@@ -1,9 +1,11 @@
-<!DOCTYPE html>
-<html lang="es">
+    
+
+    <!DOCTYPE html>
+<html lang="es" class="h-full w-full">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>SparkyKrea AI</title>
+    <title>SparkyKrea</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- FontAwesome Icons -->
@@ -16,18 +18,14 @@
             theme: {
                 extend: {
                     colors: {
-                        brand: {
-                            50: '#f0fdf4',
-                            500: '#22c55e',
-                            600: '#16a34a',
-                            700: '#15803d',
-                        },
-                        dark: {
-                            bg: '#121212',
-                            sidebar: '#18181b',
-                            card: '#27272a',
-                            border: '#3f3f46'
-                        }
+                        brandVinotinto: '#800020',
+                        brandVinotintoHover: '#600018',
+                        brandVerde: '#10B981',
+                        brandVerdeHover: '#059669',
+                        darkBg: '#121212',
+                        darkSidebar: '#18181b',
+                        darkCard: '#242427',
+                        darkBorder: '#3f3f46'
                     },
                     fontFamily: {
                         sans: ['Inter', 'sans-serif'],
@@ -37,26 +35,38 @@
         }
     </script>
     <style>
-        body { font-family: 'Inter', sans-serif; }
-        .custom-scrollbar::-webkit-scrollbar { width: 6px; }
+        html, body {
+            height: 100%;
+            width: 100%;
+            margin: 0;
+            padding: 0;
+            overflow: hidden; /* Pantalla completa fija */
+        }
+        .custom-scrollbar::-webkit-scrollbar { width: 5px; }
         .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
         .custom-scrollbar::-webkit-scrollbar-thumb { background: #3f3f46; border-radius: 10px; }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: #52525b; }
     </style>
 </head>
-<body class="bg-dark-bg text-gray-100 min-h-screen flex flex-col md:flex-row antialiased overflow-x-hidden">
+<body class="bg-darkBg text-gray-100 h-full w-full flex flex-col md:flex-row antialiased select-none">
 
-    <!-- OVERLAY MÓVIL (para cerrar el menú al tocar afuera) -->
-    <div id="sidebar-overlay" onclick="toggleSidebar()" class="fixed inset-0 bg-black/60 z-30 hidden md:hidden transition-opacity"></div>
+    <!-- OVERLAY MÓVIL PARA CERRAR MENÚ -->
+    <div id="sidebar-overlay" onclick="toggleSidebar()" class="fixed inset-0 bg-black/70 z-30 hidden md:hidden transition-opacity"></div>
 
     <!-- SIDEBAR / MENÚ LATERAL -->
-    <aside id="sidebar" class="fixed md:static inset-y-0 left-0 z-40 w-72 bg-dark-sidebar border-r border-dark-border flex flex-col transform -translate-x-full md:translate-x-0 transition-transform duration-300 ease-in-out">
-        <!-- Logo y Cierre móvil -->
-        <div class="p-4 flex items-center justify-between border-b border-dark-border">
-            <div class="flex items-center space-x-2">
-                <div class="w-8 h-8 rounded-lg bg-gradient-to-tr from-purple-600 to-indigo-500 flex items-center justify-center font-bold text-white shadow-lg">
-                    <i class="fa-solid fa-wand-magic-sparkles text-sm"></i>
+    <aside id="sidebar" class="fixed md:static inset-y-0 left-0 z-40 w-72 bg-darkSidebar border-r border-darkBorder flex flex-col transform -translate-x-full md:translate-x-0 transition-transform duration-300 ease-in-out h-full">
+        <!-- Header Sidebar con Logo Vinotinto y Verde -->
+        <div class="p-4 flex items-center justify-between border-b border-darkBorder shrink-0">
+            <div class="flex items-center space-x-2.5">
+                <div class="w-9 h-9 rounded-xl bg-gradient-to-tr from-brandVinotinto to-brandVerde flex items-center justify-center font-bold text-white shadow-md">
+                    <i class="fa-solid fa-graduation-cap text-base"></i>
                 </div>
-                <span class="font-bold text-lg text-white tracking-wide">SparkyKrea <span class="text-xs bg-indigo-500/20 text-indigo-400 px-2 py-0.5 rounded border border-indigo-500/30">Edu AI</span></span>
+                <div class="flex flex-col">
+                    <span class="font-bold text-lg tracking-wide leading-tight">
+                        <span class="text-brandVinotinto">Sparky</span><span class="text-brandVerde">Krea</span>
+                    </span>
+                    <span class="text-[10px] text-gray-400 font-medium">Asistente Educativo</span>
+                </div>
             </div>
             <button onclick="toggleSidebar()" class="md:hidden text-gray-400 hover:text-white p-2">
                 <i class="fa-solid fa-xmark text-lg"></i>
@@ -64,87 +74,103 @@
         </div>
 
         <!-- Botón Nuevo Chat -->
-        <div class="p-4">
-            <button onclick="startNewChat()" class="w-full py-2.5 px-4 bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white rounded-xl font-medium shadow-md transition flex items-center justify-center gap-2">
-                <i class="fa-solid fa-plus text-sm"></i>
+        <div class="p-3 shrink-0">
+            <button onclick="startNewChat()" class="w-full py-2.5 px-4 bg-brandVinotinto hover:bg-brandVinotintoHover text-white rounded-xl font-medium shadow-md transition flex items-center justify-center gap-2 text-sm border border-rose-900/40">
+                <i class="fa-solid fa-plus text-xs"></i>
                 <span>Nueva conversación</span>
             </button>
         </div>
 
-        <!-- Historial -->
+        <!-- Historial de Chats -->
         <div class="flex-1 overflow-y-auto custom-scrollbar px-3 py-2">
-            <div class="text-xs font-semibold text-gray-400 uppercase tracking-wider px-3 mb-2">Recientes</div>
+            <div class="text-[11px] font-semibold text-gray-400 uppercase tracking-wider px-3 mb-2 flex items-center justify-between">
+                <span>Historial Reciente</span>
+            </div>
             <div id="chat-history" class="space-y-1">
-                <div class="text-sm text-gray-500 italic px-3 py-2">Sin conversaciones previas</div>
+                <!-- Se llena dinámicamente -->
             </div>
         </div>
 
         <!-- Footer Sidebar -->
-        <div class="p-4 border-t border-dark-border text-xs text-gray-500 text-center">
+        <div class="p-3 border-t border-darkBorder text-[11px] text-gray-500 text-center shrink-0">
             SparkyKrea &copy; 2026
         </div>
     </aside>
 
     <!-- ÁREA PRINCIPAL -->
-    <main class="flex-1 flex flex-col h-screen overflow-hidden">
+    <main class="flex-1 flex flex-col h-full w-full overflow-hidden bg-darkBg relative">
         
-        <!-- Header Móvil -->
-        <header class="p-4 border-b border-dark-border flex items-center justify-between bg-dark-bg md:bg-transparent">
-            <button onclick="toggleSidebar()" class="p-2 text-gray-300 hover:text-white bg-dark-card rounded-lg border border-dark-border">
-                <i class="fa-solid fa-bars-staggered"></i>
-            </button>
-            <div class="font-bold text-gray-200">SparkyKrea AI</div>
-            <button onclick="startNewChat()" class="p-2 text-gray-300 hover:text-white bg-dark-card rounded-lg border border-dark-border">
-                <i class="fa-solid fa-pen-to-square"></i>
-            </button>
+        <!-- Header Superior -->
+        <header class="h-14 border-b border-darkBorder flex items-center justify-between px-4 bg-darkBg shrink-0">
+            <div class="flex items-center gap-3">
+                <button onclick="toggleSidebar()" class="p-2 text-gray-300 hover:text-white bg-darkCard rounded-lg border border-darkBorder md:hidden">
+                    <i class="fa-solid fa-bars-staggered text-sm"></i>
+                </button>
+                <div class="font-bold text-base md:text-lg tracking-wide">
+                    <span class="text-brandVinotinto">Sparky</span><span class="text-brandVerde">Krea</span>
+                </div>
+            </div>
+
+            <div class="flex items-center gap-2">
+                <button onclick="startNewChat()" class="flex items-center gap-2 text-xs bg-darkCard hover:bg-darkBorder text-gray-200 px-3 py-1.5 rounded-lg border border-darkBorder transition">
+                    <i class="fa-solid fa-rotate-right text-brandVerde"></i>
+                    <span class="hidden sm:inline">Reiniciar</span>
+                </button>
+            </div>
         </header>
 
-        <!-- Pantalla de Bienvenida / Mensajes -->
+        <!-- Contenedor Principal de Mensajes / Pantalla Bienvenida -->
         <div id="chat-container" class="flex-1 overflow-y-auto custom-scrollbar p-4 md:p-6 max-w-4xl mx-auto w-full flex flex-col">
             
-            <div id="welcome-screen" class="my-auto text-center py-8">
-                <div class="w-16 h-16 bg-gradient-to-tr from-purple-600 to-indigo-500 rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-xl text-2xl text-white">
-                    <i class="fa-solid fa-wand-magic-sparkles"></i>
+            <!-- Pantalla de Bienvenida Didáctica -->
+            <div id="welcome-screen" class="my-auto text-center py-4 flex flex-col items-center justify-center">
+                <div class="w-14 h-14 bg-gradient-to-tr from-brandVinotinto to-brandVerde rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-lg text-2xl text-white">
+                    <i class="fa-solid fa-sparkles"></i>
                 </div>
-                <h1 class="text-2xl md:text-4xl font-bold text-white mb-3">¿Qué te gustaría aprender hoy?</h1>
-                <p class="text-gray-400 text-sm md:text-base max-w-md mx-auto mb-8">
-                    Hazme preguntas complejas. Mis respuestas serán detalladas, didácticas y estructuradas para potenciar tu aprendizaje.
+                
+                <!-- Saludo dinámico según la hora -->
+                <h1 id="dynamic-greeting" class="text-2xl md:text-3xl font-bold text-white mb-2">
+                    ¡Hola! ¿Qué te gustaría aprender hoy?
+                </h1>
+                
+                <p class="text-gray-400 text-xs md:text-sm max-w-md mx-auto mb-6 leading-relaxed">
+                    Soy tu asistente <span class="text-brandVinotinto font-semibold">Sparky</span><span class="text-brandVerde font-semibold">Krea</span>. Hazme cualquier pregunta o elige una de las opciones sugeridas a continuación.
                 </p>
 
-                <!-- Sugerencias -->
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-3 max-w-lg mx-auto text-left">
-                    <button onclick="usePrompt('Explícame cómo funciona la física cuántica con analogías sencillas.')" class="p-4 bg-dark-card border border-dark-border hover:border-indigo-500/50 rounded-xl transition text-sm text-gray-300 hover:text-white flex items-center justify-between group">
+                <!-- Sugerencias de Preguntas -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 max-w-lg w-full text-left">
+                    <button onclick="usePrompt('Explícame cómo funciona la física cuántica con analogías sencillas.')" class="p-3.5 bg-darkCard border border-darkBorder hover:border-brandVerde/50 rounded-xl transition text-xs md:text-sm text-gray-300 hover:text-white flex items-center justify-between group shadow-sm">
                         <span>Explícame cómo funciona la física cuántica con analogías sencillas.</span>
-                        <i class="fa-solid fa-arrow-right opacity-0 group-hover:opacity-100 transition text-indigo-400"></i>
+                        <i class="fa-solid fa-arrow-right opacity-0 group-hover:opacity-100 transition text-brandVerde ml-2 shrink-0"></i>
                     </button>
-                    <button onclick="usePrompt('¿Cuáles son los principios fundamentales del diseño web accesible y moderno?')" class="p-4 bg-dark-card border border-dark-border hover:border-indigo-500/50 rounded-xl transition text-sm text-gray-300 hover:text-white flex items-center justify-between group">
+                    <button onclick="usePrompt('¿Cuáles son los principios fundamentales del diseño web accesible y moderno?')" class="p-3.5 bg-darkCard border border-darkBorder hover:border-brandVerde/50 rounded-xl transition text-xs md:text-sm text-gray-300 hover:text-white flex items-center justify-between group shadow-sm">
                         <span>¿Cuáles son los principios fundamentales del diseño web accesible y moderno?</span>
-                        <i class="fa-solid fa-arrow-right opacity-0 group-hover:opacity-100 transition text-indigo-400"></i>
+                        <i class="fa-solid fa-arrow-right opacity-0 group-hover:opacity-100 transition text-brandVerde ml-2 shrink-0"></i>
                     </button>
                 </div>
             </div>
 
-            <!-- Área de mensajes dinámicos -->
-            <div id="messages-list" class="space-y-6 hidden w-full pb-6"></div>
+            <!-- Lista de Mensajes Conversacionales -->
+            <div id="messages-list" class="space-y-4 hidden w-full pb-4"></div>
         </div>
 
-        <!-- Caja de Entrada de Texto -->
-        <div class="p-4 border-t border-dark-border bg-dark-bg">
+        <!-- Caja de Entrada de Mensaje Fija Abajo -->
+        <div class="p-3 md:p-4 border-t border-darkBorder bg-darkBg shrink-0">
             <div class="max-w-4xl mx-auto relative">
                 <form onsubmit="handleSend(event)" class="relative flex items-center">
-                    <textarea 
+                    <input 
+                        type="text"
                         id="user-input" 
-                        rows="1" 
-                        placeholder="Escribe un tema o pregunta compleja..." 
-                        class="w-full pl-4 pr-12 py-3 bg-dark-card border border-dark-border focus:border-indigo-500 rounded-xl text-white placeholder-gray-500 focus:outline-none resize-none text-sm md:text-base"
-                        onkeydown="if(event.key === 'Enter' && !event.shiftKey) { event.preventDefault(); handleSend(event); }"
-                    ></textarea>
-                    <button type="submit" class="absolute right-2 p-2 bg-indigo-600 hover:bg-indigo-500 text-white rounded-lg transition flex items-center justify-center">
-                        <i class="fa-solid fa-paper-plane text-sm"></i>
+                        placeholder="Escribe tu duda o pregunta aquí..." 
+                        autocomplete="off"
+                        class="w-full pl-4 pr-12 py-3 bg-darkCard border border-darkBorder focus:border-brandVerde rounded-xl text-white placeholder-gray-500 focus:outline-none text-sm transition"
+                    />
+                    <button type="submit" class="absolute right-2 p-2 bg-brandVinotinto hover:bg-brandVinotintoHover text-white rounded-lg transition flex items-center justify-center">
+                        <i class="fa-solid fa-paper-plane text-xs"></i>
                     </button>
                 </form>
-                <div class="text-center text-xs text-gray-500 mt-2">
-                    SparkyKrea AI puede generar respuestas extensas para ayudarte a aprender mejor.
+                <div class="text-center text-[11px] text-gray-500 mt-1.5">
+                    SparkyKrea está listo para responder cualquier duda que tengas.
                 </div>
             </div>
         </div>
@@ -152,6 +178,24 @@
     </main>
 
     <script>
+        let conversations = JSON.parse(localStorage.getItem('sparkykrea_chats')) || [];
+        let currentChatId = null;
+
+        // Determinar saludo dinámico por horario
+        function getGreeting() {
+            const hour = new Date().getHours();
+            if (hour >= 5 && hour < 12) return '¡Buenos días!';
+            if (hour >= 12 && hour < 19) return '¡Buenas tardes!';
+            return '¡Buenas noches!';
+        }
+
+        // Establecer saludo en pantalla
+        document.addEventListener('DOMContentLoaded', () => {
+            const greetingText = `${getGreeting()} ¿En qué te puedo ayudar hoy?`;
+            document.getElementById('dynamic-greeting').textContent = greetingText;
+            renderSidebar();
+        });
+
         function toggleSidebar() {
             const sidebar = document.getElementById('sidebar');
             const overlay = document.getElementById('sidebar-overlay');
@@ -165,51 +209,154 @@
         }
 
         function startNewChat() {
+            currentChatId = Date.now().toString();
             document.getElementById('welcome-screen').classList.remove('hidden');
             document.getElementById('messages-list').classList.add('hidden');
             document.getElementById('messages-list').innerHTML = '';
+            document.getElementById('user-input').value = '';
+            
+            const sidebar = document.getElementById('sidebar');
+            if (!sidebar.classList.contains('-translate-x-full')) {
+                toggleSidebar();
+            }
         }
 
         function handleSend(e) {
             e.preventDefault();
             const input = document.getElementById('user-input');
-            const text = input.value.trim();
-            if (!text) return;
+            const query = input.value.trim();
+            if (!query) return;
+
+            if (!currentChatId) {
+                currentChatId = Date.now().toString();
+            }
 
             document.getElementById('welcome-screen').classList.add('hidden');
             const messagesList = document.getElementById('messages-list');
             messagesList.classList.remove('hidden');
 
-            // Agregar mensaje del usuario
             messagesList.innerHTML += `
                 <div class="flex gap-3 justify-end">
-                    <div class="bg-indigo-600 text-white p-4 rounded-2xl rounded-tr-none max-w-[85%] text-sm md:text-base shadow-md">
-                        ${text}
+                    <div class="bg-brandVinotinto text-white p-3.5 rounded-2xl rounded-tr-none max-w-[85%] text-sm shadow-md">
+                        ${escapeHtml(query)}
                     </div>
                 </div>
             `;
 
             input.value = '';
+            scrollToBottom();
 
-            // Respuesta simulada
+            const loadingId = 'loading-' + Date.now();
+            messagesList.innerHTML += `
+                <div id="${loadingId}" class="flex gap-3 justify-start items-center text-gray-400 text-xs py-2">
+                    <div class="w-7 h-7 rounded-lg bg-darkCard border border-darkBorder flex items-center justify-center text-brandVerde">
+                        <i class="fa-solid fa-spinner fa-spin text-xs"></i>
+                    </div>
+                    <span>SparkyKrea está pensando la respuesta...</span>
+                </div>
+            `;
+            scrollToBottom();
+
+            saveToHistory(query);
+
             setTimeout(() => {
+                document.getElementById(loadingId)?.remove();
+
+                const botResponse = generateSmartResponse(query);
+
                 messagesList.innerHTML += `
                     <div class="flex gap-3 justify-start">
-                        <div class="w-8 h-8 rounded-lg bg-indigo-600 flex-shrink-0 flex items-center justify-center text-white font-bold text-sm">
-                            <i class="fa-solid fa-wand-magic-sparkles"></i>
+                        <div class="w-8 h-8 rounded-lg bg-gradient-to-tr from-brandVinotinto to-brandVerde flex-shrink-0 flex items-center justify-center text-white font-bold text-xs shadow-md">
+                            SK
                         </div>
-                        <div class="bg-dark-card border border-dark-border text-gray-200 p-4 rounded-2xl rounded-tl-none max-w-[85%] text-sm md:text-base shadow-md space-y-3">
-                            <p class="font-semibold text-indigo-400">Excelente pregunta.</p>
-                            <p>Esta es una interfaz totalmente optimizada tanto para escritorio como para tu teléfono celular.</p>
+                        <div class="bg-darkCard border border-darkBorder text-gray-200 p-4 rounded-2xl rounded-tl-none max-w-[88%] text-sm leading-relaxed shadow-md space-y-2">
+                            ${botResponse}
                         </div>
                     </div>
                 `;
-                const container = document.getElementById('chat-container');
-                container.scrollTop = container.scrollHeight;
-            }, 600);
+                scrollToBottom();
+            }, 700);
+        }
+
+        function generateSmartResponse(input) {
+            const clean = input.toLowerCase().trim();
+            const greeting = getGreeting();
+
+            if (clean === 'hola' || clean === 'buenas' || clean === 'hola!' || clean === 'buenas!') {
+                return `<p class="font-semibold text-brandVerde">${greeting}</p>
+                        <p>Soy <strong>SparkyKrea</strong>, tu asistente educativo. ¿En qué tema o duda te puedo ayudar el día de hoy?</p>`;
+            }
+
+            if (clean.includes('xd') || clean.includes('jaja') || clean === 'lol') {
+                return `<p>${greeting} 😄 Veo que estás de buen humor.</p>
+                        <p>¿Tienes alguna duda sobre algún tema en específico o te gustaría consultar alguna pregunta didáctica?</p>`;
+            }
+
+            if (clean.includes('física cuántica') || clean.includes('fisica cuantica')) {
+                return `<p class="font-bold text-brandVerde">⚛️ La Física Cuántica explicada de forma sencilla:</p>
+                        <p>Imagina que el mundo normal es como una escalera donde subes peldaño a peldaño. En el mundo cuántico, las partículas pueden estar en varios peldaños a la vez (<strong>superposición</strong>) o conectarse al instante a cualquier distancia (<strong>entrelazamiento</strong>).</p>
+                        <p class="text-xs text-gray-400 border-t border-gray-700 pt-2 mt-2">¿Te gustaría profundizar en el experimento del gato de Schrödinger o en los fotones?</p>`;
+            }
+
+            if (clean.includes('diseño web') || clean.includes('accesible')) {
+                return `<p class="font-bold text-brandVerde">💻 Principios de Diseño Web Accesible:</p>
+                        <ul class="list-disc pl-4 space-y-1 text-xs md:text-sm">
+                            <li><strong>Contraste adecuado:</strong> Asegurar buena visibilidad entre texto y fondo.</li>
+                            <li><strong>Navegación por teclado:</strong> Permitir usar la web sin ratón.</li>
+                            <li><strong>Diseño adaptativo:</strong> Que funcione bien en pantallas de escritorio y teléfonos móviles sin desbordar.</li>
+                        </ul>`;
+            }
+
+            return `<p class="font-semibold text-brandVerde">${greeting}</p>
+                    <p>Has preguntado sobre: <em>"${escapeHtml(input)}"</em>.</p>
+                    <p>Como tu asistente <strong>SparkyKrea</strong>, estoy diseñado para responder y guiarte en cualquier duda académica, didáctica o técnica que tengas. ¿Deseas que profundicemos en algún detalle en particular?</p>`;
+        }
+
+        function scrollToBottom() {
+            const container = document.getElementById('chat-container');
+            container.scrollTop = container.scrollHeight;
+        }
+
+        function saveToHistory(query) {
+            let chat = conversations.find(c => c.id === currentChatId);
+            if (!chat) {
+                chat = { id: currentChatId, title: query.substring(0, 22) + (query.length > 22 ? '...' : '') };
+                conversations.unshift(chat);
+            }
+            localStorage.setItem('sparkykrea_chats', JSON.stringify(conversations));
+            renderSidebar();
+        }
+
+        function renderSidebar() {
+            const historyContainer = document.getElementById('chat-history');
+            if (conversations.length === 0) {
+                historyContainer.innerHTML = `<div class="text-xs text-gray-500 italic px-3 py-2">Sin conversaciones previas</div>`;
+                return;
+            }
+            historyContainer.innerHTML = '';
+            conversations.forEach(c => {
+                const active = c.id === currentChatId;
+                historyContainer.innerHTML += `
+                    <div onclick="selectChat('${c.id}')" class="flex items-center justify-between px-3 py-2 rounded-lg cursor-pointer text-xs transition ${active ? 'bg-brandVinotinto/30 border border-brandVinotinto/50 text-white font-medium' : 'text-gray-400 hover:bg-darkCard hover:text-gray-200'}">
+                        <div class="flex items-center gap-2 truncate">
+                            <i class="fa-regular fa-message text-brandVerde text-[10px]"></i>
+                            <span class="truncate">${escapeHtml(c.title)}</span>
+                        </div>
+                    </div>
+                `;
+            });
+        }
+
+        function selectChat(id) {
+            currentChatId = id;
+            renderSidebar();
+        }
+
+        function escapeHtml(str) {
+            return str.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#039;");
         }
     </script>
 </body>
 </html>
 
-                                                          
+        
