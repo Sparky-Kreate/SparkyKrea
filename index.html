@@ -1,10 +1,9 @@
-
-            <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es" class="h-full w-full">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>SparkyKrea - Asesoría Publicitaria</title>
+    <title>SparkyKrea - Asesoría Publicitaria Pro</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- FontAwesome Icons -->
@@ -120,7 +119,7 @@
         <!-- Contenedor Principal -->
         <div id="chat-container" class="flex-1 overflow-y-auto custom-scrollbar p-4 md:p-6 max-w-4xl mx-auto w-full flex flex-col">
             
-            <!-- Pantalla de Bienvenida Sin Botones Rígidos -->
+            <!-- Pantalla de Bienvenida -->
             <div id="welcome-screen" class="my-auto text-center py-4 flex flex-col items-center justify-center">
                 <div class="w-14 h-14 bg-gradient-to-tr from-brandVinotinto to-brandVerde rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-lg text-2xl text-white">
                     <i class="fa-solid fa-clapperboard"></i>
@@ -131,7 +130,7 @@
                 </h1>
                 
                 <p class="text-gray-400 text-xs md:text-sm max-w-md mx-auto leading-relaxed">
-                    Soy tu asistente de <span class="text-brandVinotinto font-semibold">Sparky</span><span class="text-brandVerde font-semibold">Krea</span>. Indícame cualquier producto, servicio o tema para crear tu guion publicitario completo.
+                    Soy tu asistente de <span class="text-brandVinotinto font-semibold">Sparky</span><span class="text-brandVerde font-semibold">Krea</span>. Escribe cualquier videojuego, marca o servicio para comenzar.
                 </p>
             </div>
 
@@ -146,7 +145,7 @@
                     <input 
                         type="text"
                         id="user-input" 
-                        placeholder="Indica el juego o producto para tu publicidad..." 
+                        placeholder="Escribe el producto, juego o servicio aquí..." 
                         autocomplete="off"
                         class="w-full pl-4 pr-12 py-3 bg-darkCard border border-darkBorder focus:border-brandVerde rounded-xl text-white placeholder-gray-500 focus:outline-none text-sm transition"
                     />
@@ -155,7 +154,7 @@
                     </button>
                 </form>
                 <div class="text-center text-[11px] text-gray-500 mt-1.5">
-                    SparkyKrea • Generador experto de publicidad, guiones y soundtrack.
+                    SparkyKrea • Asesoría técnica, guiones profesionales y banda sonora.
                 </div>
             </div>
         </div>
@@ -201,22 +200,25 @@
             }
         }
 
+        function deleteChat(id, e) {
+            e.stopPropagation();
+            conversations = conversations.filter(c => c.id !== id);
+            localStorage.setItem('sparkykrea_chats', JSON.stringify(conversations));
+            if (currentChatId === id) {
+                startNewChat();
+            } else {
+                renderSidebar();
+            }
+        }
+
         function handleSend(e) {
-            e.preventDefault();
+            if (e) e.preventDefault();
             const input = document.getElementById('user-input');
             const query = input.value.trim();
             if (!query) return;
 
-            let isFirstMessageInChat = false;
-
             if (!currentChatId) {
                 currentChatId = Date.now().toString();
-                isFirstMessageInChat = true;
-            }
-
-            const chatObj = conversations.find(c => c.id === currentChatId);
-            if (!chatObj || chatObj.messages.length === 0) {
-                isFirstMessageInChat = true;
             }
 
             document.getElementById('welcome-screen').classList.add('hidden');
@@ -240,14 +242,14 @@
                     <div class="w-7 h-7 rounded-lg bg-darkCard border border-darkBorder flex items-center justify-center text-brandVerde">
                         <i class="fa-solid fa-spinner fa-spin text-xs"></i>
                     </div>
-                    <span>SparkyKrea procesando la solicitud...</span>
+                    <span>Diseñando estrategia y guion publicitario...</span>
                 </div>
             `;
             scrollToBottom();
 
             setTimeout(() => {
                 document.getElementById(loadingId)?.remove();
-                const botResponse = processPublicityRequest(query, isFirstMessageInChat);
+                const botResponse = processPublicityRequest(query);
 
                 messagesList.innerHTML += `
                     <div class="flex gap-3 justify-start">
@@ -265,6 +267,19 @@
             }, 600);
         }
 
+        function selectDurationFromDropdown(val) {
+            if (val === 'custom') {
+                const customVal = prompt("Ingresa el tiempo deseado (Ej: 45 segundos, 2 minutos, 8 minutos):");
+                if (customVal) {
+                    document.getElementById('user-input').value = customVal;
+                    handleSend();
+                }
+            } else if (val) {
+                document.getElementById('user-input').value = val;
+                handleSend();
+            }
+        }
+
         function parseDurationInSeconds(text) {
             const clean = text.toLowerCase();
             let minutes = 0;
@@ -279,41 +294,12 @@
 
             if (!minMatch && !secMatch && onlyNumberMatch) {
                 const num = parseInt(onlyNumberMatch[1]);
-                if (num <= 5) minutes = num;
+                if (num <= 10) minutes = num;
                 else seconds = num;
             }
 
             const totalSeconds = (minutes * 60) + seconds;
             return totalSeconds > 0 ? totalSeconds : 30;
-        }
-
-        function generateDynamicScript(topic, totalSeconds) {
-            let blocks = [];
-            
-            if (totalSeconds <= 30) {
-                blocks = [
-                    { start: "0:00", end: `0:05`, title: "Gancho Visual & Auditivo", desc: `Apertura impactante presentando el problema o llamada de atención directa sobre ${topic}.` },
-                    { start: "0:05", end: `0:20`, title: "Demostración / Valor Clave", desc: `Muestra dinámica de ${topic} en acción resaltando sus características principales.` },
-                    { start: "0:20", end: formatTime(totalSeconds), title: "Llamado a la Acción (CTA)", desc: `Cierre con propuesta clara, oferta o enlace de descarga/compra.` }
-                ];
-            } else if (totalSeconds <= 60) {
-                blocks = [
-                    { start: "0:00", end: "0:08", title: "Gancho de Alto Impacto", desc: `Pregunta o problema directo para captar atención en los primeros segundos sobre ${topic}.` },
-                    { start: "0:08", end: "0:30", title: "Presentación & Experiencia", desc: `Muestra en detalle cómo funciona ${topic}, resaltando sus beneficios clave.` },
-                    { start: "0:30", end: "0:50", title: "Prueba Social / Uso Práctico", desc: `Escenas rápidas con situaciones cotidianas o gameplay disfrutando ${topic}.` },
-                    { start: "0:50", end: formatTime(totalSeconds), title: "Cierre & Llamado a la Acción", desc: `Instrucción directa al usuario para registrarse, comprar o seguir la cuenta.` }
-                ];
-            } else {
-                const quarter = Math.floor(totalSeconds / 4);
-                blocks = [
-                    { start: "0:00", end: formatTime(quarter), title: "Introducción Narrativa / Storytelling", desc: `Planteamiento del contexto o historia donde ${topic} cobra importancia.` },
-                    { start: formatTime(quarter), end: formatTime(quarter * 2), title: "Desarrollo Visual & Características", desc: `Recorrido profundo por las mejores funciones, estética o beneficios principales de ${topic}.` },
-                    { start: formatTime(quarter * 2), end: formatTime(quarter * 3), title: "Puntos Fuertes & Diferenciación", desc: `Demostración detallada de por qué ${topic} destaca frente a otras opciones.` },
-                    { start: formatTime(quarter * 3), end: formatTime(totalSeconds), title: "Conclusión Épica & CTA Final", desc: `Llamado a la acción extendido, enlaces directos y oferta especial de cierre.` }
-                ];
-            }
-
-            return blocks.map(b => `<p><strong>[${b.start} - ${b.end}] ${b.title}:</strong> ${b.desc}</p>`).join("");
         }
 
         function formatTime(sec) {
@@ -322,56 +308,138 @@
             return `${m}:${s < 10 ? '0' : ''}${s}`;
         }
 
-        function processPublicityRequest(input, isFirstMessage) {
-            const clean = input.toLowerCase().trim();
-            const timeGreeting = getGreeting();
+        // Genera bloques cronológicos ultra detallados para cualquier tiempo
+        function generateDetailedScript(topic, totalSeconds) {
+            let steps = [];
+            
+            if (totalSeconds <= 15) {
+                steps = [
+                    { time: "0:00 - 0:03", visual: `Plano detalle de alto impacto (Macro). Aparición del título deslumbrante de ${topic}.`, audio: `Grito de atención / SFX "Swoosh" pesado + Frase gancho impactante.` },
+                    { time: "0:03 - 0:10", visual: `Cortes ultrarrápidos (0.5s cada uno) mostrando las mejores características o jugadas de ${topic}.`, audio: `Voz dinámica acelerada + Beat fuerte al ritmo de las imágenes.` },
+                    { time: "0:10 - 0:15", visual: `Pantalla de cierre con logotipo gigante, oferta tentadora e íconos de acción.`, audio: `Locución directa: "¡Pruébalo ahora, enlace aquí abajo!" + Remate de audio.` }
+                ];
+            } else if (totalSeconds <= 30) {
+                steps = [
+                    { time: "0:00 - 0:05", visual: `Plano subjetivo (POV) mostrando una situación común o problema antes de conocer ${topic}.`, audio: `Pregunta directa al espectador con fondo musical suspenso.` },
+                    { time: "0:05 - 0:15", visual: `Transición explosiva hacia la solución: Revelación visual principal de ${topic} en acción.`, audio: `El beat explota (Drop de la canción). Frase de valor único.` },
+                    { time: "0:15 - 0:25", visual: `3 Tomas seguidas: Plano medio (interacción), primer plano (calidad/textura/detalle) y resultado.`, audio: `Explicación rápida de los beneficios principales.` },
+                    { time: "0:25 - 0:30", visual: `Banner promocional, animación de flechas apuntando al botón de descarga/compra.`, audio: `Call to Action final con urgencia: "Disponibilidad limitada. ¡Haz clic ya!"` }
+                ];
+            } else if (totalSeconds <= 60) {
+                steps = [
+                    { time: "0:00 - 0:08", visual: `Gancho en primer plano. Personaje o demostración intrigante relacionada con ${topic}.`, audio: `Frase controvertida o dato curioso que atrape la atención inmediatamente.` },
+                    { time: "0:08 - 0:20", visual: `Plano general mostrando el entorno completo y la llegada o activación de ${topic}.`, audio: `Inicio de la música principal. Voz descriptiva enérgica.` },
+                    { time: "0:20 - 0:38", visual: `Secuencia de prueba: Muestra detallada de las 3 ventajas técnicas o de entretenimiento más potentes.`, audio: `Puntos claves expresados con claridad y breves efectos de sonido entre puntos.` },
+                    { time: "0:38 - 0:50", visual: `Reacción en vivo / Testimonio / Demostración en tiempo real disfrutando ${topic}.`, audio: `Voz secundaria o efecto de validación/comunidad.` },
+                    { time: "0:50 - 1:00", visual: `Cierre con logo, redes sociales y botón interactivo destacado.`, audio: `Llamado a la acción claro y fading suave de la música.` }
+                ];
+            } else {
+                // Duraciones largas (3 min, 5 min, 10 min, etc.)
+                const stepDuration = Math.floor(totalSeconds / 6);
+                let currentSec = 0;
 
-            if (['hola', 'buenas', 'hola buenas', 'saludos'].some(s => clean === s)) {
-                return `<p class="font-bold text-brandVerde">${timeGreeting} Soy el asistente de <strong>SparkyKrea</strong>.</p>
-                        <p>¿Sobre qué producto, servicio o videojuego te gustaría hacer la publicidad?</p>`;
+                const labels = [
+                    "Introducción & Planteamiento del Problema",
+                    "Revelación de la Solución (" + topic + ")",
+                    "Demostración Técnica & Calidad en Detalle",
+                    "Comparativa / Ventajas Exclusivas frente a alternativas",
+                    "Prueba de Campo / Experiencia de uso real",
+                    "Oferta Especial, Garantía & Cierre con CTA"
+                ];
+
+                for (let i = 0; i < 6; i++) {
+                    let nextSec = (i === 5) ? totalSeconds : currentSec + stepDuration;
+                    steps.push({
+                        time: `${formatTime(currentSec)} - ${formatTime(nextSec)}`,
+                        visual: `[Estructura Bloque ${i+1}]: Tomas para ${labels[i]}. Alterna entre plano general, primeros planos cinematográficos y B-Roll estético.`,
+                        audio: `Desarrollo de locución fluida. Transiciones musicales graduales adaptadas a este bloque.`
+                    });
+                    currentSec = nextSec;
+                }
             }
+
+            return steps.map(s => `
+                <div class="border-l-2 border-brandVerde pl-3 my-2 space-y-1">
+                    <p class="font-bold text-white text-xs">⏱️ <span>${s.time}</span></p>
+                    <p class="text-gray-300">📹 <strong>Visual & Cámara:</strong> ${s.visual}</p>
+                    <p class="text-gray-400">🎙️ <strong>Locución & Audio:</strong> ${s.audio}</p>
+                </div>
+            `).join("");
+        }
+
+        function processPublicityRequest(input) {
+            const clean = input.toLowerCase().trim();
 
             const hasTimeKeywords = /(\d+|segundo|segundos|minuto|minutos|min|seg)/i.test(clean);
             
+            // SI YA TENEMOS UN TEMA REGISTRADO Y RECIBIMOS EL TIEMPO:
             if (pendingTopic && hasTimeKeywords) {
                 const totalSec = parseDurationInSeconds(clean);
-                const scriptHTML = generateDynamicScript(pendingTopic, totalSec);
+                const scriptHTML = generateDetailedScript(pendingTopic, totalSec);
                 const currentTopic = pendingTopic;
                 pendingTopic = null;
 
                 return `
-                    <p class="font-bold text-brandVerde">🎬 Propuesta Publicitaria para "${escapeHtml(currentTopic)}" (${formatTime(totalSec)} min/seg)</p>
-                    
-                    <div class="bg-darkSidebar p-3.5 rounded-xl border border-darkBorder space-y-2 text-xs">
-                        <p class="text-brandVerde font-bold uppercase tracking-wider">🎙️ GUION Y CRONOGRAMA DE ESCENAS:</p>
-                        ${scriptHTML}
-                    </div>
+                    <div class="space-y-4">
+                        <div class="border-b border-darkBorder pb-2">
+                            <h2 class="text-base font-bold text-brandVerde">🎬 Estrategia de Producción Publicitaria Pro</h2>
+                            <p class="text-xs text-gray-400">Proyecto: <strong class="text-white">${escapeHtml(currentTopic)}</strong> | Duración: <strong class="text-white">${formatTime(totalSec)}</strong></p>
+                        </div>
 
-                    <div class="bg-darkSidebar p-3.5 rounded-xl border border-darkBorder space-y-1.5 text-xs">
-                        <p class="text-brandVerde font-bold uppercase tracking-wider">🎵 BANDA SONORA & AUDIO RECOMENDADO:</p>
-                        <p>• <strong>Estilo Musical:</strong> Ritmo adaptable a la temática de ${escapeHtml(currentTopic)} (Evolutivo según la intensidad del video).</p>
-                        <p>• <strong>Efectos Sonoros (SFX):</strong> Transiciones audibles, impactos graves en cortes principales y mezcla balanceada con la voz de locución.</p>
-                    </div>
+                        <!-- 1. GUION PASO A PASO -->
+                        <div class="bg-darkSidebar p-3.5 rounded-xl border border-darkBorder space-y-2 text-xs">
+                            <p class="text-brandVerde font-bold uppercase tracking-wider">📜 GUION PASO A PASO (CRONOGRAMA EXACTO):</p>
+                            ${scriptHTML}
+                        </div>
 
-                    <div class="bg-darkSidebar p-3.5 rounded-xl border border-darkBorder space-y-1 text-xs">
-                        <p class="text-brandVerde font-bold uppercase tracking-wider">💡 OPCIONES ADICIONALES Y EDICIÓN:</p>
-                        <p>• <strong>Opción A:</strong> Formato vertical (9:16) optimizado para TikTok / Instagram Reels / YouTube Shorts.</p>
-                        <p>• <strong>Opción B:</strong> Formato horizontal (16:9) estilo anuncio cinemático para YouTube o TV.</p>
+                        <!-- 2. ESTRATEGIA DE GRABACIÓN Y EDICIÓN -->
+                        <div class="bg-darkSidebar p-3.5 rounded-xl border border-darkBorder space-y-2 text-xs">
+                            <p class="text-brandVerde font-bold uppercase tracking-wider">🎥 ESTRATEGIA DE GRABACIÓN & RODAJE:</p>
+                            <p>• <strong>Iluminación:</strong> Usa luz principal a 45° (Softbox) y luz de acento trasera en color contraste para separar el sujeto/producto del fondo.</p>
+                            <p>• <strong>Planos recomendados:</strong> Intercala entre planos detalle (Macro) y planos medios dinámicos en movimiento (Gimbal o cámara en mano estable).</p>
+                            <p>• <strong>Ritmo de Edición:</strong> Aplica cortes de velocidad (Speed Ramps), zooms de impacto en palabras clave y subtítulos dinámicos centro-pantalla con tipografía gruesa.</p>
+                        </div>
+
+                        <!-- 3. MÚSICA Y BANDA SONORA -->
+                        <div class="bg-darkSidebar p-3.5 rounded-xl border border-darkBorder space-y-2 text-xs">
+                            <p class="text-brandVerde font-bold uppercase tracking-wider">🎵 BANDA SONORA & OPCIONES DE CANCIONES:</p>
+                            <p class="text-gray-300">Te sugerimos estas opciones para la música de fondo. <em>Puedes elegir cualquiera de estas o utilizar una similar a tu propio gusto:</em></p>
+                            <ul class="list-disc list-inside text-gray-400 space-y-1">
+                                <li><strong>Opción Enérgica / Trap-Phonk:</strong> Ideal para videojuegos, deportes o juventud (Beats pesados con graves potentes).</li>
+                                <li><strong>Opción Pop / Electronic House:</strong> Excelente para moda, maquillaje, aplicaciones y productos tecnológicos.</li>
+                                <li><strong>Opción Synthwave 80s / Retro:</strong> Perfecta para darle un estilo estilizado, nocturno o cyberpunk.</li>
+                                <li><strong>Opción Lofi / Chillhop:</strong> Recomendada para servicios, comida, relajación o marcas educativas.</li>
+                                <li><strong>Opción Cinematic / Epic Orchestral:</strong> Para promociones solemnes, tráilers o eventos de gran impacto.</li>
+                            </ul>
+                        </div>
                     </div>
                 `;
             }
 
+            // SI ES EL INICIO O UN NUEVO TEMA:
             pendingTopic = input;
-            
-            let header = isFirstMessage 
-                ? `<p class="font-bold text-brandVerde">${timeGreeting} Asistente de <strong>SparkyKrea</strong> a tu servicio.</p>` 
-                : '';
 
             return `
-                ${header}
-                <p>Perfecto, armaremos la estrategia publicitaria para: <strong>"${escapeHtml(input)}"</strong>.</p>
-                <div class="p-3 bg-darkSidebar rounded-xl border border-darkBorder font-semibold text-xs text-brandVerde mt-2">
-                    ⏱️ ¿Qué duración exacta te gustaría que tenga la publicidad? (Ejemplo: 15 segundos, 1 minuto, 3 minutos).
+                <div class="space-y-3">
+                    <p>Perfecto. Diseñaré la estrategia completa para: <strong class="text-brandVerde">"${escapeHtml(input)}"</strong>.</p>
+                    
+                    <div class="p-3 bg-darkSidebar rounded-xl border border-darkBorder space-y-2">
+                        <label for="duration-select" class="block text-xs font-semibold text-gray-300">
+                            ⏱️ Selecciona o indica la duración deseada para el video:
+                        </label>
+                        
+                        <select id="duration-select" onchange="selectDurationFromDropdown(this.value)" class="w-full bg-darkCard border border-darkBorder text-white text-xs rounded-lg p-2.5 focus:outline-none focus:border-brandVerde cursor-pointer">
+                            <option value="">-- Elige un tiempo de la lista --</option>
+                            <option value="10 segundos">10 Segundos (Ultra rápido / Story-Reel)</option>
+                            <option value="20 segundos">20 Segundos (Anuncio Dinámico)</option>
+                            <option value="30 segundos">30 Segundos (Comercial Estándar)</option>
+                            <option value="60 segundos">60 Segundos (1 Minuto / Explicativo)</option>
+                            <option value="3 minutos">3 Minutos (Review / Caso Extenso)</option>
+                            <option value="5 minutos">5 Minutos (Presentación Completa)</option>
+                            <option value="10 minutos">10 Minutos (Especial / Guion Largo)</option>
+                            <option value="custom">✍️ Escribir tiempo personalizado...</option>
+                        </select>
+                    </div>
                 </div>
             `;
         }
@@ -386,7 +454,7 @@
             if (!chat) {
                 chat = { 
                     id: currentChatId, 
-                    title: userText.substring(0, 24) + (userText.length > 24 ? '...' : ''),
+                    title: userText.substring(0, 22) + (userText.length > 22 ? '...' : ''),
                     messages: [] 
                 };
                 conversations.unshift(chat);
@@ -409,11 +477,14 @@
             conversations.forEach(c => {
                 const active = c.id === currentChatId;
                 historyContainer.innerHTML += `
-                    <div onclick="selectChat('${c.id}')" class="flex items-center justify-between px-3 py-2 rounded-lg cursor-pointer text-xs transition ${active ? 'bg-brandVinotinto/30 border border-brandVinotinto/50 text-white font-medium' : 'text-gray-400 hover:bg-darkCard hover:text-gray-200'}">
+                    <div onclick="selectChat('${c.id}')" class="group flex items-center justify-between px-3 py-2 rounded-lg cursor-pointer text-xs transition ${active ? 'bg-brandVinotinto/30 border border-brandVinotinto/50 text-white font-medium' : 'text-gray-400 hover:bg-darkCard hover:text-gray-200'}">
                         <div class="flex items-center gap-2 truncate">
                             <i class="fa-solid fa-film text-brandVerde text-[10px]"></i>
                             <span class="truncate">${escapeHtml(c.title)}</span>
                         </div>
+                        <button onclick="deleteChat('${c.id}', event)" class="opacity-0 group-hover:opacity-100 p-1 text-gray-500 hover:text-rose-400 transition" title="Eliminar chat">
+                            <i class="fa-solid fa-trash-can text-xs"></i>
+                        </button>
                     </div>
                 `;
             });
