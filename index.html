@@ -1,5 +1,5 @@
     
-<!DOCTYPE html>
+                        <!DOCTYPE html>
 <html lang="es" class="h-full w-full">
 <head>
     <meta charset="UTF-8">
@@ -131,17 +131,17 @@
                 </h1>
                 
                 <p class="text-gray-400 text-xs md:text-sm max-w-md mx-auto mb-6 leading-relaxed">
-                    Bienvenido a <span class="text-brandVinotinto font-semibold">Sparky</span><span class="text-brandVerde font-semibold">Krea</span>. Tu especialista en creación de guiones, audio y estrategia audiovisual para videos publicitarios.
+                    Soy tu asistente de <span class="text-brandVinotinto font-semibold">Sparky</span><span class="text-brandVerde font-semibold">Krea</span>. Especialista en guiones publicitarios para videojuegos, productos y servicios.
                 </p>
 
                 <!-- Sugerencias Rápidas -->
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 max-w-lg w-full text-left">
-                    <button onclick="usePrompt('Quiero hacer un video publicitario para una marca de maquillaje.')" class="p-3.5 bg-darkCard border border-darkBorder hover:border-brandVerde/50 rounded-xl transition text-xs md:text-sm text-gray-300 hover:text-white flex items-center justify-between group shadow-sm">
-                        <span>Publicidad para marca de maquillaje</span>
+                    <button onclick="usePrompt('Quiero hacer una publicidad para el juego Valorant.')" class="p-3.5 bg-darkCard border border-darkBorder hover:border-brandVerde/50 rounded-xl transition text-xs md:text-sm text-gray-300 hover:text-white flex items-center justify-between group shadow-sm">
+                        <span>Publicidad para Valorant</span>
                         <i class="fa-solid fa-arrow-right opacity-0 group-hover:opacity-100 transition text-brandVerde ml-2 shrink-0"></i>
                     </button>
-                    <button onclick="usePrompt('Necesito una estrategia y guion para promocionar un restaurante.')" class="p-3.5 bg-darkCard border border-darkBorder hover:border-brandVerde/50 rounded-xl transition text-xs md:text-sm text-gray-300 hover:text-white flex items-center justify-between group shadow-sm">
-                        <span>Anuncio audiovisual para restaurante</span>
+                    <button onclick="usePrompt('Quiero hacer una publicidad para una marca de maquillaje.')" class="p-3.5 bg-darkCard border border-darkBorder hover:border-brandVerde/50 rounded-xl transition text-xs md:text-sm text-gray-300 hover:text-white flex items-center justify-between group shadow-sm">
+                        <span>Publicidad para marca de maquillaje</span>
                         <i class="fa-solid fa-arrow-right opacity-0 group-hover:opacity-100 transition text-brandVerde ml-2 shrink-0"></i>
                     </button>
                 </div>
@@ -158,7 +158,7 @@
                     <input 
                         type="text"
                         id="user-input" 
-                        placeholder="Escribe el producto o servicio para tu publicidad..." 
+                        placeholder="Indica el juego o producto para tu publicidad..." 
                         autocomplete="off"
                         class="w-full pl-4 pr-12 py-3 bg-darkCard border border-darkBorder focus:border-brandVerde rounded-xl text-white placeholder-gray-500 focus:outline-none text-sm transition"
                     />
@@ -167,7 +167,7 @@
                     </button>
                 </form>
                 <div class="text-center text-[11px] text-gray-500 mt-1.5">
-                    SparkyKrea • Asesoría integral para guiones, música y clips publicitarios.
+                    SparkyKrea • Generador experto de publicidad, guiones y soundtrack.
                 </div>
             </div>
         </div>
@@ -177,6 +177,24 @@
     <script>
         let conversations = JSON.parse(localStorage.getItem('sparkykrea_chats')) || [];
         let currentChatId = null;
+        let activeSubject = null; // Guarda el tema actual (ej. Valorant, Maquillaje)
+
+        // BD de Conocimiento de Juegos y Temas Conocidos
+        const KNOWLEDGE_BASE = {
+            'valorant': { type: 'game', name: 'Valorant', genre: 'Shooter Táctico 5v5', music: 'Trap Electrónico, Bass Boosted o Dubstep de ritmo rápido.', hook: '¿Listo para dominar la Spike y alcanzar el rango Radiante?' },
+            'free fire': { type: 'game', name: 'Free Fire', genre: 'Battle Royale Móvil', music: 'Reggaeton Urbano o Trap Latino animado.', hook: '¿Quieres conseguir el Booyah y los mejores skins de la temporada?' },
+            'fortnite': { type: 'game', name: 'Fortnite', genre: 'Battle Royale & Construcción', music: 'Electro Pop enérgico o Synthwave futurista.', hook: '¿Preparado para construir tu victoria y dominar la isla?' },
+            'minecraft': { type: 'game', name: 'Minecraft', genre: 'Sandbox & Supervivencia', music: 'Ambient Chill Lofi o temas acústicos suaves.', hook: 'Crea tu propio mundo sin límites y lleva tu aventura al siguiente nivel.' },
+            'league of legends': { type: 'game', name: 'League of Legends (LoL)', genre: 'MOBA 5v5', music: 'Orquestal Épico mezclado con Rock / Metal alternativo.', hook: '¿Tienes lo necesario para destruir el nexo enemigo?' },
+            'lol': { type: 'game', name: 'League of Legends (LoL)', genre: 'MOBA 5v5', music: 'Orquestal Épico mezclado con Rock / Metal alternativo.', hook: '¿Tienes lo necesario para destruir el nexo enemigo?' },
+            'gta': { type: 'game', name: 'GTA V / GTA Online', genre: 'Acción y Mundo Abierto', music: 'Hip-Hop West Coast o Electrónica urbana.', hook: 'Conquista las calles y domina la ciudad en el mejor servidor.' },
+            'roblox': { type: 'game', name: 'Roblox', genre: 'Plataforma Multijugador', music: 'Chiptune / Pop Alegre y Dinámico.', hook: '¡Explora miles de mundos y juega con tus amigos como nunca antes!' },
+            'call of duty': { type: 'game', name: 'Call of Duty (Warzone / Mobile)', genre: 'FPS Shooter', music: 'Rock Industrial o Beats de Acción Táctica.', hook: 'Entra a la zona de guerra y asegura la victoria de tu escuadrón.' },
+            'cod': { type: 'game', name: 'Call of Duty', genre: 'FPS Shooter', music: 'Rock Industrial o Beats de Acción Táctica.', hook: 'Entra a la zona de guerra y asegura la victoria de tu escuadrón.' },
+            'maquillaje': { type: 'product', name: 'Línea de Maquillaje', music: 'Pop Elegante, House Suave o Lofi Chill.', hook: 'Resalta tu belleza natural con la nueva colección de larga duración.' },
+            'restaurante': { type: 'product', name: 'Restaurante / Comida', music: 'Jazz Moderno, Bossanova o Pop Acústico.', hook: 'Descubre el verdadero sabor que deleitará tus sentidos.' },
+            'ropa': { type: 'product', name: 'Moda / Ropa', music: 'Indie Pop, House de Pasarela o Hip Hop sutil.', hook: 'Expresa tu estilo único con la nueva temporada.' }
+        };
 
         function getGreeting() {
             const hour = new Date().getHours();
@@ -205,6 +223,7 @@
 
         function startNewChat() {
             currentChatId = Date.now().toString();
+            activeSubject = null;
             document.getElementById('welcome-screen').classList.remove('hidden');
             document.getElementById('messages-list').classList.add('hidden');
             document.getElementById('messages-list').innerHTML = '';
@@ -238,7 +257,7 @@
             const messagesList = document.getElementById('messages-list');
             messagesList.classList.remove('hidden');
 
-            // Insertar mensaje usuario
+            // Renderizar mensaje del usuario
             messagesList.innerHTML += `
                 <div class="flex gap-3 justify-end">
                     <div class="bg-brandVinotinto text-white p-3.5 rounded-2xl rounded-tr-none max-w-[85%] text-sm shadow-md">
@@ -256,7 +275,7 @@
                     <div class="w-7 h-7 rounded-lg bg-darkCard border border-darkBorder flex items-center justify-center text-brandVerde">
                         <i class="fa-solid fa-spinner fa-spin text-xs"></i>
                     </div>
-                    <span>SparkyKrea elaborando propuesta publicitaria...</span>
+                    <span>SparkyKrea procesando la solicitud...</span>
                 </div>
             `;
             scrollToBottom();
@@ -264,7 +283,7 @@
             setTimeout(() => {
                 document.getElementById(loadingId)?.remove();
 
-                const botResponse = generateAdResponse(query, isFirstMessageInChat);
+                const botResponse = processPublicityRequest(query, isFirstMessageInChat);
 
                 messagesList.innerHTML += `
                     <div class="flex gap-3 justify-start">
@@ -277,65 +296,88 @@
                     </div>
                 `;
                 
-                // Guardar en almacenamiento
                 saveMessageToHistory(query, botResponse);
                 scrollToBottom();
-            }, 750);
+            }, 650);
         }
 
-        function generateAdResponse(input, isFirstMessage) {
+        function processPublicityRequest(input, isFirstMessage) {
             const clean = input.toLowerCase().trim();
             const timeGreeting = getGreeting();
 
-            // CASO: Saludos simples o expresiones
+            // 1. Saludos simples o expresiones
             if (clean === 'hola' || clean === 'buenas' || clean === 'hola buenas tardes' || clean === 'hola buenas noches' || clean === 'hola buenos dias') {
-                return `<p class="font-bold text-brandVerde">${timeGreeting} Le da la bienvenida el equipo de <strong>SparkyKrea</strong>.</p>
-                        <p>Estoy listo para coordinar la producción de su anuncio publicitario. ¿De qué producto o marca le gustaría crear la campaña publicitaria hoy?</p>`;
+                return `<p class="font-bold text-brandVerde">${timeGreeting} Soy el asistente de <strong>SparkyKrea</strong>.</p>
+                        <p>¿Sobre qué videojuego, producto o servicio te gustaría realizar la publicidad hoy?</p>`;
             }
 
             if (clean.includes('xd') || clean.includes('jaja') || clean === 'lol') {
-                return `<p>Un gusto saludarle. 😄 En <strong>SparkyKrea</strong> estamos atentos para ayudarle a comercializar su producto.</p>
-                        <p>Por favor, coméntenos sobre qué marca o artículo le gustaría estructurar su video publicitario.</p>`;
+                return `<p>😄 ¡Hola! Soy el asistente de <strong>SparkyKrea</strong>.</p>
+                        <p>¿En qué publicidad te puedo ayudar el día de hoy?</p>`;
             }
 
-            // CASO: Si el usuario responde con un número o duración
-            if (clean.includes('segundo') || clean.includes('seg') || !isNaN(clean) || clean.includes('minuto')) {
+            // 2. Si el usuario está respondiendo el TIEMPO (ej: 30 segundos, 1 min, etc.)
+            const durationMatch = clean.match(/(\d+)\s*(seg|segundos|min|minuto|minutos)?/i) || clean.includes('segundo') || clean.includes('minuto');
+            
+            if (durationMatch && activeSubject) {
+                const item = KNOWLEDGE_BASE[activeSubject];
+                const durationText = input;
+
                 return `
-                    <p class="font-bold text-brandVerde">🎬 Estrategia Publicitaria Personalizada (${escapeHtml(input)})</p>
-                    <p>Excelente elección de tiempo. A continuación presento la estructura técnica completa para la producción de su video:</p>
+                    <p class="font-bold text-brandVerde">🎬 Estrategia y Guion Publicitario para ${item.name} (${escapeHtml(durationText)})</p>
+                    <p>Aquí tienes el guion extenso y detallado listo para producción:</p>
                     
-                    <div class="bg-darkSidebar p-3 rounded-xl border border-darkBorder space-y-2 text-xs">
-                        <p class="text-brandVerde font-semibold">🎙️ GUION DE LOCUCIÓN & TEXTO EN PANTALLA:</p>
-                        <p><strong>[0:00 - 0:03] Gancho Impactante:</strong> "¿Cansado de productos que no entregan lo que prometen? Es hora de un cambio real."</p>
-                        <p><strong>[0:03 - End] Desarrollo y Beneficio:</strong> Presentación del producto en acción con tomas cerradas destacando la textura y acabado premium.</p>
-                        <p><strong>[Cierre] Llamado a la Acción (CTA):</strong> "Disponible hoy con envío gratis. Haz clic en el enlace de la biografía."</p>
+                    <div class="bg-darkSidebar p-3.5 rounded-xl border border-darkBorder space-y-2 text-xs">
+                        <p class="text-brandVerde font-bold uppercase tracking-wider">🎙️ GUION EXTENSO DE LOCUCIÓN Y ESCENAS:</p>
+                        <p><strong>[Inicio / Gancho]:</strong> "${item.hook}"</p>
+                        <p><strong>[Desarrollo Visual]:</strong> Muestra secuencias dinámicas de ${item.name}. Si es gameplay, incluye jugadas destacadas y edición rápida. Transición suave con cortes al ritmo de la música.</p>
+                        <p><strong>[Cierre / Call to Action]:</strong> "¡No esperes más! Descarga, únete ahora y vive la experiencia. Enlace en la descripción."</p>
                     </div>
 
-                    <div class="bg-darkSidebar p-3 rounded-xl border border-darkBorder space-y-1 text-xs">
-                        <p class="text-brandVerde font-semibold">🎵 MUSICALIZACIÓN Y EFECTOS SONOROS:</p>
-                        <p>• <strong>Pista de Fondo:</strong> Pop moderno o Synthwave sutil con ritmo ascendente.</p>
-                        <p>• <strong>Efectos (SFX):</strong> Sonido "Swoosh" suave en las transiciones de video.</p>
+                    <div class="bg-darkSidebar p-3.5 rounded-xl border border-darkBorder space-y-1.5 text-xs">
+                        <p class="text-brandVerde font-bold uppercase tracking-wider">🎵 MUSICALIZACIÓN RECOMENDADA:</p>
+                        <p>• <strong>Estilo de audio:</strong> ${item.music}</p>
+                        <p>• <strong>Efectos de sonido (SFX):</strong> Impactos graves (Sub-bass drops) en el inicio y efectos táctiles durante las transiciones.</p>
                     </div>
 
-                    <div class="bg-darkSidebar p-3 rounded-xl border border-darkBorder space-y-1 text-xs">
-                        <p class="text-brandVerde font-semibold">💡 CONSEJOS DE EDICIÓN Y GRABACIÓN:</p>
-                        <p>• Use iluminación frontal suave y grabe tomas breves de 2 a 3 segundos para mantener un dinamismo visual constante.</p>
+                    <div class="bg-darkSidebar p-3.5 rounded-xl border border-darkBorder space-y-1 text-xs">
+                        <p class="text-brandVerde font-bold uppercase tracking-wider">💡 RECOMENDACIONES DE PRODUCCIÓN:</p>
+                        <p>• Mantén subtítulos llamativos centrados en pantalla con los colores representativos de ${item.name}.</p>
                     </div>
                 `;
             }
 
-            // CASO: El usuario indica lo que quiere promocionar (ej. marca de maquillaje, restaurante, etc.)
-            let prefixHeader = isFirstMessage 
-                ? `<p class="font-bold text-brandVerde">${timeGreeting} Le saluda su asesor de <strong>SparkyKrea</strong>.</p>` 
-                : '';
+            // 3. Buscar si el input coincide con un juego o producto conocido
+            let matchedKey = null;
+            for (let key in KNOWLEDGE_BASE) {
+                if (clean.includes(key)) {
+                    matchedKey = key;
+                    break;
+                }
+            }
 
+            if (matchedKey) {
+                activeSubject = matchedKey;
+                const item = KNOWLEDGE_BASE[matchedKey];
+                
+                let header = isFirstMessage 
+                    ? `<p class="font-bold text-brandVerde">Hola, ${timeGreeting.toLowerCase()} soy el asistente de <strong>SparkyKrea</strong>.</p>` 
+                    : '';
+
+                return `
+                    ${header}
+                    <p>Excelente tema. Prepararé la propuesta publicitaria para <strong>${item.name}</strong> (${item.genre}).</p>
+                    <div class="p-3 bg-darkSidebar rounded-xl border border-darkBorder font-semibold text-xs text-brandVerde mt-2">
+                        ❓ ¿Cuánto tiempo desea o quiere que dure la publicidad?
+                    </div>
+                `;
+            }
+
+            // 4. Si la entrada NO pertenece a ningún juego o tema conocido
             return `
-                ${prefixHeader}
-                <p>Con mucho gusto le ayudaremos a estructurar la estrategia publicitaria para: <strong>"${escapeHtml(input)}"</strong>.</p>
-                <p>Para elaborar el <strong>guion técnico exacto, la recomendación de música y las recomendaciones visuales</strong>, por favor indíquenos:</p>
-                <div class="p-3 bg-darkSidebar rounded-xl border border-darkBorder font-medium text-xs text-brandVerde">
-                    ⏱️ ¿De cuántos segundos o minutos desea que sea la duración de su video publicitario? (Ej: 15 seg, 30 seg, 60 seg)
-                </div>
+                <p class="font-semibold text-rose-400">⚠️ Tema no identificado</p>
+                <p>Lo siento, no conozco o no tengo registro sobre <em>"${escapeHtml(input)}"</em> en mi base de datos de videojuegos o productos publicitarios.</p>
+                <p class="text-xs text-gray-400">Por favor, indícame un videojuego conocido (ej. <em>Valorant, Free Fire, Fortnite, Minecraft, LoL, CoD</em>) o un producto válido para poder generar tu publicidad.</p>
             `;
         }
 
@@ -430,5 +472,3 @@
     </script>
 </body>
 </html>
-
-                                            
