@@ -1,16 +1,16 @@
 
-      <!DOCTYPE html>
+                  <!DOCTYPE html>
 <html lang="es" class="h-full">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SparkyKrea AI</title>
     <!-- Tailwind CSS CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="[https://cdn.tailwindcss.com](https://cdn.tailwindcss.com)"></script>
     <!-- FontAwesome Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="[https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css](https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css)">
     <!-- Marked.js para formatear respuestas enriquecidas -->
-    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script src="[https://cdn.jsdelivr.net/npm/marked/marked.min.js](https://cdn.jsdelivr.net/npm/marked/marked.min.js)"></script>
     <script>
         tailwind.config = {
             darkMode: 'class',
@@ -28,7 +28,6 @@
         }
     </script>
     <style>
-        /* Custom Scrollbar */
         ::-webkit-scrollbar {
             width: 8px;
         }
@@ -49,7 +48,7 @@
     <!-- TOP NAVBAR -->
     <header class="h-14 border-b border-gray-800 flex items-center justify-between px-4 bg-geminiBg z-20 shrink-0">
         <div class="flex items-center gap-3">
-            <!-- Botón de las 2/3 rayitas (Sidebar Toggle) -->
+            <!-- Botón de las 2/3 rayitas -->
             <button id="toggleSidebarBtn" class="p-2 text-gray-400 hover:text-white hover:bg-geminiHover rounded-lg transition-colors focus:outline-none" title="Menú de conversaciones">
                 <i class="fa-solid fa-bars-staggered text-lg"></i>
             </button>
@@ -71,7 +70,7 @@
 
     <div class="flex flex-1 h-[calc(100vh-3.5rem)] overflow-hidden relative">
 
-        <!-- SIDEBAR (Historial de Conversaciones) -->
+        <!-- SIDEBAR -->
         <aside id="sidebar" class="w-64 bg-geminiSidebar border-r border-gray-800 flex flex-col transition-all duration-300 z-10 shrink-0">
             <div class="p-3">
                 <button id="newChatSidebarBtn" class="w-full flex items-center gap-3 bg-geminiCard hover:bg-geminiHover text-white px-4 py-3 rounded-xl border border-gray-700 transition text-sm font-medium">
@@ -99,7 +98,7 @@
             
             <!-- CONTENEDOR DE MENSAJES -->
             <div id="messagesContainer" class="flex-1 overflow-y-auto p-4 md:p-8 space-y-6 max-w-4xl w-full mx-auto">
-                <!-- Pantalla de bienvenida por defecto -->
+                <!-- Pantalla de bienvenida -->
                 <div id="welcomeScreen" class="h-full flex flex-col justify-center items-center text-center my-auto py-12">
                     <div class="w-16 h-16 rounded-2xl bg-gradient-to-tr from-blue-600 to-purple-600 flex items-center justify-center mb-6 shadow-lg shadow-blue-500/20">
                         <i class="fa-solid fa-wand-magic-sparkles text-3xl text-white"></i>
@@ -109,7 +108,7 @@
                         Hazme preguntas complejas. Mis respuestas serán detalladas, didácticas y estructuradas para potenciar tu aprendizaje.
                     </p>
 
-                    <!-- Sugerencias rápidas -->
+                    <!-- Sugerencias -->
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-3 mt-8 w-full max-w-xl text-left">
                         <button onclick="sendQuickPrompt('Explícame cómo funciona la física cuántica con analogías sencillas.')" class="p-4 bg-geminiCard hover:bg-geminiHover rounded-2xl border border-gray-800 transition text-sm text-gray-300 flex flex-col justify-between group">
                             <span>Explícame cómo funciona la física cuántica con analogías sencillas.</span>
@@ -153,11 +152,9 @@
 
     <!-- SCRIPT DE FUNCIONALIDAD -->
     <script>
-        // ESTADO DE LA APLICACIÓN
         let conversations = JSON.parse(localStorage.getItem('sparky_chats')) || [];
         let currentChatId = null;
 
-        // ELEMENTOS DOM
         const sidebar = document.getElementById('sidebar');
         const toggleSidebarBtn = document.getElementById('toggleSidebarBtn');
         const chatHistoryList = document.getElementById('chatHistoryList');
@@ -168,18 +165,15 @@
         const newChatTopBtn = document.getElementById('newChatTopBtn');
         const newChatSidebarBtn = document.getElementById('newChatSidebarBtn');
 
-        // AJUSTE AUTOMÁTICO DE TEXTAREA
         userInput.addEventListener('input', function() {
             this.style.height = 'auto';
             this.style.height = (this.scrollHeight) + 'px';
         });
 
-        // TOGGLE SIDEBAR (2 Rayitas)
         toggleSidebarBtn.addEventListener('click', () => {
             sidebar.classList.toggle('-ml-64');
         });
 
-        // NUEVO CHAT
         function startNewChat() {
             currentChatId = Date.now().toString();
             const newChat = {
@@ -196,19 +190,16 @@
         newChatTopBtn.addEventListener('click', startNewChat);
         newChatSidebarBtn.addEventListener('click', startNewChat);
 
-        // GUARDAR EN LOCALSTORAGE
         function saveConversations() {
             localStorage.setItem('sparky_chats', JSON.stringify(conversations));
         }
 
-        // CARGAR CHAT SELECCIONADO
         function loadChat(id) {
             currentChatId = id;
             renderSidebar();
             renderMessages();
         }
 
-        // BORRAR CHAT
         function deleteChat(e, id) {
             e.stopPropagation();
             conversations = conversations.filter(c => c.id !== id);
@@ -220,7 +211,6 @@
             renderMessages();
         }
 
-        // RENDERIZAR SIDEBAR
         function renderSidebar() {
             chatHistoryList.innerHTML = '';
             
@@ -250,7 +240,6 @@
             });
         }
 
-        // RENDERIZAR MENSAJES
         function renderMessages() {
             const currentChat = conversations.find(c => c.id === currentChatId);
 
@@ -275,7 +264,6 @@
                         </div>
                     `;
                 } else {
-                    // Formatear texto con Markdown si está disponible
                     const formattedText = typeof marked !== 'undefined' ? marked.parse(msg.text) : msg.text;
 
                     msgDiv.innerHTML = `
@@ -288,7 +276,6 @@
                                     ${formattedText}
                                 </div>
 
-                                <!-- SECCIÓN INTERACTIVA: "¿Qué te gustó de esta información?" -->
                                 <div class="bg-geminiSidebar border border-gray-800 rounded-xl p-3 text-xs space-y-2">
                                     <div class="flex items-center gap-1.5 text-geminiAccent font-medium">
                                         <i class="fa-solid fa-sparkles"></i>
@@ -317,11 +304,9 @@
                 messagesContainer.appendChild(msgDiv);
             });
 
-            // Scroll al final
             messagesContainer.scrollTop = messagesContainer.scrollHeight;
         }
 
-        // PROCESAR ENVÍO DE MENSAJE PRINCIPAL
         chatForm.addEventListener('submit', (e) => {
             e.preventDefault();
             const text = userInput.value.trim();
@@ -333,12 +318,10 @@
 
             const currentChat = conversations.find(c => c.id === currentChatId);
             
-            // Si es el primer mensaje, actualizar título
             if (currentChat.messages.length === 0) {
                 currentChat.title = text.length > 25 ? text.substring(0, 25) + '...' : text;
             }
 
-            // Agregar mensaje del usuario
             currentChat.messages.push({ role: 'user', text: text });
             userInput.value = '';
             userInput.style.height = 'auto';
@@ -347,7 +330,6 @@
             renderSidebar();
             renderMessages();
 
-            // Generar Respuesta Didáctica Compleja
             generateEducationalResponse(text);
         });
 
@@ -356,9 +338,7 @@
             chatForm.dispatchEvent(new Event('submit'));
         }
 
-        // GENERADOR DE RESPUESTAS EXTENSAS Y DIDÁCTICAS (Motor Didáctico)
         function generateEducationalResponse(userQuery) {
-            // Indicador de "Escribiendo..."
             const loadingDiv = document.createElement('div');
             loadingDiv.id = 'loadingIndicator';
             loadingDiv.className = 'flex gap-3 justify-start items-center text-gray-400 text-xs py-2';
@@ -385,7 +365,6 @@
             }, 1200);
         }
 
-        // CONSTRUCTOR DE RESPUESTA INTERACTIVA "Qué te gustó"
         function submitFeedback(index) {
             const inputEl = document.getElementById(`feedback-input-${index}`);
             const likedText = inputEl ? inputEl.value.trim() : '';
@@ -401,7 +380,6 @@
             saveConversations();
             renderMessages();
 
-            // Respuesta especial expandida
             generateExpandedResponse(likedText);
         }
 
@@ -458,7 +436,6 @@ Para complementar lo anterior, aquí tienes un **aporte adicional exclusivo**:
             }, 1200);
         }
 
-        // GENERADOR GENERAL DE TEXTO DIDÁCTICO COMPLEJO
         function buildComplexResponse(query) {
             return `### 📘 Análisis Educativo Complejo: "${escapeHtml(query)}"
 
@@ -490,14 +467,12 @@ Imagina este proceso como el funcionamiento de un reloj de precisión: cada engr
 - **Crecimiento:** Dominar estos detalles te brinda un nivel de comprensión superior.`;
         }
 
-        // FUNCIÓN UTILITARIA
         function escapeHtml(text) {
             const div = document.createElement('div');
             div.textContent = text;
             return div.innerHTML;
         }
 
-        // INICIALIZACIÓN
         if (conversations.length > 0) {
             currentChatId = conversations[0].id;
         }
@@ -508,21 +483,19 @@ Imagina este proceso como el funcionamiento de un reloj de precisión: cada engr
 </html>
 ```eof
 
-### ¿Qué incluye esta versión?
-1. **Icono de menú superior izquierda**: Las **2-3 rayitas (`fa-bars-staggered`)** al lado del nombre "SparkyKrea" abren y cierran el panel lateral de forma suave.
-2. **Sección de Feedback e Interacción ("¿Qué te gustó?")**: En la parte inferior de cada respuesta de la IA, tendrás una cajita interactiva donde puedes escribir exactamente qué información te agradó o te pareció clave. Al hacer clic en **Profundizar**, la aplicación responderá analizando ese fragmento específico y te entregará **"Algo más"** (datos extra, ejemplos y casos prácticos).
-3. **Estructura Didáctica Compleja**: Las respuestas utilizan listas, formato Markdown, encabezados y cajas visuales modernas similares a Gemini.**Diseño de la Interfaz**
+### Pasos para arreglarlo en GitHub:
+1. Entra a tu repositorio en GitHub y edita el archivo `index.html`.
+2. Borra **todo** el contenido actual del archivo.
+3. Copia y pega exactamente el bloque de código de arriba.
+4. Haz clic en **"Commit changes..."** para guardar. 
 
-* **Menú Superior Izquierdo:** Icono de dos rayas horizontales (`=`) colocado a la izquierda del nombre del asistente para desplegar el historial de chats y configuraciones.
-* **Módulo de Feedback Interactivo:** Un campo de texto al final de cada respuesta etiquetado como *"¿Qué te gustó de esta información?"* junto a un botón de envío (*"Profundizar"*).
+En 1-2 minutos, recarga tu página web y ese texto habrá desaparecido por completo.Ese texto pequeño en el fondo de la pantalla parece ser un **prompt de sistema, instrucciones internas o notas del desarrollador** que terminaron mostrándose por error en la interfaz.
 
----
+Causas habituales de este fallo:
 
-**Configuración de Respuestas**
+* **Error de renderizado web:** La página está cargando etiquetas de código o fragmentos de texto en un contenedor visible en lugar de mantenerlos ocultos en el código fuente.
+* **Instrucciones del sistema expuestas:** El texto en la parte inferior contiene especificaciones de diseño y comportamiento (como referencias a Markdown, botones y configuraciones), las cuales están dirigidas al modelo de IA o al entorno de desarrollo y no deberían ser visibles para el usuario final.
+* **Falta de ocultación por CSS:** El elemento HTML que contiene esa nota carece del estilo o la propiedad necesaria para ocultarlo (`display: none`).
 
-* **Estructura Didáctica y Compleja:** Respuestas de mayor extensión (~350-500 palabras) divididas en explicación teórica, ejemplos prácticos, análisis de causa-efecto y aplicaciones reales.
-* **Flujo de Continuidad:** Al enviar tu comentario en el módulo de feedback, el sistema procesa los puntos que destacaste y genera automáticamente un anexo con contenido avanzado, curiosidades relacionadas o ejercicios prácticos sobre esos aspectos específicos.
-
----
-
-Para ajustar el prototipo exactamente a lo que buscas: ¿prefieres que el campo para escribir lo que te gustó aparezca automáticamente debajo de cada mensaje, o prefieres un botón discreto que lo despliegue solo cuando quieras usarlo?
+Si la página es tuya, puedes ocultarlo o eliminar ese fragmento del código del prototipo; si estás usando la aplicación, refrescar la página o limpiar la caché debería hacer que desaparezca.
+      
