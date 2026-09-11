@@ -1,11 +1,10 @@
     
-
-    <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es" class="h-full w-full">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>SparkyKrea</title>
+    <title>SparkyKrea - Asesoría Publicitaria</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- FontAwesome Icons -->
@@ -40,7 +39,7 @@
             width: 100%;
             margin: 0;
             padding: 0;
-            overflow: hidden; /* Pantalla completa fija */
+            overflow: hidden;
         }
         .custom-scrollbar::-webkit-scrollbar { width: 5px; }
         .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
@@ -55,17 +54,17 @@
 
     <!-- SIDEBAR / MENÚ LATERAL -->
     <aside id="sidebar" class="fixed md:static inset-y-0 left-0 z-40 w-72 bg-darkSidebar border-r border-darkBorder flex flex-col transform -translate-x-full md:translate-x-0 transition-transform duration-300 ease-in-out h-full">
-        <!-- Header Sidebar con Logo Vinotinto y Verde -->
+        <!-- Header Sidebar -->
         <div class="p-4 flex items-center justify-between border-b border-darkBorder shrink-0">
             <div class="flex items-center space-x-2.5">
                 <div class="w-9 h-9 rounded-xl bg-gradient-to-tr from-brandVinotinto to-brandVerde flex items-center justify-center font-bold text-white shadow-md">
-                    <i class="fa-solid fa-graduation-cap text-base"></i>
+                    <i class="fa-solid fa-rectangle-ad text-base"></i>
                 </div>
                 <div class="flex flex-col">
                     <span class="font-bold text-lg tracking-wide leading-tight">
                         <span class="text-brandVinotinto">Sparky</span><span class="text-brandVerde">Krea</span>
                     </span>
-                    <span class="text-[10px] text-gray-400 font-medium">Asistente Educativo</span>
+                    <span class="text-[10px] text-gray-400 font-medium">Asesoría Publicitaria</span>
                 </div>
             </div>
             <button onclick="toggleSidebar()" class="md:hidden text-gray-400 hover:text-white p-2">
@@ -77,21 +76,20 @@
         <div class="p-3 shrink-0">
             <button onclick="startNewChat()" class="w-full py-2.5 px-4 bg-brandVinotinto hover:bg-brandVinotintoHover text-white rounded-xl font-medium shadow-md transition flex items-center justify-center gap-2 text-sm border border-rose-900/40">
                 <i class="fa-solid fa-plus text-xs"></i>
-                <span>Nueva conversación</span>
+                <span>Nuevo proyecto publicitario</span>
             </button>
         </div>
 
         <!-- Historial de Chats -->
         <div class="flex-1 overflow-y-auto custom-scrollbar px-3 py-2">
             <div class="text-[11px] font-semibold text-gray-400 uppercase tracking-wider px-3 mb-2 flex items-center justify-between">
-                <span>Historial Reciente</span>
+                <span>Campañas Recientes</span>
             </div>
             <div id="chat-history" class="space-y-1">
-                <!-- Se llena dinámicamente -->
+                <!-- Historial dinámico -->
             </div>
         </div>
 
-        <!-- Footer Sidebar -->
         <div class="p-3 border-t border-darkBorder text-[11px] text-gray-500 text-center shrink-0">
             SparkyKrea &copy; 2026
         </div>
@@ -114,54 +112,53 @@
             <div class="flex items-center gap-2">
                 <button onclick="startNewChat()" class="flex items-center gap-2 text-xs bg-darkCard hover:bg-darkBorder text-gray-200 px-3 py-1.5 rounded-lg border border-darkBorder transition">
                     <i class="fa-solid fa-rotate-right text-brandVerde"></i>
-                    <span class="hidden sm:inline">Reiniciar</span>
+                    <span class="hidden sm:inline">Nueva Asesoría</span>
                 </button>
             </div>
         </header>
 
-        <!-- Contenedor Principal de Mensajes / Pantalla Bienvenida -->
+        <!-- Contenedor Principal -->
         <div id="chat-container" class="flex-1 overflow-y-auto custom-scrollbar p-4 md:p-6 max-w-4xl mx-auto w-full flex flex-col">
             
-            <!-- Pantalla de Bienvenida Didáctica -->
+            <!-- Pantalla de Bienvenida -->
             <div id="welcome-screen" class="my-auto text-center py-4 flex flex-col items-center justify-center">
                 <div class="w-14 h-14 bg-gradient-to-tr from-brandVinotinto to-brandVerde rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-lg text-2xl text-white">
-                    <i class="fa-solid fa-sparkles"></i>
+                    <i class="fa-solid fa-clapperboard"></i>
                 </div>
                 
-                <!-- Saludo dinámico según la hora -->
                 <h1 id="dynamic-greeting" class="text-2xl md:text-3xl font-bold text-white mb-2">
-                    ¡Hola! ¿Qué te gustaría aprender hoy?
+                    ¡Hola! ¿En qué publicidad te puedo ayudar hoy?
                 </h1>
                 
                 <p class="text-gray-400 text-xs md:text-sm max-w-md mx-auto mb-6 leading-relaxed">
-                    Soy tu asistente <span class="text-brandVinotinto font-semibold">Sparky</span><span class="text-brandVerde font-semibold">Krea</span>. Hazme cualquier pregunta o elige una de las opciones sugeridas a continuación.
+                    Bienvenido a <span class="text-brandVinotinto font-semibold">Sparky</span><span class="text-brandVerde font-semibold">Krea</span>. Tu especialista en creación de guiones, audio y estrategia audiovisual para videos publicitarios.
                 </p>
 
-                <!-- Sugerencias de Preguntas -->
+                <!-- Sugerencias Rápidas -->
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 max-w-lg w-full text-left">
-                    <button onclick="usePrompt('Explícame cómo funciona la física cuántica con analogías sencillas.')" class="p-3.5 bg-darkCard border border-darkBorder hover:border-brandVerde/50 rounded-xl transition text-xs md:text-sm text-gray-300 hover:text-white flex items-center justify-between group shadow-sm">
-                        <span>Explícame cómo funciona la física cuántica con analogías sencillas.</span>
+                    <button onclick="usePrompt('Quiero hacer un video publicitario para una marca de maquillaje.')" class="p-3.5 bg-darkCard border border-darkBorder hover:border-brandVerde/50 rounded-xl transition text-xs md:text-sm text-gray-300 hover:text-white flex items-center justify-between group shadow-sm">
+                        <span>Publicidad para marca de maquillaje</span>
                         <i class="fa-solid fa-arrow-right opacity-0 group-hover:opacity-100 transition text-brandVerde ml-2 shrink-0"></i>
                     </button>
-                    <button onclick="usePrompt('¿Cuáles son los principios fundamentales del diseño web accesible y moderno?')" class="p-3.5 bg-darkCard border border-darkBorder hover:border-brandVerde/50 rounded-xl transition text-xs md:text-sm text-gray-300 hover:text-white flex items-center justify-between group shadow-sm">
-                        <span>¿Cuáles son los principios fundamentales del diseño web accesible y moderno?</span>
+                    <button onclick="usePrompt('Necesito una estrategia y guion para promocionar un restaurante.')" class="p-3.5 bg-darkCard border border-darkBorder hover:border-brandVerde/50 rounded-xl transition text-xs md:text-sm text-gray-300 hover:text-white flex items-center justify-between group shadow-sm">
+                        <span>Anuncio audiovisual para restaurante</span>
                         <i class="fa-solid fa-arrow-right opacity-0 group-hover:opacity-100 transition text-brandVerde ml-2 shrink-0"></i>
                     </button>
                 </div>
             </div>
 
-            <!-- Lista de Mensajes Conversacionales -->
+            <!-- Lista de Mensajes -->
             <div id="messages-list" class="space-y-4 hidden w-full pb-4"></div>
         </div>
 
-        <!-- Caja de Entrada de Mensaje Fija Abajo -->
+        <!-- Entrada de Texto -->
         <div class="p-3 md:p-4 border-t border-darkBorder bg-darkBg shrink-0">
             <div class="max-w-4xl mx-auto relative">
                 <form onsubmit="handleSend(event)" class="relative flex items-center">
                     <input 
                         type="text"
                         id="user-input" 
-                        placeholder="Escribe tu duda o pregunta aquí..." 
+                        placeholder="Escribe el producto o servicio para tu publicidad..." 
                         autocomplete="off"
                         class="w-full pl-4 pr-12 py-3 bg-darkCard border border-darkBorder focus:border-brandVerde rounded-xl text-white placeholder-gray-500 focus:outline-none text-sm transition"
                     />
@@ -170,7 +167,7 @@
                     </button>
                 </form>
                 <div class="text-center text-[11px] text-gray-500 mt-1.5">
-                    SparkyKrea está listo para responder cualquier duda que tengas.
+                    SparkyKrea • Asesoría integral para guiones, música y clips publicitarios.
                 </div>
             </div>
         </div>
@@ -181,7 +178,6 @@
         let conversations = JSON.parse(localStorage.getItem('sparkykrea_chats')) || [];
         let currentChatId = null;
 
-        // Determinar saludo dinámico por horario
         function getGreeting() {
             const hour = new Date().getHours();
             if (hour >= 5 && hour < 12) return '¡Buenos días!';
@@ -189,9 +185,8 @@
             return '¡Buenas noches!';
         }
 
-        // Establecer saludo en pantalla
         document.addEventListener('DOMContentLoaded', () => {
-            const greetingText = `${getGreeting()} ¿En qué te puedo ayudar hoy?`;
+            const greetingText = `¡Hola! ${getGreeting()} ¿En qué publicidad te puedo ayudar hoy?`;
             document.getElementById('dynamic-greeting').textContent = greetingText;
             renderSidebar();
         });
@@ -227,14 +222,23 @@
             const query = input.value.trim();
             if (!query) return;
 
+            let isFirstMessageInChat = false;
+
             if (!currentChatId) {
                 currentChatId = Date.now().toString();
+                isFirstMessageInChat = true;
+            }
+
+            const chatObj = conversations.find(c => c.id === currentChatId);
+            if (!chatObj || chatObj.messages.length === 0) {
+                isFirstMessageInChat = true;
             }
 
             document.getElementById('welcome-screen').classList.add('hidden');
             const messagesList = document.getElementById('messages-list');
             messagesList.classList.remove('hidden');
 
+            // Insertar mensaje usuario
             messagesList.innerHTML += `
                 <div class="flex gap-3 justify-end">
                     <div class="bg-brandVinotinto text-white p-3.5 rounded-2xl rounded-tr-none max-w-[85%] text-sm shadow-md">
@@ -252,64 +256,87 @@
                     <div class="w-7 h-7 rounded-lg bg-darkCard border border-darkBorder flex items-center justify-center text-brandVerde">
                         <i class="fa-solid fa-spinner fa-spin text-xs"></i>
                     </div>
-                    <span>SparkyKrea está pensando la respuesta...</span>
+                    <span>SparkyKrea elaborando propuesta publicitaria...</span>
                 </div>
             `;
             scrollToBottom();
 
-            saveToHistory(query);
-
             setTimeout(() => {
                 document.getElementById(loadingId)?.remove();
 
-                const botResponse = generateSmartResponse(query);
+                const botResponse = generateAdResponse(query, isFirstMessageInChat);
 
                 messagesList.innerHTML += `
                     <div class="flex gap-3 justify-start">
                         <div class="w-8 h-8 rounded-lg bg-gradient-to-tr from-brandVinotinto to-brandVerde flex-shrink-0 flex items-center justify-center text-white font-bold text-xs shadow-md">
                             SK
                         </div>
-                        <div class="bg-darkCard border border-darkBorder text-gray-200 p-4 rounded-2xl rounded-tl-none max-w-[88%] text-sm leading-relaxed shadow-md space-y-2">
+                        <div class="bg-darkCard border border-darkBorder text-gray-200 p-4 rounded-2xl rounded-tl-none max-w-[88%] text-sm leading-relaxed shadow-md space-y-3">
                             ${botResponse}
                         </div>
                     </div>
                 `;
+                
+                // Guardar en almacenamiento
+                saveMessageToHistory(query, botResponse);
                 scrollToBottom();
-            }, 700);
+            }, 750);
         }
 
-        function generateSmartResponse(input) {
+        function generateAdResponse(input, isFirstMessage) {
             const clean = input.toLowerCase().trim();
-            const greeting = getGreeting();
+            const timeGreeting = getGreeting();
 
-            if (clean === 'hola' || clean === 'buenas' || clean === 'hola!' || clean === 'buenas!') {
-                return `<p class="font-semibold text-brandVerde">${greeting}</p>
-                        <p>Soy <strong>SparkyKrea</strong>, tu asistente educativo. ¿En qué tema o duda te puedo ayudar el día de hoy?</p>`;
+            // CASO: Saludos simples o expresiones
+            if (clean === 'hola' || clean === 'buenas' || clean === 'hola buenas tardes' || clean === 'hola buenas noches' || clean === 'hola buenos dias') {
+                return `<p class="font-bold text-brandVerde">${timeGreeting} Le da la bienvenida el equipo de <strong>SparkyKrea</strong>.</p>
+                        <p>Estoy listo para coordinar la producción de su anuncio publicitario. ¿De qué producto o marca le gustaría crear la campaña publicitaria hoy?</p>`;
             }
 
             if (clean.includes('xd') || clean.includes('jaja') || clean === 'lol') {
-                return `<p>${greeting} 😄 Veo que estás de buen humor.</p>
-                        <p>¿Tienes alguna duda sobre algún tema en específico o te gustaría consultar alguna pregunta didáctica?</p>`;
+                return `<p>Un gusto saludarle. 😄 En <strong>SparkyKrea</strong> estamos atentos para ayudarle a comercializar su producto.</p>
+                        <p>Por favor, coméntenos sobre qué marca o artículo le gustaría estructurar su video publicitario.</p>`;
             }
 
-            if (clean.includes('física cuántica') || clean.includes('fisica cuantica')) {
-                return `<p class="font-bold text-brandVerde">⚛️ La Física Cuántica explicada de forma sencilla:</p>
-                        <p>Imagina que el mundo normal es como una escalera donde subes peldaño a peldaño. En el mundo cuántico, las partículas pueden estar en varios peldaños a la vez (<strong>superposición</strong>) o conectarse al instante a cualquier distancia (<strong>entrelazamiento</strong>).</p>
-                        <p class="text-xs text-gray-400 border-t border-gray-700 pt-2 mt-2">¿Te gustaría profundizar en el experimento del gato de Schrödinger o en los fotones?</p>`;
+            // CASO: Si el usuario responde con un número o duración
+            if (clean.includes('segundo') || clean.includes('seg') || !isNaN(clean) || clean.includes('minuto')) {
+                return `
+                    <p class="font-bold text-brandVerde">🎬 Estrategia Publicitaria Personalizada (${escapeHtml(input)})</p>
+                    <p>Excelente elección de tiempo. A continuación presento la estructura técnica completa para la producción de su video:</p>
+                    
+                    <div class="bg-darkSidebar p-3 rounded-xl border border-darkBorder space-y-2 text-xs">
+                        <p class="text-brandVerde font-semibold">🎙️ GUION DE LOCUCIÓN & TEXTO EN PANTALLA:</p>
+                        <p><strong>[0:00 - 0:03] Gancho Impactante:</strong> "¿Cansado de productos que no entregan lo que prometen? Es hora de un cambio real."</p>
+                        <p><strong>[0:03 - End] Desarrollo y Beneficio:</strong> Presentación del producto en acción con tomas cerradas destacando la textura y acabado premium.</p>
+                        <p><strong>[Cierre] Llamado a la Acción (CTA):</strong> "Disponible hoy con envío gratis. Haz clic en el enlace de la biografía."</p>
+                    </div>
+
+                    <div class="bg-darkSidebar p-3 rounded-xl border border-darkBorder space-y-1 text-xs">
+                        <p class="text-brandVerde font-semibold">🎵 MUSICALIZACIÓN Y EFECTOS SONOROS:</p>
+                        <p>• <strong>Pista de Fondo:</strong> Pop moderno o Synthwave sutil con ritmo ascendente.</p>
+                        <p>• <strong>Efectos (SFX):</strong> Sonido "Swoosh" suave en las transiciones de video.</p>
+                    </div>
+
+                    <div class="bg-darkSidebar p-3 rounded-xl border border-darkBorder space-y-1 text-xs">
+                        <p class="text-brandVerde font-semibold">💡 CONSEJOS DE EDICIÓN Y GRABACIÓN:</p>
+                        <p>• Use iluminación frontal suave y grabe tomas breves de 2 a 3 segundos para mantener un dinamismo visual constante.</p>
+                    </div>
+                `;
             }
 
-            if (clean.includes('diseño web') || clean.includes('accesible')) {
-                return `<p class="font-bold text-brandVerde">💻 Principios de Diseño Web Accesible:</p>
-                        <ul class="list-disc pl-4 space-y-1 text-xs md:text-sm">
-                            <li><strong>Contraste adecuado:</strong> Asegurar buena visibilidad entre texto y fondo.</li>
-                            <li><strong>Navegación por teclado:</strong> Permitir usar la web sin ratón.</li>
-                            <li><strong>Diseño adaptativo:</strong> Que funcione bien en pantallas de escritorio y teléfonos móviles sin desbordar.</li>
-                        </ul>`;
-            }
+            // CASO: El usuario indica lo que quiere promocionar (ej. marca de maquillaje, restaurante, etc.)
+            let prefixHeader = isFirstMessage 
+                ? `<p class="font-bold text-brandVerde">${timeGreeting} Le saluda su asesor de <strong>SparkyKrea</strong>.</p>` 
+                : '';
 
-            return `<p class="font-semibold text-brandVerde">${greeting}</p>
-                    <p>Has preguntado sobre: <em>"${escapeHtml(input)}"</em>.</p>
-                    <p>Como tu asistente <strong>SparkyKrea</strong>, estoy diseñado para responder y guiarte en cualquier duda académica, didáctica o técnica que tengas. ¿Deseas que profundicemos en algún detalle en particular?</p>`;
+            return `
+                ${prefixHeader}
+                <p>Con mucho gusto le ayudaremos a estructurar la estrategia publicitaria para: <strong>"${escapeHtml(input)}"</strong>.</p>
+                <p>Para elaborar el <strong>guion técnico exacto, la recomendación de música y las recomendaciones visuales</strong>, por favor indíquenos:</p>
+                <div class="p-3 bg-darkSidebar rounded-xl border border-darkBorder font-medium text-xs text-brandVerde">
+                    ⏱️ ¿De cuántos segundos o minutos desea que sea la duración de su video publicitario? (Ej: 15 seg, 30 seg, 60 seg)
+                </div>
+            `;
         }
 
         function scrollToBottom() {
@@ -317,12 +344,20 @@
             container.scrollTop = container.scrollHeight;
         }
 
-        function saveToHistory(query) {
+        function saveMessageToHistory(userText, botText) {
             let chat = conversations.find(c => c.id === currentChatId);
             if (!chat) {
-                chat = { id: currentChatId, title: query.substring(0, 22) + (query.length > 22 ? '...' : '') };
+                chat = { 
+                    id: currentChatId, 
+                    title: userText.substring(0, 24) + (userText.length > 24 ? '...' : ''),
+                    messages: [] 
+                };
                 conversations.unshift(chat);
             }
+            
+            chat.messages.push({ sender: 'user', text: userText });
+            chat.messages.push({ sender: 'bot', text: botText });
+
             localStorage.setItem('sparkykrea_chats', JSON.stringify(conversations));
             renderSidebar();
         }
@@ -330,7 +365,7 @@
         function renderSidebar() {
             const historyContainer = document.getElementById('chat-history');
             if (conversations.length === 0) {
-                historyContainer.innerHTML = `<div class="text-xs text-gray-500 italic px-3 py-2">Sin conversaciones previas</div>`;
+                historyContainer.innerHTML = `<div class="text-xs text-gray-500 italic px-3 py-2">Sin campañas guardadas</div>`;
                 return;
             }
             historyContainer.innerHTML = '';
@@ -339,7 +374,7 @@
                 historyContainer.innerHTML += `
                     <div onclick="selectChat('${c.id}')" class="flex items-center justify-between px-3 py-2 rounded-lg cursor-pointer text-xs transition ${active ? 'bg-brandVinotinto/30 border border-brandVinotinto/50 text-white font-medium' : 'text-gray-400 hover:bg-darkCard hover:text-gray-200'}">
                         <div class="flex items-center gap-2 truncate">
-                            <i class="fa-regular fa-message text-brandVerde text-[10px]"></i>
+                            <i class="fa-solid fa-film text-brandVerde text-[10px]"></i>
                             <span class="truncate">${escapeHtml(c.title)}</span>
                         </div>
                     </div>
@@ -349,7 +384,44 @@
 
         function selectChat(id) {
             currentChatId = id;
+            const chat = conversations.find(c => c.id === id);
+            if (!chat) return;
+
+            document.getElementById('welcome-screen').classList.add('hidden');
+            const messagesList = document.getElementById('messages-list');
+            messagesList.classList.remove('hidden');
+            messagesList.innerHTML = '';
+
+            chat.messages.forEach(m => {
+                if (m.sender === 'user') {
+                    messagesList.innerHTML += `
+                        <div class="flex gap-3 justify-end">
+                            <div class="bg-brandVinotinto text-white p-3.5 rounded-2xl rounded-tr-none max-w-[85%] text-sm shadow-md">
+                                ${escapeHtml(m.text)}
+                            </div>
+                        </div>
+                    `;
+                } else {
+                    messagesList.innerHTML += `
+                        <div class="flex gap-3 justify-start">
+                            <div class="w-8 h-8 rounded-lg bg-gradient-to-tr from-brandVinotinto to-brandVerde flex-shrink-0 flex items-center justify-center text-white font-bold text-xs shadow-md">
+                                SK
+                            </div>
+                            <div class="bg-darkCard border border-darkBorder text-gray-200 p-4 rounded-2xl rounded-tl-none max-w-[88%] text-sm leading-relaxed shadow-md space-y-3">
+                                ${m.text}
+                            </div>
+                        </div>
+                    `;
+                }
+            });
+
             renderSidebar();
+            scrollToBottom();
+
+            const sidebar = document.getElementById('sidebar');
+            if (!sidebar.classList.contains('-translate-x-full')) {
+                toggleSidebar();
+            }
         }
 
         function escapeHtml(str) {
@@ -359,4 +431,4 @@
 </body>
 </html>
 
-        
+                                            
