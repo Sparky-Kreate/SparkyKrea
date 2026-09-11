@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SparkyKrea ⚡</title>
+
+<style>
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+body{
+    font-family:Arial, sans-serif;
+    background:#050713;
+    color:white;
+    min-height:100vh;
+}
+
+header{
+    height:70px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:0 7%;
+    border-bottom:1px solid #20244a;
+    background:rgba(5,7,19,.9);
+}
+
+.logo{
+    font-size:25px;
+    font-weight:bold;
+}
+
+.logo span{
+    color:#8b5cff;
+}
+
+.logo b{
+    color:#22c7ff;
+}
+
+nav a{
+    color:#bbbfe0;
+    text-decoration:none;
+    margin-left:25px;
+}
+
+.container{
+    max-width:1100px;
+    margin:auto;
+    padding:70px 20px;
+}
+
+.hero{
+    text-align:center;
+}
+
+.spark{
+    font-size:55px;
+    margin-bottom:15px;
+}
+
+h1{
+    font-size:clamp(42px,8vw,76px);
+    line-height:1;
+    margin-bottom:20px;
+}
+
+.gradient{
+    background:linear-gradient(90deg,#8b5cff,#22c7ff,#ff4fd8);
+    -webkit-background-clip:text;
+    color:transparent;
+}
+
+.subtitle{
+    color:#aeb3d6;
+    font-size:19px;
+    max-width:650px;
+    margin:0 auto 40px;
+    line-height:1.6;
+}
+
+.generator{
+    background:linear-gradient(145deg,#0d1025,#080a18);
+    border:1px solid #6044c9;
+    border-radius:24px;
+    padding:25px;
+    max-width:800px;
+    margin:auto;
+    box-shadow:0 0 45px rgba(105,70,255,.18);
+}
+
+textarea{
+    width:100%;
+    min-height:130px;
+    resize:none;
+    border:none;
+    outline:none;
+    border-radius:16px;
+    padding:20px;
+    background:#050713;
+    color:white;
+    font-size:17px;
+    border:1px solid #282d58;
+}
+
+textarea:focus{
+    border-color:#8b5cff;
+}
+
+.modes{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:10px;
+    margin:18px 0;
+}
+
+.mode{
+    padding:13px 5px;
+    border-radius:12px;
+    background:#0b0e20;
+    color:#bbbfe0;
+    border:1px solid #252a50;
+    cursor:pointer;
+}
+
+.mode.active{
+    background:linear-gradient(90deg,#6d3cff,#22aaff);
+    color:white;
+    border-color:transparent;
+}
+
+button.generate{
+    width:100%;
+    padding:17px;
+    border:0;
+    border-radius:15px;
+    font-size:18px;
+    font-weight:bold;
+    color:white;
+    cursor:pointer;
+    background:linear-gradient(90deg,#713cff,#22bfff);
+    box-shadow:0 0 25px rgba(75,150,255,.25);
+}
+
+button.generate:active{
+    transform:scale(.98);
+}
+
+.results{
+    display:none;
+    margin-top:35px;
+    text-align:left;
+}
+
+.results.show{
+    display:block;
+}
+
+.result-title{
+    font-size:25px;
+    margin-bottom:18px;
+}
+
+.cards{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:14px;
+}
+
+.card{
+    background:#0b0e20;
+    border:1px solid #252a50;
+    border-radius:17px;
+    padding:20px;
+}
+
+.card h3{
+    margin-bottom:10px;
+}
+
+.card p{
+    color:#b8bddb;
+    line-height:1.5;
+}
+
+.loading{
+    display:none;
+    text-align:center;
+    padding:25px;
+    color:#aeb3d6;
+}
+
+.loading.show{
+    display:block;
+}
+
+.dot{
+    animation:blink 1s infinite;
+}
+
+@keyframes blink{
+    0%,100%{opacity:.2}
+    50%{opacity:1}
+}
+
+.features{
+    margin-top:80px;
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:20px;
+}
+
+.feature{
+    background:#0a0d1d;
+    border:1px solid #20264b;
+    border-radius:18px;
+    padding:25px;
+}
+
+.feature .icon{
+    font-size:30px;
+    margin-bottom:15px;
+}
+
+.feature p{
+    color:#9298bd;
+    margin-top:10px;
+    line-height:1.5;
+}
+
+footer{
+    text-align:center;
+    padding:40px;
+    color:#676d92;
+}
+
+@media(max-width:700px){
+    header{
+        padding:0 20px;
+    }
+
+    nav{
+        display:none;
+    }
+
+    .container{
+        padding:45px 15px;
+    }
+
+    .modes{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .cards{
+        grid-template-columns:1fr;
+    }
+
+    .features{
+        grid-template-columns:1fr;
+        margin-top:50px;
+    }
+
+    h1{
+        font-size:45px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <div class="logo">⚡ Sparky<span>Krea</span></div>
+
+    <nav>
+        <a href="#crear">Crear</a>
+        <a href="#funciones">Funciones</a>
+        <a href="#sobre">Sobre nosotros</a>
+    </nav>
+</header>
+
+<main class="container">
+
+<section class="hero" id="crear">
+
+    <div class="spark">⚡</div>
+
+    <h1>
+        Convierte una idea en<br>
+        <span class="gradient">algo increíble.</span>
+    </h1>
+
+    <p class="subtitle">
+        SparkyKrea convierte tus ideas en contenido listo para crear.
+        Escribe lo que tienes en mente y deja que Sparky haga el resto.
+    </p>
+
+    <div class="generator">
+
+        <textarea id="idea"
+        placeholder="¿Qué quieres crear?&#10;&#10;Ejemplo: Quiero hacer un TikTok de Clash Royale que sea divertido..."></textarea>
+
+        <div class="modes">
+
+            <div class="mode active" onclick="selectMode(this,'TikTok')">
+                🎵 TikTok
+            </div>
+
+            <div class="mode" onclick="selectMode(this,'YouTube')">
+                ▶️ YouTube
+            </div>
+
+            <div class="mode" onclick="selectMode(this,'Instagram')">
+                📸 Instagram
+            </div>
+
+            <div class="mode" onclick="selectMode(this,'Proyecto')">
+                💡 Proyecto
+            </div>
+
+        </div>
+
+        <button class="generate" onclick="generate()">
+            ⚡ Generar con Sparky
+        </button>
+
+        <div class="loading" id="loading">
+            ✨ Sparky está creando...
+            <span class="dot">●</span>
+            <span class="dot">●</span>
+            <span class="dot">●</span>
+        </div>
+
+        <div class="results" id="results">
+
+            <div class="result-title">
+                ✨ Tu idea está lista
+            </div>
+
+            <div class="cards">
+
+                <div class="card">
+                    <h3>💡 Idea principal</h3>
+                    <p id="ideaResult"></p>
+                </div>
+
+                <div class="card">
+                    <h3>🪝 Gancho</h3>
+                    <p id="hookResult"></p>
+                </div>
+
+                <div class="card">
+                    <h3>📝 Guion</h3>
+                    <p id="scriptResult"></p>
+                </div>
+
+                <div class="card">
+                    <h3>🎵 Música</h3>
+                    <p id="musicResult"></p>
+                </div>
+
+                <div class="card">
+                    <h3>🖼️ Miniatura</h3>
+                    <p id="thumbnailResult"></p>
+                </div>
+
+                <div class="card">
+                    <h3>#️⃣ Hashtags</h3>
+                    <p id="tagsResult"></p>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<section class="features" id="funciones">
+
+    <div class="feature">
+        <div class="icon">⚡</div>
+        <h2>Rápido</h2>
+        <p>
+            Convierte una idea sencilla en un concepto completo
+            en pocos segundos.
+        </p>
+    </div>
+
+    <div class="feature">
+        <div class="icon">🧠</div>
+        <h2>Creativo</h2>
+        <p>
+            Pensado para ayudarte a encontrar ideas diferentes
+            y evitar el típico contenido aburrido.
+        </p>
+    </div>
+
+    <div class="feature">
+        <div class="icon">🚀</div>
+        <h2>Para creadores</h2>
+        <p>
+            TikTok, YouTube, Instagram y proyectos personales
+            desde un solo lugar.
+        </p>
+    </div>
+
+</section>
+
+</main>
+
+<footer id="sobre">
+    ⚡ SparkyKrea — De una chispa a una idea increíble.
+    <br><br>
+    Primera versión • Gratis
+</footer>
+
+
+<script>
+
+let selectedMode = "TikTok";
+
+function selectMode(element, mode){
+
+    document.querySelectorAll(".mode")
+        .forEach(x => x.classList.remove("active"));
+
+    element.classList.add("active");
+
+    selectedMode = mode;
+}
+
+
+function generate(){
+
+    const idea = document.getElementById("idea").value.trim();
+
+    if(!idea){
+
+        alert("⚡ Primero escribe una idea.");
+
+        return;
+    }
+
+    const loading = document.getElementById("loading");
+    const results = document.getElementById("results");
+
+    results.classList.remove("show");
+    loading.classList.add("show");
+
+    setTimeout(() => {
+
+        loading.classList.remove("show");
+
+        document.getElementById("ideaResult").textContent =
+        "Crea contenido para " + selectedMode +
+        " basándote en esta idea: " + idea;
+
+        document.getElementById("hookResult").textContent =
+        "¿Y si te dijera que esta idea puede convertirse en uno de tus mejores videos? 👀";
+
+        document.getElementById("scriptResult").textContent =
+        "Empieza con el gancho, presenta rápidamente la idea, " +
+        "muestra el momento principal y termina invitando a la gente " +
+        "a comentar o seguirte.";
+
+        document.getElementById("musicResult").textContent =
+        "Usa una canción energética que esté funcionando bien " +
+        "en " + selectedMode + " y que combine con el ritmo del contenido.";
+
+        document.getElementById("thumbnailResult").textContent =
+        "Texto corto y grande relacionado con tu idea + una imagen " +
+        "que muestre claramente el momento más interesante.";
+
+        document.getElementById("tagsResult").textContent =
+        "#SparkyKrea #Ideas #Contenido #Creatividad #" +
+        selectedMode;
+
+        results.classList.add("show");
+
+    },1500);
+
+}
+
+</script>
+
+</body>
+  </html>
