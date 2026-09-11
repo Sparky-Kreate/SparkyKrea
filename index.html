@@ -1,4 +1,4 @@
-                     <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es" class="h-full w-full">
 <head>
     <meta charset="UTF-8">
@@ -309,7 +309,7 @@
                     <div class="w-6 h-6 rounded-lg bg-darkCard border border-darkBorder flex items-center justify-center text-brandVerde">
                         <i class="fa-solid fa-spinner fa-spin text-[10px]"></i>
                     </div>
-                    <span class="text-[11px]">Procesando...</span>
+                    <span class="text-[11px]">Cargando ideas creativas...</span>
                 </div>
             `;
             scrollToBottom();
@@ -376,87 +376,111 @@
             return `${m}:${s < 10 ? '0' : ''}${s}`;
         }
 
-        // GENERADOR DE GUIONES NARRATIVOS ESPECÍFICOS Y TÉCNICOS
+        // GENERADOR DE GUIONES RECARGADO CON MUCHÍSIMAS IDEAS Y TÉCNICAS CREATIVAS
         function generateSpecificScript(topic, detail, totalSeconds) {
             const topicClean = (topic + " " + (detail || "")).toLowerCase();
             let steps = [];
+            let creativeHooks = [];
+            let visualEffectsIdeas = [];
 
-            // PIZZERÍA / RESTAURANTE
-            if (topicClean.includes("piz") || topicClean.includes("restauran") || topicClean.includes("comida") || topicClean.includes("burger")) {
-                if (totalSeconds <= 15) {
-                    steps = [
-                        { time: "0:00 - 0:04", visual: "Entra una llamada o notificación de pedido en pantalla. Transición rápida en primera persona a la cocina encendida.", audio: "SFX timbre de pedido + '¡Nos pidieron una especial en tiempo récord!'" },
-                        { time: "0:04 - 0:11", visual: "Cortes ultra veloces: estirado de masa, queso derramándose y salsa fresca entrando al horno caliente.", audio: "Música alegre/rápida + 'Masa crujiente y los mejores ingredientes frescos.'" },
-                        { time: "0:11 - 0:15", visual: "Caja cerrada entregándose al cliente en puerta con logo prominente y teléfono.", audio: "Locución: 'Pídela ya mismo con envío gratis aquí abajo.'" }
-                    ];
-                } else if (totalSeconds <= 30) {
-                    steps = [
-                        { time: "0:00 - 0:07", visual: "Cliente mirando su teléfono con hambre. Un repartidor abre la caja dejando salir vapor.", audio: "SFX crujido + '¿Antojo de algo verdaderamente artesanal?'" },
-                        { time: "0:07 - 0:18", visual: "Plano cenital: preparación en vivo, tirando la masa, esparciendo quesos y horneado perfecto.", audio: "Voz en off: 'Preparada al momento con la receta tradicional de la casa.'" },
-                        { time: "0:18 - 0:25", visual: "Corte de la rebanada en cámara lenta mostrando el hilo de queso derretido.", audio: "Música al máximo + 'Sabor inigualable desde el primer bocado.'" },
-                        { time: "0:25 - 0:30", visual: "Muestra de la ubicación del local, menú rápido y botón de pedir en WhatsApp.", audio: "CTA: '¡Haz clic y recibe tu promoción 2x1 hoy!'" }
-                    ];
-                } else {
-                    const t1 = formatTime(Math.floor(totalSeconds * 0.2));
-                    const t2 = formatTime(Math.floor(totalSeconds * 0.5));
-                    const t3 = formatTime(Math.floor(totalSeconds * 0.8));
-                    const tFinal = formatTime(totalSeconds);
-                    steps = [
-                        { time: `0:00 - ${t1}`, visual: "Te entra un pedido especial al local y presentas las instalaciones en primera persona (POV) saludando al espectador.", audio: "Música de ambiente + 'Hoy les voy a mostrar cómo preparamos el pedido más grande del día.'" },
-                        { time: `${t1} - ${t2}`, visual: "Proceso completo de preparación: amasado, aderezos especiales, horneado y emplatado técnico.", audio: "Efectos de sonido reales del horneado + Explicación del secreto del sabor de la casa." },
-                        { time: `${t2} - ${t3}`, visual: "Reacción en vivo de un cliente o prueba de control de calidad por el chef al salir del horno.", audio: "Locución entusiasta: 'Crujiente, jugosa y lista para enviar a cualquier parte de la ciudad.'" },
-                        { time: `${t3} - ${tFinal}`, visual: "Cierre con empaque elegante, promociones del mes y enlaces directos de pedido.", audio: "Locución final: 'Escribe a nuestro WhatsApp o visítanos en nuestro local.'" }
-                    ];
-                }
-            } 
-            // GAMING / VALORANT / LOL / TFT
-            else if (topicClean.includes("valorant") || topicClean.includes("lol") || topicClean.includes("league") || topicClean.includes("tft") || topicClean.includes("game") || topicClean.includes("juego")) {
-                const char = detail ? detail : "tu personaje favorito";
+            // PIZZERÍA / RESTAURANT / COMIDA
+            if (topicClean.includes("piz") || topicClean.includes("restauran") || topicClean.includes("comida") || topicClean.includes("burger") || topicClean.includes("cafe")) {
+                creativeHooks = [
+                    "🔥 <strong>Gancho #1 (POV Reto):</strong> 'Nadie se termina esta pizza en menos de 5 minutos... ¿Aceptas el desafío?'",
+                    "🔥 <strong>Gancho #2 (El Antojo Nocturno):</strong> 'Son las 2 a.m., tienes hambre y la nevera está vacía. Esto es lo que necesitas.'",
+                    "🔥 <strong>Gancho #3 (El Secreto del Chef):</strong> 'El 90% de la gente cree que el secreto está en la masa, pero miren lo que pasa cuando añadimos esto...'"
+                ];
+                visualEffectsIdeas = [
+                    "✨ <strong>Efecto ASMR:</strong> Sonido amplificado de crujido al partir la porción y queso estirándose en macro.",
+                    "✨ <strong>Transición Flash:</strong> Cambio de escena rápido usando el humo caliente del horno como cortinilla."
+                ];
+
                 if (totalSeconds <= 20) {
                     steps = [
-                        { time: "0:00 - 0:05", visual: `Zoom in agresivo al agente/campeón (${char}) ejecutando una habilidad definitiva.`, audio: "SFX de habilidad gamer + 'Si juegas con este personaje, estabas cometiendo este error.'" },
-                        { time: "0:05 - 0:14", visual: "Gameplay a 60fps comparando la jugada mala vs la estrategia pro correcta.", audio: "Música Trap/Phonk + 'Aplica esta alineación para dominar tus partidas esta semana.'" },
-                        { time: "0:14 - 0:20", visual: "Pantalla con tu canal/stream o app gamer y botón de seguir/descargar.", audio: "Locución: 'Sígueme para no perderte la guía completa.'" }
+                        { time: "0:00 - 0:04", visual: "Cámara en primera persona (POV) abriendo una caja humeante con iluminación cenital dramática.", audio: "SFX crujido fuerte + 'El verdadero sabor artesanal llegó a tu puerta.'" },
+                        { time: "0:04 - 0:14", visual: "Cortes ultra dinámicos: queso derretido en cámara lenta, pepperoni fresco y borde dorado saliendo del horno.", audio: "Música alegre con beat acelerado + 'Pídelo caliente, crujiente y con envío express.'" },
+                        { time: "0:14 - 0:20", visual: "Pantalla final con el logotipo gigante, botón de WhatsApp y oferta parpadeante.", audio: "Locución: '¡Haz clic abajo y reclama tu descuento hoy!'" }
                     ];
                 } else {
                     const t1 = formatTime(Math.floor(totalSeconds * 0.25));
                     const t2 = formatTime(Math.floor(totalSeconds * 0.65));
                     const tFinal = formatTime(totalSeconds);
                     steps = [
-                        { time: `0:00 - ${t1}`, visual: `Cinemática impactante de ${char} seguida de una jugada clave (Clutch/Pentakill).`, audio: "Drop de música electrónica + 'La mejor guía/combo para subir de rango con este pick.'" },
-                        { time: `${t1} - ${t2}`, visual: "Explicación detallada en juego: armado de ítems, posicionamiento de habilidades y trucos de mapa.", audio: "Voz rápida y clara narrando cada movimiento clave sin tiempos muertos." },
-                        { time: `${t2} - ${tFinal}`, visual: "Resumen de victorias, tabla de clasificación e invitación a unirse a la comunidad/discord.", audio: "CTA: 'Guarda este video y comparte con tu duo.'" }
+                        { time: `0:00 - ${t1}`, visual: "Te entra una llamada urgente de un cliente hambriento. Presentas el local en primera persona saludando a la cámara con energía.", audio: "Música de fondo cálida + 'Hoy nos pidieron un banquete y te voy a mostrar cómo lo armamos.'" },
+                        { time: `${t1} - ${t2}`, visual: "Proceso completo paso a paso: estirado acrobático de masa, salsa de tomate casera, lluvia de tres quesos y horneado en leña.", audio: "Sonidos reales de cocina + Explicación cercana de los ingredientes secretos frescos." },
+                        { time: `${t2} - ${tFinal}`, visual: "Prueba de calidad por el chef con reacción de satisfacción real, empaque impecable y llamada a la acción.", audio: "Locución final: 'Escríbenos al WhatsApp y recibe tu pedido calientito en minutos.'" }
                     ];
                 }
-            }
-            // FUTBOL / DEPORTES
-            else if (topicClean.includes("fut") || topicClean.includes("deporte") || topicClean.includes("equip") || topicClean.includes("entrena")) {
-                const target = detail ? detail : "el atleta";
+            } 
+            // GAMING / VALORANT / LOL / TFT / STREAMERS
+            else if (topicClean.includes("valorant") || topicClean.includes("lol") || topicClean.includes("league") || topicClean.includes("tft") || topicClean.includes("game") || topicClean.includes("juego")) {
+                const char = detail ? detail : "tu personaje favorito";
+                creativeHooks = [
+                    "🔥 <strong>Gancho #1 (Error Crítico):</strong> 'Si sigues usando a este personaje de la forma incorrecta, vas a seguir perdiendo rango.'",
+                    "🔥 <strong>Gancho #2 (Jugada Imposible):</strong> 'Nadie creía que esta estrategia con " + char + " funcionaría en competitivo, hasta que hicimos esto...'",
+                    "🔥 <strong>Gancho #3 (Guía Express):</strong> 'Domina este mapa y este agente en menos de 60 segundos.'"
+                ];
+                visualEffectsIdeas = [
+                    "✨ <strong>Efecto HUD Gamer:</strong> Gráficos animados flotantes señalando daño, enfriamientos y posición en el minimapa.",
+                    "✨ <strong>Zoom Tembloroso (Camera Shake):</strong> En el momento exacto del impacto de la habilidad definitiva o Pentakill."
+                ];
+
                 steps = [
-                    { time: "0:00 - 0:05", visual: `Primer plano de atado de agujetas y salto al campo de ${target}.`, audio: "Música Épica / Beats fuertes + 'La disciplina no descansa.'" },
-                    { time: "0:05 - 0:20", visual: "Tomas de entrenamiento de alta intensidad, jugadas de habilidad y tiros a gol.", audio: "Voz motivacional + Sonido de balón e impacto." },
-                    { time: "0:20 - " + formatTime(totalSeconds), visual: "Muestra de producto/marca deportiva usada y pantalla final con llamado a la acción.", audio: "CTA: 'Equípate como los profesionales. Enlace en bio.'" }
+                    { time: "0:00 - 0:05", visual: `Cinemática explosiva con ${char} ejecutando su ultimate en pantalla completa con subtítulos dinámicos grandes.`, audio: "Drop de Phonk/Trap pesado + 'El truco secreto que los pros de este juego no quieren que sepas.'" },
+                    { time: "0:05 - " + formatTime(Math.floor(totalSeconds * 0.8)), visual: "Gameplay en vivo a 60fps con marcas de colores en pantalla explicando posicionamiento exacto, cruces y armado de ítems.", audio: "Voz en off analítica y rápida sin espacios vacíos, explicando cada segundo clave." },
+                    { time: formatTime(Math.floor(totalSeconds * 0.8)) + " - " + formatTime(totalSeconds), visual: "Pantalla de victoria (Victory Screen) con llamada a seguir el canal, unirse al Discord o descargar la app.", audio: "CTA: 'Guarda este video, compártelo con tu trío/duo y suscríbete.'" }
                 ];
             }
-            // GENERAL / PRODUCTOS / SERVICIOS
+            // FUTBOL / DEPORTES / ATLETAS
+            else if (topicClean.includes("fut") || topicClean.includes("deporte") || topicClean.includes("equip") || topicClean.includes("entrena")) {
+                const target = detail ? detail : "el atleta";
+                creativeHooks = [
+                    "🔥 <strong>Gancho #1 (Mentalidad):</strong> 'La diferencia entre ganar la copa o verla desde la grada se resume en este único hábito.'",
+                    "🔥 <strong>Gancho #2 (Esfuerzo Extremo):</strong> 'Mientras todos duermen, " + target + " está entrenando bajo la lluvia.'"
+                ];
+                visualEffectsIdeas = [
+                    "✨ <strong>Cámara Lenta Extrema (Slow Motion 240fps):</strong> En el golpeo del balón, el sudor cayendo o la zancada final.",
+                    "✨ <strong>Efecto de Viñeta Oscura:</strong> Con destellos de luz dorada para dar un tono cinematográfico épico."
+                ];
+
+                steps = [
+                    { time: "0:00 - 0:06", visual: `Primer plano cerrado de tachones pisando el césped húmedo y respiración profunda de ${target}.`, audio: "Música Épica con percusión fuerte + 'La gloria no se regala, se entrena cada madrugada.'" },
+                    { time: "0:06 - " + formatTime(Math.floor(totalSeconds * 0.75)), visual: "Secuencia de jugadas rápidas, regates, centros perfectos y goles con tomas desde diferentes ángulos de cámara.", audio: "Efectos de golpe de balón + Narración motivacional intensa." },
+                    { time: formatTime(Math.floor(totalSeconds * 0.75)) + " - " + formatTime(totalSeconds), visual: "Muestra de indumentaria deportiva de alta calidad y logotipo de la marca al centro con enlace directo.", audio: "CTA: 'Equípate con los mejores. Consigue tu indumentaria aquí abajo.'" }
+                ];
+            }
+            // GENERAL / PRODUCTOS / SERVICIOS / NEGOCIOS
             else {
-                const t1 = formatTime(Math.floor(totalSeconds * 0.2));
-                const t2 = formatTime(Math.floor(totalSeconds * 0.7));
+                creativeHooks = [
+                    "🔥 <strong>Gancho #1 (Problema / Solución):</strong> '¿Cansado de gastar dinero en soluciones que no funcionan? Mira cómo esto cambió las reglas del juego.'",
+                    "🔥 <strong>Gancho #2 (Curiosidad Extrema):</strong> 'Lo que estás a punto de ver va a ahorrarte horas de frustración esta semana.'"
+                ];
+                visualEffectsIdeas = [
+                    "✨ <strong>Split Screen (Pantalla Dividida):</strong> Comparativa lado a lado del 'Antes vs Después' del uso del producto.",
+                    "✨ <strong>Textos Animados Pop-up:</strong> Palabras clave apareciendo en colores vibrantes (verde/blanco) al ritmo de la locución."
+                ];
+
+                const t1 = formatTime(Math.floor(totalSeconds * 0.25));
+                const t2 = formatTime(Math.floor(totalSeconds * 0.75));
                 const tFinal = formatTime(totalSeconds);
                 steps = [
-                    { time: `0:00 - ${t1}`, visual: "Plano de problema o necesidad común resuelta de forma directa y llamativa.", audio: "Gancho auditivo: 'Si estabas buscando la solución definitiva a esto, mira esto.'" },
-                    { time: `${t1} - ${t2}`, visual: "Demostración práctica del servicio/producto en primera persona mostrando resultados inmediatos.", audio: "Explicación de características, calidad y valor diferencial." },
-                    { time: `${t2} - ${tFinal}`, visual: "Toma estética final con oferta por tiempo limitado y llamado a actuar.", audio: "Locución final con promoción y llamada a la acción." }
+                    { time: `0:00 - ${t1}`, visual: "Plano abierto del problema común o necesidad cotidiana con expresión de asombro o alivio.", audio: "Gancho auditivo directo: 'Si estabas buscando la solución definitiva, presta mucha atención.'" },
+                    { time: `${t1} - ${t2}`, visual: "Demostración en primer plano (POV) del producto o servicio en funcionamiento real, destacando calidad y acabados.", audio: "Voz en off explicativa resaltando los 3 beneficios principales de forma dinámica." },
+                    { time: `${t2} - ${tFinal}`, visual: "Toma estética final con garantía, oferta por tiempo limitado y botón grande de contacto.", audio: "Locución final: 'Aprovecha la promoción exclusiva haciendo clic en el enlace.'" }
                 ];
             }
 
-            return steps.map(s => `
-                <div class="border-l-2 border-brandVerde pl-2.5 my-1.5 space-y-0.5">
-                    <p class="font-bold text-white text-[11px]">🎬 <span>Toma ${s.time}</span></p>
-                    <p class="text-gray-300">📹 <strong>Visual:</strong> ${s.visual}</p>
-                    <p class="text-gray-400">🎙️ <strong>Audio:</strong> ${s.audio}</p>
-                </div>
-            `).join("");
+            return {
+                hooks: creativeHooks,
+                sfx: visualEffectsIdeas,
+                scriptSteps: steps.map(s => `
+                    <div class="border-l-2 border-brandVerde pl-2.5 my-1.5 space-y-0.5">
+                        <p class="font-bold text-white text-[11px]">🎬 <span>Toma ${s.time}</span></p>
+                        <p class="text-gray-300">📹 <strong>Visual:</strong> ${s.visual}</p>
+                        <p class="text-gray-400">🎙️ <strong>Audio & Voz:</strong> ${s.audio}</p>
+                    </div>
+                `).join("")
+            };
         }
 
         // RECOMENDACIÓN DE MÚSICA DIVERSIFICADA CON ARTISTAS REALES
@@ -488,7 +512,7 @@
                 return `
                     <div class="space-y-2">
                         <p>¡Excelente elección con <strong class="text-brandVerde">"${escapeHtml(input)}"</strong>! 🎯</p>
-                        <p class="text-gray-300">Ahora, selecciona o dime la duración de tu video publicitario para armarte el guion técnico exacto:</p>
+                        <p class="text-gray-300">Ahora, selecciona o dime la duración de tu video publicitario para armarte el guion técnico exacto con múltiples ideas:</p>
                         
                         <div class="pt-1">
                             <select onchange="selectDurationFromDropdown(this.value)" class="w-full bg-darkSidebar border border-darkBorder hover:border-brandVerde text-gray-200 text-xs rounded-xl p-2 focus:outline-none cursor-pointer transition">
@@ -509,7 +533,7 @@
             // CASO 3: Ya tenemos el tema y nos dan la duración del video
             if (pendingTopic && hasTimeKeywords) {
                 const totalSec = parseDurationInSeconds(clean);
-                const scriptHTML = generateSpecificScript(pendingTopic, pendingDetail, totalSec);
+                const generated = generateSpecificScript(pendingTopic, pendingDetail, totalSec);
                 const mainTopic = pendingTopic;
                 const detailTopic = pendingDetail;
 
@@ -519,21 +543,27 @@
                 return `
                     <div class="space-y-3">
                         <div class="border-b border-darkBorder pb-1.5">
-                            <h2 class="text-xs font-bold text-brandVerde">🎬 Guion Publicitario Técnico & Plan de Rodaje</h2>
+                            <h2 class="text-xs font-bold text-brandVerde">🎬 Guion Publicitario Recargado & Plan Creativo Pro</h2>
                             <p class="text-[11px] text-gray-400">Proyecto: <strong class="text-white">${escapeHtml(mainTopic)} ${detailTopic ? '(' + escapeHtml(detailTopic) + ')' : ''}</strong> | Tiempo Total: <strong class="text-white">${formatTime(totalSec)}</strong></p>
                         </div>
 
-                        <!-- GUION PASO A PASO PASO A PASO -->
-                        <div class="bg-darkSidebar p-2.5 rounded-xl border border-darkBorder text-[11px]">
-                            <p class="text-brandVerde font-bold uppercase tracking-wider mb-1.5">📜 GUION Y DIRECCIÓN DE CÁMARA:</p>
-                            ${scriptHTML}
+                        <!-- IDEAS DE GANCHOS Y ENFOQUES -->
+                        <div class="bg-darkSidebar p-2.5 rounded-xl border border-darkBorder text-[11px] space-y-1">
+                            <p class="text-brandVerde font-bold uppercase tracking-wider">💡 IDEAS DE GANCHOS (PRIMEROS 3 SEGUNDOS):</p>
+                            ${generated.hooks.join('<br>')}
                         </div>
 
-                        <!-- PLAN DE GRABACIÓN -->
+                        <!-- GUION PASO A PASO -->
+                        <div class="bg-darkSidebar p-2.5 rounded-xl border border-darkBorder text-[11px]">
+                            <p class="text-brandVerde font-bold uppercase tracking-wider mb-1.5">📜 GUION Y DIRECCIÓN DE CÁMARA POR TOMAS:</p>
+                            ${generated.scriptSteps}
+                        </div>
+
+                        <!-- IDEAS DE EFECTOS Y TRANSICIONES -->
                         <div class="bg-darkSidebar p-2.5 rounded-xl border border-darkBorder text-[11px] space-y-1">
-                            <p class="text-brandVerde font-bold uppercase tracking-wider">🎥 CONSEJOS TÉCNICOS DE PRODUCCIÓN:</p>
-                            <p>• <strong>Ritmo de corte:</strong> Cambia de plano o toma cada 2.5 a 4 segundos para evitar que la audiencia pierda interés.</p>
-                            <p>• <strong>Iluminación:</strong> Asegura luz suave sobre la acción principal y mantén los textos centrados para legibilidad móvil.</p>
+                            <p class="text-brandVerde font-bold uppercase tracking-wider">⚡ EFECTOS VISUALES Y DINÁMICA:</p>
+                            ${generated.sfx.join('<br>')}
+                            <p>• <strong>Ritmo de corte:</strong> Varía la escala de plano (general a primer plano) cada 3 segundos para retener la retención.</p>
                         </div>
 
                         <!-- MÚSICA RECOMENDADA CON ARTISTAS -->
@@ -548,12 +578,11 @@
             // CASO 4: Nueva solicitud. EVALUAR SI REQUIERE PREGUNTA ESPECÍFICA
             pendingTopic = input;
 
-            // Detectar si requiere pregunta específica (Juegos, Deportes, etc.)
             if (clean.includes("valorant") || clean.includes("lol") || clean.includes("league of legends") || clean.includes("tft") || clean.includes("overwatch") || clean.includes("free fire")) {
                 awaitingSpecificQuestion = true;
                 return `
                     <div class="space-y-2">
-                        <p>${greeting} ¡Excelente! Para hacer la publicidad de <strong class="text-brandVerde">"${escapeHtml(input)}"</strong> impecable:</p>
+                        <p>${greeting} ¡Excelente! Para hacer la publicidad de <strong class="text-brandVerde">"${escapeHtml(input)}"</strong> llena de ideas pro:</p>
                         <p class="text-gray-300">🎮 <strong>¿Qué Agente, Campeón o Personaje específico vas a destacar o usar en esta publicidad?</strong></p>
                     </div>
                 `;
@@ -563,17 +592,17 @@
                 awaitingSpecificQuestion = true;
                 return `
                     <div class="space-y-2">
-                        <p>${greeting} ¡Buenísimo! Para enfocar las tomas deportivas de <strong class="text-brandVerde">"${escapeHtml(input)}"</strong>:</p>
+                        <p>${greeting} ¡Buenísimo! Para reventar de creatividad las tomas de <strong class="text-brandVerde">"${escapeHtml(input)}"</strong>:</p>
                         <p class="text-gray-300">⚽ <strong>¿Qué futbolista, atleta o equipo es el protagonista principal de esta campaña?</strong></p>
                     </div>
                 `;
             }
 
-            // Para negocios directos (Pizzería, Barbero, Tienda, etc.) pasa directamente al tiempo
+            // Para negocios directos pasa directamente al tiempo
             return `
                 <div class="space-y-2">
-                    <p>${greeting} ¡Listo! Trabajemos en la publicidad para <strong class="text-brandVerde">"${escapeHtml(input)}"</strong>.</p>
-                    <p class="text-gray-300">¿Cuánto tiempo quieres que dure el video para armar la estructura exacta por tomas?</p>
+                    <p>${greeting} ¡Listo! Trabajemos en la publicidad llena de ideas creativas para <strong class="text-brandVerde">"${escapeHtml(input)}"</strong>.</p>
+                    <p class="text-gray-300">¿Cuánto tiempo quieres que dure el video para armar la estructura exacta con múltiples ganchos y tomas?</p>
                     
                     <div class="pt-1">
                         <select onchange="selectDurationFromDropdown(this.value)" class="w-full bg-darkSidebar border border-darkBorder hover:border-brandVerde text-gray-200 text-xs rounded-xl p-2 focus:outline-none cursor-pointer transition">
@@ -683,4 +712,3 @@
     </script>
 </body>
 </html>
-                                   
