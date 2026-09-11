@@ -1,501 +1,215 @@
-
-                  <!DOCTYPE html>
-<html lang="es" class="h-full">
+<!DOCTYPE html>
+<html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>SparkyKrea AI</title>
-    <!-- Tailwind CSS CDN -->
-    <script src="[https://cdn.tailwindcss.com](https://cdn.tailwindcss.com)"></script>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
     <!-- FontAwesome Icons -->
-    <link rel="stylesheet" href="[https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css](https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css)">
-    <!-- Marked.js para formatear respuestas enriquecidas -->
-    <script src="[https://cdn.jsdelivr.net/npm/marked/marked.min.js](https://cdn.jsdelivr.net/npm/marked/marked.min.js)"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <script>
         tailwind.config = {
             darkMode: 'class',
             theme: {
                 extend: {
                     colors: {
-                        geminiBg: '#131314',
-                        geminiSidebar: '#1e1f20',
-                        geminiCard: '#282a2c',
-                        geminiAccent: '#a8c7fa',
-                        geminiHover: '#333538'
+                        brand: {
+                            50: '#f0fdf4',
+                            500: '#22c55e',
+                            600: '#16a34a',
+                            700: '#15803d',
+                        },
+                        dark: {
+                            bg: '#121212',
+                            sidebar: '#18181b',
+                            card: '#27272a',
+                            border: '#3f3f46'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
                     }
                 }
             }
         }
     </script>
     <style>
-        ::-webkit-scrollbar {
-            width: 8px;
-        }
-        ::-webkit-scrollbar-track {
-            background: transparent;
-        }
-        ::-webkit-scrollbar-thumb {
-            background: #374151;
-            border-radius: 4px;
-        }
-        ::-webkit-scrollbar-thumb:hover {
-            background: #4b5563;
-        }
+        body { font-family: 'Inter', sans-serif; }
+        .custom-scrollbar::-webkit-scrollbar { width: 6px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #3f3f46; border-radius: 10px; }
     </style>
 </head>
-<body class="bg-geminiBg text-gray-200 h-full flex flex-col font-sans overflow-hidden">
+<body class="bg-dark-bg text-gray-100 min-h-screen flex flex-col md:flex-row antialiased overflow-x-hidden">
 
-    <!-- TOP NAVBAR -->
-    <header class="h-14 border-b border-gray-800 flex items-center justify-between px-4 bg-geminiBg z-20 shrink-0">
-        <div class="flex items-center gap-3">
-            <!-- Botón de las 2/3 rayitas -->
-            <button id="toggleSidebarBtn" class="p-2 text-gray-400 hover:text-white hover:bg-geminiHover rounded-lg transition-colors focus:outline-none" title="Menú de conversaciones">
-                <i class="fa-solid fa-bars-staggered text-lg"></i>
+    <!-- OVERLAY MÓVIL (para cerrar el menú al tocar afuera) -->
+    <div id="sidebar-overlay" onclick="toggleSidebar()" class="fixed inset-0 bg-black/60 z-30 hidden md:hidden transition-opacity"></div>
+
+    <!-- SIDEBAR / MENÚ LATERAL -->
+    <aside id="sidebar" class="fixed md:static inset-y-0 left-0 z-40 w-72 bg-dark-sidebar border-r border-dark-border flex flex-col transform -translate-x-full md:translate-x-0 transition-transform duration-300 ease-in-out">
+        <!-- Logo y Cierre móvil -->
+        <div class="p-4 flex items-center justify-between border-b border-dark-border">
+            <div class="flex items-center space-x-2">
+                <div class="w-8 h-8 rounded-lg bg-gradient-to-tr from-purple-600 to-indigo-500 flex items-center justify-center font-bold text-white shadow-lg">
+                    <i class="fa-solid fa-wand-magic-sparkles text-sm"></i>
+                </div>
+                <span class="font-bold text-lg text-white tracking-wide">SparkyKrea <span class="text-xs bg-indigo-500/20 text-indigo-400 px-2 py-0.5 rounded border border-indigo-500/30">Edu AI</span></span>
+            </div>
+            <button onclick="toggleSidebar()" class="md:hidden text-gray-400 hover:text-white p-2">
+                <i class="fa-solid fa-xmark text-lg"></i>
             </button>
-            
-            <!-- Nombre del Proyecto -->
-            <div class="flex items-center gap-2 font-semibold text-lg tracking-wide text-white select-none">
-                <span class="bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">SparkyKrea</span>
-                <span class="text-xs px-2 py-0.5 rounded-full bg-blue-500/20 text-blue-300 font-normal border border-blue-500/30">Edu AI</span>
+        </div>
+
+        <!-- Botón Nuevo Chat -->
+        <div class="p-4">
+            <button onclick="startNewChat()" class="w-full py-2.5 px-4 bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white rounded-xl font-medium shadow-md transition flex items-center justify-center gap-2">
+                <i class="fa-solid fa-plus text-sm"></i>
+                <span>Nueva conversación</span>
+            </button>
+        </div>
+
+        <!-- Historial -->
+        <div class="flex-1 overflow-y-auto custom-scrollbar px-3 py-2">
+            <div class="text-xs font-semibold text-gray-400 uppercase tracking-wider px-3 mb-2">Recientes</div>
+            <div id="chat-history" class="space-y-1">
+                <div class="text-sm text-gray-500 italic px-3 py-2">Sin conversaciones previas</div>
             </div>
         </div>
 
-        <div class="flex items-center gap-2">
-            <button id="newChatTopBtn" class="flex items-center gap-2 text-sm bg-geminiCard hover:bg-geminiHover text-gray-200 px-3 py-1.5 rounded-full border border-gray-700 transition">
-                <i class="fa-solid fa-plus text-xs"></i>
-                <span>Nuevo chat</span>
-            </button>
+        <!-- Footer Sidebar -->
+        <div class="p-4 border-t border-dark-border text-xs text-gray-500 text-center">
+            SparkyKrea &copy; 2026
         </div>
-    </header>
+    </aside>
 
-    <div class="flex flex-1 h-[calc(100vh-3.5rem)] overflow-hidden relative">
+    <!-- ÁREA PRINCIPAL -->
+    <main class="flex-1 flex flex-col h-screen overflow-hidden">
+        
+        <!-- Header Móvil -->
+        <header class="p-4 border-b border-dark-border flex items-center justify-between bg-dark-bg md:bg-transparent">
+            <button onclick="toggleSidebar()" class="p-2 text-gray-300 hover:text-white bg-dark-card rounded-lg border border-dark-border">
+                <i class="fa-solid fa-bars-staggered"></i>
+            </button>
+            <div class="font-bold text-gray-200">SparkyKrea AI</div>
+            <button onclick="startNewChat()" class="p-2 text-gray-300 hover:text-white bg-dark-card rounded-lg border border-dark-border">
+                <i class="fa-solid fa-pen-to-square"></i>
+            </button>
+        </header>
 
-        <!-- SIDEBAR -->
-        <aside id="sidebar" class="w-64 bg-geminiSidebar border-r border-gray-800 flex flex-col transition-all duration-300 z-10 shrink-0">
-            <div class="p-3">
-                <button id="newChatSidebarBtn" class="w-full flex items-center gap-3 bg-geminiCard hover:bg-geminiHover text-white px-4 py-3 rounded-xl border border-gray-700 transition text-sm font-medium">
-                    <i class="fa-solid fa-plus text-geminiAccent"></i>
-                    <span>Nueva conversación</span>
-                </button>
-            </div>
-
-            <div class="px-3 py-2 text-xs font-semibold text-gray-400 uppercase tracking-wider">
-                Recientes
-            </div>
-
-            <!-- Lista de Chats -->
-            <div id="chatHistoryList" class="flex-1 overflow-y-auto px-2 space-y-1">
-                <!-- Se cargan dinámicamente -->
-            </div>
-
-            <div class="p-3 border-t border-gray-800 text-xs text-gray-500 text-center">
-                SparkyKrea &copy; 2026
-            </div>
-        </aside>
-
-        <!-- MAIN CHAT AREA -->
-        <main class="flex-1 flex flex-col bg-geminiBg h-full relative overflow-hidden">
+        <!-- Pantalla de Bienvenida / Mensajes -->
+        <div id="chat-container" class="flex-1 overflow-y-auto custom-scrollbar p-4 md:p-6 max-w-4xl mx-auto w-full flex flex-col">
             
-            <!-- CONTENEDOR DE MENSAJES -->
-            <div id="messagesContainer" class="flex-1 overflow-y-auto p-4 md:p-8 space-y-6 max-w-4xl w-full mx-auto">
-                <!-- Pantalla de bienvenida -->
-                <div id="welcomeScreen" class="h-full flex flex-col justify-center items-center text-center my-auto py-12">
-                    <div class="w-16 h-16 rounded-2xl bg-gradient-to-tr from-blue-600 to-purple-600 flex items-center justify-center mb-6 shadow-lg shadow-blue-500/20">
-                        <i class="fa-solid fa-wand-magic-sparkles text-3xl text-white"></i>
-                    </div>
-                    <h1 class="text-3xl md:text-4xl font-bold mb-3 text-white">¿Qué te gustaría aprender hoy?</h1>
-                    <p class="text-gray-400 max-w-md text-sm md:text-base leading-relaxed">
-                        Hazme preguntas complejas. Mis respuestas serán detalladas, didácticas y estructuradas para potenciar tu aprendizaje.
-                    </p>
+            <div id="welcome-screen" class="my-auto text-center py-8">
+                <div class="w-16 h-16 bg-gradient-to-tr from-purple-600 to-indigo-500 rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-xl text-2xl text-white">
+                    <i class="fa-solid fa-wand-magic-sparkles"></i>
+                </div>
+                <h1 class="text-2xl md:text-4xl font-bold text-white mb-3">¿Qué te gustaría aprender hoy?</h1>
+                <p class="text-gray-400 text-sm md:text-base max-w-md mx-auto mb-8">
+                    Hazme preguntas complejas. Mis respuestas serán detalladas, didácticas y estructuradas para potenciar tu aprendizaje.
+                </p>
 
-                    <!-- Sugerencias -->
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-3 mt-8 w-full max-w-xl text-left">
-                        <button onclick="sendQuickPrompt('Explícame cómo funciona la física cuántica con analogías sencillas.')" class="p-4 bg-geminiCard hover:bg-geminiHover rounded-2xl border border-gray-800 transition text-sm text-gray-300 flex flex-col justify-between group">
-                            <span>Explícame cómo funciona la física cuántica con analogías sencillas.</span>
-                            <i class="fa-solid fa-arrow-right self-end text-xs text-gray-500 group-hover:text-geminiAccent transition-colors mt-2"></i>
-                        </button>
-                        <button onclick="sendQuickPrompt('¿Cuáles son los principios fundamentales del diseño web accesible y moderno?')" class="p-4 bg-geminiCard hover:bg-geminiHover rounded-2xl border border-gray-800 transition text-sm text-gray-300 flex flex-col justify-between group">
-                            <span>¿Cuáles son los principios fundamentales del diseño web accesible y moderno?</span>
-                            <i class="fa-solid fa-arrow-right self-end text-xs text-gray-500 group-hover:text-geminiAccent transition-colors mt-2"></i>
-                        </button>
-                    </div>
+                <!-- Sugerencias -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-3 max-w-lg mx-auto text-left">
+                    <button onclick="usePrompt('Explícame cómo funciona la física cuántica con analogías sencillas.')" class="p-4 bg-dark-card border border-dark-border hover:border-indigo-500/50 rounded-xl transition text-sm text-gray-300 hover:text-white flex items-center justify-between group">
+                        <span>Explícame cómo funciona la física cuántica con analogías sencillas.</span>
+                        <i class="fa-solid fa-arrow-right opacity-0 group-hover:opacity-100 transition text-indigo-400"></i>
+                    </button>
+                    <button onclick="usePrompt('¿Cuáles son los principios fundamentales del diseño web accesible y moderno?')" class="p-4 bg-dark-card border border-dark-border hover:border-indigo-500/50 rounded-xl transition text-sm text-gray-300 hover:text-white flex items-center justify-between group">
+                        <span>¿Cuáles son los principios fundamentales del diseño web accesible y moderno?</span>
+                        <i class="fa-solid fa-arrow-right opacity-0 group-hover:opacity-100 transition text-indigo-400"></i>
+                    </button>
                 </div>
             </div>
 
-            <!-- INPUT BOX INFERIOR -->
-            <div class="p-4 bg-geminiBg border-t border-gray-800/50 shrink-0">
-                <div class="max-w-4xl mx-auto relative">
-                    <form id="chatForm" class="bg-geminiCard rounded-2xl border border-gray-700/60 focus-within:border-geminiAccent transition-all shadow-lg flex items-end p-2 gap-2">
-                        <textarea 
-                            id="userInput" 
-                            rows="1" 
-                            placeholder="Escribe un tema o pregunta compleja..." 
-                            class="w-full bg-transparent text-white placeholder-gray-400 focus:outline-none resize-none p-2 max-h-32 text-sm md:text-base"
-                            required
-                        ></textarea>
-                        <button 
-                            type="submit" 
-                            id="sendBtn"
-                            class="bg-geminiAccent hover:bg-blue-300 text-gray-900 p-2.5 rounded-xl font-medium transition flex items-center justify-center shrink-0 disabled:opacity-50"
-                        >
-                            <i class="fa-solid fa-paper-plane text-sm"></i>
-                        </button>
-                    </form>
-                    <p class="text-[11px] text-center text-gray-500 mt-2">
-                        SparkyKrea AI puede generar respuestas extensas para ayudarte a aprender mejor.
-                    </p>
+            <!-- Área de mensajes dinámicos -->
+            <div id="messages-list" class="space-y-6 hidden w-full pb-6"></div>
+        </div>
+
+        <!-- Caja de Entrada de Texto -->
+        <div class="p-4 border-t border-dark-border bg-dark-bg">
+            <div class="max-w-4xl mx-auto relative">
+                <form onsubmit="handleSend(event)" class="relative flex items-center">
+                    <textarea 
+                        id="user-input" 
+                        rows="1" 
+                        placeholder="Escribe un tema o pregunta compleja..." 
+                        class="w-full pl-4 pr-12 py-3 bg-dark-card border border-dark-border focus:border-indigo-500 rounded-xl text-white placeholder-gray-500 focus:outline-none resize-none text-sm md:text-base"
+                        onkeydown="if(event.key === 'Enter' && !event.shiftKey) { event.preventDefault(); handleSend(event); }"
+                    ></textarea>
+                    <button type="submit" class="absolute right-2 p-2 bg-indigo-600 hover:bg-indigo-500 text-white rounded-lg transition flex items-center justify-center">
+                        <i class="fa-solid fa-paper-plane text-sm"></i>
+                    </button>
+                </form>
+                <div class="text-center text-xs text-gray-500 mt-2">
+                    SparkyKrea AI puede generar respuestas extensas para ayudarte a aprender mejor.
                 </div>
             </div>
+        </div>
 
-        </main>
-    </div>
+    </main>
 
-    <!-- SCRIPT DE FUNCIONALIDAD -->
     <script>
-        let conversations = JSON.parse(localStorage.getItem('sparky_chats')) || [];
-        let currentChatId = null;
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.getElementById('sidebar-overlay');
+            sidebar.classList.toggle('-translate-x-full');
+            overlay.classList.toggle('hidden');
+        }
 
-        const sidebar = document.getElementById('sidebar');
-        const toggleSidebarBtn = document.getElementById('toggleSidebarBtn');
-        const chatHistoryList = document.getElementById('chatHistoryList');
-        const messagesContainer = document.getElementById('messagesContainer');
-        const welcomeScreen = document.getElementById('welcomeScreen');
-        const chatForm = document.getElementById('chatForm');
-        const userInput = document.getElementById('userInput');
-        const newChatTopBtn = document.getElementById('newChatTopBtn');
-        const newChatSidebarBtn = document.getElementById('newChatSidebarBtn');
-
-        userInput.addEventListener('input', function() {
-            this.style.height = 'auto';
-            this.style.height = (this.scrollHeight) + 'px';
-        });
-
-        toggleSidebarBtn.addEventListener('click', () => {
-            sidebar.classList.toggle('-ml-64');
-        });
+        function usePrompt(text) {
+            document.getElementById('user-input').value = text;
+            handleSend(new Event('submit'));
+        }
 
         function startNewChat() {
-            currentChatId = Date.now().toString();
-            const newChat = {
-                id: currentChatId,
-                title: 'Nueva conversación',
-                messages: []
-            };
-            conversations.unshift(newChat);
-            saveConversations();
-            renderSidebar();
-            renderMessages();
+            document.getElementById('welcome-screen').classList.remove('hidden');
+            document.getElementById('messages-list').classList.add('hidden');
+            document.getElementById('messages-list').innerHTML = '';
         }
 
-        newChatTopBtn.addEventListener('click', startNewChat);
-        newChatSidebarBtn.addEventListener('click', startNewChat);
-
-        function saveConversations() {
-            localStorage.setItem('sparky_chats', JSON.stringify(conversations));
-        }
-
-        function loadChat(id) {
-            currentChatId = id;
-            renderSidebar();
-            renderMessages();
-        }
-
-        function deleteChat(e, id) {
-            e.stopPropagation();
-            conversations = conversations.filter(c => c.id !== id);
-            if (currentChatId === id) {
-                currentChatId = conversations.length > 0 ? conversations[0].id : null;
-            }
-            saveConversations();
-            renderSidebar();
-            renderMessages();
-        }
-
-        function renderSidebar() {
-            chatHistoryList.innerHTML = '';
-            
-            if (conversations.length === 0) {
-                chatHistoryList.innerHTML = `<p class="text-xs text-gray-500 px-3 py-2 italic">Sin conversaciones previas</p>`;
-                return;
-            }
-
-            conversations.forEach(chat => {
-                const isActive = chat.id === currentChatId;
-                const item = document.createElement('div');
-                item.className = `flex items-center justify-between px-3 py-2.5 rounded-xl cursor-pointer text-sm transition group ${
-                    isActive ? 'bg-geminiCard text-white font-medium' : 'text-gray-400 hover:bg-geminiHover hover:text-gray-200'
-                }`;
-                item.onclick = () => loadChat(chat.id);
-
-                item.innerHTML = `
-                    <div class="flex items-center gap-2.5 overflow-hidden">
-                        <i class="fa-regular fa-message text-xs ${isActive ? 'text-geminiAccent' : 'text-gray-500'}"></i>
-                        <span class="truncate max-w-[130px]">${chat.title}</span>
-                    </div>
-                    <button onclick="deleteChat(event, '${chat.id}')" class="opacity-0 group-hover:opacity-100 text-gray-500 hover:text-red-400 p-1 transition">
-                        <i class="fa-solid fa-trash-can text-xs"></i>
-                    </button>
-                `;
-                chatHistoryList.appendChild(item);
-            });
-        }
-
-        function renderMessages() {
-            const currentChat = conversations.find(c => c.id === currentChatId);
-
-            if (!currentChat || currentChat.messages.length === 0) {
-                welcomeScreen.classList.remove('hidden');
-                messagesContainer.innerHTML = '';
-                messagesContainer.appendChild(welcomeScreen);
-                return;
-            }
-
-            welcomeScreen.classList.add('hidden');
-            messagesContainer.innerHTML = '';
-
-            currentChat.messages.forEach((msg, idx) => {
-                const msgDiv = document.createElement('div');
-                msgDiv.className = `flex gap-4 ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`;
-
-                if (msg.role === 'user') {
-                    msgDiv.innerHTML = `
-                        <div class="max-w-[80%] bg-blue-600 text-white p-4 rounded-2xl rounded-tr-none text-sm leading-relaxed shadow-md">
-                            ${escapeHtml(msg.text)}
-                        </div>
-                    `;
-                } else {
-                    const formattedText = typeof marked !== 'undefined' ? marked.parse(msg.text) : msg.text;
-
-                    msgDiv.innerHTML = `
-                        <div class="flex gap-3 max-w-[95%] md:max-w-[85%]">
-                            <div class="w-8 h-8 rounded-full bg-gradient-to-tr from-blue-500 to-purple-500 flex items-center justify-center text-white text-xs shrink-0 font-bold mt-1 shadow">
-                                AI
-                            </div>
-                            <div class="flex-1 space-y-3">
-                                <div class="bg-geminiCard border border-gray-800 p-5 rounded-2xl rounded-tl-none text-gray-200 text-sm md:text-base leading-relaxed space-y-3 shadow-md prose prose-invert">
-                                    ${formattedText}
-                                </div>
-
-                                <div class="bg-geminiSidebar border border-gray-800 rounded-xl p-3 text-xs space-y-2">
-                                    <div class="flex items-center gap-1.5 text-geminiAccent font-medium">
-                                        <i class="fa-solid fa-sparkles"></i>
-                                        <span>¿Qué te gustó o qué deseas profundizar de esta respuesta?</span>
-                                    </div>
-                                    <div class="flex gap-2">
-                                        <input 
-                                            type="text" 
-                                            id="feedback-input-${idx}" 
-                                            placeholder="Ej: Me gustó la explicación de las analogías, quiero saber más sobre..." 
-                                            class="flex-1 bg-geminiBg border border-gray-700 text-gray-200 rounded-lg px-3 py-1.5 focus:outline-none focus:border-geminiAccent text-xs"
-                                        />
-                                        <button 
-                                            onclick="submitFeedback('${idx}')" 
-                                            class="bg-geminiAccent hover:bg-blue-300 text-gray-900 font-semibold px-3 py-1.5 rounded-lg transition shrink-0 flex items-center gap-1"
-                                        >
-                                            <span>Profundizar</span>
-                                            <i class="fa-solid fa-paper-plane text-[10px]"></i>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    `;
-                }
-                messagesContainer.appendChild(msgDiv);
-            });
-
-            messagesContainer.scrollTop = messagesContainer.scrollHeight;
-        }
-
-        chatForm.addEventListener('submit', (e) => {
+        function handleSend(e) {
             e.preventDefault();
-            const text = userInput.value.trim();
+            const input = document.getElementById('user-input');
+            const text = input.value.trim();
             if (!text) return;
 
-            if (!currentChatId) {
-                startNewChat();
-            }
+            document.getElementById('welcome-screen').classList.add('hidden');
+            const messagesList = document.getElementById('messages-list');
+            messagesList.classList.remove('hidden');
 
-            const currentChat = conversations.find(c => c.id === currentChatId);
-            
-            if (currentChat.messages.length === 0) {
-                currentChat.title = text.length > 25 ? text.substring(0, 25) + '...' : text;
-            }
-
-            currentChat.messages.push({ role: 'user', text: text });
-            userInput.value = '';
-            userInput.style.height = 'auto';
-
-            saveConversations();
-            renderSidebar();
-            renderMessages();
-
-            generateEducationalResponse(text);
-        });
-
-        function sendQuickPrompt(promptText) {
-            userInput.value = promptText;
-            chatForm.dispatchEvent(new Event('submit'));
-        }
-
-        function generateEducationalResponse(userQuery) {
-            const loadingDiv = document.createElement('div');
-            loadingDiv.id = 'loadingIndicator';
-            loadingDiv.className = 'flex gap-3 justify-start items-center text-gray-400 text-xs py-2';
-            loadingDiv.innerHTML = `
-                <div class="w-7 h-7 rounded-full bg-geminiCard flex items-center justify-center">
-                    <i class="fa-solid fa-circle-notch fa-spin text-geminiAccent"></i>
+            // Agregar mensaje del usuario
+            messagesList.innerHTML += `
+                <div class="flex gap-3 justify-end">
+                    <div class="bg-indigo-600 text-white p-4 rounded-2xl rounded-tr-none max-w-[85%] text-sm md:text-base shadow-md">
+                        ${text}
+                    </div>
                 </div>
-                <span>SparkyKrea está estructurando una respuesta didáctica extensa...</span>
             `;
-            messagesContainer.appendChild(loadingDiv);
-            messagesContainer.scrollTop = messagesContainer.scrollHeight;
 
+            input.value = '';
+
+            // Respuesta simulada
             setTimeout(() => {
-                document.getElementById('loadingIndicator')?.remove();
-
-                const responseText = buildComplexResponse(userQuery);
-
-                const currentChat = conversations.find(c => c.id === currentChatId);
-                if (currentChat) {
-                    currentChat.messages.push({ role: 'assistant', text: responseText });
-                    saveConversations();
-                    renderMessages();
-                }
-            }, 1200);
+                messagesList.innerHTML += `
+                    <div class="flex gap-3 justify-start">
+                        <div class="w-8 h-8 rounded-lg bg-indigo-600 flex-shrink-0 flex items-center justify-center text-white font-bold text-sm">
+                            <i class="fa-solid fa-wand-magic-sparkles"></i>
+                        </div>
+                        <div class="bg-dark-card border border-dark-border text-gray-200 p-4 rounded-2xl rounded-tl-none max-w-[85%] text-sm md:text-base shadow-md space-y-3">
+                            <p class="font-semibold text-indigo-400">Excelente pregunta.</p>
+                            <p>Esta es una interfaz totalmente optimizada tanto para escritorio como para tu teléfono celular.</p>
+                        </div>
+                    </div>
+                `;
+                const container = document.getElementById('chat-container');
+                container.scrollTop = container.scrollHeight;
+            }, 600);
         }
-
-        function submitFeedback(index) {
-            const inputEl = document.getElementById(`feedback-input-${index}`);
-            const likedText = inputEl ? inputEl.value.trim() : '';
-
-            if (!likedText) return;
-
-            const promptForMore = `Me gustó especialmente esto de tu respuesta: "${likedText}". Por favor profundiza mucho más en este punto, dame ejemplos prácticos, datos avanzados y aportes adicionales ("algo más").`;
-
-            if (!currentChatId) return;
-
-            const currentChat = conversations.find(c => c.id === currentChatId);
-            currentChat.messages.push({ role: 'user', text: promptForMore });
-            saveConversations();
-            renderMessages();
-
-            generateExpandedResponse(likedText);
-        }
-
-        function generateExpandedResponse(likedAspect) {
-            const loadingDiv = document.createElement('div');
-            loadingDiv.id = 'loadingIndicator';
-            loadingDiv.className = 'flex gap-3 justify-start items-center text-gray-400 text-xs py-2';
-            loadingDiv.innerHTML = `
-                <div class="w-7 h-7 rounded-full bg-geminiCard flex items-center justify-center">
-                    <i class="fa-solid fa-sparkles fa-spin text-geminiAccent"></i>
-                </div>
-                <span>Profundizando en lo que te gustó: "${escapeHtml(likedAspect)}"...</span>
-            `;
-            messagesContainer.appendChild(loadingDiv);
-            messagesContainer.scrollTop = messagesContainer.scrollHeight;
-
-            setTimeout(() => {
-                document.getElementById('loadingIndicator')?.remove();
-
-                const expandedText = `### 🚀 Profundización Especial: "${escapeHtml(likedAspect)}"
-
-¡Excelente observación! Me alegra que te hayas interesado particularmente en ese punto. Vamos a desglosarlo a un nivel mucho más detallado y didáctico.
-
----
-
-#### 📌 1. Fundamentos Avanzados
-Cuando nos enfocamos en **${escapeHtml(likedAspect)}**, encontramos que el principio clave reside en cómo interactúan los elementos del sistema. 
-
-- **Perspectiva Técnica:** Permite optimizar los procesos reduciendo la fricción conceptual y aumentando la claridad.
-- **Aplicación Práctica:** Puedes utilizar este concepto para estructurar proyectos reales, resolver problemas complejos o diseñar metodologías de trabajo eficientes.
-
----
-
-#### 💡 2. "Algo Más": Un dato o recurso extra que no conocías
-Para complementar lo anterior, aquí tienes un **aporte adicional exclusivo**:
-
-> **Sabías que:** Integrar este aspecto con enfoques multidisciplinarios incrementa la retención del conocimiento en más de un 60%. En entornos reales, las soluciones que aplican este enfoque tienden a ser más escalables y sostenibles a largo plazo.
-
----
-
-#### 🛠️ 3. Caso de Estudio Ejemplar
-1. **Paso 1 (Análisis Inicial):** Identifica dónde encaja este aspecto en tu flujo diario.
-2. **Paso 2 (Implementación):** Aplica pequeñas iteraciones enfocadas en refinar ese detalle específico.
-3. **Paso 3 (Evaluación):** Mide los resultados observando la mejora en comprensión y ejecución.
-
-¿Qué otro detalle de esta sección extendida te llama la atención para seguir explorando?`;
-
-                const currentChat = conversations.find(c => c.id === currentChatId);
-                if (currentChat) {
-                    currentChat.messages.push({ role: 'assistant', text: expandedText });
-                    saveConversations();
-                    renderMessages();
-                }
-            }, 1200);
-        }
-
-        function buildComplexResponse(query) {
-            return `### 📘 Análisis Educativo Complejo: "${escapeHtml(query)}"
-
-¡Hola! Con gusto analizaré esta consulta de manera exhaustiva y didáctica para ofrecerte una comprensión sólida y profunda sobre el tema.
-
----
-
-#### 🎯 1. Concepto Fundamental
-Para entender **${escapeHtml(query)}**, primero debemos desglosar sus componentes esenciales:
-
-1. **Estructura Base:** Representa el pilar sobre el cual se construyen los conceptos secundarios.
-2. **Dinámica de Funcionamiento:** Cómo interactúan los diferentes elementos entre sí de forma sistémica.
-3. **Relevancia Didáctica:** Por qué es crucial dominar este tema en el contexto actual.
-
----
-
-#### 🔬 2. Explicación Detallada y Analogía Didáctica
-Imagina este proceso como el funcionamiento de un reloj de precisión: cada engranaje por sí solo tiene una función simple, pero al conectarse sincrónicamente, generan un movimiento complejo y armonioso.
-
-- **Punto Clave A:** La información se organiza de manera jerárquica para facilitar el aprendizaje progresivo.
-- **Punto Clave B:** Permite identificar patrones y resolver problemas aplicando lógica deductiva.
-- **Punto Clave C:** Promueve el pensamiento crítico y la capacidad de síntesis.
-
----
-
-#### 📊 3. Resumen y Conclusiones Principales
-- **Claridad:** Comprender el núcleo del problema simplifica la ejecución.
-- **Versatilidad:** Este conocimiento es aplicable a múltiples áreas y disciplinas.
-- **Crecimiento:** Dominar estos detalles te brinda un nivel de comprensión superior.`;
-        }
-
-        function escapeHtml(text) {
-            const div = document.createElement('div');
-            div.textContent = text;
-            return div.innerHTML;
-        }
-
-        if (conversations.length > 0) {
-            currentChatId = conversations[0].id;
-        }
-        renderSidebar();
-        renderMessages();
     </script>
 </body>
 </html>
-```eof
 
-### Pasos para arreglarlo en GitHub:
-1. Entra a tu repositorio en GitHub y edita el archivo `index.html`.
-2. Borra **todo** el contenido actual del archivo.
-3. Copia y pega exactamente el bloque de código de arriba.
-4. Haz clic en **"Commit changes..."** para guardar. 
-
-En 1-2 minutos, recarga tu página web y ese texto habrá desaparecido por completo.Ese texto pequeño en el fondo de la pantalla parece ser un **prompt de sistema, instrucciones internas o notas del desarrollador** que terminaron mostrándose por error en la interfaz.
-
-Causas habituales de este fallo:
-
-* **Error de renderizado web:** La página está cargando etiquetas de código o fragmentos de texto en un contenedor visible en lugar de mantenerlos ocultos en el código fuente.
-* **Instrucciones del sistema expuestas:** El texto en la parte inferior contiene especificaciones de diseño y comportamiento (como referencias a Markdown, botones y configuraciones), las cuales están dirigidas al modelo de IA o al entorno de desarrollo y no deberían ser visibles para el usuario final.
-* **Falta de ocultación por CSS:** El elemento HTML que contiene esa nota carece del estilo o la propiedad necesaria para ocultarlo (`display: none`).
-
-Si la página es tuya, puedes ocultarlo o eliminar ese fragmento del código del prototipo; si estás usando la aplicación, refrescar la página o limpiar la caché debería hacer que desaparezca.
-      
+                                                          
