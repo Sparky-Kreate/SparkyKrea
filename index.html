@@ -220,7 +220,7 @@ body{
 .header-logo-text span:nth-child(2){ color:#10b981; }
 .header-logo-text small{ display:block; font-size:6px; letter-spacing:2px; color:var(--muted); }
 
-/* Menú desplegable personalizado de idiomas completamente opaco */
+/* Menú desplegable 100% sólido y opaco */
 .header-menu-container{ position:relative; }
 .header-dots-btn{
     background:none;
@@ -242,13 +242,13 @@ body{
     position:absolute;
     right:0;
     top:40px;
-    background:#111318;
-    opacity:1;
+    background-color: #0b0c10 !important;
+    opacity: 1 !important;
     border:1px solid var(--border);
-    border-radius:12px;
+    border-radius:14px;
     padding:12px;
-    box-shadow:0 20px 40px rgba(0,0,0,0.8);
-    z-index:99999;
+    box-shadow:0 25px 50px rgba(0,0,0,0.95);
+    z-index:999999;
     min-width:210px;
 }
 .header-dropdown.active{ display:block; }
@@ -509,7 +509,7 @@ textarea::placeholder{ color:#4b5563; }
         <header class="header">
             <div class="header-title"><button class="mobile-menu" id="mobileMenu">☰</button></div>
             <div class="header-right">
-                <!-- Selector de idiomas con fondo sólido y opaco -->
+                <!-- Selector de idiomas 100% opaco y sólido -->
                 <div class="header-menu-container">
                     <button class="header-dots-btn" id="headerDotsBtn" title="Opciones / Idiomas">⋮</button>
                     <div class="header-dropdown" id="headerDropdown">
@@ -953,9 +953,9 @@ const nicheDatabase = {
         musicArtist: "Phonk / Workout Energy Beats",
         musicTrack: "«METAMORPHOSIS» (Ritmo pesado y motivacional)",
         script: [
-            "Toma 1 (0:00 a 0:05) - Gancho: Primer plano de esfuerzo extremo y pesas levantándose.",
-            "Toma 2 (0:05 a 0:20) - Desarrollo: Secuencia de entrenamiento de alta intensidad enfocada en resultados.",
-            "Toma 3 (0:20 a Final) - Cierre & CTA: Enlace directo para inscribirse al plan de entrenamiento."
+            "Toma 1 (0:00 a 0:05) - Gancho: Primer plano de esfuerzo extremo o jugada estelar en el campo.",
+            "Toma 2 (0:05 a 0:20) - Desarrollo: Secuencia de técnica, velocidad, entrenamiento y disciplina deportiva.",
+            "Toma 3 (0:20 a Final) - Cierre & CTA: Mensaje motivacional y enlace directo de contratación o academia."
         ]
     },
     bienes_raices: {
@@ -1007,11 +1007,11 @@ const nicheDatabase = {
 
 function detectNiche(topic){
     const t = topic.toLowerCase();
+    if(t.includes("futbolista") || t.includes("futbol") || t.includes("soccer") || t.includes("deporte") || t.includes("gym") || t.includes("fitness") || t.includes("entreno") || t.includes("crossfit") || t.includes("sport")) return "fitness";
     if(t.includes("valorant") || t.includes("lol") || t.includes("juego") || t.includes("videojuego") || t.includes("gaming") || t.includes("gta") || t.includes("playstation") || t.includes("xbox") || t.includes("game")) return "juego";
     if(t.includes("panaderia") || t.includes("restaurante") || t.includes("comida") || t.includes("burger") || t.includes("café") || t.includes("pizza") || t.includes("food")) return "comida";
     if(t.includes("ropa") || t.includes("moda") || t.includes("tienda") || t.includes("zapatos") || t.includes("outfit") || t.includes("boutique") || t.includes("clothes")) return "moda";
     if(t.includes("tec") || t.includes("celular") || t.includes("computadora") || t.includes("app") || t.includes("software") || t.includes("electronica") || t.includes("tech")) return "tecnologia";
-    if(t.includes("gym") || t.includes("fitness") || t.includes("entreno") || t.includes("deporte") || t.includes("salud") || t.includes("crossfit") || t.includes("sport")) return "fitness";
     if(t.includes("casa") || t.includes("inmobiliaria") || t.includes("bienes raices") || t.includes("apartamento") || t.includes("alquiler") || t.includes("real estate")) return "bienes_raices";
     if(t.includes("perro") || t.includes("gato") || t.includes("veterinaria") || t.includes("mascota") || t.includes("animal") || t.includes("pet")) return "veterinaria";
     if(t.includes("makeup") || t.includes("belleza") || t.includes("salón") || t.includes("cabello") || t.includes("uñas") || t.includes("spa") || t.includes("beauty")) return "belleza";
@@ -1047,15 +1047,17 @@ function generateResponse(text){
     const lower = cleanText.toLowerCase();
     const t = i18n[currentLang];
 
-    const exactBlacklist = ["mojon", "mierda", "nada", "test", "asdf", "xd", "ninguno", "hola", "buenas", "saludos", "hi", "hey", "buenos dias", "buenas tardes"];
+    const exactBlacklist = ["mojon", "mierda", "nada", "test", "asdf", "xd", "ninguno", "hola", "bbuenas", "buenas", "saludos", "hi", "hey", "buenos dias", "buenas tardes"];
     
     if (exactBlacklist.includes(lower) || cleanText.length < 3) {
         addBotMessage(t.errInvalid);
         return;
     }
 
+    // Filtro inteligente mejorado para extraer el tema real y limpiar texto conversacional
     let processedTopic = cleanText
-        .replace(/^(hola|buenas tardes|buenos dias|hey|hi|saludos|por favor|quiero hacer una publicidad para|necesito un anuncio de|anuncio para)\s*/i, "")
+        .replace(/^(hola|bbuenas|buenas|buenos dias|buenas tardes|hey|hi|saludos|por favor|1\.|-)\s*/gi, "")
+        .replace(/(quiero hacer una publicidad sobre|quiero hacer un anuncio sobre|necesito un anuncio de|anuncio para|publicidad sobre|anuncio sobre|un|una)\s+/gi, "")
         .trim();
     
     if(processedTopic.length < 2) {
