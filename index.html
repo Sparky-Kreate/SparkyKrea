@@ -37,7 +37,7 @@ body{
     overflow:hidden;
 }
 
-/* ================= LOGO SVG OFICIAL (CASA + CÁMARA) ================= */
+/* ================= LOGO CIRCULAR OFICIAL (3RA FOTO) ================= */
 .sparky-logo-svg{
     width:100%;
     height:100%;
@@ -77,13 +77,11 @@ body{
 }
 
 .splash-name span:first-child{
-    color:var(--white);
+    color:#9f1239; /* Color vino exacto de la letra de la marca */
 }
 
 .splash-name span:nth-child(2){
-    background:linear-gradient(90deg, var(--wine-glow), var(--green-glow));
-    -webkit-background-clip:text;
-    -webkit-text-fill-color:transparent;
+    color:#10b981; /* Verde esmeralda exacto de la marca */
 }
 
 .splash-studio{
@@ -111,7 +109,6 @@ body{
     position:relative;
 }
 
-/* Capa oscura de fondo para cerrar menú al hacer clic en móvil */
 .overlay{
     display:none;
     position:fixed;
@@ -161,13 +158,11 @@ body{
 }
 
 .brand-text span:first-child{
-    color:var(--white);
+    color:#9f1239;
 }
 
 .brand-text span:nth-child(2){
-    background:linear-gradient(90deg, var(--wine-glow), var(--green-glow));
-    -webkit-background-clip:text;
-    -webkit-text-fill-color:transparent;
+    color:#10b981;
 }
 
 .brand-text small{
@@ -224,46 +219,50 @@ body{
     border-radius:4px;
 }
 
-/* HISTORIAL REMARCADO Y ESPACIADO */
 .history-item{
-    padding:14px 16px;
+    padding:12px 14px;
     border-radius:12px;
     color:#cbd5e1;
     font-size:13px;
     font-weight:500;
     cursor:pointer;
-    white-space:nowrap;
-    overflow:hidden;
-    text-overflow:ellipsis;
     margin-bottom:10px;
     background:rgba(255, 255, 255, 0.015);
     border:1px solid rgba(255, 255, 255, 0.04);
     transition:all .2s ease;
     display:flex;
     align-items:center;
-    gap:12px;
+    justify-content:space-between;
+    gap:8px;
 }
 
-.history-item::before{
-    content:"";
-    width:7px;
-    height:7px;
-    border-radius:50%;
-    background:var(--muted);
-    flex-shrink:0;
-    transition:all .2s ease;
+.history-text{
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    flex:1;
+}
+
+.history-delete{
+    background:none;
+    border:0;
+    color:var(--muted);
+    cursor:pointer;
+    font-size:14px;
+    padding:2px 6px;
+    border-radius:6px;
+    transition:all .2s;
+}
+
+.history-delete:hover{
+    background:rgba(244, 63, 94, 0.15);
+    color:var(--wine-glow);
 }
 
 .history-item:hover{
     background:var(--card);
     border-color:var(--border);
     color:var(--white);
-    transform:translateX(4px);
-}
-
-.history-item:hover::before{
-    background:var(--green-glow);
-    box-shadow:0 0 10px var(--green-glow);
 }
 
 .sidebar-bottom{
@@ -283,8 +282,6 @@ body{
     flex-direction:column;
     background:var(--bg);
 }
-
-/* ================= HEADER ================= */
 
 .header{
     height:64px;
@@ -325,13 +322,11 @@ body{
 }
 
 .header-logo-text span:first-child{
-    color:var(--white);
+    color:#9f1239;
 }
 
 .header-logo-text span:nth-child(2){
-    background:linear-gradient(90deg, var(--wine-glow), var(--green-glow));
-    -webkit-background-clip:text;
-    -webkit-text-fill-color:transparent;
+    color:#10b981;
 }
 
 .header-logo-text small{
@@ -353,8 +348,6 @@ body{
     max-width:800px;
     margin:auto;
 }
-
-/* ================= WELCOME ================= */
 
 .welcome{
     min-height:50vh;
@@ -386,8 +379,6 @@ body{
     line-height:1.7;
 }
 
-/* ================= MESSAGES ================= */
-
 .message{
     display:flex;
     margin-bottom:24px;
@@ -408,6 +399,7 @@ body{
     border-radius:14px;
     font-size:13.5px;
     line-height:1.7;
+    font-weight:750; /* Negrita pronunciada como pediste */
 }
 
 .user .bubble{
@@ -415,6 +407,7 @@ body{
     border:1px solid #282f3d;
     color:var(--white);
     border-bottom-right-radius:4px;
+    font-weight:500;
 }
 
 .bot .bubble{
@@ -424,37 +417,30 @@ body{
     border-bottom-left-radius:4px;
 }
 
-/* BOT CONTENT FORMATTING */
-
 .bot-title{
-    font-size:16px;
-    font-weight:700;
-    margin-bottom:10px;
+    font-size:15px;
+    font-weight:800;
+    margin-bottom:8px;
     color:var(--white);
 }
 
 .section{
-    margin-top:14px;
+    margin-top:10px;
     background:rgba(255,255,255,0.015);
     border:1px solid rgba(255,255,255,0.03);
     border-radius:10px;
-    padding:12px 14px;
-}
-
-.section strong{
-    color:var(--white);
-    display:block;
-    margin-bottom:4px;
-    font-size:13px;
+    padding:10px 12px;
+    font-weight:600;
 }
 
 .motivation{
-    margin-top:16px;
-    padding-top:12px;
+    margin-top:12px;
+    padding-top:10px;
     border-top:1px solid var(--border);
     color:var(--muted);
     font-style:italic;
-    font-size:12px;
+    font-size:11.5px;
+    font-weight:500;
 }
 
 /* ================= TYPING ================= */
@@ -556,62 +542,65 @@ textarea::placeholder{
     font-weight:500;
 }
 
-/* ================= DURATION PANEL ================= */
+/* ================= DURATION PANEL EN TEXTO ================= */
 
-.duration-wrap{
-    position:relative;
-    margin-top:14px;
+.duration-inline-wrap{
+    margin-top:12px;
 }
 
-.duration-button{
-    background:var(--card);
-    border:1px solid var(--border);
+.duration-trigger-btn{
+    background:linear-gradient(135deg, #1e2430, #161920);
+    border:1px solid var(--green-glow);
     color:var(--white);
     border-radius:10px;
     padding:10px 16px;
     cursor:pointer;
     font-size:12.5px;
-    font-weight:600;
+    font-weight:700;
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    box-shadow:0 0 15px rgba(16, 185, 129, 0.2);
+    transition:all 0.2s;
 }
 
-.duration-button:hover{
-    background:#1c202a;
+.duration-trigger-btn:hover{
+    background:#1e2430;
+    transform:translateY(-1px);
 }
 
-.duration-panel{
+.duration-grid-panel{
     display:none;
-    position:absolute;
-    bottom:48px;
-    left:0;
-    width:260px;
-    padding:10px;
-    background:var(--panel);
-    border:1px solid var(--border);
-    border-radius:14px;
-    box-shadow:0 20px 40px rgba(0,0,0,0.6);
-    z-index:50;
-}
-
-.duration-panel.open{
-    display:grid;
-    grid-template-columns:1fr 1fr;
+    margin-top:10px;
+    grid-template-columns:repeat(4, 1fr);
     gap:6px;
+    background:rgba(0,0,0,0.3);
+    padding:10px;
+    border-radius:10px;
+    border:1px solid var(--border);
 }
 
-.duration-option{
+.duration-grid-panel.open{
+    display:grid;
+}
+
+.duration-chip{
     background:var(--card);
     border:1px solid var(--border);
     color:#cbd5e1;
-    padding:10px 8px;
+    padding:8px 6px;
     border-radius:8px;
     cursor:pointer;
-    font-size:11.5px;
-    font-weight:500;
+    font-size:11px;
+    font-weight:700;
+    text-align:center;
+    transition:all .2s;
 }
 
-.duration-option:hover{
-    background:#1e2430;
+.duration-chip:hover{
+    background:var(--green);
     color:var(--white);
+    border-color:var(--green-glow);
 }
 
 /* ================= MOBILE ================= */
@@ -646,29 +635,35 @@ textarea::placeholder{
     .chat{
         padding:25px 14px 120px;
     }
+    .duration-grid-panel{
+        grid-template-columns:repeat(3, 1fr);
+    }
 }
 </style>
 </head>
 
 <body>
 
-<!-- ================= SVG LOGO DEFINITION (CASA + CÁMARA) ================= -->
+<!-- ================= LOGO CIRCULAR SVG DEFINITION (3RA FOTO) ================= -->
 <svg style="display:none;">
-    <g id="sparky-house-camera-logo">
-        <!-- Contorno exterior sutil -->
-        <circle cx="50" cy="50" r="46" fill="none" stroke="#ffffff" stroke-width="2" opacity="0.12"/>
-        <!-- Silueta de Casa con Cámara Integrada -->
-        <path d="M50 14 L80 37 V76 C80 79.3 77.3 82 74 82 H26 C22.7 82 20 79.3 20 76 V37 Z" fill="none" stroke="url(#logoGrad)" stroke-width="3.5" stroke-linejoin="round"/>
-        <path d="M68 30 V20 H74 V35" fill="none" stroke="url(#logoGrad)" stroke-width="3" stroke-linecap="round"/>
-        <!-- Lente de Cámara dentro de la casa -->
-        <rect x="31" y="44" width="38" height="26" rx="6" fill="#111318" stroke="#059669" stroke-width="2.5"/>
-        <circle cx="50" cy="57" r="8.5" fill="none" stroke="#ffffff" stroke-width="3"/>
-        <circle cx="52" cy="55" r="2.5" fill="#ffffff"/>
+    <g id="sparky-circular-logo">
+        <circle cx="50" cy="50" r="47" fill="none" stroke="#ffffff" stroke-width="2.5"/>
+        <circle cx="50" cy="50" r="41" fill="none" stroke="#222630" stroke-width="1.5"/>
+        <!-- Fondo verde del círculo -->
+        <circle cx="50" cy="50" r="37.5" fill="#059669"/>
+        <!-- Anillo interior -->
+        <circle cx="50" cy="50" r="34" fill="none" stroke="#ffffff" stroke-width="1.5" opacity="0.3"/>
+        <!-- Cámara blanca -->
+        <path d="M26 42 H34 L37 37 H63 L66 42 H74 C76.2 42 78 43.8 78 46 V64 C78 66.2 76.2 68 74 68 H26 C23.8 68 22 66.2 22 64 V46 C22 43.8 23.8 42 26 42 Z" fill="#ffffff"/>
+        <!-- Lente estrella -->
+        <circle cx="50" cy="55" r="13" fill="#059669" stroke="#ffffff" stroke-width="2.5"/>
+        <path d="M50 44 L52.5 52.5 L61 55 L52.5 57.5 L50 66 L47.5 57.5 L39 55 L47.5 52.5 Z" fill="#ffffff"/>
+        <!-- Cuadro de rollo fotográfico lateral -->
+        <rect x="65" y="45" width="4" height="20" rx="1.5" fill="#059669"/>
+        <circle cx="67" cy="48" r="1" fill="#ffffff"/>
+        <circle cx="67" cy="55" r="1" fill="#ffffff"/>
+        <circle cx="67" cy="62" r="1" fill="#ffffff"/>
     </g>
-    <linearGradient id="logoGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-        <stop offset="0%" stop-color="#f43f5e"/>
-        <stop offset="100%" stop-color="#10b981"/>
-    </linearGradient>
 </svg>
 
 <!-- ================= SPLASH ================= -->
@@ -676,7 +671,7 @@ textarea::placeholder{
 <div id="splash">
     <div class="splash-content">
         <div class="splash-svg-box">
-            <svg class="sparky-logo-svg" viewBox="0 0 100 100"><use href="#sparky-house-camera-logo"/></svg>
+            <svg class="sparky-logo-svg" viewBox="0 0 100 100"><use href="#sparky-circular-logo"/></svg>
         </div>
         <div class="splash-name">
             <span>Sparky</span><span>Krea</span>
@@ -685,7 +680,6 @@ textarea::placeholder{
     </div>
 </div>
 
-<!-- ================= OVERLAY PARA CERRAR MENÚ CON 1 CLIC FUERA ================= -->
 <div class="overlay" id="overlay" onclick="closeSidebar()"></div>
 
 <!-- ================= APP ================= -->
@@ -695,7 +689,7 @@ textarea::placeholder{
     <aside class="sidebar" id="sidebar">
         <div class="brand">
             <div class="brand-svg-box">
-                <svg class="sparky-logo-svg" viewBox="0 0 100 100"><use href="#sparky-house-camera-logo"/></svg>
+                <svg class="sparky-logo-svg" viewBox="0 0 100 100"><use href="#sparky-circular-logo"/></svg>
             </div>
             <div class="brand-text">
                 <span>Sparky</span><span>Krea</span>
@@ -727,7 +721,7 @@ textarea::placeholder{
 
             <div class="header-right">
                 <div class="header-svg-box">
-                    <svg class="sparky-logo-svg" viewBox="0 0 100 100"><use href="#sparky-house-camera-logo"/></svg>
+                    <svg class="sparky-logo-svg" viewBox="0 0 100 100"><use href="#sparky-circular-logo"/></svg>
                 </div>
                 <div class="header-logo-text">
                     <span>Sparky</span><span>Krea</span>
@@ -740,11 +734,11 @@ textarea::placeholder{
             <div class="chat-inner">
                 <div class="welcome" id="welcome">
                     <div class="welcome-svg-box">
-                        <svg class="sparky-logo-svg" viewBox="0 0 100 100"><use href="#sparky-house-camera-logo"/></svg>
+                        <svg class="sparky-logo-svg" viewBox="0 0 100 100"><use href="#sparky-circular-logo"/></svg>
                     </div>
-                    <h1>¿Qué estrategia creamos hoy?</h1>
+                    <h1>¿En qué publicidad te puedo ayudar hoy?</h1>
                     <p>
-                        Diseña campañas de publicidad para negocios, panaderías, supermercados o videojuegos como Valorant, LoL, FIFA y más.
+                        Diseña guiones, estrategias y música profesional optimizados para tu negocio o videojuego al instante.
                     </p>
                 </div>
             </div>
@@ -759,7 +753,7 @@ textarea::placeholder{
         <textarea
             id="input"
             rows="1"
-            placeholder="Escribe tu idea, juego, negocio o duda (ej: Valorant, Panadería)..."
+            placeholder="Escribe tu idea, juego o negocio (ej: Valorant, Panadería)..."
         ></textarea>
         <button class="send" id="send">↑</button>
     </div>
@@ -780,24 +774,13 @@ const sidebar = document.getElementById("sidebar");
 const overlay = document.getElementById("overlay");
 
 let greetingShown = false;
-let pendingDuration = false;
 let currentProject = null;
 let motivationIndex = 0;
-
-function getGreeting(){
-    const hour = new Date().getHours();
-    if(hour >= 5 && hour < 12) return "Buenos días";
-    if(hour >= 12 && hour < 19) return "Buenas tardes";
-    return "Buenas noches";
-}
 
 function showGreeting(){
     if(greetingShown) return;
     greetingShown = true;
-    addBotMessage(
-        `${getGreeting()} 👋<br><br>
-        Soy SparkyKrea Studio's. Dime si vas a promocionar un negocio (restaurante, panadería, supermercado), un videojuego (Valorant, LoL, TFT, Wild Rift, FIFA, Call of Duty) o cuéntame tu idea.`
-    );
+    addBotMessage(`¿En qué publicidad te puedo ayudar hoy?`);
 }
 
 const motivations = [
@@ -813,217 +796,101 @@ function motivation(){
     return `<div class="motivation">${text}</div>`;
 }
 
-const durations = [
-    "15 segundos",
-    "30 segundos",
-    "45 segundos",
-    "60 segundos",
-    "90 segundos",
-    "2 minutos"
+const timeOptions = [
+    "10 seg", "20 seg", "30 seg", "40 seg", "50 seg", "60 seg", "3 min", "Personalizado"
 ];
 
-function showDurationSelector(){
-    const id = "duration-" + Date.now();
+function showDurationSelectorInsideChat(){
+    const panelId = "dur-panel-" + Date.now();
     return `
-        <div class="duration-wrap">
-            <button class="duration-button" onclick="toggleDuration('${id}')">
-                ⏱ Seleccionar duración del anuncio
+        <div class="duration-inline-wrap">
+            <button class="duration-trigger-btn" onclick="toggleDurationPanel('${panelId}')">
+                ⏱ ¿Cuánto tiempo debe durar? (Clic aquí)
             </button>
-            <div class="duration-panel" id="${id}">
-                ${durations.map(d => `
-                    <button class="duration-option" onclick="selectDuration('${d.replace(/'/g,"\\'")}')">
-                        ${d}
+            <div class="duration-grid-panel" id="${panelId}">
+                ${timeOptions.map(t => `
+                    <button class="duration-chip" onclick="selectDurationOption('${t.replace(/'/g,"\\'")}')">
+                        ${t}
                     </button>
                 `).join("")}
-                <button class="duration-option" onclick="customDuration()">Personalizado</button>
             </div>
         </div>
     `;
 }
 
-function toggleDuration(id){
+function toggleDurationPanel(id){
     const panel = document.getElementById(id);
     if(panel) panel.classList.toggle("open");
 }
 
-function selectDuration(duration){
-    pendingDuration = false;
-    if(!currentProject){
-        currentProject = { topic:"campaña general", type:"publicidad", duration:duration };
-    } else {
-        currentProject.duration = duration;
+function selectDurationOption(dur){
+    if(dur === "Personalizado"){
+        dur = prompt("Indica la duración deseada:") || "30 segundos";
     }
-    addUserMessage(duration);
+    if(!currentProject){
+        currentProject = { topic: "Campaña general", duration: dur };
+    } else {
+        currentProject.duration = dur;
+    }
+    addUserMessage(dur);
     showTyping();
     setTimeout(() => {
         removeTyping();
-        addBotMessage(buildCompleteStrategy(currentProject));
+        addBotMessage(buildFinalStrategy(currentProject));
     }, 700);
 }
 
-function customDuration(){
-    const value = prompt("Indica la duración o formato deseado:");
-    if(!value) return;
-    selectDuration(value);
-}
-
-function normalize(text){
-    return text.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"");
-}
-
-function analyzeTopic(text){
-    const t = normalize(text);
-
-    if(t.length <= 3 && (t.includes("xd") || t.includes("test") || t.includes("hola"))){
-        return { type: "invalid", name: text };
-    }
-
-    const games = ["valorant", "lol", "league of legends", "tft", "wild rift", "fifa", "call of duty", "cod", "roblox", "minecraft", "fortnite"];
-    for(const g of games){
-        if(t.includes(g)){
-            return { type: "game", name: g.toUpperCase() };
-        }
-    }
-
-    const business = ["restaurante", "pasteleria", "panaderia", "supermercado", "tienda", "cafeteria", "hamburguesa", "comida"];
-    for(const b of business){
-        if(t.includes(b)){
-            return { type: "business", name: b.toUpperCase() };
-        }
-    }
-
-    return { type: "general", name: text };
-}
-
-function getMusicRecommendation(category, topic){
-    const t = normalize(topic);
-    if(category === "game" || t.includes("valorant") || t.includes("lol") || t.includes("cod")){
+function getMusicRecommendation(topic){
+    const t = topic.toLowerCase();
+    if(t.includes("valorant") || t.includes("lol") || t.includes("juego")){
         return {
             artist: "League of Legends / Imagine Dragons",
-            track: "«Enemy» o «Legends Never Die» (Versión instrumental con drops pesados)"
+            track: "«Enemy» (Versión instrumental con beats intensos)"
         };
-    } else if(category === "business" || t.includes("panaderia") || t.includes("pasteleria") || t.includes("supermercado")){
+    } else if(t.includes("panaderia") || t.includes("restaurante") || t.includes("supermercado")){
         return {
-            artist: "Lauv & Troye Sivan / upbeat acoustic indie",
-            track: "«i'm so tired...» (Versión instrumental comercial o alegre)"
+            artist: "Lauv & Troye Sivan / Upbeat Acoustic",
+            track: "«i'm so tired...» (Versión comercial alegre)"
         };
     } else {
         return {
             artist: "The Weeknd / Electronic Pop Commercial",
-            track: "«Blinding Lights» (Ritmo acelerado con sintetizadores vibrantes)"
+            track: "«Blinding Lights» (Ritmo dinámico y comercial)"
         };
     }
 }
 
-function buildCompleteStrategy(project){
-    const topic = project.topic || "tu proyecto";
-    const duration = project.duration || "30 segundos";
-    const category = project.category || "general";
-    const music = getMusicRecommendation(category, topic);
-
-    let extraPrompt = "";
-    if(category === "game"){
-        extraPrompt = `
-            <div class="section">
-                <strong>🎮 Enfoque de Gaming / Personaje</strong>
-                Enfocado en jugabilidad, clips destacados, jugadas clutch y conexión directa con la comunidad de jugadores.
-            </div>
-        `;
-    } else if(category === "business"){
-        extraPrompt = `
-            <div class="section">
-                <strong>🏪 Enfoque Comercial (Local/Negocio)</strong>
-                Estrategia orientada a generar antojo visual, llamadas a la acción directas y destacar calidad o frescura.
-            </div>
-        `;
-    }
+function buildFinalStrategy(proj){
+    const topic = proj.topic || "tu negocio";
+    const duration = proj.duration || "30 seg";
+    const music = getMusicRecommendation(topic);
 
     return `
-        <div class="bot-title">
-            🎬 Estrategia, Guión y Música Publicitaria
-        </div>
-
+        <div class="bot-title">🎬 Estrategia, Guión y Música Publicitaria</div>
+        <div class="section"><b>📌 Proyecto:</b> ${capitalize(topic)} (${duration})</div>
         <div class="section">
-            <strong>🎯 Proyecto analizado:</strong> ${capitalize(topic)} (${duration})
+            <b>🎙️ Guión Sugerido (${duration}):</b><br>
+            • <b>[Gancho 0-3s]:</b> ¡Atención! Si te interesa ${topic}, esto es para ti.<br>
+            • <b>[Desarrollo]:</b> Mostramos las ventajas clave de forma dinámica y directa.<br>
+            • <b>[Cierre & CTA]:</b> ¡Haz clic abajo y descúbrelo ahora mismo!
         </div>
-
-        ${extraPrompt}
-
         <div class="section">
-            <strong>🎙️ Guión Sugerido (${duration})</strong>
-            <p style="margin-top:6px; color:#cbd5e1;">
-              <b>[0s - 3s (Gancho)]</b> "¿Buscas llevar tu experiencia al siguiente nivel? Si te interesa ${topic}, mira esto..."<br><br>
-              <b>[3s - Desarrollo]</b> Destacamos el valor principal con ritmo visual dinámico y transiciones sincronizadas.<br><br>
-              <b>[Cierre & CTA]</b> "Haz clic abajo, descúbrelo ahora y aprovecha la promoción."
-            </p>
+            <b>🎵 Música y Audio:</b><br>
+            • <b>Artista:</b> ${music.artist}<br>
+            • <b>Canción:</b> ${music.track}
         </div>
-
-        <div class="section">
-            <strong>🎵 Música, Artista y Estilo de Audio</strong>
-            • <b>Artista / Intérprete recomendado:</b> ${music.artist}<br>
-            • <b>Tema / Canción específica:</b> ${music.track}<br>
-            • <b>Edición:</b> Cortes dinámicos cada 2 segundos con efectos de sonido (SFX) en transiciones.
-        </div>
-
         ${motivation()}
     `;
 }
 
 function generateResponse(text){
-    const analysis = analyzeTopic(text);
-    const writtenDuration = text.match(/(\d+)\s*(seg|segundos|min|minutos)/i);
-
-    if(pendingDuration && writtenDuration){
-        currentProject.duration = text;
-        pendingDuration = false;
-        addUserMessage(text);
-        showTyping();
-        setTimeout(() => {
-            removeTyping();
-            addBotMessage(buildCompleteStrategy(currentProject));
-        }, 700);
-        return;
-    }
-
-    if(analysis.type === "invalid"){
-        addBotMessage(`
-            <div class="bot-title">¡Hola de nuevo! 😄</div>
-            <div class="section">
-                Noto que pusiste <b>"${text}"</b>. Para poder darte un guión, música y estrategia perfecta, cuéntame qué quieres promocionar exactamente.
-            </div>
-            <div class="section">
-                Puedes decirme por ejemplo: <br>
-                • <i>"Quiero una publicidad para una panadería"</i><br>
-                • <i>"Un video para Valorant con Jett"</i><br>
-                • <i>"Un anuncio de 30 segundos para un supermercado"</i>
-            </div>
-        `);
-        return;
-    }
-
-    currentProject = {
-        topic: text,
-        category: analysis.type,
-        type: "publicidad"
-    };
-    pendingDuration = true;
-
-    let subMsg = "";
-    if(analysis.type === "game"){
-        subMsg = `Detecté que se trata de un videojuego (<b>${analysis.name}</b>). ¿Hay algún personaje, arma o rol específico en el que nos enfoquemos?`;
-    } else if(analysis.type === "business"){
-        subMsg = `Excelente, analicé que es para el sector de <b>${analysis.name}</b>. ¿Qué producto o promoción principal quieres destacar?`;
-    } else {
-        subMsg = `He registrado tu propuesta sobre <b>"${capitalize(text)}"</b>.`;
-    }
+    const cleanText = text.trim();
+    currentProject = { topic: cleanText };
 
     addBotMessage(`
-        <div class="bot-title">✨ Análisis de Propuesta Publicitaria</div>
-        <div class="section">${subMsg}</div>
-        <div class="section">
-            Para terminar de armar tu estrategia, guión y música con artista, <b>selecciona la duración ideal:</b>
-        </div>
-        ${showDurationSelector()}
+        ¡Perfecto! Analicé tu propuesta sobre <b>"${capitalize(cleanText)}"</b>.<br>
+        Para continuar y darte el guión y música exacta, <b>selecciona la duración del anuncio:</b>
+        ${showDurationSelectorInsideChat()}
     `);
 }
 
@@ -1106,30 +973,52 @@ input.addEventListener("input", () => {
 function saveHistory(){
     const firstUser = chatInner.querySelector(".message.user .bubble");
     if(!firstUser) return;
-    const title = firstUser.innerText.substring(0, 38);
-    let chats = JSON.parse(localStorage.getItem("sparky_final_chats") || "[]");
+    const title = firstUser.innerText.substring(0, 35);
+    let chats = JSON.parse(localStorage.getItem("sparky_final_v2_chats") || "[]");
     if(!chats.includes(title)){
         chats.unshift(title);
         chats = chats.slice(0, 30);
-        localStorage.setItem("sparky_final_chats", JSON.stringify(chats));
+        localStorage.setItem("sparky_final_v2_chats", JSON.stringify(chats));
         renderHistory();
     }
 }
 
 function renderHistory(){
-    const chats = JSON.parse(localStorage.getItem("sparky_final_chats") || "[]");
+    const chats = JSON.parse(localStorage.getItem("sparky_final_v2_chats") || "[]");
     history.innerHTML = "";
-    chats.forEach(title => {
+    chats.forEach((title, index) => {
         const item = document.createElement("div");
         item.className = "history-item";
-        item.textContent = title;
-        item.onclick = () => {
+        
+        const span = document.createElement("span");
+        span.className = "history-text";
+        span.textContent = title;
+        span.onclick = () => {
             input.value = title;
             input.focus();
-            closeSidebar(); // Cierra el menú al hacer clic en un chat del historial
+            closeSidebar();
         };
+
+        const delBtn = document.createElement("button");
+        delBtn.className = "history-delete";
+        delBtn.innerHTML = "🗑";
+        delBtn.title = "Eliminar chat";
+        delBtn.onclick = (e) => {
+            e.stopPropagation();
+            deleteChat(index);
+        };
+
+        item.appendChild(span);
+        item.appendChild(delBtn);
         history.appendChild(item);
     });
+}
+
+function deleteChat(index){
+    let chats = JSON.parse(localStorage.getItem("sparky_final_v2_chats") || "[]");
+    chats.splice(index, 1);
+    localStorage.setItem("sparky_final_v2_chats", JSON.stringify(chats));
+    renderHistory();
 }
 
 document.getElementById("newProject").addEventListener("click", () => {
@@ -1137,7 +1026,6 @@ document.getElementById("newProject").addEventListener("click", () => {
     chatInner.appendChild(welcome);
     welcome.style.display = "flex";
     greetingShown = false;
-    pendingDuration = false;
     currentProject = null;
     input.value = "";
     closeSidebar();
