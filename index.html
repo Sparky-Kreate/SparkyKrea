@@ -2,893 +2,1353 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 
 <title>SparkyKrea Studio's</title>
+
+<!-- =====================================================
+     LIBRERÍAS
+===================================================== -->
 
 <script src="https://cdn.tailwindcss.com"></script>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 
 <link rel="stylesheet"
 href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
+
 <script>
-tailwind.config={
-theme:{
-extend:{
-colors:{
-vino:"#800020",
-verde:"#10B981",
-fondo:"#101010",
-panel:"#18181b",
-card:"#222225",
-borde:"#3f3f46"
-}
-}
-}
+tailwind.config = {
+    theme: {
+        extend: {
+            colors: {
+                vino: "#800020",
+                verde: "#10B981",
+                fondo: "#101010",
+                panel: "#18181b",
+                card: "#222225",
+                borde: "#3f3f46"
+            }
+        }
+    }
 }
 </script>
 
+
 <style>
 
-*{
-box-sizing:border-box;
-}
-
-html,body{
-margin:0;
-width:100%;
-height:100%;
-height:100dvh;
-overflow:hidden;
-font-family:Inter,sans-serif;
-background:#101010;
-color:white;
-}
-
-button,input{
--webkit-tap-highlight-color:transparent;
-}
-
-::-webkit-scrollbar{
-width:5px;
-}
-
-::-webkit-scrollbar-track{
-background:transparent;
-}
-
-::-webkit-scrollbar-thumb{
-background:#3f3f46;
-border-radius:20px;
-}
-
 /* =====================================================
-ANIMACIONES GENERALES
+   BASE
 ===================================================== */
 
-.fade{
-animation:fade .35s ease both;
+* {
+    box-sizing: border-box;
 }
 
-@keyframes fade{
-from{
-opacity:0;
-transform:translateY(10px);
-}
-to{
-opacity:1;
-transform:translateY(0);
-}
-}
-
-.card{
-background:#222225;
-border:1px solid #3f3f46;
-border-radius:15px;
-transition:.25s ease;
+html,
+body {
+    margin: 0;
+    width: 100%;
+    height: 100%;
+    height: 100dvh;
+    overflow: hidden;
+    background: #101010;
+    color: white;
+    font-family: "Inter", Arial, sans-serif;
 }
 
-.card:hover{
-border-color:#55555c;
+button,
+input {
+    font-family: inherit;
+    -webkit-tap-highlight-color: transparent;
 }
 
-.pulse{
-animation:pulse 2s infinite;
+button {
+    cursor: pointer;
 }
 
-@keyframes pulse{
-0%,100%{
-box-shadow:0 0 0 rgba(16,185,129,0);
-}
-50%{
-box-shadow:0 0 35px rgba(16,185,129,.16);
-}
+input {
+    min-width: 0;
 }
 
-/* =====================================================
-SPLASH / ENTRADA
-===================================================== */
-
-#splash{
-position:fixed;
-inset:0;
-z-index:99999;
-display:flex;
-align-items:center;
-justify-content:center;
-background:
-radial-gradient(circle at 50% 45%,rgba(128,0,32,.22),transparent 32%),
-radial-gradient(circle at 60% 55%,rgba(16,185,129,.09),transparent 35%),
-#030304;
-overflow:hidden;
-transition:opacity .8s ease,visibility .8s ease;
+::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
 }
 
-#splash.hide{
-opacity:0;
-visibility:hidden;
-pointer-events:none;
+::-webkit-scrollbar-track {
+    background: transparent;
 }
 
-.splashGlow{
-position:absolute;
-width:420px;
-height:420px;
-border-radius:50%;
-background:radial-gradient(circle,rgba(128,0,32,.18),transparent 65%);
-animation:glow 3s ease-in-out infinite;
+::-webkit-scrollbar-thumb {
+    background: #3f3f46;
+    border-radius: 20px;
 }
 
-@keyframes glow{
-0%,100%{
-transform:scale(.85);
-opacity:.5;
-}
-50%{
-transform:scale(1.15);
-opacity:1;
-}
+::-webkit-scrollbar-thumb:hover {
+    background: #55555c;
 }
 
-.splashContent{
-position:relative;
-z-index:2;
-display:flex;
-flex-direction:column;
-align-items:center;
-text-align:center;
-animation:splashIn 1s cubic-bezier(.2,.8,.2,1);
-}
-
-@keyframes splashIn{
-from{
-opacity:0;
-transform:scale(.82) translateY(15px);
-}
-to{
-opacity:1;
-transform:scale(1) translateY(0);
-}
-}
-
-.splashLogo{
-width:105px;
-height:105px;
-margin-bottom:22px;
-filter:drop-shadow(0 0 22px rgba(128,0,32,.5));
-animation:logoFloat 2.8s ease-in-out infinite;
-}
-
-@keyframes logoFloat{
-0%,100%{
-transform:translateY(0);
-}
-50%{
-transform:translateY(-7px);
-}
-}
-
-.splashName{
-font-size:32px;
-font-weight:900;
-letter-spacing:-1.5px;
-animation:nameIn 1s .25s both;
-}
-
-@keyframes nameIn{
-from{
-opacity:0;
-letter-spacing:8px;
-}
-to{
-opacity:1;
-letter-spacing:-1.5px;
-}
-}
-
-.splashStudio{
-margin-top:7px;
-font-size:9px;
-letter-spacing:7px;
-color:#fff;
-opacity:.7;
-animation:studioIn 1s .55s both;
-}
-
-@keyframes studioIn{
-from{
-opacity:0;
-transform:translateY(8px);
-}
-to{
-opacity:.7;
-transform:translateY(0);
-}
-}
-
-.splashLine{
-width:0;
-height:1px;
-margin-top:22px;
-background:linear-gradient(90deg,#800020,#10B981);
-animation:lineIn 1s .8s forwards;
-}
-
-@keyframes lineIn{
-to{
-width:150px;
-}
-}
 
 /* =====================================================
-LOGO
+   ANIMACIONES
 ===================================================== */
 
-.brandLogo{
-display:flex;
-align-items:center;
-gap:11px;
+.fade {
+    animation: fadeIn .35s ease both;
 }
 
-.logoIcon{
-width:42px;
-height:42px;
-flex:none;
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
-.brandName{
-font-size:20px;
-font-weight:900;
-line-height:1;
+
+.slideUp {
+    animation: slideUp .45s ease both;
 }
 
-.brandSparky{
-color:#800020;
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(18px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
-.brandKrea{
-color:#10B981;
+
+.scaleIn {
+    animation: scaleIn .3s ease both;
 }
 
-.brandStudio{
-font-size:7px;
-letter-spacing:4px;
-color:#fff;
-opacity:.65;
-margin-top:5px;
+@keyframes scaleIn {
+    from {
+        opacity: 0;
+        transform: scale(.94);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
 }
+
 
 /* =====================================================
-SIDEBAR
+   SPLASH
 ===================================================== */
 
-#sidebar{
-width:285px;
+#splash {
+    position: fixed;
+    inset: 0;
+    z-index: 999999;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background:
+        radial-gradient(
+            circle at 50% 45%,
+            rgba(128,0,32,.22),
+            transparent 32%
+        ),
+        radial-gradient(
+            circle at 65% 60%,
+            rgba(16,185,129,.08),
+            transparent 38%
+        ),
+        #050505;
+
+    transition:
+        opacity .7s ease,
+        visibility .7s ease;
 }
 
-@media(max-width:767px){
-#sidebar{
-position:fixed;
-z-index:50;
-}
-}
-
-.action{
-border:1px solid #3f3f46;
-background:#18181b;
-color:#a1a1aa;
-padding:7px 10px;
-border-radius:8px;
-font-size:10px;
-transition:.2s;
+#splash.hide {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
 }
 
-.action:hover{
-color:white;
-border-color:#10B981;
-background:#27272a;
+
+.splashGlow {
+    position: absolute;
+
+    width: min(500px, 80vw);
+    height: min(500px, 80vw);
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(128,0,32,.18),
+            transparent 68%
+        );
+
+    animation: splashGlow 3s ease-in-out infinite;
 }
 
-.typingDot{
-display:inline-block;
-width:4px;
-height:4px;
-border-radius:50%;
-background:#777;
-margin:0 2px;
-animation:typing 1s infinite;
+@keyframes splashGlow {
+
+    0%,
+    100% {
+        transform: scale(.85);
+        opacity: .45;
+    }
+
+    50% {
+        transform: scale(1.15);
+        opacity: 1;
+    }
 }
 
-.typingDot:nth-child(2){
-animation-delay:.15s;
+
+.splashContent {
+    position: relative;
+    z-index: 2;
+
+    width: min(500px, 90vw);
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    text-align: center;
+
+    animation:
+        splashEnter 1s cubic-bezier(.2,.8,.2,1);
 }
 
-.typingDot:nth-child(3){
-animation-delay:.3s;
+@keyframes splashEnter {
+
+    from {
+        opacity: 0;
+        transform: scale(.82) translateY(18px);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
 }
 
-@keyframes typing{
-0%,100%{
-opacity:.25;
-transform:translateY(0);
+
+.splashLogo {
+    width: 110px;
+    height: 110px;
+
+    animation:
+        logoFloat 2.8s ease-in-out infinite;
+
+    filter:
+        drop-shadow(0 0 20px rgba(128,0,32,.55))
+        drop-shadow(0 0 18px rgba(16,185,129,.15));
 }
-50%{
-opacity:1;
-transform:translateY(-3px);
+
+@keyframes logoFloat {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-7px);
+    }
 }
+
+
+.splashName {
+    margin-top: 20px;
+
+    font-size: clamp(28px, 6vw, 38px);
+
+    font-weight: 900;
+
+    letter-spacing: -1.5px;
+
+    animation:
+        nameAppear .9s .2s both;
+}
+
+@keyframes nameAppear {
+
+    from {
+        opacity: 0;
+        letter-spacing: 8px;
+    }
+
+    to {
+        opacity: 1;
+        letter-spacing: -1.5px;
+    }
+}
+
+
+.splashStudio {
+    margin-top: 8px;
+
+    font-size: 8px;
+
+    letter-spacing: 7px;
+
+    color: white;
+
+    opacity: .7;
+
+    animation:
+        studioAppear .8s .45s both;
+}
+
+@keyframes studioAppear {
+
+    from {
+        opacity: 0;
+        transform: translateY(8px);
+    }
+
+    to {
+        opacity: .7;
+        transform: translateY(0);
+    }
+}
+
+
+.splashLine {
+    width: 0;
+    height: 2px;
+
+    margin-top: 22px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #800020,
+            #10B981
+        );
+
+    animation:
+        lineAppear .9s .7s forwards;
+}
+
+@keyframes lineAppear {
+    to {
+        width: 180px;
+    }
+}
+
+
+/* =====================================================
+   CARDS
+===================================================== */
+
+.card {
+    background: #222225;
+    border: 1px solid #3f3f46;
+    border-radius: 16px;
+
+    transition:
+        border-color .25s ease,
+        transform .25s ease,
+        box-shadow .25s ease;
+}
+
+.card:hover {
+    border-color: #55555c;
+}
+
+
+/* =====================================================
+   BOTONES
+===================================================== */
+
+.action {
+    border: 1px solid #3f3f46;
+
+    background: #18181b;
+
+    color: #a1a1aa;
+
+    padding: 8px 11px;
+
+    border-radius: 9px;
+
+    font-size: 10px;
+
+    transition:
+        background .2s ease,
+        color .2s ease,
+        border-color .2s ease,
+        transform .15s ease;
+}
+
+.action:hover {
+    color: white;
+    border-color: #10B981;
+    background: #27272a;
+}
+
+.action:active {
+    transform: scale(.96);
+}
+
+
+/* =====================================================
+   PUNTOS DE ESCRITURA
+===================================================== */
+
+.typingDot {
+    display: inline-block;
+
+    width: 4px;
+    height: 4px;
+
+    margin: 0 2px;
+
+    border-radius: 50%;
+
+    background: #777;
+
+    animation: typing 1s infinite;
+}
+
+.typingDot:nth-child(2) {
+    animation-delay: .15s;
+}
+
+.typingDot:nth-child(3) {
+    animation-delay: .3s;
+}
+
+@keyframes typing {
+
+    0%,
+    100% {
+        opacity: .25;
+        transform: translateY(0);
+    }
+
+    50% {
+        opacity: 1;
+        transform: translateY(-3px);
+    }
+}
+
+
+/* =====================================================
+   LOGO PEQUEÑO
+===================================================== */
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.brandIcon {
+    width: 42px;
+    height: 42px;
+    flex-shrink: 0;
+}
+
+.brandTitle {
+    font-size: 20px;
+    line-height: 1;
+    font-weight: 900;
+}
+
+.brandSparky {
+    color: #800020;
+}
+
+.brandKrea {
+    color: #10B981;
+}
+
+.brandStudio {
+    margin-top: 5px;
+
+    font-size: 7px;
+
+    letter-spacing: 4px;
+
+    color: white;
+
+    opacity: .65;
+}
+
+
+/* =====================================================
+   SIDEBAR
+===================================================== */
+
+#sidebar {
+    width: 285px;
+    flex-shrink: 0;
+}
+
+
+/* =====================================================
+   INPUT
+===================================================== */
+
+#input {
+    transition:
+        border-color .2s ease,
+        box-shadow .2s ease,
+        background .2s ease;
+}
+
+#input:focus {
+    border-color: #10B981;
+    box-shadow: 0 0 0 3px rgba(16,185,129,.07);
+}
+
+
+/* =====================================================
+   BOT AVATAR
+===================================================== */
+
+.botAvatar {
+    width: 30px;
+    height: 30px;
+
+    flex-shrink: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 9px;
+
+    background: #800020;
+
+    box-shadow:
+        0 0 20px rgba(128,0,32,.12);
+}
+
+
+/* =====================================================
+   MODAL
+===================================================== */
+
+.modalBox {
+    animation: modalIn .25s ease both;
+}
+
+@keyframes modalIn {
+
+    from {
+        opacity: 0;
+        transform: scale(.95) translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
+
+/* =====================================================
+   RESPONSIVE
+===================================================== */
+
+@media (max-width: 767px) {
+
+    #sidebar {
+        position: fixed;
+        left: 0;
+        top: 0;
+        bottom: 0;
+
+        z-index: 100;
+
+        transform: translateX(-100%);
+    }
+
+    #sidebar.mobileOpen {
+        transform: translateX(0);
+    }
+
+    .mobileHide {
+        display: none;
+    }
+
+}
+
+
+@media (min-width: 768px) {
+
+    #sidebar {
+        transform: translateX(0) !important;
+    }
+
+}
+
+
+@media (max-width: 420px) {
+
+    .action {
+        padding: 8px 9px;
+        font-size: 9px;
+    }
+
+}
+
+
+/* =====================================================
+   ACCESIBILIDAD / MENOS ANIMACIONES
+===================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: .01ms !important;
+    }
+
 }
 
 </style>
 </head>
 
+
 <body>
 
+
 <!-- =====================================================
-SPLASH
+     SPLASH
 ===================================================== -->
 
 <div id="splash">
 
-<div class="splashGlow"></div>
+    <div class="splashGlow"></div>
 
-<div class="splashContent">
+    <div class="splashContent">
 
-<!-- LOGO CASITA + CÁMARA -->
-<svg class="splashLogo" viewBox="0 0 120 120" fill="none">
+        <!-- CASITA + CÁMARA -->
 
-<!-- casa -->
-<path
-d="M19 56L60 21L101 56"
-stroke="#800020"
-stroke-width="5"
-stroke-linecap="round"
-stroke-linejoin="round"/>
+        <svg
+            class="splashLogo"
+            viewBox="0 0 120 120"
+            fill="none"
+        >
 
-<path
-d="M28 51V94C28 97 30 99 33 99H87C90 99 92 97 92 94V51"
-stroke="#800020"
-stroke-width="5"
-stroke-linecap="round"/>
+            <!-- Casa -->
 
-<!-- cámara -->
-<rect
-x="36"
-y="55"
-width="48"
-height="32"
-rx="8"
-stroke="#10B981"
-stroke-width="4"/>
+            <path
+                d="M18 56L60 20L102 56"
+                stroke="#800020"
+                stroke-width="5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+            />
 
-<circle
-cx="60"
-cy="71"
-r="9"
-stroke="#10B981"
-stroke-width="4"/>
+            <path
+                d="M28 51V94C28 98 30 100 34 100H86C90 100 92 98 92 94V51"
+                stroke="#800020"
+                stroke-width="5"
+                stroke-linecap="round"
+            />
 
-<path
-d="M45 55L49 49H62L67 55"
-stroke="#10B981"
-stroke-width="4"
-stroke-linecap="round"
-stroke-linejoin="round"/>
 
-<!-- pequeño brillo -->
-<path
-d="M94 29L96 35L102 37L96 39L94 45L92 39L86 37L92 35L94 29Z"
-fill="#10B981"/>
+            <!-- Cámara -->
 
-</svg>
+            <rect
+                x="35"
+                y="55"
+                width="50"
+                height="33"
+                rx="8"
+                stroke="#10B981"
+                stroke-width="4"
+            />
 
-<div class="splashName">
-<span style="color:#800020">Sparky</span><span style="color:#10B981">Krea</span>
-</div>
+            <circle
+                cx="60"
+                cy="71"
+                r="9"
+                stroke="#10B981"
+                stroke-width="4"
+            />
 
-<div class="splashStudio">
-STUDIO'S
-</div>
+            <path
+                d="M45 55L49 49H63L67 55"
+                stroke="#10B981"
+                stroke-width="4"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+            />
 
-<div class="splashLine"></div>
 
-</div>
+            <!-- Brillo -->
+
+            <path
+                d="M95 28L97 35L104 37L97 39L95 46L93 39L86 37L93 35L95 28Z"
+                fill="#10B981"
+            />
+
+        </svg>
+
+
+        <div class="splashName">
+
+            <span style="color:#800020">
+                Sparky
+            </span>
+
+            <span style="color:#10B981">
+                Krea
+            </span>
+
+        </div>
+
+
+        <div class="splashStudio">
+            STUDIO'S
+        </div>
+
+
+        <div class="splashLine"></div>
+
+    </div>
+
 </div>
 
 
 <!-- =====================================================
-OVERLAY
+     OVERLAY MÓVIL
 ===================================================== -->
 
 <div
-id="overlay"
-onclick="closeSidebar()"
-class="fixed inset-0 bg-black/70 z-30 hidden md:hidden">
-</div>
+    id="overlay"
+    onclick="closeSidebar()"
+    class="fixed inset-0 bg-black/70 z-[90] hidden"
+></div>
 
 
 <!-- =====================================================
-SIDEBAR
+     APP
+===================================================== -->
+
+<div class="w-full h-full flex">
+
+
+<!-- =====================================================
+     SIDEBAR
 ===================================================== -->
 
 <aside
-id="sidebar"
-class="fixed md:static left-0 top-0 bottom-0
-bg-panel border-r border-borde
-flex flex-col
-transform -translate-x-full md:translate-x-0
-transition-transform duration-300">
-
-<div class="px-4 py-4 border-b border-borde">
-
-<div class="flex items-center justify-between">
-
-<div class="brandLogo">
-
-<svg class="logoIcon" viewBox="0 0 120 120" fill="none">
-
-<path
-d="M19 56L60 21L101 56"
-stroke="#800020"
-stroke-width="6"
-stroke-linecap="round"
-stroke-linejoin="round"/>
-
-<path
-d="M28 51V94C28 97 30 99 33 99H87C90 99 92 97 92 94V51"
-stroke="#800020"
-stroke-width="6"
-stroke-linecap="round"/>
-
-<rect
-x="36"
-y="55"
-width="48"
-height="32"
-rx="8"
-stroke="#10B981"
-stroke-width="5"/>
-
-<circle
-cx="60"
-cy="71"
-r="9"
-stroke="#10B981"
-stroke-width="5"/>
-
-<path
-d="M45 55L49 49H62L67 55"
-stroke="#10B981"
-stroke-width="5"
-stroke-linecap="round"
-stroke-linejoin="round"/>
-
-<path
-d="M94 29L96 35L102 37L96 39L94 45L92 39L86 37L92 35L94 29Z"
-fill="#10B981"/>
-
-</svg>
-
-<div>
-
-<div class="brandName">
-<span class="brandSparky">Sparky</span><span class="brandKrea">Krea</span>
-</div>
-
-<div class="brandStudio">
-STUDIO'S
-</div>
-
-</div>
-</div>
-
-<button
-onclick="closeSidebar()"
-class="md:hidden text-gray-500 p-2">
-
-<i class="fa-solid fa-xmark"></i>
-
-</button>
-
-</div>
-
-</div>
+    id="sidebar"
+    class="bg-panel border-r border-borde flex flex-col transition-transform duration-300"
+>
 
 
-<!-- NUEVO -->
+    <!-- LOGO -->
 
-<div class="p-3">
+    <div class="px-4 py-4 border-b border-borde">
 
-<button
-onclick="nuevoProyecto()"
-class="w-full bg-vino hover:bg-[#600018]
-rounded-xl py-3 font-bold text-xs
-flex items-center justify-center gap-2 transition">
+        <div class="flex items-center justify-between">
 
-<i class="fa-solid fa-plus"></i>
+            <div class="brand">
 
-Nuevo proyecto
+                <svg
+                    class="brandIcon"
+                    viewBox="0 0 120 120"
+                    fill="none"
+                >
 
-</button>
+                    <path
+                        d="M18 56L60 20L102 56"
+                        stroke="#800020"
+                        stroke-width="6"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                    />
 
-</div>
+                    <path
+                        d="M28 51V94C28 98 30 100 34 100H86C90 100 92 98 92 94V51"
+                        stroke="#800020"
+                        stroke-width="6"
+                        stroke-linecap="round"
+                    />
 
+                    <rect
+                        x="35"
+                        y="55"
+                        width="50"
+                        height="33"
+                        rx="8"
+                        stroke="#10B981"
+                        stroke-width="5"
+                    />
 
-<!-- GUARDADOS -->
+                    <circle
+                        cx="60"
+                        cy="71"
+                        r="9"
+                        stroke="#10B981"
+                        stroke-width="5"
+                    />
 
-<div class="px-3">
+                    <path
+                        d="M45 55L49 49H63L67 55"
+                        stroke="#10B981"
+                        stroke-width="5"
+                        stroke-linecap="round"
+                    />
 
-<button
-onclick="abrirGuardados()"
-class="w-full flex items-center justify-between
-px-3 py-2.5 rounded-xl bg-card
-border border-borde hover:border-verde transition">
+                    <path
+                        d="M95 28L97 35L104 37L97 39L95 46L93 39L86 37L93 35L95 28Z"
+                        fill="#10B981"
+                    />
 
-<div class="flex items-center gap-2 text-xs">
-
-<i class="fa-solid fa-star text-yellow-400"></i>
-
-Guardados
-
-</div>
-
-<span
-id="savedCount"
-class="bg-vino rounded-full px-1.5 py-0.5 text-[9px]">
-
-0
-
-</span>
-
-</button>
-
-</div>
-
-
-<!-- HISTORIAL -->
-
-<div class="flex-1 overflow-y-auto px-3 mt-5">
-
-<div class="text-[9px] uppercase tracking-widest
-text-gray-600 font-bold px-2 mb-2">
-
-Proyectos recientes
-
-</div>
-
-<div id="history" class="space-y-1"></div>
-
-</div>
+                </svg>
 
 
-<!-- FOOTER -->
+                <div>
 
-<div class="border-t border-borde p-3 text-center">
+                    <div class="brandTitle">
 
-<div class="text-xs font-bold">
-<span class="text-gray-300">by</span>
-<span class="text-verde">SparkyKrea</span>
-</div>
+                        <span class="brandSparky">
+                            Sparky
+                        </span>
 
-</div>
+                        <span class="brandKrea">
+                            Krea
+                        </span>
+
+                    </div>
+
+                    <div class="brandStudio">
+                        STUDIO'S
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <button
+                onclick="closeSidebar()"
+                class="md:hidden text-gray-500 p-2"
+            >
+
+                <i class="fa-solid fa-xmark"></i>
+
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <!-- NUEVO -->
+
+    <div class="p-3">
+
+        <button
+            onclick="nuevoProyecto()"
+            class="w-full bg-vino hover:bg-[#600018]
+            rounded-xl py-3 font-bold text-xs
+            flex items-center justify-center gap-2
+            transition active:scale-[.98]"
+        >
+
+            <i class="fa-solid fa-plus"></i>
+
+            Nuevo proyecto
+
+        </button>
+
+    </div>
+
+
+    <!-- GUARDADOS -->
+
+    <div class="px-3">
+
+        <button
+            onclick="abrirGuardados()"
+            class="w-full flex items-center justify-between
+            px-3 py-2.5 rounded-xl
+            bg-card border border-borde
+            hover:border-verde transition"
+        >
+
+            <div class="flex items-center gap-2 text-xs">
+
+                <i class="fa-solid fa-star text-yellow-400"></i>
+
+                Guardados
+
+            </div>
+
+
+            <span
+                id="savedCount"
+                class="bg-vino rounded-full
+                px-1.5 py-0.5 text-[9px]"
+            >
+                0
+            </span>
+
+        </button>
+
+    </div>
+
+
+    <!-- HISTORIAL -->
+
+    <div class="flex-1 overflow-y-auto px-3 mt-5">
+
+        <div
+            class="text-[9px] uppercase
+            tracking-widest text-gray-600
+            font-bold px-2 mb-2"
+        >
+
+            Proyectos recientes
+
+        </div>
+
+
+        <div
+            id="history"
+            class="space-y-1"
+        ></div>
+
+    </div>
+
+
+    <!-- FOOTER -->
+
+    <div class="border-t border-borde p-3 text-center">
+
+        <div class="text-xs font-bold">
+
+            <span class="text-gray-400">
+                by
+            </span>
+
+            <span class="text-verde">
+                SparkyKrea
+            </span>
+
+        </div>
+
+    </div>
 
 </aside>
 
 
 <!-- =====================================================
-MAIN
+     CONTENIDO PRINCIPAL
 ===================================================== -->
 
-<main class="h-full flex-1 flex flex-col min-w-0">
+<main
+    class="h-full flex-1 min-w-0
+    flex flex-col bg-fondo"
+>
 
 
-<!-- HEADER -->
+    <!-- HEADER -->
 
-<header
-class="h-14 shrink-0 border-b border-borde
-flex items-center justify-between px-3 md:px-5">
+    <header
+        class="h-14 shrink-0
+        border-b border-borde
+        flex items-center justify-between
+        px-3 md:px-5"
+    >
 
-<div class="flex items-center gap-3">
+        <div class="flex items-center gap-3">
 
-<button
-onclick="toggleSidebar()"
-class="md:hidden w-9 h-9 rounded-lg
-bg-card border border-borde">
 
-<i class="fa-solid fa-bars text-xs"></i>
+            <!-- BOTÓN MÓVIL -->
 
-</button>
+            <button
+                onclick="toggleSidebar()"
+                class="md:hidden
+                w-9 h-9 rounded-lg
+                bg-card border border-borde"
+            >
 
-<div class="md:hidden flex items-center gap-2">
+                <i class="fa-solid fa-bars text-xs"></i>
 
-<svg width="25" height="25" viewBox="0 0 120 120" fill="none">
+            </button>
 
-<path d="M19 56L60 21L101 56"
-stroke="#800020" stroke-width="7"
-stroke-linecap="round"
-stroke-linejoin="round"/>
 
-<rect x="38" y="54"
-width="44" height="31"
-rx="8"
-stroke="#10B981"
-stroke-width="6"/>
+            <!-- MARCA MÓVIL -->
 
-<circle cx="60" cy="69"
-r="8"
-stroke="#10B981"
-stroke-width="5"/>
+            <div class="md:hidden flex items-center gap-2">
 
-</svg>
+                <div class="font-black">
 
-<div class="font-black">
-<span class="text-vino">Sparky</span><span class="text-verde">Krea</span>
-</div>
+                    <span class="text-vino">
+                        Sparky
+                    </span>
 
-</div>
+                    <span class="text-verde">
+                        Krea
+                    </span>
 
-<div class="hidden md:block">
+                </div>
 
-<span class="text-gray-400 text-sm">
-Asesor creativo
-</span>
+            </div>
 
-<span class="text-gray-700 mx-1">
-/
-</span>
 
-<span class="text-verde text-sm font-semibold">
-Nuevo proyecto
-</span>
+            <!-- TEXTO PC -->
 
-</div>
+            <div class="hidden md:block">
 
-</div>
+                <span class="text-gray-400 text-sm">
+                    Asesor creativo
+                </span>
 
-<button
-onclick="nuevoProyecto()"
-class="text-[10px] bg-card
-border border-borde rounded-lg
-px-3 py-2 hover:border-verde transition">
+                <span class="text-gray-700 mx-1">
+                    /
+                </span>
 
-<i class="fa-solid fa-plus text-verde mr-1"></i>
+                <span
+                    id="headerStatus"
+                    class="text-verde text-sm font-semibold"
+                >
+                    Nuevo proyecto
+                </span>
 
-Nuevo
+            </div>
 
-</button>
+        </div>
 
-</header>
 
+        <!-- NUEVO -->
 
-<!-- =====================================================
-CHAT
-===================================================== -->
+        <button
+            onclick="nuevoProyecto()"
+            class="text-[10px]
+            bg-card border border-borde
+            rounded-lg px-3 py-2
+            hover:border-verde transition"
+        >
 
-<section
-id="chat"
-class="flex-1 overflow-y-auto px-3 md:px-5 py-5">
+            <i class="fa-solid fa-plus text-verde mr-1"></i>
 
-<div class="max-w-4xl mx-auto min-h-full flex flex-col">
+            Nuevo
 
+        </button>
 
-<!-- WELCOME -->
+    </header>
 
-<div
-id="welcome"
-class="my-auto flex flex-col items-center
-text-center py-8">
 
-<svg
-width="80"
-height="80"
-viewBox="0 0 120 120"
-fill="none"
-class="mb-5 pulse">
+    <!-- =================================================
+         CHAT
+    ================================================== -->
 
-<path
-d="M19 56L60 21L101 56"
-stroke="#800020"
-stroke-width="5"
-stroke-linecap="round"
-stroke-linejoin="round"/>
+    <section
+        id="chat"
+        class="flex-1 overflow-y-auto
+        px-3 md:px-5 py-5"
+    >
+
+        <div
+            class="max-w-4xl mx-auto
+            min-h-full flex flex-col"
+        >
+
+
+            <!-- BIENVENIDA -->
+
+            <div
+                id="welcome"
+                class="my-auto
+                flex flex-col
+                items-center
+                text-center py-8"
+            >
+
+
+                <!-- LOGO -->
+
+                <svg
+                    width="90"
+                    height="90"
+                    viewBox="0 0 120 120"
+                    fill="none"
+                    class="mb-5"
+                >
 
-<path
-d="M28 51V94C28 97 30 99 33 99H87C90 99 92 97 92 94V51"
-stroke="#800020"
-stroke-width="5"
-stroke-linecap="round"/>
+                    <path
+                        d="M18 56L60 20L102 56"
+                        stroke="#800020"
+                        stroke-width="5"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                    />
 
-<rect
-x="36"
-y="55"
-width="48"
-height="32"
-rx="8"
-stroke="#10B981"
-stroke-width="4"/>
+                    <path
+                        d="M28 51V94C28 98 30 100 34 100H86C90 100 92 98 92 94V51"
+                        stroke="#800020"
+                        stroke-width="5"
+                        stroke-linecap="round"
+                    />
 
-<circle
-cx="60"
-cy="71"
-r="9"
-stroke="#10B981"
-stroke-width="4"/>
+                    <rect
+                        x="35"
+                        y="55"
+                        width="50"
+                        height="33"
+                        rx="8"
+                        stroke="#10B981"
+                        stroke-width="4"
+                    />
 
-<path
-d="M45 55L49 49H62L67 55"
-stroke="#10B981"
-stroke-width="4"
-stroke-linecap="round"/>
-
-<path
-d="M94 29L96 35L102 37L96 39L94 45L92 39L86 37L92 35L94 29Z"
-fill="#10B981"/>
-
-</svg>
-
-
-<h1
-id="welcomeTitle"
-class="text-2xl md:text-3xl font-black mb-2">
-
-¿Qué vamos a crear?
-
-</h1>
-
-<p
-class="text-gray-500 text-xs md:text-sm
-max-w-lg leading-relaxed">
-
-Cuéntame qué tienes en mente.
-No necesitas elegir categorías ni estilos.
-Escribe tu idea como se te ocurra y SparkyKrea
-te ayudará a convertirla en contenido.
-
-</p>
-
-<div
-class="mt-7 text-[10px] text-gray-700">
-
-Puedes escribir algo como:
-<br>
-
-<span class="text-gray-500">
-"quiero hacer un video sobre..."
-</span>
-
-</div>
-
-</div>
-
-
-<!-- MENSAJES -->
-
-<div
-id="messages"
-class="hidden space-y-5 pb-6">
-
-</div>
-
-</div>
-
-</section>
-
-
-<!-- =====================================================
-INPUT
-===================================================== -->
-
-<footer
-class="shrink-0 border-t border-borde
-px-2.5 md:px-5 pt-2.5 pb-2">
-
-<div class="max-w-4xl mx-auto">
-
-<form onsubmit="enviar(event)" class="relative">
-
-<input
-id="input"
-type="text"
-autocomplete="off"
-placeholder="Cuéntame tu idea..."
-class="w-full bg-card border border-borde
-focus:border-verde outline-none
-rounded-xl pl-4 pr-12 py-3.5 text-xs
-placeholder-gray-600 transition">
-
-<button
-type="submit"
-class="absolute right-1.5 top-1.5
-w-9 h-9 rounded-lg
-bg-vino hover:bg-[#600018] transition">
-
-<i class="fa-solid fa-paper-plane text-xs"></i>
-
-</button>
-
-</form>
-
-<div class="text-center text-[8px] text-gray-700 mt-1.5">
-by SparkyKrea
-</div>
-
-</div>
-
-</footer>
+                    <circle
+                        cx="60"
+                        cy="71"
+                        r="9"
+                        stroke="#10B981"
+                        stroke-width="4"
+                    />
+
+                    <path
+                        d="M45 55L49 49H63L67 55"
+                        stroke="#10B981"
+                        stroke-width="4"
+                        stroke-linecap="round"
+                    />
+
+                    <path
+                        d="M95 28L97 35L104 37L97 39L95 46L93 39L86 37L93 35L95 28Z"
+                        fill="#10B981"
+                    />
+
+                </svg>
+
+
+                <h1
+                    id="welcomeTitle"
+                    class="text-2xl md:text-3xl
+                    font-black mb-2"
+                >
+                    ¿Qué vamos a crear?
+                </h1>
+
+
+                <p
+                    class="text-gray-500
+                    text-xs md:text-sm
+                    max-w-lg
+                    leading-relaxed"
+                >
+
+                    Cuéntame cualquier cosa que tengas
+                    en mente. No necesitas elegir una
+                    categoría ni saber exactamente cómo hacerlo.
+
+                    <br><br>
+
+                    SparkyKrea convierte tu idea en una
+                    propuesta de contenido.
+
+                </p>
+
+
+                <div
+                    class="mt-7 text-[10px]
+                    text-gray-700"
+                >
+
+                    Escribe abajo y empezamos.
+
+                </div>
+
+            </div>
+
+
+            <!-- MENSAJES -->
+
+            <div
+                id="messages"
+                class="hidden space-y-5 pb-6"
+            ></div>
+
+
+        </div>
+
+    </section>
+
+
+    <!-- =================================================
+         INPUT
+    ================================================== -->
+
+    <footer
+        class="shrink-0
+        border-t border-borde
+        px-2.5 md:px-5
+        pt-2.5 pb-2"
+    >
+
+        <div class="max-w-4xl mx-auto">
+
+
+            <form
+                onsubmit="enviar(event)"
+                class="relative"
+            >
+
+                <input
+                    id="input"
+                    type="text"
+                    autocomplete="off"
+                    autocorrect="on"
+                    spellcheck="true"
+                    placeholder="Cuéntame tu idea..."
+                    class="w-full
+                    bg-card
+                    border border-borde
+                    focus:border-verde
+                    outline-none
+                    rounded-xl
+                    pl-4 pr-12
+                    py-3.5
+                    text-xs
+                    placeholder-gray-600
+                    transition"
+                >
+
+
+                <button
+                    type="submit"
+                    class="absolute
+                    right-1.5 top-1.5
+                    w-9 h-9
+                    rounded-lg
+                    bg-vino
+                    hover:bg-[#600018]
+                    active:scale-95
+                    transition"
+                >
+
+                    <i class="fa-solid fa-paper-plane text-xs"></i>
+
+                </button>
+
+            </form>
+
+
+            <div
+                class="text-center
+                text-[8px]
+                text-gray-700
+                mt-1.5"
+            >
+
+                by SparkyKrea
+
+            </div>
+
+        </div>
+
+    </footer>
 
 </main>
 
+</div>
+
 
 <!-- =====================================================
-GUARDADOS
+     MODAL GUARDADOS
 ===================================================== -->
 
 <div
-id="savedModal"
-class="fixed inset-0 bg-black/80 backdrop-blur-sm
-z-[100] hidden items-center justify-center p-3">
+    id="savedModal"
+    class="fixed inset-0
+    bg-black/80
+    backdrop-blur-sm
+    z-[200]
+    hidden
+    items-center
+    justify-center
+    p-3"
+>
 
-<div
-class="bg-panel border border-borde rounded-2xl
-w-full max-w-2xl max-h-[85vh]
-flex flex-col overflow-hidden">
+    <div
+        class="modalBox
+        bg-panel
+        border border-borde
+        rounded-2xl
+        w-full max-w-2xl
+        max-h-[85vh]
+        flex flex-col
+        overflow-hidden"
+    >
 
-<div
-class="p-4 border-b border-borde
-flex items-center justify-between">
 
-<div>
+        <div
+            class="p-4
+            border-b border-borde
+            flex items-center
+            justify-between"
+        >
 
-<div class="font-black">
-⭐ Mis ideas
-</div>
+            <div>
 
-<div class="text-[9px] text-gray-600 mt-1">
-Tus mejores propuestas guardadas.
-</div>
+                <div class="font-black">
+                    ⭐ Mis ideas
+                </div>
 
-</div>
+                <div
+                    class="text-[9px]
+                    text-gray-600 mt-1"
+                >
+                    Tus mejores propuestas guardadas.
+                </div>
 
-<button
-onclick="cerrarGuardados()"
-class="text-gray-500 p-2">
+            </div>
 
-<i class="fa-solid fa-xmark"></i>
 
-</button>
+            <button
+                onclick="cerrarGuardados()"
+                class="text-gray-500 p-2"
+            >
 
-</div>
+                <i class="fa-solid fa-xmark"></i>
 
-<div
-id="savedList"
-class="flex-1 overflow-y-auto p-3 space-y-2">
+            </button>
 
-</div>
+        </div>
 
-</div>
+
+        <div
+            id="savedList"
+            class="flex-1
+            overflow-y-auto
+            p-3 space-y-2"
+        ></div>
+
+    </div>
 
 </div>
 
@@ -896,1884 +1356,3444 @@ class="flex-1 overflow-y-auto p-3 space-y-2">
 <!-- TOAST -->
 
 <div
-id="toast"
-class="fixed bottom-5 left-1/2
--translate-x-1/2 bg-card
-border border-borde rounded-xl
-px-4 py-2 text-[10px]
-z-[200] opacity-0
-pointer-events-none transition">
-
-</div>
+    id="toast"
+    class="fixed
+    bottom-5
+    left-1/2
+    -translate-x-1/2
+    bg-card
+    border border-borde
+    rounded-xl
+    px-4 py-2
+    text-[10px]
+    z-[300]
+    opacity-0
+    pointer-events-none
+    transition"
+></div>
 
 
 <script>
 
 /* =====================================================
-DATOS
+   DATOS
 ===================================================== */
 
-const motivaciones=[
+const MOTIVACIONES = [
 
-"Una idea sencilla puede convertirse en algo increíble cuando encuentras el ángulo correcto.",
+"Una idea sencilla puede convertirse en algo enorme cuando encuentras el ángulo correcto.",
 
 "No necesitas que la primera versión sea perfecta. Necesitas empezar.",
 
 "La creatividad aparece cuando pruebas caminos diferentes.",
 
-"Tu próxima gran idea puede estar escondida en algo completamente normal.",
+"Tu próxima buena idea puede estar escondida en algo completamente normal.",
 
 "No busques hacer lo mismo que todos. Busca tu propia forma de contarlo.",
 
-"El contenido memorable no siempre es el más complicado.",
+"El contenido que se recuerda no siempre es el más complicado.",
 
 "Una buena idea merece una oportunidad. Ahora toca convertirla en realidad.",
 
-"Cada publicación te enseña algo nuevo.",
+"Cada publicación te enseña algo que no habrías descubierto quedándote pensando.",
 
 "Si puedes imaginar el video, ya tienes el primer paso.",
 
 "No necesitas cien ideas. Necesitas una que realmente quieras probar.",
 
-"Lo diferente llama la atención. Atrévete a probarlo.",
+"Lo diferente llama la atención. Atrévete a experimentar.",
 
-"Empieza pequeño, prueba, aprende y vuelve a crear."
+"Empieza pequeño, prueba, aprende y vuelve a crear.",
+
+"El primer intento no tiene que ser perfecto; tiene que existir.",
+
+"Tu estilo aparece cuando dejas de copiar fórmulas y empiezas a probar las tuyas.",
+
+"A veces el mejor contenido nace de una idea que parecía demasiado simple."
 
 ];
 
-const ctas=[
+
+const CTAS = [
 
 "¿Tú lo probarías?",
 
 "¿Qué harías tú?",
 
-"Guárdalo para probarlo después.",
-
 "Comenta qué cambiarías.",
+
+"¿Cuál elegirías?",
+
+"Guárdalo para probarlo después.",
 
 "¿Quieres ver la segunda parte?",
 
 "Etiqueta a alguien que haría esto.",
 
-"¿Cuál elegirías?",
+"Ahora toca ponerlo a prueba.",
 
-"Ahora toca ponerlo a prueba."
+"¿Te gustaría ver el resultado?",
+
+"¿Qué opción escogerías?"
 
 ];
 
-const effects={
 
-gaming:[
-"Zoom de impacto.",
-"Texto sincronizado con la jugada.",
-"Shake en el momento clave.",
-"Slow motion breve.",
-"Corte al beat.",
-"Repetición rápida del mejor momento."
-],
+const FORMATOS = [
 
-food:[
-"Plano cercano del producto.",
-"Cortes rápidos entre ingredientes.",
-"Sonidos reales de preparación.",
-"Slow motion del resultado.",
-"Texto resaltando el detalle importante.",
-"Cortes sincronizados con la música."
-],
+"reto",
 
-business:[
-"Texto grande mostrando el problema.",
-"Transición rápida hacia la solución.",
-"Plano cercano del producto.",
-"Antes y después.",
-"Palabras clave animadas.",
-"Cierre limpio con CTA."
-],
+"POV",
 
-general:[
-"Texto dinámico.",
-"Cortes rápidos.",
-"Zoom suave.",
-"Sonido de impacto.",
-"Cambio de plano inesperado.",
-"Subtítulos dinámicos."
-]
+"comparación",
 
-};
+"historia corta",
 
+"antes y después",
 
-/* =====================================================
-ESTADO
-===================================================== */
+"prueba",
 
-let chats=JSON.parse(
-localStorage.getItem("sparky_chats")||"[]"
-);
+"reacción",
 
-let saved=JSON.parse(
-localStorage.getItem("sparky_saved")||"[]"
-);
+"ranking",
 
-let currentChat=null;
-let currentIdea=null;
+"error común",
 
+"mito vs realidad",
 
-/* =====================================================
-UTILIDADES
-===================================================== */
+"pregunta + demostración",
 
-function normal(t){
+"resultado primero",
 
-return String(t)
-.toLowerCase()
-.normalize("NFD")
-.replace(/[\u0300-\u036f]/g,"");
+"experimento",
 
-}
+"serie por partes"
 
-function escape(t){
+];
 
-return String(t)
-.replace(/&/g,"&amp;")
-.replace(/</g,"&lt;")
-.replace(/>/g,"&gt;")
-.replace(/"/g,"&quot;")
-.replace(/'/g,"&#039;");
 
-}
+const HOOKS = {
 
-function random(arr){
+gaming: [
 
-return arr[Math.floor(Math.random()*arr.length)];
-
-}
-
-function strip(t){
-
-return String(t).replace(/<[^>]*>/g,"");
-
-}
-
-function saveData(){
-
-localStorage.setItem(
-"sparky_chats",
-JSON.stringify(chats)
-);
-
-localStorage.setItem(
-"sparky_saved",
-JSON.stringify(saved)
-);
-
-updateCount();
-
-}
-
-function toast(text){
-
-const el=document.getElementById("toast");
-
-el.textContent=text;
-
-el.classList.remove("opacity-0");
-el.classList.add("opacity-100");
-
-clearTimeout(window.toastTimer);
-
-window.toastTimer=setTimeout(()=>{
-
-el.classList.remove("opacity-100");
-el.classList.add("opacity-0");
-
-},2200);
-
-}
-
-function scrollBottom(){
-
-setTimeout(()=>{
-
-const c=document.getElementById("chat");
-
-c.scrollTo({
-top:c.scrollHeight,
-behavior:"smooth"
-});
-
-},50);
-
-}
-
-
-/* =====================================================
-DETECTAR CATEGORÍA
-===================================================== */
-
-function categoria(text){
-
-const t=normal(text);
-
-if(
-/valorant|clash royale|fortnite|minecraft|roblox|free fire|gta|call of duty|fifa|gaming|gamer|videojuego|partida|jugada|clip|juego/.test(t)
-)return"gaming";
-
-if(
-/hamburguesa|burger|pizza|pollo|comida|restaurante|cafe|cafeteria|postre|helado|torta|pastel|pan|bebida|receta/.test(t)
-)return"food";
-
-if(
-/negocio|empresa|tienda|marca|producto|servicio|cliente|ventas|vender|emprendimiento|publicidad|marketing/.test(t)
-)return"business";
-
-return"general";
-
-}
-
-
-/* =====================================================
-¿QUIERE IDEAS?
-===================================================== */
-
-function quiereIdeas(text){
-
-const t=normal(text);
-
-return(
-/no se que hacer/.test(t)||
-/no se que publicar/.test(t)||
-/no tengo ideas/.test(t)||
-/dame ideas/.test(t)||
-/que puedo publicar/.test(t)||
-/que puedo hacer/.test(t)||
-/que publico/.test(t)||
-/necesito ideas/.test(t)||
-/ayudame con ideas/.test(t)||
-/ideas para/.test(t)||
-/recomiendame/.test(t)||
-/que contenido/.test(t)
-);
-
-}
-
-
-/* =====================================================
-DURACIÓN
-===================================================== */
-
-function duracion(text){
-
-const t=normal(text);
-
-let m=t.match(/(\d+)\s*(segundo|segundos|seg)/);
-
-if(m)return parseInt(m[1]);
-
-m=t.match(/(\d+)\s*(minuto|minutos|min)/);
-
-if(m)return parseInt(m[1])*60;
-
-return 30;
-
-}
-
-
-/* =====================================================
-IDEAS
-===================================================== */
-
-function generarIdeas(text){
-
-const cat=categoria(text);
-
-const bancos={
-
-gaming:[
-
-"Convierte una partida normal en un reto con una regla que cambie completamente la forma de jugar.",
-
-"Haz una serie donde cada video intentes superar una meta concreta.",
-
-"Compara una estrategia popular contra una estrategia que casi nadie utiliza.",
-
-"Empieza mostrando el mejor momento y después cuenta cómo llegaste hasta ahí.",
-
-"Haz que los comentarios decidan qué debes intentar en el siguiente video.",
-
-"Cuenta el error más absurdo de una partida y conviértelo en una historia."
-
-],
-
-food:[
-
-"Muestra el proceso desde un plano muy cercano y guarda el resultado para el final.",
-
-"Haz una prueba de sabor con una pregunta al principio y responde solamente al final.",
-
-"Compara dos opciones y deja que la audiencia elija.",
-
-"Muestra qué puede conseguir alguien con un presupuesto determinado.",
-
-"Cuenta la historia del producto en vez de simplemente enseñarlo."
-
-],
-
-business:[
-
-"Muestra un problema común de tus clientes y haz que tu producto sea la solución.",
-
-"Haz un antes y después que permita entender el valor de lo que vendes.",
-
-"Responde una pregunta que tus clientes hacen constantemente.",
-
-"Cuenta una historia corta detrás de tu negocio.",
-
-"Demuestra algo de tu producto que la gente probablemente no esperaba."
-
-],
-
-general:[
-
-"Empieza con una situación completamente normal y añade un giro inesperado.",
-
-"Haz una lista de tres cosas que casi nadie conoce sobre el tema.",
-
-"Convierte una experiencia cotidiana en una historia corta.",
-
-"Compara dos opciones y obliga a la audiencia a elegir.",
-
-"Empieza mostrando el resultado y haz que quieran descubrir cómo llegaste ahí.",
-
-"Haz una serie donde cada publicación continúe la anterior."
-
-]
-
-};
-
-return{
-
-categoria:cat,
-
-ideas:bancos[cat]
-
-.sort(()=>Math.random()-.5)
-.slice(0,5)
-
-};
-
-}
-
-
-/* =====================================================
-TÍTULO
-===================================================== */
-
-function titulo(cat){
-
-const titulos={
-
-gaming:[
-
-"El concepto que probaría primero",
-
-"Una forma diferente de convertir esto en contenido",
-
-"El clip que puede destacar",
-
-"Una idea de gaming con potencial"
-
-],
-
-food:[
-
-"Una forma distinta de mostrarlo",
-
-"El video que haría para llamar la atención",
-
-"Convierte este producto en contenido",
-
-"Una idea para hacerlo irresistible"
-
-],
-
-business:[
-
-"Una forma diferente de presentar tu marca",
-
-"El concepto que probaría primero",
-
-"Convierte tu producto en contenido",
-
-"Una campaña alrededor de esta idea"
-
-],
-
-general:[
-
-"Una idea con un giro diferente",
-
-"Así convertiría esto en contenido",
-
-"El concepto que probaría",
-
-"Una forma diferente de contarlo",
-
-"Una idea que vale la pena probar"
-
-]
-
-};
-
-return random(titulos[cat]);
-
-}
-
-
-/* =====================================================
-PROPUESTA
-===================================================== */
-
-function generarPropuesta(topic,detalle="",seconds=30){
-
-const cat=categoria(topic+" "+detalle);
-
-const hookBank={
-
-gaming:[
 "Pensé que esta partida estaba perdida...",
+
 "Todo iba normal hasta que hice esto.",
+
 "Espera a ver cómo termina esto.",
+
 "Esta fue probablemente la jugada más rara de la partida.",
-"El plan parecía sencillo. La ejecución fue otra historia."
+
+"El plan parecía sencillo. La ejecución fue otra historia.",
+
+"Hay una parte de esta partida que cambia completamente el resultado.",
+
+"No esperaba que la partida terminara así.",
+
+"Esto empezó como una partida normal y terminó de otra manera."
+
 ],
 
-food:[
+food: [
+
 "Esto parece una comida normal... hasta que ves el final.",
-"Hay una razón por la que todos terminan pidiendo esto.",
-"El último plano es el que vende todo.",
-"Si te gusta la comida, mira esto.",
-"Esto es lo que pasa cuando llevas una receta al siguiente nivel."
+
+"Hay una razón por la que esto llama tanto la atención.",
+
+"Antes de probarlo tenía una duda: ¿realmente funciona?",
+
+"El último plano es el que cambia todo.",
+
+"En vez de decirte que está bueno, mejor te lo demuestro.",
+
+"Esto empezó como una idea simple y terminó así."
+
 ],
 
-business:[
-"La mayoría muestra su producto así. Yo haría otra cosa.",
-"En lugar de decir que tu producto es bueno, vamos a demostrarlo.",
-"Si tienes este problema, mira esto.",
-"Tu cliente debería entender esto antes de que termine el video.",
-"Esto puede cambiar la forma en que presentas tu negocio."
+business: [
+
+"La mayoría presenta su producto de esta forma. Yo haría otra cosa.",
+
+"Si tu cliente tiene este problema, mira esto.",
+
+"En lugar de decir que funciona, vamos a demostrarlo.",
+
+"Hay una forma más interesante de explicar lo que vendes.",
+
+"Esto es lo primero que debería entender alguien antes de comprar.",
+
+"Tu producto puede contar la historia por sí solo.",
+
+"Si yo tuviera que vender esto en pocos segundos, empezaría aquí."
+
 ],
 
-general:[
+general: [
+
 "Esto parecía una idea normal hasta que decidimos hacerlo diferente.",
-"Hay una forma mucho más interesante de contar esto.",
+
 "Espera al final porque ahí está el giro.",
+
+"Hay una forma mucho más interesante de contar esto.",
+
 "Todo empieza de una manera bastante normal.",
-"Si tuviera que convertir esto en contenido, empezaría así."
+
+"Si yo tuviera que convertir esto en contenido, empezaría así.",
+
+"Lo interesante no es lo que parece al principio.",
+
+"Hay un detalle aquí que puede cambiar completamente el video.",
+
+"Esta idea puede parecer sencilla, pero mira cómo la convertiría en contenido."
+
 ]
 
 };
 
-const hook=random(hookBank[cat]);
 
-const efectos=[...effects[cat]]
-.sort(()=>Math.random()-.5)
-.slice(0,3);
+const EFFECTS = {
 
-const motivacion=random(motivaciones);
-const cta=random(ctas);
+gaming: [
 
-const a=Math.max(3,Math.floor(seconds*.18));
-const b=Math.max(a+2,Math.floor(seconds*.65));
+"Zoom de impacto en la jugada principal.",
 
-let escenas;
+"Texto sincronizado con cada acción importante.",
 
-if(cat==="gaming"){
+"Shake breve justo en el impacto.",
 
-escenas=[
-`Abre directamente con una parte interesante de <strong>${escape(topic)}</strong>. Nada de introducciones largas.`,
-`Presenta la situación y aumenta progresivamente el ritmo. ${escape(detalle||"Haz que la audiencia quiera saber qué ocurrirá.")}`,
-`Guarda el mejor momento para el final y corta justo después de la reacción.`
+"Slow motion durante el instante decisivo.",
+
+"Corte al beat para aumentar el ritmo.",
+
+"Repetición rápida del mejor momento.",
+
+"Subtítulos grandes siguiendo la reacción."
+
+],
+
+food: [
+
+"Plano cercano del producto.",
+
+"Movimiento rápido entre ingredientes.",
+
+"Sonido ambiente del proceso.",
+
+"Slow motion del momento más atractivo.",
+
+"Texto corto resaltando el beneficio.",
+
+"Corte al beat entre planos.",
+
+"Plano final limpio del resultado."
+
+],
+
+business: [
+
+"Texto grande mostrando el problema.",
+
+"Transición rápida hacia la solución.",
+
+"Plano cercano del producto.",
+
+"Antes y después.",
+
+"Palabras clave apareciendo en pantalla.",
+
+"Demostración visual del beneficio.",
+
+"Cierre limpio con llamada a la acción."
+
+],
+
+general: [
+
+"Texto dinámico.",
+
+"Cortes rápidos.",
+
+"Zoom suave en el momento importante.",
+
+"Sonido de impacto.",
+
+"Cambio de plano inesperado.",
+
+"Subtítulos para reforzar la idea.",
+
+"Silencio breve antes del giro."
+
+]
+
+};
+
+
+const GAMES = [
+
+"valorant",
+"clash royale",
+"fortnite",
+"minecraft",
+"roblox",
+"free fire",
+"gta",
+"call of duty",
+"fifa",
+"ea sports fc",
+"league of legends",
+"apex legends"
+
 ];
 
-}else if(cat==="food"){
 
-escenas=[
-`Empieza con un plano cercano de <strong>${escape(topic)}</strong>.`,
-`Muestra el proceso o el detalle que hace diferente a <strong>${escape(detalle||"este producto")}</strong>.`,
-`Termina con el resultado final y una toma atractiva.`
+const CHARACTERS = [
+
+"reyna",
+"jett",
+"sage",
+"omen",
+"killjoy",
+"raze",
+"neon",
+"cypher",
+"sova",
+"gekko",
+"skye",
+"viper",
+"phoenix",
+"yoru",
+"chamber",
+"clove",
+"iso",
+"deadlock",
+"fade",
+"breach"
+
 ];
 
-}else if(cat==="business"){
 
-escenas=[
-`Presenta rápidamente el problema relacionado con <strong>${escape(topic)}</strong>.`,
-`Muestra cómo <strong>${escape(detalle||"tu producto o servicio")}</strong> resuelve ese problema.`,
-`Cierra con una razón concreta para continuar o conocer más.`
-];
+/* =====================================================
+   ESTADO
+===================================================== */
 
-}else{
+let chats = safeJSON("sparky_chats", []);
 
-escenas=[
-`Empieza mostrando <strong>${escape(topic)}</strong> sin explicar demasiado.`,
-`Desarrolla la idea alrededor de <strong>${escape(detalle||"la parte más interesante")}</strong>.`,
-`Reserva el giro o la información más importante para los últimos segundos.`
-];
+let saved = safeJSON("sparky_saved", []);
+
+let generations = safeJSON(
+    "sparky_generations",
+    {}
+);
+
+let currentChat = null;
+
+let currentIdea = null;
+
+
+/* =====================================================
+   LOCAL STORAGE SEGURO
+===================================================== */
+
+function safeJSON(key, fallback) {
+
+    try {
+
+        const value = localStorage.getItem(key);
+
+        if (!value) {
+            return fallback;
+        }
+
+        return JSON.parse(value);
+
+    } catch (error) {
+
+        console.warn(
+            "No se pudo leer:",
+            key
+        );
+
+        return fallback;
+
+    }
 
 }
 
-const id="idea_"+Date.now()+"_"+Math.random().toString(36).slice(2,7);
 
-const html=`
+function saveData() {
 
-<div class="fade">
+    try {
 
-<div class="card p-4 md:p-5">
+        localStorage.setItem(
+            "sparky_chats",
+            JSON.stringify(chats)
+        );
 
-<div class="flex items-start justify-between gap-3 mb-5">
+        localStorage.setItem(
+            "sparky_saved",
+            JSON.stringify(saved)
+        );
 
-<div>
+        localStorage.setItem(
+            "sparky_generations",
+            JSON.stringify(generations)
+        );
 
-<div class="text-[9px] uppercase tracking-widest
-text-verde font-bold mb-1">
+    } catch (error) {
+
+        console.warn(
+            "No se pudo guardar localStorage."
+        );
+
+    }
+
+    updateCount();
+
+}
+
+
+/* =====================================================
+   UTILIDADES
+===================================================== */
+
+function random(arr) {
+
+    if (!arr || !arr.length) {
+        return "";
+    }
+
+    return arr[
+        Math.floor(
+            Math.random() * arr.length
+        )
+    ];
+
+}
+
+
+function escapeHTML(text) {
+
+    return String(text)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+
+}
+
+
+function stripHTML(text) {
+
+    const div =
+        document.createElement("div");
+
+    div.innerHTML = text;
+
+    return div.textContent || div.innerText || "";
+
+}
+
+
+function normal(text) {
+
+    return String(text)
+        .toLowerCase()
+        .normalize("NFD")
+        .replace(
+            /[\u0300-\u036f]/g,
+            ""
+        );
+
+}
+
+
+function unique(arr) {
+
+    return [
+        ...new Set(arr)
+    ];
+
+}
+
+
+function toast(text) {
+
+    const el =
+        document.getElementById("toast");
+
+    el.textContent = text;
+
+    el.classList.remove("opacity-0");
+
+    el.classList.add("opacity-100");
+
+    clearTimeout(
+        window.toastTimer
+    );
+
+    window.toastTimer =
+        setTimeout(() => {
+
+            el.classList.remove(
+                "opacity-100"
+            );
+
+            el.classList.add(
+                "opacity-0"
+            );
+
+        }, 2200);
+
+}
+
+
+function scrollBottom() {
+
+    setTimeout(() => {
+
+        const chat =
+            document.getElementById("chat");
+
+        chat.scrollTo({
+
+            top: chat.scrollHeight,
+
+            behavior: "smooth"
+
+        });
+
+    }, 60);
+
+}
+
+
+/* =====================================================
+   DETECTAR CATEGORÍA
+===================================================== */
+
+function detectarCategoria(text) {
+
+    const t = normal(text);
+
+
+    if (
+        /valorant|clash royale|fortnite|minecraft|roblox|free fire|gta|call of duty|fifa|ea sports fc|league of legends|apex|gaming|gamer|videojuego|juego|partida|jugada|clip|stream/.test(t)
+    ) {
+
+        return "gaming";
+
+    }
+
+
+    if (
+        /hamburguesa|burger|pizza|pollo|comida|restaurante|cafe|cafeteria|postre|helado|torta|pastel|pan|bebida|receta|cocina/.test(t)
+    ) {
+
+        return "food";
+
+    }
+
+
+    if (
+        /negocio|empresa|tienda|marca|producto|servicio|cliente|ventas|vender|emprendimiento|publicidad|marketing|local/.test(t)
+    ) {
+
+        return "business";
+
+    }
+
+
+    return "general";
+
+}
+
+
+/* =====================================================
+   DETECTAR IDEAS
+===================================================== */
+
+function quiereIdeas(text) {
+
+    const t = normal(text);
+
+    return (
+
+        /no se que hacer/.test(t) ||
+
+        /no se que publicar/.test(t) ||
+
+        /no tengo ideas/.test(t) ||
+
+        /dame ideas/.test(t) ||
+
+        /dame alguna idea/.test(t) ||
+
+        /que puedo publicar/.test(t) ||
+
+        /que puedo hacer/.test(t) ||
+
+        /que publico/.test(t) ||
+
+        /necesito ideas/.test(t) ||
+
+        /ayudame con ideas/.test(t) ||
+
+        /ideas para/.test(t) ||
+
+        /recomiendame/.test(t) ||
+
+        /que contenido/.test(t) ||
+
+        /que podria subir/.test(t) ||
+
+        /que puedo subir/.test(t)
+
+    );
+
+}
+
+
+/* =====================================================
+   SALUDO
+===================================================== */
+
+function esSaludo(text) {
+
+    return /^(hola|holaa|holaaa|hey|hello|buenas|saludos|que tal)$/
+        .test(
+            normal(text).trim()
+        );
+
+}
+
+
+function saludo() {
+
+    const hora =
+        new Date().getHours();
+
+
+    if (hora < 12) {
+
+        return random([
+
+            "¡Buenos días! ⚡ Vamos a darle forma a una idea.",
+
+            "¡Buenos días! ☀️ ¿Qué quieres crear hoy?",
+
+            "Arrancamos. 🚀 Cuéntame qué tienes en mente."
+
+        ]);
+
+    }
+
+
+    if (hora < 19) {
+
+        return random([
+
+            "¡Buenas! ⚡ ¿Qué vamos a crear?",
+
+            "Hey 😎, cuéntame qué tienes pensado.",
+
+            "Vamos a crear algo interesante. 🔥"
+
+        ]);
+
+    }
+
+
+    return random([
+
+        "¡Buenas noches! 🌙 ¿Qué vamos a crear?",
+
+        "Todavía queda tiempo para una buena idea. ⚡",
+
+        "Buenas noches. Cuéntame qué tienes en mente. 🚀"
+
+    ]);
+
+}
+
+
+/* =====================================================
+   OTRA IDEA
+===================================================== */
+
+function esOtra(text) {
+
+    return /^(otra|otro|otra idea|dame otra|otra mas|ninguna|no me gusta|cambia la idea)$/
+        .test(
+            normal(text).trim()
+        );
+
+}
+
+
+/* =====================================================
+   DURACIÓN
+===================================================== */
+
+function detectarDuracion(text) {
+
+    const t = normal(text);
+
+    let m =
+        t.match(
+            /(\d+)\s*(segundo|segundos|seg)/
+        );
+
+    if (m) {
+
+        return Math.max(
+            5,
+            parseInt(m[1])
+        );
+
+    }
+
+
+    m =
+        t.match(
+            /(\d+)\s*(minuto|minutos|min)/
+        );
+
+    if (m) {
+
+        return Math.max(
+            5,
+            parseInt(m[1]) * 60
+        );
+
+    }
+
+
+    return 30;
+
+}
+
+
+/* =====================================================
+   DETALLES
+===================================================== */
+
+function detectarDetalle(text) {
+
+    const t = normal(text);
+
+
+    for (
+        const personaje of CHARACTERS
+    ) {
+
+        if (
+            t.includes(personaje)
+        ) {
+
+            return (
+                "centrando el contenido en " +
+                personaje
+            );
+
+        }
+
+    }
+
+
+    for (
+        const juego of GAMES
+    ) {
+
+        if (
+            t.includes(juego)
+        ) {
+
+            return (
+                "centrando el contenido en " +
+                juego
+            );
+
+        }
+
+    }
+
+
+    return "";
+
+}
+
+
+/* =====================================================
+   GENERAR IDEAS
+===================================================== */
+
+function generarIdeas(text) {
+
+    const cat =
+        detectarCategoria(text);
+
+
+    const bancos = {
+
+        gaming: [
+
+            "Haz una serie de retos donde cada video tenga una regla diferente y el resultado sea lo que mantenga la atención.",
+
+            "Compara una estrategia popular contra una que casi nadie utiliza y demuestra cuál funciona mejor.",
+
+            "Empieza el video con el mejor momento y después cuenta cómo llegaste hasta ahí.",
+
+            "Convierte un error de la partida en el protagonista del video.",
+
+            "Haz que los comentarios decidan qué debes intentar en el siguiente video.",
+
+            "Crea una serie intentando conseguir algo específico antes de que termine el video."
+
+        ],
+
+
+        food: [
+
+            "Empieza mostrando el resultado final y después haz que la audiencia descubra cómo llegaste hasta ahí.",
+
+            "Haz una prueba de sabor con una pregunta al principio que solo respondas al final.",
+
+            "Compara dos opciones y deja que la audiencia decida cuál gana.",
+
+            "Muestra qué puedes conseguir con un presupuesto determinado.",
+
+            "Cuenta una pequeña historia alrededor de la comida en lugar de simplemente enseñarla.",
+
+            "Haz una prueba donde el resultado sea imposible de saber hasta el último momento."
+
+        ],
+
+
+        business: [
+
+            "Muestra un problema real del cliente y convierte tu producto o servicio en la solución.",
+
+            "Haz un antes y después que permita entender el valor de lo que ofreces.",
+
+            "Responde una pregunta frecuente de tus clientes mediante una demostración.",
+
+            "Cuenta una historia corta sobre cómo nació tu negocio.",
+
+            "Demuestra algo que la gente probablemente no espera que tu producto pueda hacer.",
+
+            "Convierte una característica de tu producto en una pequeña historia."
+
+        ],
+
+
+        general: [
+
+            "Empieza con una situación completamente normal y añade un giro inesperado.",
+
+            "Haz una lista de tres cosas relacionadas con el tema que poca gente conoce.",
+
+            "Convierte una experiencia cotidiana en una historia de menos de un minuto.",
+
+            "Compara dos opciones y deja que la audiencia tenga que elegir.",
+
+            "Empieza por el resultado y haz que quieran descubrir cómo llegaste ahí.",
+
+            "Convierte una pregunta común en una pequeña prueba y muestra el resultado.",
+
+            "Haz una serie donde cada publicación continúe la anterior."
+
+        ]
+
+    };
+
+
+    return {
+
+        categoria: cat,
+
+        ideas: bancos[cat]
+            .sort(() => Math.random() - .5)
+            .slice(0, 5)
+
+    };
+
+}
+
+
+/* =====================================================
+   MOSTRAR IDEAS
+===================================================== */
+
+function mostrarIdeas(text) {
+
+    const resultado =
+        generarIdeas(text);
+
+
+    const frases = [
+
+        "Vamos a quitarle presión a la página en blanco:",
+
+        "No necesitas esperar a que llegue la inspiración. Mira estas opciones:",
+
+        "Si yo tuviera que empezar desde cero, probaría estas:",
+
+        "Hay varias formas de convertir ese tema en contenido:",
+
+        "Vamos a buscar un ángulo diferente:",
+
+        "Aquí hay varias rutas que podrían funcionar:"
+
+    ];
+
+
+    let html = `
+
+    <div class="fade">
+
+        <div class="card p-4 md:p-5">
+
+            <div class="text-sm font-bold mb-4">
+
+                ${random(frases)}
+
+            </div>
+
+            <div class="space-y-2">
+
+    `;
+
+
+    resultado.ideas.forEach(
+        (idea, index) => {
+
+            const safeIdea =
+                encodeURIComponent(
+                    idea
+                );
+
+
+            html += `
+
+            <button
+                onclick="usarIdea('${safeIdea}')"
+                class="w-full text-left
+                bg-panel
+                border border-borde
+                rounded-xl p-3
+                hover:border-verde
+                hover:-translate-y-[1px]
+                transition"
+            >
+
+                <div class="flex gap-3">
+
+                    <div
+                        class="w-6 h-6
+                        rounded-lg bg-vino
+                        flex items-center
+                        justify-center
+                        text-[10px]
+                        font-black
+                        shrink-0"
+                    >
+
+                        ${index + 1}
+
+                    </div>
+
+
+                    <div>
+
+                        <div
+                            class="text-[11px]
+                            font-semibold
+                            text-gray-200
+                            leading-relaxed"
+                        >
+
+                            ${escapeHTML(idea)}
+
+                        </div>
+
+
+                        <div
+                            class="text-[9px]
+                            text-gray-600
+                            mt-1.5"
+                        >
+
+                            Toca para desarrollar esta idea.
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </button>
+
+            `;
+
+        }
+    );
+
+
+    html += `
+
+            </div>
+
+
+            <div
+                class="mt-4 pt-3
+                border-t border-borde
+                text-[10px] text-gray-500"
+            >
+
+                También puedes escribir
+                <strong class="text-gray-300">
+                    "otra"
+                </strong>
+                para buscar un enfoque diferente.
+
+            </div>
+
+        </div>
+
+    </div>
+
+    `;
+
+
+    mensajeBot(html);
+
+}
+
+
+/* =====================================================
+   USAR IDEA
+===================================================== */
+
+function usarIdea(encoded) {
+
+    const idea =
+        decodeURIComponent(encoded);
+
+
+    const input =
+        document.getElementById("input");
+
+
+    input.value =
+        "Desarrolla esta idea: " +
+        idea;
+
+
+    input.focus();
+
+
+    toast("💡 Idea preparada");
+
+}
+
+
+/* =====================================================
+   CREAR PROPUESTA
+===================================================== */
+
+function generarPropuesta(
+    topic,
+    detalle = "",
+    seconds = 30
+) {
+
+    const cat =
+        detectarCategoria(
+            topic + " " + detalle
+        );
+
+
+    const formato =
+        random(FORMATOS);
+
+
+    const hook =
+        random(
+            HOOKS[cat]
+        );
+
+
+    const motivacion =
+        random(MOTIVACIONES);
+
+
+    const cta =
+        random(CTAS);
+
+
+    const effectPool =
+        [...EFFECTS[cat]];
+
+
+    effectPool.sort(
+        () => Math.random() - .5
+    );
+
+
+    const selectedEffects =
+        effectPool.slice(0, 3);
+
+
+    const start =
+        Math.max(
+            3,
+            Math.floor(seconds * .18)
+        );
+
+
+    const middle =
+        Math.max(
+            start + 2,
+            Math.floor(seconds * .65)
+        );
+
+
+    let escenas;
+
+
+    if (cat === "gaming") {
+
+        escenas = [
+
+            `Abre directamente con una parte interesante de <strong>${escapeHTML(topic)}</strong>. Evita una introducción larga.`,
+
+            `Presenta rápidamente la situación y aumenta el ritmo. ${escapeHTML(detalle || "Haz que la audiencia quiera descubrir qué ocurre.")}`,
+
+            `Guarda el mejor momento para el final y corta cerca de la reacción o del resultado.`
+
+        ];
+
+    }
+
+
+    else if (cat === "food") {
+
+        escenas = [
+
+            `Empieza con un plano cercano de <strong>${escapeHTML(topic)}</strong> y enseña primero el resultado que quieres conseguir.`,
+
+            `Muestra el proceso alrededor de <strong>${escapeHTML(detalle || "el detalle más atractivo")}</strong> y elimina todo lo que no aporte.`,
+
+            `Termina con el resultado final y una toma que haga que la audiencia quiera probarlo.`
+
+        ];
+
+    }
+
+
+    else if (cat === "business") {
+
+        escenas = [
+
+            `Presenta rápidamente el problema relacionado con <strong>${escapeHTML(topic)}</strong>.`,
+
+            `Demuestra cómo <strong>${escapeHTML(detalle || "tu producto o servicio")}</strong> puede resolverlo.`,
+
+            `Cierra con un beneficio concreto y una llamada a la acción sencilla.`
+
+        ];
+
+    }
+
+
+    else {
+
+        escenas = [
+
+            `Empieza mostrando <strong>${escapeHTML(topic)}</strong> sin explicar demasiado.`,
+
+            `Desarrolla la idea alrededor de <strong>${escapeHTML(detalle || "la parte más interesante")}</strong>.`,
+
+            `Reserva el giro, resultado o dato más importante para los últimos segundos.`
+
+        ];
+
+    }
+
+
+    const id =
+        "idea_" +
+        Date.now() +
+        "_" +
+        Math.random()
+            .toString(36)
+            .slice(2, 8);
+
+
+    const titulo = {
+
+        gaming: [
+
+            "El concepto que probaría primero",
+
+            "Una forma diferente de convertir esto en contenido",
+
+            "El clip que puede destacar",
+
+            "Una idea de gaming con otro giro"
+
+        ],
+
+        food: [
+
+            "Una forma distinta de mostrarlo",
+
+            "El video que haría para llamar la atención",
+
+            "Convierte esto en contenido",
+
+            "Una idea que entra por los ojos"
+
+        ],
+
+        business: [
+
+            "Una forma diferente de presentar tu marca",
+
+            "El concepto que probaría primero",
+
+            "Convierte tu producto en contenido",
+
+            "Una campaña alrededor de esta idea"
+
+        ],
+
+        general: [
+
+            "Una idea con un giro diferente",
+
+            "Así convertiría esto en contenido",
+
+            "El concepto que probaría",
+
+            "Una forma diferente de contarlo",
+
+            "Una idea que vale la pena probar"
+
+        ]
+
+    };
+
+
+    const ideaHTML = `
+
+    <div class="fade">
+
+        <div class="card p-4 md:p-5">
+
+
+            <!-- CABECERA -->
+
+            <div
+                class="flex items-start
+                justify-between gap-3 mb-5"
+            >
+
+                <div>
+
+                    <div
+                        class="text-[9px]
+                        uppercase
+                        tracking-widest
+                        text-verde
+                        font-bold mb-1"
+                    >
+
+                        PROPUESTA
+
+                    </div>
+
+
+                    <h2
+                        class="text-base
+                        md:text-lg
+                        font-black"
+                    >
+
+                        ${escapeHTML(
+                            random(titulo[cat])
+                        )}
+
+                    </h2>
+
+                </div>
+
+
+                <div
+                    class="text-[9px]
+                    text-gray-500
+                    bg-panel
+                    border border-borde
+                    rounded-full
+                    px-2 py-1
+                    shrink-0"
+                >
+
+                    ${seconds}s
+
+                </div>
+
+            </div>
+
+
+            <!-- CONCEPTO -->
+
+            <div class="mb-5">
+
+                <div
+                    class="text-[11px]
+                    font-black
+                    text-verde mb-2"
+                >
+
+                    💡 CONCEPTO
+
+                </div>
+
+
+                <div
+                    class="text-xs
+                    text-gray-300
+                    leading-relaxed"
+                >
+
+                    Convertir
+                    <strong>${escapeHTML(topic)}</strong>
+                    en una pieza de contenido
+                    usando un enfoque de
+                    <strong>${escapeHTML(formato)}</strong>.
+
+                    La clave será mostrar la idea
+                    en acción en lugar de simplemente
+                    explicarla.
+
+                </div>
+
+            </div>
+
+
+            <!-- HOOK -->
+
+            <div class="mb-5">
+
+                <div
+                    class="text-[11px]
+                    font-black
+                    text-verde mb-2"
+                >
+
+                    🪝 PRIMEROS SEGUNDOS
+
+                </div>
+
+
+                <div
+                    class="bg-panel
+                    border border-borde
+                    rounded-xl p-3"
+                >
+
+                    <div
+                        class="text-sm
+                        font-bold
+                        leading-relaxed"
+                    >
+
+                        "${escapeHTML(hook)}"
+
+                    </div>
+
+
+                    <div
+                        class="text-[9px]
+                        text-gray-600 mt-2"
+                    >
+
+                        La primera frase crea curiosidad
+                        y evita que el video empiece demasiado lento.
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- GUION -->
+
+            <div class="mb-5">
+
+                <div
+                    class="text-[11px]
+                    font-black
+                    text-verde mb-2"
+                >
+
+                    🎬 GUION
+
+                </div>
+
+
+                <div class="space-y-2">
+
+
+                    <div
+                        class="bg-panel
+                        border border-borde
+                        rounded-xl p-3"
+                    >
+
+                        <div class="flex gap-3">
+
+                            <div
+                                class="text-[10px]
+                                font-black
+                                text-verde
+                                shrink-0"
+                            >
+
+                                0-${start}s
+
+                            </div>
+
+
+                            <div>
+
+                                <div
+                                    class="text-[9px]
+                                    font-bold
+                                    text-gray-500"
+                                >
+
+                                    ENTRADA
+
+                                </div>
+
+
+                                <div
+                                    class="text-[11px]
+                                    text-gray-300
+                                    leading-relaxed
+                                    mt-1"
+                                >
+
+                                    ${escenas[0]}
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <div
+                        class="bg-panel
+                        border border-borde
+                        rounded-xl p-3"
+                    >
+
+                        <div class="flex gap-3">
+
+                            <div
+                                class="text-[10px]
+                                font-black
+                                text-verde
+                                shrink-0"
+                            >
+
+                                ${start}-${middle}s
+
+                            </div>
+
+
+                            <div>
+
+                                <div
+                                    class="text-[9px]
+                                    font-bold
+                                    text-gray-500"
+                                >
+
+                                    DESARROLLO
+
+                                </div>
+
+
+                                <div
+                                    class="text-[11px]
+                                    text-gray-300
+                                    leading-relaxed
+                                    mt-1"
+                                >
+
+                                    ${escenas[1]}
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <div
+                        class="bg-panel
+                        border border-borde
+                        rounded-xl p-3"
+                    >
+
+                        <div class="flex gap-3">
+
+                            <div
+                                class="text-[10px]
+                                font-black
+                                text-verde
+                                shrink-0"
+                            >
+
+                                ${middle}-${seconds}s
+
+                            </div>
+
+
+                            <div>
+
+                                <div
+                                    class="text-[9px]
+                                    font-bold
+                                    text-gray-500"
+                                >
+
+                                    CIERRE
+
+                                </div>
+
+
+                                <div
+                                    class="text-[11px]
+                                    text-gray-300
+                                    leading-relaxed
+                                    mt-1"
+                                >
+
+                                    ${escenas[2]}
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- EDICIÓN -->
+
+            <div class="mb-5">
+
+                <div
+                    class="text-[11px]
+                    font-black
+                    text-verde mb-2"
+                >
+
+                    ✂️ EDICIÓN
+
+                </div>
+
+
+                <div
+                    class="grid
+                    grid-cols-1
+                    sm:grid-cols-3
+                    gap-2"
+                >
+
+                    ${selectedEffects.map(
+                        (effect, i) => `
+
+                        <div
+                            class="bg-panel
+                            border border-borde
+                            rounded-xl p-3"
+                        >
+
+                            <div
+                                class="text-[9px]
+                                text-gray-600"
+                            >
+
+                                ${
+                                    [
+                                        "ENTRADA",
+                                        "MOMENTO CLAVE",
+                                        "CIERRE"
+                                    ][i]
+                                }
+
+                            </div>
+
+
+                            <div
+                                class="text-[10px]
+                                font-bold mt-1"
+                            >
+
+                                ${escapeHTML(effect)}
+
+                            </div>
+
+                        </div>
+
+                    `).join("")}
+
+                </div>
+
+            </div>
+
+
+            <!-- AUDIO -->
+
+            <div class="mb-5">
+
+                <div
+                    class="text-[11px]
+                    font-black
+                    text-verde mb-2"
+                >
+
+                    🎵 AUDIO
+
+                </div>
+
+
+                <div
+                    class="bg-panel
+                    border border-borde
+                    rounded-xl p-3"
+                >
+
+                    <div
+                        class="text-[11px]
+                        text-gray-300"
+                    >
+
+                        ${
+                            cat === "gaming"
+
+                            ? "Beat energético con un golpe fuerte en el momento clave."
+
+                            : cat === "food"
+
+                            ? "Música moderna dejando respirar los sonidos reales del proceso."
+
+                            : cat === "business"
+
+                            ? "Instrumental moderno y limpio que no compita con la explicación."
+
+                            : "Beat moderno con cambios de ritmo para marcar los cortes."
+                        }
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- CTA -->
+
+            <div class="mb-5">
+
+                <div
+                    class="text-[11px]
+                    font-black
+                    text-verde mb-2"
+                >
+
+                    🎯 FINAL
+
+                </div>
+
+
+                <div
+                    class="bg-vino/20
+                    border border-vino
+                    rounded-xl p-3"
+                >
+
+                    <div
+                        class="text-xs
+                        font-bold"
+                    >
+
+                        "${escapeHTML(cta)}"
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- MOTIVACIÓN -->
+
+            <div
+                class="bg-panel
+                border border-borde
+                rounded-xl p-3"
+            >
+
+                <div
+                    class="text-[9px]
+                    uppercase
+                    tracking-widest
+                    text-verde
+                    font-bold mb-1"
+                >
+
+                    🚀 by SparkyKrea
+
+                </div>
+
+
+                <div
+                    class="text-[10px]
+                    text-gray-400
+                    leading-relaxed"
+                >
+
+                    ${escapeHTML(motivacion)}
+
+                </div>
+
+            </div>
+
+
+            <!-- ACCIONES -->
+
+            <div
+                class="flex flex-wrap
+                gap-1.5
+                pt-3 mt-4
+                border-t border-borde"
+            >
+
+                <button
+                    class="action"
+                    onclick="copiarIdea('${id}')"
+                >
+
+                    <i class="fa-regular fa-copy"></i>
+
+                    Copiar
+
+                </button>
+
+
+                <button
+                    class="action"
+                    onclick="guardarIdea('${id}')"
+                >
+
+                    <i class="fa-regular fa-star"></i>
+
+                    Guardar
+
+                </button>
+
+
+                <button
+                    class="action"
+                    onclick="otraVersion('${id}')"
+                >
+
+                    <i class="fa-solid fa-rotate"></i>
+
+                    Otra versión
+
+                </button>
+
+
+                <button
+                    class="action"
+                    onclick="mejorarIdea('${id}')"
+                >
+
+                    <i class="fa-solid fa-wand-magic-sparkles"></i>
+
+                    Mejorar
+
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    `;
+
+
+    const plain =
+
+`SPARKYKREA
 
 PROPUESTA
 
-</div>
+${random(titulo[cat])}
 
-<h2 class="text-base md:text-lg font-black">
+CONCEPTO
 
-${titulo(cat)}
+Convertir ${topic} en contenido usando un enfoque de ${formato}.
 
-</h2>
+HOOK
 
-</div>
+"${hook}"
 
-<div class="text-[9px] text-gray-500
-bg-panel border border-borde
-rounded-full px-2 py-1">
+GUION
 
-${seconds}s
+0-${start}s:
+${stripHTML(escenas[0])}
 
-</div>
+${start}-${middle}s:
+${stripHTML(escenas[1])}
 
-</div>
+${middle}-${seconds}s:
+${stripHTML(escenas[2])}
 
+EDICIÓN
 
-<div class="mb-5">
+${selectedEffects.join("\n")}
 
-<div class="text-[11px] font-black text-verde mb-2">
-💡 CONCEPTO
-</div>
+CTA
 
-<div class="text-xs text-gray-300 leading-relaxed">
+"${cta}"
 
-Convertir <strong>${escape(topic)}</strong>
-en contenido utilizando
-<strong>${escape(detalle||"un enfoque que genere curiosidad")}</strong>.
-La idea es mostrarlo de una forma que mantenga la atención
-en lugar de simplemente explicarlo.
+MOTIVACIÓN
 
-</div>
+${motivacion}`;
 
-</div>
 
+    const data = {
 
-<div class="mb-5">
+        id,
 
-<div class="text-[11px] font-black text-verde mb-2">
-🪝 HOOK
-</div>
+        topic,
 
-<div class="bg-panel border border-borde rounded-xl p-3">
+        detalle,
 
-<div class="text-sm font-bold leading-relaxed">
+        categoria: cat,
 
-"${escape(hook)}"
+        duracion: seconds,
 
-</div>
+        html: ideaHTML,
 
-<div class="text-[9px] text-gray-600 mt-2">
-Los primeros segundos deben crear una razón para quedarse.
-</div>
+        plain,
 
-</div>
+        createdAt: Date.now()
 
-</div>
+    };
 
 
-<div class="mb-5">
+    generations[id] = data;
 
-<div class="text-[11px] font-black text-verde mb-2">
-🎬 GUION
-</div>
+    currentIdea = data;
 
-<div class="space-y-2">
+    saveData();
 
-<div class="bg-panel border border-borde rounded-xl p-3">
 
-<div class="flex gap-3">
-
-<div class="text-[10px] font-black text-verde">
-0-${a}s
-</div>
-
-<div>
-
-<div class="text-[9px] font-bold text-gray-500">
-ENTRADA
-</div>
-
-<div class="text-[11px] text-gray-300
-leading-relaxed mt-1">
-
-${escenas[0]}
-
-</div>
-
-</div>
-
-</div>
-
-</div>
-
-
-<div class="bg-panel border border-borde rounded-xl p-3">
-
-<div class="flex gap-3">
-
-<div class="text-[10px] font-black text-verde">
-${a}-${b}s
-</div>
-
-<div>
-
-<div class="text-[9px] font-bold text-gray-500">
-DESARROLLO
-</div>
-
-<div class="text-[11px] text-gray-300
-leading-relaxed mt-1">
-
-${escenas[1]}
-
-</div>
-
-</div>
-
-</div>
-
-</div>
-
-
-<div class="bg-panel border border-borde rounded-xl p-3">
-
-<div class="flex gap-3">
-
-<div class="text-[10px] font-black text-verde">
-${b}-${seconds}s
-</div>
-
-<div>
-
-<div class="text-[9px] font-bold text-gray-500">
-CIERRE
-</div>
-
-<div class="text-[11px] text-gray-300
-leading-relaxed mt-1">
-
-${escenas[2]}
-
-</div>
-
-</div>
-
-</div>
-
-</div>
-
-</div>
-
-</div>
-
-
-<div class="mb-5">
-
-<div class="text-[11px] font-black text-verde mb-2">
-✂️ EDICIÓN
-</div>
-
-<div class="grid grid-cols-1 sm:grid-cols-3 gap-2">
-
-${efectos.map((e,i)=>`
-
-<div class="bg-panel border border-borde
-rounded-xl p-3">
-
-<div class="text-[9px] text-gray-600">
-${["ENTRADA","MOMENTO CLAVE","CIERRE"][i]}
-</div>
-
-<div class="text-[10px] font-bold mt-1">
-${escape(e)}
-</div>
-
-</div>
-
-`).join("")}
-
-</div>
-
-</div>
-
-
-<div class="mb-5">
-
-<div class="text-[11px] font-black text-verde mb-2">
-🎵 AUDIO
-</div>
-
-<div class="bg-panel border border-borde rounded-xl p-3">
-
-<div class="text-[11px] text-gray-300">
-
-${cat==="gaming"
-?"Beat energético con un golpe fuerte en la jugada principal."
-:cat==="food"
-?"Música moderna dejando espacio para los sonidos reales."
-:cat==="business"
-?"Instrumental moderno y limpio que no compita con la voz."
-:"Beat moderno con cambios de ritmo para marcar los cortes."}
-
-</div>
-
-</div>
-
-</div>
-
-
-<div class="mb-5">
-
-<div class="text-[11px] font-black text-verde mb-2">
-🎯 CTA
-</div>
-
-<div class="bg-vino/20 border border-vino rounded-xl p-3">
-
-<div class="text-xs font-bold">
-"${escape(cta)}"
-</div>
-
-</div>
-
-</div>
-
-
-<div class="bg-panel border border-borde rounded-xl p-3">
-
-<div class="text-[9px] uppercase tracking-widest
-text-verde font-bold mb-1">
-
-🚀 SPARKYKREA
-
-</div>
-
-<div class="text-[10px] text-gray-400 leading-relaxed">
-
-${escape(motivacion)}
-
-</div>
-
-</div>
-
-
-<div class="flex flex-wrap gap-1.5 pt-3 mt-4
-border-t border-borde">
-
-<button class="action"
-onclick="copiarIdea('${id}')">
-
-<i class="fa-regular fa-copy"></i>
-Copiar
-
-</button>
-
-<button class="action"
-onclick="guardarIdea('${id}')">
-
-<i class="fa-regular fa-star"></i>
-Guardar
-
-</button>
-
-<button class="action"
-onclick="otraVersion('${id}')">
-
-<i class="fa-solid fa-rotate"></i>
-Otra versión
-
-</button>
-
-<button class="action"
-onclick="mejorarIdea('${id}')">
-
-<i class="fa-solid fa-wand-magic-sparkles"></i>
-Mejorar
-
-</button>
-
-</div>
-
-</div>
-
-</div>
-`;
-
-
-const plain=strip(html);
-
-currentIdea={
-id,
-topic,
-detalle,
-categoria:cat,
-duracion:seconds,
-html,
-plain
-};
-
-return currentIdea;
+    return data;
 
 }
 
 
 /* =====================================================
-MENSAJES
+   MENSAJE USUARIO
 ===================================================== */
 
-function mensajeUsuario(text){
+function mensajeUsuario(text) {
 
-const box=document.getElementById("messages");
+    const box =
+        document.getElementById("messages");
 
-box.classList.remove("hidden");
 
-const el=document.createElement("div");
+    box.classList.remove("hidden");
 
-el.className="fade flex justify-end";
 
-el.innerHTML=`
+    const el =
+        document.createElement("div");
 
-<div class="max-w-[85%] bg-vino
-rounded-2xl rounded-br-md
-px-3.5 py-2.5 text-xs leading-relaxed">
 
-${escape(text)}
+    el.className =
+        "fade flex justify-end";
 
-</div>
-`;
 
-box.appendChild(el);
+    el.innerHTML = `
 
-scrollBottom();
+        <div
+            class="max-w-[85%]
+            bg-vino
+            rounded-2xl
+            rounded-br-md
+            px-3.5 py-2.5
+            text-xs
+            leading-relaxed"
+        >
 
-}
+            ${escapeHTML(text)}
 
-function mensajeBot(html){
+        </div>
 
-const box=document.getElementById("messages");
+    `;
 
-box.classList.remove("hidden");
 
-const el=document.createElement("div");
+    box.appendChild(el);
 
-el.className="fade flex gap-2 items-start";
-
-el.innerHTML=`
-
-<div class="w-7 h-7 rounded-lg bg-vino
-shrink-0 flex items-center justify-center">
-
-<i class="fa-solid fa-bolt text-[10px]"></i>
-
-</div>
-
-<div class="min-w-0 flex-1">
-
-${html}
-
-</div>
-`;
-
-box.appendChild(el);
-
-scrollBottom();
+    scrollBottom();
 
 }
 
 
 /* =====================================================
-MOSTRAR IDEAS
+   MENSAJE BOT
 ===================================================== */
 
-function mostrarIdeas(text){
+function mensajeBot(html) {
 
-const resultado=generarIdeas(text);
+    const box =
+        document.getElementById("messages");
 
-const frases=[
 
-"Vamos a quitarle presión a la página en blanco:",
+    box.classList.remove("hidden");
 
-"No necesitas esperar a que aparezca la inspiración. Mira estas opciones:",
 
-"Si yo tuviera que empezar desde cero, probaría estas:",
+    const el =
+        document.createElement("div");
 
-"Hay varias formas de convertir ese tema en contenido:",
 
-"Vamos a buscar un ángulo diferente:"
+    el.className =
+        "fade flex gap-2 items-start";
 
-];
 
-let html=`
+    el.innerHTML = `
 
-<div class="fade">
+        <div class="botAvatar">
 
-<div class="card p-4 md:p-5">
+            <i class="fa-solid fa-bolt text-[10px]"></i>
 
-<div class="text-sm font-bold mb-4">
+        </div>
 
-${random(frases)}
 
-</div>
+        <div class="min-w-0 flex-1">
 
-<div class="space-y-2">
+            ${html}
 
-`;
+        </div>
 
-resultado.ideas.forEach((idea,i)=>{
+    `;
 
-html+=`
 
-<div
-class="bg-panel border border-borde
-rounded-xl p-3 cursor-pointer
-hover:border-verde transition"
-onclick="usarIdea(${JSON.stringify(idea).replace(/"/g,'&quot;')})">
+    box.appendChild(el);
 
-<div class="flex gap-3">
-
-<div class="w-6 h-6 rounded-lg bg-vino
-flex items-center justify-center
-text-[10px] font-black shrink-0">
-
-${i+1}
-
-</div>
-
-<div>
-
-<div class="text-[11px] font-semibold
-text-gray-200 leading-relaxed">
-
-${escape(idea)}
-
-</div>
-
-<div class="text-[9px] text-gray-600 mt-1.5">
-
-Toca esta idea para desarrollarla.
-
-</div>
-
-</div>
-
-</div>
-
-</div>
-
-`;
-
-});
-
-html+=`
-
-</div>
-
-<div class="mt-4 pt-3 border-t border-borde">
-
-<div class="text-[10px] text-gray-500">
-
-💡 Puedes tocar una idea para desarrollarla
-o escribir <strong class="text-gray-300">"otra"</strong>
-para buscar algo diferente.
-
-</div>
-
-</div>
-
-</div>
-
-</div>
-
-`;
-
-mensajeBot(html);
+    scrollBottom();
 
 }
 
 
 /* =====================================================
-USAR IDEA
+   PROCESAR MENSAJE
 ===================================================== */
 
-function usarIdea(idea){
+function procesar(text) {
 
-const input=document.getElementById("input");
 
-input.value=idea;
+    /* SALUDO */
 
-input.focus();
+    if (esSaludo(text)) {
 
-toast("💡 Idea lista para desarrollar");
+        return {
+
+            html: `
+
+                <div
+                    class="card p-4
+                    text-xs
+                    text-gray-300
+                    leading-relaxed"
+                >
+
+                    ${saludo()}
+
+                    <br><br>
+
+                    Cuéntame qué quieres crear.
+                    Puedes traerme una idea concreta,
+                    una duda o simplemente decirme
+                    que no sabes qué publicar.
+
+                </div>
+
+            `,
+
+            id: null
+
+        };
+
+    }
+
+
+    /* OTRA */
+
+    if (esOtra(text)) {
+
+        mostrarIdeas(
+            currentIdea?.topic ||
+            "contenido"
+        );
+
+        return null;
+
+    }
+
+
+    /* IDEAS */
+
+    if (quiereIdeas(text)) {
+
+        mostrarIdeas(text);
+
+        return null;
+
+    }
+
+
+    /* PROPUESTA */
+
+    return generarPropuesta(
+
+        text,
+
+        detectarDetalle(text),
+
+        detectarDuracion(text)
+
+    );
 
 }
 
 
 /* =====================================================
-PROCESAR
+   ENVIAR
 ===================================================== */
 
-function procesar(text){
+function enviar(event) {
 
-const t=normal(text);
+    event.preventDefault();
 
 
-/* SALUDOS */
+    const input =
+        document.getElementById("input");
 
-if(
-/^(hola|holaa|holaaa|hey|hello|buenas|saludos)$/.test(t)
-){
 
-return{
+    const text =
+        input.value.trim();
 
-html:`
 
-<div class="text-xs text-gray-300">
+    if (!text) {
+        return;
+    }
 
-${random([
-"¡Hey! ⚡ Cuéntame qué quieres crear.",
-"¡Buenas! 🚀 Vamos a darle forma a una idea.",
-"¡Hola! 😎 Escríbeme lo que tengas en mente.",
-"¡Hey! ✨ No hace falta que tengas todo pensado."
-])}
 
-<br><br>
+    input.value = "";
 
-Puedes contarme una idea completa,
-una frase suelta o simplemente decirme
-que no sabes qué publicar.
 
-</div>
+    /* Ocultar bienvenida */
 
-`,
+    document
+        .getElementById("welcome")
+        .classList.add("hidden");
 
-id:null
 
-};
+    /* Estado */
+
+    document
+        .getElementById("headerStatus")
+        .textContent =
+        "Proyecto en curso";
+
+
+    mensajeUsuario(text);
+
+
+    /* CARGANDO */
+
+    const loading =
+        document.createElement("div");
+
+
+    loading.id = "loading";
+
+
+    loading.className =
+        "fade flex gap-2 items-center text-gray-600 text-[10px]";
+
+
+    loading.innerHTML = `
+
+        <div class="botAvatar">
+
+            <i class="fa-solid fa-bolt text-[10px]"></i>
+
+        </div>
+
+
+        <div>
+
+            SparkyKrea está creando
+
+            <span class="typingDot"></span>
+            <span class="typingDot"></span>
+            <span class="typingDot"></span>
+
+        </div>
+
+    `;
+
+
+    document
+        .getElementById("messages")
+        .appendChild(loading);
+
+
+    scrollBottom();
+
+
+    setTimeout(() => {
+
+        if (loading.parentNode) {
+            loading.remove();
+        }
+
+
+        const result =
+            procesar(text);
+
+
+        if (result) {
+
+            if (result.html) {
+                mensajeBot(result.html);
+            }
+
+            if (result.id) {
+                guardarChat(
+                    text,
+                    result.id
+                );
+            }
+
+        }
+        else {
+
+            guardarChat(
+                text,
+                null
+            );
+
+        }
+
+    }, 550);
 
 }
 
 
-/* OTRA */
+/* =====================================================
+   GUARDAR CHAT
+===================================================== */
 
-if(
-/^(otra|otro|otra idea|dame otra|otra mas|otra más|ninguna|no me gusta)$/.test(t)
-){
+function guardarChat(
+    text,
+    ideaID
+) {
 
-mostrarIdeas(
-currentIdea?.topic||"contenido"
+    if (!currentChat) {
+
+        currentChat = {
+
+            id:
+                Date.now().toString(),
+
+            title:
+                text.length > 42
+                ? text.substring(0, 42) + "..."
+                : text,
+
+            messages: [],
+
+            createdAt:
+                Date.now()
+
+        };
+
+
+        chats.unshift(
+            currentChat
+        );
+
+    }
+
+
+    currentChat.messages.push({
+
+        user: text,
+
+        idea: ideaID || null
+
+    });
+
+
+    saveData();
+
+    renderHistory();
+
+}
+
+
+/* =====================================================
+   HISTORIAL
+===================================================== */
+
+function renderHistory() {
+
+    const history =
+        document.getElementById(
+            "history"
+        );
+
+
+    history.innerHTML = "";
+
+
+    chats
+        .slice(0, 25)
+        .forEach(chat => {
+
+
+            const row =
+                document.createElement("div");
+
+
+            row.className =
+                "group flex items-center gap-1";
+
+
+            const button =
+                document.createElement("button");
+
+
+            button.className =
+                "flex-1 text-left truncate " +
+                "px-2.5 py-2 rounded-lg " +
+                "text-[10px] text-gray-500 " +
+                "hover:bg-card " +
+                "hover:text-gray-300 " +
+                "transition";
+
+
+            button.innerHTML = `
+
+                <i
+                    class="fa-regular
+                    fa-message
+                    mr-1.5
+                    text-[8px]"
+                ></i>
+
+                ${escapeHTML(
+                    chat.title
+                )}
+
+            `;
+
+
+            button.onclick = () =>
+                abrirChat(chat.id);
+
+
+            const borrar =
+                document.createElement("button");
+
+
+            borrar.className =
+                "opacity-0 " +
+                "group-hover:opacity-100 " +
+                "text-gray-600 " +
+                "hover:text-red-400 " +
+                "p-1";
+
+
+            borrar.innerHTML =
+                '<i class="fa-solid fa-trash text-[9px]"></i>';
+
+
+            borrar.onclick = event => {
+
+                event.stopPropagation();
+
+                borrarChat(
+                    chat.id
+                );
+
+            };
+
+
+            row.appendChild(button);
+
+            row.appendChild(borrar);
+
+            history.appendChild(row);
+
+        });
+
+}
+
+
+/* =====================================================
+   ABRIR CHAT
+===================================================== */
+
+function abrirChat(id) {
+
+    const chat =
+        chats.find(
+            x => x.id === id
+        );
+
+
+    if (!chat) {
+        return;
+    }
+
+
+    currentChat = chat;
+
+
+    document
+        .getElementById("welcome")
+        .classList.add("hidden");
+
+
+    const box =
+        document.getElementById(
+            "messages"
+        );
+
+
+    box.classList.remove("hidden");
+
+    box.innerHTML = "";
+
+
+    chat.messages.forEach(message => {
+
+        mensajeUsuario(
+            message.user
+        );
+
+
+        if (message.idea) {
+
+            const idea =
+                generations[
+                    message.idea
+                ];
+
+
+            if (idea) {
+
+                mensajeBot(
+                    idea.html
+                );
+
+            }
+
+        }
+
+    });
+
+
+    document
+        .getElementById("headerStatus")
+        .textContent =
+        "Proyecto en curso";
+
+
+    closeSidebar();
+
+    scrollBottom();
+
+}
+
+
+/* =====================================================
+   BORRAR CHAT
+===================================================== */
+
+function borrarChat(id) {
+
+    chats =
+        chats.filter(
+            x => x.id !== id
+        );
+
+
+    if (
+        currentChat &&
+        currentChat.id === id
+    ) {
+
+        nuevoProyecto(false);
+
+    }
+
+
+    saveData();
+
+    renderHistory();
+
+    toast("Proyecto eliminado");
+
+}
+
+
+/* =====================================================
+   NUEVO PROYECTO
+===================================================== */
+
+function nuevoProyecto(close = true) {
+
+    currentChat = null;
+
+    currentIdea = null;
+
+
+    document
+        .getElementById("welcome")
+        .classList.remove("hidden");
+
+
+    document
+        .getElementById("messages")
+        .classList.add("hidden");
+
+
+    document
+        .getElementById("messages")
+        .innerHTML = "";
+
+
+    document
+        .getElementById("input")
+        .value = "";
+
+
+    document
+        .getElementById("headerStatus")
+        .textContent =
+        "Nuevo proyecto";
+
+
+    document
+        .getElementById("welcomeTitle")
+        .textContent =
+        random([
+
+            "¿Qué vamos a crear?",
+
+            "Cuéntame tu idea.",
+
+            "¿Qué tienes en mente?",
+
+            "Vamos a crear algo.",
+
+            "¿Qué quieres convertir en contenido?",
+
+            "Dale, ¿qué hacemos hoy?"
+
+        ]);
+
+
+    if (
+        close &&
+        window.innerWidth < 768
+    ) {
+
+        closeSidebar();
+
+    }
+
+
+    setTimeout(() => {
+
+        document
+            .getElementById("input")
+            .focus();
+
+    }, 100);
+
+}
+
+
+/* =====================================================
+   COPIAR
+===================================================== */
+
+async function copiarIdea(id) {
+
+    const idea =
+        generations[id];
+
+
+    if (!idea) {
+
+        toast("No encontré esa idea");
+
+        return;
+
+    }
+
+
+    try {
+
+        await navigator.clipboard.writeText(
+            idea.plain
+        );
+
+
+        toast("📋 Idea copiada");
+
+    }
+    catch {
+
+        const area =
+            document.createElement(
+                "textarea"
+            );
+
+
+        area.value =
+            idea.plain;
+
+
+        document
+            .body
+            .appendChild(area);
+
+
+        area.select();
+
+
+        document.execCommand(
+            "copy"
+        );
+
+
+        area.remove();
+
+
+        toast("📋 Idea copiada");
+
+    }
+
+}
+
+
+/* =====================================================
+   GUARDAR IDEA
+===================================================== */
+
+function guardarIdea(id) {
+
+    const idea =
+        generations[id];
+
+
+    if (!idea) {
+
+        toast("No encontré esa idea");
+
+        return;
+
+    }
+
+
+    if (
+        saved.some(
+            x => x.id === id
+        )
+    ) {
+
+        toast("⭐ Esta idea ya está guardada");
+
+        return;
+
+    }
+
+
+    saved.unshift({
+
+        ...idea,
+
+        savedAt:
+            Date.now()
+
+    });
+
+
+    saveData();
+
+
+    toast("⭐ Idea guardada");
+
+}
+
+
+/* =====================================================
+   OTRA VERSIÓN
+===================================================== */
+
+function otraVersion(id) {
+
+    const old =
+        generations[id];
+
+
+    if (!old) {
+
+        toast("No encontré esa propuesta");
+
+        return;
+
+    }
+
+
+    const enfoques = [
+
+        "con un giro inesperado",
+
+        "desde el punto de vista de la audiencia",
+
+        "como una historia corta",
+
+        "empezando por el resultado",
+
+        "con una comparación",
+
+        "con un reto",
+
+        "con una pregunta que genere curiosidad",
+
+        "haciendo que el final sea inesperado",
+
+        "con un ritmo mucho más rápido"
+
+    ];
+
+
+    const nueva =
+        generarPropuesta(
+
+            old.topic,
+
+            random(enfoques),
+
+            old.duracion
+
+        );
+
+
+    mensajeBot(
+        nueva.html
+    );
+
+
+    guardarChat(
+        "⚡ Otra versión: " +
+        old.topic,
+        nueva.id
+    );
+
+
+    toast("🔄 Nueva versión creada");
+
+}
+
+
+/* =====================================================
+   MEJORAR
+===================================================== */
+
+function mejorarIdea(id) {
+
+    const old =
+        generations[id];
+
+
+    if (!old) {
+
+        toast("No encontré esa propuesta");
+
+        return;
+
+    }
+
+
+    const mejoras = [
+
+        "con un hook más directo",
+
+        "con mayor curiosidad",
+
+        "con una historia más rápida",
+
+        "haciendo protagonista el resultado",
+
+        "con un final más fuerte",
+
+        "con un giro inesperado",
+
+        "con una edición más dinámica",
+
+        "haciendo participar a la audiencia"
+
+    ];
+
+
+    const nueva =
+        generarPropuesta(
+
+            old.topic,
+
+            random(mejoras),
+
+            old.duracion
+
+        );
+
+
+    mensajeBot(
+        nueva.html
+    );
+
+
+    guardarChat(
+        "✨ Mejora: " +
+        old.topic,
+        nueva.id
+    );
+
+
+    toast("✨ Propuesta mejorada");
+
+}
+
+
+/* =====================================================
+   GUARDADOS
+===================================================== */
+
+function updateCount() {
+
+    document
+        .getElementById(
+            "savedCount"
+        )
+        .textContent =
+        saved.length;
+
+}
+
+
+function abrirGuardados() {
+
+    renderSaved();
+
+
+    const modal =
+        document.getElementById(
+            "savedModal"
+        );
+
+
+    modal.classList.remove(
+        "hidden"
+    );
+
+
+    modal.classList.add(
+        "flex"
+    );
+
+
+    closeSidebar();
+
+}
+
+
+function cerrarGuardados() {
+
+    const modal =
+        document.getElementById(
+            "savedModal"
+        );
+
+
+    modal.classList.add(
+        "hidden"
+    );
+
+
+    modal.classList.remove(
+        "flex"
+    );
+
+}
+
+
+function renderSaved() {
+
+    const list =
+        document.getElementById(
+            "savedList"
+        );
+
+
+    if (!saved.length) {
+
+        list.innerHTML = `
+
+            <div
+                class="text-center
+                py-12"
+            >
+
+                <div
+                    class="text-4xl mb-3"
+                >
+                    ⭐
+                </div>
+
+
+                <div
+                    class="text-xs
+                    font-semibold
+                    text-gray-400"
+                >
+
+                    Todavía no tienes
+                    ideas guardadas.
+
+                </div>
+
+
+                <div
+                    class="text-[9px]
+                    text-gray-600 mt-1"
+                >
+
+                    Cuando encuentres
+                    una propuesta que te guste,
+                    pulsa "Guardar".
+
+                </div>
+
+            </div>
+
+        `;
+
+        return;
+
+    }
+
+
+    list.innerHTML = "";
+
+
+    saved.forEach(item => {
+
+        const div =
+            document.createElement(
+                "div"
+            );
+
+
+        div.className =
+            "card p-3";
+
+
+        div.innerHTML = `
+
+            <div
+                class="flex items-start
+                justify-between gap-2"
+            >
+
+                <div class="min-w-0">
+
+                    <div
+                        class="text-xs
+                        font-bold
+                        truncate"
+                    >
+
+                        ${escapeHTML(
+                            item.topic
+                        )}
+
+                    </div>
+
+
+                    <div
+                        class="text-[9px]
+                        text-gray-600 mt-1"
+                    >
+
+                        ${escapeHTML(
+                            item.categoria
+                        )}
+
+                    </div>
+
+                </div>
+
+
+                <div class="text-yellow-400">
+                    ⭐
+                </div>
+
+            </div>
+
+
+            <div
+                class="flex flex-wrap
+                gap-1.5 mt-3"
+            >
+
+                <button
+                    class="action"
+                    onclick="abrirIdeaGuardada('${item.id}')"
+                >
+
+                    <i class="fa-regular fa-folder-open"></i>
+
+                    Abrir
+
+                </button>
+
+
+                <button
+                    class="action"
+                    onclick="copiarGuardada('${item.id}')"
+                >
+
+                    <i class="fa-regular fa-copy"></i>
+
+                    Copiar
+
+                </button>
+
+
+                <button
+                    class="action"
+                    onclick="eliminarGuardada('${item.id}')"
+                >
+
+                    <i class="fa-solid fa-trash"></i>
+
+                    Eliminar
+
+                </button>
+
+            </div>
+
+        `;
+
+
+        list.appendChild(div);
+
+    });
+
+}
+
+
+/* =====================================================
+   ABRIR GUARDADA
+===================================================== */
+
+function abrirIdeaGuardada(id) {
+
+    const item =
+        saved.find(
+            x => x.id === id
+        );
+
+
+    if (!item) {
+        return;
+    }
+
+
+    cerrarGuardados();
+
+
+    currentIdea = item;
+
+
+    document
+        .getElementById("welcome")
+        .classList.add("hidden");
+
+
+    const box =
+        document.getElementById(
+            "messages"
+        );
+
+
+    box.classList.remove("hidden");
+
+    box.innerHTML = "";
+
+
+    mensajeBot(
+        item.html
+    );
+
+
+    document
+        .getElementById("headerStatus")
+        .textContent =
+        "Idea guardada";
+
+
+    scrollBottom();
+
+}
+
+
+/* =====================================================
+   COPIAR GUARDADA
+===================================================== */
+
+async function copiarGuardada(id) {
+
+    const item =
+        saved.find(
+            x => x.id === id
+        );
+
+
+    if (!item) {
+        return;
+    }
+
+
+    try {
+
+        await navigator.clipboard.writeText(
+            item.plain
+        );
+
+
+        toast("📋 Copiado");
+
+    }
+    catch {
+
+        const area =
+            document.createElement(
+                "textarea"
+            );
+
+
+        area.value =
+            item.plain;
+
+
+        document
+            .body
+            .appendChild(area);
+
+
+        area.select();
+
+
+        document.execCommand(
+            "copy"
+        );
+
+
+        area.remove();
+
+
+        toast("📋 Copiado");
+
+    }
+
+}
+
+
+/* =====================================================
+   ELIMINAR GUARDADA
+===================================================== */
+
+function eliminarGuardada(id) {
+
+    saved =
+        saved.filter(
+            x => x.id !== id
+        );
+
+
+    saveData();
+
+    renderSaved();
+
+    toast("Guardado eliminado");
+
+}
+
+
+/* =====================================================
+   SIDEBAR
+===================================================== */
+
+function toggleSidebar() {
+
+    if (
+        window.innerWidth >= 768
+    ) {
+        return;
+    }
+
+
+    const sidebar =
+        document.getElementById(
+            "sidebar"
+        );
+
+
+    const overlay =
+        document.getElementById(
+            "overlay"
+        );
+
+
+    const abierto =
+        sidebar.classList.contains(
+            "mobileOpen"
+        );
+
+
+    if (abierto) {
+
+        closeSidebar();
+
+    }
+    else {
+
+        sidebar.classList.add(
+            "mobileOpen"
+        );
+
+        overlay.classList.remove(
+            "hidden"
+        );
+
+    }
+
+}
+
+
+function closeSidebar() {
+
+    const sidebar =
+        document.getElementById(
+            "sidebar"
+        );
+
+
+    const overlay =
+        document.getElementById(
+            "overlay"
+        );
+
+
+    sidebar.classList.remove(
+        "mobileOpen"
+    );
+
+
+    overlay.classList.add(
+        "hidden"
+    );
+
+}
+
+
+/* =====================================================
+   MODAL CLICK FUERA
+===================================================== */
+
+document
+    .getElementById("savedModal")
+    .addEventListener(
+        "click",
+        function(event) {
+
+            if (
+                event.target === this
+            ) {
+
+                cerrarGuardados();
+
+            }
+
+        }
+    );
+
+
+/* =====================================================
+   TECLADO
+===================================================== */
+
+document.addEventListener(
+    "keydown",
+    event => {
+
+
+        /* Atajo "/" */
+
+        if (
+            event.key === "/" &&
+            document.activeElement.tagName !== "INPUT"
+        ) {
+
+            event.preventDefault();
+
+            document
+                .getElementById("input")
+                .focus();
+
+        }
+
+
+        /* Escape */
+
+        if (
+            event.key === "Escape"
+        ) {
+
+            cerrarGuardados();
+
+            closeSidebar();
+
+        }
+
+    }
 );
 
-return null;
 
-}
+/* =====================================================
+   INICIALIZAR
+===================================================== */
 
+function iniciarApp() {
 
-/* IDEAS */
+    try {
 
-if(quiereIdeas(text)){
+        renderHistory();
 
-mostrarIdeas(text);
+        updateCount();
 
-return null;
+        nuevoProyecto(false);
 
-}
+    }
+    catch (error) {
 
+        console.error(
+            "Error iniciando SparkyKrea:",
+            error
+        );
 
-/* PROPUESTA */
+        /* Incluso si algo falla,
+           mostramos la interfaz */
 
-return generarPropuesta(
-text,
-"",
-duracion(text)
-);
+        const welcome =
+            document.getElementById(
+                "welcome"
+            );
+
+        if (welcome) {
+
+            welcome.classList.remove(
+                "hidden"
+            );
+
+        }
+
+    }
 
 }
 
 
 /* =====================================================
-ENVIAR
+   SPLASH ULTRA SEGURO
 ===================================================== */
 
-function enviar(event){
+function quitarSplash() {
 
-event.preventDefault();
-
-const input=document.getElementById("input");
-
-const text=input.value.trim();
-
-if(!text)return;
-
-input.value="";
-
-mensajeUsuario(text);
+    const splash =
+        document.getElementById(
+            "splash"
+        );
 
 
-/* TYPING */
-
-const loading=document.createElement("div");
-
-loading.id="loading";
-
-loading.className=
-"fade flex gap-2 items-center text-gray-600 text-[10px]";
-
-loading.innerHTML=`
-
-<div class="w-7 h-7 rounded-lg bg-vino
-flex items-center justify-center">
-
-<i class="fa-solid fa-bolt text-[10px]"></i>
-
-</div>
-
-<div>
-
-SparkyKrea está creando
-
-<span class="typingDot"></span>
-<span class="typingDot"></span>
-<span class="typingDot"></span>
-
-</div>
-`;
-
-document.getElementById("messages")
-.appendChild(loading);
-
-scrollBottom();
+    if (!splash) {
+        return;
+    }
 
 
-setTimeout(()=>{
+    splash.classList.add(
+        "hide"
+    );
 
-loading.remove();
 
-const result=procesar(text);
+    setTimeout(() => {
 
-if(result){
+        if (
+            splash &&
+            splash.parentNode
+        ) {
 
-if(result.html){
+            splash.remove();
 
-mensajeBot(result.html);
+        }
 
-}
-
-if(result.id){
-
-guardarChat(text,result);
-
-}
-
-}else{
-
-guardarChat(text,null);
-
-}
-
-},550);
+    }, 800);
 
 }
 
 
 /* =====================================================
-HISTORIAL
+   ARRANQUE
 ===================================================== */
 
-function guardarChat(text,result){
+iniciarApp();
 
-if(!currentChat){
 
-currentChat={
+/*
+   La animación dura 2.3 segundos.
 
-id:Date.now().toString(),
+   Pero existe un segundo temporizador
+   de seguridad a los 4 segundos.
 
-title:text.length>40
-?text.substring(0,40)+"..."
-:text,
-
-messages:[],
-
-createdAt:Date.now()
-
-};
-
-chats.unshift(currentChat);
-
-}
-
-currentChat.messages.push({
-
-user:text,
-
-idea:result?.id||null
-
-});
-
-saveData();
-
-renderHistory();
-
-}
-
-
-function renderHistory(){
-
-const history=document.getElementById("history");
-
-history.innerHTML="";
-
-chats.slice(0,20).forEach(chat=>{
-
-const row=document.createElement("div");
-
-row.className=
-"group flex items-center gap-1";
-
-const btn=document.createElement("button");
-
-btn.className=
-"flex-1 text-left truncate px-2.5 py-2
-rounded-lg text-[10px] text-gray-500
-hover:bg-card hover:text-gray-300 transition";
-
-btn.innerHTML=`
-
-<i class="fa-regular fa-message mr-1.5 text-[8px]"></i>
-
-${escape(chat.title)}
-
-`;
-
-btn.onclick=()=>abrirChat(chat.id);
-
-const del=document.createElement("button");
-
-del.className=
-"opacity-0 group-hover:opacity-100
-text-gray-600 hover:text-red-400 p-1";
-
-del.innerHTML=
-'<i class="fa-solid fa-trash text-[9px]"></i>';
-
-del.onclick=e=>{
-
-e.stopPropagation();
-
-borrarChat(chat.id);
-
-};
-
-row.appendChild(btn);
-row.appendChild(del);
-
-history.appendChild(row);
-
-});
-
-}
-
-
-function abrirChat(id){
-
-const chat=chats.find(x=>x.id===id);
-
-if(!chat)return;
-
-currentChat=chat;
-
-document.getElementById("welcome")
-.classList.add("hidden");
-
-const box=document.getElementById("messages");
-
-box.classList.remove("hidden");
-
-box.innerHTML="";
-
-chat.messages.forEach(m=>{
-
-mensajeUsuario(m.user);
-
-});
-
-closeSidebar();
-
-scrollBottom();
-
-}
-
-
-/* =====================================================
-BORRAR
-===================================================== */
-
-function borrarChat(id){
-
-chats=chats.filter(x=>x.id!==id);
-
-if(currentChat?.id===id){
-
-nuevoProyecto(false);
-
-}
-
-saveData();
-
-renderHistory();
-
-toast("Proyecto eliminado");
-
-}
-
-
-/* =====================================================
-NUEVO PROYECTO
-===================================================== */
-
-function nuevoProyecto(close=true){
-
-currentChat=null;
-currentIdea=null;
-
-document.getElementById("welcome")
-.classList.remove("hidden");
-
-document.getElementById("messages")
-.classList.add("hidden");
-
-document.getElementById("messages").innerHTML="";
-
-document.getElementById("input").value="";
-
-document.getElementById("welcomeTitle")
-.textContent=random([
-
-"¿Qué vamos a crear?",
-
-"Cuéntame tu idea.",
-
-"¿Qué tienes en mente?",
-
-"Vamos a crear algo.",
-
-"¿Qué quieres convertir en contenido?"
-
-]);
-
-if(close && innerWidth<768)
-closeSidebar();
+   Por lo tanto, aunque el navegador
+   tenga algún problema con la animación,
+   la web NO debería quedarse atrapada
+   en la pantalla de entrada.
+*/
 
 setTimeout(
-()=>document.getElementById("input").focus(),
-100
+    quitarSplash,
+    2300
 );
 
-}
 
-
-/* =====================================================
-OTRA VERSIÓN
-===================================================== */
-
-function otraVersion(id){
-
-if(!currentIdea||currentIdea.id!==id)return;
-
-const enfoques=[
-
-"con un giro inesperado",
-
-"desde el punto de vista de la audiencia",
-
-"como una historia corta",
-
-"empezando por el resultado",
-
-"con una comparación",
-
-"con un reto",
-
-"con una pregunta que genere curiosidad",
-
-"haciendo que el final sea inesperado"
-
-];
-
-const nueva=generarPropuesta(
-
-currentIdea.topic,
-
-random(enfoques),
-
-currentIdea.duracion
-
+setTimeout(
+    quitarSplash,
+    4000
 );
 
-mensajeBot(nueva.html);
 
-toast("🔄 Nueva versión creada");
+/* Si la página ya terminó de cargar,
+   enfocamos el input después del splash. */
 
-}
+window.addEventListener(
+    "load",
+    () => {
 
+        setTimeout(() => {
 
-/* =====================================================
-MEJORAR
-===================================================== */
+            const input =
+                document.getElementById(
+                    "input"
+                );
 
-function mejorarIdea(id){
+            if (input) {
+                input.focus();
+            }
 
-if(!currentIdea||currentIdea.id!==id)return;
+        }, 2800);
 
-const mejoras=[
-
-"con un hook más directo",
-
-"con mayor curiosidad",
-
-"con una historia más rápida",
-
-"con un final más fuerte",
-
-"con un giro inesperado",
-
-"haciendo que la audiencia participe",
-
-"con una edición más dinámica"
-
-];
-
-const nueva=generarPropuesta(
-
-currentIdea.topic,
-
-random(mejoras),
-
-currentIdea.duracion
-
+    }
 );
 
-mensajeBot(nueva.html);
-
-toast("✨ Idea mejorada");
-
-}
-
 
 /* =====================================================
-COPIAR
+   SI CAMBIA EL TAMAÑO DE PANTALLA
 ===================================================== */
 
-async function copiarIdea(id){
+window.addEventListener(
+    "resize",
+    () => {
 
-if(!currentIdea||currentIdea.id!==id)return;
+        if (
+            window.innerWidth >= 768
+        ) {
 
-try{
+            const sidebar =
+                document.getElementById(
+                    "sidebar"
+                );
 
-await navigator.clipboard.writeText(
-currentIdea.plain
+            const overlay =
+                document.getElementById(
+                    "overlay"
+                );
+
+
+            sidebar.classList.remove(
+                "mobileOpen"
+            );
+
+            overlay.classList.add(
+                "hidden"
+            );
+
+        }
+
+    }
 );
-
-toast("📋 Idea copiada");
-
-}catch{
-
-const area=document.createElement("textarea");
-
-area.value=currentIdea.plain;
-
-document.body.appendChild(area);
-
-area.select();
-
-document.execCommand("copy");
-
-area.remove();
-
-toast("📋 Idea copiada");
-
-}
-
-}
-
-
-/* =====================================================
-GUARDAR
-===================================================== */
-
-function guardarIdea(id){
-
-if(!currentIdea||currentIdea.id!==id)return;
-
-if(saved.some(x=>x.id===id)){
-
-toast("⭐ Ya está guardada");
-
-return;
-
-}
-
-saved.unshift({
-
-id:currentIdea.id,
-
-title:currentIdea.topic,
-
-topic:currentIdea.topic,
-
-html:currentIdea.html,
-
-plain:currentIdea.plain,
-
-createdAt:Date.now()
-
-});
-
-saveData();
-
-toast("⭐ Idea guardada");
-
-}
-
-
-/* =====================================================
-GUARDADOS
-===================================================== */
-
-function updateCount(){
-
-document.getElementById("savedCount")
-.textContent=saved.length;
-
-}
-
-function abrirGuardados(){
-
-renderSaved();
-
-const modal=document.getElementById("savedModal");
-
-modal.classList.remove("hidden");
-modal.classList.add("flex");
-
-closeSidebar();
-
-}
-
-function cerrarGuardados(){
-
-const modal=document.getElementById("savedModal");
-
-modal.classList.add("hidden");
-modal.classList.remove("flex");
-
-}
-
-function renderSaved(){
-
-const list=document.getElementById("savedList");
-
-if(!saved.length){
-
-list.innerHTML=`
-
-<div class="text-center py-12">
-
-<div class="text-4xl mb-3">⭐</div>
-
-<div class="text-xs font-semibold text-gray-400">
-
-Todavía no tienes ideas guardadas.
-
-</div>
-
-<div class="text-[9px] text-gray-600 mt-1">
-
-Cuando encuentres una propuesta que te guste,
-pulsa Guardar.
-
-</div>
-
-</div>
-
-`;
-
-return;
-
-}
-
-list.innerHTML="";
-
-saved.forEach(item=>{
-
-const div=document.createElement("div");
-
-div.className="card p-3";
-
-div.innerHTML=`
-
-<div class="flex items-start
-justify-between gap-2">
-
-<div class="min-w-0">
-
-<div class="text-xs font-bold truncate">
-
-${escape(item.title)}
-
-</div>
-
-<div class="text-[9px] text-gray-600 mt-1">
-
-${escape(item.topic)}
-
-</div>
-
-</div>
-
-<div class="text-yellow-400">
-⭐
-</div>
-
-</div>
-
-<div class="flex gap-1.5 mt-3">
-
-<button class="action"
-onclick="abrirIdeaGuardada('${item.id}')">
-
-<i class="fa-regular fa-folder-open"></i>
-Abrir
-
-</button>
-
-<button class="action"
-onclick="copiarGuardada('${item.id}')">
-
-<i class="fa-regular fa-copy"></i>
-Copiar
-
-</button>
-
-<button class="action"
-onclick="eliminarGuardada('${item.id}')">
-
-<i class="fa-solid fa-trash"></i>
-Eliminar
-
-</button>
-
-</div>
-
-`;
-
-list.appendChild(div);
-
-});
-
-}
-
-
-function abrirIdeaGuardada(id){
-
-const item=saved.find(x=>x.id===id);
-
-if(!item)return;
-
-cerrarGuardados();
-
-document.getElementById("welcome")
-.classList.add("hidden");
-
-document.getElementById("messages")
-.classList.remove("hidden");
-
-document.getElementById("messages").innerHTML="";
-
-currentIdea={
-
-id:item.id,
-
-topic:item.topic,
-
-html:item.html,
-
-plain:item.plain,
-
-duracion:30
-
-};
-
-mensajeBot(item.html);
-
-}
-
-
-async function copiarGuardada(id){
-
-const item=saved.find(x=>x.id===id);
-
-if(!item)return;
-
-try{
-
-await navigator.clipboard.writeText(item.plain);
-
-toast("📋 Copiado");
-
-}catch{
-
-const area=document.createElement("textarea");
-
-area.value=item.plain;
-
-document.body.appendChild(area);
-
-area.select();
-
-document.execCommand("copy");
-
-area.remove();
-
-toast("📋 Copiado");
-
-}
-
-}
-
-
-function eliminarGuardada(id){
-
-saved=saved.filter(x=>x.id!==id);
-
-saveData();
-
-renderSaved();
-
-toast("Guardado eliminado");
-
-}
-
-
-/* =====================================================
-SIDEBAR
-===================================================== */
-
-function toggleSidebar(){
-
-const sidebar=document.getElementById("sidebar");
-
-const overlay=document.getElementById("overlay");
-
-sidebar.classList.toggle("-translate-x-full");
-
-overlay.classList.toggle("hidden");
-
-}
-
-function closeSidebar(){
-
-document.getElementById("sidebar")
-.classList.add("-translate-x-full");
-
-document.getElementById("overlay")
-.classList.add("hidden");
-
-}
-
-
-/* =====================================================
-MODAL
-===================================================== */
-
-document.getElementById("savedModal")
-.addEventListener("click",function(e){
-
-if(e.target===this)
-cerrarGuardados();
-
-});
-
-
-/* =====================================================
-ATAJO /
-===================================================== */
-
-document.addEventListener("keydown",e=>{
-
-if(
-e.key==="/" &&
-document.activeElement.tagName!=="INPUT"
-){
-
-e.preventDefault();
-
-document.getElementById("input").focus();
-
-}
-
-});
-
-
-/* =====================================================
-INICIO
-===================================================== */
-
-renderHistory();
-updateCount();
-
-nuevoProyecto(false);
-
-
-/* =====================================================
-ANIMACIÓN DE ENTRADA
-===================================================== */
-
-window.addEventListener("load",()=>{
-
-setTimeout(()=>{
-
-document.getElementById("splash")
-.classList.add("hide");
-
-setTimeout(()=>{
-
-document.getElementById("input").focus();
-
-},700);
-
-},2300);
-
-});
 
 </script>
 
