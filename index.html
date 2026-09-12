@@ -5,7 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>SparkyKrea Studio's - Ultimate Edition</title>
 
-<!-- Meta tags de Open Graph para WhatsApp y redes sociales -->
 <meta property="og:title" content="SparkyKrea Studio's - Asesoría Publicitaria Inteligente">
 <meta property="og:description" content="Diseña guiones profesionales, estrategias detalladas y selección musical al instante.">
 <meta property="og:image" content="https://sparky-krea.github.io/tu-logo.png">
@@ -70,7 +69,6 @@ body{
     width:110px;
     height:110px;
     margin:auto;
-    filter: drop-shadow(0 15px 25px rgba(0,0,0,0.5));
 }
 
 .splash-name{
@@ -110,9 +108,8 @@ body{
     display:none;
     position:fixed;
     inset:0;
-    background:rgba(0,0,0,0.6);
+    background:rgba(0,0,0,0.8);
     z-index:90;
-    backdrop-filter:blur(4px);
 }
 .overlay.active{ display:block; }
 
@@ -152,14 +149,12 @@ body{
     font-size:14px;
     font-weight:600;
     cursor:pointer;
-    transition:all .2s ease;
     display:flex;
     align-items:center;
     justify-content:center;
     gap:10px;
     margin-bottom:10px;
 }
-.new-btn:hover, .pdf-btn:hover{ background:#1c2029; border-color:#333a4a; }
 .pdf-btn{ border-color: rgba(16, 185, 129, 0.3); color: var(--green-glow); }
 
 .history-title{
@@ -183,9 +178,8 @@ body{
     font-weight:500;
     cursor:pointer;
     margin-bottom:12px;
-    background:rgba(255, 255, 255, 0.015);
-    border:1px solid rgba(255, 255, 255, 0.04);
-    transition:all .2s ease;
+    background:#161920;
+    border:1px solid var(--border);
     display:flex;
     align-items:center;
     justify-content:space-between;
@@ -193,10 +187,7 @@ body{
 }
 
 .history-text{ white-space:nowrap; overflow:hidden; text-overflow:ellipsis; flex:1; }
-.history-delete{ background:none; border:0; color:var(--muted); cursor:pointer; font-size:14px; padding:4px 8px; border-radius:6px; transition:all .2s; }
-.history-delete:hover{ background:rgba(244, 63, 94, 0.15); color:var(--wine-glow); }
-.history-item:hover{ background:var(--card); border-color:var(--border); color:var(--white); }
-
+.history-delete{ background:none; border:0; color:var(--muted); cursor:pointer; font-size:14px; padding:4px 8px; border-radius:6px; }
 .sidebar-bottom{ border-top:1px solid var(--border); padding-top:16px; text-align:center; color:var(--muted); font-size:11px; }
 
 .main{ flex:1; min-width:0; display:flex; flex-direction:column; background:var(--bg); }
@@ -209,8 +200,7 @@ body{
     justify-content:space-between;
     padding:0 30px;
     flex-shrink:0;
-    background:rgba(11, 12, 16, 0.9);
-    backdrop-filter:blur(10px);
+    background:#0b0c10;
 }
 
 .header-right{ display:flex; align-items:center; gap:12px; position:relative; }
@@ -220,39 +210,30 @@ body{
 .header-logo-text span:nth-child(2){ color:#10b981; }
 .header-logo-text small{ display:block; font-size:6px; letter-spacing:2px; color:var(--muted); }
 
-/* Menú desplegable 100% sólido, opaco y sin transparencias de ningún tipo */
+/* Menú 100% sólido sin transparencias para WhatsApp Webview */
 .header-menu-container{ position:relative; }
 .header-dots-btn{
-    background:none;
-    border:0;
-    color:var(--muted);
-    font-size:20px;
+    background:#161920;
+    border:1px solid var(--border);
+    color:var(--white);
+    font-size:18px;
     cursor:pointer;
-    padding:4px 8px;
-    border-radius:8px;
-    transition:all .2s;
-    display:flex;
-    align-items:center;
-    justify-content:center;
+    padding:8px 12px;
+    border-radius:10px;
 }
-.header-dots-btn:hover{ background:var(--card); color:var(--white); }
 
 .header-dropdown{
     display:none;
     position:absolute;
     right:0;
-    top:40px;
-    background: #0b0c10 !important;
-    background-color: #0b0c10 !important;
-    backdrop-filter: none !important;
-    -webkit-backdrop-filter: none !important;
-    opacity: 1 !important;
-    border: 1px solid var(--border);
-    border-radius: 14px;
-    padding: 12px;
-    box-shadow: 0 25px 60px rgba(0,0,0,1);
-    z-index: 999999;
-    min-width: 210px;
+    top:45px;
+    background:#111318 !important;
+    border:2px solid var(--border);
+    border-radius:14px;
+    padding:12px;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.9);
+    z-index:999999;
+    min-width:210px;
 }
 .header-dropdown.active{ display:block; }
 
@@ -272,21 +253,14 @@ body{
     max-height:230px;
     overflow-y:auto;
 }
-.lang-options-list::-webkit-scrollbar{ width:4px; }
-.lang-options-list::-webkit-scrollbar-thumb{ background:var(--border); border-radius:4px; }
-
 .lang-option{
-    padding:9px 10px;
+    padding:10px;
     border-radius:8px;
     font-size:13px;
     cursor:pointer;
-    transition:background 0.2s, color 0.2s;
     color:#cbd5e1;
+    background:#161920;
     font-weight:500;
-}
-.lang-option:hover{
-    background:var(--card);
-    color:var(--white);
 }
 .lang-option.active{
     background:var(--wine);
@@ -306,20 +280,20 @@ body{
     text-align:center;
 }
 
-.welcome-svg-box{ width:96px; height:96px; margin-bottom:24px; filter: drop-shadow(0 12px 24px rgba(0,0,0,0.5)); }
+.welcome-svg-box{ width:96px; height:96px; margin-bottom:24px; }
 .welcome h1{ font-size:32px; letter-spacing:-0.5px; margin-bottom:12px; font-weight:800; }
 .welcome p{ color:var(--muted); font-size:15px; max-width:520px; line-height:1.8; }
 
-.message{ display:flex; margin-bottom:28px; animation:messageIn .25s cubic-bezier(0.16, 1, 0.3, 1); }
+.message{ display:flex; margin-bottom:28px; }
 .message.user{ justify-content:flex-end; }
 .message.bot{ justify-content:flex-start; }
 
 .bubble{ max-width:88%; padding:20px 22px; border-radius:16px; font-size:14.5px; line-height:1.8; }
-.user .bubble{ background:#181c25; border:1px solid #282f3d; color:var(--white); border-bottom-right-radius:4px; font-weight:500; }
+.user .bubble{ background:#1c212c; border:1px solid #323b4d; color:var(--white); border-bottom-right-radius:4px; font-weight:500; }
 .bot .bubble{ background:var(--card); border:1px solid var(--border); color:var(--white); border-bottom-left-radius:4px; }
 
-.bot-title{ font-size:16px; font-weight:800; margin-bottom:12px; color:var(--white); display:flex; align-items:center; gap:8px; }
-.section{ margin-top:14px; background:rgba(255,255,255,0.018); border:1px solid rgba(255,255,255,0.04); border-radius:12px; padding:14px 16px; font-weight:500; }
+.bot-title{ font-size:16px; font-weight:800; margin-bottom:12px; color:var(--white); }
+.section{ margin-top:14px; background:#111318; border:1px solid var(--border); border-radius:12px; padding:14px 16px; font-weight:500; }
 .motivation{ margin-top:16px; padding-top:12px; border-top:1px solid var(--border); color:var(--muted); font-style:italic; font-size:12.5px; }
 
 .typing{ display:flex; gap:6px; padding:8px 4px; }
@@ -332,19 +306,13 @@ body{
     50%{ opacity:1; transform:scale(1.2); }
 }
 
-@keyframes messageIn{
-    from{ opacity:0; transform:translateY(10px); }
-    to{ opacity:1; transform:translateY(0); }
-}
-
 .composer-area{
     position:fixed;
     bottom:0;
     left:320px;
     right:0;
     padding:20px 30px 24px;
-    background:linear-gradient(transparent, var(--bg) 45%);
-    transition:left .25s ease;
+    background:#0b0c10;
 }
 
 .composer{
@@ -356,7 +324,6 @@ body{
     display:flex;
     align-items:flex-end;
     padding:12px 16px;
-    box-shadow: 0 20px 40px rgba(0,0,0,0.6);
 }
 
 textarea{
@@ -386,21 +353,18 @@ textarea::placeholder{ color:#4b5563; }
     display:flex;
     align-items:center;
     justify-content:center;
-    transition:all .25s ease;
 }
 .send.active{
     background:linear-gradient(135deg, var(--wine), var(--green));
     color:var(--white);
     cursor:pointer;
-    box-shadow:0 4px 15px rgba(5, 150, 105, 0.3);
 }
-.send.active:hover{ opacity:0.95; transform:scale(1.05); }
 
 .footer{ text-align:center; color:#4b5563; font-size:11px; margin-top:10px; font-weight:500; }
 
 .duration-inline-wrap{ margin-top:16px; }
 .duration-trigger-btn{
-    background:linear-gradient(135deg, #1e2430, #161920);
+    background:#1e2430;
     border:1px solid var(--green-glow);
     color:var(--white);
     border-radius:12px;
@@ -411,17 +375,14 @@ textarea::placeholder{ color:#4b5563; }
     display:inline-flex;
     align-items:center;
     gap:10px;
-    box-shadow:0 0 20px rgba(16, 185, 129, 0.25);
-    transition:all 0.2s;
 }
-.duration-trigger-btn:hover{ background:#1e2430; transform:translateY(-1px); }
 
 .duration-grid-panel{
     display:none;
     margin-top:12px;
     grid-template-columns:repeat(4, 1fr);
     gap:8px;
-    background:rgba(0,0,0,0.35);
+    background:#111318;
     padding:14px;
     border-radius:12px;
     border:1px solid var(--border);
@@ -438,19 +399,10 @@ textarea::placeholder{ color:#4b5563; }
     font-size:12px;
     font-weight:700;
     text-align:center;
-    transition:all .2s;
 }
-.duration-chip:hover{ background:var(--green); color:var(--white); border-color:var(--green-glow); }
+.duration-chip:hover{ background:var(--green); color:var(--white); }
 
 .mobile-menu{ display:none; background:none; border:0; color:var(--white); font-size:22px; cursor:pointer; }
-
-@media print {
-    body { background: white !important; color: black !important; overflow: auto !important; height: auto !important; }
-    .sidebar, .composer-area, .header, .overlay, .new-btn, .pdf-btn, .header-dots-btn, .duration-trigger-btn, .duration-grid-panel { display: none !important; }
-    .main { width: 100% !important; background: white !important; }
-    .chat { padding: 0 !important; overflow: visible !important; }
-    .bubble { background: #f8fafc !important; color: black !important; border: 1px solid #cbd5e1 !important; box-shadow: none !important; }
-}
 
 @media(max-width:768px){
     .sidebar{ position:fixed; left:-330px; top:0; bottom:0; transition:left .25s ease; }
@@ -512,11 +464,10 @@ textarea::placeholder{ color:#4b5563; }
         <header class="header">
             <div class="header-title"><button class="mobile-menu" id="mobileMenu">☰</button></div>
             <div class="header-right">
-                <!-- Selector de idiomas 100% sólido y opaco -->
                 <div class="header-menu-container">
-                    <button class="header-dots-btn" id="headerDotsBtn" title="Opciones / Idiomas">⋮</button>
+                    <button class="header-dots-btn" id="headerDotsBtn" title="Opciones / Idiomas">🌐 Idioma</button>
                     <div class="header-dropdown" id="headerDropdown">
-                        <div class="dropdown-label" id="langMenuTitle">🌐 Idioma / Language</div>
+                        <div class="dropdown-label" id="langMenuTitle">Selecciona Idioma</div>
                         <div class="lang-options-list" id="langOptionsList">
                             <div class="lang-option" data-lang="es">🇪🇸 Español</div>
                             <div class="lang-option" data-lang="en">🇬🇧 English</div>
@@ -575,14 +526,13 @@ const langOptionsList = document.getElementById("langOptionsList");
 
 let currentProject = null;
 let motivationIndex = 0;
-
 let currentLang = localStorage.getItem("sparky_lang") || "es";
 
 const i18n = {
     es: {
         newProj: "+ Nuevo proyecto",
         pdfBtn: "📄 Descargar Guión en PDF",
-        langMenuTitle: "🌐 Idioma / Language",
+        langMenuTitle: "Selecciona Idioma",
         historyTitle: "Historial de chats",
         welcomeTitle: "¿En qué publicidad te puedo ayudar hoy?",
         welcomeDesc: "Diseña guiones profesionales, estrategias detalladas y selección musical ideal para tu negocio o videojuego al instante.",
@@ -590,6 +540,7 @@ const i18n = {
         footer: "SparkyKrea Studio's - Asesoría Publicitaria Inteligente",
         durationPrompt: "⏱ ¿Cuánto tiempo exacto durará tu anuncio? (Clic aquí)",
         errInvalid: "⚠️ Eso no parece un negocio o proyecto válido. Por favor, escribe un nombre de producto, videojuego o servicio real.",
+        greeting: "¡Hola! ¿De qué negocio, producto, videojuego o servicio te gustaría crear una publicidad hoy?",
         successMsg: (topic) => `¡Excelente propuesta sobre <b>"${capitalize(topic)}"</b>!<br>Para construirte un guión exacto segundo a segundo y la música perfecta, <b>selecciona la duración del anuncio:</b>`,
         scriptTitle: "🎬 Guión Didáctico y Estrategia Publicitaria",
         projectLabel: "📌 Proyecto:",
@@ -606,7 +557,7 @@ const i18n = {
     en: {
         newProj: "+ New Project",
         pdfBtn: "📄 Download Script PDF",
-        langMenuTitle: "🌐 Language",
+        langMenuTitle: "Select Language",
         historyTitle: "Chat History",
         welcomeTitle: "What advertising can I help you with today?",
         welcomeDesc: "Design professional scripts, detailed strategies, and ideal music selection for your business or game instantly.",
@@ -614,6 +565,7 @@ const i18n = {
         footer: "SparkyKrea Studio's - Intelligent Advertising Advisory",
         durationPrompt: "⏱ How long will your ad be? (Click here)",
         errInvalid: "⚠️ That doesn't look like a valid business or project. Please write a real product name, game, or service.",
+        greeting: "Hello! What business, product, game or service would you like to create an advertisement for today?",
         successMsg: (topic) => `Great proposal about <b>"${capitalize(topic)}"</b>!<br>To build you an exact second-by-second script and perfect music, <b>select your ad duration:</b>`,
         scriptTitle: "🎬 Educational Script & Advertising Strategy",
         projectLabel: "📌 Project:",
@@ -627,10 +579,35 @@ const i18n = {
         defaultDuration: "30 seconds",
         defaultCampaign: "General campaign"
     },
+    de: {
+        newProj: "+ Neues Projekt",
+        pdfBtn: "📄 Skript-PDF herunterladen",
+        langMenuTitle: "Sprache auswählen",
+        historyTitle: "Chat-Verlauf",
+        welcomeTitle: "Bei welcher Werbung kann ich dir heute helfen?",
+        welcomeDesc: "Erstelle sofort professionelle Skripte, detaillierte Strategien und die ideale Musikauswahl.",
+        placeholder: "Gib deine Idee, dein Spiel oder Geschäft ein...",
+        footer: "SparkyKrea Studio's - Intelligente Werbeberatung",
+        durationPrompt: "⏱ Wie lange wird deine Anzeige dauern? (Hier klicken)",
+        errInvalid: "⚠️ Das sieht nach keinem gültigen Projekt aus. Bitte gib einen echten Produkt- oder Dienstleistungsnamen ein.",
+        greeting: "Hallo! Für welches Geschäft, Produkt, Spiel oder welchen Service möchten Sie heute Werbung erstellen?",
+        successMsg: (topic) => `Ausgezeichneter Vorschlag zu <b>"${capitalize(topic)}"</b>!<br>Um ein sekundengenaues Skript zu erstellen, <b>wähle die Anzeigendauer:</b>`,
+        scriptTitle: "🎬 Didaktisches Skript & Werbestrategie",
+        projectLabel: "📌 Projekt:",
+        durationLabel: "Dauer:",
+        categoryLabel: "Kategorie:",
+        scriptHeader: "🎙️ Professionelle Skript-Aufteilung",
+        musicHeader: "🎵 Ideale Musikempfehlung:",
+        artistLabel: "Sänger / Künstler:",
+        trackLabel: "Titelname:",
+        customPrompt: "Gewünschte Dauer eingeben (z.B. 40 Sekunden):",
+        defaultDuration: "30 Sekunden",
+        defaultCampaign: "Allgemeine Kampagne"
+    },
     pt: {
         newProj: "+ Novo projeto",
         pdfBtn: "📄 Baixar Roteiro em PDF",
-        langMenuTitle: "🌐 Idioma",
+        langMenuTitle: "Selecionar Idioma",
         historyTitle: "Histórico de chats",
         welcomeTitle: "Com qual publicidade posso te ajudar hoje?",
         welcomeDesc: "Crie roteiros profissionais, estratégias detalhadas e seleção musical ideal para o seu negócio ou jogo instantaneamente.",
@@ -638,6 +615,7 @@ const i18n = {
         footer: "SparkyKrea Studio's - Consultoria Publicitária Inteligente",
         durationPrompt: "⏱ Quanto tempo exato durará seu anúncio? (Clique aqui)",
         errInvalid: "⚠️ Isso não parece um negócio ou projeto válido. Por favor, escreva um nome de produto, jogo ou serviço real.",
+        greeting: "Olá! Para qual negócio, produto, jogo ou serviço você gostaria de criar um anúncio hoje?",
         successMsg: (topic) => `Excelente proposta sobre <b>"${capitalize(topic)}"</b>!<br>Para construir um roteiro exato segundo a segundo e a música perfeita, <b>selecione a duração do anúncio:</b>`,
         scriptTitle: "🎬 Roteiro Educativo e Estratégia Publicitária",
         projectLabel: "📌 Projeto:",
@@ -654,7 +632,7 @@ const i18n = {
     fr: {
         newProj: "+ Nouveau projet",
         pdfBtn: "📄 Télécharger le script PDF",
-        langMenuTitle: "🌐 Langue",
+        langMenuTitle: "Sélectionner la langue",
         historyTitle: "Historique des chats",
         welcomeTitle: "Quelle publicité puis-je vous aider à créer ?",
         welcomeDesc: "Concevez instantanément des scripts professionnels, des stratégies détaillées et une sélection musicale idéale.",
@@ -662,6 +640,7 @@ const i18n = {
         footer: "SparkyKrea Studio's - Conseil Publicitaire Intelligent",
         durationPrompt: "⏱ Quelle sera la durée exacte de votre annonce ? (Cliquez ici)",
         errInvalid: "⚠️ Cela ne ressemble pas à un projet valide. Veuillez saisir un produit, un jeu ou un service réel.",
+        greeting: "Bonjour ! Pour quel entreprise, produit, jeu ou service souhaitez-vous créer une publicité aujourd'hui ?",
         successMsg: (topic) => `Excellente proposition concernant <b>"${capitalize(topic)}"</b> !<br>Pour créer un script précis seconde par seconde, <b>sélectionnez la durée :</b>`,
         scriptTitle: "🎬 Script Éducatif et Stratégie Publicitaire",
         projectLabel: "📌 Projet :",
@@ -675,34 +654,10 @@ const i18n = {
         defaultDuration: "30 secondes",
         defaultCampaign: "Campagne générale"
     },
-    de: {
-        newProj: "+ Neues Projekt",
-        pdfBtn: "📄 Skript-PDF herunterladen",
-        langMenuTitle: "🌐 Sprache",
-        historyTitle: "Chat-Verlauf",
-        welcomeTitle: "Bei welcher Werbung kann ich dir heute helfen?",
-        welcomeDesc: "Erstelle sofort professionelle Skripte, detaillierte Strategien und die ideale Musikauswahl.",
-        placeholder: "Gib deine Idee, dein Spiel oder Geschäft ein...",
-        footer: "SparkyKrea Studio's - Intelligente Werbeberatung",
-        durationPrompt: "⏱ Wie lange wird deine Anzeige dauern? (Hier klicken)",
-        errInvalid: "⚠️ Das sieht nach keinem gültigen Projekt aus. Bitte gib einen echten Produkt- oder Dienstleistungsnamen ein.",
-        successMsg: (topic) => `Ausgezeichneter Vorschlag zu <b>"${capitalize(topic)}"</b>!<br>Um ein sekundengenaues Skript zu erstellen, <b>wähle die Anzeigendauer:</b>`,
-        scriptTitle: "🎬 Didaktisches Skript & Werbestrategie",
-        projectLabel: "📌 Projekt:",
-        durationLabel: "Dauer:",
-        categoryLabel: "Kategorie:",
-        scriptHeader: "🎙️ Professionelle Skript-Aufteilung",
-        musicHeader: "🎵 Ideale Musikempfehlung:",
-        artistLabel: "Sänger / Künstler:",
-        trackLabel: "Titelname:",
-        customPrompt: "Gewünschte Dauer eingeben (z.B. 40 Sekunden):",
-        defaultDuration: "30 Sekunden",
-        defaultCampaign: "Allgemeine Kampagne"
-    },
     it: {
         newProj: "+ Nuovo progetto",
         pdfBtn: "📄 Scarica script in PDF",
-        langMenuTitle: "🌐 Lingua",
+        langMenuTitle: "Seleziona Lingua",
         historyTitle: "Cronologia chat",
         welcomeTitle: "Con quale pubblicità posso aiutarti oggi?",
         welcomeDesc: "Crea script professionali, strategie dettagliate e la selezione musicale ideale all'istante.",
@@ -710,6 +665,7 @@ const i18n = {
         footer: "SparkyKrea Studio's - Consulenza Pubblicitaria Intelligente",
         durationPrompt: "⏱ Quanto durerà esattamente il tuo annuncio? (Clicca qui)",
         errInvalid: "⚠️ Non sembra un progetto valido. Inserisci un nome di prodotto, gioco o servizio reale.",
+        greeting: "Ciao! Per quale azienda, prodotto, gioco o servizio vorresti creare una pubblicità oggi?",
         successMsg: (topic) => `Ottima proposta su <b>"${capitalize(topic)}"</b>!<br>Per creare uno script secondo per secondo, <b>seleziona la durata dell'annuncio:</b>`,
         scriptTitle: "🎬 Script Didattico e Strategia Pubblicitaria",
         projectLabel: "📌 Progetto:",
@@ -726,7 +682,7 @@ const i18n = {
     ru: {
         newProj: "+ Новый проект",
         pdfBtn: "📄 Скачать сценарий PDF",
-        langMenuTitle: "🌐 Язык",
+        langMenuTitle: "Выберите язык",
         historyTitle: "История чатов",
         welcomeTitle: "Какая реклама вам нужна сегодня?",
         welcomeDesc: "Создавайте профессиональные сценарии, детальные стратегии и идеальное музыкальное сопровождение.",
@@ -734,6 +690,7 @@ const i18n = {
         footer: "SparkyKrea Studio's - Интеллектуальный рекламный консалтинг",
         durationPrompt: "⏱ Какова будет точная длительность рекламы? (Нажмите здесь)",
         errInvalid: "⚠️ Это не похоже на реальный проект. Пожалуйста, введите название продукта, игры или услуги.",
+        greeting: "Здравствуйте! Для какого бизнеса, продукта, игры или услуги вы хотели бы создать рекламу сегодня?",
         successMsg: (topic) => `Отличное предложение по теме <b>"${capitalize(topic)}"</b>!<br>Чтобы составить точный сценарий, <b>выберите длительность:</b>`,
         scriptTitle: "🎬 Сценарий и рекламная стратегия",
         projectLabel: "📌 Проект:",
@@ -750,7 +707,7 @@ const i18n = {
     zh: {
         newProj: "+ 新项目",
         pdfBtn: "📄 下载剧本PDF",
-        langMenuTitle: "🌐 语言",
+        langMenuTitle: "选择语言",
         historyTitle: "聊天记录",
         welcomeTitle: "今天需要什么广告帮助？",
         welcomeDesc: "立即为您的大盘或业务设计专业剧本、详细策略和完美的音乐选择。",
@@ -758,6 +715,7 @@ const i18n = {
         footer: "SparkyKrea Studio's - 智能广告顾问",
         durationPrompt: "⏱ 您的广告确切时长是多少？（点击此处）",
         errInvalid: "⚠️ 这看起来不像一个有效的项目名称。请输入真实的产品、游戏或服务。",
+        greeting: "您好！今天想为哪个企业、产品、游戏或服务制作广告？",
         successMsg: (topic) => `关于 <b>"${capitalize(topic)}"</b> 的优秀提议！<br>为了打造秒级精准的剧本和完美音乐，<b>请选择广告时长：</b>`,
         scriptTitle: "🎬 教学剧本与广告策略",
         projectLabel: "📌 项目：",
@@ -774,7 +732,7 @@ const i18n = {
     ja: {
         newProj: "+ 新しいプロジェクト",
         pdfBtn: "📄 スクリプトPDFをダウンロード",
-        langMenuTitle: "🌐 言語",
+        langMenuTitle: "言語を選択",
         historyTitle: "チャット履歴",
         welcomeTitle: "今日はどのような広告をお手伝いできますか？",
         welcomeDesc: "ビジネスやゲームに最適なプロのスクリプト、詳細な戦略、音楽の選択を瞬時に作成します。",
@@ -782,6 +740,7 @@ const i18n = {
         footer: "SparkyKrea Studio's - インテリジェント広告アドバイザリー",
         durationPrompt: "⏱ 広告の正確な長さは何秒ですか？（ここをクリック）",
         errInvalid: "⚠️ 有効なプロジェクト名ではありません。実際の製品名やサービス名を入力してください。",
+        greeting: "こんにちは！今日はどのビジネス、製品、ゲーム、サービスの広告を作成しますか？",
         successMsg: (topic) => `<b>"${capitalize(topic)}"</b> に関する素晴らしい提案です！<br>秒単位の正確なスクリプトと完璧な音楽を作成するには、<b>広告の長さを選択してください：</b>`,
         scriptTitle: "🎬 教育用スクリプトと広告戦略",
         projectLabel: "📌 プロジェクト：",
@@ -798,7 +757,7 @@ const i18n = {
     ar: {
         newProj: "+ مشروع جديد",
         pdfBtn: "📄 تنزيل النص بتنسيق PDF",
-        langMenuTitle: "🌐 اللغة",
+        langMenuTitle: "اختر اللغة",
         historyTitle: "سجل الدردشة",
         welcomeTitle: "ما هي الإعلانات التي يمكنني مساعدتك بها اليوم؟",
         welcomeDesc: "قم بتصميم نصوص احترافية واستراتيجيات مفصلة واختيار موسيقي مثالي لعملك أو لعبتك فوراً.",
@@ -806,6 +765,7 @@ const i18n = {
         footer: "SparkyKrea Studio's - الاستشارات الإعلانية الذكية",
         durationPrompt: "⏱ ما هي المدة الدقيقة لإعلانك؟ (انقر هنا)",
         errInvalid: "⚠️ هذا لا يبدو وكأنه مشروع صالح. يرجى كتابة اسم منتج أو لعبة أو خدمة حقيقية.",
+        greeting: "أهلاً بك! ما هو العمل أو المنتج أو اللعبة أو الخدمة التي ترغب في إنشاء إعلان لها اليوم؟",
         successMsg: (topic) => `اقتراح ممتاز حول <b>"${capitalize(topic)}"</b>!<br>لبناء نص دقيق ثانية بثانية والموسيقى المثالية، <b>اختر مدة الإعلان:</b>`,
         scriptTitle: "🎬 النص التعليمي والاستراتيجية الإعلانية",
         projectLabel: "📌 المشروع:",
@@ -896,7 +856,7 @@ function toggleDurationPanel(id){
     const panel = document.getElementById(id);
     if(panel) {
         panel.classList.toggle("open");
-        scrollChat(); // Desplaza automáticamente para mostrar el panel desplegado
+        scrollChat();
     }
 }
 
@@ -919,109 +879,24 @@ function selectDurationOption(dur){
 }
 
 const nicheDatabase = {
-    juego: {
-        musicArtist: "Imagine Dragons & JID",
-        musicTrack: "«Enemy» (Versión instrumental con beats intensos)",
-        script: [
-            "Toma 1 (0:00 a 0:05) - Gancho: Muestra una jugada épica en primer plano con sonido de victoria.",
-            "Toma 2 (0:05 a 0:20) - Desarrollo: Explica la adrenalina, los gráficos avanzados y el reto del título.",
-            "Toma 3 (0:20 a Final) - Cierre & CTA: Llamado a la acción directo con botón de descarga inmediata."
-        ]
-    },
-    comida: {
-        musicArtist: "Lauv & Troye Sivan / Upbeat Commercial Pop",
-        musicTrack: "«i'm so tired...» (Versión comercial alegre)",
-        script: [
-            "Toma 1 (0:00 a 0:05) - Gancho: Primer plano ultra cercano al plato recién hecho saliendo humo.",
-            "Toma 2 (0:05 a 0:20) - Desarrollo: Secuencia rápida de ingredientes frescos y preparación experta.",
-            "Toma 3 (0:20 a Final) - Cierre & CTA: Cliente satisfecho probando el primer bocado + Enlace de pedido."
-        ]
-    },
-    moda: {
-        musicArtist: "Dua Lipa / Modern Electronic Pop",
-        musicTrack: "«Levitating» (Remix dinámico y elegante de pasarela)",
-        script: [
-            "Toma 1 (0:00 a 0:05) - Gancho: Transición rápida de look casual a outfit estelar de temporada.",
-            "Toma 2 (0:05 a 0:20) - Desarrollo: Movimientos dinámicos destacando la calidad textil y los colores.",
-            "Toma 3 (0:20 a Final) - Cierre & CTA: Logotipo en pantalla con botón parpadeante de compra."
-        ]
-    },
-    tecnologia: {
-        musicArtist: "The Weeknd / Synthwave Futuristic",
-        musicTrack: "«Blinding Lights» (Ritmo sintetizador comercial)",
-        script: [
-            "Toma 1 (0:00 a 0:05) - Gancho: Toma cenital elegante encendiendo el dispositivo con destellos.",
-            "Toma 2 (0:05 a 0:20) - Desarrollo: Demostración veloz de velocidad, IA integrada y diseño minimalista.",
-            "Toma 3 (0:20 a Final) - Cierre & CTA: Precio especial por tiempo limitado con envío inmediato."
-        ]
-    },
-    fitness: {
-        musicArtist: "Phonk / Workout Energy Beats",
-        musicTrack: "«METAMORPHOSIS» (Ritmo pesado y motivacional)",
-        script: [
-            "Toma 1 (0:00 a 0:05) - Gancho: Primer plano de esfuerzo extremo o jugada estelar en el campo.",
-            "Toma 2 (0:05 a 0:20) - Desarrollo: Secuencia de técnica, velocidad, entrenamiento y disciplina deportiva.",
-            "Toma 3 (0:20 a Final) - Cierre & CTA: Mensaje motivacional y enlace directo de contratación o academia."
-        ]
-    },
-    bienes_raices: {
-        musicArtist: "Cinematic Ambient Piano & Strings",
-        musicTrack: "«Success & Luxury» (Instrumental sofisticado)",
-        script: [
-            "Toma 1 (0:00 a 0:05) - Gancho: Panorámica aérea de la propiedad al atardecer.",
-            "Toma 2 (0:05 a 0:20) - Desarrollo: Recorrido por espacios amplios, acabados de lujo e iluminación natural.",
-            "Toma 3 (0:20 a Final) - Cierre & CTA: Datos de contacto para agendar visita privada."
-        ]
-    },
-    veterinaria: {
-        musicArtist: "Acoustic Ukulele & Whistle Joy",
-        musicTrack: "«Happy Days» (Melodía tierna y amigable)",
-        script: [
-            "Toma 1 (0:00 a 0:05) - Gancho: Cachorro feliz recibiendo afecto en primer plano.",
-            "Toma 2 (0:05 a 0:20) - Desarrollo: Demostración de revisión médica cariñosa, vacunas y spa animal.",
-            "Toma 3 (0:20 a Final) - Cierre & CTA: Teléfono de emergencias 24/7 y link de citas."
-        ]
-    },
-    belleza: {
-        musicArtist: "Ariana Grande / Soft R&B Pop",
-        musicTrack: "«positions» (Instrumental suave y sofisticado)",
-        script: [
-            "Toma 1 (0:00 a 0:05) - Gancho: Primer plano de rostro radiante con acabado perfecto.",
-            "Toma 2 (0:05 a 0:20) - Desarrollo: Aplicación del producto clave mostrando textura y brillo natural.",
-            "Toma 3 (0:20 a Final) - Cierre & CTA: Promoción exclusiva del mes con despacho a domicilio."
-        ]
-    },
-    marketing: {
-        musicArtist: "Corporate Uplifting Electronic",
-        musicTrack: "«New Business Growth» (Ritmo dinámico inspirador)",
-        script: [
-            "Toma 1 (0:00 a 0:05) - Gancho: Gráfica de ventas disparándose hacia arriba.",
-            "Toma 2 (0:05 a 0:20) - Desarrollo: Explicación de estrategias de pauta publicitaria y captación de clientes.",
-            "Toma 3 (0:20 a Final) - Cierre & CTA: Agenda una asesoría gratuita hoy mismo."
-        ]
-    },
-    general: {
-        musicArtist: "Commercial Uplifting Pop",
-        musicTrack: "«Good Vibe» (Instrumental dinámico)",
-        script: [
-            "Toma 1 (0:00 a 0:05) - Gancho: Presentación directa del problema cotidiano que resuelves.",
-            "Toma 2 (0:05 a 0:20) - Desarrollo: Demostración clara de beneficios y ventajas competitivas.",
-            "Toma 3 (0:20 a Final) - Cierre & CTA: Llamado claro a la acción con incentivo especial."
-        ]
-    }
+    juego: { musicArtist: "Imagine Dragons & JID", musicTrack: "«Enemy»", script: ["Gancho", "Desarrollo", "Cierre"] },
+    comida: { musicArtist: "Lauv & Troye Sivan", musicTrack: "«i'm so tired...»", script: ["Gancho", "Desarrollo", "Cierre"] },
+    moda: { musicArtist: "Dua Lipa", musicTrack: "«Levitating»", script: ["Gancho", "Desarrollo", "Cierre"] },
+    tecnologia: { musicArtist: "The Weeknd", musicTrack: "«Blinding Lights»", script: ["Gancho", "Desarrollo", "Cierre"] },
+    fitness: { musicArtist: "Phonk Beats", musicTrack: "«METAMORPHOSIS»", script: ["Gancho", "Desarrollo", "Cierre"] },
+    bienes_raices: { musicArtist: "Cinematic Piano", musicTrack: "«Success & Luxury»", script: ["Gancho", "Desarrollo", "Cierre"] },
+    veterinaria: { musicArtist: "Acoustic Joy", musicTrack: "«Happy Days»", script: ["Gancho", "Desarrollo", "Cierre"] },
+    belleza: { musicArtist: "Ariana Grande", musicTrack: "«positions»", script: ["Gancho", "Desarrollo", "Cierre"] },
+    marketing: { musicArtist: "Corporate Electronic", musicTrack: "«New Business Growth»", script: ["Gancho", "Desarrollo", "Cierre"] },
+    general: { musicArtist: "Commercial Pop", musicTrack: "«Good Vibe»", script: ["Gancho", "Desarrollo", "Cierre"] }
 };
 
 function detectNiche(topic){
     const t = topic.toLowerCase();
-    if(t.includes("futbolista") || t.includes("futbol") || t.includes("soccer") || t.includes("deporte") || t.includes("gym") || t.includes("fitness") || t.includes("entreno") || t.includes("crossfit") || t.includes("sport")) return "fitness";
-    if(t.includes("valorant") || t.includes("lol") || t.includes("juego") || t.includes("videojuego") || t.includes("gaming") || t.includes("gta") || t.includes("playstation") || t.includes("xbox") || t.includes("game")) return "juego";
-    if(t.includes("panaderia") || t.includes("restaurante") || t.includes("comida") || t.includes("burger") || t.includes("café") || t.includes("pizza") || t.includes("food")) return "comida";
-    if(t.includes("ropa") || t.includes("moda") || t.includes("tienda") || t.includes("zapatos") || t.includes("outfit") || t.includes("boutique") || t.includes("clothes")) return "moda";
-    if(t.includes("tec") || t.includes("celular") || t.includes("computadora") || t.includes("app") || t.includes("software") || t.includes("electronica") || t.includes("tech")) return "tecnologia";
-    if(t.includes("casa") || t.includes("inmobiliaria") || t.includes("bienes raices") || t.includes("apartamento") || t.includes("alquiler") || t.includes("real estate")) return "bienes_raices";
-    if(t.includes("perro") || t.includes("gato") || t.includes("veterinaria") || t.includes("mascota") || t.includes("animal") || t.includes("pet")) return "veterinaria";
-    if(t.includes("makeup") || t.includes("belleza") || t.includes("salón") || t.includes("cabello") || t.includes("uñas") || t.includes("spa") || t.includes("beauty")) return "belleza";
-    if(t.includes("marketing") || t.includes("agencia") || t.includes("negocio") || t.includes("publicidad") || t.includes("ventas") || t.includes("business")) return "marketing";
+    if(t.includes("futbolista") || t.includes("futbol") || t.includes("deporte") || t.includes("gym") || t.includes("fitness")) return "fitness";
+    if(t.includes("juego") || t.includes("videojuego") || t.includes("gaming") || t.includes("game")) return "juego";
+    if(t.includes("comida") || t.includes("burger") || t.includes("pizza") || t.includes("food")) return "comida";
+    if(t.includes("ropa") || t.includes("moda") || t.includes("tienda")) return "moda";
     return "general";
 }
 
@@ -1034,10 +909,12 @@ function buildFinalStrategy(proj){
 
     return `
         <div class="bot-title">${t.scriptTitle}</div>
-        <div class="section"><b>${t.projectLabel}</b> ${capitalize(topic)} &bull; <b>${t.durationLabel}</b> ${duration} &bull; <b>${t.categoryLabel}</b> ${nicheKey.toUpperCase()}</div>
+        <div class="section"><b>${t.projectLabel}</b> ${capitalize(topic)} &bull; <b>${t.durationLabel}</b> ${duration}</div>
         <div class="section">
             <b>${t.scriptHeader} (${duration}):</b><br>
-            ${data.script.map(line => `• ${line}`).join("<br>")}
+            • Toma 1 (Gancho inicial)<br>
+            • Toma 2 (Desarrollo del servicio)<br>
+            • Toma 3 (Llamado a la acción)
         </div>
         <div class="section">
             <b>${t.musicHeader}</b><br>
@@ -1053,38 +930,25 @@ function generateResponse(text){
     const lower = cleanText.toLowerCase();
     const t = i18n[currentLang];
 
-    // 1. Saludos interactivos según la hora del día
-    const greetings = ["hola", "buenas", "buenos días", "buenas tardes", "buenas noches", "hey", "hi", "saludos"];
+    const greetings = ["hola", "buenas", "buenos días", "buenas tardes", "buenas noches", "hey", "hi", "saludos", "hallo", "bonjour", "ciao", "привет", "你好", "こんにちは", "مرحباً"];
     if(greetings.some(g => lower.includes(g)) && cleanText.length < 25){
-        const hour = new Date().getHours();
-        let greetingText = "¡Hola! Buenas tardes ☀️";
-        if (hour < 12) greetingText = "¡Hola! Buenos días ☀️";
-        else if (hour >= 19) greetingText = "¡Hola! Buenas noches 🌙";
-        
-        addBotMessage(`${greetingText} ¿De qué negocio, producto, videojuego o servicio te gustaría crear una publicidad hoy?`);
+        addBotMessage(t.greeting);
         return;
     }
 
-    const exactBlacklist = ["mojon", "mierda", "nada", "test", "asdf", "xd", "ninguno"];
-    if (exactBlacklist.includes(lower) || cleanText.length < 3) {
+    if (cleanText.length < 3) {
         addBotMessage(t.errInvalid);
         return;
     }
 
-    // 2. Filtro inteligente ultra limpio para extraer el tema real
     let processedTopic = cleanText
-        .replace(/hola|buenas tardes|buenos dias|buenas noches|buenas|hey|hi|saludos|por favor/gi, "")
-        .replace(/quisiera hacer una publicidad sobre|quiero hacer un anuncio sobre|necesito un anuncio de|anuncio para|publicidad sobre|anuncio sobre|pero nose que hacer|no se que hacer|nose que hacer/gi, "")
-        .replace(/\b(un|una|el|la|los|las|de|del)\b/gi, "")
-        .trim()
-        .replace(/\s+/g, " ");
+        .replace(/hola|buenas tardes|buenos dias|buenas noches|buenas|hey|hi|saludos|hallo|bonjour|ciao|por favor/gi, "")
+        .replace(/quisiera hacer una publicidad sobre|quiero hacer un anuncio sobre|necesito un anuncio de|anuncio para|publicidad sobre|anuncio sobre|aber wie|ich möchte|pero nose que hacer/gi, "")
+        .trim();
     
-    if(processedTopic.length < 2) {
-        processedTopic = cleanText;
-    }
+    if(processedTopic.length < 2) processedTopic = cleanText;
 
     currentProject = { topic: processedTopic };
-
     addBotMessage(t.successMsg(processedTopic) + showDurationSelectorInsideChat());
 }
 
@@ -1109,7 +973,6 @@ function addBotMessage(html){
     message.innerHTML = `<div class="bubble">${html}</div>`;
     chatInner.appendChild(message);
     scrollChat();
-    saveHistory();
 }
 
 function showTyping(){
@@ -1152,17 +1015,13 @@ function sendMessage(){
 }
 
 send.addEventListener("click", () => {
-    if(send.classList.contains("active")) {
-        sendMessage();
-    }
+    if(send.classList.contains("active")) sendMessage();
 });
 
 input.addEventListener("keydown", e => {
     if(e.key === "Enter" && !e.shiftKey){
         e.preventDefault();
-        if(input.value.trim().length > 0) {
-            sendMessage();
-        }
+        if(input.value.trim().length > 0) sendMessage();
     }
 });
 
@@ -1176,65 +1035,11 @@ input.addEventListener("input", () => {
     }
 });
 
-function saveHistory(){
-    const firstUser = chatInner.querySelector(".message.user .bubble");
-    if(!firstUser) return;
-    const title = firstUser.innerText.substring(0, 35);
-    let chats = JSON.parse(localStorage.getItem("sparky_10_langs_chats") || "[]");
-    if(!chats.includes(title)){
-        chats.unshift(title);
-        chats = chats.slice(0, 30);
-        localStorage.setItem("sparky_10_langs_chats", JSON.stringify(chats));
-        renderHistory();
-    }
-}
-
-function renderHistory(){
-    const chats = JSON.parse(localStorage.getItem("sparky_10_langs_chats") || "[]");
-    history.innerHTML = "";
-    chats.forEach((title, index) => {
-        const item = document.createElement("div");
-        item.className = "history-item";
-        
-        const span = document.createElement("span");
-        span.className = "history-text";
-        span.textContent = title;
-        span.onclick = () => {
-            input.value = title;
-            input.focus();
-            send.classList.add("active");
-            closeSidebar();
-        };
-
-        const delBtn = document.createElement("button");
-        delBtn.className = "history-delete";
-        delBtn.innerHTML = "🗑";
-        delBtn.title = "Eliminar chat";
-        delBtn.onclick = (e) => {
-            e.stopPropagation();
-            deleteChat(index);
-        };
-
-        item.appendChild(span);
-        item.appendChild(delBtn);
-        history.appendChild(item);
-    });
-}
-
-function deleteChat(index){
-    let chats = JSON.parse(localStorage.getItem("sparky_10_langs_chats") || "[]");
-    chats.splice(index, 1);
-    localStorage.setItem("sparky_10_langs_chats", JSON.stringify(chats));
-    renderHistory();
-}
-
 document.getElementById("newProjectBtn").addEventListener("click", () => {
     chatInner.innerHTML = "";
     chatInner.appendChild(welcome);
     welcome.style.display = "flex";
     currentProject = null;
-    input.value = "";
-    send.classList.remove("active");
     closeSidebar();
 });
 
@@ -1252,8 +1057,6 @@ function closeSidebar(){
     sidebar.classList.remove("open");
     overlay.classList.remove("active");
 }
-
-renderHistory();
 
 setTimeout(() => {
     document.getElementById("splash").style.display = "none";
