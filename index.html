@@ -220,7 +220,7 @@ body{
 .header-logo-text span:nth-child(2){ color:#10b981; }
 .header-logo-text small{ display:block; font-size:6px; letter-spacing:2px; color:var(--muted); }
 
-/* Menú desplegable 100% sólido y opaco */
+/* Menú desplegable 100% sólido, opaco y sin transparencias de ningún tipo */
 .header-menu-container{ position:relative; }
 .header-dots-btn{
     background:none;
@@ -242,14 +242,17 @@ body{
     position:absolute;
     right:0;
     top:40px;
+    background: #0b0c10 !important;
     background-color: #0b0c10 !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
     opacity: 1 !important;
-    border:1px solid var(--border);
-    border-radius:14px;
-    padding:12px;
-    box-shadow:0 25px 50px rgba(0,0,0,0.95);
-    z-index:999999;
-    min-width:210px;
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 12px;
+    box-shadow: 0 25px 60px rgba(0,0,0,1);
+    z-index: 999999;
+    min-width: 210px;
 }
 .header-dropdown.active{ display:block; }
 
@@ -509,7 +512,7 @@ textarea::placeholder{ color:#4b5563; }
         <header class="header">
             <div class="header-title"><button class="mobile-menu" id="mobileMenu">☰</button></div>
             <div class="header-right">
-                <!-- Selector de idiomas 100% opaco y sólido -->
+                <!-- Selector de idiomas 100% sólido y opaco -->
                 <div class="header-menu-container">
                     <button class="header-dots-btn" id="headerDotsBtn" title="Opciones / Idiomas">⋮</button>
                     <div class="header-dropdown" id="headerDropdown">
@@ -891,7 +894,10 @@ function showDurationSelectorInsideChat(){
 
 function toggleDurationPanel(id){
     const panel = document.getElementById(id);
-    if(panel) panel.classList.toggle("open");
+    if(panel) {
+        panel.classList.toggle("open");
+        scrollChat(); // Desplaza automáticamente para mostrar el panel desplegado
+    }
 }
 
 function selectDurationOption(dur){
@@ -1047,18 +1053,31 @@ function generateResponse(text){
     const lower = cleanText.toLowerCase();
     const t = i18n[currentLang];
 
-    const exactBlacklist = ["mojon", "mierda", "nada", "test", "asdf", "xd", "ninguno", "hola", "bbuenas", "buenas", "saludos", "hi", "hey", "buenos dias", "buenas tardes"];
-    
+    // 1. Saludos interactivos según la hora del día
+    const greetings = ["hola", "buenas", "buenos días", "buenas tardes", "buenas noches", "hey", "hi", "saludos"];
+    if(greetings.some(g => lower.includes(g)) && cleanText.length < 25){
+        const hour = new Date().getHours();
+        let greetingText = "¡Hola! Buenas tardes ☀️";
+        if (hour < 12) greetingText = "¡Hola! Buenos días ☀️";
+        else if (hour >= 19) greetingText = "¡Hola! Buenas noches 🌙";
+        
+        addBotMessage(`${greetingText} ¿De qué negocio, producto, videojuego o servicio te gustaría crear una publicidad hoy?`);
+        return;
+    }
+
+    const exactBlacklist = ["mojon", "mierda", "nada", "test", "asdf", "xd", "ninguno"];
     if (exactBlacklist.includes(lower) || cleanText.length < 3) {
         addBotMessage(t.errInvalid);
         return;
     }
 
-    // Filtro inteligente mejorado para extraer el tema real y limpiar texto conversacional
+    // 2. Filtro inteligente ultra limpio para extraer el tema real
     let processedTopic = cleanText
-        .replace(/^(hola|bbuenas|buenas|buenos dias|buenas tardes|hey|hi|saludos|por favor|1\.|-)\s*/gi, "")
-        .replace(/(quiero hacer una publicidad sobre|quiero hacer un anuncio sobre|necesito un anuncio de|anuncio para|publicidad sobre|anuncio sobre|un|una)\s+/gi, "")
-        .trim();
+        .replace(/hola|buenas tardes|buenos dias|buenas noches|buenas|hey|hi|saludos|por favor/gi, "")
+        .replace(/quisiera hacer una publicidad sobre|quiero hacer un anuncio sobre|necesito un anuncio de|anuncio para|publicidad sobre|anuncio sobre|pero nose que hacer|no se que hacer|nose que hacer/gi, "")
+        .replace(/\b(un|una|el|la|los|las|de|del)\b/gi, "")
+        .trim()
+        .replace(/\s+/g, " ");
     
     if(processedTopic.length < 2) {
         processedTopic = cleanText;
