@@ -135,7 +135,7 @@ body{
 .brand-text span:nth-child(2){ color:#10b981; }
 .brand-text small{ display:block; font-size:7px; letter-spacing:3px; color:var(--muted); font-weight:700; }
 
-.new-btn{
+.new-btn, .pdf-btn{
     width:100%;
     border:1px solid var(--border);
     background:var(--card);
@@ -150,15 +150,17 @@ body{
     align-items:center;
     justify-content:center;
     gap:10px;
+    margin-bottom:10px;
 }
-.new-btn:hover{ background:#1c2029; border-color:#333a4a; }
+.new-btn:hover, .pdf-btn:hover{ background:#1c2029; border-color:#333a4a; }
+.pdf-btn{ border-color: rgba(16, 185, 129, 0.3); color: var(--green-glow); }
 
 .history-title{
     color:var(--muted);
     font-size:11px;
     text-transform:uppercase;
     letter-spacing:1.5px;
-    margin:24px 8px 12px;
+    margin:14px 8px 12px;
     font-weight:700;
 }
 
@@ -204,12 +206,62 @@ body{
     backdrop-filter:blur(10px);
 }
 
-.header-right{ display:flex; align-items:center; gap:12px; }
+.header-right{ display:flex; align-items:center; gap:12px; position:relative; }
 .header-svg-box{ width:34px; height:34px; }
 .header-logo-text{ font-size:12px; font-weight:700; line-height:1.2; }
 .header-logo-text span:first-child{ color:var(--wine); }
 .header-logo-text span:nth-child(2){ color:#10b981; }
 .header-logo-text small{ display:block; font-size:6px; letter-spacing:2px; color:var(--muted); }
+
+/* Menú de tres puntos en la cabecera */
+.header-menu-container{ position:relative; }
+.header-dots-btn{
+    background:none;
+    border:0;
+    color:var(--muted);
+    font-size:20px;
+    cursor:pointer;
+    padding:4px 8px;
+    border-radius:8px;
+    transition:all .2s;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+.header-dots-btn:hover{ background:var(--card); color:var(--white); }
+
+.header-dropdown{
+    display:none;
+    position:absolute;
+    right:0;
+    top:40px;
+    background:var(--panel);
+    border:1px solid var(--border);
+    border-radius:12px;
+    padding:8px;
+    box-shadow:0 10px 25px rgba(0,0,0,0.5);
+    z-index:200;
+    min-width:180px;
+}
+.header-dropdown.active{ display:block; }
+
+.dropdown-item{
+    width:100%;
+    background:none;
+    border:0;
+    color:var(--white);
+    text-align:left;
+    padding:10px 12px;
+    font-size:13px;
+    font-weight:600;
+    cursor:pointer;
+    border-radius:8px;
+    transition:background 0.2s;
+    display:flex;
+    align-items:center;
+    gap:8px;
+}
+.dropdown-item:hover{ background:var(--card); color:var(--green-glow); }
 
 .chat{ flex:1; overflow-y:auto; padding:50px 24px 150px; }
 .chat-inner{ max-width:850px; margin:auto; }
@@ -361,6 +413,14 @@ textarea::placeholder{ color:#4b5563; }
 
 .mobile-menu{ display:none; background:none; border:0; color:var(--white); font-size:22px; cursor:pointer; }
 
+@media print {
+    body { background: white !important; color: black !important; overflow: auto !important; height: auto !important; }
+    .sidebar, .composer-area, .header, .overlay, .new-btn, .pdf-btn, .header-dots-btn, .duration-trigger-btn, .duration-grid-panel { display: none !important; }
+    .main { width: 100% !important; background: white !important; }
+    .chat { padding: 0 !important; overflow: visible !important; }
+    .bubble { background: #f8fafc !important; color: black !important; border: 1px solid #cbd5e1 !important; box-shadow: none !important; }
+}
+
 @media(max-width:768px){
     .sidebar{ position:fixed; left:-330px; top:0; bottom:0; transition:left .25s ease; }
     .sidebar.open{ left:0; }
@@ -410,8 +470,9 @@ textarea::placeholder{ color:#4b5563; }
             </div>
             <div class="brand-text"><span>Sparky</span><span>Krea</span><small>STUDIO'S</small></div>
         </div>
-        <button class="new-btn" id="newProject">+ Nuevo proyecto</button>
-        <div class="history-title">Historial de chats</div>
+        <button class="new-btn" id="newProjectBtn">+ Nuevo proyecto</button>
+        <button class="pdf-btn" id="exportPdfBtn">📄 Descargar Guión en PDF</button>
+        <div class="history-title" id="historyTitleTxt">Historial de chats</div>
         <div class="history" id="history"></div>
         <div class="sidebar-bottom">SparkyKrea Studio's &copy; 2026</div>
     </aside>
@@ -420,6 +481,13 @@ textarea::placeholder{ color:#4b5563; }
         <header class="header">
             <div class="header-title"><button class="mobile-menu" id="mobileMenu">☰</button></div>
             <div class="header-right">
+                <!-- Menú desplegable con tres puntos -->
+                <div class="header-menu-container">
+                    <button class="header-dots-btn" id="headerDotsBtn" title="Opciones / Opciones de Idioma">⋮</button>
+                    <div class="header-dropdown" id="headerDropdown">
+                        <button class="dropdown-item" id="toggleLangBtn">🌐 English (EN)</button>
+                    </div>
+                </div>
                 <div class="header-svg-box">
                     <svg class="sparky-logo-svg" viewBox="0 0 100 100"><use href="#sparky-circular-logo"/></svg>
                 </div>
@@ -433,8 +501,8 @@ textarea::placeholder{ color:#4b5563; }
                     <div class="welcome-svg-box">
                         <svg class="sparky-logo-svg" viewBox="0 0 100 100"><use href="#sparky-circular-logo"/></svg>
                     </div>
-                    <h1>¿En qué publicidad te puedo ayudar hoy?</h1>
-                    <p>Diseña guiones profesionales, estrategias detalladas y selección musical ideal para tu negocio o videojuego al instante.</p>
+                    <h1 id="welcomeTitle">¿En qué publicidad te puedo ayudar hoy?</h1>
+                    <p id="welcomeDesc">Diseña guiones profesionales, estrategias detalladas y selección musical ideal para tu negocio o videojuego al instante.</p>
                 </div>
             </div>
         </section>
@@ -446,7 +514,7 @@ textarea::placeholder{ color:#4b5563; }
         <textarea id="input" rows="1" placeholder="Escribe tu idea, juego o negocio..."></textarea>
         <button class="send" id="send">↑</button>
     </div>
-    <div class="footer">SparkyKrea Studio's - Asesoría Publicitaria Inteligente</div>
+    <div class="footer" id="footerText">SparkyKrea Studio's - Asesoría Publicitaria Inteligente</div>
 </div>
 
 <script>
@@ -458,9 +526,91 @@ const welcome = document.getElementById("welcome");
 const history = document.getElementById("history");
 const sidebar = document.getElementById("sidebar");
 const overlay = document.getElementById("overlay");
+const headerDotsBtn = document.getElementById("headerDotsBtn");
+const headerDropdown = document.getElementById("headerDropdown");
 
 let currentProject = null;
 let motivationIndex = 0;
+let currentLang = "es"; // "es" o "en"
+
+const i18n = {
+    es: {
+        newProj: "+ Nuevo proyecto",
+        pdfBtn: "📄 Descargar Guión en PDF",
+        langText: "🌐 English (EN)",
+        historyTitle: "Historial de chats",
+        welcomeTitle: "¿En qué publicidad te puedo ayudar hoy?",
+        welcomeDesc: "Diseña guiones profesionales, estrategias detalladas y selección musical ideal para tu negocio o videojuego al instante.",
+        placeholder: "Escribe tu idea, juego o negocio...",
+        footer: "SparkyKrea Studio's - Asesoría Publicitaria Inteligente",
+        durationPrompt: "⏱ ¿Cuánto tiempo exacto durará tu anuncio? (Clic aquí)",
+        errInvalid: "⚠️ Eso no parece un negocio o proyecto válido. Por favor, escribe un nombre de producto, videojuego o servicio real.",
+        successMsg: (topic) => `¡Excelente propuesta sobre <b>"${capitalize(topic)}"</b>!<br>Para construirte un guión exacto segundo a segundo y la música perfecta, <b>selecciona la duración del anuncio:</b>`,
+        scriptTitle: "🎬 Guión Didáctico y Estrategia Publicitaria",
+        projectLabel: "📌 Proyecto:",
+        durationLabel: "Duración:",
+        categoryLabel: "Categoría:",
+        scriptHeader: "🎙️ Desglose del Guión Profesional",
+        musicHeader: "🎵 Recomendación Musical Ideal:",
+        artistLabel: "Cantante / Artista:",
+        trackLabel: "Nombre de la Canción:",
+        customPrompt: "Indica la duración deseada (ej: 40 segundos):",
+        defaultDuration: "30 segundos",
+        defaultCampaign: "Campaña general"
+    },
+    en: {
+        newProj: "+ New Project",
+        pdfBtn: "📄 Download Script PDF",
+        langText: "🌐 Español (ES)",
+        historyTitle: "Chat History",
+        welcomeTitle: "What advertising can I help you with today?",
+        welcomeDesc: "Design professional scripts, detailed strategies, and ideal music selection for your business or game instantly.",
+        placeholder: "Type your idea, game or business...",
+        footer: "SparkyKrea Studio's - Intelligent Advertising Advisory",
+        durationPrompt: "⏱ How long will your ad be? (Click here)",
+        errInvalid: "⚠️ That doesn't look like a valid business or project. Please write a real product name, game, or service.",
+        successMsg: (topic) => `Great proposal about <b>"${capitalize(topic)}"</b>!<br>To build you an exact second-by-second script and perfect music, <b>select your ad duration:</b>`,
+        scriptTitle: "🎬 Educational Script & Advertising Strategy",
+        projectLabel: "📌 Project:",
+        durationLabel: "Duration:",
+        categoryLabel: "Category:",
+        scriptHeader: "🎙️ Professional Script Breakdown",
+        musicHeader: "🎵 Ideal Music Recommendation:",
+        artistLabel: "Singer / Artist:",
+        trackLabel: "Track Name:",
+        customPrompt: "Enter desired duration (e.g., 40 seconds):",
+        defaultDuration: "30 seconds",
+        defaultCampaign: "General campaign"
+    }
+};
+
+function updateLanguageUI(){
+    const t = i18n[currentLang];
+    document.getElementById("newProjectBtn").textContent = t.newProj;
+    document.getElementById("exportPdfBtn").textContent = t.pdfBtn;
+    document.getElementById("toggleLangBtn").textContent = t.langText;
+    document.getElementById("historyTitleTxt").textContent = t.historyTitle;
+    document.getElementById("welcomeTitle").textContent = t.welcomeTitle;
+    document.getElementById("welcomeDesc").textContent = t.welcomeDesc;
+    input.placeholder = t.placeholder;
+    document.getElementById("footerText").textContent = t.footer;
+}
+
+// Abrir / cerrar menú de los 3 puntos
+headerDotsBtn.addEventListener("click", (e) => {
+    e.stopPropagation();
+    headerDropdown.classList.toggle("active");
+});
+
+window.addEventListener("click", () => {
+    headerDropdown.classList.remove("active");
+});
+
+document.getElementById("toggleLangBtn").addEventListener("click", () => {
+    currentLang = currentLang === "es" ? "en" : "es";
+    updateLanguageUI();
+    headerDropdown.classList.remove("active");
+});
 
 const motivations = [
     "Una buena publicidad conecta directamente con la emoción y la necesidad del usuario.",
@@ -479,13 +629,14 @@ const timeOptions = ["10 seg", "20 seg", "30 seg", "45 seg", "60 seg", "90 seg",
 
 function showDurationSelectorInsideChat(){
     const panelId = "dur-panel-" + Date.now();
+    const t = i18n[currentLang];
     return `
         <div class="duration-inline-wrap">
             <button class="duration-trigger-btn" onclick="toggleDurationPanel('${panelId}')">
-                ⏱ ¿Cuánto tiempo exacto durará tu anuncio? (Clic aquí)
+                ${t.durationPrompt}
             </button>
             <div class="duration-grid-panel" id="${panelId}">
-                ${timeOptions.map(t => `<button class="duration-chip" onclick="selectDurationOption('${t.replace(/'/g,"\\'")}')">${t}</button>`).join("")}
+                ${timeOptions.map(durOpt => `<button class="duration-chip" onclick="selectDurationOption('${durOpt.replace(/'/g,"\\'")}')">${durOpt}</button>`).join("")}
             </div>
         </div>
     `;
@@ -497,11 +648,12 @@ function toggleDurationPanel(id){
 }
 
 function selectDurationOption(dur){
+    const t = i18n[currentLang];
     if(dur === "Personalizado"){
-        dur = prompt("Indica la duración deseada (ej: 40 segundos):") || "30 segundos";
+        dur = prompt(t.customPrompt) || t.defaultDuration;
     }
     if(!currentProject){
-        currentProject = { topic: "Campaña general", duration: dur };
+        currentProject = { topic: t.defaultCampaign, duration: dur };
     } else {
         currentProject.duration = dur;
     }
@@ -513,7 +665,6 @@ function selectDurationOption(dur){
     }, 700);
 }
 
-// Base de datos ultra extendida con múltiples nichos avanzados
 const nicheDatabase = {
     juego: {
         musicArtist: "Imagine Dragons & JID",
@@ -609,35 +760,36 @@ const nicheDatabase = {
 
 function detectNiche(topic){
     const t = topic.toLowerCase();
-    if(t.includes("valorant") || t.includes("lol") || t.includes("juego") || t.includes("videojuego") || t.includes("gaming")) return "juego";
-    if(t.includes("panaderia") || t.includes("restaurante") || t.includes("comida") || t.includes("burger") || t.includes("café") || t.includes("pizza")) return "comida";
-    if(t.includes("ropa") || t.includes("moda") || t.includes("tienda") || t.includes("zapatos") || t.includes("outfit") || t.includes("boutique")) return "moda";
-    if(t.includes("tec") || t.includes("celular") || t.includes("computadora") || t.includes("app") || t.includes("software") || t.includes("electronica")) return "tecnologia";
-    if(t.includes("gym") || t.includes("fitness") || t.includes("entreno") || t.includes("deporte") || t.includes("salud") || t.includes("crossfit")) return "fitness";
-    if(t.includes("casa") || t.includes("inmobiliaria") || t.includes("bienes raices") || t.includes("apartamento") || t.includes("alquiler")) return "bienes_raices";
-    if(t.includes("perro") || t.includes("gato") || t.includes("veterinaria") || t.includes("mascota") || t.includes("animal")) return "veterinaria";
-    if(t.includes("makeup") || t.includes("belleza") || t.includes("salón") || t.includes("cabello") || t.includes("uñas") || t.includes("spa")) return "belleza";
-    if(t.includes("marketing") || t.includes("agencia") || t.includes("negocio") || t.includes("publicidad") || t.includes("ventas")) return "marketing";
+    if(t.includes("valorant") || t.includes("lol") || t.includes("juego") || t.includes("videojuego") || t.includes("gaming") || t.includes("gta") || t.includes("playstation") || t.includes("xbox") || t.includes("game")) return "juego";
+    if(t.includes("panaderia") || t.includes("restaurante") || t.includes("comida") || t.includes("burger") || t.includes("café") || t.includes("pizza") || t.includes("food")) return "comida";
+    if(t.includes("ropa") || t.includes("moda") || t.includes("tienda") || t.includes("zapatos") || t.includes("outfit") || t.includes("boutique") || t.includes("clothes")) return "moda";
+    if(t.includes("tec") || t.includes("celular") || t.includes("computadora") || t.includes("app") || t.includes("software") || t.includes("electronica") || t.includes("tech")) return "tecnologia";
+    if(t.includes("gym") || t.includes("fitness") || t.includes("entreno") || t.includes("deporte") || t.includes("salud") || t.includes("crossfit") || t.includes("sport")) return "fitness";
+    if(t.includes("casa") || t.includes("inmobiliaria") || t.includes("bienes raices") || t.includes("apartamento") || t.includes("alquiler") || t.includes("real estate")) return "bienes_raices";
+    if(t.includes("perro") || t.includes("gato") || t.includes("veterinaria") || t.includes("mascota") || t.includes("animal") || t.includes("pet")) return "veterinaria";
+    if(t.includes("makeup") || t.includes("belleza") || t.includes("salón") || t.includes("cabello") || t.includes("uñas") || t.includes("spa") || t.includes("beauty")) return "belleza";
+    if(t.includes("marketing") || t.includes("agencia") || t.includes("negocio") || t.includes("publicidad") || t.includes("ventas") || t.includes("business")) return "marketing";
     return "general";
 }
 
 function buildFinalStrategy(proj){
+    const t = i18n[currentLang];
     const topic = proj.topic || "tu negocio";
     const duration = proj.duration || "30 seg";
     const nicheKey = detectNiche(topic);
     const data = nicheDatabase[nicheKey];
 
     return `
-        <div class="bot-title">🎬 Guión Didáctico y Estrategia Publicitaria</div>
-        <div class="section"><b>📌 Proyecto:</b> ${capitalize(topic)} &bull; <b>Duración:</b> ${duration} &bull; <b>Categoría:</b> ${nicheKey.toUpperCase()}</div>
+        <div class="bot-title">${t.scriptTitle}</div>
+        <div class="section"><b>${t.projectLabel}</b> ${capitalize(topic)} &bull; <b>${t.durationLabel}</b> ${duration} &bull; <b>${t.categoryLabel}</b> ${nicheKey.toUpperCase()}</div>
         <div class="section">
-            <b>🎙️ Desglose del Guión Profesional (${duration}):</b><br>
+            <b>${t.scriptHeader} (${duration}):</b><br>
             ${data.script.map(line => `• ${line}`).join("<br>")}
         </div>
         <div class="section">
-            <b>🎵 Recomendación Musical Ideal:</b><br>
-            • <b>Cantante / Artista:</b> ${data.musicArtist}<br>
-            • <b>Nombre de la Canción:</b> ${data.musicTrack}
+            <b>${t.musicHeader}</b><br>
+            • <b>${t.artistLabel}</b> ${data.musicArtist}<br>
+            • <b>${t.trackLabel}</b> ${data.musicTrack}
         </div>
         ${motivation()}
     `;
@@ -646,20 +798,26 @@ function buildFinalStrategy(proj){
 function generateResponse(text){
     const cleanText = text.trim();
     const lower = cleanText.toLowerCase();
+    const t = i18n[currentLang];
 
-    const blacklist = ["mojon", "mierda", "nada", "test", "asdf", "xd", "ninguno"];
-    if (blacklist.some(word => lower.includes(word)) || cleanText.length < 3) {
-        addBotMessage(`⚠️ Eso no parece un negocio o proyecto válido. Por favor, escribe un nombre de producto, videojuego o servicio real.`);
+    const exactBlacklist = ["mojon", "mierda", "nada", "test", "asdf", "xd", "ninguno", "hola", "buenas", "saludos", "hi", "hey", "buenos dias", "buenas tardes"];
+    
+    if (exactBlacklist.includes(lower) || cleanText.length < 3) {
+        addBotMessage(t.errInvalid);
         return;
     }
 
-    currentProject = { topic: cleanText };
+    let processedTopic = cleanText
+        .replace(/^(hola|buenas tardes|buenos dias|hey|hi|saludos|por favor|quiero hacer una publicidad para|necesito un anuncio de|anuncio para)\s*/i, "")
+        .trim();
+    
+    if(processedTopic.length < 2) {
+        processedTopic = cleanText;
+    }
 
-    addBotMessage(`
-        ¡Excelente propuesta sobre <b>"${capitalize(cleanText)}"</b>!<br>
-        Para construirte un guión exacto segundo a segundo y la música perfecta, <b>selecciona la duración del anuncio:</b>
-        ${showDurationSelectorInsideChat()}
-    `);
+    currentProject = { topic: processedTopic };
+
+    addBotMessage(t.successMsg(processedTopic) + showDurationSelectorInsideChat());
 }
 
 function capitalize(text){
@@ -754,17 +912,17 @@ function saveHistory(){
     const firstUser = chatInner.querySelector(".message.user .bubble");
     if(!firstUser) return;
     const title = firstUser.innerText.substring(0, 35);
-    let chats = JSON.parse(localStorage.getItem("sparky_final_v5_chats") || "[]");
+    let chats = JSON.parse(localStorage.getItem("sparky_dots_menu_chats") || "[]");
     if(!chats.includes(title)){
         chats.unshift(title);
         chats = chats.slice(0, 30);
-        localStorage.setItem("sparky_final_v5_chats", JSON.stringify(chats));
+        localStorage.setItem("sparky_dots_menu_chats", JSON.stringify(chats));
         renderHistory();
     }
 }
 
 function renderHistory(){
-    const chats = JSON.parse(localStorage.getItem("sparky_final_v5_chats") || "[]");
+    const chats = JSON.parse(localStorage.getItem("sparky_dots_menu_chats") || "[]");
     history.innerHTML = "";
     chats.forEach((title, index) => {
         const item = document.createElement("div");
@@ -796,13 +954,13 @@ function renderHistory(){
 }
 
 function deleteChat(index){
-    let chats = JSON.parse(localStorage.getItem("sparky_final_v5_chats") || "[]");
+    let chats = JSON.parse(localStorage.getItem("sparky_dots_menu_chats") || "[]");
     chats.splice(index, 1);
-    localStorage.setItem("sparky_final_v5_chats", JSON.stringify(chats));
+    localStorage.setItem("sparky_dots_menu_chats", JSON.stringify(chats));
     renderHistory();
 }
 
-document.getElementById("newProject").addEventListener("click", () => {
+document.getElementById("newProjectBtn").addEventListener("click", () => {
     chatInner.innerHTML = "";
     chatInner.appendChild(welcome);
     welcome.style.display = "flex";
@@ -810,6 +968,10 @@ document.getElementById("newProject").addEventListener("click", () => {
     input.value = "";
     send.classList.remove("active");
     closeSidebar();
+});
+
+document.getElementById("exportPdfBtn").addEventListener("click", () => {
+    window.print();
 });
 
 const mobileMenuBtn = document.getElementById("mobileMenu");
