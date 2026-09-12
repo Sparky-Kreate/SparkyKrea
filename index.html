@@ -21,11 +21,11 @@
     --wine-glow:#f43f5e;
     --green:#059669;
     --green-glow:#10b981;
-    --bg:#050507;
-    --panel:#090a0f;
-    --card:#0e1017;
-    --border:#1f2430;
-    --white:#f8fafc;
+    --bg:#0b0c10;
+    --panel:#111318;
+    --card:#161920;
+    --border:#222630;
+    --white:#f1f5f9;
     --muted:#94a3b8;
 }
 
@@ -35,6 +35,13 @@ body{
     color:var(--white);
     height:100vh;
     overflow:hidden;
+}
+
+/* ================= LOGO SVG REUTILIZABLE ================= */
+.app-logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
 }
 
 /* ================= SPLASH ================= */
@@ -50,85 +57,50 @@ body{
     animation:splashOut .8s ease 2s forwards;
 }
 
-.splash-logo{
+.splash-content{
     text-align:center;
     animation:logoIn 1s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.logo-badge{
-    width:80px;
-    height:80px;
+.splash-svg{
+    width:90px;
+    height:90px;
     margin:auto;
-    background:linear-gradient(135deg, rgba(159, 18, 57, 0.15), rgba(5, 150, 105, 0.15));
-    border:1px solid var(--border);
-    border-radius:20px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    box-shadow: 0 20px 40px rgba(0,0,0,0.5);
-    position:relative;
-    overflow:hidden;
+    filter: drop-shadow(0 15px 25px rgba(0,0,0,0.5));
 }
 
-.logo-badge::before{
-    content:'';
-    position:absolute;
-    inset:0;
-    background:radial-gradient(circle at center, rgba(244, 63, 94, 0.2), transparent 70%);
-}
-
-.logo-letter{
-    font-size:32px;
-    font-weight:800;
-    background:linear-gradient(135deg, var(--wine-glow), var(--green-glow));
-    -webkit-background-clip:text;
-    -webkit-text-fill-color:transparent;
-    position:relative;
-    z-index:1;
-}
-
-.logo-name{
-    margin-top:18px;
-    font-size:26px;
+.splash-name{
+    margin-top:16px;
+    font-size:28px;
     font-weight:800;
     letter-spacing:-0.5px;
 }
 
-.logo-name span:first-child{
+.splash-name span:first-child{
     color:var(--white);
 }
 
-.logo-name span:nth-child(2){
+.splash-name span:nth-child(2){
     background:linear-gradient(90deg, var(--wine-glow), var(--green-glow));
     -webkit-background-clip:text;
     -webkit-text-fill-color:transparent;
 }
 
-.logo-studio{
-    font-size:9px;
+.splash-studio{
+    font-size:10px;
     letter-spacing:4px;
     color:var(--muted);
     margin-top:4px;
-    font-weight:600;
+    font-weight:700;
 }
 
 @keyframes logoIn{
-    from{
-        opacity:0;
-        transform:scale(0.9) translateY(10px);
-    }
-    to{
-        opacity:1;
-        transform:scale(1) translateY(0);
-    }
+    from{ opacity:0; transform:scale(0.9) translateY(10px); }
+    to{ opacity:1; transform:scale(1) translateY(0); }
 }
 
 @keyframes splashOut{
-    to{
-        opacity:0;
-        visibility:hidden;
-        pointer-events:none;
-    }
+    to{ opacity:0; visibility:hidden; pointer-events:none; }
 }
 
 /* ================= APP ================= */
@@ -153,30 +125,20 @@ body{
 .brand{
     display:flex;
     align-items:center;
-    gap:12px;
-    padding:6px 6px 22px;
+    gap:10px;
+    padding:4px 4px 20px;
 }
 
-.brand-badge{
-    width:38px;
-    height:38px;
-    background:linear-gradient(135deg, rgba(159, 18, 57, 0.2), rgba(5, 150, 105, 0.2));
-    border:1px solid var(--border);
-    border-radius:11px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-size:16px;
-    font-weight:800;
-    background:linear-gradient(135deg, var(--wine-glow), var(--green-glow));
-    -webkit-background-clip:text;
-    -webkit-text-fill-color:transparent;
+.brand-svg{
+    width:36px;
+    height:36px;
 }
 
 .brand-text{
-    font-size:15px;
+    font-size:14px;
     font-weight:800;
     letter-spacing:-0.5px;
+    line-height:1.2;
 }
 
 .brand-text span:first-child{
@@ -191,11 +153,10 @@ body{
 
 .brand-text small{
     display:block;
-    font-size:7px;
-    letter-spacing:3px;
+    font-size:6px;
+    letter-spacing:2.5px;
     color:var(--muted);
-    margin-top:2px;
-    font-weight:600;
+    font-weight:700;
 }
 
 .new-btn{
@@ -204,7 +165,7 @@ body{
     background:var(--card);
     color:var(--white);
     border-radius:12px;
-    padding:12px 16px;
+    padding:12px;
     font-size:13px;
     font-weight:600;
     cursor:pointer;
@@ -216,9 +177,8 @@ body{
 }
 
 .new-btn:hover{
-    background:#141720;
-    border-color:#2a3040;
-    transform:translateY(-1px);
+    background:#1c2029;
+    border-color:#333a4a;
 }
 
 .history-title{
@@ -226,7 +186,7 @@ body{
     font-size:10px;
     text-transform:uppercase;
     letter-spacing:1.5px;
-    margin:25px 8px 10px;
+    margin:24px 8px 10px;
     font-weight:700;
 }
 
@@ -245,22 +205,46 @@ body{
     border-radius:4px;
 }
 
+/* CHATS REMARCADOS EN EL HISTORIAL */
 .history-item{
-    padding:10px 12px;
-    border-radius:9px;
-    color:#94a3b8;
-    font-size:12px;
+    padding:12px 14px;
+    border-radius:10px;
+    color:#cbd5e1;
+    font-size:12.5px;
+    font-weight:500;
     cursor:pointer;
     white-space:nowrap;
     overflow:hidden;
     text-overflow:ellipsis;
-    margin-bottom:4px;
-    transition:all .15s ease;
+    margin-bottom:6px;
+    background:rgba(255, 255, 255, 0.01);
+    border:1px solid rgba(255, 255, 255, 0.03);
+    transition:all .2s ease;
+    display:flex;
+    align-items:center;
+    gap:10px;
+}
+
+.history-item::before{
+    content:"";
+    width:6px;
+    height:6px;
+    border-radius:50%;
+    background:var(--muted);
+    flex-shrink:0;
+    transition:all .2s ease;
 }
 
 .history-item:hover{
     background:var(--card);
+    border-color:var(--border);
     color:var(--white);
+    transform:translateX(4px);
+}
+
+.history-item:hover::before{
+    background:var(--green-glow);
+    box-shadow:0 0 8px var(--green-glow);
 }
 
 .sidebar-bottom{
@@ -289,9 +273,9 @@ body{
     display:flex;
     align-items:center;
     justify-content:space-between;
-    padding:0 28px;
+    padding:0 24px;
     flex-shrink:0;
-    background:rgba(5, 5, 7, 0.75);
+    background:rgba(11, 12, 16, 0.8);
     backdrop-filter:blur(10px);
 }
 
@@ -304,31 +288,21 @@ body{
     gap:12px;
 }
 
-.header-logo{
+.header-right{
     display:flex;
     align-items:center;
     gap:10px;
 }
 
-.header-badge{
+.header-svg{
     width:28px;
     height:28px;
-    background:linear-gradient(135deg, rgba(159, 18, 57, 0.2), rgba(5, 150, 105, 0.2));
-    border:1px solid var(--border);
-    border-radius:8px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-size:12px;
-    font-weight:800;
-    background:linear-gradient(135deg, var(--wine-glow), var(--green-glow));
-    -webkit-background-clip:text;
-    -webkit-text-fill-color:transparent;
 }
 
 .header-logo-text{
-    font-size:12px;
+    font-size:11px;
     font-weight:700;
+    line-height:1.2;
 }
 
 .header-logo-text span:first-child{
@@ -344,7 +318,7 @@ body{
 .header-logo-text small{
     display:block;
     font-size:5px;
-    letter-spacing:2px;
+    letter-spacing:1.5px;
     color:var(--muted);
 }
 
@@ -357,7 +331,7 @@ body{
 }
 
 .chat-inner{
-    max-width:820px;
+    max-width:800px;
     margin:auto;
 }
 
@@ -372,35 +346,24 @@ body{
     text-align:center;
 }
 
-.welcome-badge{
-    width:72px;
-    height:72px;
-    background:linear-gradient(135deg, rgba(159, 18, 57, 0.15), rgba(5, 150, 105, 0.15));
-    border:1px solid var(--border);
-    border-radius:20px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-size:28px;
-    font-weight:800;
-    background:linear-gradient(135deg, var(--wine-glow), var(--green-glow));
-    -webkit-background-clip:text;
-    -webkit-text-fill-color:transparent;
-    margin-bottom:24px;
-    box-shadow: 0 15px 30px rgba(0,0,0,0.4);
+.welcome-svg{
+    width:76px;
+    height:76px;
+    margin-bottom:20px;
+    filter: drop-shadow(0 10px 20px rgba(0,0,0,0.4));
 }
 
 .welcome h1{
-    font-size:32px;
-    letter-spacing:-1px;
+    font-size:28px;
+    letter-spacing:-0.5px;
     margin-bottom:10px;
     font-weight:800;
 }
 
 .welcome p{
     color:var(--muted);
-    font-size:14px;
-    max-width:480px;
+    font-size:13.5px;
+    max-width:460px;
     line-height:1.7;
 }
 
@@ -429,8 +392,8 @@ body{
 }
 
 .user .bubble{
-    background:#141720;
-    border:1px solid #232a38;
+    background:#181c25;
+    border:1px solid #282f3d;
     color:var(--white);
     border-bottom-right-radius:4px;
 }
@@ -442,22 +405,19 @@ body{
     border-bottom-left-radius:4px;
 }
 
-/* BOT STYLING ENHANCEMENTS */
+/* BOT CONTENT TYPOGRAPHY */
 
 .bot-title{
     font-size:16px;
     font-weight:700;
-    margin-bottom:12px;
+    margin-bottom:10px;
     color:var(--white);
-    display:flex;
-    align-items:center;
-    gap:8px;
 }
 
 .section{
-    margin-top:16px;
-    background:rgba(255,255,255,0.02);
-    border:1px solid rgba(255,255,255,0.04);
+    margin-top:14px;
+    background:rgba(255,255,255,0.015);
+    border:1px solid rgba(255,255,255,0.03);
     border-radius:10px;
     padding:12px 14px;
 }
@@ -465,28 +425,8 @@ body{
 .section strong{
     color:var(--white);
     display:block;
-    margin-bottom:6px;
+    margin-bottom:4px;
     font-size:13px;
-    letter-spacing:-0.2px;
-}
-
-.strategy-grid{
-    display:grid;
-    grid-template-columns: 1fr 1fr;
-    gap:8px;
-    margin-top:10px;
-}
-
-.strategy-card{
-    background:rgba(0,0,0,0.2);
-    border:1px solid var(--border);
-    border-radius:8px;
-    padding:10px;
-}
-
-.strategy-card span{
-    color:var(--muted);
-    font-size:12px;
 }
 
 .motivation{
@@ -495,7 +435,7 @@ body{
     border-top:1px solid var(--border);
     color:var(--muted);
     font-style:italic;
-    font-size:12.5px;
+    font-size:12px;
 }
 
 /* ================= TYPING ================= */
@@ -514,28 +454,17 @@ body{
     animation:typing 1s infinite ease-in-out;
 }
 
-.typing i:nth-child(2){
-    animation-delay:.2s;
-}
-
-.typing i:nth-child(3){
-    animation-delay:.4s;
-}
+.typing i:nth-child(2){ animation-delay:.2s; }
+.typing i:nth-child(3){ animation-delay:.4s; }
 
 @keyframes typing{
-    0%,100%{opacity:.2; transform:scale(0.8)}
-    50%{opacity:1; transform:scale(1.2)}
+    0%,100%{ opacity:.2; transform:scale(0.8); }
+    50%{ opacity:1; transform:scale(1.2); }
 }
 
 @keyframes messageIn{
-    from{
-        opacity:0;
-        transform:translateY(8px);
-    }
-    to{
-        opacity:1;
-        transform:translateY(0);
-    }
+    from{ opacity:0; transform:translateY(8px); }
+    to{ opacity:1; transform:translateY(0); }
 }
 
 /* ================= COMPOSER ================= */
@@ -545,12 +474,12 @@ body{
     bottom:0;
     left:280px;
     right:0;
-    padding:15px 24px 22px;
-    background:linear-gradient(transparent, var(--bg) 40%);
+    padding:15px 24px 20px;
+    background:linear-gradient(transparent, var(--bg) 45%);
 }
 
 .composer{
-    max-width:820px;
+    max-width:800px;
     margin:auto;
     border:1px solid var(--border);
     background:var(--panel);
@@ -558,7 +487,7 @@ body{
     display:flex;
     align-items:flex-end;
     padding:10px 12px;
-    box-shadow: 0 20px 40px rgba(0,0,0,0.6);
+    box-shadow: 0 15px 35px rgba(0,0,0,0.5);
 }
 
 textarea{
@@ -584,7 +513,7 @@ textarea::placeholder{
     height:36px;
     border-radius:10px;
     border:0;
-    background:linear-gradient(135deg, var(--wine-glow), var(--green-glow));
+    background:linear-gradient(135deg, var(--wine), var(--green));
     color:var(--white);
     font-size:16px;
     cursor:pointer;
@@ -592,7 +521,6 @@ textarea::placeholder{
     align-items:center;
     justify-content:center;
     transition:all .2s ease;
-    box-shadow: 0 4px 12px rgba(5, 150, 105, 0.2);
 }
 
 .send:hover{
@@ -624,11 +552,10 @@ textarea::placeholder{
     cursor:pointer;
     font-size:12.5px;
     font-weight:600;
-    transition:background .2s;
 }
 
 .duration-button:hover{
-    background:#141720;
+    background:#1c202a;
 }
 
 .duration-panel{
@@ -641,7 +568,7 @@ textarea::placeholder{
     background:var(--panel);
     border:1px solid var(--border);
     border-radius:14px;
-    box-shadow:0 20px 50px rgba(0,0,0,0.6);
+    box-shadow:0 20px 40px rgba(0,0,0,0.6);
     z-index:50;
 }
 
@@ -654,18 +581,16 @@ textarea::placeholder{
 .duration-option{
     background:var(--card);
     border:1px solid var(--border);
-    color:#e2e8f0;
+    color:#cbd5e1;
     padding:10px 8px;
     border-radius:8px;
     cursor:pointer;
     font-size:11.5px;
     font-weight:500;
-    transition:all .15s;
 }
 
 .duration-option:hover{
-    background:#171c28;
-    border-color:#333e54;
+    background:#1e2430;
     color:var(--white);
 }
 
@@ -687,7 +612,7 @@ textarea::placeholder{
         left:-290px;
         top:0;
         bottom:0;
-        transition:left .25s cubic-bezier(0.16, 1, 0.3, 1);
+        transition:left .25s ease;
     }
     .sidebar.open{
         left:0;
@@ -708,17 +633,31 @@ textarea::placeholder{
 
 <body>
 
+<!-- ================= SVG LOGO TEMPLATE ================= -->
+<svg style="display:none;">
+    <g id="sparky-logo-template">
+        <circle cx="50" cy="50" r="45" fill="none" stroke="#ffffff" stroke-width="3" opacity="0.15"/>
+        <circle cx="50" cy="50" r="38" fill="none" stroke="#ffffff" stroke-width="2" opacity="0.3"/>
+        <circle cx="50" cy="50" r="31" fill="#059669"/>
+        <path d="M28 42 H35 L38 37 H62 L65 42 H72 C75.3 42 78 44.7 78 48 V65 C78 68.3 75.3 71 72 71 H28 C24.7 71 22 68.3 22 65 V48 C22 44.7 24.7 42 28 42 Z" fill="none" stroke="#ffffff" stroke-width="3" stroke-linejoin="round"/>
+        <circle cx="50" cy="56.5" r="11" fill="none" stroke="#ffffff" stroke-width="3"/>
+        <path d="M46 56.5 L50 50.5 L54 56.5 L50 62.5 Z" fill="#ffffff"/>
+        <rect x="67" y="46" width="5" height="15" rx="1" fill="#ffffff"/>
+        <rect x="25" y="45" width="4" height="3" rx="1" fill="#ffffff"/>
+    </g>
+</svg>
+
 <!-- ================= SPLASH ================= -->
 
 <div id="splash">
-    <div class="splash-logo">
-        <div class="logo-badge">
-            <span class="logo-letter">SK</span>
-        </div>
-        <div class="logo-name">
+    <div class="splash-content">
+        <svg class="splash-svg" viewBox="0 0 100 100">
+            <use href="#sparky-logo-template"/>
+        </svg>
+        <div class="splash-name">
             <span>Sparky</span><span>Krea</span>
         </div>
-        <div class="logo-studio">STUDIO'S</div>
+        <div class="splash-studio">STUDIO'S</div>
     </div>
 </div>
 
@@ -728,7 +667,9 @@ textarea::placeholder{
 
     <aside class="sidebar" id="sidebar">
         <div class="brand">
-            <div class="brand-badge">SK</div>
+            <svg class="brand-svg" viewBox="0 0 100 100">
+                <use href="#sparky-logo-template"/>
+            </svg>
             <div class="brand-text">
                 <span>Sparky</span><span>Krea</span>
                 <small>STUDIO'S</small>
@@ -740,7 +681,7 @@ textarea::placeholder{
         </button>
 
         <div class="history-title">
-            Historial de proyectos
+            Historial de chats
         </div>
 
         <div class="history" id="history"></div>
@@ -754,11 +695,13 @@ textarea::placeholder{
         <header class="header">
             <div class="header-title">
                 <button class="mobile-menu" id="mobileMenu">☰</button>
-                Asesoría de Publicidad & Contenido
+                Asesoría Publicitaria Inteligente
             </div>
 
-            <div class="header-logo">
-                <div class="header-badge">SK</div>
+            <div class="header-right">
+                <svg class="header-svg" viewBox="0 0 100 100">
+                    <use href="#sparky-logo-template"/>
+                </svg>
                 <div class="header-logo-text">
                     <span>Sparky</span><span>Krea</span>
                     <small>STUDIO'S</small>
@@ -769,10 +712,12 @@ textarea::placeholder{
         <section class="chat" id="chat">
             <div class="chat-inner">
                 <div class="welcome" id="welcome">
-                    <div class="welcome-badge">SK</div>
-                    <h1>¿Qué marca o campaña creamos hoy?</h1>
+                    <svg class="welcome-svg" viewBox="0 0 100 100">
+                        <use href="#sparky-logo-template"/>
+                    </svg>
+                    <h1>¿Qué estrategia creamos hoy?</h1>
                     <p>
-                        Diseña estrategias de publicidad de alto impacto, copys persuasivos y guiones profesionales optimizados para tu negocio.
+                        Diseña campañas de publicidad para negocios, restaurantes, panaderías, supermercados o videojuegos como Valorant, LoL, FIFA, Wild Rift y más.
                     </p>
                 </div>
             </div>
@@ -787,7 +732,7 @@ textarea::placeholder{
         <textarea
             id="input"
             rows="1"
-            placeholder="Describe tu producto, servicio o idea de publicidad..."
+            placeholder="Escribe tu idea, juego, negocio o duda (ej: Valorant, Panadería, Xd)..."
         ></textarea>
         <button class="send" id="send">↑</button>
     </div>
@@ -822,16 +767,15 @@ function showGreeting(){
     greetingShown = true;
     addBotMessage(
         `${getGreeting()} 👋<br><br>
-        Soy SparkyKrea Studio's. Cuéntame sobre tu negocio, producto o servicio y estructuraremos una campaña publicitaria ganadora.`
+        Soy SparkyKrea Studio's. Dime si vas a promocionar un negocio (restaurante, panadería, supermercado), un videojuego (Valorant, LoL, TFT, Wild Rift, FIFA, Call of Duty) o cuéntame tu idea.`
     );
 }
 
 const motivations = [
-    "Una publicidad efectiva no grita: conecta con la necesidad del cliente.",
-    "El mejor anuncio es aquel que no parece un anuncio.",
-    "Captura la atención en los primeros 3 segundos o el usuario deslizará.",
-    "Un buen copy publicitario despierta emociones y mueve a la acción.",
-    "Haz que tu marca sea recordada por resolver un problema real."
+    "Una buena publicidad conecta directamente con la emoción y la necesidad del usuario.",
+    "El secreto de un anuncio exitoso está en capturar la atención en los primeros 3 segundos.",
+    "Haz que tu marca o contenido sea tan memorable que resulte imposible de ignorar.",
+    "No vendas solo un producto o servicio: vende la solución a un problema."
 ];
 
 function motivation(){
@@ -854,7 +798,7 @@ function showDurationSelector(){
     return `
         <div class="duration-wrap">
             <button class="duration-button" onclick="toggleDuration('${id}')">
-                ⏱ Seleccionar formato de duración
+                ⏱ Seleccionar duración del anuncio
             </button>
             <div class="duration-panel" id="${id}">
                 ${durations.map(d => `
@@ -876,7 +820,7 @@ function toggleDuration(id){
 function selectDuration(duration){
     pendingDuration = false;
     if(!currentProject){
-        currentProject = { topic:"estrategia publicitaria", type:"publicidad", duration:duration };
+        currentProject = { topic:"campaña general", type:"publicidad", duration:duration };
     } else {
         currentProject.duration = duration;
     }
@@ -884,12 +828,12 @@ function selectDuration(duration){
     showTyping();
     setTimeout(() => {
         removeTyping();
-        addBotMessage(buildAdvancedAdStrategy(currentProject));
+        addBotMessage(buildCompleteStrategy(currentProject));
     }, 700);
 }
 
 function customDuration(){
-    const value = prompt("Indica la duración o formato de campaña deseado:");
+    const value = prompt("Indica la duración o formato deseado:");
     if(!value) return;
     selectDuration(value);
 }
@@ -898,63 +842,76 @@ function normalize(text){
     return text.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"");
 }
 
-function detectPlatform(text){
+function analyzeTopic(text){
     const t = normalize(text);
-    const platforms = ["tiktok", "instagram", "facebook", "youtube", "shorts", "reels", "meta ads"];
-    for(const p of platforms){
-        if(t.includes(p)) return p;
+
+    if(t.length <= 3 && (t.includes("xd") || t.includes("test") || t.includes("hola"))){
+        return { type: "invalid", name: text };
     }
-    return "multiplataforma";
+
+    const games = ["valorant", "lol", "league of legends", "tft", "wild rift", "fifa", "call of duty", "cod", "roblox", "minecraft", "fortnite"];
+    for(const g of games){
+        if(t.includes(g)){
+            return { type: "game", name: g.toUpperCase() };
+        }
+    }
+
+    const business = ["restaurante", "pasteleria", "panaderia", "supermercado", "tienda", "cafeteria", "hamburguesa", "comida"];
+    for(const b of business){
+        if(t.includes(b)){
+            return { type: "business", name: b.toUpperCase() };
+        }
+    }
+
+    return { type: "general", name: text };
 }
 
-function analyze(text){
-    const platform = detectPlatform(text);
-    return { raw: text, topic: text, platform };
-}
-
-function buildAdvancedAdStrategy(project){
-    const topic = project.topic || "tu producto o servicio";
+function buildCompleteStrategy(project){
+    const topic = project.topic || "tu proyecto";
     const duration = project.duration || "30 segundos";
-    const platform = project.platform || "redes sociales";
+    const category = project.category || "general";
+
+    let extraPrompt = "";
+    if(category === "game"){
+        extraPrompt = `
+            <div class="section">
+                <strong>🎮 Enfoque de Gaming / Personaje</strong>
+                Enfocado en jugabilidad, jugadas épicas, momentos divertidos o análisis de personaje/rol para conectar con la comunidad gamer.
+            </div>
+        `;
+    } else if(category === "business"){
+        extraPrompt = `
+            <div class="section">
+                <strong>🏪 Enfoque Comercial (Local/Negocio)</strong>
+                Estrategia orientada a generar antojo, llamadas a la acción locales (¡Visítanos hoy!) y destacar la calidad del producto.
+            </div>
+        `;
+    }
 
     return `
         <div class="bot-title">
-            🎯 Estrategia Publicitaria & Copywriting
+            🎬 Estrategia, Guión y Música Publicitaria
         </div>
 
         <div class="section">
-            <strong>🚀 Enfoque de Campaña (${platform.toUpperCase()})</strong>
-            Campaña especializada para <b>${capitalize(topic)}</b> orientada a conversión y retención.
+            <strong>🎯 Proyecto analizado:</strong> ${capitalize(topic)} (${duration})
+        </div>
+
+        ${extraPrompt}
+
+        <div class="section">
+            <strong>🎙️ Guión Sugerido (${duration})</strong>
+            <p style="margin-top:6px; color:#cbd5e1;">
+              <b>[0s - 3s (Gancho)]</b> "¿Sabías que la mayoría se pierde esto? Si te interesa ${topic}, mira lo que sucede cuando haces esto bien..."<br><br>
+              <b>[3s - 20s (Desarrollo)]</b> Mostramos las características principales, el valor agregado o la jugada clave. Ritmo dinámico en pantalla.<br><br>
+              <b>[Cierre & CTA]</b> "No te quedes atrás. Haz clic en el enlace y descúbrelo ahora mismo."
+            </p>
         </div>
 
         <div class="section">
-            <strong>⏱️ Formato & Duración</strong>
-            ${duration} optimizado para alto engagement.
-        </div>
-
-        <div class="section">
-            <strong>✍️ Estructura del Anuncio (Método AIDA)</strong>
-            <div class="strategy-grid">
-                <div class="strategy-card">
-                    <span><b>01. Gancho (0-3s):</b> Frase visual o hablada que detenga el scroll inmediatamente.</span>
-                </div>
-                <div class="strategy-card">
-                    <span><b>02. Problema/Interés:</b> Conecta con el dolor o deseo principal del cliente objetivo.</span>
-                </div>
-                <div class="strategy-card">
-                    <span><b>03. Solución (Propuesta):</b> Muestra por qué tu servicio o producto es la opción ideal.</span>
-                </div>
-                <div class="strategy-card">
-                    <span><b>04. Llamada a la Acción (CTA):</b> Instrucción clara de qué hacer a continuación.</span>
-                </div>
-            </div>
-        </div>
-
-        <div class="section">
-            <strong>💡 Recomendaciones de Asesoría</strong>
-            • Utiliza subtítulos dinámicos y llamativos.<br>
-            • Mantén un ritmo visual ágil con cortes limpios.<br>
-            • Dirige el tráfico a un enlace directo de contacto o sitio web optimizado.
+            <strong>🎵 Recomendación de Música y Estilo</strong>
+            • <b>Estilo de audio:</b> Beats rítmicos con subidas de tensión y efectos de sonido (SFX) en las transiciones.<br>
+            • <b>Edición visual:</b> Cortes rápidos cada 2.5 segundos, subtítulos grandes resaltados en amarillo/blanco.
         </div>
 
         ${motivation()}
@@ -962,7 +919,7 @@ function buildAdvancedAdStrategy(project){
 }
 
 function generateResponse(text){
-    const context = analyze(text);
+    const analysis = analyzeTopic(text);
     const writtenDuration = text.match(/(\d+)\s*(seg|segundos|min|minutos)/i);
 
     if(pendingDuration && writtenDuration){
@@ -972,27 +929,48 @@ function generateResponse(text){
         showTyping();
         setTimeout(() => {
             removeTyping();
-            addBotMessage(buildAdvancedAdStrategy(currentProject));
+            addBotMessage(buildCompleteStrategy(currentProject));
         }, 700);
+        return;
+    }
+
+    if(analysis.type === "invalid"){
+        addBotMessage(`
+            <div class="bot-title">¡Hola de nuevo! 😄</div>
+            <div class="section">
+                Noto que pusiste <b>"${text}"</b>. Para poder darte un guión, música y estrategia perfecta, cuéntame qué quieres promocionar exactamente.
+            </div>
+            <div class="section">
+                Puedes decirme por ejemplo: <br>
+                • <i>"Quiero una publicidad para una panadería"</i><br>
+                • <i>"Un video para Valorant con Jett"</i><br>
+                • <i>"Un anuncio de 30 segundos para un supermercado"</i>
+            </div>
+        `);
         return;
     }
 
     currentProject = {
         topic: text,
-        type: "publicidad",
-        platform: context.platform
+        category: analysis.type,
+        type: "publicidad"
     };
     pendingDuration = true;
 
+    let subMsg = "";
+    if(analysis.type === "game"){
+        subMsg = `Detecté que se trata de un videojuego (<b>${analysis.name}</b>). ¿Hay algún personaje, arma o rol específico en el que nos enfoquemos (por ejemplo, un personaje principal)?`;
+    } else if(analysis.type === "business"){
+        subMsg = `Excelente, analicé que es para el sector de <b>${analysis.name}</b>. ¿Qué producto estrella o promoción principal quieres destacar en el anuncio?`;
+    } else {
+        subMsg = `He registrado tu propuesta sobre <b>"${capitalize(text)}"</b>.`;
+    }
+
     addBotMessage(`
-        <div class="bot-title">
-            ✨ Análisis de Propuesta Publicitaria
-        </div>
+        <div class="bot-title">✨ Análisis de Propuesta Publicitaria</div>
+        <div class="section">${subMsg}</div>
         <div class="section">
-            He registrado tu proyecto sobre <b>"${capitalize(text)}"</b> enfocado en <b>${context.platform}</b>.
-        </div>
-        <div class="section">
-            Para estructurar el mejor plan de anuncios y copys publicitarios, selecciona la duración o el formato ideal:
+            Para terminar de armar tu estrategia, guión y música, <b>selecciona la duración ideal:</b>
         </div>
         ${showDurationSelector()}
     `);
@@ -1077,18 +1055,18 @@ input.addEventListener("input", () => {
 function saveHistory(){
     const firstUser = chatInner.querySelector(".message.user .bubble");
     if(!firstUser) return;
-    const title = firstUser.innerText.substring(0, 40);
-    let chats = JSON.parse(localStorage.getItem("sparky_ads_chats") || "[]");
+    const title = firstUser.innerText.substring(0, 38);
+    let chats = JSON.parse(localStorage.getItem("sparky_final_chats") || "[]");
     if(!chats.includes(title)){
         chats.unshift(title);
         chats = chats.slice(0, 30);
-        localStorage.setItem("sparky_ads_chats", JSON.stringify(chats));
+        localStorage.setItem("sparky_final_chats", JSON.stringify(chats));
         renderHistory();
     }
 }
 
 function renderHistory(){
-    const chats = JSON.parse(localStorage.getItem("sparky_ads_chats") || "[]");
+    const chats = JSON.parse(localStorage.getItem("sparky_final_chats") || "[]");
     history.innerHTML = "";
     chats.forEach(title => {
         const item = document.createElement("div");
