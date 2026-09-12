@@ -8,7 +8,7 @@
 <!-- Meta tags de Open Graph para WhatsApp y redes sociales -->
 <meta property="og:title" content="SparkyKrea Studio's - Asesoría Publicitaria Inteligente">
 <meta property="og:description" content="Diseña guiones profesionales, estrategias detalladas y selección musical al instante.">
-<meta property="og:image" content="https://sparky-krea.github.io/tu-logo.png"> <!-- Reemplaza con la ruta de tu logo -->
+<meta property="og:image" content="https://sparky-krea.github.io/tu-logo.png">
 <meta property="og:url" content="https://sparky-krea.github.io/">
 <meta property="og:type" content="website">
 
@@ -220,7 +220,7 @@ body{
 .header-logo-text span:nth-child(2){ color:#10b981; }
 .header-logo-text small{ display:block; font-size:6px; letter-spacing:2px; color:var(--muted); }
 
-/* Menú de tres puntos y selector de idiomas múltiple */
+/* Menú desplegable personalizado de idiomas */
 .header-menu-container{ position:relative; }
 .header-dots-btn{
     background:none;
@@ -261,21 +261,33 @@ body{
     font-weight:700;
 }
 
-.lang-select{
-    width:100%;
-    background:var(--card);
-    border:1px solid var(--border);
-    color:var(--white);
+.lang-options-list{
+    display:flex;
+    flex-direction:column;
+    gap:4px;
+    max-height:230px;
+    overflow-y:auto;
+}
+.lang-options-list::-webkit-scrollbar{ width:4px; }
+.lang-options-list::-webkit-scrollbar-thumb{ background:var(--border); border-radius:4px; }
+
+.lang-option{
     padding:9px 10px;
     border-radius:8px;
-    font-family:inherit;
     font-size:13px;
-    outline:none;
     cursor:pointer;
+    transition:background 0.2s, color 0.2s;
+    color:#cbd5e1;
+    font-weight:500;
 }
-.lang-select option{
-    background:var(--panel);
+.lang-option:hover{
+    background:var(--card);
     color:var(--white);
+}
+.lang-option.active{
+    background:var(--wine);
+    color:var(--white);
+    font-weight:700;
 }
 
 .chat{ flex:1; overflow-y:auto; padding:50px 24px 150px; }
@@ -496,23 +508,23 @@ textarea::placeholder{ color:#4b5563; }
         <header class="header">
             <div class="header-title"><button class="mobile-menu" id="mobileMenu">☰</button></div>
             <div class="header-right">
-                <!-- Selector de 10 idiomas dentro del menú de tres puntos -->
+                <!-- Selector de 10 idiomas rediseñado como lista interactiva -->
                 <div class="header-menu-container">
                     <button class="header-dots-btn" id="headerDotsBtn" title="Opciones / Idiomas">⋮</button>
                     <div class="header-dropdown" id="headerDropdown">
                         <div class="dropdown-label" id="langMenuTitle">🌐 Idioma / Language</div>
-                        <select id="langSelect" class="lang-select">
-                            <option value="es">🇪🇸 Español</option>
-                            <option value="en">🇬🇧 English</option>
-                            <option value="pt">🇧🇷 Português</option>
-                            <option value="fr">🇫🇷 Français</option>
-                            <option value="de">🇩🇪 Deutsch</option>
-                            <option value="it">🇮🇹 Italiano</option>
-                            <option value="ru">🇷🇺 Русский</option>
-                            <option value="zh">🇨🇳 中文</option>
-                            <option value="ja">🇯🇵 日本語</option>
-                            <option value="ar">🇸🇦 العربية</option>
-                        </select>
+                        <div class="lang-options-list" id="langOptionsList">
+                            <div class="lang-option" data-lang="es">🇪🇸 Español</div>
+                            <div class="lang-option" data-lang="en">🇬🇧 English</div>
+                            <div class="lang-option" data-lang="pt">🇧🇷 Português</div>
+                            <div class="lang-option" data-lang="fr">🇫🇷 Français</div>
+                            <div class="lang-option" data-lang="de">🇩🇪 Deutsch</div>
+                            <div class="lang-option" data-lang="it">🇮🇹 Italiano</div>
+                            <div class="lang-option" data-lang="ru">🇷🇺 Русский</div>
+                            <div class="lang-option" data-lang="zh">🇨🇳 中文</div>
+                            <div class="lang-option" data-lang="ja">🇯🇵 日本語</div>
+                            <div class="lang-option" data-lang="ar">🇸🇦 العربية</div>
+                        </div>
                     </div>
                 </div>
                 <div class="header-svg-box">
@@ -555,14 +567,13 @@ const sidebar = document.getElementById("sidebar");
 const overlay = document.getElementById("overlay");
 const headerDotsBtn = document.getElementById("headerDotsBtn");
 const headerDropdown = document.getElementById("headerDropdown");
-const langSelect = document.getElementById("langSelect");
+const langOptionsList = document.getElementById("langOptionsList");
 
 let currentProject = null;
 let motivationIndex = 0;
 
 // Cargar idioma guardado o usar español por defecto
 let currentLang = localStorage.getItem("sparky_lang") || "es";
-langSelect.value = currentLang;
 
 const i18n = {
     es: {
@@ -817,9 +828,19 @@ function updateLanguageUI(){
     document.getElementById("welcomeDesc").textContent = t.welcomeDesc;
     input.placeholder = t.placeholder;
     document.getElementById("footerText").textContent = t.footer;
+
+    // Actualizar clase activa en la lista personalizada
+    const options = langOptionsList.querySelectorAll(".lang-option");
+    options.forEach(opt => {
+        if(opt.getAttribute("data-lang") === currentLang){
+            opt.classList.add("active");
+        } else {
+            opt.classList.remove("active");
+        }
+    });
 }
 
-// Inicializar UI con el idioma guardado
+// Inicializar UI y marcar idioma actual
 updateLanguageUI();
 
 // Abrir / cerrar menú de los 3 puntos
@@ -832,10 +853,14 @@ window.addEventListener("click", () => {
     headerDropdown.classList.remove("active");
 });
 
-langSelect.addEventListener("change", (e) => {
-    currentLang = e.target.value;
-    localStorage.setItem("sparky_lang", currentLang); // Guardar en localStorage
+// Manejar selección de idioma de la lista personalizada
+langOptionsList.addEventListener("click", (e) => {
+    const option = e.target.closest(".lang-option");
+    if(!option) return;
+    currentLang = option.getAttribute("data-lang");
+    localStorage.setItem("sparky_lang", currentLang);
     updateLanguageUI();
+    headerDropdown.classList.remove("active");
 });
 
 const motivations = [
