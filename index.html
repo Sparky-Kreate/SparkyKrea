@@ -5,6 +5,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>SparkyKrea Studio's - Ultimate Edition</title>
 
+<!-- Meta tags de Open Graph para WhatsApp y redes sociales -->
+<meta property="og:title" content="SparkyKrea Studio's - Asesoría Publicitaria Inteligente">
+<meta property="og:description" content="Diseña guiones profesionales, estrategias detalladas y selección musical al instante.">
+<meta property="og:image" content="https://sparky-krea.github.io/tu-logo.png"> <!-- Reemplaza con la ruta de tu logo -->
+<meta property="og:url" content="https://sparky-krea.github.io/">
+<meta property="og:type" content="website">
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -552,7 +559,10 @@ const langSelect = document.getElementById("langSelect");
 
 let currentProject = null;
 let motivationIndex = 0;
-let currentLang = "es";
+
+// Cargar idioma guardado o usar español por defecto
+let currentLang = localStorage.getItem("sparky_lang") || "es";
+langSelect.value = currentLang;
 
 const i18n = {
     es: {
@@ -809,6 +819,9 @@ function updateLanguageUI(){
     document.getElementById("footerText").textContent = t.footer;
 }
 
+// Inicializar UI con el idioma guardado
+updateLanguageUI();
+
 // Abrir / cerrar menú de los 3 puntos
 headerDotsBtn.addEventListener("click", (e) => {
     e.stopPropagation();
@@ -821,6 +834,7 @@ window.addEventListener("click", () => {
 
 langSelect.addEventListener("change", (e) => {
     currentLang = e.target.value;
+    localStorage.setItem("sparky_lang", currentLang); // Guardar en localStorage
     updateLanguageUI();
 });
 
