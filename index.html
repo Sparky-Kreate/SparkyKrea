@@ -220,7 +220,7 @@ body{
 .header-logo-text span:nth-child(2){ color:#10b981; }
 .header-logo-text small{ display:block; font-size:6px; letter-spacing:2px; color:var(--muted); }
 
-/* Menú desplegable personalizado de idiomas */
+/* Menú desplegable personalizado de idiomas completamente opaco */
 .header-menu-container{ position:relative; }
 .header-dots-btn{
     background:none;
@@ -242,12 +242,13 @@ body{
     position:absolute;
     right:0;
     top:40px;
-    background:var(--panel);
+    background:#111318;
+    opacity:1;
     border:1px solid var(--border);
     border-radius:12px;
     padding:12px;
-    box-shadow:0 10px 25px rgba(0,0,0,0.5);
-    z-index:200;
+    box-shadow:0 20px 40px rgba(0,0,0,0.8);
+    z-index:99999;
     min-width:210px;
 }
 .header-dropdown.active{ display:block; }
@@ -508,7 +509,7 @@ textarea::placeholder{ color:#4b5563; }
         <header class="header">
             <div class="header-title"><button class="mobile-menu" id="mobileMenu">☰</button></div>
             <div class="header-right">
-                <!-- Selector de 10 idiomas rediseñado como lista interactiva -->
+                <!-- Selector de idiomas con fondo sólido y opaco -->
                 <div class="header-menu-container">
                     <button class="header-dots-btn" id="headerDotsBtn" title="Opciones / Idiomas">⋮</button>
                     <div class="header-dropdown" id="headerDropdown">
@@ -572,7 +573,6 @@ const langOptionsList = document.getElementById("langOptionsList");
 let currentProject = null;
 let motivationIndex = 0;
 
-// Cargar idioma guardado o usar español por defecto
 let currentLang = localStorage.getItem("sparky_lang") || "es";
 
 const i18n = {
@@ -829,7 +829,6 @@ function updateLanguageUI(){
     input.placeholder = t.placeholder;
     document.getElementById("footerText").textContent = t.footer;
 
-    // Actualizar clase activa en la lista personalizada
     const options = langOptionsList.querySelectorAll(".lang-option");
     options.forEach(opt => {
         if(opt.getAttribute("data-lang") === currentLang){
@@ -840,10 +839,8 @@ function updateLanguageUI(){
     });
 }
 
-// Inicializar UI y marcar idioma actual
 updateLanguageUI();
 
-// Abrir / cerrar menú de los 3 puntos
 headerDotsBtn.addEventListener("click", (e) => {
     e.stopPropagation();
     headerDropdown.classList.toggle("active");
@@ -853,7 +850,6 @@ window.addEventListener("click", () => {
     headerDropdown.classList.remove("active");
 });
 
-// Manejar selección de idioma de la lista personalizada
 langOptionsList.addEventListener("click", (e) => {
     const option = e.target.closest(".lang-option");
     if(!option) return;
