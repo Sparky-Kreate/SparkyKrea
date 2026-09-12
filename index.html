@@ -3,925 +3,599 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#08090b">
-
 <title>SparkyKrea Studio's</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
-<link rel="stylesheet"
-href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-
 <style>
-
-/* =========================================================
-   SPARKYKREA
-   Diseño general
-========================================================= */
-
-:root{
-    --vino:#800020;
-    --vino-light:#a20a35;
-    --green:#10B981;
-
-    --bg:#08090b;
-    --bg2:#0c0e11;
-    --panel:#0f1115;
-    --panel2:#121419;
-    --border:rgba(255,255,255,.07);
-
-    --text:#ffffff;
-    --muted:#8d929b;
-
-    --sidebar:270px;
-}
-
 *{
     box-sizing:border-box;
-}
-
-html,
-body{
     margin:0;
-    width:100%;
-    min-height:100%;
-    background:var(--bg);
-    color:var(--text);
-    font-family:"Inter",Arial,sans-serif;
+    padding:0;
+}
+
+:root{
+    --wine:#800020;
+    --green:#10B981;
+    --bg:#08090c;
+    --panel:#0d0f13;
+    --card:#111318;
+    --border:#20242c;
+    --white:#f5f5f5;
+    --muted:#858a94;
 }
 
 body{
-    min-height:100dvh;
+    font-family:Inter,Arial,sans-serif;
+    background:var(--bg);
+    color:var(--white);
+    height:100vh;
     overflow:hidden;
 }
 
-/* =========================================================
-   SPLASH
-========================================================= */
+/* ================= SPLASH ================= */
 
 #splash{
     position:fixed;
     inset:0;
-    z-index:99999;
-
+    z-index:9999;
+    background:#08090c;
     display:flex;
-    align-items:center;
     justify-content:center;
-
-    background:#070809;
-
-    animation:splashAuto 1.35s ease forwards;
-    pointer-events:none;
-}
-
-@keyframes splashAuto{
-    0%,72%{
-        opacity:1;
-        visibility:visible;
-    }
-
-    100%{
-        opacity:0;
-        visibility:hidden;
-    }
-}
-
-.splash-content{
-    text-align:center;
-    transform:translateY(-4px);
-    animation:splashLogo .9s ease;
-}
-
-@keyframes splashLogo{
-    from{
-        opacity:0;
-        transform:translateY(8px) scale(.97);
-    }
-
-    to{
-        opacity:1;
-        transform:translateY(-4px) scale(1);
-    }
+    align-items:center;
+    animation:splashOut .8s ease 2.2s forwards;
 }
 
 .splash-logo{
-    width:min(330px,75vw);
-    height:auto;
+    text-align:center;
+    animation:logoIn 1s ease;
 }
 
-.splash-subtitle{
-    margin-top:12px;
+.logo-icon{
+    width:75px;
+    height:75px;
+    margin:auto;
+}
+
+.logo-name{
+    margin-top:15px;
+    font-size:28px;
+    font-weight:800;
+    letter-spacing:-1px;
+}
+
+.logo-name span:first-child{
+    color:var(--wine);
+}
+
+.logo-name span:nth-child(2){
+    color:var(--green);
+}
+
+.logo-studio{
     font-size:10px;
-    letter-spacing:4px;
-    color:#777c84;
-    text-transform:uppercase;
+    letter-spacing:5px;
+    color:white;
+    margin-top:3px;
 }
 
-/* =========================================================
-   LOGO
-========================================================= */
+@keyframes logoIn{
+    from{
+        opacity:0;
+        transform:scale(.85);
+    }
+    to{
+        opacity:1;
+        transform:scale(1);
+    }
+}
+
+@keyframes splashOut{
+    to{
+        opacity:0;
+        visibility:hidden;
+        pointer-events:none;
+    }
+}
+
+/* ================= APP ================= */
+
+#app{
+    height:100vh;
+    display:flex;
+}
+
+/* ================= SIDEBAR ================= */
+
+.sidebar{
+    width:270px;
+    background:#0b0d11;
+    border-right:1px solid var(--border);
+    display:flex;
+    flex-direction:column;
+    padding:20px 15px;
+    flex-shrink:0;
+}
 
 .brand{
     display:flex;
     align-items:center;
     gap:10px;
-    user-select:none;
+    padding:4px 7px 24px;
 }
 
 .brand-icon{
-    width:43px;
-    height:43px;
-    flex:none;
+    width:35px;
+    height:35px;
 }
 
-.brand-name{
-    display:flex;
-    flex-direction:column;
-    line-height:1;
-}
-
-.brand-main{
-    font-size:19px;
+.brand-text{
+    font-size:16px;
     font-weight:800;
-    letter-spacing:-.8px;
 }
 
-.brand-main .sparky{
-    color:#8c1735;
+.brand-text .s{
+    color:var(--wine);
 }
 
-.brand-main .krea{
-    color:#1bc48d;
+.brand-text .k{
+    color:var(--green);
 }
 
-.brand-studios{
-    margin-top:5px;
+.brand-text small{
+    display:block;
     font-size:7px;
     letter-spacing:3px;
-    color:#e6e6e6;
-    font-weight:600;
-}
-
-/* =========================================================
-   APP
-========================================================= */
-
-#app{
-    width:100%;
-    height:100dvh;
-    display:flex;
-}
-
-/* =========================================================
-   SIDEBAR
-========================================================= */
-
-.sidebar{
-    width:var(--sidebar);
-    height:100dvh;
-
-    flex:none;
-
-    background:#0a0b0e;
-    border-right:1px solid var(--border);
-
-    display:flex;
-    flex-direction:column;
-
-    transition:.25s ease;
-}
-
-.sidebar-top{
-    padding:22px 18px 18px;
-}
-
-.sidebar-logo{
-    padding:3px 5px 22px;
-}
-
-.new-project{
-    width:100%;
-    border:1px solid rgba(128,0,32,.35);
-    background:rgba(128,0,32,.10);
     color:#fff;
+    margin-top:1px;
+}
 
-    padding:11px 13px;
-    border-radius:10px;
-
-    display:flex;
-    align-items:center;
-    gap:10px;
-
+.new-btn{
+    width:100%;
+    border:1px solid #292d35;
+    background:#12151a;
+    color:white;
+    border-radius:11px;
+    padding:12px;
     font-size:13px;
-    font-weight:600;
-
     cursor:pointer;
     transition:.2s;
 }
 
-.new-project:hover{
-    background:rgba(128,0,32,.18);
-    border-color:rgba(128,0,32,.55);
-}
-
-.new-project i{
-    color:#a92a4c;
+.new-btn:hover{
+    background:#171a20;
 }
 
 .history-title{
-    padding:20px 7px 10px;
-
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-
+    color:#707680;
     font-size:11px;
-    color:#777c84;
     text-transform:uppercase;
-    letter-spacing:1.5px;
-    font-weight:700;
+    letter-spacing:1px;
+    margin:25px 8px 10px;
 }
 
-.history-list{
+.history{
+    overflow:auto;
     flex:1;
-    overflow-y:auto;
-    padding:0 5px 15px;
 }
 
 .history-item{
-    width:100%;
-    padding:10px 9px;
-    margin-bottom:4px;
-
-    border:0;
-    border-radius:8px;
-
-    background:transparent;
-    color:#a8adb5;
-
-    text-align:left;
-    cursor:pointer;
-
+    padding:10px;
+    border-radius:9px;
+    color:#b9bdc5;
     font-size:12px;
-
-    display:flex;
-    align-items:center;
-    gap:9px;
-
-    transition:.15s;
+    cursor:pointer;
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    margin-bottom:3px;
 }
 
 .history-item:hover{
-    background:rgba(255,255,255,.035);
-    color:#fff;
+    background:#14171c;
+    color:white;
 }
 
-.history-item i{
-    font-size:11px;
-    color:#5e636b;
+.sidebar-bottom{
+    border-top:1px solid var(--border);
+    padding-top:14px;
+    text-align:center;
+    color:#555b65;
+    font-size:10px;
 }
 
-.history-empty{
-    padding:20px 10px;
-    color:#555a62;
-    font-size:12px;
-    line-height:1.5;
-}
-
-/* =========================================================
-   MAIN
-========================================================= */
+/* ================= MAIN ================= */
 
 .main{
     flex:1;
     min-width:0;
-    height:100dvh;
-
     display:flex;
     flex-direction:column;
-
-    background:
-        radial-gradient(
-            circle at 50% -20%,
-            rgba(128,0,32,.07),
-            transparent 35%
-        ),
-        var(--bg);
 }
 
-/* =========================================================
-   HEADER
-========================================================= */
+/* ================= HEADER ================= */
 
 .header{
-    height:70px;
-    flex:none;
-
+    height:62px;
+    border-bottom:1px solid var(--border);
     display:flex;
     align-items:center;
     justify-content:space-between;
-
     padding:0 24px;
-
-    border-bottom:1px solid rgba(255,255,255,.045);
-}
-
-.header-left{
-    display:flex;
-    align-items:center;
-    gap:12px;
-}
-
-.mobile-menu{
-    display:none;
-
-    width:37px;
-    height:37px;
-
-    border:1px solid var(--border);
-    border-radius:9px;
-
-    background:#101216;
-    color:#aaa;
-
-    cursor:pointer;
+    flex-shrink:0;
 }
 
 .header-title{
-    font-size:13px;
+    font-size:14px;
     font-weight:600;
-    color:#d7d9dc;
-}
-
-.header-right{
-    display:flex;
-    align-items:center;
-    gap:10px;
 }
 
 .header-logo{
     display:flex;
     align-items:center;
     gap:8px;
-
-    margin-right:5px;
 }
 
-.header-logo .brand-icon{
-    width:32px;
-    height:32px;
+.header-logo .mini-icon{
+    width:27px;
+    height:27px;
 }
 
-.header-logo .brand-main{
-    font-size:14px;
+.header-logo-text{
+    font-size:11px;
+    font-weight:700;
 }
 
-.header-logo .brand-studios{
+.header-logo-text .s{
+    color:var(--wine);
+}
+
+.header-logo-text .k{
+    color:var(--green);
+}
+
+.header-logo-text small{
+    display:block;
     font-size:5px;
     letter-spacing:2px;
-    margin-top:3px;
 }
 
-.header-dot{
-    width:6px;
-    height:6px;
-    border-radius:50%;
-    background:#444950;
-}
+/* ================= CHAT ================= */
 
-/* =========================================================
-   WORKSPACE
-========================================================= */
-
-.workspace{
+.chat{
     flex:1;
-    min-height:0;
-
-    display:flex;
-    flex-direction:column;
+    overflow-y:auto;
+    padding:35px 20px 120px;
 }
 
-/* =========================================================
-   WELCOME
-========================================================= */
+.chat-inner{
+    max-width:850px;
+    margin:auto;
+}
+
+/* ================= WELCOME ================= */
 
 .welcome{
-    width:min(900px,calc(100% - 40px));
-    margin:0 auto;
-
-    padding:65px 0 20px;
-
-    text-align:center;
-
-    transition:.3s;
-}
-
-.welcome.hidden{
-    display:none;
-}
-
-.welcome-logo{
+    min-height:55vh;
     display:flex;
+    flex-direction:column;
+    align-items:center;
     justify-content:center;
+    text-align:center;
+}
+
+.welcome-icon{
+    width:82px;
+    height:82px;
     margin-bottom:20px;
 }
 
-.welcome-logo .brand-icon{
-    width:67px;
-    height:67px;
-}
-
 .welcome h1{
-    margin:0;
-
-    font-size:clamp(27px,4vw,39px);
-    letter-spacing:-1.8px;
-
-    font-weight:800;
-}
-
-.welcome h1 span{
-    color:#a8abb0;
+    font-size:30px;
+    letter-spacing:-1px;
+    margin-bottom:9px;
 }
 
 .welcome p{
-    margin:13px auto 0;
-
-    max-width:550px;
-
-    color:#727780;
-
+    color:#777d87;
     font-size:13px;
+    max-width:470px;
     line-height:1.7;
 }
 
-/* =========================================================
-   MESSAGES
-========================================================= */
-
-.messages{
-    flex:1;
-    min-height:0;
-
-    overflow-y:auto;
-    scroll-behavior:smooth;
-
-    padding:25px 20px 15px;
-}
-
-.messages-inner{
-    width:min(900px,100%);
-    margin:0 auto;
-}
+/* ================= MESSAGES ================= */
 
 .message{
     display:flex;
-    margin-bottom:22px;
-}
-
-.message.bot{
-    justify-content:flex-start;
+    margin-bottom:23px;
+    animation:messageIn .25s ease;
 }
 
 .message.user{
     justify-content:flex-end;
 }
 
-.message-bubble{
-    max-width:820px;
+.message.bot{
+    justify-content:flex-start;
+}
 
-    border-radius:13px;
-
+.bubble{
+    max-width:82%;
     padding:14px 16px;
-
+    border-radius:13px;
     font-size:13px;
-    line-height:1.7;
+    line-height:1.65;
+    white-space:normal;
 }
 
-/* BOT: MUCHO MÁS DISCRETO */
-
-.bot .message-bubble{
-    width:100%;
-
-    background:#101216;
-
-    border:1px solid rgba(255,255,255,.045);
-
-    color:#fff;
-
-    box-shadow:none;
-}
-
-/* USER */
-
-.user .message-bubble{
-    max-width:650px;
-
+.user .bubble{
     background:#15171c;
-
-    border:1px solid rgba(255,255,255,.055);
-
-    color:#f4f4f4;
+    border:1px solid #20232a;
+    color:#e8e8e8;
 }
 
-.message-label{
-    display:flex;
-    align-items:center;
-    gap:8px;
-
-    margin-bottom:9px;
-
-    font-size:10px;
-    font-weight:700;
-    letter-spacing:1px;
-
-    color:#747982;
-    text-transform:uppercase;
-}
-
-.message-label .bot-mini{
-    width:20px;
-    height:20px;
-}
-
-.bot-content{
+.bot .bubble{
+    background:#101216;
+    border:1px solid #1b1e24;
     color:#fff;
 }
 
-.bot-content p{
-    margin:0 0 12px;
-}
+/* headings inside bot */
 
-.bot-content p:last-child{
-    margin-bottom:0;
+.bot-title{
+    font-size:17px;
+    font-weight:700;
+    margin-bottom:10px;
+    color:white;
 }
 
 .section{
-    margin:13px 0;
-    padding-left:12px;
-
-    border-left:2px solid rgba(255,255,255,.08);
+    margin-top:15px;
 }
 
-.section-title{
-    margin-bottom:4px;
-
-    font-size:10px;
-    letter-spacing:1px;
-    text-transform:uppercase;
-
-    color:#8e939b;
-    font-weight:700;
-}
-
-.section-text{
+.section strong{
     color:#fff;
-}
-
-.idea-card{
-    margin:11px 0;
-    padding:12px 13px;
-
-    background:rgba(255,255,255,.018);
-
-    border:1px solid rgba(255,255,255,.045);
-
-    border-radius:9px;
-}
-
-.idea-number{
-    color:#858a92;
-    font-size:10px;
-    font-weight:700;
+    display:block;
     margin-bottom:4px;
-}
-
-.idea-title{
-    color:#fff;
-    font-size:13px;
-    font-weight:700;
-    margin-bottom:4px;
-}
-
-.idea-description{
-    color:#b5b8bd;
-    font-size:12px;
-    line-height:1.6;
 }
 
 .motivation{
-    margin-top:17px;
-    padding-top:12px;
-
-    border-top:1px solid rgba(255,255,255,.045);
-
-    color:#aeb2b7;
-
-    font-size:11px;
+    margin-top:18px;
+    padding-top:13px;
+    border-top:1px solid #22252b;
+    color:#c7c9cd;
     font-style:italic;
 }
 
-/* =========================================================
-   TYPING
-========================================================= */
+/* ================= IDEA CARDS ================= */
+
+.idea{
+    border:1px solid #20232a;
+    background:#0d0f13;
+    border-radius:11px;
+    padding:13px;
+    margin:10px 0;
+}
+
+.idea-number{
+    font-weight:700;
+    color:#fff;
+    margin-bottom:6px;
+}
+
+.idea span{
+    color:#aaaeb6;
+}
+
+/* ================= TYPING ================= */
 
 .typing{
     display:flex;
-    gap:5px;
-    padding:7px 3px;
+    gap:4px;
+    padding:6px 2px;
 }
 
-.typing span{
+.typing i{
     width:5px;
     height:5px;
     border-radius:50%;
-    background:#666b73;
-
-    animation:typing 1s infinite ease-in-out;
+    background:#737780;
+    animation:typing 1s infinite;
 }
 
-.typing span:nth-child(2){
+.typing i:nth-child(2){
     animation-delay:.15s;
 }
 
-.typing span:nth-child(3){
+.typing i:nth-child(3){
     animation-delay:.3s;
 }
 
 @keyframes typing{
-    0%,60%,100%{
-        transform:translateY(0);
-        opacity:.35;
-    }
+    0%,100%{opacity:.25}
+    50%{opacity:1}
+}
 
-    30%{
-        transform:translateY(-3px);
+@keyframes messageIn{
+    from{
+        opacity:0;
+        transform:translateY(5px);
+    }
+    to{
         opacity:1;
+        transform:translateY(0);
     }
 }
 
-/* =========================================================
-   COMPOSER
-========================================================= */
+/* ================= COMPOSER ================= */
 
 .composer-area{
-    flex:none;
-
-    padding:10px 20px 0;
-
-    background:linear-gradient(
-        to bottom,
-        rgba(8,9,11,0),
-        rgba(8,9,11,.94) 22%
-    );
+    position:fixed;
+    bottom:0;
+    left:270px;
+    right:0;
+    padding:15px 20px 18px;
+    background:linear-gradient(transparent,#08090c 25%);
 }
 
 .composer{
-    width:min(900px,100%);
-    margin:0 auto;
-
+    max-width:850px;
+    margin:auto;
+    border:1px solid #292d34;
+    background:#101216;
+    border-radius:15px;
     display:flex;
     align-items:flex-end;
-    gap:9px;
-
     padding:9px;
-
-    background:#111318;
-
-    border:1px solid rgba(255,255,255,.07);
-
-    border-radius:14px;
-
-    box-shadow:0 10px 35px rgba(0,0,0,.25);
 }
 
-.composer textarea{
+textarea{
     flex:1;
-
-    min-height:40px;
-    max-height:140px;
-
     resize:none;
-
     border:0;
     outline:0;
-
     background:transparent;
-
-    color:#fff;
-
+    color:white;
     font-family:inherit;
     font-size:13px;
-    line-height:1.5;
-
-    padding:10px 8px;
+    padding:9px;
+    max-height:130px;
 }
 
-.composer textarea::placeholder{
-    color:#5f646c;
+textarea::placeholder{
+    color:#626771;
 }
 
 .send{
-    width:40px;
-    height:40px;
-
-    flex:none;
-
-    border:0;
+    width:38px;
+    height:38px;
     border-radius:10px;
-
-    background:#e9e9e9;
-    color:#090a0c;
-
+    border:0;
+    background:#e8e8e8;
+    color:#111;
+    font-size:18px;
     cursor:pointer;
-
-    transition:.2s;
 }
 
 .send:hover{
-    background:#fff;
-    transform:translateY(-1px);
+    background:white;
 }
-
-.send:disabled{
-    opacity:.35;
-    cursor:default;
-    transform:none;
-}
-
-/* =========================================================
-   FOOTER
-========================================================= */
 
 .footer{
-    width:100%;
-
-    padding:9px 20px 13px;
-
     text-align:center;
-
-    color:#4d5259;
-
+    color:#484d56;
     font-size:9px;
-    letter-spacing:1.5px;
-
-    text-transform:lowercase;
-
-    flex:none;
+    margin-top:7px;
 }
 
-.footer strong{
-    color:#737880;
-    font-weight:600;
+/* ================= DURATION PANEL ================= */
+
+.duration-wrap{
+    position:relative;
+    margin-top:15px;
 }
 
-/* =========================================================
-   OVERLAY
-========================================================= */
+.duration-button{
+    background:#111419;
+    border:1px solid #292d34;
+    color:white;
+    border-radius:9px;
+    padding:10px 14px;
+    cursor:pointer;
+    font-size:12px;
+}
 
-.overlay{
+.duration-button:hover{
+    background:#171a20;
+}
+
+.duration-panel{
     display:none;
-
-    position:fixed;
-    inset:0;
+    position:absolute;
+    bottom:48px;
+    left:0;
+    width:250px;
+    padding:10px;
+    background:#0d0f13;
+    border:1px solid #292d34;
+    border-radius:13px;
+    box-shadow:0 15px 40px rgba(0,0,0,.45);
     z-index:50;
-
-    background:rgba(0,0,0,.65);
-    backdrop-filter:blur(2px);
 }
 
-.overlay.show{
-    display:block;
+.duration-panel.open{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:6px;
 }
 
-/* =========================================================
-   SCROLLBAR
-========================================================= */
-
-::-webkit-scrollbar{
-    width:5px;
+.duration-option{
+    background:#111419;
+    border:1px solid #20242b;
+    color:#ddd;
+    padding:10px 7px;
+    border-radius:8px;
+    cursor:pointer;
+    font-size:11px;
 }
 
-::-webkit-scrollbar-track{
-    background:transparent;
+.duration-option:hover{
+    background:#191c22;
+    border-color:#333842;
 }
 
-::-webkit-scrollbar-thumb{
-    background:#24272c;
-    border-radius:10px;
+/* ================= MOBILE ================= */
+
+.mobile-menu{
+    display:none;
+    background:none;
+    border:0;
+    color:white;
+    font-size:21px;
+    cursor:pointer;
 }
 
-/* =========================================================
-   MOBILE
-========================================================= */
-
-@media(max-width:760px){
-
-    body{
-        overflow:hidden;
-    }
+@media(max-width:700px){
 
     .sidebar{
         position:fixed;
         z-index:100;
-
-        left:0;
+        left:-280px;
         top:0;
-
-        transform:translateX(-105%);
-
-        box-shadow:20px 0 50px rgba(0,0,0,.45);
+        bottom:0;
+        transition:.25s;
     }
 
     .sidebar.open{
-        transform:translateX(0);
+        left:0;
     }
 
     .mobile-menu{
-        display:flex;
-        align-items:center;
-        justify-content:center;
+        display:block;
+        margin-right:10px;
     }
 
     .header{
-        height:62px;
-        padding:0 13px;
+        padding:0 14px;
     }
 
     .header-title{
-        font-size:12px;
+        display:flex;
+        align-items:center;
     }
 
-    .header-logo .brand-name{
+    .header-logo-text{
         display:none;
     }
 
-    .header-logo .brand-icon{
-        width:31px;
-        height:31px;
+    .chat{
+        padding:25px 12px 115px;
     }
 
-    .welcome{
-        width:calc(100% - 28px);
-        padding:45px 0 15px;
-    }
-
-    .welcome-logo .brand-icon{
-        width:57px;
-        height:57px;
-    }
-
-    .welcome h1{
-        font-size:27px;
-    }
-
-    .welcome p{
-        font-size:12px;
-    }
-
-    .messages{
-        padding:15px 11px 10px;
-    }
-
-    .message-bubble{
-        font-size:12px;
-    }
-
-    .bot .message-bubble{
-        padding:13px;
-    }
-
-    .user .message-bubble{
-        max-width:88%;
-    }
-
-    .composer-area{
-        padding:7px 10px 0;
-    }
-
-    .composer{
-        border-radius:12px;
-    }
-
-    .footer{
-        padding:8px 10px 10px;
-    }
-}
-
-/* =========================================================
-   VERY SMALL PHONES
-========================================================= */
-
-@media(max-width:380px){
-
-    .header-right .header-dot{
-        display:none;
-    }
-
-    .welcome{
-        padding-top:30px;
+    .bubble{
+        max-width:92%;
     }
 
     .welcome h1{
@@ -929,449 +603,174 @@ body{
     }
 
     .welcome p{
-        font-size:11px;
-    }
-
-    .composer textarea{
         font-size:12px;
     }
-}
 
+    .composer-area{
+        left:0;
+        padding:10px 10px 14px;
+    }
+
+    .duration-panel{
+        width:230px;
+    }
+}
 </style>
 </head>
 
 <body>
 
-<!-- =======================================================
-     SPLASH
-======================================================= -->
+<!-- ================= SPLASH ================= -->
 
 <div id="splash">
+    <div class="splash-logo">
 
-    <div class="splash-content">
-
-        <svg class="splash-logo"
-             viewBox="0 0 520 150"
-             xmlns="http://www.w3.org/2000/svg">
-
-            <!-- ICONO CASA + CÁMARA -->
-
-            <g transform="translate(10 18)">
-
-                <!-- techo -->
-                <path
-                    d="M15 62 L58 25 L101 62"
+        <svg class="logo-icon" viewBox="0 0 100 100">
+            <path d="M15 45 L50 18 L85 45 V82 H15Z"
+                  fill="none"
+                  stroke="#800020"
+                  stroke-width="5"/>
+            <rect x="29" y="49" width="42" height="25"
+                  rx="4"
+                  fill="none"
+                  stroke="#10B981"
+                  stroke-width="4"/>
+            <circle cx="50" cy="61" r="8"
                     fill="none"
-                    stroke="#8b1736"
-                    stroke-width="7"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"/>
-
-                <!-- casa -->
-                <path
-                    d="M27 56 V105 H91 V56"
-                    fill="none"
-                    stroke="#8b1736"
-                    stroke-width="6"
-                    stroke-linejoin="round"/>
-
-                <!-- cámara -->
-                <rect
-                    x="39"
-                    y="65"
-                    width="43"
-                    height="29"
-                    rx="7"
-                    fill="#101216"
-                    stroke="#10B981"
-                    stroke-width="4"/>
-
-                <!-- lente -->
-                <circle
-                    cx="60.5"
-                    cy="79.5"
-                    r="9"
-                    fill="none"
-                    stroke="#10B981"
-                    stroke-width="4"/>
-
-                <circle
-                    cx="60.5"
-                    cy="79.5"
-                    r="3"
-                    fill="#10B981"/>
-
-                <!-- pequeño destello -->
-                <path
-                    d="M98 30 L101 38 L109 41 L101 44 L98 52 L95 44 L87 41 L95 38 Z"
-                    fill="#10B981"/>
-
-            </g>
-
-            <!-- TEXTO -->
-
-            <text
-                x="130"
-                y="82"
-                font-family="Inter, Arial, sans-serif"
-                font-size="51"
-                font-weight="800"
-                letter-spacing="-2">
-
-                <tspan fill="#8b1736">Sparky</tspan>
-                <tspan fill="#10B981">Krea</tspan>
-
-            </text>
-
-            <text
-                x="134"
-                y="106"
-                fill="#ffffff"
-                font-family="Inter, Arial, sans-serif"
-                font-size="11"
-                font-weight="600"
-                letter-spacing="5">
-
-                STUDIO'S
-
-            </text>
-
+                    stroke="white"
+                    stroke-width="3"/>
+            <path d="M39 49 L43 42 H57 L61 49"
+                  fill="none"
+                  stroke="#10B981"
+                  stroke-width="3"/>
         </svg>
 
-        <div class="splash-subtitle">
-            creative engine
+        <div class="logo-name">
+            <span>Sparky</span><span>Krea</span>
         </div>
 
+        <div class="logo-studio">STUDIO'S</div>
     </div>
-
 </div>
 
-
-<!-- =======================================================
-     APP
-======================================================= -->
+<!-- ================= APP ================= -->
 
 <div id="app">
 
-    <!-- SIDEBAR -->
-
     <aside class="sidebar" id="sidebar">
 
-        <div class="sidebar-top">
+        <div class="brand">
 
-            <div class="sidebar-logo">
+            <svg class="brand-icon" viewBox="0 0 100 100">
+                <path d="M15 45 L50 18 L85 45 V82 H15Z"
+                      fill="none"
+                      stroke="#800020"
+                      stroke-width="5"/>
+                <rect x="29" y="49" width="42" height="25"
+                      rx="4"
+                      fill="none"
+                      stroke="#10B981"
+                      stroke-width="4"/>
+                <circle cx="50" cy="61" r="8"
+                        fill="none"
+                        stroke="white"
+                        stroke-width="3"/>
+            </svg>
 
-                <div class="brand">
-
-                    <svg class="brand-icon"
-                         viewBox="0 0 120 120"
-                         xmlns="http://www.w3.org/2000/svg">
-
-                        <path
-                            d="M14 52 L60 14 L106 52"
-                            fill="none"
-                            stroke="#8b1736"
-                            stroke-width="8"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"/>
-
-                        <path
-                            d="M26 47 V103 H94 V47"
-                            fill="none"
-                            stroke="#8b1736"
-                            stroke-width="7"/>
-
-                        <rect
-                            x="37"
-                            y="57"
-                            width="46"
-                            height="32"
-                            rx="8"
-                            fill="#0d0f12"
-                            stroke="#10B981"
-                            stroke-width="5"/>
-
-                        <circle
-                            cx="60"
-                            cy="73"
-                            r="11"
-                            fill="none"
-                            stroke="#10B981"
-                            stroke-width="5"/>
-
-                        <circle
-                            cx="60"
-                            cy="73"
-                            r="3.5"
-                            fill="#10B981"/>
-
-                        <path
-                            d="M99 18 L102 27 L111 30 L102 33 L99 42 L96 33 L87 30 L96 27 Z"
-                            fill="#10B981"/>
-
-                    </svg>
-
-                    <div class="brand-name">
-
-                        <div class="brand-main">
-                            <span class="sparky">Sparky</span><span class="krea">Krea</span>
-                        </div>
-
-                        <div class="brand-studios">
-                            STUDIO'S
-                        </div>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-
-            <button class="new-project" id="newProject">
-
-                <i class="fa-solid fa-plus"></i>
-
-                <span>Nuevo proyecto</span>
-
-            </button>
-
-
-            <div class="history-title">
-
-                <span>Historial</span>
-
+            <div class="brand-text">
+                <span class="s">Sparky</span><span class="k">Krea</span>
+                <small>STUDIO'S</small>
             </div>
 
         </div>
 
+        <button class="new-btn" id="newProject">
+            + Nuevo proyecto
+        </button>
 
-        <div class="history-list" id="historyList">
+        <div class="history-title">
+            Historial
+        </div>
 
-            <div class="history-empty">
-                Tus conversaciones aparecerán aquí automáticamente.
-            </div>
+        <div class="history" id="history"></div>
 
+        <div class="sidebar-bottom">
+            SparkyKrea Studio's
         </div>
 
     </aside>
 
-
-    <!-- OVERLAY MOBILE -->
-
-    <div class="overlay" id="overlay"></div>
-
-
-    <!-- MAIN -->
-
     <main class="main">
-
-        <!-- HEADER -->
 
         <header class="header">
 
-            <div class="header-left">
-
-                <button class="mobile-menu" id="mobileMenu">
-                    <i class="fa-solid fa-bars"></i>
-                </button>
-
-                <div class="header-title">
-                    SparkyKrea Studio's
-                </div>
-
+            <div class="header-title">
+                <button class="mobile-menu" id="mobileMenu">☰</button>
+                SparkyKrea Studio's
             </div>
 
+            <div class="header-logo">
 
-            <div class="header-right">
-
-                <!-- LOGO ARRIBA, JUNTO AL HISTORIAL/CONTROLES -->
-
-                <div class="header-logo">
-
-                    <svg class="brand-icon"
-                         viewBox="0 0 120 120"
-                         xmlns="http://www.w3.org/2000/svg">
-
-                        <path
-                            d="M14 52 L60 14 L106 52"
+                <svg class="mini-icon" viewBox="0 0 100 100">
+                    <path d="M15 45 L50 18 L85 45 V82 H15Z"
+                          fill="none"
+                          stroke="#800020"
+                          stroke-width="5"/>
+                    <rect x="29" y="49" width="42" height="25"
+                          rx="4"
+                          fill="none"
+                          stroke="#10B981"
+                          stroke-width="4"/>
+                    <circle cx="50" cy="61" r="8"
                             fill="none"
-                            stroke="#8b1736"
-                            stroke-width="8"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"/>
+                            stroke="white"
+                            stroke-width="3"/>
+                </svg>
 
-                        <path
-                            d="M26 47 V103 H94 V47"
-                            fill="none"
-                            stroke="#8b1736"
-                            stroke-width="7"/>
-
-                        <rect
-                            x="37"
-                            y="57"
-                            width="46"
-                            height="32"
-                            rx="8"
-                            fill="#0d0f12"
-                            stroke="#10B981"
-                            stroke-width="5"/>
-
-                        <circle
-                            cx="60"
-                            cy="73"
-                            r="11"
-                            fill="none"
-                            stroke="#10B981"
-                            stroke-width="5"/>
-
-                        <circle
-                            cx="60"
-                            cy="73"
-                            r="3.5"
-                            fill="#10B981"/>
-
-                        <path
-                            d="M99 18 L102 27 L111 30 L102 33 L99 42 L96 33 L87 30 L96 27 Z"
-                            fill="#10B981"/>
-
-                    </svg>
-
-                    <div class="brand-name">
-
-                        <div class="brand-main">
-                            <span class="sparky">Sparky</span><span class="krea">Krea</span>
-                        </div>
-
-                        <div class="brand-studios">
-                            STUDIO'S
-                        </div>
-
-                    </div>
-
+                <div class="header-logo-text">
+                    <span class="s">Sparky</span><span class="k">Krea</span>
+                    <small>STUDIO'S</small>
                 </div>
 
-                <div class="header-dot"></div>
-
-                <i class="fa-solid fa-ellipsis" style="color:#626770;font-size:15px;"></i>
+                <span style="color:#555">•</span>
+                <span style="color:#777">⋯</span>
 
             </div>
 
         </header>
 
+        <section class="chat" id="chat">
 
-        <!-- WORKSPACE -->
+            <div class="chat-inner">
 
-        <section class="workspace">
+                <div class="welcome" id="welcome">
 
-
-            <!-- WELCOME -->
-
-            <div class="welcome" id="welcome">
-
-                <div class="welcome-logo">
-
-                    <svg class="brand-icon"
-                         viewBox="0 0 120 120"
-                         xmlns="http://www.w3.org/2000/svg">
-
-                        <path
-                            d="M14 52 L60 14 L106 52"
-                            fill="none"
-                            stroke="#8b1736"
-                            stroke-width="8"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"/>
-
-                        <path
-                            d="M26 47 V103 H94 V47"
-                            fill="none"
-                            stroke="#8b1736"
-                            stroke-width="7"/>
-
-                        <rect
-                            x="37"
-                            y="57"
-                            width="46"
-                            height="32"
-                            rx="8"
-                            fill="#0d0f12"
-                            stroke="#10B981"
-                            stroke-width="5"/>
-
-                        <circle
-                            cx="60"
-                            cy="73"
-                            r="11"
-                            fill="none"
-                            stroke="#10B981"
-                            stroke-width="5"/>
-
-                        <circle
-                            cx="60"
-                            cy="73"
-                            r="3.5"
-                            fill="#10B981"/>
-
-                        <path
-                            d="M99 18 L102 27 L111 30 L102 33 L99 42 L96 33 L87 30 L96 27 Z"
-                            fill="#10B981"/>
-
+                    <svg class="welcome-icon" viewBox="0 0 100 100">
+                        <path d="M15 45 L50 18 L85 45 V82 H15Z"
+                              fill="none"
+                              stroke="#800020"
+                              stroke-width="5"/>
+                        <rect x="29" y="49" width="42" height="25"
+                              rx="4"
+                              fill="none"
+                              stroke="#10B981"
+                              stroke-width="4"/>
+                        <circle cx="50" cy="61" r="8"
+                                fill="none"
+                                stroke="white"
+                                stroke-width="3"/>
                     </svg>
 
-                </div>
+                    <h1>¿Qué vamos a crear hoy?</h1>
 
-                <h1>
-                    ¿Qué vamos a crear <span>hoy?</span>
-                </h1>
-
-                <p>
-                    Cuéntame lo que tienes en mente. SparkyKrea analiza
-                    lo que escribes y adapta la respuesta a tu idea.
-                </p>
-
-            </div>
-
-
-            <!-- MESSAGES -->
-
-            <div class="messages" id="messages">
-
-                <div class="messages-inner" id="messagesInner"></div>
-
-            </div>
-
-
-            <!-- COMPOSER -->
-
-            <div class="composer-area">
-
-                <div class="composer">
-
-                    <textarea
-                        id="userInput"
-                        rows="1"
-                        placeholder="Cuéntame qué quieres crear..."
-                        autocomplete="off"></textarea>
-
-                    <button class="send" id="sendButton" aria-label="Enviar">
-
-                        <i class="fa-solid fa-arrow-up"></i>
-
-                    </button>
+                    <p>
+                        Cuéntame lo que tienes en mente. SparkyKrea analizará
+                        tu idea y te ayudará a convertirla en contenido.
+                    </p>
 
                 </div>
 
             </div>
-
-
-            <!-- FOOTER -->
-
-            <footer class="footer">
-
-                by <strong>SparkyKrea</strong>
-
-            </footer>
 
         </section>
 
@@ -1379,6 +778,29 @@ body{
 
 </div>
 
+<!-- ================= COMPOSER ================= -->
+
+<div class="composer-area">
+
+    <div class="composer">
+
+        <textarea
+            id="input"
+            rows="1"
+            placeholder="Cuéntame qué quieres crear..."
+        ></textarea>
+
+        <button class="send" id="send">
+            ↑
+        </button>
+
+    </div>
+
+    <div class="footer">
+        by SparkyKrea
+    </div>
+
+</div>
 
 <script>
 
@@ -1386,38 +808,22 @@ body{
    SPARKYKREA ENGINE
 ========================================================= */
 
+const input = document.getElementById("input");
+const send = document.getElementById("send");
+const chat = document.getElementById("chat");
+const chatInner = chat.querySelector(".chat-inner");
+const welcome = document.getElementById("welcome");
+const history = document.getElementById("history");
 
-/* ---------------------------------------------------------
-   UTILIDADES
---------------------------------------------------------- */
-
-const $ = selector => document.querySelector(selector);
-
-function normalize(text){
-
-    return text
-        .toLowerCase()
-        .normalize("NFD")
-        .replace(/[\u0300-\u036f]/g,"")
-        .trim();
-
-}
-
-function escapeHTML(text){
-
-    return String(text)
-        .replace(/&/g,"&amp;")
-        .replace(/</g,"&lt;")
-        .replace(/>/g,"&gt;")
-        .replace(/"/g,"&quot;")
-        .replace(/'/g,"&#039;");
-
-}
+let greetingShown = false;
+let pendingDuration = false;
+let currentProject = null;
+let motivationIndex = 0;
 
 
-/* ---------------------------------------------------------
-   HORA DEL DÍA
---------------------------------------------------------- */
+/* =========================================================
+   SALUDO — SOLO UNA VEZ
+========================================================= */
 
 function getGreeting(){
 
@@ -1432,1468 +838,853 @@ function getGreeting(){
     }
 
     return "Buenas noches";
-
 }
 
 
-/* ---------------------------------------------------------
+function showGreeting(){
+
+    if(greetingShown) return;
+
+    greetingShown = true;
+
+    addBotMessage(
+        `${getGreeting()} 👋<br><br>
+        Soy SparkyKrea. Cuéntame qué tienes en mente y yo me encargo de analizarlo.`
+    );
+}
+
+
+/* =========================================================
    MOTIVACIONES
---------------------------------------------------------- */
+========================================================= */
 
 const motivations = [
 
-    "Una buena idea no necesita ser perfecta para empezar a funcionar.",
-
-    "Hazlo simple, hazlo tuyo y deja que el contenido hable.",
-
-    "La diferencia muchas veces está en cómo cuentas algo que todos conocen.",
-
-    "No necesitas esperar a tener la idea perfecta. Necesitas probar una.",
-
-    "Cada publicación es otra oportunidad para encontrar algo que conecte.",
-
-    "Si la idea te representa, ya tienes una razón para publicarla.",
-
-    "La creatividad mejora cuando dejas de intentar hacer siempre lo mismo.",
-
-    "Empieza con lo que tienes y mejora mientras avanzas.",
-
-    "Un buen concepto puede convertirse en una serie completa.",
-
-    "No busques copiar lo que funciona: busca entender por qué funciona.",
-
-    "Tu próximo video puede salir de una idea que hoy parece pequeña.",
-
-    "Prueba, mide y vuelve a intentar. Así se construye un estilo.",
-
-    "La constancia convierte ideas normales en contenido reconocible.",
-
-    "Si consigues que alguien quiera ver los primeros segundos, ya empezaste bien.",
-
-    "No subestimes una idea sencilla bien ejecutada.",
-
-    "La originalidad aparece cuando empiezas a ponerle tu propia personalidad a las ideas.",
-
-    "Hoy puede ser simplemente el primer intento de algo mucho más grande.",
-
-    "Crea primero. Perfecciona después.",
-
-    "Que el miedo a que no funcione no decida por ti.",
-
-    "Una publicación no define tu camino; cada intento lo va construyendo."
+    "Una buena idea puede empezar pequeña y terminar siendo enorme.",
+    "No necesitas tenerlo todo claro para empezar. Vamos paso a paso.",
+    "La creatividad mejora cuando te atreves a probar cosas diferentes.",
+    "Tu próxima idea podría ser la que marque la diferencia.",
+    "Haz que alguien quiera quedarse hasta el último segundo.",
+    "Crear también es experimentar. Si algo no funciona, lo cambiamos.",
+    "Una idea sencilla, bien ejecutada, puede sorprender muchísimo.",
+    "No busques solamente publicar: busca dejar algo en quien lo vea.",
+    "Cada video es una oportunidad para mejorar el siguiente.",
+    "La originalidad aparece cuando dejas de copiar fórmulas.",
+    "Empieza con lo que tienes y construye desde ahí.",
+    "Un buen concepto merece una buena ejecución.",
+    "No subestimes una idea que todavía está tomando forma.",
+    "Hazlo interesante, hazlo tuyo.",
+    "La constancia convierte las ideas en proyectos.",
+    "Tu creatividad no necesita permiso para empezar.",
+    "Prueba, analiza y vuelve a intentarlo. Así nacen las buenas ideas.",
+    "Lo importante no es que sea perfecto, sino que tenga algo que decir.",
+    "Cada proyecto puede enseñarte algo nuevo.",
+    "Ahora toca convertir la idea en algo que la gente quiera ver."
 
 ];
 
-let motivationIndex = 0;
-
-function getMotivation(){
+function motivation(){
 
     const text = motivations[motivationIndex % motivations.length];
 
     motivationIndex++;
 
-    return text;
-
+    return `
+        <div class="motivation">
+            ${text}
+        </div>
+    `;
 }
 
 
-/* ---------------------------------------------------------
-   JUEGOS
---------------------------------------------------------- */
+/* =========================================================
+   DURACIONES
+========================================================= */
 
-const games = {
+const durations = [
+    "10 segundos",
+    "15 segundos",
+    "30 segundos",
+    "45 segundos",
+    "60 segundos",
+    "90 segundos",
+    "2 minutos",
+    "3 minutos",
+    "5 minutos"
+];
 
-    valorant:{
-        names:[
-            "valorant",
-            "val"
-        ],
 
-        characters:[
-            "reyna",
-            "jett",
-            "sage",
-            "raze",
-            "omen",
-            "cypher",
-            "killjoy",
-            "gekko",
-            "sova",
-            "viper",
-            "yoru",
-            "chamber",
-            "neon",
-            "iso",
-            "clove",
-            "fade",
-            "breach",
-            "skye",
-            "phoenix",
-            "brimstone",
-            "astra",
-            "harbor",
-            "deadlock",
-            "waylay",
-            "tejo",
-            "vyse"
-        ]
-    },
+function showDurationSelector(){
 
-    minecraft:{
-        names:["minecraft"],
-        characters:[]
-    },
+    const id = "duration-" + Date.now();
 
-    roblox:{
-        names:["roblox"],
-        characters:[]
-    },
+    const html = `
 
-    fortnite:{
-        names:["fortnite"],
-        characters:[
-            "jonesy",
-            "peely",
-            "fishstick"
-        ]
-    },
+        <div class="duration-wrap">
 
-    "clash royale":{
-        names:["clash royale","clash"],
-        characters:[
-            "montapuercos",
-            "caballero",
-            "principe",
-            "princesa",
-            "pekka",
-            "mega caballero",
-            "mago",
-            "bruja",
-            "minero",
-            "esqueleto gigante",
-            "golem",
-            "gigante"
-        ]
-    },
+            <button
+                class="duration-button"
+                onclick="toggleDuration('${id}')"
+            >
+                ⏱ Elegir duración
+            </button>
 
-    "brawl stars":{
-        names:["brawl stars"],
-        characters:[
-            "shelly",
-            "colt",
-            "spike",
-            "crow",
-            "leon",
-            "edgar",
-            "mortis",
-            "stu",
-            "surge"
-        ]
-    },
+            <div
+                class="duration-panel"
+                id="${id}"
+            >
 
-    "free fire":{
-        names:["free fire"],
-        characters:[
-            "alvaro",
-            "kelly",
-            "hayato",
-            "moco",
-            "chrono"
-        ]
+                ${durations.map(d => `
+                    <button
+                        class="duration-option"
+                        onclick="selectDuration('${d.replace(/'/g,"\\'")}')"
+                    >
+                        ${d}
+                    </button>
+                `).join("")}
+
+                <button
+                    class="duration-option"
+                    onclick="customDuration()"
+                >
+                    Personalizado
+                </button>
+
+            </div>
+
+        </div>
+    `;
+
+    addBotMessage(html);
+}
+
+
+function toggleDuration(id){
+
+    const panel = document.getElementById(id);
+
+    if(panel){
+        panel.classList.toggle("open");
+    }
+}
+
+
+function selectDuration(duration){
+
+    pendingDuration = false;
+
+    if(!currentProject){
+
+        currentProject = {
+            topic:"contenido",
+            type:"video",
+            duration:duration
+        };
+
+    }else{
+
+        currentProject.duration = duration;
+
     }
 
-};
+    addUserMessage(duration);
+
+    showTyping();
+
+    setTimeout(() => {
+
+        removeTyping();
+
+        addBotMessage(
+            buildLongScript(currentProject)
+        );
+
+    },700);
+}
 
 
-/* ---------------------------------------------------------
-   BUSCAR JUEGO
---------------------------------------------------------- */
+function customDuration(){
+
+    const value = prompt(
+        "Escribe la duración aproximada. Ejemplo: 75 segundos o 4 minutos."
+    );
+
+    if(!value) return;
+
+    selectDuration(value);
+}
+
+
+/* =========================================================
+   ANALIZADOR
+========================================================= */
+
+function normalize(text){
+
+    return text
+        .toLowerCase()
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g,"");
+}
+
+
+function detectPlatform(text){
+
+    const t = normalize(text);
+
+    const platforms = [
+        "tiktok",
+        "instagram",
+        "youtube",
+        "shorts",
+        "reels",
+        "facebook",
+        "twitter",
+        "x "
+    ];
+
+    for(const p of platforms){
+
+        if(t.includes(p)){
+            return p.trim();
+        }
+
+    }
+
+    return null;
+}
+
 
 function detectGame(text){
 
     const t = normalize(text);
 
-    for(const gameName in games){
-
-        const game = games[gameName];
-
-        if(game.names.some(name => t.includes(name))){
-            return gameName;
-        }
-
-    }
-
-    return null;
-
-}
-
-
-/* ---------------------------------------------------------
-   BUSCAR PERSONAJE
---------------------------------------------------------- */
-
-function detectCharacter(text,gameName){
-
-    if(!gameName || !games[gameName]) return null;
-
-    const t = normalize(text);
-
-    const characters = games[gameName].characters;
-
-    for(const character of characters){
-
-        if(t.includes(normalize(character))){
-            return character;
-        }
-
-    }
-
-    return null;
-
-}
-
-
-/* ---------------------------------------------------------
-   DETECTAR SI NO QUIERE PERSONAJE
---------------------------------------------------------- */
-
-function explicitlyNoCharacter(text){
-
-    const t = normalize(text);
-
-    const phrases = [
-
-        "sin personaje",
-        "sin agente",
-        "no importa el personaje",
-        "no importa el agente",
-        "cualquiera",
-        "el que sea",
-        "sorprendeme",
-        "sorprendeme tu",
-        "tu elige",
-        "elige tu",
-        "uno cualquiera"
-
+    const games = [
+        "gta 6",
+        "gta vi",
+        "gta",
+        "valorant",
+        "minecraft",
+        "roblox",
+        "fortnite",
+        "clash royale",
+        "brawl stars",
+        "free fire"
     ];
 
-    return phrases.some(x => t.includes(x));
+    for(const game of games){
 
+        if(t.includes(game)){
+            return game;
+        }
+
+    }
+
+    return null;
 }
 
 
-/* ---------------------------------------------------------
-   INTENCIONES
---------------------------------------------------------- */
-
-function detectIntent(text){
+function detectType(text){
 
     const t = normalize(text);
 
-    return {
+    if(
+        t.includes("publicidad") ||
+        t.includes("anuncio") ||
+        t.includes("promocionar") ||
+        t.includes("promocion")
+    ){
+        return "publicidad";
+    }
 
-        asksIdeas:
-            /que puedo publicar|que puedo subir|que publico|que subo|no se que hacer|no se que publicar|no se que subir|dame ideas|ideas para|alguna idea|necesito ideas|quiero una idea|quiero hacer contenido|contenido para/.test(t),
+    if(
+        t.includes("guion") ||
+        t.includes("guión")
+    ){
+        return "guion";
+    }
 
-        asksScript:
-            /guion|guion para|hazme un guion|escribeme un guion|script|dialogo/.test(t),
+    if(
+        t.includes("meme")
+    ){
+        return "meme";
+    }
 
-        asksHook:
-            /hook|gancho|inicio|primeros segundos|como empiezo/.test(t),
+    if(
+        t.includes("video") ||
+        t.includes("video")
+    ){
+        return "video";
+    }
 
-        asksMeme:
-            /meme|humor|gracioso|chiste|shitpost/.test(t),
+    if(
+        t.includes("idea") ||
+        t.includes("que hago") ||
+        t.includes("no se que hacer") ||
+        t.includes("no se que publicar")
+    ){
+        return "ideas";
+    }
 
-        asksBusiness:
-            /negocio|emprendimiento|vender|ventas|cliente|marca|empresa/.test(t),
-
-        asksProduct:
-            /producto|tienda|catalogo|servicio|publicidad|anuncio/.test(t),
-
-        asksStory:
-            /historia|storytime|contar una historia|story telling|storytelling/.test(t),
-
-        asksEducational:
-            /explicar|educativo|enseñar|aprende|tutorial|explicacion/.test(t),
-
-        asksTikTok:
-            /tiktok|tik tok/.test(t),
-
-        asksYouTube:
-            /youtube|video largo/.test(t),
-
-        asksInstagram:
-            /instagram|reel|reels/.test(t),
-
-        asksEditing:
-            /editar|edicion|capcut|transicion|montaje|edit/.test(t),
-
-        asksMotivation:
-            /motivacion|motiva|motivame|estoy desanimado/.test(t)
-
-    };
-
+    return "contenido";
 }
 
 
-/* ---------------------------------------------------------
-   CONTEXTO GENERAL
---------------------------------------------------------- */
-
-function analyze(text){
+function detectTopic(text){
 
     const game = detectGame(text);
 
-    const character = detectCharacter(text,game);
+    if(game){
+        return game;
+    }
 
-    const intent = detectIntent(text);
+    const platform = detectPlatform(text);
+
+    if(platform){
+        return `contenido para ${platform}`;
+    }
+
+    return text
+        .replace(/quiero/gi,"")
+        .replace(/hacer/gi,"")
+        .replace(/un/gi,"")
+        .replace(/una/gi,"")
+        .replace(/por favor/gi,"")
+        .trim();
+}
+
+
+function analyze(text){
+
+    const type = detectType(text);
+    const topic = detectTopic(text);
+    const platform = detectPlatform(text);
+    const game = detectGame(text);
+
+    const durationWords =
+        /(\d+)\s*(seg|segundos|min|minutos)/i.test(text);
 
     return {
-
-        text,
+        raw:text,
+        type,
+        topic,
+        platform,
         game,
-        character,
-        noCharacter:explicitlyNoCharacter(text),
-        intent
-
+        durationWords
     };
-
 }
 
 
-/* ---------------------------------------------------------
-   IDEAS GAMING
---------------------------------------------------------- */
+/* =========================================================
+   DETECTAR DURACIÓN ESCRITA
+========================================================= */
 
-const gamingIdeas = [
+function extractDuration(text){
 
-    {
-        title:"La partida que parecía perdida",
-        hook:"“Esta partida estaba completamente perdida… hasta que pasó esto.”",
-        format:"Clip corto con tensión creciente",
-        development:"Empieza directamente en el momento complicado. No expliques demasiado al principio. Deja que la jugada demuestre por qué parecía imposible.",
-        edit:"Cortes rápidos, zoom muy suave en el momento clave y pausa de medio segundo justo antes de la jugada.",
-        cta:"“¿Tú qué habrías hecho aquí?”"
-    },
-
-    {
-        title:"Mi peor decisión de la partida",
-        hook:"“Tomé la peor decisión posible y, por alguna razón, funcionó.”",
-        format:"Gameplay + comentario",
-        development:"Presenta la decisión, muestra las consecuencias y termina enseñando el resultado.",
-        edit:"Texto breve en pantalla y sonido de transición justo cuando tomas la decisión.",
-        cta:"“¿Buena jugada o pura suerte?”"
-    },
-
-    {
-        title:"Una partida, una regla",
-        hook:"“Hoy voy a jugar toda la partida siguiendo una sola regla.”",
-        format:"Challenge de gameplay",
-        development:"Define una regla sencilla y segura. El interés está en ver cuánto puedes aguantar antes de romperla.",
-        edit:"Contador pequeño durante la partida y cortes únicamente en momentos importantes.",
-        cta:"“Dime otra regla para la siguiente.”"
-    },
-
-    {
-        title:"El error que todos cometen",
-        hook:"“Si juegas esto, probablemente también haces este error.”",
-        format:"Consejo rápido",
-        development:"Muestra el error primero y después enseña una alternativa sencilla.",
-        edit:"Comparación antes/después con texto muy corto.",
-        cta:"“¿Quieres más errores que podemos corregir?”"
-    },
-
-    {
-        title:"POV: todo depende de ti",
-        hook:"“POV: tus compañeros ya hicieron lo suyo y ahora queda esto.”",
-        format:"POV + gameplay",
-        development:"Construye la escena rápidamente y deja que el gameplay sea el remate.",
-        edit:"Subtítulos grandes únicamente en las frases importantes.",
-        cta:"“Ese momento donde ya no puedes fallar.”"
-    },
-
-    {
-        title:"El momento más absurdo",
-        hook:"“No sé cómo explicar lo que acaba de pasar.”",
-        format:"Clip de reacción",
-        development:"No expliques el chiste antes. Enseña el momento y deja que la situación sea el humor.",
-        edit:"Silencio breve antes del momento y corte inmediato después.",
-        cta:"“Esto no estaba en mis planes.”"
-    },
-
-    {
-        title:"Aprendiendo una mecánica",
-        hook:"“Nunca había intentado esto y decidí probarlo en una partida.”",
-        format:"Experimento",
-        development:"Muestra el intento, el fallo o progreso y finalmente el resultado.",
-        edit:"Mantén los errores; hacen que el resultado final tenga más valor.",
-        cta:"“¿Qué debería intentar después?”"
-    },
-
-    {
-        title:"La jugada que nadie esperaba",
-        hook:"“Probablemente esta no era la jugada correcta… pero mira.”",
-        format:"Clutch / highlight",
-        development:"Elimina todo el tiempo muerto y conserva únicamente lo necesario para entender la jugada.",
-        edit:"Corte directo al conflicto y pequeño zoom durante el desenlace.",
-        cta:"“¿La repetirías?”"
-    }
-
-];
-
-
-/* ---------------------------------------------------------
-   IDEAS GENERALES
---------------------------------------------------------- */
-
-const generalIdeas = [
-
-    {
-        title:"Lo que nadie te cuenta",
-        hook:"“Hay algo sobre esto que casi nadie explica.”",
-        format:"Opinión + información",
-        development:"Presenta una idea que normalmente se pasa por alto y explícalo de forma sencilla.",
-        edit:"Frases cortas en pantalla acompañando cada punto.",
-        cta:"“¿Te había pasado?”"
-    },
-
-    {
-        title:"3 cosas que aprendí",
-        hook:"“Después de hacer esto varias veces, aprendí estas tres cosas.”",
-        format:"Lista rápida",
-        development:"Cada punto debe aportar algo diferente. El último puede ser el más inesperado.",
-        edit:"Un corte por cada aprendizaje.",
-        cta:"“Guárdate la tercera porque es la que más cambia las cosas.”"
-    },
-
-    {
-        title:"Antes pensaba esto",
-        hook:"“Antes estaba convencido de que esto funcionaba así.”",
-        format:"Cambio de perspectiva",
-        development:"Explica qué pensabas antes, qué descubriste y qué harías ahora.",
-        edit:"Transición sencilla entre “antes” y “ahora”.",
-        cta:"“¿Tú pensabas lo mismo?”"
-    },
-
-    {
-        title:"El experimento",
-        hook:"“Voy a probar esto para ver si realmente funciona.”",
-        format:"Experimento",
-        development:"Plantea una pregunta clara y deja que el vídeo responda.",
-        edit:"Muestra el resultado al final, no al principio.",
-        cta:"“¿Qué experimento hacemos después?”"
-    },
-
-    {
-        title:"Una idea convertida en serie",
-        hook:"“Si esto funciona, voy a convertirlo en una serie.”",
-        format:"Serie de contenido",
-        development:"Haz que el primer vídeo plantee una pregunta que pueda continuar en otros vídeos.",
-        edit:"Usa una estructura reconocible en cada episodio.",
-        cta:"“Si quieres parte 2, ya sabes.”"
-    },
-
-    {
-        title:"La opinión incómoda",
-        hook:"“Voy a decir algo que probablemente no todos van a estar de acuerdo.”",
-        format:"Opinión",
-        development:"Da una opinión concreta y explica por qué. Evita convertirla en ataque personal.",
-        edit:"Plano estable y texto mínimo.",
-        cta:"“Ahora quiero leer tu opinión.”"
-    },
-
-    {
-        title:"Hazlo conmigo",
-        hook:"“Vamos a intentar esto juntos.”",
-        format:"Contenido participativo",
-        development:"Invita a la audiencia a intentar una actividad sencilla y comparar resultados.",
-        edit:"Cuenta los pasos visualmente.",
-        cta:"“Después me cuentas cómo te salió.”"
-    },
-
-    {
-        title:"La transformación",
-        hook:"“Así estaba al principio y así terminó.”",
-        format:"Antes / después",
-        development:"Muestra el contraste de forma clara y explica brevemente qué cambió.",
-        edit:"Transición limpia entre ambas versiones.",
-        cta:"“¿Cuál transformación hacemos después?”"
-    }
-
-];
-
-
-/* ---------------------------------------------------------
-   MEMES
---------------------------------------------------------- */
-
-const memeIdeas = [
-
-    {
-        title:"Expectativa vs realidad",
-        hook:"“Yo pensando que esto iba a salir perfecto…”",
-        format:"Meme de contraste",
-        development:"Primero muestra una expectativa exageradamente positiva y después una realidad completamente distinta.",
-        edit:"Corte seco entre ambas partes.",
-        cta:"“Todos hemos estado ahí.”"
-    },
-
-    {
-        title:"Cuando dices una cosa y haces otra",
-        hook:"“Yo: hoy sí voy a hacerlo bien.”",
-        format:"Meme de reacción",
-        development:"La gracia está en que la segunda escena contradiga inmediatamente la primera.",
-        edit:"Texto grande, pausa breve y remate rápido.",
-        cta:"“No aprendí absolutamente nada.”"
-    },
-
-    {
-        title:"El plan perfecto",
-        hook:"“Tenía un plan perfecto.”",
-        format:"Mini sketch",
-        development:"Explica el plan durante pocos segundos y corta al instante en que todo sale diferente.",
-        edit:"Silencio antes del desastre para darle más peso al remate.",
-        cta:"“¿Quién más hace esto?”"
-    }
-
-];
-
-
-/* ---------------------------------------------------------
-   VALORANT ESPECÍFICO
---------------------------------------------------------- */
-
-const valorantByAgent = {
-
-    reyna:[
-        "Haz una serie donde cada vídeo gire alrededor de una decisión arriesgada con Reyna y explica después si valió la pena.",
-        "Crea un montaje corto centrado en entradas agresivas y acompáñalo con una narración contando qué estabas pensando.",
-        "Haz un vídeo de “cosas que aprendí jugando Reyna” pero utiliza clips reales como prueba de cada punto.",
-        "Compara dos estilos de juego con Reyna: jugar buscando duelos y jugar buscando información.",
-        "Haz un POV de una ronda donde empiezas con confianza y terminas teniendo que improvisar."
-    ],
-
-    jett:[
-        "Haz una serie centrada en decisiones rápidas con Jett y muestra qué opción elegiste en cada situación.",
-        "Monta tus mejores entradas con una narración corta explicando qué viste antes de entrar.",
-        "Haz un vídeo sobre errores comunes al utilizar la movilidad de Jett.",
-        "Crea un reto de creatividad usando las habilidades de Jett de formas poco habituales pero seguras."
-    ],
-
-    sage:[
-        "Haz una serie mostrando decisiones de Sage que cambian una ronda sin necesidad de conseguir muchas bajas.",
-        "Explica con clips cuándo prefieres jugar para apoyar al equipo y cuándo tomar iniciativa.",
-        "Crea un vídeo de jugadas inesperadas con la pared y convierte cada ronda en un pequeño capítulo."
-    ],
-
-    raze:[
-        "Haz una recopilación de jugadas creativas con las habilidades de Raze.",
-        "Crea un vídeo donde cada ronda tenga una idea diferente para utilizar tus habilidades.",
-        "Haz un montaje rápido mezclando movimiento, utilidad y reacción."
-    ],
-
-    omen:[
-        "Haz una serie de jugadas inteligentes con humos y teletransportes.",
-        "Explica una ronda completa desde la perspectiva de las decisiones de Omen.",
-        "Crea un vídeo de “lo que pensé que iba a pasar vs lo que realmente pasó”."
-    ],
-
-    killjoy:[
-        "Haz una serie de setups sencillos y demuestra con clips qué consiguen realmente.",
-        "Convierte una ronda normal en una pequeña historia donde tus dispositivos sean parte del plan.",
-        "Haz una comparación entre jugar agresivo y jugar paciente con Killjoy."
-    ]
-
-};
-
-
-/* ---------------------------------------------------------
-   MÁS IDEAS PARA VALORANT
---------------------------------------------------------- */
-
-const valorantGeneric = [
-
-    {
-        title:"El segundo antes del clutch",
-        hook:"“En este momento pensé que la ronda ya estaba perdida.”",
-        format:"Highlight narrado",
-        development:"Empieza cerca del momento decisivo y añade una narración breve explicando la situación.",
-        edit:"Corta cualquier espera y conserva solamente información útil.",
-        cta:"“¿Tú habrías intentado lo mismo?”"
-    },
-
-    {
-        title:"Lo que pensé vs lo que ocurrió",
-        hook:"“En mi cabeza esto iba a salir perfecto.”",
-        format:"Gameplay + humor",
-        development:"Presenta la intención y después deja que el clip contradiga la expectativa.",
-        edit:"Texto dividido en dos momentos: pensamiento y realidad.",
-        cta:"“La teoría era buena… la ejecución no tanto.”"
-    },
-
-    {
-        title:"Una ronda contada como historia",
-        hook:"“Todo comenzó normal hasta que apareció este problema.”",
-        format:"Storytelling gaming",
-        development:"Convierte una ronda completa en una mini historia con inicio, problema y desenlace.",
-        edit:"Música ambiental suave y cortes según la tensión.",
-        cta:"“¿Hacemos otra ronda así?”"
-    },
-
-    {
-        title:"El error de medio segundo",
-        hook:"“Un segundo antes y esta ronda terminaba diferente.”",
-        format:"Análisis rápido",
-        development:"Muestra el instante concreto que cambió la ronda.",
-        edit:"Repite el momento una segunda vez con pausa.",
-        cta:"“Ese pequeño detalle lo cambió todo.”"
-    },
-
-    {
-        title:"La ronda que no debía ganar",
-        hook:"“No tenía ninguna razón para ganar esta ronda.”",
-        format:"Clutch",
-        development:"Deja que el contexto sea breve y concentra el vídeo en cómo evoluciona la situación.",
-        edit:"Sube progresivamente el ritmo de los cortes.",
-        cta:"“¿Suerte o lectura?”"
-    }
-
-];
-
-
-/* ---------------------------------------------------------
-   SELECCIONAR ELEMENTOS SIN REPETIR
---------------------------------------------------------- */
-
-let usedIdeas = JSON.parse(
-    localStorage.getItem("sparky_used_ideas") || "[]"
-);
-
-function chooseDifferent(array){
-
-    if(!array.length) return null;
-
-    let available = array.filter(
-        item => !usedIdeas.includes(item.title)
+    const match = text.match(
+        /(\d+)\s*(seg|segundos|min|minutos)/i
     );
 
-    if(!available.length){
+    if(!match) return null;
 
-        usedIdeas = [];
-
-        localStorage.setItem(
-            "sparky_used_ideas",
-            JSON.stringify(usedIdeas)
-        );
-
-        available = array;
-    }
-
-    const item =
-        available[Math.floor(Math.random()*available.length)];
-
-    if(item.title){
-
-        usedIdeas.push(item.title);
-
-        if(usedIdeas.length > 50){
-            usedIdeas.shift();
-        }
-
-        localStorage.setItem(
-            "sparky_used_ideas",
-            JSON.stringify(usedIdeas)
-        );
-
-    }
-
-    return item;
-
-}
-
-
-/* ---------------------------------------------------------
-   GENERAR IDEAS DE GAMING
---------------------------------------------------------- */
-
-function buildGamingIdeas(context){
-
-    let pool = [...gamingIdeas];
-
-    if(context.game === "valorant"){
-
-        pool = [
-            ...valorantGeneric,
-            ...gamingIdeas
-        ];
-
-    }
-
-    const selected = [];
-
-    while(selected.length < 6 && pool.length){
-
-        const idea = chooseDifferent(pool);
-
-        if(!idea) break;
-
-        if(!selected.some(x => x.title === idea.title)){
-            selected.push(idea);
-        }
-
-        pool = pool.filter(x => x.title !== idea.title);
-
-    }
-
-    return selected;
-
-}
-
-
-/* ---------------------------------------------------------
-   GENERAR IDEAS GENERALES
---------------------------------------------------------- */
-
-function buildGeneralIdeas(){
-
-    const pool = [
-        ...generalIdeas,
-        ...memeIdeas
-    ];
-
-    const selected = [];
-
-    while(selected.length < 6 && pool.length){
-
-        const idea = chooseDifferent(pool);
-
-        if(!idea) break;
-
-        if(!selected.some(x => x.title === idea.title)){
-            selected.push(idea);
-        }
-
-        pool.splice(
-            pool.findIndex(x => x.title === idea.title),
-            1
-        );
-
-    }
-
-    return selected;
-
-}
-
-
-/* ---------------------------------------------------------
-   RESPUESTA PARA PREGUNTA DE PERSONAJE
---------------------------------------------------------- */
-
-function characterQuestion(game){
-
-    const names = games[game].characters;
-
-    if(game === "valorant"){
-
-        return `
-            <p>Veo que quieres crear contenido de <strong>Valorant</strong>, pero antes de lanzarme con una idea quiero afinarla.</p>
-
-            <p>¿Quieres que el contenido esté centrado en algún agente específico?</p>
-
-            <p>Por ejemplo: <strong>Reyna, Jett, Sage, Raze, Omen, Killjoy</strong> u otro.</p>
-
-            <p>Si no te importa el agente, dime <strong>“cualquiera”</strong> y te sorprendo con el concepto.</p>
-        `;
-
-    }
-
-    return `
-        <p>Veo que quieres crear contenido de <strong>${escapeHTML(game)}</strong>.</p>
-
-        <p>¿Quieres que la idea esté centrada en algún personaje específico?</p>
-
-        <p>Si quieres dejarlo abierto, dime <strong>“cualquiera”</strong> y lo planteo sin depender de un personaje.</p>
-    `;
-
-}
-
-
-/* ---------------------------------------------------------
-   RESPUESTA CON IDEAS
---------------------------------------------------------- */
-
-function ideasResponse(context){
-
-    const greeting = getGreeting();
-
-    let ideas;
-
-    if(context.game){
-
-        ideas = buildGamingIdeas(context);
-
-    }else{
-
-        ideas = buildGeneralIdeas();
-
-    }
-
-    let html = `<p>${greeting}. Ya entendí lo que buscas.</p>`;
-
-    if(context.game){
-
-        html += `
-            <p>
-                Si hablamos de <strong>${escapeHTML(context.game)}</strong>,
-                te propongo varias direcciones para que no termines haciendo
-                siempre el mismo tipo de vídeo.
-            </p>
-        `;
-
-    }else{
-
-        html += `
-            <p>
-                En vez de darte una sola idea, te dejo varias rutas diferentes
-                para que puedas escoger la que más encaje contigo.
-            </p>
-        `;
-
-    }
-
-
-    ideas.forEach((idea,index)=>{
-
-        html += `
-
-            <div class="idea-card">
-
-                <div class="idea-number">
-                    IDEA ${index+1}
-                </div>
-
-                <div class="idea-title">
-                    ${escapeHTML(idea.title)}
-                </div>
-
-                <div class="idea-description">
-
-                    <strong>Hook:</strong>
-                    ${escapeHTML(idea.hook)}
-
-                    <br><br>
-
-                    <strong>Formato:</strong>
-                    ${escapeHTML(idea.format)}
-
-                    <br><br>
-
-                    <strong>Cómo hacerlo:</strong>
-                    ${escapeHTML(idea.development)}
-
-                    <br><br>
-
-                    <strong>Edición:</strong>
-                    ${escapeHTML(idea.edit)}
-
-                    <br><br>
-
-                    <strong>Cierre:</strong>
-                    ${escapeHTML(idea.cta)}
-
-                </div>
-
-            </div>
-
-        `;
-
-    });
-
-
-    html += `
-
-        <div class="motivation">
-            ${escapeHTML(getMotivation())}
-        </div>
-
-    `;
-
-    return html;
-
-}
-
-
-/* ---------------------------------------------------------
-   GUION
---------------------------------------------------------- */
-
-function scriptResponse(context){
-
-    const greeting = getGreeting();
-
-    let subject = context.game
-        ? context.game
-        : "tu contenido";
-
-    let characterPart = context.character
-        ? ` usando a ${context.character}`
-        : "";
-
-    return `
-
-        <p>${greeting}. Vamos a convertir esa idea en algo que puedas grabar.</p>
-
-        <div class="section">
-
-            <div class="section-title">
-                Concepto
-            </div>
-
-            <div class="section-text">
-                Un vídeo corto sobre ${escapeHTML(subject)}${escapeHTML(characterPart)},
-                construido alrededor de una situación concreta en vez de empezar
-                con una explicación larga.
-            </div>
-
-        </div>
-
-
-        <div class="section">
-
-            <div class="section-title">
-                Hook
-            </div>
-
-            <div class="section-text">
-                “Pensé que esta partida iba a ser completamente normal… hasta que pasó esto.”
-            </div>
-
-        </div>
-
-
-        <div class="section">
-
-            <div class="section-title">
-                Desarrollo
-            </div>
-
-            <div class="section-text">
-                Empieza directamente con el momento que genera curiosidad.
-                Después muestra brevemente el contexto, deja que ocurra el
-                momento principal y termina con una reacción o conclusión.
-            </div>
-
-        </div>
-
-
-        <div class="section">
-
-            <div class="section-title">
-                Texto en pantalla
-            </div>
-
-            <div class="section-text">
-                “Esto no estaba en el plan.”
-            </div>
-
-        </div>
-
-
-        <div class="section">
-
-            <div class="section-title">
-                Edición
-            </div>
-
-            <div class="section-text">
-                Quita silencios, utiliza subtítulos solamente en las frases
-                importantes y deja una pequeña pausa justo antes del momento
-                principal.
-            </div>
-
-        </div>
-
-
-        <div class="section">
-
-            <div class="section-title">
-                Cierre
-            </div>
-
-            <div class="section-text">
-                “¿Tú habrías hecho lo mismo?”
-            </div>
-
-        </div>
-
-
-        <div class="motivation">
-            ${escapeHTML(getMotivation())}
-        </div>
-
-    `;
-
-}
-
-
-/* ---------------------------------------------------------
-   RESPUESTA A MEMES
---------------------------------------------------------- */
-
-function memeResponse(){
-
-    const ideas = [
-        ...memeIdeas,
-        ...generalIdeas.filter(x =>
-            /expectativa|opinion|plan|transformacion/i.test(x.title)
-        )
-    ];
-
-    const idea = chooseDifferent(ideas);
-
-    return `
-
-        <p>${getGreeting()}. Tengo una idea que puede funcionar muy bien como meme corto.</p>
-
-        <div class="section">
-
-            <div class="section-title">
-                Concepto
-            </div>
-
-            <div class="section-text">
-                ${escapeHTML(idea.title)}
-            </div>
-
-        </div>
-
-        <div class="section">
-
-            <div class="section-title">
-                Texto inicial
-            </div>
-
-            <div class="section-text">
-                ${escapeHTML(idea.hook)}
-            </div>
-
-        </div>
-
-        <div class="section">
-
-            <div class="section-title">
-                Remate
-            </div>
-
-            <div class="section-text">
-                ${escapeHTML(idea.development)}
-            </div>
-
-        </div>
-
-        <div class="section">
-
-            <div class="section-title">
-                Edición
-            </div>
-
-            <div class="section-text">
-                ${escapeHTML(idea.edit)}
-            </div>
-
-        </div>
-
-        <div class="motivation">
-            ${escapeHTML(getMotivation())}
-        </div>
-
-    `;
-
-}
-
-
-/* ---------------------------------------------------------
-   RESPUESTA DE EDICIÓN
---------------------------------------------------------- */
-
-function editingResponse(context){
-
-    const greeting = getGreeting();
-
-    return `
-
-        <p>${greeting}. Si quieres mejorar la edición, no necesitas llenar el vídeo de efectos.</p>
-
-        <div class="section">
-
-            <div class="section-title">
-                Primero
-            </div>
-
-            <div class="section-text">
-                Elimina todo lo que no aporte información, emoción o humor.
-                Un vídeo rápido no significa poner cortes cada medio segundo.
-            </div>
-
-        </div>
-
-        <div class="section">
-
-            <div class="section-title">
-                Texto
-            </div>
-
-            <div class="section-text">
-                Usa frases cortas y deja que aparezcan exactamente cuando
-                la persona necesita entender algo.
-            </div>
-
-        </div>
-
-        <div class="section">
-
-            <div class="section-title">
-                Ritmo
-            </div>
-
-            <div class="section-text">
-                Guarda los cortes más rápidos para los momentos importantes.
-                Si todo tiene el mismo ritmo, nada parece importante.
-            </div>
-
-        </div>
-
-        <div class="section">
-
-            <div class="section-title">
-                Remate
-            </div>
-
-            <div class="section-text">
-                Termina con una frase, reacción o imagen que haga sentir que
-                el vídeo tuvo un cierre.
-            </div>
-
-        </div>
-
-        <div class="motivation">
-            ${escapeHTML(getMotivation())}
-        </div>
-
-    `;
-
-}
-
-
-/* ---------------------------------------------------------
-   RESPUESTA MOTIVACIONAL
---------------------------------------------------------- */
-
-function motivationResponse(){
-
-    const lines = [
-
-        "Si hoy no sabes qué crear, empieza por algo pequeño y deja que la siguiente idea aparezca mientras haces la primera.",
-
-        "No necesitas tenerlo todo resuelto para comenzar.",
-
-        "A veces la mejor idea aparece después de publicar la primera.",
-
-        "Haz una prueba. Si no funciona, ya aprendiste algo que antes no sabías.",
-
-        "La creatividad también se entrena creando."
-
-    ];
-
-    const line =
-        lines[Math.floor(Math.random()*lines.length)];
-
-    return `
-
-        <p>${getGreeting()}.</p>
-
-        <p>${escapeHTML(line)}</p>
-
-        <div class="motivation">
-            ${escapeHTML(getMotivation())}
-        </div>
-
-    `;
-
-}
-
-
-/* ---------------------------------------------------------
-   RESPUESTA INTELIGENTE GENERAL
---------------------------------------------------------- */
-
-function genericResponse(context){
-
-    const text = normalize(context.text);
-
-    let html = `<p>${getGreeting()}. Te estoy siguiendo.</p>`;
-
+    const number = parseInt(match[1]);
 
     if(
-        text.includes("hola") ||
-        text.includes("buenas") ||
-        text === "hey" ||
-        text === "hello"
+        match[2].toLowerCase().startsWith("min")
     ){
+        return `${number} minuto${number === 1 ? "" : "s"}`;
+    }
 
-        html += `
-            <p>
-                Cuéntame qué tienes en mente, aunque todavía esté a medias.
-                Puedes decirme simplemente el tema, el juego, el tipo de
-                contenido o incluso decirme que no sabes qué hacer.
-            </p>
+    return `${number} segundo${number === 1 ? "" : "s"}`;
+}
+
+
+/* =========================================================
+   CREAR GUION
+========================================================= */
+
+function buildLongScript(project){
+
+    const duration = project.duration || "30 segundos";
+    const topic = project.topic || "tu idea";
+    const type = project.type || "contenido";
+
+    let lengthText = "";
+
+    if(duration.includes("10")){
+        lengthText = `
+            <div class="section">
+                <strong>🎙️ Guion</strong>
+                <p>
+                    “Esto acaba de cambiarlo todo. Si todavía no
+                    conoces ${topic}, mira esto.”
+                </p>
+            </div>
+        `;
+    }
+
+    else if(duration.includes("15")){
+
+        lengthText = `
+            <div class="section">
+                <strong>🎙️ Guion</strong>
+                <p>
+                    “¿Has visto esto? ${topic} tiene algo que muchos
+                    todavía no están aprovechando. Y si quieres
+                    descubrirlo, quédate porque esto te interesa.”
+                </p>
+            </div>
         `;
 
     }
 
-    else if(
-        /no se|no tengo idea|no tengo nada|estoy perdido/.test(text)
-    ){
+    else if(duration.includes("30")){
 
-        html += `
-            <p>
-                Perfecto, entonces no voy a obligarte a escoger una categoría.
-                Dame aunque sea una palabra —un juego, tema, producto,
-                situación o plataforma— y construiré opciones diferentes
-                desde ahí.
-            </p>
+        lengthText = `
+            <div class="section">
+                <strong>🎙️ Guion completo</strong>
+
+                <p>
+                    “Si te interesa ${topic}, presta atención.
+                    Hay una razón por la que este tema está llamando
+                    tanto la atención.
+                </p>
+
+                <p style="margin-top:8px">
+                    Primero tenemos el contexto: necesitamos mostrar
+                    rápidamente qué hace especial a ${topic}.
+                    Después presentamos el punto fuerte que queremos
+                    que recuerde la persona.
+                </p>
+
+                <p style="margin-top:8px">
+                    Y cerramos con una llamada a la acción sencilla:
+                    invitar al espectador a descubrir más.”
+                </p>
+            </div>
+        `;
+
+    }
+
+    else if(duration.includes("45")){
+
+        lengthText = `
+            <div class="section">
+                <strong>🎙️ Guion completo</strong>
+
+                <p>
+                    “Hay cosas que ves una vez y olvidas. Y después
+                    está ${topic}.
+                </p>
+
+                <p style="margin-top:8px">
+                    La idea de este video es comenzar con algo que
+                    despierte curiosidad. No vamos a explicar todo
+                    desde el principio: primero vamos a conseguir que
+                    la persona quiera saber qué viene después.
+                </p>
+
+                <p style="margin-top:8px">
+                    Luego mostramos las características principales,
+                    acompañando cada frase con imágenes relacionadas
+                    con el producto, juego o concepto.
+                </p>
+
+                <p style="margin-top:8px">
+                    Finalmente hacemos que el espectador entienda
+                    por qué debería prestarle atención y cerramos
+                    con una llamada a la acción.”
+                </p>
+            </div>
+        `;
+
+    }
+
+    else if(duration.includes("60")){
+
+        lengthText = `
+            <div class="section">
+                <strong>🎙️ Guion completo — aproximadamente 60 segundos</strong>
+
+                <p>
+                    “Imagina descubrir ${topic} por primera vez.
+                    Ahora imagina que tienes menos de un minuto
+                    para entender por qué merece tu atención.
+                </p>
+
+                <p style="margin-top:8px">
+                    Empezamos con un plano que genere curiosidad.
+                    La primera frase debe hacer que el espectador
+                    piense: ‘espera, ¿qué es esto?’.
+                </p>
+
+                <p style="margin-top:8px">
+                    Después presentamos ${topic} de forma clara.
+                    Aquí mostramos lo más interesante y evitamos
+                    explicaciones innecesarias.
+                </p>
+
+                <p style="margin-top:8px">
+                    En la parte central enseñamos los detalles que
+                    hacen diferente esta propuesta. Cada punto debe
+                    estar acompañado por imágenes, clips o texto
+                    que refuerce lo que estamos diciendo.
+                </p>
+
+                <p style="margin-top:8px">
+                    Para terminar, resumimos la idea principal y
+                    dejamos una llamada a la acción natural para que
+                    la persona pueda descubrir más.
+                </p>
+
+                <p style="margin-top:8px">
+                    “Ahora ya sabes por qué ${topic} merece que le
+                    prestes atención. La pregunta es: ¿vas a
+                    quedarte mirando o vas a descubrirlo?”
+                </p>
+            </div>
         `;
 
     }
 
     else{
 
-        html += `
-            <p>
-                Entiendo la idea. Puedo convertir lo que acabas de decir
-                en un concepto, una estructura de vídeo, un guion, un hook
-                o varias ideas distintas.
-            </p>
-
+        lengthText = `
             <div class="section">
+                <strong>🎙️ Guion extendido — ${duration}</strong>
 
-                <div class="section-title">
-                    Lo que entendí
-                </div>
+                <p>
+                    <b>INTRODUCCIÓN</b><br>
+                    Abrimos con una frase fuerte relacionada con
+                    ${topic}. La intención es presentar el concepto
+                    sin revelar todo inmediatamente.
+                </p>
 
-                <div class="section-text">
-                    ${escapeHTML(context.text)}
-                </div>
+                <p style="margin-top:10px">
+                    <b>DESARROLLO</b><br>
+                    Explicamos progresivamente el contexto y las
+                    características principales. Cada bloque de
+                    información debe acompañarse con imágenes,
+                    clips o texto en pantalla.
+                </p>
 
+                <p style="margin-top:10px">
+                    <b>PARTE CENTRAL</b><br>
+                    Aquí profundizamos en los elementos que hacen
+                    interesante la propuesta. Podemos introducir
+                    ejemplos, comparaciones, detalles y pequeñas
+                    sorpresas para mantener la atención.
+                </p>
+
+                <p style="margin-top:10px">
+                    <b>CIERRE</b><br>
+                    Recuperamos la idea principal, damos una razón
+                    para continuar investigando ${topic} y terminamos
+                    con una llamada a la acción.
+                </p>
+
+                <p style="margin-top:10px">
+                    <b>CTA</b><br>
+                    “Si quieres conocer más sobre esto, ya sabes
+                    dónde encontrarlo. Y si te interesa este tipo
+                    de contenido, quédate porque esto apenas
+                    comienza.”
+                </p>
             </div>
-
-            <p>
-                Si quieres, también puedo llevar esta idea directamente
-                hacia contenido para redes.
-            </p>
         `;
 
     }
 
+    return `
 
-    html += `
-
-        <div class="motivation">
-            ${escapeHTML(getMotivation())}
+        <div class="bot-title">
+            🎬 ${capitalize(type)} sobre ${capitalize(topic)}
         </div>
 
+        <div class="section">
+            <strong>🎯 Concepto</strong>
+            Un contenido pensado para captar atención desde los
+            primeros segundos y llevar la idea de ${topic} hacia
+            un formato que funcione bien en video.
+        </div>
+
+        <div class="section">
+            <strong>⏱️ Duración</strong>
+            ${duration}
+        </div>
+
+        ${lengthText}
+
+        <div class="section">
+            <strong>📝 Texto en pantalla</strong>
+            Frases cortas, grandes y fáciles de leer. Haz que cada
+            texto aparezca justo cuando se menciona en la narración.
+        </div>
+
+        <div class="section">
+            <strong>✂️ Edición</strong>
+            Usa cortes dinámicos, acercamientos suaves, cambios de
+            plano y sonidos que acompañen los momentos importantes.
+            Evita saturar la pantalla.
+        </div>
+
+        <div class="section">
+            <strong>🔥 Cierre</strong>
+            Termina con una frase que deje curiosidad o invite a
+            realizar una acción relacionada con ${topic}.
+        </div>
+
+        ${motivation()}
     `;
-
-    return html;
-
 }
 
 
 /* =========================================================
-   ESTADO PENDIENTE
+   RESPUESTA INTELIGENTE
 ========================================================= */
-
-let pendingCharacter = null;
-
-
-/* ---------------------------------------------------------
-   GENERADOR PRINCIPAL
---------------------------------------------------------- */
 
 function generateResponse(text){
 
     const context = analyze(text);
 
-    /*
-       SI ESTÁBAMOS ESPERANDO QUE EL USUARIO ELIJA PERSONAJE
-    */
+    /* Si el usuario está eligiendo duración */
 
-    if(pendingCharacter){
+    const writtenDuration = extractDuration(text);
 
-        const previous = pendingCharacter;
+    if(pendingDuration && writtenDuration){
 
-        const newCharacter =
-            detectCharacter(text,previous.game);
+        currentProject.duration = writtenDuration;
 
-        const noCharacter =
-            explicitlyNoCharacter(text);
+        pendingDuration = false;
 
-        if(newCharacter){
+        addUserMessage(text);
 
-            pendingCharacter = null;
+        showTyping();
 
-            const combined = {
-                ...previous,
-                character:newCharacter,
-                noCharacter:false,
-                text:previous.text + " " + text
-            };
+        setTimeout(() => {
 
-            return generateAfterCharacter(combined);
+            removeTyping();
 
-        }
+            addBotMessage(
+                buildLongScript(currentProject)
+            );
 
-        if(noCharacter){
+        },700);
 
-            pendingCharacter = null;
-
-            const combined = {
-                ...previous,
-                character:null,
-                noCharacter:true
-            };
-
-            return ideasResponse(combined);
-
-        }
-
-        if(
-            normalize(text) === "si" ||
-            normalize(text) === "si quiero" ||
-            normalize(text) === "yes"
-        ){
-
-            return `
-                <p>${getGreeting()}.</p>
-
-                <p>
-                    Perfecto. ¿Con qué agente o personaje quieres hacerlo?
-                </p>
-
-                <p>
-                    Puedes decirme algo como <strong>Reyna</strong>,
-                    <strong>Jett</strong>, <strong>Sage</strong> u otro.
-                </p>
-            `;
-
-        }
-
-        return `
-            <p>${getGreeting()}.</p>
-
-            <p>
-                Solo me falta ese detalle: ¿qué personaje quieres utilizar?
-            </p>
-
-            <p>
-                Si te da igual, escribe <strong>“cualquiera”</strong>
-                y continúo sin limitar la idea a un personaje.
-            </p>
-        `;
-
+        return;
     }
 
 
     /*
-       GAMING:
-       SI HAY JUEGO CON PERSONAJES Y NO HAY PERSONAJE,
-       PREGUNTAMOS ANTES DE GENERAR.
+       Si dice algo como:
+       "sí", "si", "dale", etc.
+       y había una pregunta pendiente,
+       NO repetimos la pregunta.
     */
 
     if(
-        context.game &&
-        games[context.game] &&
-        games[context.game].characters.length > 0 &&
-        !context.character &&
-        !context.noCharacter
+        pendingDuration &&
+        /^(si|sí|dale|claro|ok|okay|va|perfecto|yes)$/i.test(text.trim())
     ){
 
-        pendingCharacter = context;
+        addUserMessage(text);
 
-        return characterQuestion(context.game);
+        addBotMessage(`
+            Perfecto. Solo me falta saber la duración aproximada
+            para adaptar el guion correctamente.
+            ${showDurationSelector()}
+        `);
 
-    }
-
-
-    return generateAfterCharacter(context);
-
-}
-
-
-/* ---------------------------------------------------------
-   GENERAR DESPUÉS DE SABER PERSONAJE
---------------------------------------------------------- */
-
-function generateAfterCharacter(context){
-
-    const intent = context.intent;
-
-
-    if(intent.asksIdeas){
-
-        return ideasResponse(context);
-
-    }
-
-
-    if(intent.asksScript){
-
-        return scriptResponse(context);
-
-    }
-
-
-    if(intent.asksMeme){
-
-        return memeResponse();
-
-    }
-
-
-    if(intent.asksEditing){
-
-        return editingResponse(context);
-
-    }
-
-
-    if(intent.asksMotivation){
-
-        return motivationResponse();
-
+        return;
     }
 
 
     /*
-       SI SOLO DICE VALORANT PERO NO PIDE NADA,
-       AHORA SÍ ENTENDEMOS EL CONTEXTO.
+       Analizar la intención.
+       Si ya tenemos suficiente información,
+       preguntar solamente lo que falta.
     */
 
-    if(context.game){
+    if(
+        context.type === "publicidad" ||
+        context.type === "guion" ||
+        context.type === "video"
+    ){
 
-        return ideasResponse({
-            ...context,
-            intent:{
-                ...intent,
-                asksIdeas:true
-            }
-        });
+        currentProject = {
+            topic:context.topic,
+            type:context.type,
+            platform:context.platform
+        };
 
+        pendingDuration = true;
+
+        addBotMessage(`
+
+            <div class="bot-title">
+                Perfecto, ya tengo la idea.
+            </div>
+
+            <div class="section">
+                Voy a plantearlo como un contenido sobre
+                <strong>${capitalize(context.topic)}</strong>
+                ${context.platform ? `pensado para ${context.platform}` : "para formato de video"}.
+            </div>
+
+            <div class="section">
+                Antes de escribirlo necesito adaptar el ritmo,
+                la cantidad de información y el desarrollo a una
+                duración concreta.
+            </div>
+
+            <div class="section">
+                <strong>¿Cuánto quieres que dure aproximadamente?</strong>
+                Elige una opción:
+            </div>
+
+            ${buildDurationHTML()}
+
+        `);
+
+        return;
     }
 
 
-    return genericResponse(context);
+    /* Ideas */
 
+    if(
+        context.type === "ideas" ||
+        /no se que hacer|no sé qué hacer|no tengo idea|que puedo hacer|qué puedo hacer/i.test(text)
+    ){
+
+        const topic = context.game || "contenido";
+
+        addBotMessage(`
+            <div class="bot-title">
+                💡 Vamos a desbloquear ideas.
+            </div>
+
+            <div class="section">
+                Como estás pensando en <strong>${capitalize(topic)}</strong>,
+                te propongo varias direcciones diferentes en lugar
+                de darte siempre la misma fórmula.
+            </div>
+
+            <div class="idea">
+                <div class="idea-number">01 — El descubrimiento</div>
+                <span>Empieza con algo que parezca desconocido y
+                revela poco a poco de qué se trata.</span>
+            </div>
+
+            <div class="idea">
+                <div class="idea-number">02 — El reto creativo</div>
+                <span>Plantea una condición dentro del contenido
+                y construye el video alrededor de ella.</span>
+            </div>
+
+            <div class="idea">
+                <div class="idea-number">03 — La opinión</div>
+                <span>Presenta una opinión polémica o inesperada
+                y desarrolla argumentos para mantener la atención.</span>
+            </div>
+
+            <div class="idea">
+                <div class="idea-number">04 — El experimento</div>
+                <span>Haz algo diferente y documenta qué sucede.</span>
+            </div>
+
+            <div class="idea">
+                <div class="idea-number">05 — La historia</div>
+                <span>Convierte el tema en una pequeña historia con
+                inicio, conflicto y final.</span>
+            </div>
+
+            ${motivation()}
+        `);
+
+        return;
+    }
+
+
+    /* Respuesta genérica */
+
+    addBotMessage(`
+
+        <div class="bot-title">
+            Entendido.
+        </div>
+
+        <div class="section">
+            Analicé lo que me dijiste y puedo ayudarte a convertirlo
+            en una idea, guion, publicidad, video o concepto para
+            redes.
+        </div>
+
+        <div class="section">
+            Cuéntame qué quieres conseguir con esa idea y la
+            desarrollaré desde ahí.
+        </div>
+
+        ${motivation()}
+
+    `);
+}
+
+
+/* =========================================================
+   HTML DEL SELECTOR
+========================================================= */
+
+function buildDurationHTML(){
+
+    return `
+
+        <div class="duration-wrap">
+
+            <button
+                class="duration-button"
+                onclick="toggleDuration('main-duration-panel')"
+            >
+                ⏱ Elegir duración
+            </button>
+
+            <div
+                class="duration-panel"
+                id="main-duration-panel"
+            >
+
+                ${durations.map(d => `
+                    <button
+                        class="duration-option"
+                        onclick="selectDuration('${d}')"
+                    >
+                        ${d}
+                    </button>
+                `).join("")}
+
+                <button
+                    class="duration-option"
+                    onclick="customDuration()"
+                >
+                    Personalizado
+                </button>
+
+            </div>
+
+        </div>
+    `;
+}
+
+
+/* =========================================================
+   UTILIDADES
+========================================================= */
+
+function capitalize(text){
+
+    if(!text) return "";
+
+    return text.charAt(0).toUpperCase() + text.slice(1);
 }
 
 
@@ -2901,334 +1692,105 @@ function generateAfterCharacter(context){
    CHAT
 ========================================================= */
 
-const messagesInner = $("#messagesInner");
-const messages = $("#messages");
-const input = $("#userInput");
-const sendButton = $("#sendButton");
-const welcome = $("#welcome");
+function addUserMessage(text){
+
+    welcome.style.display = "none";
+
+    const message = document.createElement("div");
+
+    message.className = "message user";
+
+    message.innerHTML = `
+        <div class="bubble">
+            ${escapeHTML(text)}
+        </div>
+    `;
+
+    chatInner.appendChild(message);
+
+    scrollChat();
+}
 
 
-function addMessage(type,html){
+function addBotMessage(html){
 
-    welcome.classList.add("hidden");
+    welcome.style.display = "none";
 
-    const wrapper =
-        document.createElement("div");
+    const message = document.createElement("div");
 
-    wrapper.className =
-        "message " + type;
+    message.className = "message bot";
 
+    message.innerHTML = `
+        <div class="bubble">
+            ${html}
+        </div>
+    `;
 
-    const bubble =
-        document.createElement("div");
+    chatInner.appendChild(message);
 
-    bubble.className =
-        "message-bubble";
+    scrollChat();
 
-
-    if(type === "bot"){
-
-        bubble.innerHTML = `
-
-            <div class="message-label">
-
-                <svg class="bot-mini"
-                     viewBox="0 0 120 120">
-
-                    <path
-                        d="M14 52 L60 14 L106 52"
-                        fill="none"
-                        stroke="#8b1736"
-                        stroke-width="8"
-                        stroke-linecap="round"/>
-
-                    <path
-                        d="M26 47 V103 H94 V47"
-                        fill="none"
-                        stroke="#8b1736"
-                        stroke-width="7"/>
-
-                    <rect
-                        x="37"
-                        y="57"
-                        width="46"
-                        height="32"
-                        rx="8"
-                        fill="#0d0f12"
-                        stroke="#10B981"
-                        stroke-width="5"/>
-
-                    <circle
-                        cx="60"
-                        cy="73"
-                        r="11"
-                        fill="none"
-                        stroke="#10B981"
-                        stroke-width="5"/>
-
-                    <circle
-                        cx="60"
-                        cy="73"
-                        r="3.5"
-                        fill="#10B981"/>
-
-                </svg>
-
-                SPARKYKREA
-
-            </div>
-
-            <div class="bot-content">
-                ${html}
-            </div>
-
-        `;
-
-    }else{
-
-        bubble.innerHTML =
-            `<div>${escapeHTML(html)}</div>`;
-
-    }
-
-
-    wrapper.appendChild(bubble);
-
-    messagesInner.appendChild(wrapper);
-
-    scrollBottom();
+    saveHistory();
 
 }
 
 
-function addTyping(){
+function showTyping(){
 
-    const wrapper =
-        document.createElement("div");
+    const typing = document.createElement("div");
 
-    wrapper.className =
-        "message bot";
+    typing.className = "message bot";
 
-    wrapper.id =
-        "typingMessage";
+    typing.id = "typing";
 
-
-    wrapper.innerHTML = `
-
-        <div class="message-bubble">
-
-            <div class="message-label">
-
-                SPARKYKREA
-
-            </div>
-
+    typing.innerHTML = `
+        <div class="bubble">
             <div class="typing">
-
-                <span></span>
-                <span></span>
-                <span></span>
-
+                <i></i>
+                <i></i>
+                <i></i>
             </div>
-
         </div>
-
     `;
 
-    messagesInner.appendChild(wrapper);
+    chatInner.appendChild(typing);
 
-    scrollBottom();
-
+    scrollChat();
 }
 
 
 function removeTyping(){
 
-    const typing =
-        $("#typingMessage");
+    const typing = document.getElementById("typing");
 
     if(typing){
         typing.remove();
     }
-
 }
 
 
-function scrollBottom(){
+function scrollChat(){
 
-    setTimeout(()=>{
+    setTimeout(() => {
 
-        messages.scrollTo({
-            top:messages.scrollHeight,
+        chat.scrollTo({
+            top:chat.scrollHeight,
             behavior:"smooth"
         });
 
-    },30);
-
+    },50);
 }
 
 
-/* =========================================================
-   HISTORIAL
-========================================================= */
-
-let chats = [];
-
-try{
-
-    chats =
-        JSON.parse(
-            localStorage.getItem("sparky_chats") || "[]"
-        );
-
-    if(!Array.isArray(chats)){
-        chats=[];
-    }
-
-}catch(e){
-
-    chats=[];
-
-}
-
-
-function saveChat(userText,botHTML){
-
-    const chat = {
-
-        id:Date.now(),
-
-        title:userText.slice(0,55),
-
-        user:userText,
-
-        bot:botHTML,
-
-        date:new Date().toLocaleString("es-ES",{
-            day:"2-digit",
-            month:"2-digit",
-            hour:"2-digit",
-            minute:"2-digit"
-        })
-
-    };
-
-
-    chats.unshift(chat);
-
-    if(chats.length > 40){
-
-        chats =
-            chats.slice(0,40);
-
-    }
-
-
-    try{
-
-        localStorage.setItem(
-            "sparky_chats",
-            JSON.stringify(chats)
-        );
-
-    }catch(e){}
-
-
-    renderHistory();
-
-}
-
-
-function renderHistory(){
-
-    const list =
-        $("#historyList");
-
-    if(!chats.length){
-
-        list.innerHTML = `
-
-            <div class="history-empty">
-
-                Tus conversaciones aparecerán aquí automáticamente.
-
-            </div>
-
-        `;
-
-        return;
-
-    }
-
-
-    list.innerHTML = "";
-
-
-    chats.forEach(chat=>{
-
-        const button =
-            document.createElement("button");
-
-        button.className =
-            "history-item";
-
-        button.innerHTML = `
-
-            <i class="fa-regular fa-message"></i>
-
-            <span>
-                ${escapeHTML(chat.title)}
-            </span>
-
-        `;
-
-
-        button.addEventListener("click",()=>{
-
-            openChat(chat.id);
-
-            closeSidebar();
-
-        });
-
-
-        list.appendChild(button);
-
-    });
-
-}
-
-
-function openChat(id){
-
-    const chat =
-        chats.find(x=>x.id===id);
-
-    if(!chat) return;
-
-    messagesInner.innerHTML="";
-
-    welcome.classList.add("hidden");
-
-    addMessage("user",chat.user);
-
-    addMessage("bot",chat.bot);
-
-}
-
-
-function newProject(){
-
-    messagesInner.innerHTML="";
-
-    welcome.classList.remove("hidden");
-
-    pendingCharacter=null;
-
-    input.value="";
-
-    input.focus();
-
+function escapeHTML(text){
+
+    return text
+        .replace(/&/g,"&amp;")
+        .replace(/</g,"&lt;")
+        .replace(/>/g,"&gt;")
+        .replace(/"/g,"&quot;")
+        .replace(/'/g,"&#039;")
+        .replace(/\n/g,"<br>");
 }
 
 
@@ -3236,201 +1798,187 @@ function newProject(){
    ENVIAR
 ========================================================= */
 
-let busy=false;
-
-
 function sendMessage(){
 
-    if(busy) return;
-
-    const text =
-        input.value.trim();
+    const text = input.value.trim();
 
     if(!text) return;
 
+    input.value = "";
 
-    busy=true;
+    input.style.height = "auto";
 
-    sendButton.disabled=true;
+    if(!greetingShown){
+        showGreeting();
+    }
 
-    input.value="";
+    addUserMessage(text);
 
-    autoResize();
+    showTyping();
 
-
-    addMessage(
-        "user",
-        text
-    );
-
-
-    addTyping();
-
-
-    /*
-       Pequeño retraso para que la respuesta
-       se sienta natural sin bloquear.
-    */
-
-    setTimeout(()=>{
+    setTimeout(() => {
 
         removeTyping();
 
+        generateResponse(text);
 
-        const response =
-            generateResponse(text);
-
-
-        addMessage(
-            "bot",
-            response
-        );
-
-
-        saveChat(
-            text,
-            response
-        );
-
-
-        busy=false;
-
-        sendButton.disabled=false;
-
-        input.focus();
-
-    },450 + Math.random()*450);
-
+    },650);
 }
 
 
-sendButton.addEventListener(
-    "click",
-    sendMessage
-);
+send.addEventListener("click",sendMessage);
 
 
-input.addEventListener(
-    "keydown",
-    e=>{
+input.addEventListener("keydown",e => {
 
-        if(e.key === "Enter" && !e.shiftKey){
+    if(e.key === "Enter" && !e.shiftKey){
 
-            e.preventDefault();
+        e.preventDefault();
 
-            sendMessage();
-
-        }
+        sendMessage();
 
     }
-);
+
+});
 
 
-/* =========================================================
-   TEXTAREA AUTOMÁTICO
-========================================================= */
+input.addEventListener("input",() => {
 
-function autoResize(){
-
-    input.style.height="auto";
+    input.style.height = "auto";
 
     input.style.height =
-        Math.min(input.scrollHeight,140) + "px";
+        Math.min(input.scrollHeight,130) + "px";
 
-}
-
-input.addEventListener(
-    "input",
-    autoResize
-);
+});
 
 
 /* =========================================================
-   ATAJOS
+   HISTORIAL
 ========================================================= */
 
-document.addEventListener(
-    "keydown",
-    e=>{
+function saveHistory(){
 
-        if(
-            e.key === "/" &&
-            document.activeElement !== input
-        ){
+    const messages = [...chatInner.querySelectorAll(".message")];
 
-            e.preventDefault();
+    if(!messages.length) return;
+
+    const firstUser =
+        chatInner.querySelector(".message.user .bubble");
+
+    if(!firstUser) return;
+
+    const title =
+        firstUser.innerText.substring(0,45);
+
+    let chats =
+        JSON.parse(localStorage.getItem("sparky_chats") || "[]");
+
+    if(!chats.includes(title)){
+
+        chats.unshift(title);
+
+        chats = chats.slice(0,40);
+
+        localStorage.setItem(
+            "sparky_chats",
+            JSON.stringify(chats)
+        );
+
+        renderHistory();
+
+    }
+}
+
+
+function renderHistory(){
+
+    const chats =
+        JSON.parse(localStorage.getItem("sparky_chats") || "[]");
+
+    history.innerHTML = "";
+
+    chats.forEach(title => {
+
+        const item =
+            document.createElement("div");
+
+        item.className = "history-item";
+
+        item.textContent = title;
+
+        item.onclick = () => {
+
+            input.value = title;
 
             input.focus();
 
-        }
+        };
 
-        if(e.key === "Escape"){
+        history.appendChild(item);
 
-            closeSidebar();
-
-        }
-
-    }
-);
-
-
-/* =========================================================
-   MOBILE SIDEBAR
-========================================================= */
-
-const sidebar =
-    $("#sidebar");
-
-const overlay =
-    $("#overlay");
-
-const mobileMenu =
-    $("#mobileMenu");
-
-
-function openSidebar(){
-
-    sidebar.classList.add("open");
-
-    overlay.classList.add("show");
-
+    });
 }
-
-
-function closeSidebar(){
-
-    sidebar.classList.remove("open");
-
-    overlay.classList.remove("show");
-
-}
-
-
-mobileMenu.addEventListener(
-    "click",
-    openSidebar
-);
-
-overlay.addEventListener(
-    "click",
-    closeSidebar
-);
 
 
 /* =========================================================
    NUEVO PROYECTO
 ========================================================= */
 
-$("#newProject").addEventListener(
-    "click",
-    ()=>{
+document.getElementById("newProject")
+    .addEventListener("click",() => {
 
-        newProject();
+        chatInner.innerHTML = "";
 
-        closeSidebar();
+        chatInner.appendChild(welcome);
+
+        welcome.style.display = "flex";
+
+        greetingShown = false;
+        pendingDuration = false;
+        currentProject = null;
+
+        input.value = "";
+
+    });
+
+
+/* =========================================================
+   MOBILE MENU
+========================================================= */
+
+document.getElementById("mobileMenu")
+    .addEventListener("click",() => {
+
+        document
+            .getElementById("sidebar")
+            .classList.toggle("open");
+
+    });
+
+
+/* =========================================================
+   ATAJOS
+========================================================= */
+
+document.addEventListener("keydown",e => {
+
+    if(e.key === "/" && document.activeElement !== input){
+
+        e.preventDefault();
+
+        input.focus();
 
     }
-);
+
+    if(e.key === "Escape"){
+
+        document
+            .getElementById("sidebar")
+            .classList.remove("open");
+
+    }
+
+});
 
 
 /* =========================================================
@@ -3439,50 +1987,11 @@ $("#newProject").addEventListener(
 
 renderHistory();
 
+setTimeout(() => {
 
-/* =========================================================
-   SPLASH DE SEGURIDAD
-   Aunque falle JS en alguna parte del futuro,
-   el CSS ya lo oculta automáticamente.
-========================================================= */
+    document.getElementById("splash").style.display = "none";
 
-setTimeout(()=>{
-
-    const splash =
-        $("#splash");
-
-    if(splash){
-
-        splash.style.opacity="0";
-        splash.style.visibility="hidden";
-
-        setTimeout(()=>{
-
-            if(splash){
-                splash.remove();
-            }
-
-        },350);
-
-    }
-
-},1500);
-
-
-/* =========================================================
-   BIENVENIDA AUTOMÁTICA
-========================================================= */
-
-setTimeout(()=>{
-
-    /*
-       No mostramos un mensaje automático.
-       El usuario puede escribir directamente.
-    */
-
-    input.focus();
-
-},1600);
+},3200);
 
 </script>
 
