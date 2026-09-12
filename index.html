@@ -62,7 +62,7 @@ body{
 
 .splash-content{
     text-align:center;
-    animation:logoIn 1s cubic-bezier(0.16, 1, 0.3, 1);
+    animation:logoIn 1s cubic-bezier(0.16,1,0.3,1);
 }
 
 .splash-svg-box{
@@ -78,8 +78,8 @@ body{
     letter-spacing:-0.5px;
 }
 
-.splash-name span:first-child{ color:var(--wine); }
-.splash-name span:nth-child(2){ color:#10b981; }
+.splash-name span:first-child{color:var(--wine);}
+.splash-name span:nth-child(2){color:#10b981;}
 
 .splash-studio{
     font-size:11px;
@@ -90,12 +90,16 @@ body{
 }
 
 @keyframes logoIn{
-    from{ opacity:0; transform:scale(0.9) translateY(10px); }
-    to{ opacity:1; transform:scale(1) translateY(0); }
+    from{opacity:0;transform:scale(.9) translateY(10px);}
+    to{opacity:1;transform:scale(1) translateY(0);}
 }
 
 @keyframes splashOut{
-    to{ opacity:0; visibility:hidden; pointer-events:none; }
+    to{
+        opacity:0;
+        visibility:hidden;
+        pointer-events:none;
+    }
 }
 
 #app{
@@ -108,10 +112,13 @@ body{
     display:none;
     position:fixed;
     inset:0;
-    background:rgba(0,0,0,0.8);
+    background:rgba(0,0,0,.8);
     z-index:90;
 }
-.overlay.active{ display:block; }
+
+.overlay.active{
+    display:block;
+}
 
 .sidebar{
     width:320px;
@@ -133,17 +140,21 @@ body{
     margin-bottom:20px;
 }
 
-.brand-svg-box{ width:46px; height:46px; flex-shrink:0; }
+.brand-svg-box{
+    width:46px;
+    height:46px;
+    flex-shrink:0;
+}
 
 .brand-text{
     font-size:15px;
     font-weight:800;
-    letter-spacing:-0.5px;
+    letter-spacing:-.5px;
     line-height:1.2;
 }
 
-.brand-text span:first-child{ color:var(--wine); }
-.brand-text span:nth-child(2){ color:#10b981; }
+.brand-text span:first-child{color:var(--wine);}
+.brand-text span:nth-child(2){color:#10b981;}
 
 .brand-text small{
     display:block;
@@ -153,7 +164,8 @@ body{
     font-weight:700;
 }
 
-.new-btn, .pdf-btn{
+.new-btn,
+.pdf-btn{
     width:100%;
     border:1px solid var(--border);
     background:var(--card);
@@ -170,8 +182,14 @@ body{
     margin-bottom:10px;
 }
 
+.new-btn:hover,
+.pdf-btn:hover{
+    border-color:var(--green-glow);
+    transform:translateY(-1px);
+}
+
 .pdf-btn{
-    border-color:rgba(16,185,129,0.3);
+    border-color:rgba(16,185,129,.3);
     color:var(--green-glow);
 }
 
@@ -190,7 +208,10 @@ body{
     padding-right:4px;
 }
 
-.history::-webkit-scrollbar{ width:5px; }
+.history::-webkit-scrollbar{
+    width:5px;
+}
+
 .history::-webkit-scrollbar-thumb{
     background:var(--border);
     border-radius:4px;
@@ -212,6 +233,11 @@ body{
     gap:10px;
 }
 
+.history-item:hover{
+    border-color:#394150;
+    background:#1a1e27;
+}
+
 .history-text{
     white-space:nowrap;
     overflow:hidden;
@@ -227,6 +253,10 @@ body{
     font-size:14px;
     padding:4px 8px;
     border-radius:6px;
+}
+
+.history-delete:hover{
+    color:#f43f5e;
 }
 
 .sidebar-bottom{
@@ -274,8 +304,8 @@ body{
     line-height:1.2;
 }
 
-.header-logo-text span:first-child{ color:var(--wine); }
-.header-logo-text span:nth-child(2){ color:#10b981; }
+.header-logo-text span:first-child{color:var(--wine);}
+.header-logo-text span:nth-child(2){color:#10b981;}
 
 .header-logo-text small{
     display:block;
@@ -292,7 +322,7 @@ body{
     background:#161920;
     border:1px solid var(--border);
     color:var(--white);
-    font-size:18px;
+    font-size:14px;
     cursor:pointer;
     padding:8px 12px;
     border-radius:10px;
@@ -307,12 +337,14 @@ body{
     border:2px solid var(--border);
     border-radius:14px;
     padding:12px;
-    box-shadow:0 15px 35px rgba(0,0,0,0.9);
+    box-shadow:0 15px 35px rgba(0,0,0,.9);
     z-index:999999;
     min-width:210px;
 }
 
-.header-dropdown.active{ display:block; }
+.header-dropdown.active{
+    display:block;
+}
 
 .dropdown-label{
     font-size:11px;
@@ -339,6 +371,10 @@ body{
     color:#cbd5e1;
     background:#161920;
     font-weight:500;
+}
+
+.lang-option:hover{
+    background:#202530;
 }
 
 .lang-option.active{
@@ -375,7 +411,7 @@ body{
 
 .welcome h1{
     font-size:32px;
-    letter-spacing:-0.5px;
+    letter-spacing:-.5px;
     margin-bottom:12px;
     font-weight:800;
 }
@@ -392,11 +428,16 @@ body{
     margin-bottom:28px;
 }
 
-.message.user{ justify-content:flex-end; }
-.message.bot{ justify-content:flex-start; }
+.message.user{
+    justify-content:flex-end;
+}
+
+.message.bot{
+    justify-content:flex-start;
+}
 
 .bubble{
-    max-width:88%;
+    max-width:92%;
     padding:20px 22px;
     border-radius:16px;
     font-size:14.5px;
@@ -434,35 +475,31 @@ body{
     font-weight:500;
 }
 
-.section strong{
-    color:#fff;
-}
-
 .script-line{
     padding:10px 0;
-    border-bottom:1px solid #222630;
+    border-bottom:1px solid #20242d;
 }
 
 .script-line:last-child{
     border-bottom:0;
 }
 
-.script-time{
+.time-code{
     color:var(--green-glow);
     font-weight:800;
 }
 
-.script-label{
-    color:#fff;
-    font-weight:800;
+.tip{
+    color:#cbd5e1;
+    margin-top:7px;
 }
 
-.music-card{
+.idea-card{
     margin-top:10px;
-    padding:12px;
-    border-radius:10px;
-    background:#161920;
+    padding:13px;
+    background:#151922;
     border:1px solid #252b36;
+    border-radius:10px;
 }
 
 .motivation{
@@ -488,13 +525,18 @@ body{
     animation:typing 1s infinite ease-in-out;
 }
 
-.typing i:nth-child(2){ animation-delay:.2s; }
-.typing i:nth-child(3){ animation-delay:.4s; }
+.typing i:nth-child(2){
+    animation-delay:.2s;
+}
+
+.typing i:nth-child(3){
+    animation-delay:.4s;
+}
 
 @keyframes typing{
     0%,100%{
         opacity:.2;
-        transform:scale(0.8);
+        transform:scale(.8);
     }
     50%{
         opacity:1;
@@ -509,6 +551,7 @@ body{
     right:0;
     padding:20px 30px 24px;
     background:#0b0c10;
+    z-index:50;
 }
 
 .composer{
@@ -536,7 +579,9 @@ textarea{
     line-height:1.6;
 }
 
-textarea::placeholder{ color:#4b5563; }
+textarea::placeholder{
+    color:#4b5563;
+}
 
 .send{
     width:40px;
@@ -584,6 +629,10 @@ textarea::placeholder{ color:#4b5563; }
     gap:10px;
 }
 
+.duration-trigger-btn:hover{
+    background:#252c39;
+}
+
 .duration-grid-panel{
     display:none;
     margin-top:12px;
@@ -625,21 +674,8 @@ textarea::placeholder{ color:#4b5563; }
     cursor:pointer;
 }
 
-.idea-grid{
-    display:grid;
-    grid-template-columns:repeat(2,1fr);
-    gap:9px;
-    margin-top:12px;
-}
-
-.idea-item{
-    padding:11px;
-    background:#161920;
-    border:1px solid var(--border);
-    border-radius:10px;
-}
-
 @media(max-width:768px){
+
     .sidebar{
         position:fixed;
         left:-330px;
@@ -669,45 +705,124 @@ textarea::placeholder{ color:#4b5563; }
         grid-template-columns:repeat(3,1fr);
     }
 
-    .bubble{
-        max-width:94%;
-    }
-
     .welcome h1{
         font-size:25px;
     }
 
+    .welcome p{
+        font-size:13.5px;
+    }
+
+    .bubble{
+        max-width:96%;
+        padding:17px;
+        font-size:13.5px;
+    }
+
     .header{
-        padding:0 16px;
+        padding:0 14px;
+    }
+
+    .header-logo-text{
+        display:none;
+    }
+
+    .header-right{
+        gap:7px;
+    }
+
+    .header-svg-box{
+        width:31px;
+        height:31px;
+    }
+
+    .header-dots-btn{
+        font-size:12px;
+    }
+}
+
+@media(max-width:430px){
+
+    .duration-grid-panel{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .duration-trigger-btn{
+        width:100%;
+        justify-content:center;
+    }
+
+    .chat{
+        padding-left:10px;
+        padding-right:10px;
+    }
+
+    .composer{
+        padding:9px 10px;
+    }
+
+    .send{
+        width:38px;
+        height:38px;
     }
 }
 
 @media print{
+
     body{
         background:white;
         color:black;
         overflow:visible;
-    }
-
-    .sidebar,
-    .header,
-    .composer-area,
-    .splash,
-    .duration-inline-wrap{
-        display:none !important;
-    }
-
-    .main,
-    .chat{
-        overflow:visible;
         height:auto;
     }
 
-    .bot .bubble,
-    .section{
+    #splash,
+    .sidebar,
+    .header,
+    .composer-area,
+    .overlay,
+    .duration-trigger-btn,
+    .duration-grid-panel{
+        display:none !important;
+    }
+
+    #app{
+        display:block;
+        height:auto;
+    }
+
+    .main{
         background:white;
-        color:black;
-        border:1px solid #ccc;
+    }
+
+    .chat{
+        overflow:visible;
+        padding:20px;
+    }
+
+    .chat-inner{
+        max-width:100%;
+    }
+
+    .message{
+        display:flex;
+    }
+
+    .bot .bubble,
+    .user .bubble,
+    .section,
+    .idea-card{
+        background:white !important;
+        color:black !important;
+        border-color:#ccc !important;
+    }
+
+    .time-code{
+        color:#087f5b !important;
+    }
+
+    .motivation{
+        color:#555 !important;
     }
 }
 </style>
@@ -720,7 +835,7 @@ textarea::placeholder{ color:#4b5563; }
         <circle cx="50" cy="50" r="47" fill="none" stroke="#ffffff" stroke-width="2.5"/>
         <circle cx="50" cy="50" r="41" fill="none" stroke="#222630" stroke-width="1.5"/>
         <circle cx="50" cy="50" r="37.5" fill="#059669"/>
-        <circle cx="50" cy="50" r="34" fill="none" stroke="#ffffff" stroke-width="1.5" opacity="0.3"/>
+        <circle cx="50" cy="50" r="34" fill="none" stroke="#ffffff" stroke-width="1.5" opacity=".3"/>
         <path d="M26 42 H34 L37 37 H63 L66 42 H74 C76.2 42 78 43.8 78 46 V64 C78 66.2 76.2 68 74 68 H26 C23.8 68 22 66.2 22 64 V46 C22 43.8 23.8 42 26 42 Z" fill="#ffffff"/>
         <circle cx="50" cy="55" r="13" fill="#059669" stroke="#ffffff" stroke-width="2.5"/>
         <path d="M50 44 L52.5 52.5 L61 55 L52.5 57.5 L50 66 L47.5 57.5 L39 55 L47.5 52.5 Z" fill="#ffffff"/>
@@ -738,11 +853,9 @@ textarea::placeholder{ color:#4b5563; }
                 <use href="#sparky-circular-logo"/>
             </svg>
         </div>
-
         <div class="splash-name">
             <span>Sparky</span><span>Krea</span>
         </div>
-
         <div class="splash-studio">STUDIO'S</div>
     </div>
 </div>
@@ -798,7 +911,7 @@ textarea::placeholder{ color:#4b5563; }
 
                 <div class="header-menu-container">
 
-                    <button class="header-dots-btn" id="headerDotsBtn">
+                    <button class="header-dots-btn" id="headerDotsBtn" title="Opciones / Idiomas">
                         🌐 Idioma
                     </button>
 
@@ -822,7 +935,9 @@ textarea::placeholder{ color:#4b5563; }
                             <div class="lang-option" data-lang="ar">🇸🇦 العربية</div>
 
                         </div>
+
                     </div>
+
                 </div>
 
                 <div class="header-svg-box">
@@ -837,6 +952,7 @@ textarea::placeholder{ color:#4b5563; }
                 </div>
 
             </div>
+
         </header>
 
         <section class="chat" id="chat">
@@ -862,9 +978,11 @@ textarea::placeholder{ color:#4b5563; }
                 </div>
 
             </div>
+
         </section>
 
     </main>
+
 </div>
 
 <div class="composer-area" id="composerArea">
@@ -890,8 +1008,9 @@ textarea::placeholder{ color:#4b5563; }
 <script>
 
 /* =========================================================
-   ELEMENTOS PRINCIPALES
-========================================================= */
+   SPARKYKREA STUDIO'S
+   MOTOR LOCAL DE CONVERSACIÓN
+   ========================================================= */
 
 const input = document.getElementById("input");
 const send = document.getElementById("send");
@@ -906,185 +1025,348 @@ const headerDropdown = document.getElementById("headerDropdown");
 const langOptionsList = document.getElementById("langOptionsList");
 
 let currentProject = null;
-let motivationIndex = 0;
 let currentLang = localStorage.getItem("sparky_lang") || "es";
-
-/*
-    Este estado evita que el bot trate cada mensaje
-    como si fuera una conversación nueva.
-*/
-
-let conversationState = {
-    greetingShown:false,
-    awaitingDuration:false,
-    awaitingIdeaAfterDuration:false,
-    awaitingPlatform:false,
-    awaitingGoal:false,
-    awaitingModification:false,
-    lastUserMessage:"",
-    lastResponse:"",
-    messages:[],
-    projectStarted:false
-};
+let motivationIndex = 0;
+let greetingShown = false;
+let waitingForDuration = false;
+let waitingForIdeasAfterDuration = false;
+let conversationStarted = false;
+let lastGeneratedHTML = "";
+let projectHistory = JSON.parse(localStorage.getItem("sparky_history") || "[]");
 
 
 /* =========================================================
    IDIOMAS
-========================================================= */
+   ========================================================= */
 
 const i18n = {
 
-    es:{
-        newProj:"+ Nuevo proyecto",
-        pdfBtn:"📄 Descargar Guión en PDF",
-        langMenuTitle:"Selecciona Idioma",
-        historyTitle:"Historial de chats",
-        welcomeTitle:"¿En qué publicidad te puedo ayudar hoy?",
-        welcomeDesc:"Diseña guiones profesionales, estrategias detalladas y selección musical ideal para tu negocio o videojuego al instante.",
-        placeholder:"Escribe tu idea, juego o negocio...",
-        footer:"SparkyKrea Studio's - Asesoría Publicitaria Inteligente",
-        durationPrompt:"⏱ ¿Cuánto tiempo durará tu video? (Clic aquí)",
-        greeting:"Buenas tardes 👋",
-        customPrompt:"Indica la duración deseada (ej: 40 segundos):",
-        defaultDuration:"30 seg"
-    },
+es:{
+newProj:"+ Nuevo proyecto",
+pdfBtn:"📄 Descargar Guión en PDF",
+langMenuTitle:"Selecciona Idioma",
+historyTitle:"Historial de chats",
+welcomeTitle:"¿En qué publicidad te puedo ayudar hoy?",
+welcomeDesc:"Diseña guiones profesionales, estrategias detalladas y selección musical ideal para tu negocio o videojuego al instante.",
+placeholder:"Escribe tu idea, juego o negocio...",
+footer:"SparkyKrea Studio's - Asesoría Publicitaria Inteligente",
+durationPrompt:"⏱ Selecciona la duración del video",
+customPrompt:"Indica la duración deseada (ej: 40 segundos):",
+defaultDuration:"30 segundos",
+greeting:"¡Hola! 👋 Cuéntame qué quieres crear y voy a analizar tu idea para saber qué necesitas.",
+success:"Perfecto. Ya entendí el proyecto.",
+invalid:"Puedo ayudarte con publicidad, guiones, ideas, estrategia, música y contenido. Cuéntame qué tienes en mente.",
+noIdea:"Tranqui, no necesitas tener una idea todavía. Primero dime cuánto quieres que dure el video y después te propongo conceptos completos.",
+thanks:"¡De nada! Cuando quieras seguimos con el proyecto.",
+help:"Puedo crear guiones, conceptos, ganchos, estrategias, llamadas a la acción, ideas para TikTok/Reels/YouTube, estructura por segundos y recomendaciones musicales.",
+scriptTitle:"🎬 Guión + Estrategia Publicitaria",
+projectLabel:"📌 Proyecto:",
+durationLabel:"⏱ Duración:",
+categoryLabel:"🎯 Enfoque:",
+scriptHeader:"🎙️ Guión profesional segundo a segundo",
+musicHeader:"🎵 Dirección musical",
+artistLabel:"Referencia artística:",
+trackLabel:"Tema / estilo:",
+strategyHeader:"🧠 Estrategia didáctica",
+platformHeader:"📱 Adaptación para plataforma",
+ideasHeader:"💡 Ideas que puedes probar",
+changeHeader:"🔧 Ajuste realizado",
+},
 
-    en:{
-        newProj:"+ New Project",
-        pdfBtn:"📄 Download Script PDF",
-        langMenuTitle:"Select Language",
-        historyTitle:"Chat History",
-        welcomeTitle:"What advertising can I help you with today?",
-        welcomeDesc:"Design professional scripts, detailed strategies, and ideal music selection for your business or game instantly.",
-        placeholder:"Type your idea, game or business...",
-        footer:"SparkyKrea Studio's - Intelligent Advertising Advisory",
-        durationPrompt:"⏱ How long will your video be? (Click here)",
-        greeting:"Good afternoon 👋",
-        customPrompt:"Enter desired duration:",
-        defaultDuration:"30 sec"
-    },
+en:{
+newProj:"+ New Project",
+pdfBtn:"📄 Download Script PDF",
+langMenuTitle:"Select Language",
+historyTitle:"Chat History",
+welcomeTitle:"What advertising can I help you with today?",
+welcomeDesc:"Design professional scripts, detailed strategies, and ideal music selection for your business or game instantly.",
+placeholder:"Type your idea, game or business...",
+footer:"SparkyKrea Studio's - Intelligent Advertising Advisory",
+durationPrompt:"⏱ Select video duration",
+customPrompt:"Enter desired duration (e.g. 40 seconds):",
+defaultDuration:"30 seconds",
+greeting:"Hello! 👋 Tell me what you want to create and I'll analyze your idea to understand what you need.",
+success:"Perfect. I understand the project.",
+invalid:"I can help with advertising, scripts, ideas, strategy, music and content. Tell me what you have in mind.",
+noIdea:"No worries, you don't need an idea yet. First tell me the video duration, then I'll propose complete concepts.",
+thanks:"You're welcome! We can continue whenever you're ready.",
+help:"I can create scripts, hooks, strategies, calls to action, TikTok/Reels/YouTube ideas, second-by-second structures and music direction.",
+scriptTitle:"🎬 Script + Advertising Strategy",
+projectLabel:"📌 Project:",
+durationLabel:"⏱ Duration:",
+categoryLabel:"🎯 Focus:",
+scriptHeader:"🎙️ Professional second-by-second script",
+musicHeader:"🎵 Music direction",
+artistLabel:"Artistic reference:",
+trackLabel:"Track / style:",
+strategyHeader:"🧠 Didactic strategy",
+platformHeader:"📱 Platform adaptation",
+ideasHeader:"💡 Ideas to try",
+changeHeader:"🔧 Adjustment made",
+},
 
-    pt:{
-        newProj:"+ Novo projeto",
-        pdfBtn:"📄 Baixar Roteiro em PDF",
-        langMenuTitle:"Selecionar Idioma",
-        historyTitle:"Histórico de chats",
-        welcomeTitle:"Com qual publicidade posso te ajudar hoje?",
-        welcomeDesc:"Crie roteiros profissionais, estratégias detalhadas e seleção musical ideal.",
-        placeholder:"Digite sua ideia, jogo ou negócio...",
-        footer:"SparkyKrea Studio's - Consultoria Publicitária Inteligente",
-        durationPrompt:"⏱ Quanto tempo terá o vídeo? (Clique aqui)",
-        greeting:"Boa tarde 👋",
-        customPrompt:"Digite a duração desejada:",
-        defaultDuration:"30 seg"
-    },
+pt:{
+newProj:"+ Novo projeto",
+pdfBtn:"📄 Baixar Roteiro em PDF",
+langMenuTitle:"Selecionar Idioma",
+historyTitle:"Histórico de chats",
+welcomeTitle:"Com qual publicidade posso te ajudar hoje?",
+welcomeDesc:"Crie roteiros profissionais, estratégias detalhadas e seleção musical ideal para o seu negócio ou jogo.",
+placeholder:"Digite sua ideia, jogo ou negócio...",
+footer:"SparkyKrea Studio's - Consultoria Publicitária Inteligente",
+durationPrompt:"⏱ Selecione a duração do vídeo",
+customPrompt:"Digite a duração desejada:",
+defaultDuration:"30 segundos",
+greeting:"Olá! 👋 Conte o que você quer criar e vou analisar sua ideia.",
+success:"Perfeito. Já entendi o projeto.",
+invalid:"Posso ajudar com publicidade, roteiros, ideias, estratégia, música e conteúdo.",
+noIdea:"Sem problema! Primeiro me diga a duração do vídeo e depois vou propor conceitos completos.",
+thanks:"De nada! Podemos continuar quando quiser.",
+help:"Posso criar roteiros, ganchos, estratégias, chamadas para ação, ideias para TikTok/Reels/YouTube e direção musical.",
+scriptTitle:"🎬 Roteiro + Estratégia Publicitária",
+projectLabel:"📌 Projeto:",
+durationLabel:"⏱ Duração:",
+categoryLabel:"🎯 Foco:",
+scriptHeader:"🎙️ Roteiro profissional segundo a segundo",
+musicHeader:"🎵 Direção musical",
+artistLabel:"Referência artística:",
+trackLabel:"Tema / estilo:",
+strategyHeader:"🧠 Estratégia didática",
+platformHeader:"📱 Adaptação para plataforma",
+ideasHeader:"💡 Ideias para testar",
+changeHeader:"🔧 Ajuste realizado",
+},
 
-    fr:{
-        newProj:"+ Nouveau projet",
-        pdfBtn:"📄 Télécharger le script PDF",
-        langMenuTitle:"Sélectionner la langue",
-        historyTitle:"Historique",
-        welcomeTitle:"Quelle publicité puis-je vous aider à créer ?",
-        welcomeDesc:"Créez des scripts professionnels et des stratégies détaillées.",
-        placeholder:"Tapez votre idée, jeu ou entreprise...",
-        footer:"SparkyKrea Studio's - Conseil Publicitaire Intelligent",
-        durationPrompt:"⏱ Quelle sera la durée de la vidéo ? (Cliquez ici)",
-        greeting:"Bonjour 👋",
-        customPrompt:"Entrez la durée souhaitée :",
-        defaultDuration:"30 sec"
-    },
+fr:{
+newProj:"+ Nouveau projet",
+pdfBtn:"📄 Télécharger le script PDF",
+langMenuTitle:"Sélectionner la langue",
+historyTitle:"Historique des chats",
+welcomeTitle:"Quelle publicité puis-je vous aider à créer ?",
+welcomeDesc:"Créez des scripts professionnels et des stratégies détaillées.",
+placeholder:"Écrivez votre idée, jeu ou entreprise...",
+footer:"SparkyKrea Studio's - Conseil Publicitaire Intelligent",
+durationPrompt:"⏱ Sélectionnez la durée de la vidéo",
+customPrompt:"Indiquez la durée souhaitée :",
+defaultDuration:"30 secondes",
+greeting:"Bonjour ! 👋 Dites-moi ce que vous voulez créer et j'analyserai votre idée.",
+success:"Parfait. J'ai compris le projet.",
+invalid:"Je peux aider avec les scripts, idées, stratégies, musique et contenu.",
+noIdea:"Pas de problème ! Donnez-moi d'abord la durée de la vidéo, puis je proposerai des concepts.",
+thanks:"Avec plaisir ! Nous pouvons continuer quand vous voulez.",
+help:"Je peux créer des scripts, accroches, stratégies, appels à l'action et directions musicales.",
+scriptTitle:"🎬 Script + Stratégie Publicitaire",
+projectLabel:"📌 Projet :",
+durationLabel:"⏱ Durée :",
+categoryLabel:"🎯 Focus :",
+scriptHeader:"🎙️ Script professionnel seconde par seconde",
+musicHeader:"🎵 Direction musicale",
+artistLabel:"Référence artistique :",
+trackLabel:"Style :",
+strategyHeader:"🧠 Stratégie pédagogique",
+platformHeader:"📱 Adaptation plateforme",
+ideasHeader:"💡 Idées à tester",
+changeHeader:"🔧 Ajustement effectué",
+},
 
-    de:{
-        newProj:"+ Neues Projekt",
-        pdfBtn:"📄 Skript-PDF herunterladen",
-        langMenuTitle:"Sprache auswählen",
-        historyTitle:"Chat-Verlauf",
-        welcomeTitle:"Bei welcher Werbung kann ich dir helfen?",
-        welcomeDesc:"Erstelle professionelle Skripte und detaillierte Strategien.",
-        placeholder:"Gib deine Idee, dein Spiel oder Geschäft ein...",
-        footer:"SparkyKrea Studio's - Intelligente Werbeberatung",
-        durationPrompt:"⏱ Wie lange wird dein Video dauern? (Hier klicken)",
-        greeting:"Guten Tag 👋",
-        customPrompt:"Gewünschte Dauer eingeben:",
-        defaultDuration:"30 Sek."
-    },
+de:{
+newProj:"+ Neues Projekt",
+pdfBtn:"📄 Skript-PDF herunterladen",
+langMenuTitle:"Sprache auswählen",
+historyTitle:"Chat-Verlauf",
+welcomeTitle:"Bei welcher Werbung kann ich dir heute helfen?",
+welcomeDesc:"Erstelle professionelle Skripte und detaillierte Strategien.",
+placeholder:"Gib deine Idee, dein Spiel oder Geschäft ein...",
+footer:"SparkyKrea Studio's - Intelligente Werbeberatung",
+durationPrompt:"⏱ Videolänge auswählen",
+customPrompt:"Gewünschte Dauer:",
+defaultDuration:"30 Sekunden",
+greeting:"Hallo! 👋 Erzähl mir, was du erstellen möchtest.",
+success:"Perfekt. Ich habe das Projekt verstanden.",
+invalid:"Ich kann bei Werbung, Skripten, Ideen, Strategie und Musik helfen.",
+noIdea:"Kein Problem! Nenne zuerst die Videolänge, danach entwickle ich Konzepte.",
+thanks:"Gerne! Wir können jederzeit weitermachen.",
+help:"Ich kann Skripte, Hooks, Strategien, CTAs, Plattform-Ideen und Musikrichtungen erstellen.",
+scriptTitle:"🎬 Skript + Werbestrategie",
+projectLabel:"📌 Projekt:",
+durationLabel:"⏱ Dauer:",
+categoryLabel:"🎯 Fokus:",
+scriptHeader:"🎙️ Professionelles Skript",
+musicHeader:"🎵 Musikrichtung",
+artistLabel:"Künstlerische Referenz:",
+trackLabel:"Stil:",
+strategyHeader:"🧠 Didaktische Strategie",
+platformHeader:"📱 Plattform-Anpassung",
+ideasHeader:"💡 Ideen zum Testen",
+changeHeader:"🔧 Anpassung",
+},
 
-    it:{
-        newProj:"+ Nuovo progetto",
-        pdfBtn:"📄 Scarica script in PDF",
-        langMenuTitle:"Seleziona Lingua",
-        historyTitle:"Cronologia chat",
-        welcomeTitle:"Con quale pubblicità posso aiutarti?",
-        welcomeDesc:"Crea script professionali e strategie dettagliate.",
-        placeholder:"Scrivi la tua idea, gioco o azienda...",
-        footer:"SparkyKrea Studio's - Consulenza Pubblicitaria Intelligente",
-        durationPrompt:"⏱ Quanto durerà il video? (Clicca qui)",
-        greeting:"Buon pomeriggio 👋",
-        customPrompt:"Inserisci la durata desiderata:",
-        defaultDuration:"30 sec"
-    },
+it:{
+newProj:"+ Nuovo progetto",
+pdfBtn:"📄 Scarica script PDF",
+langMenuTitle:"Seleziona lingua",
+historyTitle:"Cronologia chat",
+welcomeTitle:"Con quale pubblicità posso aiutarti oggi?",
+welcomeDesc:"Crea script professionali e strategie dettagliate.",
+placeholder:"Scrivi la tua idea, gioco o azienda...",
+footer:"SparkyKrea Studio's - Consulenza Pubblicitaria Intelligente",
+durationPrompt:"⏱ Seleziona la durata del video",
+customPrompt:"Inserisci la durata:",
+defaultDuration:"30 secondi",
+greeting:"Ciao! 👋 Dimmi cosa vuoi creare e analizzerò la tua idea.",
+success:"Perfetto. Ho capito il progetto.",
+invalid:"Posso aiutarti con pubblicità, script, idee, strategia e musica.",
+noIdea:"Nessun problema! Dimmi prima la durata e poi creerò alcuni concetti.",
+thanks:"Di nulla! Possiamo continuare quando vuoi.",
+help:"Posso creare script, hook, strategie, CTA, idee per TikTok/Reels/YouTube e direzione musicale.",
+scriptTitle:"🎬 Script + Strategia Pubblicitaria",
+projectLabel:"📌 Progetto:",
+durationLabel:"⏱ Durata:",
+categoryLabel:"🎯 Focus:",
+scriptHeader:"🎙️ Script professionale",
+musicHeader:"🎵 Direzione musicale",
+artistLabel:"Riferimento artistico:",
+trackLabel:"Stile:",
+strategyHeader:"🧠 Strategia didattica",
+platformHeader:"📱 Adattamento piattaforma",
+ideasHeader:"💡 Idee da provare",
+changeHeader:"🔧 Modifica",
+},
 
-    ru:{
-        newProj:"+ Новый проект",
-        pdfBtn:"📄 Скачать сценарий PDF",
-        langMenuTitle:"Выберите язык",
-        historyTitle:"История чатов",
-        welcomeTitle:"Какая реклама вам нужна?",
-        welcomeDesc:"Создавайте профессиональные сценарии и стратегии.",
-        placeholder:"Введите идею, игру или бизнес...",
-        footer:"SparkyKrea Studio's - Рекламная консультация",
-        durationPrompt:"⏱ Сколько будет длиться видео?",
-        greeting:"Добрый день 👋",
-        customPrompt:"Введите длительность:",
-        defaultDuration:"30 сек"
-    },
+ru:{
+newProj:"+ Новый проект",
+pdfBtn:"📄 Скачать сценарий PDF",
+langMenuTitle:"Выберите язык",
+historyTitle:"История чатов",
+welcomeTitle:"Какая реклама вам нужна сегодня?",
+welcomeDesc:"Создавайте профессиональные сценарии и подробные стратегии.",
+placeholder:"Введите идею, игру или бизнес...",
+footer:"SparkyKrea Studio's - Интеллектуальный рекламный консалтинг",
+durationPrompt:"⏱ Выберите длительность видео",
+customPrompt:"Введите длительность:",
+defaultDuration:"30 секунд",
+greeting:"Здравствуйте! 👋 Расскажите, что вы хотите создать.",
+success:"Отлично. Я понял проект.",
+invalid:"Я могу помочь со сценариями, идеями, стратегией и музыкой.",
+noIdea:"Не проблема! Сначала укажите длительность видео, затем я предложу концепции.",
+thanks:"Пожалуйста! Можем продолжить в любой момент.",
+help:"Я могу создавать сценарии, хуки, стратегии, CTA, идеи для платформ и музыкальное направление.",
+scriptTitle:"🎬 Сценарий + рекламная стратегия",
+projectLabel:"📌 Проект:",
+durationLabel:"⏱ Длительность:",
+categoryLabel:"🎯 Фокус:",
+scriptHeader:"🎙️ Профессиональный сценарий",
+musicHeader:"🎵 Музыкальное направление",
+artistLabel:"Артистическая референция:",
+trackLabel:"Стиль:",
+strategyHeader:"🧠 Стратегия",
+platformHeader:"📱 Адаптация",
+ideasHeader:"💡 Идеи",
+changeHeader:"🔧 Изменение",
+},
 
-    zh:{
-        newProj:"+ 新项目",
-        pdfBtn:"📄 下载剧本PDF",
-        langMenuTitle:"选择语言",
-        historyTitle:"聊天记录",
-        welcomeTitle:"今天需要什么广告帮助？",
-        welcomeDesc:"创建专业脚本和详细广告策略。",
-        placeholder:"输入您的创意、游戏或业务...",
-        footer:"SparkyKrea Studio's",
-        durationPrompt:"⏱ 视频将持续多久？",
-        greeting:"下午好 👋",
-        customPrompt:"输入视频时长：",
-        defaultDuration:"30秒"
-    },
+zh:{
+newProj:"+ 新项目",
+pdfBtn:"📄 下载剧本PDF",
+langMenuTitle:"选择语言",
+historyTitle:"聊天记录",
+welcomeTitle:"今天需要什么广告帮助？",
+welcomeDesc:"立即创建专业剧本和详细广告策略。",
+placeholder:"输入你的创意、游戏或业务...",
+footer:"SparkyKrea Studio's - 智能广告顾问",
+durationPrompt:"⏱ 选择视频时长",
+customPrompt:"输入视频时长：",
+defaultDuration:"30秒",
+greeting:"你好！👋 告诉我你想制作什么，我会分析你的想法。",
+success:"很好。我已经理解这个项目。",
+invalid:"我可以帮助你制作广告、剧本、创意、策略和音乐方向。",
+noIdea:"没关系！先告诉我视频时长，然后我会给你完整的创意。",
+thanks:"不客气！准备好后我们可以继续。",
+help:"我可以制作剧本、开场钩子、策略、CTA、TikTok/Reels/YouTube创意和音乐方向。",
+scriptTitle:"🎬 剧本 + 广告策略",
+projectLabel:"📌 项目：",
+durationLabel:"⏱ 时长：",
+categoryLabel:"🎯 重点：",
+scriptHeader:"🎙️ 专业剧本",
+musicHeader:"🎵 音乐方向",
+artistLabel:"艺术参考：",
+trackLabel:"风格：",
+strategyHeader:"🧠 策略",
+platformHeader:"📱 平台适配",
+ideasHeader:"💡 创意",
+changeHeader:"🔧 调整",
+},
 
-    ja:{
-        newProj:"+ 新しいプロジェクト",
-        pdfBtn:"📄 スクリプトPDF",
-        langMenuTitle:"言語を選択",
-        historyTitle:"チャット履歴",
-        welcomeTitle:"今日はどんな広告を作りますか？",
-        welcomeDesc:"プロフェッショナルな脚本と広告戦略を作成します。",
-        placeholder:"アイデア、ゲーム、ビジネスを入力...",
-        footer:"SparkyKrea Studio's",
-        durationPrompt:"⏱ 動画の長さは？",
-        greeting:"こんにちは 👋",
-        customPrompt:"希望する長さ：",
-        defaultDuration:"30秒"
-    },
+ja:{
+newProj:"+ 新しいプロジェクト",
+pdfBtn:"📄 スクリプトPDFをダウンロード",
+langMenuTitle:"言語を選択",
+historyTitle:"チャット履歴",
+welcomeTitle:"今日はどのような広告をお手伝いできますか？",
+welcomeDesc:"プロのスクリプトと詳細な広告戦略を作成します。",
+placeholder:"アイデア、ゲーム、ビジネスを入力...",
+footer:"SparkyKrea Studio's - インテリジェント広告アドバイザリー",
+durationPrompt:"⏱ 動画の長さを選択",
+customPrompt:"希望する長さを入力：",
+defaultDuration:"30秒",
+greeting:"こんにちは！👋 何を作りたいか教えてください。",
+success:"完璧です。プロジェクトを理解しました。",
+invalid:"広告、台本、アイデア、戦略、音楽をサポートできます。",
+noIdea:"大丈夫です！まず動画の長さを教えてください。その後コンセプトを提案します。",
+thanks:"どういたしまして！いつでも続けられます。",
+help:"台本、フック、戦略、CTA、TikTok/Reels/YouTube向けアイデア、音楽方向を作れます。",
+scriptTitle:"🎬 スクリプト + 広告戦略",
+projectLabel:"📌 プロジェクト：",
+durationLabel:"⏱ 長さ：",
+categoryLabel:"🎯 フォーカス：",
+scriptHeader:"🎙️ プロフェッショナル脚本",
+musicHeader:"🎵 音楽方向",
+artistLabel:"アーティスト参考：",
+trackLabel:"スタイル：",
+strategyHeader:"🧠 戦略",
+platformHeader:"📱 プラットフォーム対応",
+ideasHeader:"💡 アイデア",
+changeHeader:"🔧 調整",
+},
 
-    ar:{
-        newProj:"+ مشروع جديد",
-        pdfBtn:"📄 تنزيل النص PDF",
-        langMenuTitle:"اختر اللغة",
-        historyTitle:"سجل الدردشة",
-        welcomeTitle:"ما الإعلان الذي تريد إنشاءه؟",
-        welcomeDesc:"أنشئ نصوصًا واستراتيجيات إعلانية احترافية.",
-        placeholder:"اكتب فكرتك أو لعبتك أو عملك...",
-        footer:"SparkyKrea Studio's",
-        durationPrompt:"⏱ كم ستكون مدة الفيديو؟",
-        greeting:"مساء الخير 👋",
-        customPrompt:"أدخل المدة:",
-        defaultDuration:"30 ثانية"
-    }
+ar:{
+newProj:"+ مشروع جديد",
+pdfBtn:"📄 تنزيل النص PDF",
+langMenuTitle:"اختر اللغة",
+historyTitle:"سجل الدردشة",
+welcomeTitle:"ما هي الإعلانات التي يمكنني مساعدتك بها اليوم؟",
+welcomeDesc:"صمم نصوصاً احترافية واستراتيجيات إعلانية مفصلة.",
+placeholder:"اكتب فكرتك أو لعبتك أو عملك...",
+footer:"SparkyKrea Studio's - الاستشارات الإعلانية الذكية",
+durationPrompt:"⏱ اختر مدة الفيديو",
+customPrompt:"أدخل المدة:",
+defaultDuration:"30 ثانية",
+greeting:"مرحباً! 👋 أخبرني بما تريد إنشاءه وسأحلل فكرتك.",
+success:"ممتاز. فهمت المشروع.",
+invalid:"يمكنني مساعدتك في الإعلانات والنصوص والأفكار والاستراتيجيات والموسيقى.",
+noIdea:"لا مشكلة! أخبرني أولاً بمدة الفيديو ثم سأقترح عليك أفكاراً كاملة.",
+thanks:"على الرحب والسعة! يمكننا المتابعة متى شئت.",
+help:"يمكنني إنشاء النصوص والخطافات والاستراتيجيات والدعوات إلى الإجراء وأفكار المنصات والموسيقى.",
+scriptTitle:"🎬 النص + الاستراتيجية الإعلانية",
+projectLabel:"📌 المشروع:",
+durationLabel:"⏱ المدة:",
+categoryLabel:"🎯 التركيز:",
+scriptHeader:"🎙️ النص الاحترافي",
+musicHeader:"🎵 التوجيه الموسيقي",
+artistLabel:"مرجع فني:",
+trackLabel:"الأسلوب:",
+strategyHeader:"🧠 الاستراتيجية",
+platformHeader:"📱 تكييف المنصة",
+ideasHeader:"💡 أفكار",
+changeHeader:"🔧 التعديل",
+}
+
 };
 
+
+/* =========================================================
+   ACTUALIZAR IDIOMA
+   ========================================================= */
 
 function updateLanguageUI(){
 
@@ -1099,12 +1381,16 @@ function updateLanguageUI(){
     input.placeholder = t.placeholder;
     document.getElementById("footerText").textContent = t.footer;
 
-    langOptionsList.querySelectorAll(".lang-option").forEach(opt=>{
-        opt.classList.toggle(
-            "active",
-            opt.dataset.lang === currentLang
-        );
+    document.querySelectorAll(".lang-option").forEach(option=>{
+
+        if(option.dataset.lang === currentLang){
+            option.classList.add("active");
+        }else{
+            option.classList.remove("active");
+        }
+
     });
+
 }
 
 updateLanguageUI();
@@ -1112,19 +1398,20 @@ updateLanguageUI();
 
 /* =========================================================
    MENÚ IDIOMAS
-========================================================= */
+   ========================================================= */
 
 headerDotsBtn.addEventListener("click",(e)=>{
-    e.stopPropagation();
-    headerDropdown.classList.toggle("active");
-});
 
-headerDropdown.addEventListener("click",e=>{
     e.stopPropagation();
+
+    headerDropdown.classList.toggle("active");
+
 });
 
 window.addEventListener("click",()=>{
+
     headerDropdown.classList.remove("active");
+
 });
 
 langOptionsList.addEventListener("click",(e)=>{
@@ -1135,63 +1422,44 @@ langOptionsList.addEventListener("click",(e)=>{
 
     currentLang = option.dataset.lang;
 
-    localStorage.setItem(
-        "sparky_lang",
-        currentLang
-    );
+    localStorage.setItem("sparky_lang",currentLang);
 
     updateLanguageUI();
 
     headerDropdown.classList.remove("active");
+
 });
 
 
 /* =========================================================
    MOTIVACIONES
-   MUCHAS MÁS PARA EVITAR REPETICIÓN
-========================================================= */
+   ========================================================= */
 
 const motivations = [
 
-"Una idea sencilla puede convertirse en una campaña enorme cuando tiene una buena estructura.",
+"Una idea sencilla puede convertirse en algo enorme cuando tiene una buena ejecución.",
 
-"El primer segundo consigue la atención; los siguientes consiguen que la persona se quede.",
+"No busques hacerlo perfecto desde el primer intento: busca que la siguiente versión sea mejor.",
 
-"No necesitas gritar para destacar: necesitas decir algo que la gente quiera escuchar.",
+"Los primeros segundos llaman la atención; la historia es la que consigue que la gente se quede.",
 
-"Una buena historia hace que el público recuerde el mensaje incluso después de terminar el video.",
+"Una buena publicidad no grita más fuerte: comunica mejor.",
 
-"El contenido que conecta con una emoción suele quedarse mucho más tiempo en la memoria.",
+"Si tu idea todavía está verde, perfecto. Aquí es donde empieza el proceso creativo.",
 
-"Cada segundo del video debe tener una razón para existir.",
+"Cada versión te acerca a encontrar el estilo que realmente representa tu proyecto.",
 
-"Un buen gancho abre la puerta; una buena historia consigue que nadie quiera cerrarla.",
+"Una marca memorable empieza con una idea que alguien quiera recordar.",
 
-"La creatividad no consiste solo en tener ideas, sino en saber convertirlas en experiencias.",
+"El contenido mejora cuando dejas de copiar fórmulas y empiezas a construir una identidad propia.",
 
-"Cuando el mensaje es claro, editar el video se vuelve muchísimo más fácil.",
+"Prueba, mide, cambia y vuelve a probar. Así se construyen los contenidos que funcionan.",
 
-"Una campaña fuerte no vende únicamente algo: construye una razón para elegirlo.",
+"No necesitas tenerlo todo resuelto para empezar; necesitas dar el primer paso.",
 
-"El mejor contenido no siempre es el más complicado; es el que comunica mejor.",
+"Una buena estrategia convierte una idea normal en una experiencia que la gente recuerda.",
 
-"Si consigues que alguien piense 'quiero ver qué pasa después', ya ganaste los primeros segundos.",
-
-"Una buena estrategia transforma una publicación aislada en una campaña con dirección.",
-
-"El ritmo también cuenta una historia: cada pausa, corte y cambio puede tener intención.",
-
-"Tu idea puede empezar pequeña y aun así tener una ejecución enorme.",
-
-"El objetivo no es solamente conseguir una vista; es conseguir que esa vista signifique algo.",
-
-"Cuando una pieza tiene identidad, deja de parecer una publicidad genérica.",
-
-"Un buen CTA no obliga: le muestra al espectador cuál es el siguiente paso.",
-
-"Las mejores campañas encuentran una forma sencilla de explicar algo que parecía complicado.",
-
-"Tu contenido gana fuerza cuando cada elemento trabaja para el mismo objetivo."
+"Tu siguiente concepto puede ser mejor que el anterior. Sigue construyendo."
 
 ];
 
@@ -1203,26 +1471,53 @@ function motivation(){
     motivationIndex++;
 
     return `<div class="motivation">${text}</div>`;
+
 }
 
 
 /* =========================================================
    DURACIONES
-========================================================= */
+   ========================================================= */
 
 const timeOptions = [
-    "10 seg",
-    "20 seg",
-    "30 seg",
-    "45 seg",
-    "60 seg",
-    "90 seg",
-    "2 min",
-    "3 min",
-    "5 min",
-    "Personalizado"
+
+"10 seg",
+"20 seg",
+"30 seg",
+"45 seg",
+"60 seg",
+"90 seg",
+"2 min",
+"3 min",
+"5 min",
+"Personalizado"
+
 ];
 
+function durationToSeconds(duration){
+
+    const d = String(duration).toLowerCase();
+
+    if(d.includes("min")){
+
+        const number = parseFloat(d.replace(",","."));
+
+        if(!isNaN(number)){
+            return number * 60;
+        }
+
+    }
+
+    const number = parseFloat(d);
+
+    return isNaN(number) ? 30 : number;
+
+}
+
+
+/* =========================================================
+   SELECTOR DE DURACIÓN
+   ========================================================= */
 
 function showDurationSelectorInsideChat(){
 
@@ -1232,6 +1527,7 @@ function showDurationSelectorInsideChat(){
     const t = i18n[currentLang];
 
     return `
+
         <div class="duration-inline-wrap">
 
             <button
@@ -1246,21 +1542,24 @@ function showDurationSelectorInsideChat(){
                 id="${panelId}"
             >
 
-                ${timeOptions.map(dur=>`
+                ${timeOptions.map(option=>`
+
                     <button
                         class="duration-chip"
-                        onclick="selectDurationOption('${dur}')"
+                        onclick="selectDurationOption('${option}')"
                     >
-                        ${dur}
+                        ${option}
                     </button>
+
                 `).join("")}
 
             </div>
 
         </div>
-    `;
-}
 
+    `;
+
+}
 
 function toggleDurationPanel(id){
 
@@ -1272,9 +1571,463 @@ function toggleDurationPanel(id){
         panel.classList.toggle("open");
 
         scrollChat();
+
     }
+
 }
 
+
+/* =========================================================
+   DETECTAR DURACIÓN ESCRITA
+   ========================================================= */
+
+function extractDuration(text){
+
+    const clean =
+        text.toLowerCase().replace(",", ".");
+
+    let match =
+        clean.match(/(\d+(?:\.\d+)?)\s*(segundos?|secs?|s)\b/);
+
+    if(match){
+
+        return match[1] + " seg";
+
+    }
+
+    match =
+        clean.match(/(\d+(?:\.\d+)?)\s*(minutos?|mins?|m)\b/);
+
+    if(match){
+
+        return match[1] + " min";
+
+    }
+
+    const known = [
+        ["5 minutos","5 min"],
+        ["3 minutos","3 min"],
+        ["2 minutos","2 min"],
+        ["1 minuto","60 seg"],
+        ["90 segundos","90 seg"],
+        ["60 segundos","60 seg"],
+        ["45 segundos","45 seg"],
+        ["30 segundos","30 seg"],
+        ["20 segundos","20 seg"],
+        ["10 segundos","10 seg"]
+    ];
+
+    for(const pair of known){
+
+        if(clean.includes(pair[0])){
+            return pair[1];
+        }
+
+    }
+
+    return null;
+
+}
+
+
+/* =========================================================
+   DETECCIÓN DE INTENCIÓN
+   ========================================================= */
+
+const intentPatterns = {
+
+greeting:[
+"hola",
+"holaa",
+"holaaa",
+"ola",
+"buenas",
+"buenos dias",
+"buenos días",
+"buenas tardes",
+"buenas noches",
+"hey",
+"hello",
+"hi",
+"hallo",
+"bonjour",
+"ciao",
+"saludos"
+],
+
+noIdea:[
+"no se que hacer",
+"no sé qué hacer",
+"no se",
+"no sé",
+"no tengo idea",
+"no tengo ni idea",
+"ninguna idea",
+"no tengo nada",
+"no se me ocurre",
+"no sé qué publicar",
+"no se que publicar",
+"que puedo hacer",
+"qué puedo hacer",
+"qué hago",
+"que hago",
+"ayudame",
+"ayúdame",
+"estoy sin ideas",
+"estoy sin idea"
+],
+
+help:[
+"que puedes hacer",
+"qué puedes hacer",
+"que haces",
+"qué haces",
+"para que sirves",
+"para qué sirves",
+"como me ayudas",
+"cómo me ayudas",
+"que sabes hacer",
+"qué sabes hacer",
+"funciones",
+"ayuda",
+"ayúdame con algo"
+],
+
+thanks:[
+"gracias",
+"muchas gracias",
+"thanks",
+"thank you",
+"te agradezco",
+"perfecto gracias",
+"ok gracias"
+],
+
+confirmation:[
+"si",
+"sí",
+"yes",
+"dale",
+"ok",
+"okay",
+"va",
+"vale",
+"claro",
+"correcto",
+"exacto",
+"hazlo",
+"adelante",
+"continua",
+"continúa"
+],
+
+modify:[
+"hazlo más",
+"hazlo menos",
+"cambia",
+"cambiar",
+"modifica",
+"modificar",
+"otra versión",
+"otra idea",
+"otro guion",
+"otro guión",
+"más emocionante",
+"más serio",
+"más divertido",
+"con humor",
+"sin humor",
+"más corto",
+"más largo",
+"más rápido",
+"más lento",
+"ponlo para tiktok",
+"ponlo para tik tok",
+"para instagram",
+"para reels",
+"para youtube",
+"hazlo viral",
+"más profesional",
+"más natural",
+"más agresivo",
+"más elegante",
+"mejora el gancho",
+"cambia el gancho",
+"cambia la música"
+],
+
+ideas:[
+"dame ideas",
+"ideas",
+"qué puedo publicar",
+"que puedo publicar",
+"que publico",
+"qué publico",
+"qué contenido hago",
+"que contenido hago",
+"contenido",
+"quiero ideas",
+"dame una idea",
+"dame una publicidad"
+]
+
+};
+
+
+/* =========================================================
+   FUNCIÓN DE DETECCIÓN
+   ========================================================= */
+
+function containsPattern(text,list){
+
+    const lower =
+        text.toLowerCase().trim();
+
+    return list.some(pattern=>{
+
+        return lower === pattern ||
+               lower.includes(pattern);
+
+    });
+
+}
+
+
+/* =========================================================
+   DETECTAR TEMA / CATEGORÍA
+   ========================================================= */
+
+function detectNiche(topic){
+
+    const t =
+        topic.toLowerCase();
+
+    if(
+        /valorant|reyna|riot|fps|shooter|gaming|gamer|videojuego|juego|minecraft|fortnite|gta|gta 6|roblox|free fire|clash royale|playstation|xbox|steam/.test(t)
+    ){
+        return "gaming";
+    }
+
+    if(
+        /futbol|fútbol|futbolista|deporte|gym|fitness|entrenamiento|atleta|baloncesto|basket|running/.test(t)
+    ){
+        return "deportes";
+    }
+
+    if(
+        /pizza|hamburguesa|burger|comida|restaurante|cafeteria|café|comer|food|postre|dulce|helado/.test(t)
+    ){
+        return "comida";
+    }
+
+    if(
+        /ropa|moda|zapato|zapatilla|tienda|camisa|pantalon|accesorio|streetwear/.test(t)
+    ){
+        return "moda";
+    }
+
+    if(
+        /tecnologia|tecnología|telefono|teléfono|celular|pc|computadora|laptop|software|app|aplicacion|aplicación/.test(t)
+    ){
+        return "tecnologia";
+    }
+
+    if(
+        /belleza|maquillaje|cosmetico|cosmético|perfume|cabello|pelo|skincare/.test(t)
+    ){
+        return "belleza";
+    }
+
+    if(
+        /casa|hogar|inmobiliaria|apartamento|departamento|terreno|venta de casas|real estate/.test(t)
+    ){
+        return "hogar";
+    }
+
+    if(
+        /mascota|veterinaria|perro|gato|animal/.test(t)
+    ){
+        return "mascotas";
+    }
+
+    if(
+        /marketing|publicidad|marca|branding|negocio|empresa|emprendimiento|ventas/.test(t)
+    ){
+        return "negocio";
+    }
+
+    if(
+        /musica|música|cancion|canción|artista|cantante|album|álbum/.test(t)
+    ){
+        return "musica";
+    }
+
+    return "general";
+
+}
+
+
+/* =========================================================
+   BASE MUSICAL
+   ========================================================= */
+
+const musicDatabase = {
+
+gaming:{
+artist:"Rock electrónico / trap cinematográfico",
+style:"Beat energético con subida progresiva y golpe fuerte en los momentos de acción.",
+free:"Busca una pista royalty-free de gaming, phonk cinematográfico o electronic trap.",
+},
+
+deportes:{
+artist:"Hip-hop deportivo / electrónica energética",
+style:"Percusión marcada, bajo potente y sensación de avance.",
+free:"Busca una pista royalty-free de sports hype o energetic hip-hop.",
+},
+
+comida:{
+artist:"Pop alegre / funk moderno",
+style:"Ritmo ligero, fresco y apetitoso, con cortes sincronizados con las tomas.",
+free:"Busca una pista royalty-free de upbeat food commercial o funky pop.",
+},
+
+moda:{
+artist:"Pop electrónico / dance elegante",
+style:"Beat limpio, moderno y con espacios para destacar cambios de outfit o producto.",
+free:"Busca una pista royalty-free de fashion electronic o luxury pop.",
+},
+
+tecnologia:{
+artist:"Electrónica futurista",
+style:"Sonido limpio, digital y progresivo que acompañe las demostraciones.",
+free:"Busca una pista royalty-free de futuristic technology ambient.",
+},
+
+belleza:{
+artist:"Pop minimalista / R&B suave",
+style:"Producción limpia, elegante y con transiciones suaves.",
+free:"Busca una pista royalty-free de beauty commercial o elegant R&B.",
+},
+
+hogar:{
+artist:"Cinematic pop / piano moderno",
+style:"Sensación cálida, aspiracional y confiable.",
+free:"Busca una pista royalty-free de cinematic lifestyle.",
+},
+
+mascotas:{
+artist:"Pop acústico alegre",
+style:"Cálido, divertido y cercano.",
+free:"Busca una pista royalty-free de happy acoustic commercial.",
+},
+
+negocio:{
+artist:"Corporate electronic moderno",
+style:"Ritmo profesional y optimista sin competir con la voz.",
+free:"Busca una pista royalty-free de modern corporate technology.",
+},
+
+musica:{
+artist:"Electrónica / pop según la identidad",
+style:"La música debe adaptarse a la personalidad del proyecto y no tapar el mensaje.",
+free:"Usa una pista royalty-free que coincida con el género visual.",
+},
+
+general:{
+artist:"Pop electrónico comercial",
+style:"Ritmo moderno, fácil de seguir y adaptable a cortes rápidos.",
+free:"Busca una pista royalty-free de modern commercial pop."
+}
+
+};
+
+
+/* =========================================================
+   PLATAFORMA
+   ========================================================= */
+
+function detectPlatform(text){
+
+    const t = text.toLowerCase();
+
+    if(/tiktok|tik tok/.test(t))
+        return "TikTok";
+
+    if(/instagram|reels/.test(t))
+        return "Instagram Reels";
+
+    if(/youtube|shorts/.test(t))
+        return "YouTube Shorts";
+
+    if(/facebook/.test(t))
+        return "Facebook";
+
+    if(/whatsapp/.test(t))
+        return "WhatsApp";
+
+    return currentProject?.platform || "Redes sociales";
+
+}
+
+
+/* =========================================================
+   LIMPIAR TEMA
+   ========================================================= */
+
+function cleanTopic(text){
+
+    let result = text
+        .replace(/hola|holaa|holaaa|buenas|buenos dias|buenos días|buenas tardes|buenas noches|hey|hello|hi|saludos/gi,"")
+        .replace(/quiero hacer una publicidad sobre/gi,"")
+        .replace(/quiero hacer un anuncio sobre/gi,"")
+        .replace(/quiero un anuncio de/gi,"")
+        .replace(/necesito una publicidad para/gi,"")
+        .replace(/necesito un anuncio para/gi,"")
+        .replace(/publicidad para/gi,"")
+        .replace(/publicidad sobre/gi,"")
+        .replace(/anuncio para/gi,"")
+        .replace(/anuncio sobre/gi,"")
+        .replace(/hazme una publicidad de/gi,"")
+        .replace(/hazme un anuncio de/gi,"")
+        .replace(/por favor/gi,"")
+        .trim();
+
+    return result || text.trim();
+
+}
+
+
+/* =========================================================
+   ANALIZAR CONTEXTO
+   ========================================================= */
+
+function analyzeProject(text){
+
+    const duration =
+        extractDuration(text);
+
+    const platform =
+        detectPlatform(text);
+
+    const topic =
+        cleanTopic(text);
+
+    const niche =
+        detectNiche(topic);
+
+    return {
+        topic,
+        duration,
+        platform,
+        niche
+    };
+
+}
+
+
+/* =========================================================
+   SELECTOR DE DURACIÓN
+   ========================================================= */
 
 function selectDurationOption(dur){
 
@@ -1282,34 +2035,30 @@ function selectDurationOption(dur){
 
     if(dur === "Personalizado"){
 
-        let custom =
+        const custom =
             prompt(t.customPrompt);
 
         if(!custom){
             return;
         }
 
-        dur = normalizeDuration(custom);
+        dur = custom;
+
     }
 
     if(!currentProject){
 
         currentProject = {
-            topic:"Concepto creativo",
-            duration:dur,
-            type:"publicidad",
-            platform:"redes",
-            goal:"captar atención",
-            tone:"creativo"
+            topic:"tu proyecto",
+            niche:"general",
+            platform:"Redes sociales"
         };
 
-    }else{
-
-        currentProject.duration = dur;
     }
 
-    conversationState.awaitingDuration = false;
-    conversationState.awaitingIdeaAfterDuration = false;
+    currentProject.duration = dur;
+
+    waitingForDuration = false;
 
     addUserMessage(dur);
 
@@ -1319,1395 +2068,1066 @@ function selectDurationOption(dur){
 
         removeTyping();
 
-        /*
-            Si no había una idea, primero mostramos
-            todo lo que SparkyKrea puede hacer.
-        */
+        if(waitingForIdeasAfterDuration){
 
-        if(
-            !currentProject.topic ||
-            currentProject.topic === "Concepto creativo"
-        ){
+            waitingForIdeasAfterDuration = false;
 
             addBotMessage(
-                buildCapabilitiesMessage()
+                buildIdeasResponse(currentProject)
             );
-
-            conversationState.awaitingIdeaAfterDuration = true;
 
         }else{
 
             addBotMessage(
                 buildFinalStrategy(currentProject)
             );
+
         }
 
-    },700);
+        saveCurrentProject();
+
+    },650);
+
 }
 
 
 /* =========================================================
-   NORMALIZADOR DE DURACIÓN
-========================================================= */
+   GENERAR SEGMENTOS SEGÚN DURACIÓN
+   ========================================================= */
 
-function normalizeDuration(value){
+function buildTimeline(duration,topic,niche,platform){
 
-    const text =
-        String(value)
-        .toLowerCase()
-        .trim();
+    const seconds =
+        durationToSeconds(duration);
 
-    const num =
-        parseFloat(
-            text.replace(",",".")
-        );
+    let segments = [];
 
-    if(!num || num <= 0){
-        return "30 seg";
+    if(seconds <= 10){
+
+        segments = [
+
+        {
+        time:"0–2s",
+        title:"GANCHO",
+        text:`Impacto inmediato con una imagen fuerte de ${topic}. Nada de introducciones largas.`
+        },
+
+        {
+        time:"2–7s",
+        title:"VALOR",
+        text:`Muestra rápidamente qué hace especial a ${topic} y cuál es el beneficio principal.`
+        },
+
+        {
+        time:"7–10s",
+        title:"CTA",
+        text:`Cierre directo: invita a probar, visitar, comprar, seguir o descubrir ${topic}.`
+        }
+
+        ];
+
+    }else if(seconds <= 20){
+
+        segments = [
+
+        {
+        time:"0–3s",
+        title:"GANCHO",
+        text:`Abre con una pregunta, sorpresa o situación que haga detener el scroll.`
+        },
+
+        {
+        time:"3–8s",
+        title:"PROBLEMA",
+        text:`Presenta rápidamente la necesidad o situación relacionada con ${topic}.`
+        },
+
+        {
+        time:"8–15s",
+        title:"SOLUCIÓN",
+        text:`Demuestra visualmente cómo ${topic} resuelve esa necesidad.`
+        },
+
+        {
+        time:"15–20s",
+        title:"CTA",
+        text:`Cierra con una acción concreta y fácil de recordar.`
+        }
+
+        ];
+
+    }else if(seconds <= 30){
+
+        segments = [
+
+        {
+        time:"0–3s",
+        title:"GANCHO",
+        text:`Primera imagen potente. El espectador debe entender rápidamente que hay algo interesante que descubrir.`
+        },
+
+        {
+        time:"3–8s",
+        title:"CONTEXTO",
+        text:`Introduce el problema, deseo o situación que conecta con el público objetivo.`
+        },
+
+        {
+        time:"8–18s",
+        title:"PRESENTACIÓN",
+        text:`Presenta ${topic} y enseña 2 características o beneficios importantes.`
+        },
+
+        {
+        time:"18–25s",
+        title:"PRUEBA / EXPERIENCIA",
+        text:`Muestra una demostración, resultado, reacción o escena que haga tangible la propuesta.`
+        },
+
+        {
+        time:"25–30s",
+        title:"CTA",
+        text:`Termina con una llamada a la acción clara y una frase fácil de recordar.`
+        }
+
+        ];
+
+    }else if(seconds <= 45){
+
+        segments = [
+
+        {
+        time:"0–4s",
+        title:"GANCHO",
+        text:`Abre con una situación inesperada, pregunta fuerte o visual que obligue a prestar atención.`
+        },
+
+        {
+        time:"4–10s",
+        title:"PROBLEMA",
+        text:`Explica la situación desde el punto de vista del público para generar identificación.`
+        },
+
+        {
+        time:"10–20s",
+        title:"SOLUCIÓN",
+        text:`Introduce ${topic} y explica claramente cómo responde a la necesidad.`
+        },
+
+        {
+        time:"20–30s",
+        title:"DEMOSTRACIÓN",
+        text:`Muestra el producto, servicio o experiencia en acción mediante varias tomas.`
+        },
+
+        {
+        time:"30–38s",
+        title:"DIFERENCIAL",
+        text:`Destaca aquello que hace diferente a ${topic} frente a alternativas comunes.`
+        },
+
+        {
+        time:"38–45s",
+        title:"CTA",
+        text:`Cierre memorable con una acción concreta.`
+        }
+
+        ];
+
+    }else if(seconds <= 60){
+
+        segments = [
+
+        {
+        time:"0–5s",
+        title:"GANCHO",
+        text:`Impacto inmediato. Evita logos largos o presentaciones antes de captar atención.`
+        },
+
+        {
+        time:"5–12s",
+        title:"SITUACIÓN",
+        text:`Presenta el problema, deseo o escenario que vive el público.`
+        },
+
+        {
+        time:"12–22s",
+        title:"PRESENTACIÓN",
+        text:`Introduce ${topic} como solución y comunica la propuesta principal.`
+        },
+
+        {
+        time:"22–34s",
+        title:"BENEFICIOS",
+        text:`Explica tres beneficios utilizando imágenes distintas para mantener dinamismo.`
+        },
+
+        {
+        time:"34–46s",
+        title:"PRUEBA",
+        text:`Incluye demostración, resultado, comparación o reacción para reforzar credibilidad.`
+        },
+
+        {
+        time:"46–54s",
+        title:"EMOCIÓN",
+        text:`Construye el momento que quieres que el espectador recuerde.`
+        },
+
+        {
+        time:"54–60s",
+        title:"CTA",
+        text:`Final directo con llamada a la acción y recordatorio visual de ${topic}.`
+        }
+
+        ];
+
+    }else{
+
+        const total =
+            seconds;
+
+        const step =
+            Math.max(8,Math.floor(total/8));
+
+        const names = [
+
+            ["GANCHO","Captura atención con una apertura fuerte."],
+            ["CONTEXTO","Explica rápidamente qué está pasando y por qué debería importarle al público."],
+            ["PROBLEMA","Presenta la necesidad o deseo principal."],
+            ["SOLUCIÓN","Introduce y demuestra cómo funciona el proyecto."],
+            ["BENEFICIOS","Desarrolla las ventajas más importantes."],
+            ["PRUEBA","Añade demostración, reacción, resultado o evidencia visual."],
+            ["DIFERENCIAL","Explica por qué esta propuesta merece ser elegida."],
+            ["CTA","Cierra con una acción clara y memorable."]
+        ];
+
+        names.forEach((item,index)=>{
+
+            const start =
+                index === 0 ? 0 : index * step;
+
+            const end =
+                index === names.length-1
+                ? total
+                : Math.min(total,start+step);
+
+            segments.push({
+
+                time:`${formatSeconds(start)}–${formatSeconds(end)}`,
+
+                title:item[0],
+
+                text:
+                    index === 0
+                    ? `${item[1]} Haz que la primera imagen tenga relación directa con ${topic}.`
+                    : `${item[1]} Integra ${topic} de forma natural y evita rellenar tiempo sin aportar información.`
+
+            });
+
+        });
+
     }
 
-    if(
-        text.includes("min") ||
-        text.includes("m ")
-    ){
+    return segments;
 
-        const seconds =
-            Math.round(num * 60);
-
-        return seconds + " seg";
-    }
-
-    return Math.round(num) + " seg";
 }
 
 
-function durationSeconds(duration){
+function formatSeconds(seconds){
 
-    const text =
-        String(duration).toLowerCase();
+    if(seconds < 60)
+        return `${Math.round(seconds)}s`;
 
-    const num =
-        parseFloat(
-            text.replace(",",".")
-        );
+    const min =
+        Math.floor(seconds/60);
 
-    if(text.includes("min")){
+    const sec =
+        Math.round(seconds%60);
 
-        return Math.round(num * 60);
-    }
+    return sec === 0
+        ? `${min}:00`
+        : `${min}:${String(sec).padStart(2,"0")}`;
 
-    return Math.round(num || 30);
 }
 
 
 /* =========================================================
-   BASE DE MÚSICA
-========================================================= */
+   IDEAS
+   ========================================================= */
 
-const musicDatabase = {
+function buildIdeas(topic,niche){
 
-    juego:{
-        styles:[
-            "electrónica cinematográfica",
-            "trap energético",
-            "hip-hop oscuro",
-            "electrónica agresiva"
+    const base = {
+
+        gaming:[
+        `“La jugada que nadie esperaba” — empieza con el momento más impactante y explica después qué pasó.`,
+        `“¿Vale la pena jugarlo?” — formato de opinión rápida con 3 razones visuales.`,
+        `“Si te gusta ${topic}, tienes que ver esto” — descubrimiento rápido con cortes dinámicos.`,
+        `“De cero a experto” — mini transformación o progreso dentro del contenido.`,
+        `“El reto de ${topic}” — objetivo claro y resultado al final.`
         ],
-        artists:[
-            "voz masculina grave",
-            "voz femenina potente",
-            "rap con actitud",
-            "narrador cinematográfico"
-        ]
-    },
 
-    tecnologia:{
-        styles:[
-            "electrónica futurista",
-            "synthwave moderno",
-            "electro-pop tecnológico",
-            "ambient digital"
+        deportes:[
+        `“El error que todos cometen” — abre con el error y luego enseña cómo mejorarlo.`,
+        `“Antes vs después” — muestra evolución mediante imágenes rápidas.`,
+        `“¿Puedes hacerlo?” — plantea un desafío seguro y centrado en habilidad.`,
+        `“3 cosas que cambiarían tu entrenamiento” — formato educativo rápido.`,
+        `“La historia detrás del resultado” — mezcla emoción y explicación.`
         ],
-        artists:[
-            "voz masculina limpia",
-            "voz femenina moderna",
-            "narrador tecnológico",
-            "voz comercial elegante"
-        ]
-    },
 
-    comida:{
-        styles:[
-            "pop alegre",
-            "funk moderno",
-            "hip-hop ligero",
-            "groove comercial"
+        comida:[
+        `“Esto no parece lo que cuesta” — presentación visual del producto.`,
+        `“El primer bocado” — reacción y detalles del producto.`,
+        `“Así se prepara” — proceso acelerado con cortes atractivos.`,
+        `“3 razones para probarlo” — formato rápido y fácil de recordar.`,
+        `“¿Cuál elegirías?” — presenta varias opciones y genera interacción.`
         ],
-        artists:[
-            "voz joven energética",
-            "voz cálida",
-            "voz divertida",
-            "voz comercial dinámica"
-        ]
-    },
 
-    moda:{
-        styles:[
-            "pop elegante",
-            "electro-pop",
-            "house sofisticado",
-            "dance moderno"
+        moda:[
+        `“Un outfit, tres estilos” — transforma una misma pieza de diferentes maneras.`,
+        `“El detalle que cambia todo” — empieza con un detalle visual.`,
+        `“Antes y después” — transición limpia mostrando el resultado.`,
+        `“3 formas de combinarlo” — educativo y comercial.`,
+        `“¿Cuál elegirías?” — varias opciones y CTA de interacción.`
         ],
-        artists:[
-            "voz femenina elegante",
-            "voz masculina suave",
-            "voz fashion",
-            "voz minimalista"
-        ]
-    },
 
-    fitness:{
-        styles:[
-            "phonk deportivo",
-            "trap motivacional",
-            "electrónica intensa",
-            "hip-hop energético"
+        tecnologia:[
+        `“No sabía que esto podía hacer esto” — descubre una función interesante.`,
+        `“3 funciones que casi nadie usa” — contenido educativo.`,
+        `“¿Vale la pena?” — prueba rápida con pros y puntos fuertes.`,
+        `“Problema → solución” — muestra una necesidad y resuélvela con el producto.`,
+        `“Así cambia tu día” — enfoque basado en utilidad real.`
         ],
-        artists:[
-            "voz grave motivacional",
-            "voz energética",
-            "rap intenso",
-            "narrador deportivo"
-        ]
-    },
 
-    belleza:{
-        styles:[
-            "pop suave",
-            "R&B elegante",
-            "electro-pop delicado",
-            "ambient moderno"
+        belleza:[
+        `“El cambio está en el detalle” — abre con una transformación visual.`,
+        `“3 errores comunes” — educativo y fácil de compartir.`,
+        `“Rutina rápida” — pasos visuales y ordenados.`,
+        `“Producto + resultado” — muestra el producto dentro de una experiencia.`,
+        `“¿Cuál elegirías?” — comparación visual.`
         ],
-        artists:[
-            "voz femenina suave",
-            "voz elegante",
-            "voz cálida",
-            "voz comercial premium"
-        ]
-    },
 
-    negocio:{
-        styles:[
-            "corporativo moderno",
-            "electrónica inspiradora",
-            "pop empresarial",
-            "cinemático elegante"
+        negocio:[
+        `“Tu cliente está buscando esto” — plantea una necesidad concreta.`,
+        `“El problema que nadie explica” — enfoque educativo.`,
+        `“Antes / después de usar nuestro servicio” — transformación.`,
+        `“3 razones para elegirnos” — propuesta comercial clara.`,
+        `“Un día trabajando con nosotros” — formato detrás de cámaras.`
         ],
-        artists:[
-            "voz corporativa clara",
-            "voz masculina profesional",
-            "voz femenina profesional",
-            "narrador elegante"
-        ]
-    },
 
-    general:{
-        styles:[
-            "pop comercial",
-            "electrónica moderna",
-            "cinemático inspirador",
-            "beat urbano"
-        ],
-        artists:[
-            "voz comercial moderna",
-            "voz masculina clara",
-            "voz femenina energética",
-            "narrador cinematográfico"
+        general:[
+        `“¿Sabías esto?” — comienza con un dato o descubrimiento relacionado con el proyecto.`,
+        `“El problema que todos tienen” — identifica una necesidad común.`,
+        `“3 razones para probarlo” — estructura sencilla y directa.`,
+        `“Antes vs después” — muestra transformación.`,
+        `“Te lo explico en menos de un minuto” — enfoque didáctico.`
         ]
-    }
-};
+
+    };
+
+    return base[niche] || base.general;
+
+}
 
 
 /* =========================================================
-   DETECCIÓN DE CATEGORÍA
-========================================================= */
+   RESPUESTA DE IDEAS
+   ========================================================= */
 
-function detectNiche(topic){
+function buildIdeasResponse(proj){
 
     const t =
-        String(topic)
-        .toLowerCase();
+        i18n[currentLang];
 
-    if(
-        /valorant|gta|gta 6|fortnite|minecraft|roblox|free fire|fifa|fc 26|clash royale|videojuego|video juego|gaming|game|juego/.test(t)
-    ){
-        return "juego";
-    }
-
-    if(
-        /gym|fitness|futbol|fútbol|basket|baloncesto|deporte|entrenamiento|atleta/.test(t)
-    ){
-        return "fitness";
-    }
-
-    if(
-        /pizza|burger|hamburguesa|comida|restaurante|cafeteria|café|food|dulce|postre/.test(t)
-    ){
-        return "comida";
-    }
-
-    if(
-        /ropa|moda|zapatos|zapatillas|tienda|outfit|fashion/.test(t)
-    ){
-        return "moda";
-    }
-
-    if(
-        /iphone|samsung|pc|computadora|software|app|aplicación|tecnologia|tecnología|celular|móvil|ia|inteligencia artificial/.test(t)
-    ){
-        return "tecnologia";
-    }
-
-    if(
-        /maquillaje|cosmetico|cosmético|belleza|skincare|cabello|perfume/.test(t)
-    ){
-        return "belleza";
-    }
-
-    if(
-        /empresa|negocio|marca|servicio|agencia|emprendimiento|tienda online|marketing/.test(t)
-    ){
-        return "negocio";
-    }
-
-    return "general";
-}
-
-
-/* =========================================================
-   PALABRAS / FRASES QUE NO SON PROYECTOS
-========================================================= */
-
-const nonProjectExpressions = [
-
-    "hola",
-    "ola",
-    "holaa",
-    "holaaa",
-    "buenas",
-    "buenos dias",
-    "buenos días",
-    "buenas tardes",
-    "buenas noches",
-    "hey",
-    "hello",
-    "hi",
-    "hii",
-    "hiii",
-    "saludos",
-    "que tal",
-    "qué tal",
-    "como estas",
-    "cómo estás",
-
-    "si",
-    "sí",
-    "sii",
-    "siii",
-    "no",
-    "nop",
-    "nope",
-    "ok",
-    "okay",
-    "vale",
-    "dale",
-    "listo",
-    "perfecto",
-    "perfecta",
-    "bien",
-    "bueno",
-    "buena",
-    "claro",
-    "exacto",
-    "exactamente",
-    "correcto",
-    "de acuerdo",
-
-    "gracias",
-    "muchas gracias",
-    "grx",
-    "thx",
-    "thank you",
-    "por favor",
-    "pls",
-    "please",
-
-    "ayuda",
-    "ayudame",
-    "ayúdame",
-    "necesito ayuda",
-    "no se",
-    "no sé",
-    "nose",
-    "no tengo idea",
-    "no tengo ni idea",
-    "no tengo ideas",
-    "no se que hacer",
-    "no sé qué hacer",
-    "nose que hacer",
-    "nose q hacer",
-    "no se q hacer",
-    "qué hago",
-    "que hago",
-    "q hago",
-    "no sé qué publicar",
-    "no se que publicar",
-    "qué publico",
-    "que publico",
-    "q publico",
-    "no sé qué subir",
-    "no se que subir",
-    "qué puedo hacer",
-    "que puedo hacer",
-    "dame una idea",
-    "dame ideas",
-    "otra idea",
-    "otras ideas",
-
-    "hazlo mejor",
-    "hazlo mas bonito",
-    "hazlo más bonito",
-    "hazlo mas emocionante",
-    "hazlo más emocionante",
-    "hazlo mas serio",
-    "hazlo más serio",
-    "hazlo corto",
-    "hazlo más corto",
-    "hazlo mas corto",
-    "otra version",
-    "otra versión",
-    "cambia el gancho",
-    "cambia la intro",
-    "cambia la introduccion",
-    "cambia la introducción",
-    "ponle humor",
-    "con humor",
-    "hazlo viral",
-    "más viral",
-    "mas viral",
-    "para tiktok",
-    "para tik tok",
-    "para reels",
-    "para youtube",
-    "para shorts"
-];
-
-
-/* =========================================================
-   INTENCIONES
-========================================================= */
-
-function normalizeText(text){
-
-    return String(text)
-        .toLowerCase()
-        .normalize("NFD")
-        .replace(/[\u0300-\u036f]/g,"")
-        .replace(/[¿?¡!.,;:()[\]{}]/g," ")
-        .replace(/\s+/g," ")
-        .trim();
-}
-
-
-function isGreeting(text){
-
-    const t = normalizeText(text);
-
-    const greetings = [
-        "hola",
-        "ola",
-        "holaa",
-        "holaaa",
-        "buenas",
-        "buenos dias",
-        "buenas tardes",
-        "buenas noches",
-        "hey",
-        "hello",
-        "hi",
-        "saludos",
-        "bonjour",
-        "ciao",
-        "hallo"
-    ];
-
-    return greetings.includes(t);
-}
-
-
-function isNoIdea(text){
-
-    const t = normalizeText(text);
-
-    return [
-        "no se",
-        "nose",
-        "no tengo idea",
-        "no tengo ni idea",
-        "no tengo ideas",
-        "no se que hacer",
-        "nose que hacer",
-        "nose q hacer",
-        "no se q hacer",
-        "que hago",
-        "q hago",
-        "no se que publicar",
-        "que publico",
-        "no se que subir",
-        "que puedo hacer",
-        "dame una idea",
-        "dame ideas"
-    ].includes(t);
-}
-
-
-function isAffirmative(text){
-
-    const t = normalizeText(text);
-
-    return [
-        "si",
-        "sii",
-        "siii",
-        "ok",
-        "okay",
-        "dale",
-        "claro",
-        "perfecto",
-        "perfecta",
-        "vale",
-        "listo",
-        "bien",
-        "exacto",
-        "exactamente",
-        "correcto",
-        "de acuerdo"
-    ].includes(t);
-}
-
-
-function isNegative(text){
-
-    const t = normalizeText(text);
-
-    return [
-        "no",
-        "nop",
-        "nope",
-        "negativo"
-    ].includes(t);
-}
-
-
-function isThanks(text){
-
-    const t = normalizeText(text);
-
-    return [
-        "gracias",
-        "muchas gracias",
-        "grx",
-        "thx",
-        "thank you"
-    ].includes(t);
-}
-
-
-function isModification(text){
-
-    const t = normalizeText(text);
-
-    return /hazlo|cambia|cambiar|modifica|modificar|mejoralo|mejoralo|mejoralo|otra version|otra idea|mas emocionante|mas serio|mas divertido|mas corto|mas largo|ponle humor|quita|elimina|agrega|añade|anade|cambia el gancho|cambia la intro|para tiktok|para reels|para youtube|para shorts|viral/.test(t);
-}
-
-
-function containsDuration(text){
-
-    const t = normalizeText(text);
-
-    return /\b\d+\s*(seg|segs|segundo|segundos|s|min|minuto|minutos|m)\b/.test(t);
-}
-
-
-/* =========================================================
-   EXTRAER DURACIÓN DEL MENSAJE
-========================================================= */
-
-function extractDuration(text){
-
-    const t = normalizeText(text);
-
-    const match =
-        t.match(/(\d+(?:[.,]\d+)?)\s*(seg|segs|segundo|segundos|s|min|minuto|minutos|m)\b/);
-
-    if(!match){
-        return null;
-    }
-
-    const value =
-        parseFloat(match[1].replace(",","."));
-
-    const unit = match[2];
-
-    if(
-        unit.startsWith("min") ||
-        unit === "m"
-    ){
-        return Math.round(value * 60) + " seg";
-    }
-
-    return Math.round(value) + " seg";
-}
-
-
-/* =========================================================
-   DETECTAR PLATAFORMA
-========================================================= */
-
-function detectPlatform(text){
-
-    const t = normalizeText(text);
-
-    if(/tiktok|tik tok/.test(t)) return "TikTok";
-    if(/instagram|reels/.test(t)) return "Instagram Reels";
-    if(/youtube|shorts/.test(t)) return "YouTube Shorts";
-    if(/facebook/.test(t)) return "Facebook";
-    if(/television|television|tv/.test(t)) return "Televisión";
-    if(/youtube largo|video largo/.test(t)) return "YouTube";
-
-    return null;
-}
-
-
-/* =========================================================
-   DETECTAR TONO
-========================================================= */
-
-function detectTone(text){
-
-    const t = normalizeText(text);
-
-    if(/serio|profesional|elegante|premium/.test(t))
-        return "profesional y elegante";
-
-    if(/emocionante|epico|epica|intenso|intensa/.test(t))
-        return "emocionante y cinematográfico";
-
-    if(/humor|gracioso|graciosa|divertido|divertida|meme/.test(t))
-        return "divertido y espontáneo";
-
-    if(/viral|tendencia|trend/.test(t))
-        return "rápido, llamativo y orientado a retención";
-
-    if(/misterio|misterioso|misteriosa/.test(t))
-        return "misterioso y intrigante";
-
-    return null;
-}
-
-
-/* =========================================================
-   DETECTAR OBJETIVO
-========================================================= */
-
-function detectGoal(text){
-
-    const t = normalizeText(text);
-
-    if(/vender|ventas|comprar|compra/.test(t))
-        return "generar ventas";
-
-    if(/seguidores|followers|crecer/.test(t))
-        return "ganar seguidores";
-
-    if(/viral|visitas|vistas|views|alcance/.test(t))
-        return "maximizar alcance y retención";
-
-    if(/presentar|presentacion|presentación|lanzamiento/.test(t))
-        return "presentar o lanzar";
-
-    if(/cliente|clientes|servicio/.test(t))
-        return "conseguir clientes";
-
-    if(/marca|branding|identidad/.test(t))
-        return "fortalecer la marca";
-
-    return "captar atención y generar interés";
-}
-
-
-/* =========================================================
-   LIMPIAR TEMA
-========================================================= */
-
-function extractTopic(text){
-
-    let topic = String(text).trim();
-
-    topic = topic
-        .replace(/hola|holaa|holaaa|buenas tardes|buenas noches|buenos dias|buenos días|buenas|hey|hello|hi|saludos/gi,"")
-
-        .replace(/quiero|quisiera|necesito|necesito hacer|me gustaria|me gustaría|hazme|haz un|hacer una|hacer un/gi,"")
-
-        .replace(/una publicidad|un publicidad|una publicidad para|publicidad para|publicidad sobre|publicidad de|anuncio para|anuncio sobre|anuncio de|un anuncio|un video|un vídeo|video para|vídeo para/gi,"")
-
-        .replace(/un guion|un guión|guion para|guión para/gi,"")
-
-        .replace(/de\s+(\d+)\s*(seg|segs|segundo|segundos|min|minuto|minutos|s|m)/gi,"")
-
-        .trim();
-
-    return topic;
-}
-
-
-/* =========================================================
-   MENSAJE DE CAPACIDADES
-========================================================= */
-
-function buildCapabilitiesMessage(){
+    const ideas =
+        buildIdeas(proj.topic,proj.niche);
 
     return `
+
         <div class="bot-title">
-            🚀 Podemos empezar desde cero
+            💡 Ahora sí: vamos a encontrar una idea para ${capitalize(proj.topic)}
         </div>
 
         <div class="section">
-            <b>Perfecto, ya tenemos la duración.</b><br><br>
-
-            No necesitas traerme una idea terminada.
-            Puedo construir el concepto contigo o tomar todas
-            las decisiones creativas y entregarte una propuesta
-            completa.
+            <b>${t.durationLabel}</b> ${proj.duration}
+            <br>
+            <b>${t.platformHeader}</b>
+            <br>
+            Te propongo ideas pensadas para ${proj.platform || "redes sociales"}, adaptadas a la duración que elegiste.
         </div>
 
         <div class="section">
 
-            <b>🎬 ¿Qué puedo crear?</b>
+            <b>${t.ideasHeader}</b>
 
-            <div class="idea-grid">
+            ${ideas.map((idea,index)=>`
 
-                <div class="idea-item">
-                    🎙️ <b>Guiones</b><br>
-                    Narración, diálogos, escenas y estructura segundo a segundo.
+                <div class="idea-card">
+                    <b>${index+1}. ${idea.split(" — ")[0]}</b>
+                    <br>
+                    ${idea.split(" — ")[1] || ""}
                 </div>
 
-                <div class="idea-item">
-                    🎯 <b>Estrategias</b><br>
-                    Objetivo, público, propuesta, posicionamiento y CTA.
-                </div>
-
-                <div class="idea-item">
-                    🎣 <b>Ganchos</b><br>
-                    Aperturas diseñadas para captar atención rápidamente.
-                </div>
-
-                <div class="idea-item">
-                    🎵 <b>Música</b><br>
-                    Estilo, ritmo, ambiente, entrada y cambios musicales.
-                </div>
-
-                <div class="idea-item">
-                    🎤 <b>Voz / cantante</b><br>
-                    Tipo de voz, personalidad, interpretación y energía.
-                </div>
-
-                <div class="idea-item">
-                    📱 <b>Redes sociales</b><br>
-                    TikTok, Reels, Shorts, YouTube y campañas digitales.
-                </div>
-
-                <div class="idea-item">
-                    🎮 <b>Gaming</b><br>
-                    Trailers, clips, anuncios, historias y contenido gaming.
-                </div>
-
-                <div class="idea-item">
-                    🛍️ <b>Productos y negocios</b><br>
-                    Lanzamientos, promociones, anuncios y campañas.
-                </div>
-
-                <div class="idea-item">
-                    🎥 <b>Dirección visual</b><br>
-                    Planos, escenas, iluminación, transiciones y ritmo.
-                </div>
-
-                <div class="idea-item">
-                    😂 <b>Humor y entretenimiento</b><br>
-                    Memes, situaciones, giros y conceptos para redes.
-                </div>
-
-            </div>
+            `).join("")}
 
         </div>
 
         <div class="section">
-            <b>🧠 Y si no sabes qué elegir...</b><br><br>
-            Yo puedo decidir el concepto, tono, estructura,
-            gancho, música, voz y estrategia según la duración
-            que acabas de seleccionar.
+
+            <b>🛠️ ¿Qué puede hacer SparkyKrea?</b>
+
+            <br><br>
+
+            • Crear el concepto completo.
+            <br>
+            • Crear el guion segundo a segundo.
+            <br>
+            • Diseñar el gancho inicial.
+            <br>
+            • Crear llamadas a la acción.
+            <br>
+            • Adaptar el contenido a TikTok, Reels, Shorts y otras plataformas.
+            <br>
+            • Proponer diferentes estilos de edición.
+            <br>
+            • Recomendar dirección musical.
+            <br>
+            • Crear una estrategia de publicación.
+            <br>
+            • Crear varias versiones del mismo anuncio.
+            <br>
+            • Hacerlo más serio, divertido, emocionante, rápido o profesional.
+            <br>
+            • Cambiar cualquier parte del guion sin perder el contexto.
+
         </div>
 
         ${motivation()}
+
     `;
+
 }
 
 
 /* =========================================================
-   GENERAR GUIONES SEGÚN DURACIÓN
-========================================================= */
+   ESTRATEGIA FINAL
+   ========================================================= */
 
 function buildFinalStrategy(proj){
 
-    const topic =
-        proj.topic || "tu concepto";
+    const t =
+        i18n[currentLang];
 
-    const seconds =
-        durationSeconds(proj.duration);
+    const topic =
+        proj.topic || "tu proyecto";
+
+    const duration =
+        proj.duration || "30 seg";
 
     const niche =
-        detectNiche(topic);
-
-    const music =
-        musicDatabase[niche] || musicDatabase.general;
-
-    const style =
-        music.styles[
-            Math.floor(Math.random()*music.styles.length)
-        ];
-
-    const voice =
-        music.artists[
-            Math.floor(Math.random()*music.artists.length)
-        ];
+        proj.niche || detectNiche(topic);
 
     const platform =
         proj.platform || "Redes sociales";
 
-    const tone =
-        proj.tone || "dinámico y atractivo";
+    const music =
+        musicDatabase[niche] ||
+        musicDatabase.general;
 
-    const goal =
-        proj.goal || "captar atención y generar interés";
+    const timeline =
+        buildTimeline(
+            duration,
+            topic,
+            niche,
+            platform
+        );
 
-    let script = "";
+    const seconds =
+        durationToSeconds(duration);
 
-    if(seconds <= 10){
+    let strategyText;
 
-        script = `
+    if(seconds <= 20){
 
-        <div class="script-line">
-            <span class="script-time">0:00 – 0:03</span><br>
-            <span class="script-label">🎣 GANCHO:</span><br>
-            “Espera. Si te interesa <b>${escapeHTML(topic)}</b>, esto es para ti.”
-        </div>
-
-        <div class="script-line">
-            <span class="script-time">0:03 – 0:07</span><br>
-            <span class="script-label">⚡ MENSAJE:</span><br>
-            Presenta la idea principal de forma directa, visual y fácil de recordar.
-        </div>
-
-        <div class="script-line">
-            <span class="script-time">0:07 – 0:10</span><br>
-            <span class="script-label">📢 CTA:</span><br>
-            “Descúbrelo ahora y no te quedes fuera.”
-        </div>
-
-        `;
-
-    }else if(seconds <= 30){
-
-        script = `
-
-        <div class="script-line">
-            <span class="script-time">0:00 – 0:04</span><br>
-            <span class="script-label">🎣 GANCHO:</span><br>
-            “¿Y si ${escapeHTML(topic)} fuera exactamente lo que estabas buscando?”
-        </div>
-
-        <div class="script-line">
-            <span class="script-time">0:04 – 0:10</span><br>
-            <span class="script-label">👀 CONTEXTO:</span><br>
-            Presenta rápidamente qué es ${escapeHTML(topic)} y por qué debería importarle al espectador.
-        </div>
-
-        <div class="script-line">
-            <span class="script-time">0:10 – 0:19</span><br>
-            <span class="script-label">🚀 DESARROLLO:</span><br>
-            Muestra el beneficio principal mediante imágenes, demostración o una pequeña situación.
-        </div>
-
-        <div class="script-line">
-            <span class="script-time">0:19 – 0:26</span><br>
-            <span class="script-label">🔥 PUNTO FUERTE:</span><br>
-            Destaca aquello que diferencia la propuesta de las demás.
-        </div>
-
-        <div class="script-line">
-            <span class="script-time">0:26 – 0:30</span><br>
-            <span class="script-label">📢 CTA:</span><br>
-            “Ahora ya sabes por qué deberías probarlo. ¿Te atreves?”
-        </div>
-
-        `;
+        strategyText =
+        "La prioridad es velocidad: el espectador debe entender el concepto casi inmediatamente. Cada plano debe aportar información.";
 
     }else if(seconds <= 60){
 
-        script = `
-
-        <div class="script-line">
-            <span class="script-time">0:00 – 0:05</span><br>
-            <span class="script-label">🎣 GANCHO:</span><br>
-            “Hay algo sobre <b>${escapeHTML(topic)}</b> que probablemente todavía no estás aprovechando.”
-        </div>
-
-        <div class="script-line">
-            <span class="script-time">0:05 – 0:14</span><br>
-            <span class="script-label">🧠 PLANTEAMIENTO:</span><br>
-            Presenta el problema, deseo o curiosidad que tiene el público.
-        </div>
-
-        <div class="script-line">
-            <span class="script-time">0:14 – 0:27</span><br>
-            <span class="script-label">🎬 DESARROLLO:</span><br>
-            Introduce ${escapeHTML(topic)} y explica visualmente qué ofrece.
-            Aquí deben aparecer los elementos más importantes.
-        </div>
-
-        <div class="script-line">
-            <span class="script-time">0:27 – 0:40</span><br>
-            <span class="script-label">⚡ DIFERENCIADOR:</span><br>
-            Presenta el beneficio principal y una razón concreta para elegir esta propuesta.
-        </div>
-
-        <div class="script-line">
-            <span class="script-time">0:40 – 0:52</span><br>
-            <span class="script-label">🔥 REMATE:</span><br>
-            Aumenta el ritmo y muestra el resultado que puede conseguir el espectador.
-        </div>
-
-        <div class="script-line">
-            <span class="script-time">0:52 – 1:00</span><br>
-            <span class="script-label">📢 CTA:</span><br>
-            “Ya lo viste. Ahora toca dar el siguiente paso.”
-        </div>
-
-        `;
-
-    }else if(seconds <= 120){
-
-        script = `
-
-        <div class="script-line">
-            <span class="script-time">0:00 – 0:08</span><br>
-            <span class="script-label">🎣 GANCHO CINEMATOGRÁFICO:</span><br>
-            Abre con una imagen potente y una frase que genere curiosidad.
-            “Todo comienza con una decisión...”
-        </div>
-
-        <div class="script-line">
-            <span class="script-time">0:08 – 0:25</span><br>
-            <span class="script-label">🧩 PROBLEMA:</span><br>
-            Explica la situación que vive el público y crea identificación.
-        </div>
-
-        <div class="script-line">
-            <span class="script-time">0:25 – 0:45</span><br>
-            <span class="script-label">💡 SOLUCIÓN:</span><br>
-            Presenta ${escapeHTML(topic)} como la respuesta al problema.
-            Utiliza demostraciones y planos de detalle.
-        </div>
-
-        <div class="script-line">
-            <span class="script-time">0:45 – 1:05</span><br>
-            <span class="script-label">🚀 BENEFICIOS:</span><br>
-            Desarrolla los beneficios principales utilizando ejemplos concretos.
-        </div>
-
-        <div class="script-line">
-            <span class="script-time">1:05 – 1:20</span><br>
-            <span class="script-label">🔥 MOMENTO FUERTE:</span><br>
-            Aumenta música y velocidad de edición.
-            Presenta el elemento más memorable de la campaña.
-        </div>
-
-        <div class="script-line">
-            <span class="script-time">1:20 – 1:30</span><br>
-            <span class="script-label">🎯 CIERRE:</span><br>
-            Resume la propuesta en una frase fácil de recordar.
-        </div>
-
-        <div class="script-line">
-            <span class="script-time">1:30 – 2:00</span><br>
-            <span class="script-label">📢 CTA + MARCA:</span><br>
-            Repite el beneficio principal, presenta la llamada a la acción
-            y termina con identidad visual.
-        </div>
-
-        `;
+        strategyText =
+        "La estructura combina atención, contexto, demostración y cierre. La edición debe cambiar de estímulo regularmente sin sentirse caótica.";
 
     }else{
 
-        script = `
+        strategyText =
+        "Al tener más tiempo, el anuncio puede desarrollar una pequeña historia. La clave es dividir la información en bloques para evitar que el ritmo se vuelva plano.";
 
-        <div class="script-line">
-            <span class="script-time">0:00 – 0:15</span><br>
-            <span class="script-label">🎣 APERTURA:</span><br>
-            Construye una introducción cinematográfica.
-            No expliques todo todavía: abre una pregunta o conflicto.
-        </div>
-
-        <div class="script-line">
-            <span class="script-time">0:15 – 0:40</span><br>
-            <span class="script-label">🧠 CONTEXTO:</span><br>
-            Explica el escenario, necesidad o problema que conecta
-            con el público.
-        </div>
-
-        <div class="script-line">
-            <span class="script-time">0:40 – 1:10</span><br>
-            <span class="script-label">💡 PRESENTACIÓN:</span><br>
-            Introduce ${escapeHTML(topic)} y establece claramente
-            qué representa dentro de la historia.
-        </div>
-
-        <div class="script-line">
-            <span class="script-time">1:10 – 1:45</span><br>
-            <span class="script-label">🚀 DESARROLLO I:</span><br>
-            Presenta las características, beneficios o elementos
-            más importantes mediante escenas progresivas.
-        </div>
-
-        <div class="script-line">
-            <span class="script-time">1:45 – 2:20</span><br>
-            <span class="script-label">🔥 DESARROLLO II:</span><br>
-            Introduce una demostración, ejemplo, comparación o
-            situación que permita visualizar el beneficio.
-        </div>
-
-        <div class="script-line">
-            <span class="script-time">2:20 – 2:40</span><br>
-            <span class="script-label">⚡ CLÍMAX:</span><br>
-            Aumenta el ritmo visual y musical.
-            Coloca aquí el momento que quieres que el público recuerde.
-        </div>
-
-        <div class="script-line">
-            <span class="script-time">2:40 – 2:55</span><br>
-            <span class="script-label">🎯 CONCLUSIÓN:</span><br>
-            Resume la propuesta y conecta nuevamente con el problema
-            presentado al principio.
-        </div>
-
-        <div class="script-line">
-            <span class="script-time">2:55 – ${formatTime(seconds)}</span><br>
-            <span class="script-label">📢 CTA FINAL:</span><br>
-            Presenta una llamada a la acción clara y memorable.
-            Cierra con identidad visual y sonora.
-        </div>
-
-        `;
     }
-
 
     return `
 
         <div class="bot-title">
-            🎬 Guion + Estrategia Creativa
+            ${t.scriptTitle}
         </div>
 
         <div class="section">
 
-            <b>📌 Proyecto:</b>
-            ${capitalize(escapeHTML(topic))}<br>
+            <b>${t.projectLabel}</b>
+            ${capitalize(topic)}
 
-            <b>⏱ Duración:</b>
-            ${escapeHTML(proj.duration || "30 seg")}<br>
+            <br>
+
+            <b>${t.durationLabel}</b>
+            ${duration}
+
+            <br>
+
+            <b>${t.categoryLabel}</b>
+            ${capitalize(niche)}
+
+            <br>
 
             <b>📱 Plataforma:</b>
-            ${escapeHTML(platform)}<br>
-
-            <b>🎯 Objetivo:</b>
-            ${escapeHTML(goal)}<br>
-
-            <b>🎭 Tono:</b>
-            ${escapeHTML(tone)}
+            ${platform}
 
         </div>
 
+
         <div class="section">
 
-            <b>🎙️ GUION PROFESIONAL</b>
+            <b>${t.scriptHeader}</b>
 
-            ${script}
+            ${timeline.map(segment=>`
+
+                <div class="script-line">
+
+                    <span class="time-code">
+                        ${segment.time}
+                    </span>
+
+                    —
+                    <b>${segment.title}</b>
+
+                    <div class="tip">
+                        ${segment.text}
+                    </div>
+
+                </div>
+
+            `).join("")}
 
         </div>
 
+
         <div class="section">
 
-            <b>🎵 DIRECCIÓN MUSICAL</b>
+            <b>${t.strategyHeader}</b>
 
-            <div class="music-card">
-                <b>Estilo:</b> ${style}<br>
-                <b>Voz / cantante:</b> ${voice}<br>
-                <b>Ritmo:</b> ${
-                    seconds <= 30
-                    ? "rápido y directo"
-                    : seconds <= 60
-                    ? "dinámico con subida progresiva"
-                    : "cinematográfico con evolución"
-                }<br>
-                <b>Entrada:</b> La música comienza de forma limpia
-                y aumenta en los momentos importantes.<br>
-                <b>Final:</b> Deja espacio para que el CTA se entienda.
-            </div>
+            <br><br>
+
+            ${strategyText}
+
+            <br><br>
+
+            <b>🎯 Público:</b>
+            Personas interesadas en ${topic} o en el problema/necesidad que resuelve.
+
+            <br><br>
+
+            <b>🧲 Gancho:</b>
+            No comenzar con una presentación larga. Mostrar primero el resultado, problema o elemento más interesante.
+
+            <br><br>
+
+            <b>👁️ Visual:</b>
+            Mantener el elemento principal en pantalla mientras la información importante aparece mediante texto breve.
+
+            <br><br>
+
+            <b>✂️ Edición:</b>
+            Cortes limpios, cambios visuales sincronizados con el ritmo y texto únicamente cuando ayude a comprender el mensaje.
+
+            <br><br>
+
+            <b>🗣️ Voz:</b>
+            Tono natural y seguro. Evitar sonar como una lectura mecánica.
+
+            <br><br>
+
+            <b>📢 CTA:</b>
+            Una sola acción principal al final. Evitar pedir demasiadas cosas simultáneamente.
 
         </div>
 
-        <div class="section">
-
-            <b>🎥 DIRECCIÓN VISUAL</b><br><br>
-
-            • Primeros segundos: máximo impacto visual.<br>
-            • Planos cortos durante el gancho.<br>
-            • Cambios de escena sincronizados con la música.<br>
-            • Utilizar texto en pantalla solamente cuando aporte información.<br>
-            • Reservar el plano más memorable para el momento fuerte.<br>
-            • Cierre limpio con CTA e identidad visual.
-
-        </div>
 
         <div class="section">
 
-            <b>🧠 ESTRATEGIA</b><br><br>
+            <b>${t.platformHeader}</b>
 
-            <b>Audiencia:</b>
-            Personas interesadas en ${escapeHTML(topic)}.<br><br>
+            <br><br>
 
-            <b>Propuesta:</b>
-            Convertir la atención inicial en interés y posteriormente
-            en una acción concreta.<br><br>
+            <b>Formato:</b>
+            Vertical 9:16 si se publicará principalmente en TikTok, Reels o Shorts.
+
+            <br><br>
+
+            <b>Primeros segundos:</b>
+            El contenido importante empieza inmediatamente.
+
+            <br><br>
+
+            <b>Texto:</b>
+            Frases cortas, grandes y fáciles de leer desde un teléfono.
+
+            <br><br>
 
             <b>Retención:</b>
-            El video introduce información progresivamente para evitar
-            revelar todo al principio.<br><br>
+            Introducir cambios visuales y pequeños avances de información para mantener curiosidad.
 
-            <b>CTA:</b>
-            Debe ser simple, directo y relacionado con el objetivo.
+        </div>
+
+
+        <div class="section">
+
+            <b>${t.musicHeader}</b>
+
+            <br><br>
+
+            <b>${t.artistLabel}</b>
+            ${music.artist}
+
+            <br><br>
+
+            <b>${t.trackLabel}</b>
+            ${music.style}
+
+            <br><br>
+
+            <b>🎧 Alternativa para contenido comercial:</b>
+            ${music.free}
+
+        </div>
+
+
+        <div class="section">
+
+            <b>🎬 Dirección de edición</b>
+
+            <br><br>
+
+            • Sin introducción larga.
+            <br>
+            • El primer plano debe generar curiosidad.
+            <br>
+            • Los textos deben reforzar, no repetir exactamente, la voz.
+            <br>
+            • Los cambios de plano deben tener intención.
+            <br>
+            • El cierre debe dejar claro qué hacer después.
+            <br>
+            • Mantener una identidad visual consistente con ${topic}.
 
         </div>
 
         ${motivation()}
 
     `;
+
 }
 
 
 /* =========================================================
-   FORMATO DE TIEMPO
-========================================================= */
+   RESPUESTAS ESPECIALES
+   ========================================================= */
 
-function formatTime(seconds){
+function showHelp(){
 
-    const min =
-        Math.floor(seconds / 60);
+    const t =
+        i18n[currentLang];
 
-    const sec =
-        seconds % 60;
+    addBotMessage(`
 
-    if(min === 0){
-        return sec + "s";
-    }
+        <div class="bot-title">
+            🧠 ${t.help}
+        </div>
 
-    return min + ":" +
-        String(sec).padStart(2,"0");
+        <div class="section">
+
+            <b>🎬 Guiones</b><br>
+            Puedo estructurar anuncios desde 10 segundos hasta varios minutos.
+
+        </div>
+
+        <div class="section">
+
+            <b>💡 Ideas</b><br>
+            Si no tienes ninguna idea, puedo proponerte conceptos diferentes según tu tema, plataforma y duración.
+
+        </div>
+
+        <div class="section">
+
+            <b>📈 Estrategia</b><br>
+            Puedo trabajar gancho, público, mensaje, estructura, retención, CTA, edición y posicionamiento.
+
+        </div>
+
+        <div class="section">
+
+            <b>🎵 Música</b><br>
+            Puedo recomendar dirección musical, energía, ritmo, referencias artísticas y alternativas royalty-free.
+
+        </div>
+
+        <div class="section">
+
+            <b>🔧 También puedo modificar</b><br>
+            "hazlo más emocionante", "cambia el gancho", "hazlo más corto", "ponlo para TikTok", "haz otra versión", "ponle humor", "hazlo más profesional", etc.
+
+        </div>
+
+        ${motivation()}
+
+    `);
+
+}
+
+
+function showThanks(){
+
+    const t =
+        i18n[currentLang];
+
+    addBotMessage(
+        `${t.thanks}${motivation()}`
+    );
+
 }
 
 
 /* =========================================================
-   RESPUESTA DE MODIFICACIÓN
-========================================================= */
+   SALUDO
+   ========================================================= */
+
+function showGreeting(){
+
+    if(greetingShown)
+        return;
+
+    greetingShown = true;
+
+    const t =
+        i18n[currentLang];
+
+    addBotMessage(
+        `${t.greeting}${motivation()}`
+    );
+
+}
+
+
+/* =========================================================
+   FLUJO "NO TENGO IDEA"
+   ========================================================= */
+
+function startNoIdeaFlow(){
+
+    const t =
+        i18n[currentLang];
+
+    currentProject = {
+
+        topic:"contenido por descubrir",
+
+        niche:"general",
+
+        platform:"Redes sociales",
+
+        duration:null,
+
+        noIdea:true
+
+    };
+
+    waitingForDuration = true;
+
+    waitingForIdeasAfterDuration = true;
+
+    addBotMessage(`
+
+        <div class="bot-title">
+            💡 Vamos a construir la idea desde cero
+        </div>
+
+        <div class="section">
+            ${t.noIdea}
+        </div>
+
+        ${showDurationSelectorInsideChat()}
+
+    `);
+
+}
+
+
+/* =========================================================
+   MODIFICACIONES
+   ========================================================= */
 
 function modifyCurrentProject(text){
 
     if(!currentProject){
 
-        return `
-            <div class="bot-title">🧠 Primero necesitamos una idea</div>
-            <div class="section">
-                Puedo modificar un guion, estrategia, música o tono,
-                pero todavía no tenemos un proyecto activo.
-                Cuéntame qué quieres crear.
+        addBotMessage(
+            i18n[currentLang].invalid
+        );
+
+        return;
+
+    }
+
+    const lower =
+        text.toLowerCase();
+
+    let change = "";
+
+    if(/más emocionante|mas emocionante|emocionante/.test(lower)){
+
+        currentProject.tone =
+            "emocionante";
+
+        change =
+            "Aumenté la energía del concepto, priorizando un gancho más fuerte, cortes más rápidos y un momento de impacto.";
+
+    }else if(/más serio|mas serio|profesional/.test(lower)){
+
+        currentProject.tone =
+            "profesional";
+
+        change =
+            "Ajusté el tono para que sea más profesional, limpio y directo.";
+
+    }else if(/más divertido|mas divertido|humor|gracioso/.test(lower)){
+
+        currentProject.tone =
+            "divertido";
+
+        change =
+            "Añadí un enfoque más ligero y humorístico sin perder el objetivo publicitario.";
+
+    }else if(/más corto|mas corto/.test(lower)){
+
+        currentProject.duration =
+            "20 seg";
+
+        change =
+            "Compacté la estructura para que el mensaje llegue mucho más rápido.";
+
+    }else if(/más largo|mas largo/.test(lower)){
+
+        currentProject.duration =
+            "90 seg";
+
+        change =
+            "Amplié la estructura para permitir más contexto, demostración y desarrollo.";
+
+    }else if(/tiktok|tik tok/.test(lower)){
+
+        currentProject.platform =
+            "TikTok";
+
+        change =
+            "Adapté el enfoque a TikTok: gancho inmediato, formato vertical, ritmo dinámico y texto breve.";
+
+    }else if(/instagram|reels/.test(lower)){
+
+        currentProject.platform =
+            "Instagram Reels";
+
+        change =
+            "Adapté el concepto a Reels con una presentación visual más limpia y ritmo rápido.";
+
+    }else if(/youtube|shorts/.test(lower)){
+
+        currentProject.platform =
+            "YouTube Shorts";
+
+        change =
+            "Adapté la estructura a Shorts, priorizando retención y claridad.";
+
+    }else if(/cambia el gancho|mejora el gancho|otro gancho/.test(lower)){
+
+        change =
+            "Replanteé el inicio para entrar directamente en el conflicto, resultado o curiosidad principal.";
+
+    }else if(/cambia la música|otra música|música diferente|musica diferente/.test(lower)){
+
+        change =
+            "Cambié la dirección musical por una alternativa que contraste con la anterior.";
+
+    }else if(/otra versión|otra version|otro guion|otro guión|otra idea/.test(lower)){
+
+        change =
+            "Preparé una nueva dirección creativa sin abandonar el objetivo principal.";
+
+    }else{
+
+        change =
+            "Interpreté tu ajuste y mantuve el contexto del proyecto para no empezar desde cero.";
+
+    }
+
+    addUserMessage(text);
+
+    showTyping();
+
+    setTimeout(()=>{
+
+        removeTyping();
+
+        addBotMessage(`
+
+            <div class="bot-title">
+                ${i18n[currentLang].changeHeader}
             </div>
-            ${motivation()}
-        `;
-    }
 
-    const t = normalizeText(text);
+            <div class="section">
+                ${change}
+            </div>
 
-    if(/mas corto|hazlo corto/.test(t)){
+            ${buildFinalStrategy(currentProject)}
 
-        const current =
-            durationSeconds(currentProject.duration);
+        `);
 
-        const newDuration =
-            Math.max(10,Math.round(current / 2));
+        saveCurrentProject();
 
-        currentProject.duration =
-            newDuration + " seg";
-    }
+    },650);
 
-    if(/mas largo|hazlo largo/.test(t)){
-
-        const current =
-            durationSeconds(currentProject.duration);
-
-        const newDuration =
-            Math.min(300,current * 2);
-
-        currentProject.duration =
-            newDuration + " seg";
-    }
-
-    const newTone =
-        detectTone(text);
-
-    if(newTone){
-        currentProject.tone = newTone;
-    }
-
-    const platform =
-        detectPlatform(text);
-
-    if(platform){
-        currentProject.platform = platform;
-    }
-
-    if(/cambia el gancho|cambia la intro|cambia la introduccion|cambia la introducción/.test(t)){
-
-        currentProject.hookVersion =
-            (currentProject.hookVersion || 0) + 1;
-    }
-
-    if(/humor|gracioso|divertido|meme/.test(t)){
-
-        currentProject.tone =
-            "divertido y espontáneo";
-    }
-
-    if(/epico|epica|emocionante|cinematico|cinematografico/.test(t)){
-
-        currentProject.tone =
-            "emocionante y cinematográfico";
-    }
-
-    if(/serio|profesional|elegante|premium/.test(t)){
-
-        currentProject.tone =
-            "profesional y elegante";
-    }
-
-    return buildFinalStrategy(currentProject);
 }
 
 
 /* =========================================================
-   RESPUESTA PRINCIPAL
-========================================================= */
+   PROCESAR MENSAJE
+   ========================================================= */
 
 function generateResponse(text){
 
-    const cleanText =
-        String(text).trim();
+    const clean =
+        text.trim();
 
-    const normalized =
-        normalizeText(cleanText);
+    const lower =
+        clean.toLowerCase();
 
-    conversationState.lastUserMessage =
-        cleanText;
-
-    conversationState.messages.push({
-        role:"user",
-        text:cleanText
-    });
+    const t =
+        i18n[currentLang];
 
 
-    /* -----------------------------------------
-       SALUDO
-    ----------------------------------------- */
+    /* ---------------------------
+       1. SALUDO
+       --------------------------- */
 
-    if(isGreeting(cleanText)){
+    if(
+        containsPattern(clean,intentPatterns.greeting) &&
+        clean.length < 35
+    ){
 
-        if(!conversationState.greetingShown){
+        if(!greetingShown){
 
-            conversationState.greetingShown = true;
-
-            addBotMessage(`
-                ${i18n[currentLang].greeting}<br><br>
-                Cuéntame qué quieres crear y me encargo de analizarlo.
-            `);
+            showGreeting();
 
         }else{
 
-            addBotMessage(`
-                Ya estamos dentro 😎. Dime qué quieres crear
-                y continuamos desde ahí.
-            `);
-        }
-
-        return;
-    }
-
-
-    /* -----------------------------------------
-       AGRADECIMIENTO
-    ----------------------------------------- */
-
-    if(isThanks(cleanText)){
-
-        addBotMessage(`
-            ¡De nada! 😎
-            <br><br>
-            Cuando quieras, seguimos trabajando en la idea.
-        `);
-
-        return;
-    }
-
-
-    /* -----------------------------------------
-       "SÍ" / "OK"
-       Nunca debe convertirse en proyecto
-    ----------------------------------------- */
-
-    if(isAffirmative(cleanText)){
-
-        if(conversationState.awaitingDuration){
-
             addBotMessage(
-                "Perfecto. Elige la duración del video:"
-                +
-                showDurationSelectorInsideChat()
+                "👋 ¡Seguimos! Cuéntame qué quieres hacer con el proyecto."
             );
 
-            return;
-        }
-
-        if(conversationState.awaitingIdeaAfterDuration){
-
-            addBotMessage(`
-                Perfecto. Ahora dime solamente qué quieres crear.
-                Puede ser un videojuego, producto, negocio, canción,
-                personaje, marca o incluso una idea completamente nueva.
-            `);
-
-            return;
-        }
-
-        if(currentProject){
-
-            addBotMessage(
-                buildFinalStrategy(currentProject)
-            );
-
-            return;
-        }
-
-        addBotMessage(`
-            Perfecto 😎. Cuéntame qué quieres crear.
-        `);
-
-        return;
-    }
-
-
-    /* -----------------------------------------
-       NO
-    ----------------------------------------- */
-
-    if(isNegative(cleanText)){
-
-        if(currentProject){
-
-            addBotMessage(`
-                Está bien. No voy a repetir la misma propuesta.
-                Podemos cambiar completamente la dirección creativa.
-                Dime qué parte quieres cambiar.
-            `);
-
-        }else{
-
-            addBotMessage(`
-                Sin problema. Podemos empezar desde cero.
-                Dime qué tienes en mente, aunque sea una idea muy pequeña.
-            `);
         }
 
         return;
+
     }
 
 
-    /* -----------------------------------------
-       NO TENGO IDEA
-    ----------------------------------------- */
+    /* ---------------------------
+       2. NO IDEA
+       --------------------------- */
 
-    if(isNoIdea(cleanText)){
+    if(
+        containsPattern(clean,intentPatterns.noIdea)
+    ){
 
-        /*
-            IMPORTANTE:
-            primero pregunta la duración.
-            NO muestra las capacidades todavía.
-        */
-
-        currentProject = {
-            topic:null,
-            duration:null,
-            type:"publicidad",
-            platform:null,
-            goal:"crear una pieza atractiva desde cero",
-            tone:"creativo"
-        };
-
-        conversationState.projectStarted = true;
-        conversationState.awaitingDuration = true;
-        conversationState.awaitingIdeaAfterDuration = false;
-
-        addBotMessage(`
-            ${!conversationState.greetingShown ? i18n[currentLang].greeting + "<br><br>" : ""}
-
-            No pasa nada 😎. Podemos construir la idea completamente
-            desde cero.
-
-            <br><br>
-
-            Antes de decidir qué crear, necesito saber algo:
-            <b>¿cuánto quieres que dure el video?</b>
-
-            ${showDurationSelectorInsideChat()}
-        `);
-
-        conversationState.greetingShown = true;
+        startNoIdeaFlow();
 
         return;
+
     }
 
 
-    /* -----------------------------------------
-       MODIFICACIONES
-    ----------------------------------------- */
+    /* ---------------------------
+       3. AYUDA
+       --------------------------- */
 
-    if(isModification(cleanText) && currentProject){
+    if(
+        containsPattern(clean,intentPatterns.help)
+    ){
+
+        showHelp();
+
+        return;
+
+    }
+
+
+    /* ---------------------------
+       4. GRACIAS
+       --------------------------- */
+
+    if(
+        containsPattern(clean,intentPatterns.thanks)
+    ){
+
+        showThanks();
+
+        return;
+
+    }
+
+
+    /* ---------------------------
+       5. MODIFICACIONES
+       --------------------------- */
+
+    if(
+        currentProject &&
+        containsPattern(clean,intentPatterns.modify)
+    ){
+
+        modifyCurrentProject(clean);
+
+        return;
+
+    }
+
+
+    /* ---------------------------
+       6. DURACIÓN
+       --------------------------- */
+
+    const detectedDuration =
+        extractDuration(clean);
+
+    if(
+        waitingForDuration &&
+        detectedDuration
+    ){
+
+        currentProject.duration =
+            detectedDuration;
+
+        waitingForDuration = false;
+
+        addUserMessage(clean);
 
         showTyping();
 
@@ -2715,190 +3135,221 @@ function generateResponse(text){
 
             removeTyping();
 
-            addBotMessage(
-                modifyCurrentProject(cleanText)
-            );
+            if(waitingForIdeasAfterDuration){
 
-        },500);
+                waitingForIdeasAfterDuration = false;
+
+                addBotMessage(
+                    buildIdeasResponse(currentProject)
+                );
+
+            }else{
+
+                addBotMessage(
+                    buildFinalStrategy(currentProject)
+                );
+
+            }
+
+            saveCurrentProject();
+
+        },650);
 
         return;
+
     }
 
 
-    /* -----------------------------------------
-       SI ESTÁ ESPERANDO UNA IDEA
-    ----------------------------------------- */
+    /* ---------------------------
+       7. CONFIRMACIÓN
+       --------------------------- */
 
-    if(conversationState.awaitingIdeaAfterDuration){
+    if(
+        containsPattern(clean,intentPatterns.confirmation)
+    ){
 
-        const topic =
-            extractTopic(cleanText);
+        if(
+            currentProject &&
+            waitingForDuration
+        ){
 
-        if(topic.length >= 2){
+            addBotMessage(
+                showDurationSelectorInsideChat()
+            );
 
-            currentProject.topic = topic;
+            return;
 
-            currentProject.platform =
-                detectPlatform(cleanText) ||
-                "Redes sociales";
+        }
 
-            currentProject.goal =
-                detectGoal(cleanText);
-
-            currentProject.tone =
-                detectTone(cleanText) ||
-                "creativo y dinámico";
-
-            conversationState.awaitingIdeaAfterDuration = false;
+        if(currentProject){
 
             addBotMessage(
                 buildFinalStrategy(currentProject)
             );
 
             return;
+
         }
-    }
 
-
-    /* -----------------------------------------
-       EXTRAER DURACIÓN SI VIENE EN EL MENSAJE
-    ----------------------------------------- */
-
-    const detectedDuration =
-        extractDuration(cleanText);
-
-
-    /* -----------------------------------------
-       MENSAJE NORMAL:
-       ANALIZARLO EN VEZ DE REPETIRLO
-    ----------------------------------------- */
-
-    let topic =
-        extractTopic(cleanText);
-
-    /*
-       Si el mensaje tiene únicamente palabras conversacionales,
-       no se crea un proyecto.
-    */
-
-    if(
-        nonProjectExpressions.includes(normalized) ||
-        topic.length < 2
-    ){
-
-        addBotMessage(`
-            No voy a convertir eso en un proyecto por error 😅.
-            <br><br>
-            Cuéntame qué quieres crear o dime
-            <b>“no sé qué hacer”</b> y te ayudo a empezar desde cero.
-        `);
+        showGreeting();
 
         return;
+
     }
 
 
-    /* -----------------------------------------
-       CREAR / ACTUALIZAR PROYECTO
-    ----------------------------------------- */
+    /* ---------------------------
+       8. SI PIDE IDEAS
+       --------------------------- */
 
-    if(!currentProject){
+    if(
+        containsPattern(clean,intentPatterns.ideas)
+    ){
+
+        const project =
+            analyzeProject(clean);
 
         currentProject = {
-            topic:topic,
-            duration:detectedDuration,
-            type:"publicidad",
-            platform:detectPlatform(cleanText) || null,
-            goal:detectGoal(cleanText),
-            tone:detectTone(cleanText) || "creativo y dinámico"
+
+            topic:
+                project.topic || "contenido",
+
+            niche:
+                project.niche,
+
+            platform:
+                project.platform,
+
+            duration:
+                project.duration
+
         };
 
-        conversationState.projectStarted = true;
+        if(!project.duration){
 
-    }else{
+            waitingForDuration = true;
+            waitingForIdeasAfterDuration = true;
 
-        /*
-            Si ya existe proyecto, no lo reemplazamos
-            innecesariamente.
-        */
+            addBotMessage(`
 
-        currentProject.topic =
-            topic || currentProject.topic;
+                <div class="bot-title">
+                    💡 Claro. Primero vamos a definir la duración.
+                </div>
 
-        if(detectedDuration){
-            currentProject.duration =
-                detectedDuration;
+                ${showDurationSelectorInsideChat()}
+
+            `);
+
+        }else{
+
+            addBotMessage(
+                buildIdeasResponse(currentProject)
+            );
+
         }
 
-        const platform =
-            detectPlatform(cleanText);
+        return;
 
-        if(platform){
-            currentProject.platform = platform;
-        }
-
-        const tone =
-            detectTone(cleanText);
-
-        if(tone){
-            currentProject.tone = tone;
-        }
-
-        currentProject.goal =
-            detectGoal(cleanText);
     }
 
 
-    /* -----------------------------------------
-       SI YA DIO DURACIÓN:
-       GENERAR DIRECTAMENTE
-    ----------------------------------------- */
+    /* ---------------------------
+       9. MENSAJE NORMAL
+       --------------------------- */
 
-    if(currentProject.duration){
+    if(clean.length < 2){
 
-        conversationState.awaitingDuration = false;
+        addBotMessage(t.invalid);
+
+        return;
+
+    }
+
+
+    const analysis =
+        analyzeProject(clean);
+
+
+    /* ---------------------------
+       10. DETECTAR PROYECTO
+       --------------------------- */
+
+    currentProject = {
+
+        topic:
+            analysis.topic,
+
+        niche:
+            analysis.niche,
+
+        platform:
+            analysis.platform,
+
+        duration:
+            analysis.duration,
+
+        noIdea:false
+
+    };
+
+
+    conversationStarted = true;
+
+
+    /* ---------------------------
+       11. DURACIÓN YA EXISTE
+       --------------------------- */
+
+    if(analysis.duration){
+
+        waitingForDuration = false;
 
         addBotMessage(
             buildFinalStrategy(currentProject)
         );
 
+        saveCurrentProject();
+
         return;
+
     }
 
 
-    /* -----------------------------------------
-       SI FALTA DURACIÓN:
-       PREGUNTAR UNA SOLA VEZ
-    ----------------------------------------- */
+    /* ---------------------------
+       12. FALTA DURACIÓN
+       --------------------------- */
 
-    conversationState.awaitingDuration = true;
+    waitingForDuration = true;
+
+    waitingForIdeasAfterDuration = false;
 
     addBotMessage(`
 
-        ${!conversationState.greetingShown
-            ? i18n[currentLang].greeting + "<br><br>"
-            : ""
-        }
+        <div class="bot-title">
+            ${t.success}
+        </div>
 
-        Ya tengo la dirección creativa de
-        <b>${capitalize(escapeHTML(currentProject.topic))}</b>.
+        <div class="section">
 
-        <br><br>
+            <b>${t.projectLabel}</b>
+            ${capitalize(analysis.topic)}
 
-        No necesito hacerte diez preguntas.
-        Para construir el guion correctamente solo me falta
-        definir la duración.
+            <br><br>
+
+            Ya tengo claro el enfoque. Solo necesito saber la duración para ajustar correctamente la cantidad de escenas, ritmo y nivel de detalle.
+
+        </div>
 
         ${showDurationSelectorInsideChat()}
 
     `);
 
-    conversationState.greetingShown = true;
 }
 
 
 /* =========================================================
    MENSAJES
-========================================================= */
+   ========================================================= */
 
 function addUserMessage(text){
 
@@ -2911,13 +3362,12 @@ function addUserMessage(text){
         "message user";
 
     message.innerHTML =
-        `<div class="bubble">
-            ${escapeHTML(text)}
-        </div>`;
+        `<div class="bubble">${escapeHTML(text)}</div>`;
 
     chatInner.appendChild(message);
 
     scrollChat();
+
 }
 
 
@@ -2936,27 +3386,18 @@ function addBotMessage(html){
 
     chatInner.appendChild(message);
 
-    conversationState.lastResponse =
-        html;
-
-    conversationState.messages.push({
-        role:"bot",
-        text:html
-    });
-
-    saveCurrentHistory();
+    lastGeneratedHTML = html;
 
     scrollChat();
+
 }
 
 
 /* =========================================================
    TYPING
-========================================================= */
+   ========================================================= */
 
 function showTyping(){
-
-    removeTyping();
 
     const typing =
         document.createElement("div");
@@ -2968,18 +3409,23 @@ function showTyping(){
         "typing";
 
     typing.innerHTML = `
+
         <div class="bubble">
+
             <div class="typing">
                 <i></i>
                 <i></i>
                 <i></i>
             </div>
+
         </div>
+
     `;
 
     chatInner.appendChild(typing);
 
     scrollChat();
+
 }
 
 
@@ -2988,196 +3434,214 @@ function removeTyping(){
     const typing =
         document.getElementById("typing");
 
-    if(typing){
+    if(typing)
         typing.remove();
-    }
+
 }
 
 
 /* =========================================================
-   UTILIDADES
-========================================================= */
+   SCROLL
+   ========================================================= */
 
 function scrollChat(){
 
     setTimeout(()=>{
+
         chat.scrollTo({
+
             top:chat.scrollHeight,
+
             behavior:"smooth"
+
         });
+
     },50);
+
 }
 
+
+/* =========================================================
+   SEGURIDAD HTML
+   ========================================================= */
 
 function escapeHTML(text){
 
     return String(text)
+
         .replace(/&/g,"&amp;")
         .replace(/</g,"&lt;")
         .replace(/>/g,"&gt;")
         .replace(/"/g,"&quot;")
         .replace(/'/g,"&#039;")
         .replace(/\n/g,"<br>");
+
 }
 
 
 function capitalize(text){
 
-    if(!text) return "";
+    if(!text)
+        return "";
 
     return text.charAt(0).toUpperCase()
         + text.slice(1);
+
 }
 
 
 /* =========================================================
    HISTORIAL
-========================================================= */
+   ========================================================= */
 
-function getHistory(){
+function saveCurrentProject(){
 
-    try{
-
-        return JSON.parse(
-            localStorage.getItem("sparky_history") || "[]"
-        );
-
-    }catch(e){
-
-        return [];
-    }
-}
-
-
-function saveCurrentHistory(){
-
-    if(!currentProject || !currentProject.topic){
+    if(!currentProject)
         return;
-    }
 
-    const list =
-        getHistory();
+    if(!currentProject.topic)
+        return;
 
-    const title =
-        currentProject.topic;
+    const record = {
 
-    const existing =
-        list.findIndex(
-            item => item.title === title
-        );
+        id:Date.now(),
 
-    const data = {
-        title:title,
-        project:currentProject,
-        savedAt:Date.now()
+        topic:currentProject.topic,
+
+        duration:
+            currentProject.duration || "Sin duración",
+
+        platform:
+            currentProject.platform || "Redes sociales",
+
+        niche:
+            currentProject.niche || "general",
+
+        html:lastGeneratedHTML
+
     };
 
-    if(existing >= 0){
 
-        list[existing] = data;
+    projectHistory.unshift(record);
 
-    }else{
-
-        list.unshift(data);
-    }
+    projectHistory =
+        projectHistory.slice(0,30);
 
     localStorage.setItem(
         "sparky_history",
-        JSON.stringify(list.slice(0,30))
+        JSON.stringify(projectHistory)
     );
 
     renderHistory();
+
 }
 
 
 function renderHistory(){
 
-    const list =
-        getHistory();
-
     history.innerHTML = "";
 
-    if(!list.length){
+    if(projectHistory.length === 0){
 
         history.innerHTML = `
+
             <div style="
                 color:#64748b;
                 font-size:12px;
-                padding:12px 8px;
+                padding:12px;
                 text-align:center;
             ">
                 Tus proyectos aparecerán aquí.
             </div>
+
         `;
 
         return;
+
     }
 
-    list.forEach((item,index)=>{
 
-        const row =
+    projectHistory.forEach(item=>{
+
+        const element =
             document.createElement("div");
 
-        row.className =
+        element.className =
             "history-item";
 
-        row.innerHTML = `
-            <div class="history-text">
-                🎬 ${escapeHTML(item.title)}
+        element.innerHTML = `
+
+            <div
+                class="history-text"
+                title="${escapeHTML(item.topic)}"
+            >
+                ${escapeHTML(item.topic)}
             </div>
 
             <button
                 class="history-delete"
-                data-index="${index}"
+                title="Eliminar"
+                onclick="deleteHistoryItem(${item.id},event)"
             >
                 ×
             </button>
+
         `;
 
-        row.addEventListener("click",e=>{
 
-            if(e.target.closest(".history-delete")){
+        element.addEventListener("click",(e)=>{
+
+            if(e.target.closest(".history-delete"))
                 return;
-            }
 
             loadHistoryItem(item);
+
         });
 
-        const del =
-            row.querySelector(".history-delete");
 
-        del.addEventListener("click",e=>{
+        history.appendChild(element);
 
-            e.stopPropagation();
-
-            deleteHistory(index);
-        });
-
-        history.appendChild(row);
     });
+
+}
+
+
+function deleteHistoryItem(id,event){
+
+    event.stopPropagation();
+
+    projectHistory =
+        projectHistory.filter(item=>item.id !== id);
+
+    localStorage.setItem(
+        "sparky_history",
+        JSON.stringify(projectHistory)
+    );
+
+    renderHistory();
+
 }
 
 
 function loadHistoryItem(item){
 
-    currentProject =
-        JSON.parse(
-            JSON.stringify(item.project)
-        );
+    currentProject = {
 
-    conversationState =
-        {
-            greetingShown:true,
-            awaitingDuration:false,
-            awaitingIdeaAfterDuration:false,
-            awaitingPlatform:false,
-            awaitingGoal:false,
-            awaitingModification:false,
-            lastUserMessage:"",
-            lastResponse:"",
-            messages:[],
-            projectStarted:true
-        };
+        topic:item.topic,
+
+        duration:item.duration,
+
+        platform:item.platform,
+
+        niche:item.niche
+
+    };
+
+    greetingShown = true;
+
+    waitingForDuration = false;
+
+    waitingForIdeasAfterDuration = false;
 
     chatInner.innerHTML = "";
 
@@ -3187,36 +3651,28 @@ function loadHistoryItem(item){
 
     welcome.style.display = "none";
 
-    addBotMessage(
-        buildFinalStrategy(currentProject)
-    );
+    addUserMessage(item.topic);
+
+    if(item.html){
+
+        addBotMessage(item.html);
+
+    }else{
+
+        addBotMessage(
+            buildFinalStrategy(currentProject)
+        );
+
+    }
 
     closeSidebar();
+
 }
-
-
-function deleteHistory(index){
-
-    const list =
-        getHistory();
-
-    list.splice(index,1);
-
-    localStorage.setItem(
-        "sparky_history",
-        JSON.stringify(list)
-    );
-
-    renderHistory();
-}
-
-
-renderHistory();
 
 
 /* =========================================================
    NUEVO PROYECTO
-========================================================= */
+   ========================================================= */
 
 document
 .getElementById("newProjectBtn")
@@ -3230,26 +3686,26 @@ document
 
     currentProject = null;
 
-    conversationState = {
-        greetingShown:false,
-        awaitingDuration:false,
-        awaitingIdeaAfterDuration:false,
-        awaitingPlatform:false,
-        awaitingGoal:false,
-        awaitingModification:false,
-        lastUserMessage:"",
-        lastResponse:"",
-        messages:[],
-        projectStarted:false
-    };
+    greetingShown = false;
+
+    waitingForDuration = false;
+
+    waitingForIdeasAfterDuration = false;
+
+    conversationStarted = false;
+
+    lastGeneratedHTML = "";
 
     closeSidebar();
+
+    input.focus();
+
 });
 
 
 /* =========================================================
    PDF / IMPRESIÓN
-========================================================= */
+   ========================================================= */
 
 document
 .getElementById("exportPdfBtn")
@@ -3262,7 +3718,7 @@ document
 
 /* =========================================================
    MENÚ MÓVIL
-========================================================= */
+   ========================================================= */
 
 const mobileMenuBtn =
     document.getElementById("mobileMenu");
@@ -3272,6 +3728,7 @@ mobileMenuBtn.addEventListener("click",()=>{
     sidebar.classList.toggle("open");
 
     overlay.classList.toggle("active");
+
 });
 
 
@@ -3280,24 +3737,25 @@ function closeSidebar(){
     sidebar.classList.remove("open");
 
     overlay.classList.remove("active");
+
 }
 
 
 /* =========================================================
-   ENVÍO DE MENSAJES
-========================================================= */
+   ENVÍO
+   ========================================================= */
 
 function sendMessage(){
 
     const text =
         input.value.trim();
 
-    if(!text) return;
+    if(!text)
+        return;
 
     input.value = "";
 
-    input.style.height =
-        "auto";
+    input.style.height = "auto";
 
     send.classList.remove("active");
 
@@ -3305,31 +3763,29 @@ function sendMessage(){
 
     showTyping();
 
-    /*
-        Pequeño retraso para que se sienta
-        como que el sistema procesa la idea.
-    */
-
     setTimeout(()=>{
 
         removeTyping();
 
         generateResponse(text);
 
-    },700);
+    },650);
+
 }
 
 
 send.addEventListener("click",()=>{
 
     if(send.classList.contains("active")){
+
         sendMessage();
+
     }
 
 });
 
 
-input.addEventListener("keydown",e=>{
+input.addEventListener("keydown",(e)=>{
 
     if(
         e.key === "Enter" &&
@@ -3338,12 +3794,12 @@ input.addEventListener("keydown",e=>{
 
         e.preventDefault();
 
-        if(
-            input.value.trim().length > 0
-        ){
+        if(input.value.trim().length > 0){
 
             sendMessage();
+
         }
+
     }
 
 });
@@ -3351,8 +3807,7 @@ input.addEventListener("keydown",e=>{
 
 input.addEventListener("input",()=>{
 
-    input.style.height =
-        "auto";
+    input.style.height = "auto";
 
     input.style.height =
         Math.min(
@@ -3360,32 +3815,38 @@ input.addEventListener("input",()=>{
             140
         ) + "px";
 
-    if(
-        input.value.trim().length > 0
-    ){
+
+    if(input.value.trim().length > 0){
 
         send.classList.add("active");
 
     }else{
 
         send.classList.remove("active");
+
     }
 
 });
 
 
 /* =========================================================
+   HISTORIAL AL CARGAR
+   ========================================================= */
+
+renderHistory();
+
+
+/* =========================================================
    SPLASH
-========================================================= */
+   ========================================================= */
 
 setTimeout(()=>{
 
     const splash =
         document.getElementById("splash");
 
-    if(splash){
+    if(splash)
         splash.style.display = "none";
-    }
 
 },2200);
 
