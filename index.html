@@ -1,22 +1,22 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>SparkyKrea Studio's - Ultimate Edition</title>
 
-<meta property="og:title" content="SparkyKrea Studio's - Asesoría Publicitaria Inteligente">
-<meta property="og:description" content="Diseña guiones profesionales, estrategias detalladas y selección musical al instante.">
-<meta property="og:image" content="https://sparky-krea.github.io/tu-logo.png">
-<meta property="og:url" content="https://sparky-krea.github.io/">
-<meta property="og:type" content="website">
+<meta property="og:title" content="SparkyKrea Studio's">
+<meta property="og:description" content="Asesoría creativa, guiones, estrategia y música.">
+<meta name="theme-color" content="#0c0c0f">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
 <style>
+
 *{
     box-sizing:border-box;
     margin:0;
@@ -24,420 +24,428 @@
 }
 
 :root{
-    --wine:#7a1135;
-    --wine-glow:#f43f5e;
-    --green:#059669;
-    --green-glow:#10b981;
-    --bg:#0b0c10;
-    --panel:#111318;
-    --card:#161920;
-    --border:#222630;
-    --white:#f1f5f9;
-    --muted:#94a3b8;
+    --bg:#08090c;
+    --panel:#101116;
+    --panel2:#15161c;
+    --panel3:#1a1b22;
+    --wine:#711d38;
+    --wine2:#9d2850;
+    --green:#54d68a;
+    --green2:#2bb86d;
+    --white:#f5f5f7;
+    --muted:#9a9ca7;
+    --border:rgba(255,255,255,.08);
+    --shadow:0 20px 60px rgba(0,0,0,.35);
+}
+
+html,
+body{
+    width:100%;
+    height:100%;
 }
 
 body{
-    font-family:'Plus Jakarta Sans',Arial,sans-serif;
-    background:var(--bg);
+    background:
+        radial-gradient(circle at 20% 0%,rgba(113,29,56,.16),transparent 30%),
+        radial-gradient(circle at 100% 100%,rgba(84,214,138,.06),transparent 30%),
+        var(--bg);
     color:var(--white);
-    height:100vh;
+    font-family:"Plus Jakarta Sans",sans-serif;
     overflow:hidden;
 }
 
-.sparky-logo-svg{
-    width:100%;
-    height:100%;
-    display:block;
+button,
+textarea,
+input{
+    font:inherit;
 }
+
+button{
+    border:0;
+    cursor:pointer;
+}
+
+.hidden{
+    display:none!important;
+}
+
+/* SPLASH */
 
 #splash{
     position:fixed;
     inset:0;
-    z-index:9999;
-    background:var(--bg);
+    background:#08090c;
     display:flex;
     justify-content:center;
     align-items:center;
-    animation:splashOut .8s ease 1.8s forwards;
+    z-index:9999;
+    transition:.6s ease;
 }
 
-.splash-content{
+.splash-inner{
     text-align:center;
-    animation:logoIn 1s cubic-bezier(.16,1,.3,1);
 }
 
-.splash-svg-box{
-    width:110px;
-    height:110px;
+.splash-logo{
+    width:88px;
+    height:88px;
     margin:auto;
+    animation:splashPulse 1.5s infinite alternate;
 }
 
-.splash-name{
+.splash-title{
     margin-top:18px;
-    font-size:32px;
+    font-size:23px;
     font-weight:800;
+    letter-spacing:-.6px;
 }
 
-.splash-name span:first-child,
-.brand-text span:first-child,
-.header-logo-text span:first-child{
-    color:var(--wine);
+.splash-title span{
+    color:var(--green);
 }
 
-.splash-name span:nth-child(2),
-.brand-text span:nth-child(2),
-.header-logo-text span:nth-child(2){
-    color:#10b981;
+@keyframes splashPulse{
+    from{transform:scale(.94);opacity:.65}
+    to{transform:scale(1);opacity:1}
 }
 
-.splash-studio{
-    font-size:11px;
-    letter-spacing:5px;
-    color:var(--muted);
-    margin-top:6px;
-    font-weight:700;
-}
-
-@keyframes logoIn{
-    from{opacity:0;transform:scale(.9) translateY(10px)}
-    to{opacity:1;transform:scale(1) translateY(0)}
-}
-
-@keyframes splashOut{
-    to{
-        opacity:0;
-        visibility:hidden;
-        pointer-events:none;
-    }
-}
+/* APP */
 
 #app{
-    height:100vh;
+    width:100%;
+    height:100%;
     display:flex;
-    position:relative;
 }
 
-.overlay{
-    display:none;
-    position:fixed;
-    inset:0;
-    background:rgba(0,0,0,.8);
-    z-index:90;
-}
+/* SIDEBAR */
 
-.overlay.active{
-    display:block;
-}
-
-.sidebar{
-    width:320px;
-    background:var(--panel);
+#sidebar{
+    width:270px;
+    height:100%;
+    background:rgba(12,13,17,.96);
     border-right:1px solid var(--border);
     display:flex;
     flex-direction:column;
-    padding:24px 20px;
-    flex-shrink:0;
-    z-index:100;
+    padding:22px 15px;
+    position:relative;
+    z-index:50;
 }
 
 .brand{
     display:flex;
     align-items:center;
-    gap:14px;
-    padding:6px 4px 26px;
-    border-bottom:1px solid var(--border);
-    margin-bottom:20px;
+    gap:11px;
+    padding:4px 8px 24px;
 }
 
-.brand-svg-box{
-    width:46px;
-    height:46px;
-    flex-shrink:0;
+.brand-logo{
+    width:36px;
+    height:36px;
 }
 
 .brand-text{
     font-size:15px;
     font-weight:800;
-    line-height:1.2;
 }
 
-.brand-text small{
-    display:block;
-    font-size:7px;
-    letter-spacing:3px;
-    color:var(--muted);
+.brand-text span{
+    color:var(--green);
 }
 
-.new-btn,
-.pdf-btn{
+.sidebar-button{
     width:100%;
-    border:1px solid var(--border);
-    background:var(--card);
-    color:var(--white);
-    border-radius:14px;
-    padding:14px;
-    font-size:14px;
-    font-weight:600;
-    cursor:pointer;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    gap:10px;
-    margin-bottom:10px;
+    padding:12px 13px;
+    border-radius:12px;
+    background:transparent;
+    color:#ddd;
+    text-align:left;
+    margin-bottom:7px;
+    transition:.2s;
+    font-size:13px;
 }
 
-.new-btn:hover,
-.pdf-btn:hover{
-    border-color:var(--green-glow);
-    transform:translateY(-1px);
+.sidebar-button:hover{
+    background:rgba(255,255,255,.055);
 }
 
-.pdf-btn{
-    border-color:rgba(16,185,129,.3);
-    color:var(--green-glow);
+.sidebar-button.primary{
+    background:linear-gradient(135deg,var(--wine),#4d1428);
+    border:1px solid rgba(157,40,80,.35);
+}
+
+.sidebar-button.primary:hover{
+    background:linear-gradient(135deg,#842341,#57152e);
 }
 
 .history-title{
-    color:var(--muted);
+    padding:20px 9px 8px;
     font-size:11px;
     text-transform:uppercase;
-    letter-spacing:1.5px;
-    margin:14px 8px 12px;
+    letter-spacing:1.4px;
+    color:#777984;
     font-weight:700;
 }
 
-.history{
-    overflow:auto;
+#history{
     flex:1;
-    padding-right:4px;
+    overflow-y:auto;
+    padding-right:3px;
 }
 
-.history::-webkit-scrollbar{
-    width:5px;
-}
-
-.history::-webkit-scrollbar-thumb{
-    background:var(--border);
-    border-radius:4px;
+.history-empty{
+    color:#6e707a;
+    font-size:12px;
+    line-height:1.6;
+    padding:10px 8px;
 }
 
 .history-item{
-    padding:14px 16px;
-    border-radius:12px;
-    color:#cbd5e1;
-    font-size:13.5px;
-    font-weight:500;
+    padding:10px;
+    border-radius:11px;
+    margin-bottom:5px;
     cursor:pointer;
-    margin-bottom:12px;
-    background:#161920;
-    border:1px solid var(--border);
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    gap:10px;
+    border:1px solid transparent;
+    transition:.2s;
 }
 
 .history-item:hover{
-    border-color:#394150;
-    background:#1a1e27;
+    background:#15161c;
+    border-color:var(--border);
 }
 
-.history-text{
+.history-topic{
+    font-size:12px;
+    color:#e7e7ea;
     white-space:nowrap;
     overflow:hidden;
     text-overflow:ellipsis;
-    flex:1;
+}
+
+.history-date{
+    font-size:10px;
+    color:#70727c;
+    margin-top:4px;
 }
 
 .history-delete{
+    float:right;
+    color:#777;
     background:none;
-    border:0;
-    color:var(--muted);
-    cursor:pointer;
-    font-size:14px;
-    padding:4px 8px;
-}
-
-.history-delete:hover{
-    color:#f43f5e;
+    font-size:12px;
 }
 
 .sidebar-bottom{
     border-top:1px solid var(--border);
-    padding-top:16px;
-    text-align:center;
-    color:var(--muted);
-    font-size:11px;
+    padding-top:12px;
+    margin-top:10px;
 }
+
+/* MAIN */
 
 .main{
     flex:1;
     min-width:0;
+    height:100%;
+    position:relative;
     display:flex;
     flex-direction:column;
-    background:var(--bg);
 }
 
+/* HEADER */
+
 .header{
-    height:70px;
-    border-bottom:1px solid var(--border);
+    height:64px;
+    min-height:64px;
     display:flex;
     align-items:center;
     justify-content:space-between;
-    padding:0 30px;
-    flex-shrink:0;
-    background:#0b0c10;
+    padding:0 20px;
+    border-bottom:1px solid var(--border);
+    background:rgba(8,9,12,.78);
+    backdrop-filter:blur(18px);
+    position:relative;
+    z-index:30;
 }
 
-.mobile-menu{
+.header-left{
     display:flex;
     align-items:center;
-    justify-content:center;
-    background:none;
-    border:0;
-    color:var(--white);
-    width:42px;
-    height:42px;
-    font-size:32px;
-    cursor:pointer;
+    gap:13px;
 }
 
 .header-right{
     display:flex;
     align-items:center;
-    gap:12px;
-    position:relative;
-    margin-left:auto;
-}
-
-.header-menu-container{
-    position:relative;
-}
-
-.header-dots-btn{
-    width:48px;
-    height:48px;
-    border-radius:50%;
-    background:transparent;
-    border:2px solid var(--green-glow);
-    color:var(--green-glow);
-    font-size:25px;
-    cursor:pointer;
-}
-
-.header-dropdown{
-    display:none;
-    position:absolute;
-    right:0;
-    top:58px;
-    background:#111318;
-    border:2px solid var(--border);
-    border-radius:14px;
-    padding:12px;
-    box-shadow:0 15px 35px rgba(0,0,0,.9);
-    z-index:999999;
-    min-width:210px;
-}
-
-.header-dropdown.active{
-    display:block;
-}
-
-.dropdown-label{
-    font-size:11px;
-    color:var(--muted);
-    text-transform:uppercase;
-    letter-spacing:1px;
-    margin-bottom:8px;
-    font-weight:700;
-}
-
-.lang-options-list{
-    display:flex;
-    flex-direction:column;
-    gap:4px;
-    max-height:230px;
-    overflow-y:auto;
-}
-
-.lang-option{
-    padding:10px;
-    border-radius:8px;
-    font-size:13px;
-    cursor:pointer;
-    color:#cbd5e1;
-    background:#161920;
-}
-
-.lang-option:hover{
-    background:#202530;
-}
-
-.lang-option.active{
-    background:var(--wine);
-    color:var(--white);
-    font-weight:700;
-}
-
-.header-divider{
-    width:1px;
-    height:34px;
-    background:var(--border);
-}
-
-.header-svg-box{
-    width:44px;
-    height:44px;
+    gap:9px;
 }
 
 .header-logo-text{
+    font-weight:800;
     font-size:14px;
-    font-weight:700;
 }
 
-.chat{
+.header-logo-text span{
+    color:var(--green);
+}
+
+.header-icon{
+    width:38px;
+    height:38px;
+    border-radius:10px;
+    color:#ddd;
+    background:transparent;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    transition:.2s;
+}
+
+.header-icon:hover{
+    background:rgba(255,255,255,.07);
+}
+
+.user-header{
+    display:flex;
+    align-items:center;
+    gap:7px;
+    max-width:180px;
+    color:#ddd;
+    font-size:11px;
+    background:rgba(255,255,255,.04);
+    border:1px solid var(--border);
+    padding:7px 10px;
+    border-radius:10px;
+}
+
+.user-dot{
+    width:8px;
+    height:8px;
+    border-radius:50%;
+    background:var(--green);
+}
+
+/* DROPDOWN */
+
+.dropdown{
+    position:absolute;
+    right:18px;
+    top:55px;
+    width:220px;
+    background:#131419;
+    border:1px solid var(--border);
+    border-radius:14px;
+    box-shadow:var(--shadow);
+    padding:7px;
+    display:none;
+    z-index:100;
+}
+
+.dropdown.show{
+    display:block;
+}
+
+.dropdown-title{
+    padding:9px;
+    font-size:10px;
+    color:#747681;
+    text-transform:uppercase;
+    letter-spacing:1px;
+}
+
+.lang-option,
+.dropdown-item{
+    width:100%;
+    background:transparent;
+    color:#ddd;
+    text-align:left;
+    padding:10px;
+    border-radius:9px;
+    font-size:12px;
+}
+
+.lang-option:hover,
+.dropdown-item:hover{
+    background:rgba(255,255,255,.06);
+}
+
+/* CHAT */
+
+#chat{
     flex:1;
+    min-height:0;
     overflow-y:auto;
-    padding:50px 24px 150px;
     scroll-behavior:smooth;
 }
 
 .chat-inner{
-    max-width:850px;
+    width:min(850px,100%);
     margin:auto;
+    padding:40px 22px 190px;
 }
 
-.welcome{
-    min-height:55vh;
+/* WELCOME */
+
+#welcome{
+    min-height:calc(100vh - 250px);
     display:flex;
-    flex-direction:column;
     align-items:center;
     justify-content:center;
+}
+
+.welcome-box{
+    max-width:680px;
+    width:100%;
     text-align:center;
+    padding:25px;
 }
 
-.welcome-svg-box{
-    width:96px;
-    height:96px;
-    margin-bottom:24px;
+.welcome-logo{
+    width:72px;
+    height:72px;
+    margin:auto auto 22px;
 }
 
-.welcome h1{
-    font-size:32px;
-    margin-bottom:12px;
+#welcomeTitle{
+    font-size:clamp(26px,5vw,43px);
+    line-height:1.08;
+    letter-spacing:-1.7px;
     font-weight:800;
 }
 
-.welcome p{
-    color:var(--muted);
-    font-size:15px;
-    max-width:520px;
-    line-height:1.8;
+#welcomeTitle span{
+    color:var(--green);
 }
+
+#welcomeDesc{
+    margin:17px auto 0;
+    max-width:570px;
+    color:#9496a0;
+    line-height:1.7;
+    font-size:14px;
+}
+
+.welcome-tags{
+    display:flex;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:8px;
+    margin-top:25px;
+}
+
+.welcome-tag{
+    padding:8px 12px;
+    border-radius:999px;
+    border:1px solid var(--border);
+    background:rgba(255,255,255,.025);
+    color:#aaa;
+    font-size:11px;
+}
+
+/* MESSAGES */
 
 .message{
     display:flex;
-    margin-bottom:28px;
+    margin-bottom:20px;
 }
 
 .message.user{
@@ -448,578 +456,1338 @@ body{
     justify-content:flex-start;
 }
 
-.bubble{
-    max-width:92%;
-    padding:20px 22px;
-    border-radius:16px;
-    font-size:14.5px;
-    line-height:1.8;
+.message-bubble{
+    max-width:min(720px,88%);
+    border-radius:17px;
+    padding:13px 15px;
+    font-size:13px;
+    line-height:1.7;
 }
 
-.user .bubble{
-    background:#1c212c;
-    border:1px solid #323b4d;
-    border-bottom-right-radius:4px;
-    font-weight:500;
+.message.user .message-bubble{
+    background:linear-gradient(135deg,#651a34,#451426);
+    border:1px solid rgba(157,40,80,.3);
 }
 
-.bot .bubble{
-    background:var(--card);
+.message.bot .message-bubble{
+    background:#111218;
     border:1px solid var(--border);
-    border-bottom-left-radius:4px;
 }
 
-.bot-title{
-    font-size:16px;
-    font-weight:800;
-    margin-bottom:12px;
+.message-label{
+    font-size:10px;
+    color:#777984;
+    margin-bottom:5px;
+    font-weight:700;
 }
 
-.section{
-    margin-top:14px;
-    background:#111318;
-    border:1px solid var(--border);
-    border-radius:12px;
-    padding:14px 16px;
+.message.bot strong{
+    color:#fff;
 }
 
-.script-line{
-    padding:10px 0;
-    border-bottom:1px solid #20242d;
+.message.bot .accent{
+    color:var(--green);
 }
 
-.script-line:last-child{
-    border-bottom:0;
+.message.bot ul{
+    padding-left:18px;
+    margin:8px 0;
 }
 
-.time-code{
-    color:var(--green-glow);
-    font-weight:800;
+.message.bot li{
+    margin:5px 0;
 }
 
-.tip{
-    color:#cbd5e1;
-    margin-top:7px;
-}
-
-.idea-card{
-    margin-top:10px;
-    padding:13px;
-    background:#151922;
-    border:1px solid #252b36;
-    border-radius:10px;
-}
-
-.analysis-card{
-    border-left:3px solid var(--green-glow);
-}
-
-.correction{
-    color:#a7f3d0;
-    font-size:12.5px;
-}
-
-.motivation{
-    margin-top:16px;
-    padding-top:12px;
-    border-top:1px solid var(--border);
-    color:var(--muted);
-    font-style:italic;
-    font-size:12.5px;
-}
+/* TYPING */
 
 .typing{
     display:flex;
-    gap:6px;
+    gap:5px;
+    align-items:center;
 }
 
-.typing i{
-    width:7px;
-    height:7px;
+.typing span{
+    width:5px;
+    height:5px;
     border-radius:50%;
-    background:var(--muted);
-    animation:typing 1s infinite ease-in-out;
+    background:#888;
+    animation:typing 1s infinite;
 }
 
-.typing i:nth-child(2){animation-delay:.2s}
-.typing i:nth-child(3){animation-delay:.4s}
+.typing span:nth-child(2){
+    animation-delay:.15s;
+}
+
+.typing span:nth-child(3){
+    animation-delay:.3s;
+}
 
 @keyframes typing{
-    0%,100%{opacity:.2;transform:scale(.8)}
-    50%{opacity:1;transform:scale(1.2)}
+    0%,70%,100%{opacity:.3;transform:translateY(0)}
+    35%{opacity:1;transform:translateY(-3px)}
 }
 
-.composer-area{
-    position:fixed;
-    bottom:0;
-    left:320px;
+/* DURATION */
+
+.duration-panel{
+    margin-top:13px;
+    display:flex;
+    flex-wrap:wrap;
+    gap:7px;
+}
+
+.duration-option{
+    padding:8px 11px;
+    background:#191a20;
+    color:#ccc;
+    border:1px solid var(--border);
+    border-radius:9px;
+    font-size:11px;
+}
+
+.duration-option:hover,
+.duration-option.selected{
+    border-color:var(--green);
+    color:var(--green);
+}
+
+/* COMPOSER */
+
+#composerArea{
+    position:absolute;
+    left:0;
     right:0;
-    padding:20px 30px 24px;
-    background:#0b0c10;
-    z-index:50;
+    bottom:0;
+    z-index:20;
+    padding:12px 20px 17px;
+    background:linear-gradient(to top,var(--bg) 70%,transparent);
 }
 
 .composer{
-    max-width:850px;
+    width:min(850px,100%);
     margin:auto;
-    border:1px solid var(--border);
-    background:var(--panel);
-    border-radius:18px;
-    display:flex;
-    align-items:flex-end;
-    padding:12px 16px;
+    position:relative;
 }
 
-textarea{
+.composer-box{
+    display:flex;
+    align-items:flex-end;
+    gap:9px;
+    background:#111218;
+    border:1px solid rgba(255,255,255,.1);
+    border-radius:16px;
+    padding:9px;
+    box-shadow:0 15px 40px rgba(0,0,0,.3);
+}
+
+#input{
     flex:1;
-    resize:none;
-    border:0;
-    outline:0;
-    background:transparent;
-    color:var(--white);
-    font-family:inherit;
-    font-size:14.5px;
-    padding:8px 4px;
+    min-height:42px;
     max-height:140px;
+    resize:none;
+    outline:none;
+    border:0;
+    background:transparent;
+    color:#eee;
+    padding:11px 9px;
+    line-height:1.5;
+    font-size:13px;
+}
+
+#input::placeholder{
+    color:#666873;
+}
+
+#send{
+    width:40px;
+    height:40px;
+    border-radius:11px;
+    background:#24252c;
+    color:#666873;
+    transition:.2s;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+#send.active{
+    background:var(--green);
+    color:#07100b;
+}
+
+.composer-info{
+    text-align:center;
+    font-size:9px;
+    color:#555762;
+    margin-top:7px;
+}
+
+/* FOOTER */
+
+#footerText{
+    text-align:center;
+    color:#484a53;
+    font-size:9px;
+    margin-top:6px;
+}
+
+/* MOBILE */
+
+#mobileMenu{
+    display:none;
+}
+
+@media(max-width:800px){
+
+    #sidebar{
+        position:fixed;
+        left:-285px;
+        top:0;
+        bottom:0;
+        z-index:200;
+        transition:.25s ease;
+        box-shadow:20px 0 50px rgba(0,0,0,.4);
+    }
+
+    #sidebar.open{
+        left:0;
+    }
+
+    #mobileMenu{
+        display:flex;
+    }
+
+    .header{
+        padding:0 12px;
+    }
+
+    .header-logo-text{
+        display:block;
+    }
+
+    .user-header{
+        max-width:125px;
+    }
+
+    .user-header span:last-child{
+        max-width:85px;
+        overflow:hidden;
+        text-overflow:ellipsis;
+        white-space:nowrap;
+    }
+
+    .chat-inner{
+        padding:27px 13px 175px;
+    }
+
+    #composerArea{
+        padding:8px 10px 12px;
+    }
+
+    #welcome{
+        min-height:calc(100vh - 210px);
+    }
+
+    .welcome-box{
+        padding:15px;
+    }
+
+    #welcomeTitle{
+        font-size:29px;
+    }
+
+    #welcomeDesc{
+        font-size:12px;
+    }
+
+    .message-bubble{
+        max-width:94%;
+        font-size:12px;
+    }
+}
+
+/* OVERLAY */
+
+#overlay{
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.55);
+    backdrop-filter:blur(3px);
+    z-index:150;
+    display:none;
+}
+
+#overlay.show{
+    display:block;
+}
+
+/* MODALS */
+
+.modal-layer{
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.72);
+    backdrop-filter:blur(8px);
+    display:none;
+    justify-content:center;
+    align-items:center;
+    padding:18px;
+    z-index:500;
+}
+
+.modal-layer.show{
+    display:flex;
+}
+
+.modal{
+    width:min(450px,100%);
+    max-height:90vh;
+    overflow:auto;
+    background:#111218;
+    border:1px solid rgba(255,255,255,.1);
+    border-radius:19px;
+    box-shadow:0 30px 90px rgba(0,0,0,.55);
+    padding:23px;
+}
+
+.modal.large{
+    width:min(850px,100%);
+}
+
+.modal-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+    margin-bottom:18px;
+}
+
+.modal-title{
+    font-size:19px;
+    font-weight:800;
+}
+
+.modal-subtitle{
+    color:#7e808a;
+    font-size:11px;
+    line-height:1.5;
+    margin-top:5px;
+}
+
+.close-modal{
+    background:transparent;
+    color:#888;
+    font-size:20px;
+}
+
+.auth-tabs{
+    display:flex;
+    gap:5px;
+    background:#0b0c10;
+    border:1px solid var(--border);
+    padding:4px;
+    border-radius:10px;
+    margin-bottom:17px;
+}
+
+.auth-tab{
+    flex:1;
+    padding:9px;
+    border-radius:7px;
+    background:transparent;
+    color:#777;
+    font-size:11px;
+}
+
+.auth-tab.active{
+    background:#1a1b21;
+    color:#fff;
+}
+
+.auth-form{
+    display:none;
+}
+
+.auth-form.active{
+    display:block;
+}
+
+.field{
+    margin-bottom:11px;
+}
+
+.field label{
+    display:block;
+    font-size:10px;
+    color:#898b94;
+    margin-bottom:5px;
+}
+
+.field input{
+    width:100%;
+    border:1px solid var(--border);
+    background:#0b0c10;
+    color:#fff;
+    outline:none;
+    border-radius:10px;
+    padding:11px;
+    font-size:12px;
+}
+
+.field input:focus{
+    border-color:rgba(84,214,138,.5);
+}
+
+.auth-submit{
+    width:100%;
+    padding:12px;
+    border-radius:10px;
+    color:#061009;
+    background:var(--green);
+    font-weight:800;
+    margin-top:4px;
+}
+
+.auth-message{
+    min-height:18px;
+    margin-top:9px;
+    font-size:10px;
+    color:#d86a8c;
+}
+
+.auth-note{
+    margin-top:13px;
+    color:#656770;
+    font-size:9px;
     line-height:1.6;
 }
 
-textarea::placeholder{
-    color:#4b5563;
-}
+/* ADMIN */
 
-.send{
-    width:40px;
-    height:40px;
-    border-radius:12px;
-    border:0;
-    background:#222630;
-    color:var(--muted);
-    font-size:18px;
-    cursor:not-allowed;
-}
-
-.send.active{
-    background:linear-gradient(135deg,var(--wine),var(--green));
-    color:white;
-    cursor:pointer;
-}
-
-.footer{
-    text-align:center;
-    color:#4b5563;
-    font-size:11px;
-    margin-top:10px;
-}
-
-.duration-inline-wrap{
-    margin-top:16px;
-}
-
-.duration-trigger-btn{
-    background:#1e2430;
-    border:1px solid var(--green-glow);
-    color:var(--white);
-    border-radius:12px;
-    padding:12px 18px;
-    cursor:pointer;
-    font-size:13.5px;
-    font-weight:700;
-}
-
-.duration-grid-panel{
-    display:none;
-    margin-top:12px;
-    grid-template-columns:repeat(4,1fr);
-    gap:8px;
-    background:#111318;
-    padding:14px;
-    border-radius:12px;
+.admin-table-wrap{
+    overflow:auto;
     border:1px solid var(--border);
+    border-radius:12px;
 }
 
-.duration-grid-panel.open{
+.admin-table{
+    width:100%;
+    border-collapse:collapse;
+    min-width:650px;
+}
+
+.admin-table th,
+.admin-table td{
+    padding:10px;
+    border-bottom:1px solid var(--border);
+    text-align:left;
+    font-size:10px;
+}
+
+.admin-table th{
+    color:#777984;
+    text-transform:uppercase;
+    letter-spacing:.7px;
+    font-size:9px;
+}
+
+.admin-table td{
+    color:#ccc;
+}
+
+.admin-stats{
     display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:8px;
+    margin-bottom:15px;
 }
 
-.duration-chip{
-    background:var(--card);
+.admin-stat{
+    background:#0c0d11;
     border:1px solid var(--border);
-    color:#cbd5e1;
-    padding:10px 8px;
-    border-radius:9px;
-    cursor:pointer;
-    font-size:12px;
-    font-weight:700;
+    border-radius:12px;
+    padding:12px;
 }
 
-.duration-chip:hover{
-    background:var(--green);
-    color:white;
+.admin-stat-number{
+    font-size:20px;
+    font-weight:800;
+    color:var(--green);
 }
 
-@media(max-width:768px){
-
-    .sidebar{
-        position:fixed;
-        left:-330px;
-        top:0;
-        bottom:0;
-        transition:left .25s ease;
-    }
-
-    .sidebar.open{
-        left:0;
-    }
-
-    .composer-area{
-        left:0;
-        padding:15px 16px 20px;
-    }
-
-    .chat{
-        padding:30px 16px 130px;
-    }
-
-    .duration-grid-panel{
-        grid-template-columns:repeat(3,1fr);
-    }
-
-    .welcome h1{
-        font-size:25px;
-    }
-
-    .bubble{
-        max-width:96%;
-        padding:17px;
-        font-size:13.5px;
-    }
-
-    .header{
-        padding:0 18px;
-    }
-
-    .header-logo-text{
-        font-size:13px;
-    }
+.admin-stat-label{
+    font-size:9px;
+    color:#777984;
+    margin-top:3px;
 }
 
-@media(max-width:430px){
+/* ACCOUNT */
 
-    .duration-grid-panel{
-        grid-template-columns:repeat(2,1fr);
-    }
-
-    .duration-trigger-btn{
-        width:100%;
-    }
-
-    .chat{
-        padding-left:10px;
-        padding-right:10px;
-    }
-
-    .composer{
-        padding:9px 10px;
-    }
-
-    .send{
-        width:38px;
-        height:38px;
-    }
-
-    .header{
-        padding:0 14px;
-    }
-
-    .header-dots-btn{
-        width:44px;
-        height:44px;
-    }
-
-    .header-svg-box{
-        width:39px;
-        height:39px;
-    }
-
-    .header-logo-text{
-        font-size:11px;
-    }
+.account-box{
+    background:#0c0d11;
+    border:1px solid var(--border);
+    border-radius:13px;
+    padding:14px;
+    margin-bottom:10px;
 }
+
+.account-name{
+    font-weight:800;
+    font-size:13px;
+}
+
+.account-email{
+    color:#777984;
+    font-size:10px;
+    margin-top:3px;
+}
+
+.account-actions{
+    display:flex;
+    gap:7px;
+    margin-top:13px;
+}
+
+.small-btn{
+    background:#1b1c22;
+    border:1px solid var(--border);
+    color:#ccc;
+    border-radius:8px;
+    padding:8px 10px;
+    font-size:10px;
+}
+
+.small-btn.danger{
+    color:#ef7797;
+}
+
+/* PRINT */
 
 @media print{
 
     body{
         background:white;
-        color:black;
+        color:#111;
         overflow:visible;
-        height:auto;
     }
 
-    #splash,
-    .sidebar,
+    #sidebar,
     .header,
-    .composer-area,
-    .overlay,
-    .duration-trigger-btn,
-    .duration-grid-panel{
+    #composerArea,
+    #splash,
+    #overlay,
+    .modal-layer,
+    #footerText{
         display:none!important;
     }
 
-    #app{
-        display:block;
+    .main,
+    #chat{
         height:auto;
-    }
-
-    .main{
-        background:white;
-    }
-
-    .chat{
         overflow:visible;
-        padding:20px;
     }
 
-    .bot .bubble,
-    .user .bubble,
-    .section,
-    .idea-card{
+    .chat-inner{
+        width:100%;
+        padding:0;
+    }
+
+    #welcome{
+        display:none;
+    }
+
+    .message-bubble{
+        color:#111!important;
         background:white!important;
-        color:black!important;
-        border-color:#ccc!important;
+        border:1px solid #ddd!important;
+        max-width:100%;
     }
 
-    .time-code{
-        color:#087f5b!important;
+    .message.user{
+        display:none;
     }
 
-    .motivation{
-        color:#555!important;
-    }
 }
+
 </style>
 </head>
 
 <body>
 
-<svg style="display:none">
-<g id="sparky-circular-logo">
-
-<circle cx="50" cy="50" r="47"
-fill="none" stroke="#ffffff" stroke-width="2.5"/>
-
-<circle cx="50" cy="50" r="41"
-fill="none" stroke="#222630" stroke-width="1.5"/>
-
-<circle cx="50" cy="50" r="37.5"
-fill="#059669"/>
-
-<circle cx="50" cy="50" r="34"
-fill="none" stroke="#ffffff" stroke-width="1.5" opacity=".3"/>
-
-<path
-d="M26 42 H34 L37 37 H63 L66 42 H74 C76.2 42 78 43.8 78 46 V64 C78 66.2 76.2 68 74 68 H26 C23.8 68 22 66.2 22 64 V46 C22 43.8 23.8 42 26 42Z"
-fill="#ffffff"/>
-
-<circle cx="50" cy="55" r="13"
-fill="#059669"
-stroke="#ffffff"
-stroke-width="2.5"/>
-
-<path
-d="M50 44 L52.5 52.5 L61 55 L52.5 57.5 L50 66 L47.5 57.5 L39 55 L47.5 52.5Z"
-fill="#ffffff"/>
-
-<rect x="65" y="45" width="4" height="20"
-rx="1.5" fill="#059669"/>
-
-<circle cx="67" cy="48" r="1" fill="#ffffff"/>
-<circle cx="67" cy="55" r="1" fill="#ffffff"/>
-<circle cx="67" cy="62" r="1" fill="#ffffff"/>
-
-</g>
-</svg>
-
+<!-- SPLASH -->
 
 <div id="splash">
 
-<div class="splash-content">
+    <div class="splash-inner">
 
-<div class="splash-svg-box">
-<svg class="sparky-logo-svg" viewBox="0 0 100 100">
-<use href="#sparky-circular-logo"/>
-</svg>
+        <svg class="splash-logo" viewBox="0 0 100 100">
+
+            <circle cx="50" cy="50" r="46"
+                    fill="#111218"
+                    stroke="#54d68a"
+                    stroke-width="3"/>
+
+            <path d="M28 63
+                     C38 43 45 28 54 24
+                     C67 18 76 30 69 43
+                     C64 53 48 58 36 70"
+                  fill="none"
+                  stroke="#9d2850"
+                  stroke-width="8"
+                  stroke-linecap="round"/>
+
+            <circle cx="62" cy="37" r="5"
+                    fill="#54d68a"/>
+
+        </svg>
+
+        <div class="splash-title">
+            SparkyKrea <span>Studio's</span>
+        </div>
+
+    </div>
+
 </div>
-
-<div class="splash-name">
-<span>Sparky</span><span>Krea</span>
-</div>
-
-<div class="splash-studio">
-STUDIO'S
-</div>
-
-</div>
-
-</div>
-
-
-<div class="overlay" id="overlay" onclick="closeSidebar()"></div>
 
 
 <div id="app">
 
-<aside class="sidebar" id="sidebar">
+    <!-- SIDEBAR -->
 
-<div class="brand">
+    <aside id="sidebar">
 
-<div class="brand-svg-box">
-<svg class="sparky-logo-svg" viewBox="0 0 100 100">
-<use href="#sparky-circular-logo"/>
-</svg>
+        <div class="brand">
+
+            <svg class="brand-logo" viewBox="0 0 100 100">
+
+                <circle cx="50" cy="50" r="46"
+                        fill="#111218"
+                        stroke="#54d68a"
+                        stroke-width="3"/>
+
+                <path d="M28 63
+                         C38 43 45 28 54 24
+                         C67 18 76 30 69 43
+                         C64 53 48 58 36 70"
+                      fill="none"
+                      stroke="#9d2850"
+                      stroke-width="8"
+                      stroke-linecap="round"/>
+
+                <circle cx="62" cy="37" r="5"
+                        fill="#54d68a"/>
+
+            </svg>
+
+            <div class="brand-text">
+                SparkyKrea <span>Studio's</span>
+            </div>
+
+        </div>
+
+
+        <button
+            id="newProjectBtn"
+            class="sidebar-button primary">
+            ＋ Nuevo proyecto
+        </button>
+
+
+        <button
+            id="exportPdfBtn"
+            class="sidebar-button">
+            ▣ Descargar Guión en PDF
+        </button>
+
+
+        <div class="history-title">
+            <span id="historyTitleTxt">Historial de chats</span>
+        </div>
+
+
+        <div id="history">
+
+            <div class="history-empty">
+                Inicia sesión para guardar tus chats.
+            </div>
+
+        </div>
+
+
+        <div class="sidebar-bottom">
+
+            <button
+                id="authBtn"
+                class="sidebar-button">
+                ◉ Iniciar sesión
+            </button>
+
+            <button
+                id="adminBtn"
+                class="sidebar-button hidden">
+                ⚙ Panel administrador
+            </button>
+
+        </div>
+
+    </aside>
+
+
+    <div
+        id="overlay">
+    </div>
+
+
+    <!-- MAIN -->
+
+    <main class="main">
+
+
+        <header class="header">
+
+            <div class="header-left">
+
+                <button
+                    id="mobileMenu"
+                    class="header-icon">
+                    ☰
+                </button>
+
+                <div class="header-logo-text">
+                    SparkyKrea <span>Studio's</span>
+                </div>
+
+            </div>
+
+
+            <div class="header-right">
+
+                <div
+                    id="userHeader"
+                    class="user-header hidden">
+
+                    <span class="user-dot"></span>
+
+                    <span id="userHeaderName">
+                        Usuario
+                    </span>
+
+                </div>
+
+
+                <button
+                    id="headerDotsBtn"
+                    class="header-icon">
+                    ⋮
+                </button>
+
+            </div>
+
+
+            <div
+                id="headerDropdown"
+                class="dropdown">
+
+                <div
+                    class="dropdown-title"
+                    id="langMenuTitle">
+                    Idioma
+                </div>
+
+                <div id="langOptionsList">
+
+                    <button class="lang-option"
+                            data-lang="es">
+                        Español
+                    </button>
+
+                    <button class="lang-option"
+                            data-lang="en">
+                        English
+                    </button>
+
+                    <button class="lang-option"
+                            data-lang="pt">
+                        Português
+                    </button>
+
+                    <button class="lang-option"
+                            data-lang="fr">
+                        Français
+                    </button>
+
+                    <button class="lang-option"
+                            data-lang="de">
+                        Deutsch
+                    </button>
+
+                    <button class="lang-option"
+                            data-lang="it">
+                        Italiano
+                    </button>
+
+                    <button class="lang-option"
+                            data-lang="ru">
+                        Русский
+                    </button>
+
+                    <button class="lang-option"
+                            data-lang="zh">
+                        中文
+                    </button>
+
+                    <button class="lang-option"
+                            data-lang="ja">
+                        日本語
+                    </button>
+
+                    <button class="lang-option"
+                            data-lang="ar">
+                        العربية
+                    </button>
+
+                </div>
+
+            </div>
+
+        </header>
+
+
+        <!-- CHAT -->
+
+        <section id="chat">
+
+            <div class="chat-inner">
+
+
+                <div id="welcome">
+
+                    <div class="welcome-box">
+
+                        <svg class="welcome-logo"
+                             viewBox="0 0 100 100">
+
+                            <circle cx="50" cy="50" r="46"
+                                    fill="#111218"
+                                    stroke="#54d68a"
+                                    stroke-width="3"/>
+
+                            <path d="M28 63
+                                     C38 43 45 28 54 24
+                                     C67 18 76 30 69 43
+                                     C64 53 48 58 36 70"
+                                  fill="none"
+                                  stroke="#9d2850"
+                                  stroke-width="8"
+                                  stroke-linecap="round"/>
+
+                            <circle cx="62" cy="37" r="5"
+                                    fill="#54d68a"/>
+
+                        </svg>
+
+
+                        <h1 id="welcomeTitle">
+                            Tu idea puede convertirse en algo
+                            <span>increíble.</span>
+                        </h1>
+
+
+                        <p id="welcomeDesc">
+                            SparkyKrea te ayuda a crear guiones,
+                            estrategias, conceptos y música para
+                            llevar tus ideas a otro nivel.
+                        </p>
+
+
+                        <div class="welcome-tags">
+
+                            <span class="welcome-tag">
+                                Guiones
+                            </span>
+
+                            <span class="welcome-tag">
+                                Estrategia
+                            </span>
+
+                            <span class="welcome-tag">
+                                Música
+                            </span>
+
+                            <span class="welcome-tag">
+                                Ideas
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- COMPOSER -->
+
+        <div id="composerArea">
+
+            <div class="composer">
+
+                <div class="composer-box">
+
+                    <textarea
+                        id="input"
+                        rows="1"
+                        placeholder="Cuéntame qué quieres crear..."></textarea>
+
+
+                    <!-- NO CAMBIAR: BOTÓN DE ENVÍO -->
+
+                    <button
+                        id="send"
+                        title="Enviar">
+
+                        ➤
+
+                    </button>
+
+                </div>
+
+
+                <div class="composer-info">
+                    SparkyKrea puede ayudarte con guiones,
+                    estrategia, música e ideas creativas.
+                </div>
+
+
+                <div id="footerText">
+                    SparkyKrea Studio's · Creative Intelligence
+                </div>
+
+            </div>
+
+        </div>
+
+    </main>
+
 </div>
 
-<div class="brand-text">
-<span>Sparky</span><span>Krea</span>
-<small>STUDIO'S</small>
-</div>
+
+<!-- AUTH MODAL -->
+
+<div
+    id="authModal"
+    class="modal-layer">
+
+    <div class="modal">
+
+        <div class="modal-header">
+
+            <div>
+
+                <div class="modal-title">
+                    Tu cuenta
+                </div>
+
+                <div class="modal-subtitle">
+                    Guarda tus proyectos y desbloquea
+                    las funciones para usuarios.
+                </div>
+
+            </div>
+
+            <button
+                class="close-modal"
+                data-close="authModal">
+                ×
+            </button>
+
+        </div>
+
+
+        <div class="auth-tabs">
+
+            <button
+                id="loginTab"
+                class="auth-tab active">
+                Iniciar sesión
+            </button>
+
+            <button
+                id="registerTab"
+                class="auth-tab">
+                Crear cuenta
+            </button>
+
+        </div>
+
+
+        <!-- LOGIN -->
+
+        <form
+            id="loginForm"
+            class="auth-form active">
+
+            <div class="field">
+
+                <label>
+                    Correo electrónico
+                </label>
+
+                <input
+                    id="loginEmail"
+                    type="email"
+                    autocomplete="email"
+                    placeholder="tu@email.com"
+                    required>
+
+            </div>
+
+
+            <div class="field">
+
+                <label>
+                    Contraseña
+                </label>
+
+                <input
+                    id="loginPassword"
+                    type="password"
+                    autocomplete="current-password"
+                    placeholder="Tu contraseña"
+                    required>
+
+            </div>
+
+
+            <button
+                class="auth-submit"
+                type="submit">
+                Entrar
+            </button>
+
+
+            <div
+                id="loginMessage"
+                class="auth-message">
+            </div>
+
+        </form>
+
+
+        <!-- REGISTER -->
+
+        <form
+            id="registerForm"
+            class="auth-form">
+
+            <div class="field">
+
+                <label>
+                    Nombre
+                </label>
+
+                <input
+                    id="registerName"
+                    type="text"
+                    placeholder="Tu nombre"
+                    required>
+
+            </div>
+
+
+            <div class="field">
+
+                <label>
+                    Apellido
+                </label>
+
+                <input
+                    id="registerSurname"
+                    type="text"
+                    placeholder="Tu apellido"
+                    required>
+
+            </div>
+
+
+            <div class="field">
+
+                <label>
+                    Correo electrónico
+                </label>
+
+                <input
+                    id="registerEmail"
+                    type="email"
+                    autocomplete="email"
+                    placeholder="tu@email.com"
+                    required>
+
+            </div>
+
+
+            <div class="field">
+
+                <label>
+                    Contraseña
+                </label>
+
+                <input
+                    id="registerPassword"
+                    type="password"
+                    autocomplete="new-password"
+                    placeholder="Mínimo 8 caracteres"
+                    minlength="8"
+                    required>
+
+            </div>
+
+
+            <div class="field">
+
+                <label>
+                    Confirmar contraseña
+                </label>
+
+                <input
+                    id="registerPassword2"
+                    type="password"
+                    autocomplete="new-password"
+                    placeholder="Repite tu contraseña"
+                    minlength="8"
+                    required>
+
+            </div>
+
+
+            <button
+                class="auth-submit"
+                type="submit">
+                Crear cuenta
+            </button>
+
+
+            <div
+                id="registerMessage"
+                class="auth-message">
+            </div>
+
+        </form>
+
+
+        <div class="auth-note">
+            En esta versión de GitHub Pages las cuentas se guardan
+            únicamente en este navegador. Para una autenticación
+            real y segura entre dispositivos será necesario conectar
+            un servicio como Firebase o Supabase.
+        </div>
+
+    </div>
 
 </div>
 
 
-<button class="new-btn" id="newProjectBtn">
-+ Nuevo proyecto
-</button>
+<!-- ACCOUNT MODAL -->
 
-<button class="pdf-btn" id="exportPdfBtn">
-📄 Descargar Guión en PDF
-</button>
+<div
+    id="accountModal"
+    class="modal-layer">
 
-<div class="history-title" id="historyTitleTxt">
-Historial de chats
-</div>
+    <div class="modal">
 
-<div class="history" id="history"></div>
+        <div class="modal-header">
 
-<div class="sidebar-bottom">
-SparkyKrea Studio's &copy; 2026
-</div>
+            <div>
 
-</aside>
+                <div class="modal-title">
+                    Mi cuenta
+                </div>
 
+                <div class="modal-subtitle">
+                    Información de tu cuenta SparkyKrea.
+                </div>
 
-<main class="main">
+            </div>
 
-<header class="header">
+            <button
+                class="close-modal"
+                data-close="accountModal">
+                ×
+            </button>
 
-<div class="header-title">
-
-<button class="mobile-menu" id="mobileMenu">
-☰
-</button>
-
-</div>
-
-<div class="header-right">
-
-<div class="header-menu-container">
-
-<button
-class="header-dots-btn"
-id="headerDotsBtn"
-title="Cambiar idioma">
-🌐
-</button>
-
-<div class="header-dropdown" id="headerDropdown">
-
-<div class="dropdown-label" id="langMenuTitle">
-Selecciona Idioma
-</div>
-
-<div class="lang-options-list" id="langOptionsList">
-
-<div class="lang-option" data-lang="es">🇪🇸 Español</div>
-<div class="lang-option" data-lang="en">🇬🇧 English</div>
-<div class="lang-option" data-lang="pt">🇧🇷 Português</div>
-<div class="lang-option" data-lang="fr">🇫🇷 Français</div>
-<div class="lang-option" data-lang="de">🇩🇪 Deutsch</div>
-<div class="lang-option" data-lang="it">🇮🇹 Italiano</div>
-<div class="lang-option" data-lang="ru">🇷🇺 Русский</div>
-<div class="lang-option" data-lang="zh">🇨🇳 中文</div>
-<div class="lang-option" data-lang="ja">🇯🇵 日本語</div>
-<div class="lang-option" data-lang="ar">🇸🇦 العربية</div>
-
-</div>
-</div>
-</div>
-
-<div class="header-divider"></div>
-
-<div class="header-svg-box">
-<svg class="sparky-logo-svg" viewBox="0 0 100 100">
-<use href="#sparky-circular-logo"/>
-</svg>
-</div>
-
-<div class="header-logo-text">
-<span>Sparky</span><span>Krea</span> Studio’s
-</div>
-
-</div>
-
-</header>
+        </div>
 
 
-<section class="chat" id="chat">
+        <div class="account-box">
 
-<div class="chat-inner">
+            <div
+                id="accountName"
+                class="account-name">
+            </div>
 
-<div class="welcome" id="welcome">
+            <div
+                id="accountEmail"
+                class="account-email">
+            </div>
 
-<div class="welcome-svg-box">
-<svg class="sparky-logo-svg" viewBox="0 0 100 100">
-<use href="#sparky-circular-logo"/>
-</svg>
-</div>
+            <div
+                id="accountCreated"
+                class="account-email">
+            </div>
 
-<h1 id="welcomeTitle">
-¿En qué publicidad te puedo ayudar hoy?
-</h1>
+        </div>
 
-<p id="welcomeDesc">
-Diseña guiones profesionales, estrategias detalladas y selección musical ideal para tu negocio o videojuego al instante.
-</p>
 
-</div>
+        <div class="account-actions">
 
-</div>
+            <button
+                id="logoutBtn"
+                class="small-btn danger">
+                Cerrar sesión
+            </button>
 
-</section>
+        </div>
 
-</main>
+    </div>
 
 </div>
 
 
-<div class="composer-area" id="composerArea">
+<!-- ADMIN MODAL -->
 
-<div class="composer">
+<div
+    id="adminModal"
+    class="modal-layer">
 
-<textarea
-id="input"
-rows="1"
-placeholder="Escribe tu idea, juego o negocio..."></textarea>
+    <div class="modal large">
 
-<button class="send" id="send">
-↑
-</button>
+        <div class="modal-header">
 
-</div>
+            <div>
 
-<div class="footer" id="footerText">
-SparkyKrea Studio's - Asesoría Publicitaria Inteligente
-</div>
+                <div class="modal-title">
+                    Panel administrador
+                </div>
+
+                <div class="modal-subtitle">
+                    Usuarios y actividad de SparkyKrea.
+                </div>
+
+            </div>
+
+            <button
+                class="close-modal"
+                data-close="adminModal">
+                ×
+            </button>
+
+        </div>
+
+
+        <div class="admin-stats">
+
+            <div class="admin-stat">
+
+                <div
+                    id="adminUserCount"
+                    class="admin-stat-number">
+                    0
+                </div>
+
+                <div class="admin-stat-label">
+                    Usuarios registrados
+                </div>
+
+            </div>
+
+
+            <div class="admin-stat">
+
+                <div
+                    id="adminLoginCount"
+                    class="admin-stat-number">
+                    0
+                </div>
+
+                <div class="admin-stat-label">
+                    Inicios de sesión
+                </div>
+
+            </div>
+
+
+            <div class="admin-stat">
+
+                <div
+                    id="adminChatCount"
+                    class="admin-stat-number">
+                    0
+                </div>
+
+                <div class="admin-stat-label">
+                    Chats guardados
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="admin-table-wrap">
+
+            <table class="admin-table">
+
+                <thead>
+
+                    <tr>
+
+                        <th>
+                            Usuario
+                        </th>
+
+                        <th>
+                            Correo
+                        </th>
+
+                        <th>
+                            Registro
+                        </th>
+
+                        <th>
+                            Último acceso
+                        </th>
+
+                        <th>
+                            Accesos
+                        </th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody id="adminUsersBody">
+                </tbody>
+
+            </table>
+
+        </div>
+
+
+        <div
+            class="history-title"
+            style="padding-left:0;margin-top:12px">
+            Actividad reciente
+        </div>
+
+
+        <div
+            id="adminLogs"
+            style="max-height:180px;overflow:auto">
+        </div>
+
+    </div>
 
 </div>
 
@@ -1027,1649 +1795,2105 @@ SparkyKrea Studio's - Asesoría Publicitaria Inteligente
 <script>
 
 /* =========================================================
-   SPARKYKREA ENGINE
+   SPARKYKREA ULTIMATE ENGINE
    ========================================================= */
 
-const input=document.getElementById("input");
-const send=document.getElementById("send");
-const chat=document.getElementById("chat");
-const chatInner=chat.querySelector(".chat-inner");
-const welcome=document.getElementById("welcome");
-const history=document.getElementById("history");
-const sidebar=document.getElementById("sidebar");
-const overlay=document.getElementById("overlay");
-const headerDotsBtn=document.getElementById("headerDotsBtn");
-const headerDropdown=document.getElementById("headerDropdown");
-const langOptionsList=document.getElementById("langOptionsList");
 
-let currentProject=null;
-let currentLang=localStorage.getItem("sparky_lang")||"es";
-let motivationIndex=0;
-let greetingShown=false;
-let waitingForDuration=false;
-let lastGeneratedHTML="";
-let projectHistory=JSON.parse(
-    localStorage.getItem("sparky_history")||"[]"
-);
+/* ---------- ELEMENTOS ---------- */
+
+const input =
+    document.getElementById("input");
+
+const send =
+    document.getElementById("send");
+
+const chat =
+    document.getElementById("chat");
+
+const chatInner =
+    chat.querySelector(".chat-inner");
+
+const welcome =
+    document.getElementById("welcome");
+
+const history =
+    document.getElementById("history");
+
+const sidebar =
+    document.getElementById("sidebar");
+
+const overlay =
+    document.getElementById("overlay");
+
+const headerDotsBtn =
+    document.getElementById("headerDotsBtn");
+
+const headerDropdown =
+    document.getElementById("headerDropdown");
+
+const langOptionsList =
+    document.getElementById("langOptionsList");
 
 
 /* =========================================================
-   IDIOMAS
+   AUTHENTICATION / ACCOUNTS
    ========================================================= */
 
-const i18n={
+const USERS_KEY =
+    "sparky_users_v2";
 
-es:{
-newProj:"+ Nuevo proyecto",
-pdfBtn:"📄 Descargar Guión en PDF",
-langMenuTitle:"Selecciona Idioma",
-historyTitle:"Historial de chats",
-welcomeTitle:"¿En qué publicidad te puedo ayudar hoy?",
-welcomeDesc:"Diseña guiones profesionales, estrategias detalladas y selección musical ideal para tu negocio o videojuego al instante.",
-placeholder:"Escribe tu idea, juego o negocio...",
-footer:"SparkyKrea Studio's - Asesoría Publicitaria Inteligente",
-durationPrompt:"⏱ Selecciona la duración del video",
-customPrompt:"Indica la duración deseada:",
-greeting:"Hola. Cuéntame qué quieres promocionar y analizaré la idea para encontrar el mejor enfoque.",
-success:"Perfecto. Ya tengo el enfoque.",
-thanks:"De nada. Cuando quieras podemos continuar.",
-scriptTitle:"🎬 Guion + Estrategia Publicitaria",
-projectLabel:"📌 Proyecto:",
-durationLabel:"⏱ Duración:",
-categoryLabel:"🎯 Enfoque:",
-scriptHeader:"🎙️ Guion profesional segundo a segundo",
-musicHeader:"🎵 Dirección musical",
-artistLabel:"Referencia artística:",
-trackLabel:"Tema / estilo:",
-strategyHeader:"🧠 Estrategia publicitaria",
-platformHeader:"📱 Adaptación para plataforma",
-ideasHeader:"💡 Ideas que puedes probar",
-changeHeader:"🔧 Ajuste realizado"
-},
+const SESSION_KEY =
+    "sparky_session_v2";
 
-en:{
-newProj:"+ New Project",
-pdfBtn:"📄 Download Script PDF",
-langMenuTitle:"Select Language",
-historyTitle:"Chat History",
-welcomeTitle:"What advertising can I help you with today?",
-welcomeDesc:"Create professional scripts, detailed strategies and ideal music direction for your business or game.",
-placeholder:"Type your idea, game or business...",
-footer:"SparkyKrea Studio's - Intelligent Advertising Advisory",
-durationPrompt:"⏱ Select video duration",
-customPrompt:"Enter the desired duration:",
-greeting:"Hello. Tell me what you want to promote and I'll analyze the idea.",
-success:"Perfect. I have the direction.",
-thanks:"You're welcome. We can continue whenever you're ready.",
-scriptTitle:"🎬 Script + Advertising Strategy",
-projectLabel:"📌 Project:",
-durationLabel:"⏱ Duration:",
-categoryLabel:"🎯 Focus:",
-scriptHeader:"🎙️ Professional second-by-second script",
-musicHeader:"🎵 Music direction",
-artistLabel:"Artistic reference:",
-trackLabel:"Style:",
-strategyHeader:"🧠 Advertising strategy",
-platformHeader:"📱 Platform adaptation",
-ideasHeader:"💡 Ideas to try",
-changeHeader:"🔧 Adjustment made"
-},
+const LOGS_KEY =
+    "sparky_login_logs_v2";
 
-pt:{
-newProj:"+ Novo projeto",
-pdfBtn:"📄 Baixar Roteiro em PDF",
-langMenuTitle:"Selecionar idioma",
-historyTitle:"Histórico de chats",
-welcomeTitle:"Com qual publicidade posso te ajudar hoje?",
-welcomeDesc:"Crie roteiros profissionais, estratégias detalhadas e direção musical para seu negócio ou jogo.",
-placeholder:"Digite sua ideia, jogo ou negócio...",
-footer:"SparkyKrea Studio's - Consultoria Publicitária Inteligente",
-durationPrompt:"⏱ Selecione a duração",
-customPrompt:"Digite a duração:",
-greeting:"Olá. Conte o que você quer promover e vou analisar a ideia.",
-success:"Perfeito. Já tenho o direcionamento.",
-thanks:"De nada. Podemos continuar quando quiser.",
-scriptTitle:"🎬 Roteiro + Estratégia Publicitária",
-projectLabel:"📌 Projeto:",
-durationLabel:"⏱ Duração:",
-categoryLabel:"🎯 Foco:",
-scriptHeader:"🎙️ Roteiro profissional",
-musicHeader:"🎵 Direção musical",
-artistLabel:"Referência artística:",
-trackLabel:"Estilo:",
-strategyHeader:"🧠 Estratégia publicitária",
-platformHeader:"📱 Adaptação para plataforma",
-ideasHeader:"💡 Ideias",
-changeHeader:"🔧 Ajuste realizado"
-},
 
-fr:{
-newProj:"+ Nouveau projet",
-pdfBtn:"📄 Télécharger le script PDF",
-langMenuTitle:"Sélectionner la langue",
-historyTitle:"Historique des chats",
-welcomeTitle:"Quelle publicité puis-je vous aider à créer ?",
-welcomeDesc:"Créez des scripts professionnels et des stratégies publicitaires détaillées.",
-placeholder:"Écrivez votre idée, jeu ou entreprise...",
-footer:"SparkyKrea Studio's - Conseil Publicitaire Intelligent",
-durationPrompt:"⏱ Sélectionnez la durée",
-customPrompt:"Indiquez la durée:",
-greeting:"Bonjour. Dites-moi ce que vous souhaitez promouvoir.",
-success:"Parfait. J'ai compris la direction.",
-thanks:"Avec plaisir.",
-scriptTitle:"🎬 Script + Stratégie Publicitaire",
-projectLabel:"📌 Projet:",
-durationLabel:"⏱ Durée:",
-categoryLabel:"🎯 Focus:",
-scriptHeader:"🎙️ Script professionnel",
-musicHeader:"🎵 Direction musicale",
-artistLabel:"Référence artistique:",
-trackLabel:"Style:",
-strategyHeader:"🧠 Stratégie publicitaire",
-platformHeader:"📱 Adaptation plateforme",
-ideasHeader:"💡 Idées",
-changeHeader:"🔧 Ajustement"
-},
+function getUsers(){
 
-de:{
-newProj:"+ Neues Projekt",
-pdfBtn:"📄 Skript-PDF herunterladen",
-langMenuTitle:"Sprache auswählen",
-historyTitle:"Chat-Verlauf",
-welcomeTitle:"Bei welcher Werbung kann ich dir helfen?",
-welcomeDesc:"Erstelle professionelle Skripte und detaillierte Werbestrategien.",
-placeholder:"Gib deine Idee, dein Spiel oder Geschäft ein...",
-footer:"SparkyKrea Studio's - Intelligente Werbeberatung",
-durationPrompt:"⏱ Videolänge auswählen",
-customPrompt:"Gewünschte Dauer:",
-greeting:"Hallo. Erzähl mir, was du bewerben möchtest.",
-success:"Perfekt. Die Richtung ist klar.",
-thanks:"Gerne.",
-scriptTitle:"🎬 Skript + Werbestrategie",
-projectLabel:"📌 Projekt:",
-durationLabel:"⏱ Dauer:",
-categoryLabel:"🎯 Fokus:",
-scriptHeader:"🎙️ Professionelles Skript",
-musicHeader:"🎵 Musikrichtung",
-artistLabel:"Künstlerische Referenz:",
-trackLabel:"Stil:",
-strategyHeader:"🧠 Werbestrategie",
-platformHeader:"📱 Plattform-Anpassung",
-ideasHeader:"💡 Ideen",
-changeHeader:"🔧 Anpassung"
-},
+    try{
 
-it:{
-newProj:"+ Nuovo progetto",
-pdfBtn:"📄 Scarica script PDF",
-langMenuTitle:"Seleziona lingua",
-historyTitle:"Cronologia chat",
-welcomeTitle:"Con quale pubblicità posso aiutarti?",
-welcomeDesc:"Crea script professionali e strategie pubblicitarie dettagliate.",
-placeholder:"Scrivi la tua idea, gioco o azienda...",
-footer:"SparkyKrea Studio's - Consulenza Pubblicitaria Intelligente",
-durationPrompt:"⏱ Seleziona durata",
-customPrompt:"Inserisci la durata:",
-greeting:"Ciao. Dimmi cosa vuoi promuovere.",
-success:"Perfetto. Ho capito la direzione.",
-thanks:"Di nulla.",
-scriptTitle:"🎬 Script + Strategia Pubblicitaria",
-projectLabel:"📌 Progetto:",
-durationLabel:"⏱ Durata:",
-categoryLabel:"🎯 Focus:",
-scriptHeader:"🎙️ Script professionale",
-musicHeader:"🎵 Direzione musicale",
-artistLabel:"Riferimento artistico:",
-trackLabel:"Stile:",
-strategyHeader:"🧠 Strategia pubblicitaria",
-platformHeader:"📱 Adattamento piattaforma",
-ideasHeader:"💡 Idee",
-changeHeader:"🔧 Modifica"
-},
+        const data =
+            JSON.parse(
+                localStorage.getItem(USERS_KEY) || "[]"
+            );
 
-ru:{
-newProj:"+ Новый проект",
-pdfBtn:"📄 Скачать сценарий PDF",
-langMenuTitle:"Выберите язык",
-historyTitle:"История чатов",
-welcomeTitle:"Какая реклама вам нужна?",
-welcomeDesc:"Создавайте профессиональные сценарии и рекламные стратегии.",
-placeholder:"Введите идею, игру или бизнес...",
-footer:"SparkyKrea Studio's - Интеллектуальный рекламный консалтинг",
-durationPrompt:"⏱ Выберите длительность",
-customPrompt:"Введите длительность:",
-greeting:"Здравствуйте. Расскажите, что вы хотите продвигать.",
-success:"Отлично.",
-thanks:"Пожалуйста.",
-scriptTitle:"🎬 Сценарий + рекламная стратегия",
-projectLabel:"📌 Проект:",
-durationLabel:"⏱ Длительность:",
-categoryLabel:"🎯 Фокус:",
-scriptHeader:"🎙️ Профессиональный сценарий",
-musicHeader:"🎵 Музыкальное направление",
-artistLabel:"Артистическая ссылка:",
-trackLabel:"Стиль:",
-strategyHeader:"🧠 Рекламная стратегия",
-platformHeader:"📱 Адаптация",
-ideasHeader:"💡 Идеи",
-changeHeader:"🔧 Изменение"
-},
+        return Array.isArray(data)
+            ? data
+            : [];
 
-zh:{
-newProj:"+ 新项目",
-pdfBtn:"📄 下载剧本PDF",
-langMenuTitle:"选择语言",
-historyTitle:"聊天记录",
-welcomeTitle:"今天需要什么广告帮助？",
-welcomeDesc:"创建专业剧本和详细广告策略。",
-placeholder:"输入创意、游戏或业务...",
-footer:"SparkyKrea Studio's - 智能广告顾问",
-durationPrompt:"⏱ 选择视频时长",
-customPrompt:"输入时长:",
-greeting:"你好。告诉我你想推广什么。",
-success:"很好，我已经了解方向。",
-thanks:"不客气。",
-scriptTitle:"🎬 剧本 + 广告策略",
-projectLabel:"📌 项目:",
-durationLabel:"⏱ 时长:",
-categoryLabel:"🎯 重点:",
-scriptHeader:"🎙️ 专业剧本",
-musicHeader:"🎵 音乐方向",
-artistLabel:"艺术参考:",
-trackLabel:"风格:",
-strategyHeader:"🧠 广告策略",
-platformHeader:"📱 平台适配",
-ideasHeader:"💡 创意",
-changeHeader:"🔧 调整"
-},
+    }catch{
 
-ja:{
-newProj:"+ 新しいプロジェクト",
-pdfBtn:"📄 スクリプトPDFをダウンロード",
-langMenuTitle:"言語を選択",
-historyTitle:"チャット履歴",
-welcomeTitle:"今日はどのような広告を作りますか？",
-welcomeDesc:"プロの脚本と詳細な広告戦略を作成します。",
-placeholder:"アイデア、ゲーム、ビジネスを入力...",
-footer:"SparkyKrea Studio's - インテリジェント広告アドバイザリー",
-durationPrompt:"⏱ 動画の長さを選択",
-customPrompt:"長さを入力:",
-greeting:"こんにちは。何を宣伝したいか教えてください。",
-success:"完璧です。",
-thanks:"どういたしまして。",
-scriptTitle:"🎬 スクリプト + 広告戦略",
-projectLabel:"📌 プロジェクト:",
-durationLabel:"⏱ 長さ:",
-categoryLabel:"🎯 フォーカス:",
-scriptHeader:"🎙️ プロフェッショナル脚本",
-musicHeader:"🎵 音楽方向",
-artistLabel:"アーティスト参考:",
-trackLabel:"スタイル:",
-strategyHeader:"🧠 広告戦略",
-platformHeader:"📱 プラットフォーム対応",
-ideasHeader:"💡 アイデア",
-changeHeader:"🔧 調整"
-},
+        return [];
 
-ar:{
-newProj:"+ مشروع جديد",
-pdfBtn:"📄 تنزيل النص PDF",
-langMenuTitle:"اختر اللغة",
-historyTitle:"سجل الدردشة",
-welcomeTitle:"ما الإعلان الذي يمكنني مساعدتك به؟",
-welcomeDesc:"صمم نصوصاً احترافية واستراتيجيات إعلانية مفصلة.",
-placeholder:"اكتب فكرتك أو لعبتك أو عملك...",
-footer:"SparkyKrea Studio's - الاستشارات الإعلانية الذكية",
-durationPrompt:"⏱ اختر مدة الفيديو",
-customPrompt:"أدخل المدة:",
-greeting:"مرحباً. أخبرني بما تريد الترويج له.",
-success:"ممتاز.",
-thanks:"على الرحب والسعة.",
-scriptTitle:"🎬 النص + الاستراتيجية الإعلانية",
-projectLabel:"📌 المشروع:",
-durationLabel:"⏱ المدة:",
-categoryLabel:"🎯 التركيز:",
-scriptHeader:"🎙️ النص الاحترافي",
-musicHeader:"🎵 التوجيه الموسيقي",
-artistLabel:"مرجع فني:",
-trackLabel:"الأسلوب:",
-strategyHeader:"🧠 الاستراتيجية الإعلانية",
-platformHeader:"📱 تكييف المنصة",
-ideasHeader:"💡 أفكار",
-changeHeader:"🔧 التعديل"
+    }
+
 }
+
+
+function setUsers(users){
+
+    localStorage.setItem(
+        USERS_KEY,
+        JSON.stringify(users)
+    );
+
+}
+
+
+function getLogs(){
+
+    try{
+
+        const data =
+            JSON.parse(
+                localStorage.getItem(LOGS_KEY) || "[]"
+            );
+
+        return Array.isArray(data)
+            ? data
+            : [];
+
+    }catch{
+
+        return [];
+
+    }
+
+}
+
+
+function setLogs(logs){
+
+    localStorage.setItem(
+        LOGS_KEY,
+        JSON.stringify(logs.slice(0,200))
+    );
+
+}
+
+
+function getSession(){
+
+    try{
+
+        const session =
+            JSON.parse(
+                localStorage.getItem(SESSION_KEY) || "null"
+            );
+
+        return session || null;
+
+    }catch{
+
+        return null;
+
+    }
+
+}
+
+
+function setSession(user){
+
+    if(user){
+
+        localStorage.setItem(
+            SESSION_KEY,
+            JSON.stringify({
+                id:user.id,
+                email:user.email,
+                name:user.name,
+                surname:user.surname,
+                isAdmin:!!user.isAdmin
+            })
+        );
+
+    }else{
+
+        localStorage.removeItem(SESSION_KEY);
+
+    }
+
+}
+
+
+let currentUser =
+    getSession();
+
+
+/* =========================================================
+   PASSWORD HASH
+   ========================================================= */
+
+async function hashPassword(password){
+
+    if(
+        window.crypto &&
+        crypto.subtle
+    ){
+
+        const data =
+            new TextEncoder()
+                .encode(password);
+
+        const hash =
+            await crypto.subtle.digest(
+                "SHA-256",
+                data
+            );
+
+        return Array
+            .from(new Uint8Array(hash))
+            .map(
+                b=>b
+                    .toString(16)
+                    .padStart(2,"0")
+            )
+            .join("");
+
+    }
+
+    /* fallback local demo */
+
+    let hash=0;
+
+    for(let i=0;i<password.length;i++){
+
+        hash =
+            ((hash<<5)-hash)
+            +password.charCodeAt(i);
+
+        hash|=0;
+
+    }
+
+    return String(hash);
+
+}
+
+
+/* =========================================================
+   AUTH UI
+   ========================================================= */
+
+const authModal =
+    document.getElementById("authModal");
+
+const accountModal =
+    document.getElementById("accountModal");
+
+const adminModal =
+    document.getElementById("adminModal");
+
+const authBtn =
+    document.getElementById("authBtn");
+
+const adminBtn =
+    document.getElementById("adminBtn");
+
+const userHeader =
+    document.getElementById("userHeader");
+
+const userHeaderName =
+    document.getElementById("userHeaderName");
+
+
+function openModal(modal){
+
+    modal.classList.add("show");
+
+}
+
+
+function closeModal(modal){
+
+    modal.classList.remove("show");
+
+}
+
+
+document
+.querySelectorAll("[data-close]")
+.forEach(button=>{
+
+    button.addEventListener("click",()=>{
+
+        const modal =
+            document.getElementById(
+                button.dataset.close
+            );
+
+        if(modal)
+            closeModal(modal);
+
+    });
+
+});
+
+
+/* click outside */
+
+document
+.querySelectorAll(".modal-layer")
+.forEach(layer=>{
+
+    layer.addEventListener("click",e=>{
+
+        if(e.target===layer)
+            closeModal(layer);
+
+    });
+
+});
+
+
+/* tabs */
+
+const loginTab =
+    document.getElementById("loginTab");
+
+const registerTab =
+    document.getElementById("registerTab");
+
+const loginForm =
+    document.getElementById("loginForm");
+
+const registerForm =
+    document.getElementById("registerForm");
+
+
+loginTab.addEventListener("click",()=>{
+
+    loginTab.classList.add("active");
+    registerTab.classList.remove("active");
+
+    loginForm.classList.add("active");
+    registerForm.classList.remove("active");
+
+});
+
+
+registerTab.addEventListener("click",()=>{
+
+    registerTab.classList.add("active");
+    loginTab.classList.remove("active");
+
+    registerForm.classList.add("active");
+    loginForm.classList.remove("active");
+
+});
+
+
+function openLogin(){
+
+    openModal(authModal);
+
+    loginTab.click();
+
+}
+
+
+/* registration */
+
+registerForm.addEventListener(
+    "submit",
+    async e=>{
+
+        e.preventDefault();
+
+        const name =
+            document
+            .getElementById("registerName")
+            .value.trim();
+
+        const surname =
+            document
+            .getElementById("registerSurname")
+            .value.trim();
+
+        const email =
+            document
+            .getElementById("registerEmail")
+            .value
+            .trim()
+            .toLowerCase();
+
+        const password =
+            document
+            .getElementById("registerPassword")
+            .value;
+
+        const password2 =
+            document
+            .getElementById("registerPassword2")
+            .value;
+
+        const message =
+            document
+            .getElementById("registerMessage");
+
+
+        message.textContent="";
+
+
+        if(!name || !surname){
+
+            message.textContent =
+                "Completa tu nombre y apellido.";
+
+            return;
+
+        }
+
+
+        if(!email.includes("@")){
+
+            message.textContent =
+                "Introduce un correo válido.";
+
+            return;
+
+        }
+
+
+        if(password.length<8){
+
+            message.textContent =
+                "La contraseña debe tener al menos 8 caracteres.";
+
+            return;
+
+        }
+
+
+        if(password!==password2){
+
+            message.textContent =
+                "Las contraseñas no coinciden.";
+
+            return;
+
+        }
+
+
+        const users =
+            getUsers();
+
+
+        if(
+            users.some(
+                user=>user.email===email
+            )
+        ){
+
+            message.textContent =
+                "Ese correo ya está registrado.";
+
+            return;
+
+        }
+
+
+        const passwordHash =
+            await hashPassword(password);
+
+
+        const user = {
+
+            id:
+                "u_" +
+                Date.now() +
+                "_" +
+                Math.random()
+                    .toString(36)
+                    .slice(2,8),
+
+            name,
+
+            surname,
+
+            email,
+
+            passwordHash,
+
+            createdAt:
+                new Date().toISOString(),
+
+            lastLogin:null,
+
+            loginCount:0,
+
+            isAdmin:false
+
+        };
+
+
+        users.push(user);
+
+        setUsers(users);
+
+
+        currentUser=user;
+
+        setSession(user);
+
+
+        updateAuthUI();
+
+        loadUserHistory();
+
+        closeModal(authModal);
+
+
+        registerForm.reset();
+
+
+        addBotMessage(
+            "Cuenta creada correctamente. " +
+            "Desde ahora tus chats podrán guardarse " +
+            "en este navegador y tendrás acceso a la opción PDF."
+        );
+
+    }
+);
+
+
+/* login */
+
+loginForm.addEventListener(
+    "submit",
+    async e=>{
+
+        e.preventDefault();
+
+
+        const email =
+            document
+            .getElementById("loginEmail")
+            .value
+            .trim()
+            .toLowerCase();
+
+        const password =
+            document
+            .getElementById("loginPassword")
+            .value;
+
+        const message =
+            document
+            .getElementById("loginMessage");
+
+
+        message.textContent="";
+
+
+        const users =
+            getUsers();
+
+
+        const user =
+            users.find(
+                item=>item.email===email
+            );
+
+
+        if(!user){
+
+            message.textContent =
+                "No existe una cuenta con ese correo.";
+
+            return;
+
+        }
+
+
+        const passwordHash =
+            await hashPassword(password);
+
+
+        if(
+            user.passwordHash!==passwordHash
+        ){
+
+            message.textContent =
+                "La contraseña no es correcta.";
+
+            return;
+
+        }
+
+
+        user.lastLogin =
+            new Date().toISOString();
+
+        user.loginCount =
+            (user.loginCount||0)+1;
+
+
+        setUsers(users);
+
+
+        currentUser=user;
+
+        setSession(user);
+
+
+        const logs =
+            getLogs();
+
+
+        logs.unshift({
+
+            id:Date.now(),
+
+            userId:user.id,
+
+            email:user.email,
+
+            name:
+                user.name +
+                " " +
+                user.surname,
+
+            timestamp:
+                new Date().toISOString(),
+
+            type:"login"
+
+        });
+
+
+        setLogs(logs);
+
+
+        updateAuthUI();
+
+        loadUserHistory();
+
+        closeModal(authModal);
+
+
+        loginForm.reset();
+
+
+        addBotMessage(
+            "Bienvenido de nuevo, " +
+            escapeHTML(user.name) +
+            ". Tus proyectos guardados vuelven a estar disponibles."
+        );
+
+    }
+);
+
+
+/* auth button */
+
+authBtn.addEventListener("click",()=>{
+
+    if(currentUser){
+
+        openAccount();
+
+    }else{
+
+        openLogin();
+
+    }
+
+});
+
+
+function openAccount(){
+
+    if(!currentUser)
+        return openLogin();
+
+
+    document
+    .getElementById("accountName")
+    .textContent =
+        currentUser.name +
+        " " +
+        currentUser.surname;
+
+
+    document
+    .getElementById("accountEmail")
+    .textContent =
+        currentUser.email;
+
+
+    document
+    .getElementById("accountCreated")
+    .textContent =
+        "Cuenta creada: " +
+        formatDate(
+            currentUser.createdAt
+        );
+
+
+    openModal(accountModal);
+
+}
+
+
+/* logout */
+
+document
+.getElementById("logoutBtn")
+.addEventListener("click",()=>{
+
+    currentUser=null;
+
+    setSession(null);
+
+    projectHistory=[];
+
+    renderHistory();
+
+    updateAuthUI();
+
+    closeModal(accountModal);
+
+});
+
+
+/* =========================================================
+   ADMIN
+   ========================================================= */
+
+adminBtn.addEventListener("click",()=>{
+
+    if(!currentUser || !currentUser.isAdmin)
+        return;
+
+    renderAdmin();
+
+    openModal(adminModal);
+
+});
+
+
+function renderAdmin(){
+
+    if(!currentUser || !currentUser.isAdmin)
+        return;
+
+
+    const users =
+        getUsers();
+
+    const logs =
+        getLogs();
+
+
+    let chatCount=0;
+
+
+    users.forEach(user=>{
+
+        try{
+
+            const history =
+                JSON.parse(
+                    localStorage.getItem(
+                        "sparky_history_" +
+                        user.id
+                    ) || "[]"
+                );
+
+            if(Array.isArray(history))
+                chatCount += history.length;
+
+        }catch{}
+
+    });
+
+
+    document
+    .getElementById("adminUserCount")
+    .textContent =
+        users.length;
+
+
+    document
+    .getElementById("adminLoginCount")
+    .textContent =
+        logs.length;
+
+
+    document
+    .getElementById("adminChatCount")
+    .textContent =
+        chatCount;
+
+
+    const body =
+        document
+        .getElementById("adminUsersBody");
+
+
+    body.innerHTML="";
+
+
+    if(!users.length){
+
+        body.innerHTML =
+            "<tr><td colspan='5'>No hay usuarios.</td></tr>";
+
+    }else{
+
+        users.forEach(user=>{
+
+            const row =
+                document.createElement("tr");
+
+
+            row.innerHTML=`
+
+                <td>
+                    ${escapeHTML(
+                        user.name +
+                        " " +
+                        user.surname
+                    )}
+                </td>
+
+                <td>
+                    ${escapeHTML(user.email)}
+                </td>
+
+                <td>
+                    ${formatDate(user.createdAt)}
+                </td>
+
+                <td>
+                    ${
+                        user.lastLogin
+                        ? formatDate(user.lastLogin)
+                        : "Nunca"
+                    }
+                </td>
+
+                <td>
+                    ${user.loginCount||0}
+                </td>
+
+            `;
+
+
+            body.appendChild(row);
+
+        });
+
+    }
+
+
+    const logsBox =
+        document
+        .getElementById("adminLogs");
+
+
+    logsBox.innerHTML="";
+
+
+    logs
+    .slice(0,30)
+    .forEach(log=>{
+
+        const item =
+            document.createElement("div");
+
+
+        item.className="account-box";
+
+
+        item.innerHTML=`
+
+            <div class="account-name">
+                ${escapeHTML(log.name)}
+            </div>
+
+            <div class="account-email">
+                ${escapeHTML(log.email)}
+            </div>
+
+            <div class="account-email">
+                ${formatDate(log.timestamp)}
+            </div>
+
+        `;
+
+
+        logsBox.appendChild(item);
+
+    });
+
+}
+
+
+function seedAdmin(){
+
+    /*
+       DEMO ADMIN:
+
+       Para no poner una contraseña de administrador
+       visible en el código, el primer usuario registrado
+       será un usuario normal.
+
+       Puedes convertir manualmente una cuenta en admin
+       desde la consola del navegador:
+
+       localStorage -> sparky_users_v2
+
+       cambiando:
+
+       "isAdmin":false
+
+       por:
+
+       "isAdmin":true
+
+       En una versión real esto debe hacerse
+       desde el backend.
+    */
+
+}
+
+
+/* =========================================================
+   USER UI
+   ========================================================= */
+
+function updateAuthUI(){
+
+    if(currentUser){
+
+        authBtn.textContent =
+            "◉ Mi cuenta";
+
+        userHeader.classList.remove("hidden");
+
+        userHeaderName.textContent =
+            currentUser.name;
+
+        if(currentUser.isAdmin){
+
+            adminBtn.classList.remove("hidden");
+
+        }else{
+
+            adminBtn.classList.add("hidden");
+
+        }
+
+    }else{
+
+        authBtn.textContent =
+            "◉ Iniciar sesión";
+
+        userHeader.classList.add("hidden");
+
+        adminBtn.classList.add("hidden");
+
+    }
+
+    renderHistory();
+
+}
+
+
+/* =========================================================
+   LANGUAGE
+   ========================================================= */
+
+let currentLang =
+    localStorage.getItem("sparky_lang") ||
+    "es";
+
+
+const translations={
+
+    es:{
+        welcome:
+            "Tu idea puede convertirse en algo <span>increíble.</span>",
+
+        desc:
+            "SparkyKrea te ayuda a crear guiones, estrategias, conceptos y música para llevar tus ideas a otro nivel.",
+
+        placeholder:
+            "Cuéntame qué quieres crear...",
+
+        history:
+            "Historial de chats",
+
+        newProject:
+            "＋ Nuevo proyecto",
+
+        pdf:
+            "▣ Descargar Guión en PDF",
+
+        language:
+            "Idioma"
+
+    },
+
+    en:{
+        welcome:
+            "Your idea can become something <span>incredible.</span>",
+
+        desc:
+            "SparkyKrea helps you create scripts, strategies, concepts and music to take your ideas further.",
+
+        placeholder:
+            "Tell me what you want to create...",
+
+        history:
+            "Chat history",
+
+        newProject:
+            "＋ New project",
+
+        pdf:
+            "▣ Download Script as PDF",
+
+        language:
+            "Language"
+
+    },
+
+    pt:{
+        welcome:
+            "Sua ideia pode se tornar algo <span>incrível.</span>",
+
+        desc:
+            "A SparkyKrea ajuda você a criar roteiros, estratégias, conceitos e músicas.",
+
+        placeholder:
+            "Conte-me o que você quer criar...",
+
+        history:
+            "Histórico de chats",
+
+        newProject:
+            "＋ Novo projeto",
+
+        pdf:
+            "▣ Baixar roteiro em PDF",
+
+        language:
+            "Idioma"
+
+    },
+
+    fr:{
+        welcome:
+            "Votre idée peut devenir quelque chose de <span>génial.</span>",
+
+        desc:
+            "SparkyKrea vous aide à créer des scripts, stratégies, concepts et musiques.",
+
+        placeholder:
+            "Dites-moi ce que vous voulez créer...",
+
+        history:
+            "Historique des chats",
+
+        newProject:
+            "＋ Nouveau projet",
+
+        pdf:
+            "▣ Télécharger le script en PDF",
+
+        language:
+            "Langue"
+
+    },
+
+    de:{
+        welcome:
+            "Deine Idee kann etwas <span>Großartiges</span> werden.",
+
+        desc:
+            "SparkyKrea hilft dir bei Skripten, Strategien, Konzepten und Musik.",
+
+        placeholder:
+            "Erzähl mir, was du erstellen möchtest...",
+
+        history:
+            "Chatverlauf",
+
+        newProject:
+            "＋ Neues Projekt",
+
+        pdf:
+            "▣ Skript als PDF speichern",
+
+        language:
+            "Sprache"
+
+    },
+
+    it:{
+        welcome:
+            "La tua idea può diventare qualcosa di <span>incredibile.</span>",
+
+        desc:
+            "SparkyKrea ti aiuta con script, strategie, concept e musica.",
+
+        placeholder:
+            "Dimmi cosa vuoi creare...",
+
+        history:
+            "Cronologia chat",
+
+        newProject:
+            "＋ Nuovo progetto",
+
+        pdf:
+            "▣ Scarica script in PDF",
+
+        language:
+            "Lingua"
+
+    },
+
+    ru:{
+        welcome:
+            "Твоя идея может стать чем-то <span>невероятным.</span>",
+
+        desc:
+            "SparkyKrea помогает создавать сценарии, стратегии, концепции и музыку.",
+
+        placeholder:
+            "Расскажи, что ты хочешь создать...",
+
+        history:
+            "История чатов",
+
+        newProject:
+            "＋ Новый проект",
+
+        pdf:
+            "▣ Скачать сценарий PDF",
+
+        language:
+            "Язык"
+
+    },
+
+    zh:{
+        welcome:
+            "你的想法可以变成真正的<span>精彩作品。</span>",
+
+        desc:
+            "SparkyKrea 可以帮助你制作脚本、策略、概念和音乐。",
+
+        placeholder:
+            "告诉我你想创作什么...",
+
+        history:
+            "聊天记录",
+
+        newProject:
+            "＋ 新项目",
+
+        pdf:
+            "▣ 下载脚本 PDF",
+
+        language:
+            "语言"
+
+    },
+
+    ja:{
+        welcome:
+            "あなたのアイデアは<span>素晴らしい作品</span>になります。",
+
+        desc:
+            "SparkyKreaは脚本、戦略、コンセプト、音楽制作をサポートします。",
+
+        placeholder:
+            "何を作りたいですか？",
+
+        history:
+            "チャット履歴",
+
+        newProject:
+            "＋ 新しいプロジェクト",
+
+        pdf:
+            "▣ PDFとして保存",
+
+        language:
+            "言語"
+
+    },
+
+    ar:{
+        welcome:
+            "يمكن لفكرتك أن تصبح شيئًا <span>رائعًا.</span>",
+
+        desc:
+            "يساعدك SparkyKrea على إنشاء النصوص والاستراتيجيات والمفاهيم والموسيقى.",
+
+        placeholder:
+            "أخبرني ماذا تريد أن تصنع...",
+
+        history:
+            "سجل المحادثات",
+
+        newProject:
+            "＋ مشروع جديد",
+
+        pdf:
+            "▣ تنزيل النص بصيغة PDF",
+
+        language:
+            "اللغة"
+
+    }
 
 };
 
 
 function updateLanguageUI(){
 
-    const t=i18n[currentLang]||i18n.es;
+    const t =
+        translations[currentLang] ||
+        translations.es;
 
-    document.getElementById("newProjectBtn").textContent=t.newProj;
-    document.getElementById("exportPdfBtn").textContent=t.pdfBtn;
-    document.getElementById("langMenuTitle").textContent=t.langMenuTitle;
-    document.getElementById("historyTitleTxt").textContent=t.historyTitle;
-    document.getElementById("welcomeTitle").textContent=t.welcomeTitle;
-    document.getElementById("welcomeDesc").textContent=t.welcomeDesc;
-    input.placeholder=t.placeholder;
-    document.getElementById("footerText").textContent=t.footer;
 
-    document.querySelectorAll(".lang-option").forEach(option=>{
-        option.classList.toggle(
-            "active",
-            option.dataset.lang===currentLang
-        );
-    });
+    document
+    .getElementById("welcomeTitle")
+    .innerHTML =
+        t.welcome;
+
+
+    document
+    .getElementById("welcomeDesc")
+    .textContent =
+        t.desc;
+
+
+    input.placeholder =
+        t.placeholder;
+
+
+    document
+    .getElementById("historyTitleTxt")
+    .textContent =
+        t.history;
+
+
+    document
+    .getElementById("newProjectBtn")
+    .textContent =
+        t.newProject;
+
+
+    document
+    .getElementById("exportPdfBtn")
+    .textContent =
+        t.pdf;
+
+
+    document
+    .getElementById("langMenuTitle")
+    .textContent =
+        t.language;
+
 }
 
-updateLanguageUI();
 
+langOptionsList
+.querySelectorAll(".lang-option")
+.forEach(option=>{
 
-/* =========================================================
-   MENÚ IDIOMAS
-   ========================================================= */
+    option.addEventListener("click",()=>{
+
+        currentLang =
+            option.dataset.lang;
+
+        localStorage.setItem(
+            "sparky_lang",
+            currentLang
+        );
+
+        updateLanguageUI();
+
+        headerDropdown
+        .classList
+        .remove("show");
+
+    });
+
+});
+
 
 headerDotsBtn.addEventListener("click",e=>{
+
     e.stopPropagation();
-    headerDropdown.classList.toggle("active");
+
+    headerDropdown
+    .classList
+    .toggle("show");
+
 });
 
-window.addEventListener("click",()=>{
-    headerDropdown.classList.remove("active");
-});
 
-langOptionsList.addEventListener("click",e=>{
+document.addEventListener("click",e=>{
 
-    const option=e.target.closest(".lang-option");
-    if(!option)return;
+    if(
+        !headerDropdown.contains(e.target) &&
+        e.target!==headerDotsBtn
+    ){
 
-    currentLang=option.dataset.lang;
+        headerDropdown
+        .classList
+        .remove("show");
 
-    localStorage.setItem(
-        "sparky_lang",
-        currentLang
-    );
+    }
 
-    updateLanguageUI();
-    headerDropdown.classList.remove("active");
 });
 
 
 /* =========================================================
-   MOTIVACIONES
+   MOTIVATION
    ========================================================= */
 
 const motivations=[
 
-"Una idea sencilla puede convertirse en algo enorme cuando tiene una buena ejecución.",
+    "Una buena idea no necesita ser perfecta para empezar; necesita una oportunidad.",
 
-"No necesitas hacerlo perfecto desde el primer intento. Necesitas construir una versión que puedas mejorar.",
+    "Lo que hoy es un borrador puede convertirse mañana en tu mejor proyecto.",
 
-"Los primeros segundos consiguen atención; una buena idea consigue que la gente se quede.",
+    "La creatividad mejora cuando dejas de buscar la idea perfecta y empiezas a construir.",
 
-"Una publicidad efectiva no necesita gritar más fuerte. Necesita comunicar mejor.",
+    "No subestimes una idea pequeña: muchas veces ahí empieza algo grande.",
 
-"Una idea todavía sin terminar sigue siendo una oportunidad creativa.",
+    "Tu siguiente proyecto puede estar escondido en esa idea que todavía no te convence.",
 
-"Cada versión ayuda a descubrir qué estilo representa mejor el proyecto.",
+    "Crear también es probar, equivocarse y volver a intentarlo con más claridad.",
 
-"Una marca memorable empieza con una idea que alguien quiera recordar.",
+    "No necesitas tenerlo todo resuelto. Solo necesitas dar el siguiente paso.",
 
-"El contenido gana fuerza cuando deja de copiar fórmulas y empieza a construir identidad.",
-
-"Prueba, observa qué funciona, ajusta y vuelve a probar.",
-
-"No hace falta tenerlo todo resuelto para comenzar.",
-
-"Una estrategia convierte una idea común en una experiencia memorable.",
-
-"La creatividad también consiste en saber qué quitar.",
-
-"Un buen anuncio no solamente vende: deja una impresión.",
-
-"El mejor concepto suele aparecer después de hacer varias preguntas.",
-
-"Una buena ejecución puede convertir una idea pequeña en algo mucho más grande.",
-
-"La diferencia muchas veces está en cómo cuentas la idea, no solamente en la idea.",
-
-"Si el mensaje se entiende rápido, ya tienes una ventaja.",
-
-"El objetivo no es hacer más ruido: es conseguir que recuerden lo importante."
+    "Una idea con dirección puede avanzar muchísimo más que una idea perfecta sin acción."
 
 ];
 
 
+let motivationIndex=0;
+
+
 function motivation(){
 
-    const text=
+    const text =
         motivations[
-            motivationIndex++%motivations.length
+            motivationIndex %
+            motivations.length
         ];
 
+    motivationIndex++;
+
     return `
-        <div class="motivation">
+        <br><br>
+        <span class="accent">
             ${text}
-        </div>
+        </span>
     `;
+
 }
 
 
 /* =========================================================
-   CORRECTOR ORTOGRÁFICO / NORMALIZADOR
+   SPELLING
    ========================================================= */
-
-/*
-   No pretende reemplazar un corrector profesional.
-   Su función aquí es reconocer errores habituales
-   para que el motor publicitario no se confunda.
-*/
 
 const typoDictionary={
 
-    "valorantt":"valorant",
-    "valornat":"valorant",
-    "valrant":"valorant",
-    "valoran":"valorant",
-    "valroant":"valorant",
-    "valornat":"valorant",
+    q:"que",
+    k:"que",
+    ke:"que",
+    xq:"porque",
+    pq:"porque",
+    porq:"porque",
+    tmb:"también",
+    tb:"también",
+    d:"de",
+    pa:"para",
+    pro:"pero",
+    bn:"bien",
+    qiero:"quiero",
+    kiero:"quiero",
+    qiero:"quiero",
+    videos:"vídeos",
+    videoo:"video",
+    musika:"música",
+    musiq:"música",
+    guion:"guión",
+    guionn:"guión",
+    estrateguia:"estrategia",
+    publi:"publicidad",
+    intagram:"instagram",
+    tikok:"tiktok",
+    tikttok:"tiktok",
+    youtbe:"youtube",
+    facebok:"facebook",
+    instgram:"instagram"
 
-    "clahs royale":"clash royale",
-    "clash roayle":"clash royale",
-    "clash roylae":"clash royale",
-    "clahsroayle":"clash royale",
-    "clashroyale":"clash royale",
-
-    "minecraf":"minecraft",
-    "minecrat":"minecraft",
-    "minecraftt":"minecraft",
-
-    "fortnit":"fortnite",
-    "fornite":"fortnite",
-    "fortnait":"fortnite",
-
-    "freefire":"free fire",
-    "fre fire":"free fire",
-
-    "braw stars":"brawl stars",
-    "brawstars":"brawl stars",
-    "brawlstar":"brawl stars",
-
-    "league of legend":"league of legends",
-    "legue of legends":"league of legends",
-    "league of legendss":"league of legends",
-
-    "genshin":"genshin impact",
-    "genshin inpact":"genshin impact",
-    "genshin impactt":"genshin impact",
-
-    "counter strikee":"counter strike",
-    "counter strik":"counter strike",
-
-    "pubg mobilee":"pubg mobile",
-
-    "promocionar":"promocionar",
-    "promosionar":"promocionar",
-    "promocionarr":"promocionar",
-
-    "publicidadd":"publicidad",
-    "publicida":"publicidad",
-    "anunció":"anuncio",
-
-    "guionn":"guion",
-    "guionn":"guion",
-    "estratejia":"estrategia",
-    "estrateguia":"estrategia",
-    "muscia":"musica",
-    "muisca":"musica",
-    "personage":"personaje",
-    "perosnaje":"personaje",
-
-    "tiktokkk":"tiktok",
-    "tik tok":"tiktok",
-    "instagran":"instagram",
-    "instagramm":"instagram",
-    "youtbe":"youtube",
-    "yutube":"youtube",
-
-    "segundosss":"segundos",
-    "segundoss":"segundos",
-    "minutosss":"minutos",
-
-    "negosio":"negocio",
-    "negocioo":"negocio",
-    "emprendimientoo":"emprendimiento",
-    "productoo":"producto",
-    "servico":"servicio",
-    "servisio":"servicio",
-
-    "ventass":"ventas",
-    "clientees":"clientes",
-    "publico":"público",
-    "retencion":"retención",
-
-    "reyna":"reyna",
-    "jett":"jett",
-    "killjoi":"killjoy",
-    "killyoy":"killjoy",
-    "omen":"omen",
-    "cyper":"cypher",
-    "cypher":"cypher",
-    "sage":"sage",
-    "sova":"sova",
-
-    "pekka":"pekka",
-    "p.e.k.k.a":"pekka",
-    "montapuerco":"montapuercos",
-    "montapuerkos":"montapuercos",
-    "valquiriaa":"valquiria",
-
-    "caballeroo":"caballero",
-    "princesaa":"princesa",
-    "magoo":"mago",
-
-    "guion publicitarioo":"guion publicitario",
-    "publicidad para tiktokkk":"publicidad para tiktok"
 };
 
 
 function normalizeText(text){
 
-    return String(text)
+    return text
         .toLowerCase()
         .normalize("NFD")
-        .replace(/[\u0300-\u036f]/g,"")
-        .replace(/[¿?¡!.,;:()[\]{}"']/g," ")
-        .replace(/\s+/g," ")
-        .trim();
+        .replace(
+            /[\u0300-\u036f]/g,
+            ""
+        );
+
 }
 
 
 function correctSpelling(text){
 
-    let corrected=String(text);
-    let changes=[];
+    return text
+        .split(/\s+/)
+        .map(word=>{
 
-    /*
-       Primero corregimos expresiones de varias palabras.
-    */
+            const clean =
+                word
+                .toLowerCase()
+                .replace(/[.,!?;:]+$/g,"");
 
-    const entries=Object.entries(typoDictionary)
-        .sort((a,b)=>b[0].length-a[0].length);
+            return typoDictionary[clean]
+                || word;
 
-    entries.forEach(([wrong,right])=>{
+        })
+        .join(" ");
 
-        const regex=new RegExp(
-            "(^|\\s)"+
-            wrong.replace(/[.*+?^${}()|[\]\\]/g,"\\$&")+
-            "(?=\\s|$)",
-            "gi"
-        );
-
-        if(regex.test(corrected)){
-
-            corrected=corrected.replace(
-                regex,
-                `$1${right}`
-            );
-
-            changes.push(
-                `${wrong} → ${right}`
-            );
-
-        }
-
-    });
-
-
-    /*
-       Correcciones rápidas de escritura.
-    */
-
-    const replacements=[
-
-        [/\bq\b/gi,"que"],
-        [/\bke\b/gi,"que"],
-        [/\bxq\b/gi,"porque"],
-        [/\bporq\b/gi,"porque"],
-        [/\bporquee\b/gi,"porque"],
-        [/\bpublicarrr\b/gi,"publicar"],
-        [/\bhacer publicidadd\b/gi,"hacer publicidad"],
-        [/\bnecesitoo\b/gi,"necesito"],
-        [/\bquieroo\b/gi,"quiero"],
-        [/\bhazmee\b/gi,"hazme"],
-        [/\bcreamee\b/gi,"creame"],
-        [/\bquiero hacer una publi\b/gi,"quiero hacer una publicidad"],
-        [/\bpubli\b/gi,"publicidad"]
-
-    ];
-
-    replacements.forEach(([regex,right])=>{
-
-        if(regex.test(corrected)){
-
-            corrected=corrected.replace(
-                regex,
-                right
-            );
-
-            changes.push(
-                "Corrección de escritura"
-            );
-
-        }
-
-    });
-
-
-    return {
-        original:text,
-        corrected:corrected,
-        changes:[...new Set(changes)],
-        changed:
-            normalizeText(text)!==
-            normalizeText(corrected)
-    };
 }
 
 
 /* =========================================================
-   RUIDO DE CONVERSACIÓN
+   NOISE
    ========================================================= */
 
-const conversationalNoise=[
+function conversationalNoise(text){
 
-"xd",
-"x d",
-"lol",
-"lmao",
-"jaja",
-"jajaja",
-"jajajaja",
-"jeje",
-"jejeje",
-"jijiji",
-"haha",
-"hahaha",
-"bro",
-"broo",
-"brooo",
-"amigo",
-"mano",
-"literal",
-"😭",
-"😂",
-"🤣",
-"💀"
+    return [
 
-];
+        "jaja",
+        "jajaja",
+        "xd",
+        "jeje",
+        "lol",
+        "bro",
+        "mano",
+        "dios",
+
+    ].some(
+        word=>
+            normalizeText(text)
+            .includes(word)
+    );
+
+}
 
 
 function removeNoise(text){
 
-    let result=String(text);
-
-    conversationalNoise.forEach(word=>{
-
-        const escaped=
-            word.replace(
-                /[.*+?^${}()|[\]\\]/g,
-                "\\$&"
-            );
-
-        result=result.replace(
-            new RegExp(
-                escaped,
-                "gi"
-            ),
-            " "
-        );
-
-    });
-
-    return result
+    return text
+        .replace(/\bxd+\b/gi,"")
+        .replace(/\bjaj+a*\b/gi,"")
+        .replace(/\blol\b/gi,"")
+        .replace(/\bjeje+\b/gi,"")
         .replace(/\s+/g," ")
         .trim();
+
 }
 
 
 /* =========================================================
-   JUEGOS
+   GAME DATABASE
    ========================================================= */
 
 const gameDatabase={
 
-valorant:{
-names:["valorant"],
-roles:[
-"duelista",
-"duelistas",
-"centinela",
-"centinelas",
-"iniciador",
-"iniciadores",
-"controlador",
-"controladores"
-],
-characters:[
-"reyna","jett","omen","cypher","killjoy","sage","sova",
-"phoenix","raze","breach","brimstone","viper","yoru","skye",
-"kayo","chamber","neon","fade","harbor","gekko","deadlock",
-"iso","clove","vyse","waylay","tejo"
-]
-},
+    valorant:{
+        names:[
+            "valorant",
+            "reyna",
+            "jett",
+            "omen",
+            "sage",
+            "killjoy",
+            "raze",
+            "chamber",
+            "cypher",
+            "viper",
+            "gekko",
+            "phoenix"
+        ],
+        music:"Trap gaming / phonk / electrónica intensa"
+    },
 
-"counter strike":{
-names:[
-"counter strike",
-"counter-strike",
-"cs2",
-"csgo",
-"counter strike 2"
-],
-roles:[
-"rifler","awper","awp","entry","lurker","igl","support","anchor"
-],
-characters:[]
-},
+    minecraft:{
+        names:[
+            "minecraft",
+            "minecraft"
+        ],
+        music:"Lo-fi aventurero / electrónica ligera"
+    },
 
-"league of legends":{
-names:[
-"league of legends",
-"league",
-"lol",
-"lol game"
-],
-roles:[
-"top","mid","jungle","jungla","adc","support","soporte"
-],
-characters:[
-"ahri","yasuo","yone","zed","akali","lux","jinx","viego",
-"leesin","lee sin","mordekaiser","garen","sett","kaisa",
-"ezreal","thresh","senna","ashe","caitlyn","draven","riven",
-"irelia","fiora","darius","teemo","akshan","smolder","aurora"
-]
-},
+    fortnite:{
+        names:[
+            "fortnite"
+        ],
+        music:"Trap energético / hip-hop / phonk"
+    },
 
-overwatch:{
-names:["overwatch","overwatch 2","ow2"],
-roles:["tanque","tank","dps","damage","support","soporte"],
-characters:[
-"tracer","mercy","genji","hanzo","widowmaker","widow","reaper",
-"cassidy","ashe","ana","kiriko","moira","reinhardt","dva",
-"winston","zarya","doomfist","venture"
-]
-},
+    clashroyale:{
+        names:[
+            "clash royale",
+            "clash"
+        ],
+        music:"Beat rápido / meme / electrónica"
+    },
 
-"rainbow six":{
-names:[
-"rainbow six",
-"rainbow six siege",
-"r6",
-"r6 siege"
-],
-roles:[
-"fragger","entry","support","roamer","anchor",
-"hard breach","soft breach"
-],
-characters:[
-"ash","jager","bandit","thermite","hibana","iq","smoke",
-"mute","doc","rook","zofia","ela","azami","solis","fenrir"
-]
-},
+    freefire:{
+        names:[
+            "free fire",
+            "freefire"
+        ],
+        music:"Phonk / trap / beat agresivo"
+    },
 
-apex:{
-names:["apex","apex legends"],
-roles:[
-"assault","skirmisher","recon","controller","support"
-],
-characters:[
-"wraith","octane","pathfinder","lifeline","bangalore",
-"bloodhound","revenant","mirage","horizon","valkyrie",
-"newcastle","conduit"
-]
-},
-
-fortnite:{
-names:["fortnite"],
-roles:[],
-characters:[]
-},
-
-minecraft:{
-names:["minecraft"],
-roles:[],
-characters:["steve","alex"]
-},
-
-"free fire":{
-names:["free fire","garena free fire"],
-roles:[],
-characters:["alok","hayato","kelly","moco","chrono"]
-},
-
-"clash royale":{
-names:["clash royale"],
-roles:[],
-characters:[
-"caballero","princesa","mago","bruja","pekka","p.e.k.k.a",
-"montapuercos","valquiria","minero","leñador","leñadora"
-]
-},
-
-dota:{
-names:["dota","dota 2","dota2"],
-roles:[
-"carry","mid","offlane","support","hard support"
-],
-characters:[
-"invoker","pudge","juggernaut","phantom assassin",
-"crystal maiden","axe"
-]
-},
-
-pubg:{
-names:["pubg","pubg mobile"],
-roles:[],
-characters:[]
-},
-
-"call of duty":{
-names:[
-"call of duty",
-"cod",
-"warzone",
-"modern warfare",
-"black ops"
-],
-roles:[],
-characters:["ghost","price","soap","woods"]
-},
-
-"rocket league":{
-names:["rocket league"],
-roles:[],
-characters:[]
-},
-
-"brawl stars":{
-names:["brawl stars"],
-roles:[],
-characters:[
-"shelly","colt","spike","crow","leon","edgar",
-"mortis","stu","fang","cordelius"
-]
-},
-
-"genshin impact":{
-names:["genshin","genshin impact"],
-roles:[],
-characters:[
-"hu tao","hutao","raiden","raiden shogun","furina",
-"nahida","zhongli","ayaka","ganyu","yelan","arlecchino"
-]
-}
+    roblox:{
+        names:[
+            "roblox"
+        ],
+        music:"Electrónica divertida / meme / hyperpop"
+    }
 
 };
 
 
-/* =========================================================
-   DETECCIÓN DE JUEGO
-   ========================================================= */
-
 function detectGame(text){
 
-    const normalized=normalizeText(text);
+    const n =
+        normalizeText(text);
 
-    for(const key in gameDatabase){
-
-        const game=gameDatabase[key];
+    for(
+        const game in gameDatabase
+    ){
 
         if(
-            game.names.some(
-                name=>
-                normalized.includes(
+            gameDatabase[game]
+            .names
+            .some(
+                name=>n.includes(
                     normalizeText(name)
                 )
             )
         ){
 
-            return {
-                key,
-                ...game
-            };
+            return game;
 
         }
+
     }
 
     return null;
+
 }
 
 
-function detectCharacter(text,game){
+function detectCharacter(text){
 
-    if(!game)return null;
+    const n =
+        normalizeText(text);
 
-    const normalized=normalizeText(text);
+    const chars=[
+        "reyna",
+        "jett",
+        "omen",
+        "sage",
+        "killjoy",
+        "raze",
+        "chamber",
+        "cypher",
+        "viper",
+        "gekko",
+        "phoenix"
+    ];
 
-    return game.characters.find(
-        character=>
-        normalized.includes(
-            normalizeText(character)
-        )
-    )||null;
+    return chars.find(
+        char=>n.includes(char)
+    ) || null;
+
 }
 
 
-function detectRole(text,game){
+function detectRole(text){
 
-    if(!game)return null;
+    const n =
+        normalizeText(text);
 
-    const normalized=normalizeText(text);
+    if(
+        /duelista|duelist|entry|frag/.test(n)
+    )
+        return "Duelista";
 
-    return game.roles.find(
-        role=>
-        normalized.includes(
-            normalizeText(role)
-        )
-    )||null;
+    if(
+        /iniciador|initiator/.test(n)
+    )
+        return "Iniciador";
+
+    if(
+        /centinela|sentinel/.test(n)
+    )
+        return "Centinela";
+
+    if(
+        /humos|controlador|controller|smoke/.test(n)
+    )
+        return "Controlador";
+
+    return null;
+
 }
 
-
-/* =========================================================
-   DETECCIÓN DE PLATAFORMA
-   ========================================================= */
 
 function detectPlatform(text){
 
-    const t=normalizeText(text);
+    const n =
+        normalizeText(text);
 
-    if(/tiktok/.test(t))return "TikTok";
+    if(n.includes("tiktok"))
+        return "TikTok";
 
-    if(/instagram|reels/.test(t))
-        return "Instagram Reels";
-
-    if(/youtube|shorts/.test(t))
+    if(
+        n.includes("youtube") ||
+        n.includes("short")
+    )
         return "YouTube Shorts";
 
-    if(/facebook/.test(t))
+    if(
+        n.includes("instagram") ||
+        n.includes("reel")
+    )
+        return "Instagram Reels";
+
+    if(n.includes("facebook"))
         return "Facebook";
 
-    if(/whatsapp/.test(t))
-        return "WhatsApp";
-
     return "Redes sociales";
+
+}
+
+
+function detectNiche(text){
+
+    const n =
+        normalizeText(text);
+
+    if(
+        /gaming|videojuego|valorant|minecraft|fortnite|clash|roblox|free fire/.test(n)
+    )
+        return "Gaming";
+
+    if(
+        /comida|cocina|receta|restaurant/.test(n)
+    )
+        return "Gastronomía";
+
+    if(
+        /ropa|moda|outfit/.test(n)
+    )
+        return "Moda";
+
+    if(
+        /gym|fitness|entrenamiento/.test(n)
+    )
+        return "Fitness";
+
+    if(
+        /musica|cancion|artista/.test(n)
+    )
+        return "Música";
+
+    if(
+        /negocio|empresa|marca|emprendimiento/.test(n)
+    )
+        return "Negocios";
+
+    return "Contenido digital";
+
 }
 
 
 /* =========================================================
-   DETECCIÓN DE NICHO
+   ADVERTISING DETECTION
    ========================================================= */
 
-function detectNiche(topic){
+function advertisingStrongSignals(text){
 
-    const t=normalizeText(topic);
+    const n =
+        normalizeText(text);
 
-    if(detectGame(t))
-        return "gaming";
+    return [
+        "publicidad",
+        "anuncio",
+        "campana",
+        "vender",
+        "venta",
+        "marca",
+        "producto",
+        "servicio",
+        "cliente",
+        "marketing",
+        "promocionar",
+        "promocion",
+        "viral",
+        "contenido",
+        "tiktok",
+        "instagram",
+        "youtube",
+        "guion",
+        "video"
+    ].filter(
+        word=>n.includes(word)
+    ).length;
 
-    if(
-        /futbol|futbolista|deporte|gym|fitness|entrenamiento|atleta|baloncesto|basket|running|tenis/.test(t)
-    )
-        return "deportes";
-
-    if(
-        /pizza|hamburguesa|burger|comida|restaurante|cafeteria|cafe|food|postre|dulce|helado/.test(t)
-    )
-        return "comida";
-
-    if(
-        /ropa|moda|zapato|zapatilla|tienda|camisa|pantalon|accesorio|streetwear/.test(t)
-    )
-        return "moda";
-
-    if(
-        /tecnologia|telefono|celular|pc|computadora|laptop|software|app|aplicacion/.test(t)
-    )
-        return "tecnologia";
-
-    if(
-        /belleza|maquillaje|cosmetico|perfume|cabello|pelo|skincare/.test(t)
-    )
-        return "belleza";
-
-    if(
-        /casa|hogar|inmobiliaria|apartamento|departamento|terreno/.test(t)
-    )
-        return "hogar";
-
-    if(
-        /mascota|veterinaria|perro|gato|animal/.test(t)
-    )
-        return "mascotas";
-
-    if(
-        /marketing|publicidad|marca|branding|negocio|empresa|emprendimiento|ventas/.test(t)
-    )
-        return "negocio";
-
-    if(
-        /musica|cancion|artista|cantante|album/.test(t)
-    )
-        return "musica";
-
-    return "general";
 }
 
 
-/* =========================================================
-   DETECTOR DE PUBLICIDAD
-   ========================================================= */
+function advertisingContextSignals(text){
 
-const advertisingStrongSignals=[
+    const n =
+        normalizeText(text);
 
-"publicidad",
-"publicitar",
-"anuncio",
-"anunciar",
-"campaña",
-"campana",
-"marketing",
-"promocionar",
-"promocione",
-"promocion",
-"promoción",
-"promover",
-"quiero vender",
-"quiero conseguir clientes",
-"quiero atraer clientes",
-"conseguir ventas",
-"aumentar ventas",
-"generar ventas",
-"vender más",
-"vender mas",
-"dar a conocer",
-"lanzamiento",
-"lanzar mi producto",
-"lanzar un producto",
-"mi marca",
-"branding",
-"identidad de marca",
-"copy publicitario",
-"copywriting",
-"texto publicitario",
-"eslogan",
-"slogan",
-"cta",
-"llamada a la acción",
-"llamada a la accion",
-"gancho publicitario",
-"hook para",
-"guion publicitario",
-"guión publicitario",
-"video publicitario",
-"vídeo publicitario",
-"video para vender",
-"reel para vender",
-"tiktok para vender",
-"contenido para vender",
-"estrategia publicitaria",
-"estrategia de marketing",
-"estrategia para vender",
-"estrategia para promocionar",
-"plan de contenido",
-"plan de marketing",
-"necesito promocionar",
-"necesito publicidad",
-"necesito un anuncio",
-"necesito un guion",
-"necesito un guión",
-"hazme una publicidad",
-"hazme un anuncio",
-"hazme una campaña",
-"hazme un guion",
-"hazme un guión",
-"creame una publicidad",
-"créame una publicidad",
-"creame un anuncio",
-"créame un anuncio",
-"crea una publicidad",
-"crea un anuncio",
-"quiero una publicidad",
-"quiero un anuncio",
-"quiero hacer publicidad",
-"quiero hacer un anuncio",
-"quiero promocionar",
-"quiero publicitar",
-"quiero hacer marketing"
+    return [
+        "quiero hacer",
+        "quiero crear",
+        "necesito",
+        "como hago",
+        "dame ideas",
+        "ayudame",
+        "que puedo publicar",
+        "que publico",
+        "quiero subir"
+    ].filter(
+        phrase=>n.includes(phrase)
+    ).length;
 
-];
+}
 
 
-const advertisingContextSignals=[
+function obviousNonAdvertisingTopics(text){
 
-"producto",
-"servicio",
-"negocio",
-"empresa",
-"emprendimiento",
-"cliente",
-"clientes",
-"tienda",
-"marca",
-"audiencia",
-"público",
-"publico",
-"ventas",
-"venta",
-"precio",
-"oferta",
-"promoción",
-"promocion",
-"descuento",
-"comprar",
-"seguidores",
-"canal",
-"contenido",
-"video",
-"vídeo",
-"tiktok",
-"instagram",
-"reels",
-"youtube",
-"shorts",
-"facebook",
-"whatsapp",
-"redes",
-"campaña",
-"anuncio",
-"anuncios",
-"guion",
-"guión",
-"gancho",
-"hook",
-"cta",
-"música",
-"musica",
-"edición",
-"edicion",
-"viral",
-"retención",
-"retencion",
-"alcance",
-"conversión",
-"conversion",
-"branding",
-"logo",
-"identidad",
-"publicar",
-"creador",
-"streamer",
-"streaming",
-"comunidad",
-"patrocinio",
-"patrocinado",
-"juego",
-"gaming",
-"gameplay",
-"partida",
-"personaje",
-"agente",
-"campeon",
-"campeón"
+    const n =
+        normalizeText(text);
 
-];
+    return [
+        "matematicas",
+        "fraccion",
+        "ecuacion",
+        "historia",
+        "geografia",
+        "biologia",
+        "tarea escolar",
+        "quimica"
+    ].some(
+        topic=>n.includes(topic)
+    );
 
-
-const obviousNonAdvertisingTopics=[
-
-"matemática",
-"matematicas",
-"matemáticas",
-"sumar",
-"restar",
-"multiplicar",
-"dividir",
-"ecuación",
-"ecuacion",
-"fracción",
-"fraccion",
-"historia",
-"geografía",
-"geografia",
-"biología",
-"biologia",
-"química",
-"quimica",
-"física",
-"fisica",
-"tarea",
-"deberes",
-"deber",
-"capital de",
-"presidente de",
-"clima",
-"temperatura",
-"qué hora",
-"que hora",
-"receta",
-"cocinar",
-"traduce",
-"traducción",
-"traduccion",
-"definición",
-"definicion",
-"qué significa",
-"que significa",
-"cuánto es",
-"cuanto es",
-"resolver",
-"problema matemático",
-"problema matematico"
-
-];
+}
 
 
 function detectAdvertisingIntent(text){
 
-    const normalized=normalizeText(text);
-    const withoutNoise=normalizeText(
-        removeNoise(text)
+    if(obviousNonAdvertisingTopics(text))
+        return false;
+
+    return (
+        advertisingStrongSignals(text)>=1 ||
+        advertisingContextSignals(text)>=1
     );
 
-    let strong=0;
-    let context=0;
-
-    advertisingStrongSignals.forEach(signal=>{
-
-        if(
-            withoutNoise.includes(
-                normalizeText(signal)
-            )
-        ){
-            strong+=3;
-        }
-
-    });
-
-    advertisingContextSignals.forEach(signal=>{
-
-        if(
-            withoutNoise.includes(
-                normalizeText(signal)
-            )
-        ){
-            context++;
-        }
-
-    });
-
-    const obviousOther=
-        obviousNonAdvertisingTopics.some(
-            signal=>
-            normalized.includes(
-                normalizeText(signal)
-            )
-        );
-
-    if(strong>=3){
-
-        return {
-            isAdvertising:true,
-            confidence:"high"
-        };
-
-    }
-
-    if(
-        context>=3 &&
-        !obviousOther
-    ){
-
-        return {
-            isAdvertising:true,
-            confidence:"medium"
-        };
-
-    }
-
-    return {
-        isAdvertising:false,
-        confidence:"low"
-    };
 }
 
 
 /* =========================================================
-   LIMPIAR TEMA
+   CLEAN TOPIC
    ========================================================= */
 
 function cleanTopic(text){
 
-    let result=removeNoise(text);
-
-    result=result
+    return text
         .replace(
-            /hola|holaa|holaaa|buenas|buenos dias|buenas tardes|buenas noches|hey|hello|hi|saludos/gi,
-            ""
-        )
-        .replace(
-            /quiero hacer una publicidad sobre/gi,
-            ""
-        )
-        .replace(
-            /quiero hacer publicidad sobre/gi,
-            ""
-        )
-        .replace(
-            /quiero hacer un anuncio sobre/gi,
-            ""
-        )
-        .replace(
-            /quiero un anuncio de/gi,
-            ""
-        )
-        .replace(
-            /necesito una publicidad para/gi,
-            ""
-        )
-        .replace(
-            /necesito un anuncio para/gi,
-            ""
-        )
-        .replace(
-            /publicidad para/gi,
-            ""
-        )
-        .replace(
-            /publicidad sobre/gi,
-            ""
-        )
-        .replace(
-            /anuncio para/gi,
-            ""
-        )
-        .replace(
-            /anuncio sobre/gi,
-            ""
-        )
-        .replace(
-            /hazme una publicidad de/gi,
-            ""
-        )
-        .replace(
-            /hazme un anuncio de/gi,
-            ""
-        )
-        .replace(
-            /quiero promocionar/gi,
-            ""
-        )
-        .replace(
-            /quiero publicitar/gi,
-            ""
-        )
-        .replace(
-            /por favor/gi,
+            /^(hola|hey|buenas|oye|bro|mano)[,\s]*/i,
             ""
         )
         .replace(/\s+/g," ")
-        .trim();
+        .trim()
+        .slice(0,180);
 
-    return result||text.trim();
 }
 
 
 /* =========================================================
-   DURACIONES
+   DURATIONS
    ========================================================= */
 
 const timeOptions=[
-"10 seg",
-"20 seg",
-"30 seg",
-"45 seg",
-"60 seg",
-"90 seg",
-"2 min",
-"3 min",
-"5 min",
-"Personalizado"
+
+    {
+        label:"15 segundos",
+        seconds:15
+    },
+
+    {
+        label:"30 segundos",
+        seconds:30
+    },
+
+    {
+        label:"45 segundos",
+        seconds:45
+    },
+
+    {
+        label:"1 minuto",
+        seconds:60
+    },
+
+    {
+        label:"1:30",
+        seconds:90
+    },
+
+    {
+        label:"2 minutos",
+        seconds:120
+    },
+
+    {
+        label:"3 minutos",
+        seconds:180
+    }
+
 ];
 
 
 function durationToSeconds(duration){
 
-    const d=String(duration).toLowerCase();
+    if(!duration)
+        return 0;
 
-    if(d.includes("min")){
+    const n =
+        normalizeText(duration);
 
-        const number=parseFloat(
-            d.replace(",",".")
-        );
+    if(n.includes("15"))
+        return 15;
 
-        if(!isNaN(number))
-            return number*60;
+    if(n.includes("30"))
+        return 30;
 
-    }
+    if(n.includes("45"))
+        return 45;
 
-    const number=parseFloat(d);
+    if(n.includes("1:30"))
+        return 90;
 
-    return isNaN(number)?30:number;
+    if(n.includes("2"))
+        return 120;
+
+    if(n.includes("3"))
+        return 180;
+
+    if(
+        n.includes("1 minuto") ||
+        n==="1"
+    )
+        return 60;
+
+    return 0;
+
 }
 
 
 function extractDuration(text){
 
-    const clean=text
-        .toLowerCase()
-        .replace(",", ".");
+    const n =
+        normalizeText(text);
 
-    let match=clean.match(
-        /(\d+(?:\.\d+)?)\s*(segundos?|secs?|s)\b/
-    );
+    if(
+        n.includes("15 segundos")
+    )
+        return 15;
 
-    if(match)
-        return match[1]+" seg";
+    if(
+        n.includes("30 segundos")
+    )
+        return 30;
 
-    match=clean.match(
-        /(\d+(?:\.\d+)?)\s*(minutos?|mins?|m)\b/
-    );
+    if(
+        n.includes("45 segundos")
+    )
+        return 45;
 
-    if(match)
-        return match[1]+" min";
+    if(
+        n.includes("1:30")
+    )
+        return 90;
 
-    return null;
+    if(
+        n.includes("2 minutos")
+    )
+        return 120;
+
+    if(
+        n.includes("3 minutos")
+    )
+        return 180;
+
+    if(
+        n.includes("1 minuto")
+    )
+        return 60;
+
+    return 0;
+
 }
 
 
 /* =========================================================
-   MÚSICA
+   MUSIC
    ========================================================= */
 
 const musicDatabase={
 
-gaming:{
-artist:"Electrónica competitiva, trap gaming o rock electrónico.",
-style:"Beat energético, bajo marcado y golpes sincronizados con eliminaciones, cambios de escena y momentos clave.",
-free:"Busca música royalty-free de gaming, electronic trap, phonk instrumental o cinematic action."
-},
+    gaming:[
+        "Phonk oscuro",
+        "Trap energético",
+        "Drill instrumental",
+        "Electrónica intensa",
+        "Beat glitch"
+    ],
 
-deportes:{
-artist:"Hip-hop deportivo o electrónica energética.",
-style:"Percusión marcada, bajo potente y sensación de movimiento.",
-free:"Busca música royalty-free de sports hype o energetic hip-hop."
-},
+    marketing:[
+        "Electrónica moderna",
+        "Future bass",
+        "Beat corporativo dinámico",
+        "Pop moderno",
+        "Lo-fi elegante"
+    ],
 
-comida:{
-artist:"Pop alegre o funk moderno.",
-style:"Ritmo fresco y dinámico para acompañar tomas del producto.",
-free:"Busca música royalty-free de upbeat food commercial o funky pop."
-},
+    humor:[
+        "Meme beat",
+        "Hyperpop",
+        "Beat acelerado",
+        "Electrónica absurda",
+        "Percusión cómica"
+    ],
 
-moda:{
-artist:"Pop electrónico o dance elegante.",
-style:"Beat limpio y moderno con espacio para las imágenes.",
-free:"Busca música royalty-free de fashion electronic o luxury pop."
-},
+    storytelling:[
+        "Piano cinematográfico",
+        "Ambient emocional",
+        "Lo-fi narrativo",
+        "Cinematic build",
+        "Electrónica atmosférica"
+    ],
 
-tecnologia:{
-artist:"Electrónica futurista.",
-style:"Sonido digital, limpio y progresivo.",
-free:"Busca música royalty-free de futuristic technology."
-},
+    moda:[
+        "House moderno",
+        "Afrobeat",
+        "Pop fashion",
+        "Deep house",
+        "Electrónica minimalista"
+    ],
 
-belleza:{
-artist:"Pop minimalista o R&B suave.",
-style:"Elegante, limpio y con transiciones suaves.",
-free:"Busca música royalty-free de beauty commercial."
-},
-
-hogar:{
-artist:"Cinematic pop o piano moderno.",
-style:"Cálido, aspiracional y confiable.",
-free:"Busca música royalty-free de cinematic lifestyle."
-},
-
-mascotas:{
-artist:"Pop acústico alegre.",
-style:"Cálido, divertido y cercano.",
-free:"Busca música royalty-free de happy acoustic commercial."
-},
-
-negocio:{
-artist:"Corporate electronic moderno.",
-style:"Profesional y optimista sin competir con la voz.",
-free:"Busca música royalty-free de modern corporate."
-},
-
-musica:{
-artist:"Pop o electrónica según la identidad del proyecto.",
-style:"La música debe reforzar la personalidad visual.",
-free:"Usa música royalty-free compatible con el concepto."
-},
-
-general:{
-artist:"Pop electrónico comercial.",
-style:"Moderno, adaptable y fácil de sincronizar con edición.",
-free:"Busca música royalty-free de modern commercial pop."
-}
+    general:[
+        "Lo-fi moderno",
+        "Pop instrumental",
+        "Electrónica suave",
+        "Hip-hop instrumental",
+        "Ambient"
+    ]
 
 };
 
 
 /* =========================================================
-   ANALIZAR PROYECTO
+   PROJECT ANALYSIS
    ========================================================= */
 
-function analyzeProject(text,correction){
+let currentProject=null;
 
-    const duration=extractDuration(text);
-    const topic=cleanTopic(text);
-    const niche=detectNiche(topic);
-    const game=detectGame(text);
-    const character=detectCharacter(text,game);
-    const role=detectRole(text,game);
-    const platform=detectPlatform(text);
+let waitingForDuration=false;
 
-    return{
-        topic,
-        duration,
-        niche,
+let lastGeneratedHTML="";
+
+
+function analyzeProject(text){
+
+    const game =
+        detectGame(text);
+
+    const character =
+        detectCharacter(text);
+
+    const role =
+        detectRole(text);
+
+    const platform =
+        detectPlatform(text);
+
+    const niche =
+        detectNiche(text);
+
+    const duration =
+        extractDuration(text);
+
+
+    return {
+
+        topic:
+            cleanTopic(text),
+
         game,
+
         character,
+
         role,
+
         platform,
-        correction
+
+        niche,
+
+        duration:
+            duration || null
+
     };
+
 }
 
 
-/* =========================================================
-   MOSTRAR QUÉ ENTENDIÓ
-   ========================================================= */
-
 function buildAnalysisMessage(project){
 
-    let details=[];
+    const gameText =
+        project.game
+        ? capitalize(project.game)
+        : "No especificado";
 
-    if(project.game)
-        details.push(
-            `<b>Juego:</b> ${escapeHTML(project.game.names[0])}`
-        );
-
-    if(project.character)
-        details.push(
-            `<b>Personaje:</b> ${capitalize(
-                escapeHTML(project.character)
-            )}`
-        );
-
-    if(project.role)
-        details.push(
-            `<b>Rol:</b> ${capitalize(
-                escapeHTML(project.role)
-            )}`
-        );
-
-    details.push(
-        `<b>Temática:</b> ${capitalize(project.niche)}`
-    );
-
-    details.push(
-        `<b>Plataforma:</b> ${project.platform}`
-    );
-
-    if(project.duration)
-        details.push(
-            `<b>Duración:</b> ${project.duration}`
-        );
-
-    let correction="";
-
-    if(
-        project.correction &&
-        project.correction.changed
-    ){
-
-        correction=`
-
-        <div class="section analysis-card">
-
-            <b>✍️ Corrección detectada</b>
-
-            <br><br>
-
-            <span class="correction">
-
-            Entendí tu mensaje aunque tenía algunos
-            errores de escritura. Ajusté el texto internamente
-            para analizar mejor la idea.
-
-            </span>
-
-        </div>
-
-        `;
-
-    }
 
     return `
 
-        <div class="bot-title">
-            🔎 Ya entendí la idea
-        </div>
+        <strong>Perfecto. Ya tengo el punto de partida.</strong>
 
-        <div class="section analysis-card">
+        <ul>
 
-            ${details.join("<br><br>")}
+            <li>
+                <strong>Proyecto:</strong>
+                ${escapeHTML(project.topic)}
+            </li>
 
-        </div>
+            <li>
+                <strong>Plataforma:</strong>
+                ${escapeHTML(project.platform)}
+            </li>
 
-        ${correction}
+            <li>
+                <strong>Nicho:</strong>
+                ${escapeHTML(project.niche)}
+            </li>
+
+            ${
+                project.game
+                ? `
+                <li>
+                    <strong>Juego:</strong>
+                    ${escapeHTML(gameText)}
+                </li>
+                `
+                : ""
+            }
+
+            ${
+                project.character
+                ? `
+                <li>
+                    <strong>Personaje:</strong>
+                    ${escapeHTML(
+                        capitalize(project.character)
+                    )}
+                </li>
+                `
+                : ""
+            }
+
+            ${
+                project.role
+                ? `
+                <li>
+                    <strong>Rol:</strong>
+                    ${escapeHTML(project.role)}
+                </li>
+                `
+                : ""
+            }
+
+        </ul>
+
+        Para hacerlo bien, primero definamos la duración del contenido.
 
     `;
+
 }
 
 
@@ -2680,177 +3904,62 @@ function buildAnalysisMessage(project){
 function formatSeconds(seconds){
 
     if(seconds<60)
-        return `${Math.round(seconds)}s`;
+        return `${seconds} segundos`;
 
-    const min=Math.floor(seconds/60);
-    const sec=Math.round(seconds%60);
+    const minutes =
+        Math.floor(seconds/60);
 
-    return sec===0
-        ? `${min}:00`
-        : `${min}:${String(sec).padStart(2,"0")}`;
+    const remaining =
+        seconds%60;
+
+    if(!remaining)
+        return `${minutes} minuto${minutes>1?"s":""}`;
+
+    return `${minutes}:${String(remaining).padStart(2,"0")}`;
+
 }
 
 
-function buildTimeline(duration,topic,niche){
+function buildTimeline(seconds){
 
-    const seconds=durationToSeconds(duration);
-    let segments=[];
+    const parts=[];
 
-    if(seconds<=10){
-
-        segments=[
-            {
-                time:"0–2s",
-                title:"GANCHO",
-                text:`Impacto inmediato relacionado con ${topic}.`
-            },
-            {
-                time:"2–7s",
-                title:"MENSAJE",
-                text:`Presenta rápidamente la propuesta principal.`
-            },
-            {
-                time:"7–10s",
-                title:"CTA",
-                text:"Cierre directo con una acción sencilla."
-            }
-        ];
-
-    }else if(seconds<=20){
-
-        segments=[
-            {
-                time:"0–3s",
-                title:"GANCHO",
-                text:"Pregunta, sorpresa, resultado o situación que detenga el scroll."
-            },
-            {
-                time:"3–8s",
-                title:"PROBLEMA",
-                text:`Presenta la necesidad relacionada con ${topic}.`
-            },
-            {
-                time:"8–15s",
-                title:"SOLUCIÓN",
-                text:`Demuestra cómo ${topic} responde a esa necesidad.`
-            },
-            {
-                time:"15–20s",
-                title:"CTA",
-                text:"Cierre con una acción concreta."
-            }
-        ];
-
-    }else if(seconds<=30){
-
-        segments=[
-            {
-                time:"0–3s",
-                title:"GANCHO",
-                text:"Primera imagen potente para detener el scroll."
-            },
-            {
-                time:"3–8s",
-                title:"CONTEXTO",
-                text:"Presenta el problema, deseo o situación."
-            },
-            {
-                time:"8–18s",
-                title:"PRESENTACIÓN",
-                text:`Introduce ${topic} y muestra sus puntos fuertes.`
-            },
-            {
-                time:"18–25s",
-                title:"PRUEBA",
-                text:"Demostración, resultado o reacción."
-            },
-            {
-                time:"25–30s",
-                title:"CTA",
-                text:"Cierre memorable."
-            }
-        ];
-
-    }else if(seconds<=60){
-
-        segments=[
-            {
-                time:"0–5s",
-                title:"GANCHO",
-                text:"La propuesta más interesante aparece desde el principio."
-            },
-            {
-                time:"5–12s",
-                title:"SITUACIÓN",
-                text:"Conecta con una necesidad concreta."
-            },
-            {
-                time:"12–22s",
-                title:"PRESENTACIÓN",
-                text:`Presenta ${topic} y su propuesta principal.`
-            },
-            {
-                time:"22–34s",
-                title:"BENEFICIOS",
-                text:"Muestra las ventajas más importantes."
-            },
-            {
-                time:"34–46s",
-                title:"PRUEBA",
-                text:"Demostración o evidencia."
-            },
-            {
-                time:"46–54s",
-                title:"RECUERDO",
-                text:"Construye el momento visual memorable."
-            },
-            {
-                time:"54–60s",
-                title:"CTA",
-                text:"Una acción principal y clara."
-            }
-        ];
-
-    }else{
-
-        const step=Math.max(
-            8,
-            Math.floor(seconds/8)
+    const hook =
+        Math.max(
+            3,
+            Math.round(seconds*.15)
         );
 
-        const names=[
-            ["GANCHO","Captura atención inmediatamente."],
-            ["CONTEXTO","Explica por qué importa."],
-            ["PROBLEMA","Presenta la necesidad."],
-            ["SOLUCIÓN","Introduce la propuesta."],
-            ["BENEFICIOS","Desarrolla las ventajas."],
-            ["PRUEBA","Demuestra el resultado."],
-            ["DIFERENCIAL","Explica qué la hace especial."],
-            ["CTA","Cierra con una acción clara."]
-        ];
+    const development =
+        Math.max(
+            5,
+            Math.round(seconds*.55)
+        );
 
-        names.forEach((item,index)=>{
+    const payoff =
+        Math.max(
+            4,
+            seconds-hook-development
+        );
 
-            const start=index===0
-                ? 0
-                : index*step;
 
-            const end=index===names.length-1
-                ? seconds
-                : Math.min(seconds,start+step);
+    parts.push(
+        `<li><strong>0–${hook}s:</strong> Hook que detenga el scroll.</li>`
+    );
 
-            segments.push({
-                time:
-                    `${formatSeconds(start)}–${formatSeconds(end)}`,
-                title:item[0],
-                text:
-                    `${item[1]} Integra ${topic} sin llenar tiempo con información innecesaria.`
-            });
 
-        });
-    }
+    parts.push(
+        `<li><strong>${hook}–${hook+development}s:</strong> Desarrollo rápido y visual.</li>`
+    );
 
-    return segments;
+
+    parts.push(
+        `<li><strong>${hook+development}–${seconds}s:</strong> Remate, CTA o giro final.</li>`
+    );
+
+
+    return parts.join("");
+
 }
 
 
@@ -2858,836 +3967,428 @@ function buildTimeline(duration,topic,niche){
    IDEAS
    ========================================================= */
 
-function buildIdeas(
-    topic,
-    niche,
-    game,
-    character
-){
+function buildIdeas(project){
 
-    if(niche==="gaming"){
+    const ideas=[];
 
-        if(character){
 
-            return [
+    if(project.niche==="Gaming"){
 
-                `“El personaje que cambia la partida” — presenta a ${character} desde una situación de alto impacto.`,
+        ideas.push(
+            "Empieza con el momento más intenso y explica el contexto después.",
+            "Haz que el espectador tenga una razón concreta para quedarse hasta el final.",
+            "Usa cortes rápidos y deja una pequeña sorpresa para el último tercio."
+        );
 
-                `“¿Por qué jugar con ${character}?” — tres razones rápidas y visuales.`,
+    }else{
 
-                `“Si eliges ${character}, prepárate para esto” — concepto basado en estilo de juego.`,
+        ideas.push(
+            "Abre con una frase que genere curiosidad inmediata.",
+            "Convierte el beneficio principal en una demostración visual.",
+            "Termina con una acción sencilla que el espectador pueda realizar."
+        );
 
-                `“La jugada que define a ${character}” — comienza por el momento más llamativo.`,
-
-                `“${character} en pocos segundos” — identidad, habilidad y cierre rápido.`
-
-            ];
-
-        }
-
-        if(game){
-
-            const name=game.names[0];
-
-            return [
-
-                `“¿Por qué deberías probar ${name}?” — tres razones con cortes rápidos.`,
-
-                `“La experiencia que te espera en ${name}” — concepto cinematográfico.`,
-
-                `“El momento que hace especial a ${name}” — empieza con la escena más potente.`,
-
-                `“Nuevo jugador vs experiencia” — comparación visual.`,
-
-                `“Tu próximo juego podría ser este” — enfoque de descubrimiento.`
-
-            ];
-
-        }
     }
 
 
-    const ideas={
+    return ideas;
 
-        deportes:[
-            "“El error que todos cometen” — empieza con el error y muestra la alternativa.",
-            "“Antes y después” — evolución visual.",
-            "“¿Puedes hacerlo?” — reto centrado en habilidad.",
-            "“3 cosas que cambiarían tu entrenamiento” — formato educativo.",
-            "“La historia detrás del resultado” — mezcla emoción y explicación."
-        ],
-
-        comida:[
-            "“Esto es lo que estás a punto de probar” — presentación visual.",
-            "“El primer bocado” — reacción y detalles.",
-            "“Así se prepara” — proceso acelerado.",
-            "“3 razones para probarlo” — formato directo.",
-            "“¿Cuál elegirías?” — varias opciones."
-        ],
-
-        moda:[
-            "“Una pieza, tres estilos” — diferentes combinaciones.",
-            "“El detalle que cambia todo” — empieza por un detalle.",
-            "“Antes y después” — transición visual.",
-            "“3 formas de combinarlo” — enfoque educativo.",
-            "“¿Cuál elegirías?” — interacción."
-        ],
-
-        tecnologia:[
-            "“No sabía que podía hacer esto” — función inesperada.",
-            "“3 funciones que casi nadie usa” — educativo.",
-            "“¿Vale la pena?” — prueba rápida.",
-            "“Problema → solución” — utilidad real.",
-            "“Así cambia tu día” — enfoque práctico."
-        ],
-
-        belleza:[
-            "“El cambio está en el detalle” — transformación visual.",
-            "“3 errores comunes” — contenido educativo.",
-            "“Rutina rápida” — pasos claros.",
-            "“Producto + resultado” — experiencia visual.",
-            "“¿Cuál elegirías?” — comparación."
-        ],
-
-        negocio:[
-            "“Tu cliente está buscando esto” — necesidad concreta.",
-            "“El problema que nadie explica” — enfoque educativo.",
-            "“Antes y después” — transformación.",
-            "“3 razones para elegirnos” — propuesta comercial.",
-            "“Un día trabajando con nosotros” — detrás de cámaras."
-        ],
-
-        general:[
-            "“¿Sabías esto?” — dato o descubrimiento.",
-            "“El problema que todos tienen” — necesidad común.",
-            "“3 razones para probarlo” — estructura sencilla.",
-            "“Antes y después” — transformación.",
-            "“Te lo explico rápidamente” — enfoque didáctico."
-        ]
-
-    };
-
-    return ideas[niche]||ideas.general;
 }
 
 
-/* =========================================================
-   SELECTOR DE DURACIÓN
-   ========================================================= */
-
 function showDurationSelectorInsideChat(){
 
-    const panelId="dur-panel-"+Date.now();
-    const t=i18n[currentLang];
+    const wrapper =
+        document.createElement("div");
 
-    return `
 
-        <div class="duration-inline-wrap">
+    wrapper.className="message bot";
 
-            <button
-                class="duration-trigger-btn"
-                onclick="toggleDurationPanel('${panelId}')">
 
-                ${t.durationPrompt}
+    wrapper.innerHTML=`
 
-            </button>
+        <div class="message-bubble">
 
-            <div
-                class="duration-grid-panel"
-                id="${panelId}">
+            <div class="message-label">
+                SPARKYKREA
+            </div>
 
-                ${timeOptions.map(option=>`
+            <strong>
+                ¿Cuánto quieres que dure?
+            </strong>
+
+            <div class="duration-panel">
+
+                ${timeOptions.map(
+                    option=>`
 
                     <button
-                        class="duration-chip"
-                        onclick="selectDurationOption('${option}')">
+                        class="duration-option"
+                        data-seconds="${option.seconds}">
 
-                        ${option}
+                        ${option.label}
 
                     </button>
 
-                `).join("")}
+                `
+                ).join("")}
 
             </div>
 
         </div>
+
     `;
+
+
+    chatInner.appendChild(wrapper);
+
+
+    wrapper
+    .querySelectorAll(".duration-option")
+    .forEach(button=>{
+
+        button.addEventListener(
+            "click",
+            ()=>{
+
+                selectDurationOption(
+                    Number(
+                        button.dataset.seconds
+                    )
+                );
+
+            }
+        );
+
+    });
+
+
+    scrollChat();
+
 }
 
 
-function toggleDurationPanel(id){
+function toggleDurationPanel(){
 
-    const panel=document.getElementById(id);
+    showDurationSelectorInsideChat();
 
-    if(panel){
-
-        panel.classList.toggle("open");
-        scrollChat();
-
-    }
 }
 
 
 /* =========================================================
-   RESPUESTA DE IDEAS
+   RESPONSES
    ========================================================= */
 
 function buildIdeasResponse(project){
 
-    const t=i18n[currentLang];
+    const ideas =
+        buildIdeas(project);
 
-    const ideas=buildIdeas(
-        project.topic,
-        project.niche,
-        project.game,
-        project.character
-    );
 
     return `
 
-        <div class="bot-title">
-            💡 Vamos a desarrollar el concepto
-        </div>
+        <strong>Tengo varias rutas para este proyecto.</strong>
 
-        <div class="section">
-
-            <b>${t.durationLabel}</b>
-            ${escapeHTML(project.duration)}
-
-            <br><br>
-
-            <b>📱 Plataforma:</b>
-            ${escapeHTML(project.platform)}
-
-        </div>
-
-        <div class="section">
-
-            <b>${t.ideasHeader}</b>
+        <ul>
 
             ${ideas.map(
-                (idea,index)=>{
-
-                    const parts=idea.split(" — ");
-
-                    return `
-
-                    <div class="idea-card">
-
-                        <b>
-                            ${index+1}.
-                            ${escapeHTML(parts[0])}
-                        </b>
-
-                        <br>
-
-                        ${escapeHTML(parts[1]||"")}
-
-                    </div>
-
-                    `;
-                }
+                idea=>
+                    `<li>${escapeHTML(idea)}</li>`
             ).join("")}
 
-        </div>
+        </ul>
+
+        <strong>Mi recomendación:</strong>
+        empieza por la primera idea y haz que el primer segundo
+        sea imposible de ignorar.
 
         ${motivation()}
+
     `;
+
 }
 
-
-/* =========================================================
-   ESTRATEGIA FINAL
-   ========================================================= */
 
 function buildFinalStrategy(project){
 
-    const t=i18n[currentLang];
+    const seconds =
+        project.duration ||
+        30;
 
-    const topic=project.topic||"tu proyecto";
-    const duration=project.duration||"30 seg";
-    const niche=project.niche||"general";
-    const platform=project.platform||"Redes sociales";
 
-    const music=
-        musicDatabase[niche]||
-        musicDatabase.general;
+    const musicType =
+        project.niche==="Gaming"
+        ? musicDatabase.gaming
+        : musicDatabase.general;
 
-    const timeline=buildTimeline(
-        duration,
-        topic,
-        niche
-    );
 
-    const seconds=
-        durationToSeconds(duration);
+    const selectedMusic =
+        musicType[
+            Math.floor(
+                Math.random() *
+                musicType.length
+            )
+        ];
 
-    let strategyText;
 
-    if(seconds<=20){
+    const timeline =
+        buildTimeline(seconds);
 
-        strategyText=
-            "La prioridad es velocidad: el público debe comprender la propuesta casi inmediatamente.";
 
-    }else if(seconds<=60){
+    const ideas =
+        buildIdeas(project);
 
-        strategyText=
-            "La estructura combina atención, contexto, demostración y cierre sin perder ritmo.";
 
-    }else{
+    const hookOptions=[
 
-        strategyText=
-            "El tiempo adicional permite desarrollar una pequeña historia y trabajar mejor la demostración.";
-    }
+        "Si sigues haciendo esto, estás perdiendo oportunidades.",
 
+        "Nadie te cuenta esta parte cuando empiezas.",
 
-    let gamingInfo="";
+        "Mira esto antes de publicar tu próximo video.",
 
-    if(project.game){
+        "Hay una forma mucho más inteligente de hacerlo.",
 
-        gamingInfo+=`
+        "Esto es lo primero que cambiaría de tu contenido."
 
-            <br><br>
+    ];
 
-            <b>🎮 Juego:</b>
-            ${escapeHTML(project.game.names[0])}
 
-        `;
+    const hook =
+        hookOptions[
+            Math.floor(
+                Math.random() *
+                hookOptions.length
+            )
+        ];
 
-        if(project.character){
 
-            gamingInfo+=`
+    const html=`
 
-                <br><br>
+        <strong>
+            Proyecto listo: ${escapeHTML(project.topic)}
+        </strong>
 
-                <b>🎭 Personaje:</b>
-                ${capitalize(
-                    escapeHTML(project.character)
-                )}
+        <br><br>
 
-            `;
+        <strong class="accent">
+            DURACIÓN: ${formatSeconds(seconds)}
+        </strong>
 
-        }
+        <br><br>
 
-        if(project.role){
+        <strong>HOOK</strong>
 
-            gamingInfo+=`
+        <p>
+            "${escapeHTML(hook)}"
+        </p>
 
-                <br><br>
+        <strong>ESTRUCTURA</strong>
 
-                <b>🎯 Rol:</b>
-                ${capitalize(
-                    escapeHTML(project.role)
-                )}
+        <ul>
+            ${timeline}
+        </ul>
 
-            `;
+        <strong>IDEAS DE DESARROLLO</strong>
 
-        }
+        <ul>
 
-    }
+            ${ideas.map(
+                idea=>
+                    `<li>${escapeHTML(idea)}</li>`
+            ).join("")}
 
+        </ul>
 
-    return `
+        <strong>MÚSICA</strong>
 
-        <div class="bot-title">
-            ${t.scriptTitle}
-        </div>
+        <p>
+            ${escapeHTML(selectedMusic)}
+        </p>
 
-        <div class="section">
+        <strong>ESTRATEGIA</strong>
 
-            <b>${t.projectLabel}</b>
-            ${escapeHTML(capitalize(topic))}
+        <ul>
 
-            <br><br>
+            <li>
+                Mantén el comienzo directo y elimina introducciones innecesarias.
+            </li>
 
-            <b>${t.durationLabel}</b>
-            ${escapeHTML(duration)}
+            <li>
+                Añade cambios visuales cada pocos segundos.
+            </li>
 
-            <br><br>
+            <li>
+                Construye una pequeña tensión antes del resultado.
+            </li>
 
-            <b>${t.categoryLabel}</b>
-            ${capitalize(niche)}
+            <li>
+                Cierra con una acción clara para el espectador.
+            </li>
 
-            <br><br>
+        </ul>
 
-            <b>📱 Plataforma:</b>
-            ${escapeHTML(platform)}
+        <strong>CTA</strong>
 
-            ${gamingInfo}
-
-        </div>
-
-
-        <div class="section">
-
-            <b>${t.scriptHeader}</b>
-
-            ${timeline.map(segment=>`
-
-                <div class="script-line">
-
-                    <span class="time-code">
-                        ${segment.time}
-                    </span>
-
-                    —
-                    <b>${segment.title}</b>
-
-                    <div class="tip">
-                        ${escapeHTML(segment.text)}
-                    </div>
-
-                </div>
-
-            `).join("")}
-
-        </div>
-
-
-        <div class="section">
-
-            <b>${t.strategyHeader}</b>
-
-            <br><br>
-
-            ${strategyText}
-
-            <br><br>
-
-            <b>🎯 Público:</b>
-
-            Personas interesadas en
-            ${escapeHTML(topic)}
-            y en la necesidad que resuelve.
-
-            <br><br>
-
-            <b>🧲 Gancho:</b>
-
-            Entra directamente en el elemento
-            más interesante de la propuesta.
-
-            <br><br>
-
-            <b>👁️ Visual:</b>
-
-            El elemento principal debe permanecer
-            claro y reconocible.
-
-            <br><br>
-
-            <b>✂️ Edición:</b>
-
-            Cortes limpios, ritmo controlado
-            y texto breve.
-
-            <br><br>
-
-            <b>🗣️ Voz:</b>
-
-            Natural, segura y con intención.
-
-            <br><br>
-
-            <b>📢 CTA:</b>
-
-            Una sola acción principal al final.
-
-        </div>
-
-
-        <div class="section">
-
-            <b>${t.platformHeader}</b>
-
-            <br><br>
-
-            <b>Formato:</b>
-            Vertical 9:16 para TikTok, Reels y Shorts.
-
-            <br><br>
-
-            <b>Primeros segundos:</b>
-            La información importante comienza inmediatamente.
-
-            <br><br>
-
-            <b>Texto:</b>
-            Corto, grande y fácil de leer.
-
-            <br><br>
-
-            <b>Retención:</b>
-            Cambios visuales con intención y pequeños avances de información.
-
-        </div>
-
-
-        <div class="section">
-
-            <b>${t.musicHeader}</b>
-
-            <br><br>
-
-            <b>${t.artistLabel}</b>
-
-            ${music.artist}
-
-            <br><br>
-
-            <b>${t.trackLabel}</b>
-
-            ${music.style}
-
-            <br><br>
-
-            <b>🎧 Alternativa royalty-free:</b>
-
-            ${music.free}
-
-        </div>
-
-
-        <div class="section">
-
-            <b>🎬 Dirección de edición</b>
-
-            <br><br>
-
-            • Evitar introducciones largas.
-            <br>
-            • Entrar rápidamente en la idea.
-            <br>
-            • No llenar la pantalla de texto.
-            <br>
-            • Sincronizar cortes importantes con la música.
-            <br>
-            • Mantener una identidad visual coherente.
-            <br>
-            • Cerrar con una acción concreta.
-
-        </div>
+        <p>
+            "Si quieres ver la siguiente parte,
+            quédate por aquí."
+        </p>
 
         ${motivation()}
+
     `;
+
+
+    lastGeneratedHTML=html;
+
+
+    return html;
+
 }
 
 
 /* =========================================================
-   AYUDA
+   HELP
    ========================================================= */
 
 function showHelp(){
 
-    addBotMessage(`
+    return `
 
-        <div class="bot-title">
-            Puedo ayudarte dentro del mundo publicitario.
-        </div>
+        <strong>Puedo ayudarte con varias cosas:</strong>
 
-        <div class="section">
+        <ul>
 
-            <b>🎬 Guiones</b><br>
-            Guiones para anuncios, TikTok, Reels,
-            Shorts, videojuegos, marcas, productos y servicios.
+            <li>Crear un guión.</li>
 
-        </div>
+            <li>Diseñar una estrategia para TikTok,
+                Reels o Shorts.</li>
 
-        <div class="section">
+            <li>Elegir música y ritmo.</li>
 
-            <b>📈 Estrategia</b><br>
-            Público objetivo, propuesta, gancho,
-            estructura, retención, CTA y distribución.
+            <li>Crear ideas de contenido.</li>
 
-        </div>
+            <li>Mejorar un anuncio.</li>
 
-        <div class="section">
+            <li>Organizar un proyecto.</li>
 
-            <b>🎵 Música</b><br>
-            Dirección musical, energía, ritmo y referencias
-            adecuadas para el concepto.
+        </ul>
 
-        </div>
+        Por ejemplo:
 
-        <div class="section">
+        <br><br>
 
-            <b>✍️ Escritura</b><br>
-            También puedo detectar errores de escritura,
-            abreviaciones y nombres mal escritos para
-            entender mejor lo que quieres promocionar.
-
-        </div>
-
-        <div class="section">
-
-            <b>🎮 Gaming</b><br>
-            Puedo reconocer juegos, personajes y roles
-            conocidos dentro del texto y adaptar
-            la estrategia publicitaria.
-
-        </div>
+        <span class="accent">
+            "Quiero hacer un video de Valorant para TikTok
+            de 30 segundos."
+        </span>
 
         ${motivation()}
 
-    `);
+    `;
+
 }
 
-
-/* =========================================================
-   SALUDO
-   ========================================================= */
 
 function showGreeting(){
 
-    if(greetingShown)
-        return;
+    return `
 
-    greetingShown=true;
+        <strong>
+            Bienvenido a SparkyKrea.
+        </strong>
 
-    const t=i18n[currentLang];
+        <br><br>
 
-    addBotMessage(
-        `${t.greeting}${motivation()}`
-    );
+        Cuéntame qué quieres crear y convertiré la idea
+        en una propuesta mucho más clara.
+
+        ${motivation()}
+
+    `;
+
 }
 
-
-/* =========================================================
-   NO TENGO IDEA
-   ========================================================= */
 
 function startNoIdeaFlow(){
 
-    currentProject={
-        topic:"contenido por descubrir",
-        niche:"general",
-        platform:"Redes sociales",
-        duration:null,
-        noIdea:true
-    };
+    return `
 
-    addBotMessage(`
+        No pasa nada si todavía no tienes una idea.
 
-        <div class="bot-title">
-            💡 Empecemos desde cero
-        </div>
+        <br><br>
 
-        <div class="section">
+        Podemos construirla desde cero.
 
-            No necesitas tener la idea lista.
-            Primero definimos la duración y después
-            puedo proponerte varios conceptos.
+        <ul>
 
-        </div>
+            <li>Qué contenido quieres hacer.</li>
 
-        ${showDurationSelectorInsideChat()}
+            <li>Para quién.</li>
 
-    `);
+            <li>En qué plataforma.</li>
+
+            <li>Qué quieres conseguir.</li>
+
+        </ul>
+
+        Dime solamente el tema y empezamos.
+
+        ${motivation()}
+
+    `;
 
 }
 
-
-/* =========================================================
-   MODIFICACIONES
-   ========================================================= */
 
 function modifyCurrentProject(text){
 
     if(!currentProject){
 
-        addBotMessage(
-            "Primero dime qué quieres promocionar y preparo el concepto."
-        );
-
-        return;
-
-    }
-
-    const lower=normalizeText(text);
-
-    let change=
-        "Ajusté el concepto manteniendo el contexto del proyecto.";
-
-
-    if(lower.includes("mas emocionante")){
-
-        currentProject.tone="emocionante";
-
-        change=
-            "Aumenté la energía del concepto y reforcé el impacto inicial.";
-
-    }
-
-    else if(
-        lower.includes("mas serio")||
-        lower.includes("profesional")
-    ){
-
-        currentProject.tone="profesional";
-
-        change=
-            "El tono ahora es más profesional, limpio y directo.";
-
-    }
-
-    else if(
-        lower.includes("mas divertido")||
-        lower.includes("humor")
-    ){
-
-        currentProject.tone="divertido";
-
-        change=
-            "Añadí un enfoque más ligero sin perder el objetivo publicitario.";
-
-    }
-
-    else if(lower.includes("mas corto")){
-
-        currentProject.duration="20 seg";
-
-        change=
-            "Compacté la estructura para que el mensaje llegue más rápido.";
-
-    }
-
-    else if(lower.includes("mas largo")){
-
-        currentProject.duration="90 seg";
-
-        change=
-            "Amplié la estructura para permitir más contexto y desarrollo.";
-
-    }
-
-    else if(lower.includes("tiktok")){
-
-        currentProject.platform="TikTok";
-
-        change=
-            "Adapté el concepto a TikTok con gancho inmediato y ritmo dinámico.";
-
-    }
-
-    else if(
-        lower.includes("instagram")||
-        lower.includes("reels")
-    ){
-
-        currentProject.platform="Instagram Reels";
-
-        change=
-            "Adapté la propuesta a Reels con presentación visual rápida.";
-
-    }
-
-    else if(
-        lower.includes("youtube")||
-        lower.includes("shorts")
-    ){
-
-        currentProject.platform="YouTube Shorts";
-
-        change=
-            "Adapté la estructura a Shorts priorizando retención y claridad.";
-
-    }
-
-    else if(
-        lower.includes("cambia el gancho")||
-        lower.includes("mejora el gancho")||
-        lower.includes("otro gancho")
-    ){
-
-        change=
-            "Replanteé el inicio para entrar directamente en el conflicto, resultado o curiosidad principal.";
-
-    }
-
-    else if(
-        lower.includes("cambia la musica")||
-        lower.includes("otra musica")
-    ){
-
-        change=
-            "Cambié la dirección musical por una alternativa diferente.";
-
-    }
-
-    else if(
-        lower.includes("otra version")||
-        lower.includes("otro guion")||
-        lower.includes("otra idea")
-    ){
-
-        change=
-            "Preparé una dirección creativa alternativa manteniendo el objetivo principal.";
+        return generateResponse(text);
 
     }
 
 
-    addBotMessage(`
+    currentProject.topic =
+        cleanTopic(text);
 
-        <div class="bot-title">
-            ${i18n[currentLang].changeHeader}
-        </div>
 
-        <div class="section">
-            ${change}
-        </div>
+    return buildIdeasResponse(
+        currentProject
+    );
 
-        ${buildFinalStrategy(currentProject)}
-
-    `);
-
-    saveCurrentProject();
 }
 
 
 /* =========================================================
-   PROCESAR MENSAJE
+   GENERATE RESPONSE
    ========================================================= */
 
-function generateResponse(text){
+function generateResponse(rawText){
 
-    if(!text.trim())
-        return;
-
-
-    /*
-       CORRECCIÓN PRIMERO.
-       Esto permite que el resto del sistema
-       trabaje sobre una versión más limpia.
-    */
-
-    const correction=correctSpelling(text);
-    const corrected=correction.corrected;
-
-    const normalized=normalizeText(corrected);
+    const corrected =
+        correctSpelling(rawText);
 
 
-    /* SALUDO */
+    const text =
+        removeNoise(corrected);
+
+
+    const normalized =
+        normalizeText(text);
+
 
     if(
-        /^(hola|holaa|holaaa|buenas|hey|hello|hi|saludos)$/
-        .test(normalized)
-    ){
-
-        showGreeting();
-        return;
-
-    }
-
-
-    /* GRACIAS */
-
-    if(
-        /^(gracias|muchas gracias|thanks|thank you)$/
-        .test(normalized)
+        normalized==="hola" ||
+        normalized==="hey" ||
+        normalized==="buenas" ||
+        normalized.startsWith("hola ")
     ){
 
         addBotMessage(
-            `${i18n[currentLang].thanks}${motivation()}`
+            showGreeting()
         );
 
         return;
@@ -3695,114 +4396,44 @@ function generateResponse(text){
     }
 
 
-    /* AYUDA */
-
     if(
-        normalized.includes("que puedes hacer")||
-        normalized.includes("para que sirves")||
-        normalized==="ayuda"
-    ){
-
-        showHelp();
-        return;
-
-    }
-
-
-    /* MODIFICACIONES */
-
-    if(
-        currentProject &&
-        (
-            normalized.includes("mas corto")||
-            normalized.includes("mas largo")||
-            normalized.includes("cambia")||
-            normalized.includes("modifica")||
-            normalized.includes("otra version")||
-            normalized.includes("otro guion")||
-            normalized.includes("otro gancho")||
-            normalized.includes("mas emocionante")||
-            normalized.includes("mas divertido")||
-            normalized.includes("mas serio")||
-            normalized.includes("profesional")||
-            normalized.includes("tiktok")||
-            normalized.includes("instagram")||
-            normalized.includes("reels")||
-            normalized.includes("youtube")||
-            normalized.includes("shorts")
-        )
-    ){
-
-        modifyCurrentProject(corrected);
-        return;
-
-    }
-
-
-    /* SIN IDEA */
-
-    if(
-        /^(no se|no se que hacer|no tengo idea|no tengo ni idea|ninguna idea|estoy sin ideas|ayudame)$/
+        /no se|no tengo idea|ninguna idea|sin idea|no tengo nada/
         .test(normalized)
     ){
 
-        startNoIdeaFlow();
+        addBotMessage(
+            startNoIdeaFlow()
+        );
+
         return;
 
     }
 
 
-    /* DETECTAR PUBLICIDAD */
+    if(
+        /ayuda|que puedes hacer|como funcionas|que haces/
+        .test(normalized)
+    ){
 
-    const advertising=
-        detectAdvertisingIntent(corrected);
+        addBotMessage(
+            showHelp()
+        );
+
+        return;
+
+    }
 
 
-    /*
-       Si el mensaje parece una petición publicitaria,
-       seguimos aunque tenga errores.
-    */
+    const duration =
+        extractDuration(text);
 
-    if(!advertising.isAdvertising){
 
-        /*
-           Si menciona claramente un juego,
-           producto o negocio junto a verbos de creación,
-           también lo consideramos contexto publicitario.
-        */
+    if(waitingForDuration){
 
-        const game=detectGame(corrected);
+        if(duration){
 
-        const contextualAdvertising=
-            game &&
-            /hacer|crear|promocionar|publicar|video|guion|contenido|anuncio|publicidad|tiktok|reel|viral|promover/.test(
-                normalized
-            );
-
-        if(!contextualAdvertising){
-
-            addBotMessage(
-                `
-
-                <div class="bot-title">
-                    Puedo ayudarte con esa idea si la llevamos a publicidad.
-                </div>
-
-                <div class="section">
-
-                    Esa consulta no parece ser publicitaria todavía.
-
-                    <br><br>
-
-                    Dime qué quieres promocionar:
-                    un juego, personaje, producto, servicio,
-                    negocio, canal o contenido.
-
-                </div>
-
-                ${motivation()}
-
-                `
+            selectDurationOption(
+                duration
             );
 
             return;
@@ -3812,198 +4443,146 @@ function generateResponse(text){
     }
 
 
-    /* ANALIZAR */
+    if(
+        currentProject &&
+        /cambiar|modificar|hazlo diferente|otra idea|otra opcion/
+        .test(normalized)
+    ){
 
-    const analysis=
-        analyzeProject(
-            corrected,
-            correction
+        addBotMessage(
+            modifyCurrentProject(text)
         );
 
+        return;
 
-    currentProject=analysis;
+    }
 
 
-    /*
-       Mostrar que entendimos los errores
-       y el contexto.
-    */
+    const project =
+        analyzeProject(text);
+
+
+    currentProject=project;
+
+
+    if(!project.duration){
+
+        waitingForDuration=true;
+
+        addBotMessage(
+            buildAnalysisMessage(project)
+        );
+
+        showDurationSelectorInsideChat();
+
+        return;
+
+    }
+
+
+    waitingForDuration=false;
+
+    currentProject.duration =
+        project.duration;
+
 
     addBotMessage(
-        buildAnalysisMessage(
+        buildFinalStrategy(
             currentProject
         )
     );
 
 
-    /*
-       Si es gaming pero no hay personaje,
-       preguntamos solamente cuando realmente
-       tiene sentido.
-    */
-
-    if(
-        analysis.game &&
-        !analysis.character &&
-        !analysis.role
-    ){
-
-        addBotMessage(`
-
-            <div class="section">
-
-                🎮 Para personalizar todavía más la publicidad,
-                ¿quieres enfocarla en un personaje/agente
-                específico de
-                <b>${escapeHTML(
-                    analysis.game.names[0]
-                )}</b>
-                o prefieres mantenerla centrada
-                en el juego?
-
-            </div>
-
-            ${motivation()}
-
-        `);
-
-        return;
-
-    }
-
-
-    /*
-       Si ya dio duración,
-       generar directamente.
-    */
-
-    if(analysis.duration){
-
-        waitingForDuration=false;
-
-        addBotMessage(
-            buildFinalStrategy(
-                currentProject
-            )
-        );
-
-        saveCurrentProject();
-
-        return;
-
-    }
-
-
-    /*
-       Si no dio duración,
-       pedirla.
-    */
-
-    waitingForDuration=true;
-
-    addBotMessage(`
-
-        <div class="section">
-
-            ${i18n[currentLang].success}
-
-            <br><br>
-
-            Ya tengo el enfoque.
-            Ahora necesito la duración para ajustar
-            el ritmo, las escenas y el nivel de detalle.
-
-        </div>
-
-        ${showDurationSelectorInsideChat()}
-
-    `);
+    saveCurrentProject();
 
 }
 
 
 /* =========================================================
-   SELECCIONAR DURACIÓN
+   DURATION SELECTION
    ========================================================= */
 
-function selectDurationOption(duration){
-
-    if(duration==="Personalizado"){
-
-        const custom=prompt(
-            i18n[currentLang].customPrompt
-        );
-
-        if(!custom)
-            return;
-
-        duration=custom;
-    }
-
+function selectDurationOption(seconds){
 
     if(!currentProject){
 
         currentProject={
-            topic:"tu proyecto",
-            niche:"general",
-            platform:"Redes sociales"
+            topic:"Nuevo proyecto",
+            platform:"Redes sociales",
+            niche:"Contenido digital"
         };
 
     }
 
 
-    currentProject.duration=duration;
+    currentProject.duration =
+        seconds;
+
+
     waitingForDuration=false;
 
 
-    if(currentProject.noIdea){
+    addUserMessage(
+        `Duración: ${formatSeconds(seconds)}`
+    );
 
-        currentProject.noIdea=false;
 
-        addBotMessage(
-            buildIdeasResponse(
-                currentProject
-            )
-        );
+    showTyping();
 
-    }else{
 
-        addBotMessage(
+    setTimeout(()=>{
+
+        removeTyping();
+
+
+        const result =
             buildFinalStrategy(
                 currentProject
-            )
-        );
-
-    }
+            );
 
 
-    saveCurrentProject();
+        addBotMessage(result);
+
+        saveCurrentProject();
+
+    },450);
+
 }
 
 
 /* =========================================================
-   MENSAJES
+   MESSAGES
    ========================================================= */
 
 function addUserMessage(text){
 
     welcome.style.display="none";
 
-    const message=document.createElement("div");
 
-    message.className="message user";
+    const wrapper =
+        document.createElement("div");
 
-    message.innerHTML=`
 
-        <div class="bubble">
+    wrapper.className =
+        "message user";
+
+
+    wrapper.innerHTML=`
+
+        <div class="message-bubble">
+
             ${escapeHTML(text)}
+
         </div>
 
     `;
 
-    chatInner.appendChild(message);
+
+    chatInner.appendChild(wrapper);
+
 
     scrollChat();
+
 }
 
 
@@ -4011,116 +4590,233 @@ function addBotMessage(html){
 
     welcome.style.display="none";
 
-    const message=document.createElement("div");
 
-    message.className="message bot";
+    const wrapper =
+        document.createElement("div");
 
-    message.innerHTML=`
 
-        <div class="bubble">
+    wrapper.className =
+        "message bot";
+
+
+    wrapper.innerHTML=`
+
+        <div class="message-bubble">
+
+            <div class="message-label">
+                SPARKYKREA
+            </div>
+
             ${html}
+
         </div>
 
     `;
 
-    chatInner.appendChild(message);
+
+    chatInner.appendChild(wrapper);
+
 
     lastGeneratedHTML=html;
 
+
     scrollChat();
+
 }
 
 
-/* =========================================================
-   TYPING
-   ========================================================= */
-
 function showTyping(){
 
-    const typing=document.createElement("div");
+    removeTyping();
 
-    typing.className="message bot";
-    typing.id="typing";
 
-    typing.innerHTML=`
+    const wrapper =
+        document.createElement("div");
 
-        <div class="bubble">
+
+    wrapper.id="typingMessage";
+
+    wrapper.className="message bot";
+
+
+    wrapper.innerHTML=`
+
+        <div class="message-bubble">
 
             <div class="typing">
-                <i></i>
-                <i></i>
-                <i></i>
+
+                <span></span>
+                <span></span>
+                <span></span>
+
             </div>
 
         </div>
 
     `;
 
-    chatInner.appendChild(typing);
+
+    chatInner.appendChild(wrapper);
+
 
     scrollChat();
+
 }
 
 
 function removeTyping(){
 
-    const typing=document.getElementById("typing");
+    const typing =
+        document.getElementById(
+            "typingMessage"
+        );
+
 
     if(typing)
         typing.remove();
+
 }
 
-
-/* =========================================================
-   SCROLL
-   ========================================================= */
 
 function scrollChat(){
 
     setTimeout(()=>{
 
         chat.scrollTo({
+
             top:chat.scrollHeight,
+
             behavior:"smooth"
+
         });
 
-    },50);
+    },30);
+
 }
 
 
-/* =========================================================
-   SEGURIDAD
-   ========================================================= */
+function escapeHTML(value){
 
-function escapeHTML(text){
-
-    return String(text)
+    return String(value)
         .replace(/&/g,"&amp;")
         .replace(/</g,"&lt;")
         .replace(/>/g,"&gt;")
         .replace(/"/g,"&quot;")
-        .replace(/'/g,"&#039;")
-        .replace(/\n/g,"<br>");
+        .replace(/'/g,"&#039;");
+
 }
 
 
-function capitalize(text){
+function capitalize(value){
 
-    if(!text)
+    if(!value)
         return "";
 
-    return text.charAt(0).toUpperCase()+
-        text.slice(1);
+    return value.charAt(0).toUpperCase()
+        +value.slice(1);
+
+}
+
+
+function formatDate(date){
+
+    if(!date)
+        return "—";
+
+    try{
+
+        return new Date(date)
+            .toLocaleString(
+                currentLang==="es"
+                ? "es-ES"
+                : currentLang
+            );
+
+    }catch{
+
+        return "—";
+
+    }
+
 }
 
 
 /* =========================================================
-   HISTORIAL
+   HISTORY
    ========================================================= */
+
+let projectHistory=[];
+
+
+function getHistoryKey(){
+
+    if(!currentUser)
+        return null;
+
+    return (
+        "sparky_history_" +
+        currentUser.id
+    );
+
+}
+
+
+function loadUserHistory(){
+
+    projectHistory=[];
+
+
+    if(!currentUser){
+
+        renderHistory();
+
+        return;
+
+    }
+
+
+    try{
+
+        const data =
+            JSON.parse(
+                localStorage.getItem(
+                    getHistoryKey()
+                ) || "[]"
+            );
+
+
+        if(Array.isArray(data))
+            projectHistory=data;
+
+    }catch{
+
+        projectHistory=[];
+
+    }
+
+
+    renderHistory();
+
+}
+
 
 function saveCurrentProject(){
 
-    if(!currentProject||!currentProject.topic)
+    /*
+       IMPORTANTE:
+
+       Los usuarios que no han iniciado sesión
+       NO guardan historial.
+    */
+
+    if(!currentUser)
+        return;
+
+
+    if(
+        !currentProject ||
+        !currentProject.topic
+    )
         return;
 
 
@@ -4128,34 +4824,50 @@ function saveCurrentProject(){
 
         id:Date.now(),
 
-        topic:currentProject.topic,
+        topic:
+            currentProject.topic,
 
         duration:
-            currentProject.duration||
+            currentProject.duration ||
             "Sin duración",
 
         platform:
-            currentProject.platform||
+            currentProject.platform ||
             "Redes sociales",
 
         niche:
-            currentProject.niche||
+            currentProject.niche ||
             "general",
 
-        html:lastGeneratedHTML
+        html:
+            lastGeneratedHTML,
+
+        savedAt:
+            new Date().toISOString()
+
     };
 
 
     projectHistory.unshift(record);
 
-    projectHistory=projectHistory.slice(0,30);
+
+    projectHistory =
+        projectHistory.slice(0,30);
+
 
     localStorage.setItem(
-        "sparky_history",
-        JSON.stringify(projectHistory)
+
+        getHistoryKey(),
+
+        JSON.stringify(
+            projectHistory
+        )
+
     );
 
+
     renderHistory();
+
 }
 
 
@@ -4163,133 +4875,198 @@ function renderHistory(){
 
     history.innerHTML="";
 
-    if(projectHistory.length===0){
+
+    if(!currentUser){
 
         history.innerHTML=`
 
-            <div style="
-                color:#64748b;
-                font-size:12px;
-                padding:12px;
-                text-align:center;
-            ">
-                Tus proyectos aparecerán aquí.
+            <div class="history-empty">
+
+                Inicia sesión para guardar tus chats.
+
             </div>
 
         `;
 
         return;
+
+    }
+
+
+    if(!projectHistory.length){
+
+        history.innerHTML=`
+
+            <div class="history-empty">
+
+                Todavía no tienes proyectos guardados.
+
+            </div>
+
+        `;
+
+        return;
+
     }
 
 
     projectHistory.forEach(item=>{
 
-        const element=document.createElement("div");
+        const wrapper =
+            document.createElement("div");
 
-        element.className="history-item";
 
-        element.innerHTML=`
+        wrapper.className =
+            "history-item";
 
-            <div
-                class="history-text"
-                title="${escapeHTML(item.topic)}">
 
-                ${escapeHTML(item.topic)}
-
-            </div>
+        wrapper.innerHTML=`
 
             <button
                 class="history-delete"
-                title="Eliminar"
-                onclick="deleteHistoryItem(${item.id},event)">
-
+                title="Eliminar">
                 ×
-
             </button>
+
+            <div class="history-topic">
+                ${escapeHTML(item.topic)}
+            </div>
+
+            <div class="history-date">
+                ${formatDate(item.savedAt)}
+            </div>
 
         `;
 
 
-        element.addEventListener("click",e=>{
+        wrapper
+        .querySelector(".history-delete")
+        .addEventListener(
+            "click",
+            e=>{
 
-            if(
-                e.target.closest(".history-delete")
-            )
-                return;
+                e.stopPropagation();
 
-            loadHistoryItem(item);
+                deleteHistoryItem(
+                    item.id
+                );
 
-        });
+            }
+        );
 
 
-        history.appendChild(element);
+        wrapper.addEventListener(
+            "click",
+            ()=>{
+
+                loadHistoryItem(
+                    item.id
+                );
+
+                closeSidebar();
+
+            }
+        );
+
+
+        history.appendChild(wrapper);
 
     });
+
 }
 
 
-function deleteHistoryItem(id,event){
+function deleteHistoryItem(id){
 
-    event.stopPropagation();
+    if(!currentUser)
+        return;
 
-    projectHistory=
+
+    projectHistory =
         projectHistory.filter(
             item=>item.id!==id
         );
 
+
     localStorage.setItem(
-        "sparky_history",
-        JSON.stringify(projectHistory)
+
+        getHistoryKey(),
+
+        JSON.stringify(
+            projectHistory
+        )
+
     );
 
+
     renderHistory();
+
 }
 
 
-function loadHistoryItem(item){
+function loadHistoryItem(id){
+
+    if(!currentUser)
+        return;
+
+
+    const item =
+        projectHistory.find(
+            x=>x.id===id
+        );
+
+
+    if(!item)
+        return;
+
+
+    chatInner.innerHTML="";
+
+    welcome.style.display="none";
+
 
     currentProject={
 
         topic:item.topic,
-        duration:item.duration,
+
+        duration:
+            typeof item.duration==="number"
+            ? item.duration
+            : durationToSeconds(
+                item.duration
+            ),
+
         platform:item.platform,
+
         niche:item.niche
 
     };
 
-    greetingShown=true;
-    waitingForDuration=false;
 
-    chatInner.innerHTML="";
-    welcome.style.display="none";
+    addBotMessage(
+        item.html ||
+        buildFinalStrategy(
+            currentProject
+        )
+    );
 
-    addUserMessage(item.topic);
-
-    if(item.html){
-
-        addBotMessage(item.html);
-
-    }else{
-
-        addBotMessage(
-            buildFinalStrategy(
-                currentProject
-            )
-        );
-
-    }
-
-    closeSidebar();
 }
 
 
 /* =========================================================
-   NUEVO PROYECTO
+   NEW PROJECT
    ========================================================= */
 
 document
 .getElementById("newProjectBtn")
 .addEventListener("click",()=>{
+
+    currentProject=null;
+
+    waitingForDuration=false;
+
+    lastGeneratedHTML="";
+
 
     chatInner.innerHTML="";
 
@@ -4297,14 +5074,13 @@ document
 
     welcome.style.display="flex";
 
-    currentProject=null;
-    greetingShown=false;
-    waitingForDuration=false;
-    lastGeneratedHTML="";
+
+    input.value="";
+
+    input.style.height="auto";
+
 
     closeSidebar();
-
-    input.focus();
 
 });
 
@@ -4317,36 +5093,72 @@ document
 .getElementById("exportPdfBtn")
 .addEventListener("click",()=>{
 
+    if(!currentUser){
+
+        openLogin();
+
+        document
+        .getElementById("loginMessage")
+        .textContent =
+            "Inicia sesión para guardar o descargar tus proyectos en PDF.";
+
+        return;
+
+    }
+
+
+    if(
+        !currentProject &&
+        !lastGeneratedHTML
+    ){
+
+        addBotMessage(
+            "Primero crea un proyecto y luego podrás guardarlo como PDF."
+        );
+
+        return;
+
+    }
+
+
     window.print();
 
 });
 
 
 /* =========================================================
-   MENÚ MÓVIL
+   MOBILE SIDEBAR
    ========================================================= */
 
-const mobileMenuBtn=
-    document.getElementById("mobileMenu");
+document
+.getElementById("mobileMenu")
+.addEventListener("click",()=>{
 
-mobileMenuBtn.addEventListener("click",()=>{
+    sidebar.classList.add("open");
 
-    sidebar.classList.toggle("open");
-    overlay.classList.toggle("active");
+    overlay.classList.add("show");
 
 });
+
+
+overlay.addEventListener("click",closeSidebar);
 
 
 function closeSidebar(){
 
     sidebar.classList.remove("open");
-    overlay.classList.remove("active");
+
+    overlay.classList.remove("show");
 
 }
 
 
 /* =========================================================
-   ENVÍO
+   SEND BUTTON
+   =========================================================
+
+   ESTA PARTE SE MANTIENE COMO ESTABA.
+   NO SE CAMBIA SU FUNCIONAMIENTO.
    ========================================================= */
 
 function sendMessage(){
@@ -4375,14 +5187,12 @@ function sendMessage(){
 
 }
 
-
 send.addEventListener("click",()=>{
 
     if(send.classList.contains("active"))
         sendMessage();
 
 });
-
 
 input.addEventListener("keydown",e=>{
 
@@ -4399,7 +5209,6 @@ input.addEventListener("keydown",e=>{
     }
 
 });
-
 
 input.addEventListener("input",()=>{
 
@@ -4421,20 +5230,51 @@ input.addEventListener("input",()=>{
 
 
 /* =========================================================
-   INICIO
+   INITIALIZATION
    ========================================================= */
 
-renderHistory();
+seedAdmin();
+
+updateLanguageUI();
+
+updateAuthUI();
+
+loadUserHistory();
+
 
 setTimeout(()=>{
 
-    const splash=
+    const splash =
         document.getElementById("splash");
 
-    if(splash)
-        splash.style.display="none";
+    splash.style.opacity="0";
 
-},2200);
+    setTimeout(()=>{
+
+        splash.remove();
+
+    },600);
+
+},1100);
+
+
+/* =========================================================
+   WELCOME INITIAL MESSAGE
+   ========================================================= */
+
+setTimeout(()=>{
+
+    if(!chatInner.querySelector(".message")){
+
+        /*
+           La bienvenida visual permanece arriba.
+           No se inserta una conversación automática
+           que la haga desaparecer.
+        */
+
+    }
+
+},1200);
 
 </script>
 
