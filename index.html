@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
 
 <title>SparkyKrea Studio's</title>
 
@@ -10,134 +10,417 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 
 <link rel="stylesheet"
 href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
 <script>
-tailwind.config = {
-    theme: {
-        extend: {
-            colors: {
-                vino: '#800020',
-                verde: '#10B981',
-                fondo: '#101010',
-                panel: '#18181b',
-                card: '#222225',
-                borde: '#3f3f46'
-            }
-        }
-    }
+tailwind.config={
+theme:{
+extend:{
+colors:{
+vino:"#800020",
+verde:"#10B981",
+fondo:"#101010",
+panel:"#18181b",
+card:"#222225",
+borde:"#3f3f46"
+}
+}
+}
 }
 </script>
 
 <style>
 
-* {
-    box-sizing: border-box;
+*{
+box-sizing:border-box;
 }
 
-html,
-body {
-    margin: 0;
-    width: 100%;
-    height: 100%;
-    height: 100dvh;
-    overflow: hidden;
-    font-family: 'Inter', sans-serif;
-    background: #101010;
-    color: white;
+html,body{
+margin:0;
+width:100%;
+height:100%;
+height:100dvh;
+overflow:hidden;
+font-family:Inter,sans-serif;
+background:#101010;
+color:white;
 }
 
-button,
-input {
-    -webkit-tap-highlight-color: transparent;
+button,input{
+-webkit-tap-highlight-color:transparent;
 }
 
-::-webkit-scrollbar {
-    width: 5px;
+::-webkit-scrollbar{
+width:5px;
 }
 
-::-webkit-scrollbar-track {
-    background: transparent;
+::-webkit-scrollbar-track{
+background:transparent;
 }
 
-::-webkit-scrollbar-thumb {
-    background: #3f3f46;
-    border-radius: 20px;
+::-webkit-scrollbar-thumb{
+background:#3f3f46;
+border-radius:20px;
 }
 
-.fade {
-    animation: aparecer .25s ease;
+/* =====================================================
+ANIMACIONES GENERALES
+===================================================== */
+
+.fade{
+animation:fade .35s ease both;
 }
 
-@keyframes aparecer {
-    from {
-        opacity: 0;
-        transform: translateY(8px);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+@keyframes fade{
+from{
+opacity:0;
+transform:translateY(10px);
+}
+to{
+opacity:1;
+transform:translateY(0);
+}
 }
 
-.pulse {
-    animation: pulso 1.5s infinite;
+.card{
+background:#222225;
+border:1px solid #3f3f46;
+border-radius:15px;
+transition:.25s ease;
 }
 
-@keyframes pulso {
-    0%,100% {
-        box-shadow: 0 0 0 rgba(16,185,129,0);
-    }
-
-    50% {
-        box-shadow: 0 0 30px rgba(16,185,129,.15);
-    }
+.card:hover{
+border-color:#55555c;
 }
 
-.action {
-    border: 1px solid #3f3f46;
-    background: #18181b;
-    color: #a1a1aa;
-    padding: 7px 10px;
-    border-radius: 8px;
-    font-size: 10px;
-    transition: .2s;
+.pulse{
+animation:pulse 2s infinite;
 }
 
-.action:hover {
-    color: white;
-    border-color: #10B981;
-    background: #27272a;
+@keyframes pulse{
+0%,100%{
+box-shadow:0 0 0 rgba(16,185,129,0);
+}
+50%{
+box-shadow:0 0 35px rgba(16,185,129,.16);
+}
 }
 
-.card {
-    background: #222225;
-    border: 1px solid #3f3f46;
-    border-radius: 15px;
+/* =====================================================
+SPLASH / ENTRADA
+===================================================== */
+
+#splash{
+position:fixed;
+inset:0;
+z-index:99999;
+display:flex;
+align-items:center;
+justify-content:center;
+background:
+radial-gradient(circle at 50% 45%,rgba(128,0,32,.22),transparent 32%),
+radial-gradient(circle at 60% 55%,rgba(16,185,129,.09),transparent 35%),
+#030304;
+overflow:hidden;
+transition:opacity .8s ease,visibility .8s ease;
 }
 
-@media(max-width:767px) {
+#splash.hide{
+opacity:0;
+visibility:hidden;
+pointer-events:none;
+}
 
-    .action {
-        padding: 8px 10px;
-    }
+.splashGlow{
+position:absolute;
+width:420px;
+height:420px;
+border-radius:50%;
+background:radial-gradient(circle,rgba(128,0,32,.18),transparent 65%);
+animation:glow 3s ease-in-out infinite;
+}
 
+@keyframes glow{
+0%,100%{
+transform:scale(.85);
+opacity:.5;
+}
+50%{
+transform:scale(1.15);
+opacity:1;
+}
+}
+
+.splashContent{
+position:relative;
+z-index:2;
+display:flex;
+flex-direction:column;
+align-items:center;
+text-align:center;
+animation:splashIn 1s cubic-bezier(.2,.8,.2,1);
+}
+
+@keyframes splashIn{
+from{
+opacity:0;
+transform:scale(.82) translateY(15px);
+}
+to{
+opacity:1;
+transform:scale(1) translateY(0);
+}
+}
+
+.splashLogo{
+width:105px;
+height:105px;
+margin-bottom:22px;
+filter:drop-shadow(0 0 22px rgba(128,0,32,.5));
+animation:logoFloat 2.8s ease-in-out infinite;
+}
+
+@keyframes logoFloat{
+0%,100%{
+transform:translateY(0);
+}
+50%{
+transform:translateY(-7px);
+}
+}
+
+.splashName{
+font-size:32px;
+font-weight:900;
+letter-spacing:-1.5px;
+animation:nameIn 1s .25s both;
+}
+
+@keyframes nameIn{
+from{
+opacity:0;
+letter-spacing:8px;
+}
+to{
+opacity:1;
+letter-spacing:-1.5px;
+}
+}
+
+.splashStudio{
+margin-top:7px;
+font-size:9px;
+letter-spacing:7px;
+color:#fff;
+opacity:.7;
+animation:studioIn 1s .55s both;
+}
+
+@keyframes studioIn{
+from{
+opacity:0;
+transform:translateY(8px);
+}
+to{
+opacity:.7;
+transform:translateY(0);
+}
+}
+
+.splashLine{
+width:0;
+height:1px;
+margin-top:22px;
+background:linear-gradient(90deg,#800020,#10B981);
+animation:lineIn 1s .8s forwards;
+}
+
+@keyframes lineIn{
+to{
+width:150px;
+}
+}
+
+/* =====================================================
+LOGO
+===================================================== */
+
+.brandLogo{
+display:flex;
+align-items:center;
+gap:11px;
+}
+
+.logoIcon{
+width:42px;
+height:42px;
+flex:none;
+}
+
+.brandName{
+font-size:20px;
+font-weight:900;
+line-height:1;
+}
+
+.brandSparky{
+color:#800020;
+}
+
+.brandKrea{
+color:#10B981;
+}
+
+.brandStudio{
+font-size:7px;
+letter-spacing:4px;
+color:#fff;
+opacity:.65;
+margin-top:5px;
+}
+
+/* =====================================================
+SIDEBAR
+===================================================== */
+
+#sidebar{
+width:285px;
+}
+
+@media(max-width:767px){
+#sidebar{
+position:fixed;
+z-index:50;
+}
+}
+
+.action{
+border:1px solid #3f3f46;
+background:#18181b;
+color:#a1a1aa;
+padding:7px 10px;
+border-radius:8px;
+font-size:10px;
+transition:.2s;
+}
+
+.action:hover{
+color:white;
+border-color:#10B981;
+background:#27272a;
+}
+
+.typingDot{
+display:inline-block;
+width:4px;
+height:4px;
+border-radius:50%;
+background:#777;
+margin:0 2px;
+animation:typing 1s infinite;
+}
+
+.typingDot:nth-child(2){
+animation-delay:.15s;
+}
+
+.typingDot:nth-child(3){
+animation-delay:.3s;
+}
+
+@keyframes typing{
+0%,100%{
+opacity:.25;
+transform:translateY(0);
+}
+50%{
+opacity:1;
+transform:translateY(-3px);
+}
 }
 
 </style>
 </head>
 
-
 <body>
+
+<!-- =====================================================
+SPLASH
+===================================================== -->
+
+<div id="splash">
+
+<div class="splashGlow"></div>
+
+<div class="splashContent">
+
+<!-- LOGO CASITA + CÁMARA -->
+<svg class="splashLogo" viewBox="0 0 120 120" fill="none">
+
+<!-- casa -->
+<path
+d="M19 56L60 21L101 56"
+stroke="#800020"
+stroke-width="5"
+stroke-linecap="round"
+stroke-linejoin="round"/>
+
+<path
+d="M28 51V94C28 97 30 99 33 99H87C90 99 92 97 92 94V51"
+stroke="#800020"
+stroke-width="5"
+stroke-linecap="round"/>
+
+<!-- cámara -->
+<rect
+x="36"
+y="55"
+width="48"
+height="32"
+rx="8"
+stroke="#10B981"
+stroke-width="4"/>
+
+<circle
+cx="60"
+cy="71"
+r="9"
+stroke="#10B981"
+stroke-width="4"/>
+
+<path
+d="M45 55L49 49H62L67 55"
+stroke="#10B981"
+stroke-width="4"
+stroke-linecap="round"
+stroke-linejoin="round"/>
+
+<!-- pequeño brillo -->
+<path
+d="M94 29L96 35L102 37L96 39L94 45L92 39L86 37L92 35L94 29Z"
+fill="#10B981"/>
+
+</svg>
+
+<div class="splashName">
+<span style="color:#800020">Sparky</span><span style="color:#10B981">Krea</span>
+</div>
+
+<div class="splashStudio">
+STUDIO'S
+</div>
+
+<div class="splashLine"></div>
+
+</div>
+</div>
 
 
 <!-- =====================================================
-SIDEBAR
+OVERLAY
 ===================================================== -->
 
 <div
@@ -147,58 +430,80 @@ class="fixed inset-0 bg-black/70 z-30 hidden md:hidden">
 </div>
 
 
+<!-- =====================================================
+SIDEBAR
+===================================================== -->
+
 <aside
 id="sidebar"
-class="fixed md:static z-40 left-0 top-0 bottom-0
-w-[285px] max-w-[88vw]
+class="fixed md:static left-0 top-0 bottom-0
 bg-panel border-r border-borde
 flex flex-col
 transform -translate-x-full md:translate-x-0
 transition-transform duration-300">
 
-
-<!-- LOGO ORIGINAL / BRANDING -->
-
 <div class="px-4 py-4 border-b border-borde">
 
 <div class="flex items-center justify-between">
 
-<div class="flex items-center gap-2.5">
+<div class="brandLogo">
 
-<div
-class="w-10 h-10 rounded-xl
-bg-vino flex items-center justify-center
-shadow-lg">
+<svg class="logoIcon" viewBox="0 0 120 120" fill="none">
 
-<i class="fa-solid fa-bolt text-lg"></i>
+<path
+d="M19 56L60 21L101 56"
+stroke="#800020"
+stroke-width="6"
+stroke-linecap="round"
+stroke-linejoin="round"/>
 
-</div>
+<path
+d="M28 51V94C28 97 30 99 33 99H87C90 99 92 97 92 94V51"
+stroke="#800020"
+stroke-width="6"
+stroke-linecap="round"/>
+
+<rect
+x="36"
+y="55"
+width="48"
+height="32"
+rx="8"
+stroke="#10B981"
+stroke-width="5"/>
+
+<circle
+cx="60"
+cy="71"
+r="9"
+stroke="#10B981"
+stroke-width="5"/>
+
+<path
+d="M45 55L49 49H62L67 55"
+stroke="#10B981"
+stroke-width="5"
+stroke-linecap="round"
+stroke-linejoin="round"/>
+
+<path
+d="M94 29L96 35L102 37L96 39L94 45L92 39L86 37L92 35L94 29Z"
+fill="#10B981"/>
+
+</svg>
 
 <div>
 
-<div class="text-xl font-black leading-none">
-
-<span class="text-white">
-Sparky
-</span><span class="text-verde">
-Krea
-</span>
-
+<div class="brandName">
+<span class="brandSparky">Sparky</span><span class="brandKrea">Krea</span>
 </div>
 
-<div class="text-[8px]
-tracking-[4px]
-text-gray-500
-mt-1">
-
+<div class="brandStudio">
 STUDIO'S
-
 </div>
 
 </div>
-
 </div>
-
 
 <button
 onclick="closeSidebar()"
@@ -213,21 +518,15 @@ class="md:hidden text-gray-500 p-2">
 </div>
 
 
-<!-- NUEVO PROYECTO -->
+<!-- NUEVO -->
 
 <div class="p-3">
 
 <button
 onclick="nuevoProyecto()"
-class="w-full
-bg-vino hover:bg-[#600018]
-rounded-xl
-py-3
-font-bold
-text-xs
-flex items-center
-justify-center gap-2
-transition">
+class="w-full bg-vino hover:bg-[#600018]
+rounded-xl py-3 font-bold text-xs
+flex items-center justify-center gap-2 transition">
 
 <i class="fa-solid fa-plus"></i>
 
@@ -244,15 +543,9 @@ Nuevo proyecto
 
 <button
 onclick="abrirGuardados()"
-class="w-full
-flex items-center
-justify-between
-px-3 py-2.5
-rounded-xl
-bg-card
-border border-borde
-hover:border-verde
-transition">
+class="w-full flex items-center justify-between
+px-3 py-2.5 rounded-xl bg-card
+border border-borde hover:border-verde transition">
 
 <div class="flex items-center gap-2 text-xs">
 
@@ -264,9 +557,7 @@ Guardados
 
 <span
 id="savedCount"
-class="bg-vino rounded-full
-px-1.5 py-0.5
-text-[9px]">
+class="bg-vino rounded-full px-1.5 py-0.5 text-[9px]">
 
 0
 
@@ -281,52 +572,25 @@ text-[9px]">
 
 <div class="flex-1 overflow-y-auto px-3 mt-5">
 
-<div class="text-[9px]
-uppercase
-tracking-widest
-text-gray-600
-font-bold
-px-2 mb-2">
+<div class="text-[9px] uppercase tracking-widest
+text-gray-600 font-bold px-2 mb-2">
 
 Proyectos recientes
 
 </div>
 
-
-<div
-id="history"
-class="space-y-1">
-
-</div>
+<div id="history" class="space-y-1"></div>
 
 </div>
 
 
 <!-- FOOTER -->
 
-<div
-class="border-t border-borde
-p-3 text-center">
+<div class="border-t border-borde p-3 text-center">
 
-<div class="text-[9px]
-text-gray-600">
-
-Creado con
-
-</div>
-
-<div
-class="text-xs font-bold
-mt-0.5">
-
-<span class="text-gray-300">
-by
-</span>
-
-<span class="text-verde">
-SparkyKrea
-</span>
-
+<div class="text-xs font-bold">
+<span class="text-gray-300">by</span>
+<span class="text-verde">SparkyKrea</span>
 </div>
 
 </div>
@@ -344,39 +608,47 @@ MAIN
 <!-- HEADER -->
 
 <header
-class="h-14 shrink-0
-border-b border-borde
-flex items-center
-justify-between
-px-3 md:px-5">
+class="h-14 shrink-0 border-b border-borde
+flex items-center justify-between px-3 md:px-5">
 
 <div class="flex items-center gap-3">
 
 <button
 onclick="toggleSidebar()"
-class="md:hidden
-w-9 h-9
-rounded-lg
-bg-card
-border border-borde">
+class="md:hidden w-9 h-9 rounded-lg
+bg-card border border-borde">
 
 <i class="fa-solid fa-bars text-xs"></i>
 
 </button>
 
+<div class="md:hidden flex items-center gap-2">
 
-<div class="md:hidden">
+<svg width="25" height="25" viewBox="0 0 120 120" fill="none">
 
-<span class="font-black">
-Sparky
-</span>
+<path d="M19 56L60 21L101 56"
+stroke="#800020" stroke-width="7"
+stroke-linecap="round"
+stroke-linejoin="round"/>
 
-<span class="font-black text-verde">
-Krea
-</span>
+<rect x="38" y="54"
+width="44" height="31"
+rx="8"
+stroke="#10B981"
+stroke-width="6"/>
 
+<circle cx="60" cy="69"
+r="8"
+stroke="#10B981"
+stroke-width="5"/>
+
+</svg>
+
+<div class="font-black">
+<span class="text-vino">Sparky</span><span class="text-verde">Krea</span>
 </div>
 
+</div>
 
 <div class="hidden md:block">
 
@@ -396,16 +668,11 @@ Nuevo proyecto
 
 </div>
 
-
 <button
 onclick="nuevoProyecto()"
-class="text-[10px]
-bg-card
-border border-borde
-rounded-lg
-px-3 py-2
-hover:border-verde
-transition">
+class="text-[10px] bg-card
+border border-borde rounded-lg
+px-3 py-2 hover:border-verde transition">
 
 <i class="fa-solid fa-plus text-verde mr-1"></i>
 
@@ -422,162 +689,95 @@ CHAT
 
 <section
 id="chat"
-class="flex-1
-overflow-y-auto
-px-3 md:px-5
-py-5">
+class="flex-1 overflow-y-auto px-3 md:px-5 py-5">
 
-<div
-class="max-w-4xl
-mx-auto
-min-h-full
-flex flex-col">
+<div class="max-w-4xl mx-auto min-h-full flex flex-col">
 
 
 <!-- WELCOME -->
 
 <div
 id="welcome"
-class="my-auto
-flex flex-col
-items-center
-text-center
-py-8">
+class="my-auto flex flex-col items-center
+text-center py-8">
 
+<svg
+width="80"
+height="80"
+viewBox="0 0 120 120"
+fill="none"
+class="mb-5 pulse">
 
-<!-- LOGO GRANDE -->
+<path
+d="M19 56L60 21L101 56"
+stroke="#800020"
+stroke-width="5"
+stroke-linecap="round"
+stroke-linejoin="round"/>
 
-<div
-class="w-20 h-20
-md:w-24 md:h-24
-rounded-[25px]
-bg-vino
-flex items-center
-justify-center
-mb-5
-pulse">
+<path
+d="M28 51V94C28 97 30 99 33 99H87C90 99 92 97 92 94V51"
+stroke="#800020"
+stroke-width="5"
+stroke-linecap="round"/>
 
-<i class="fa-solid fa-bolt
-text-4xl md:text-5xl"></i>
+<rect
+x="36"
+y="55"
+width="48"
+height="32"
+rx="8"
+stroke="#10B981"
+stroke-width="4"/>
 
-</div>
+<circle
+cx="60"
+cy="71"
+r="9"
+stroke="#10B981"
+stroke-width="4"/>
+
+<path
+d="M45 55L49 49H62L67 55"
+stroke="#10B981"
+stroke-width="4"
+stroke-linecap="round"/>
+
+<path
+d="M94 29L96 35L102 37L96 39L94 45L92 39L86 37L92 35L94 29Z"
+fill="#10B981"/>
+
+</svg>
 
 
 <h1
 id="welcomeTitle"
-class="text-2xl md:text-3xl
-font-black mb-2">
+class="text-2xl md:text-3xl font-black mb-2">
 
 ¿Qué vamos a crear?
 
 </h1>
 
-
 <p
-class="text-gray-500
-text-xs md:text-sm
-max-w-lg
-leading-relaxed">
+class="text-gray-500 text-xs md:text-sm
+max-w-lg leading-relaxed">
 
 Cuéntame qué tienes en mente.
-No necesitas saber exactamente qué quieres hacer.
-Yo puedo ayudarte a convertir una idea en contenido.
+No necesitas elegir categorías ni estilos.
+Escribe tu idea como se te ocurra y SparkyKrea
+te ayudará a convertirla en contenido.
 
 </p>
 
-
-<!-- EJEMPLOS -->
-
 <div
-class="grid grid-cols-2
-md:grid-cols-4
-gap-2
-w-full max-w-2xl
-mt-7">
+class="mt-7 text-[10px] text-gray-700">
 
+Puedes escribir algo como:
+<br>
 
-<button
-onclick="usarEjemplo('Quiero hacer contenido de Valorant')"
-class="card p-3 text-left
-hover:border-verde
-transition">
-
-<div class="text-xl mb-2">
-🎮
-</div>
-
-<div class="text-xs font-bold">
-Gaming
-</div>
-
-<div class="text-[9px] text-gray-600 mt-1">
-Ideas y contenido
-</div>
-
-</button>
-
-
-<button
-onclick="usarEjemplo('Tengo una hamburguesería y quiero conseguir más clientes')"
-class="card p-3 text-left
-hover:border-verde
-transition">
-
-<div class="text-xl mb-2">
-🍔
-</div>
-
-<div class="text-xs font-bold">
-Negocio
-</div>
-
-<div class="text-[9px] text-gray-600 mt-1">
-Publicidad
-</div>
-
-</button>
-
-
-<button
-onclick="usarEjemplo('Quiero hacer contenido pero no sé qué publicar')"
-class="card p-3 text-left
-hover:border-verde
-transition">
-
-<div class="text-xl mb-2">
-💡
-</div>
-
-<div class="text-xs font-bold">
-Sin ideas
-</div>
-
-<div class="text-[9px] text-gray-600 mt-1">
-Encuentra contenido
-</div>
-
-</button>
-
-
-<button
-onclick="usarEjemplo('Quiero promocionar mi producto')"
-class="card p-3 text-left
-hover:border-verde
-transition">
-
-<div class="text-xl mb-2">
-🚀
-</div>
-
-<div class="text-xs font-bold">
-Producto
-</div>
-
-<div class="text-[9px] text-gray-600 mt-1">
-Hazlo destacar
-</div>
-
-</button>
+<span class="text-gray-500">
+"quiero hacer un video sobre..."
+</span>
 
 </div>
 
@@ -588,9 +788,7 @@ Hazlo destacar
 
 <div
 id="messages"
-class="hidden
-space-y-5
-pb-6">
+class="hidden space-y-5 pb-6">
 
 </div>
 
@@ -604,45 +802,28 @@ INPUT
 ===================================================== -->
 
 <footer
-class="shrink-0
-border-t border-borde
-px-2.5 md:px-5
-pt-2.5 pb-2">
+class="shrink-0 border-t border-borde
+px-2.5 md:px-5 pt-2.5 pb-2">
 
 <div class="max-w-4xl mx-auto">
 
-
-<form
-onsubmit="enviar(event)"
-class="relative">
+<form onsubmit="enviar(event)" class="relative">
 
 <input
 id="input"
 type="text"
 autocomplete="off"
 placeholder="Cuéntame tu idea..."
-class="w-full
-bg-card
-border border-borde
-focus:border-verde
-outline-none
-rounded-xl
-pl-4 pr-12
-py-3.5
-text-xs
-placeholder-gray-600
-transition">
-
+class="w-full bg-card border border-borde
+focus:border-verde outline-none
+rounded-xl pl-4 pr-12 py-3.5 text-xs
+placeholder-gray-600 transition">
 
 <button
 type="submit"
-class="absolute
-right-1.5 top-1.5
-w-9 h-9
-rounded-lg
-bg-vino
-hover:bg-[#600018]
-transition">
+class="absolute right-1.5 top-1.5
+w-9 h-9 rounded-lg
+bg-vino hover:bg-[#600018] transition">
 
 <i class="fa-solid fa-paper-plane text-xs"></i>
 
@@ -650,15 +831,8 @@ transition">
 
 </form>
 
-
-<div
-class="text-center
-text-[8px]
-text-gray-700
-mt-1.5">
-
+<div class="text-center text-[8px] text-gray-700 mt-1.5">
 by SparkyKrea
-
 </div>
 
 </div>
@@ -674,29 +848,17 @@ GUARDADOS
 
 <div
 id="savedModal"
-class="fixed inset-0
-bg-black/80
-backdrop-blur-sm
-z-50
-hidden items-center
-justify-center p-3">
-
+class="fixed inset-0 bg-black/80 backdrop-blur-sm
+z-[100] hidden items-center justify-center p-3">
 
 <div
-class="bg-panel
-border border-borde
-rounded-2xl
-w-full max-w-2xl
-max-h-[85vh]
-flex flex-col
-overflow-hidden">
-
+class="bg-panel border border-borde rounded-2xl
+w-full max-w-2xl max-h-[85vh]
+flex flex-col overflow-hidden">
 
 <div
-class="p-4
-border-b border-borde
-flex items-center
-justify-between">
+class="p-4 border-b border-borde
+flex items-center justify-between">
 
 <div>
 
@@ -704,15 +866,11 @@ justify-between">
 ⭐ Mis ideas
 </div>
 
-<div class="text-[9px]
-text-gray-600 mt-1">
-
+<div class="text-[9px] text-gray-600 mt-1">
 Tus mejores propuestas guardadas.
-
 </div>
 
 </div>
-
 
 <button
 onclick="cerrarGuardados()"
@@ -724,12 +882,9 @@ class="text-gray-500 p-2">
 
 </div>
 
-
 <div
 id="savedList"
-class="flex-1
-overflow-y-auto
-p-3 space-y-2">
+class="flex-1 overflow-y-auto p-3 space-y-2">
 
 </div>
 
@@ -742,19 +897,12 @@ p-3 space-y-2">
 
 <div
 id="toast"
-class="fixed
-bottom-5
-left-1/2
--translate-x-1/2
-bg-card
-border border-borde
-rounded-xl
-px-4 py-2
-text-[10px]
-z-[100]
-opacity-0
-pointer-events-none
-transition">
+class="fixed bottom-5 left-1/2
+-translate-x-1/2 bg-card
+border border-borde rounded-xl
+px-4 py-2 text-[10px]
+z-[200] opacity-0
+pointer-events-none transition">
 
 </div>
 
@@ -765,36 +913,39 @@ transition">
 DATOS
 ===================================================== */
 
-const MOTIVACIONES = [
+const motivaciones=[
 
-"Una idea sencilla puede convertirse en contenido increíble cuando encuentras el ángulo correcto.",
+"Una idea sencilla puede convertirse en algo increíble cuando encuentras el ángulo correcto.",
 
-"No necesitas que la primera versión sea perfecta. Necesitas publicarla para descubrir cómo mejorar la siguiente.",
+"No necesitas que la primera versión sea perfecta. Necesitas empezar.",
 
-"La creatividad aparece cuando empiezas a probar caminos que normalmente no probarías.",
+"La creatividad aparece cuando pruebas caminos diferentes.",
 
-"Tu próxima buena idea puede estar escondida en algo que hoy parece completamente normal.",
+"Tu próxima gran idea puede estar escondida en algo completamente normal.",
 
-"No busques parecerte a todos. Encuentra qué puedes hacer tú de una manera diferente.",
+"No busques hacer lo mismo que todos. Busca tu propia forma de contarlo.",
 
-"El contenido que se recuerda no siempre es el más complicado; muchas veces es simplemente el más auténtico.",
+"El contenido memorable no siempre es el más complicado.",
 
 "Una buena idea merece una oportunidad. Ahora toca convertirla en realidad.",
 
-"Cada publicación te enseña algo que no habrías descubierto quedándote pensando.",
+"Cada publicación te enseña algo nuevo.",
 
-"Si puedes imaginar el video, ya tienes el primer paso. Ahora toca construirlo.",
+"Si puedes imaginar el video, ya tienes el primer paso.",
 
-"Lo importante no es tener miles de ideas. Es encontrar una que realmente quieras probar."
+"No necesitas cien ideas. Necesitas una que realmente quieras probar.",
+
+"Lo diferente llama la atención. Atrévete a probarlo.",
+
+"Empieza pequeño, prueba, aprende y vuelve a crear."
 
 ];
 
-
-const CTA = [
+const ctas=[
 
 "¿Tú lo probarías?",
 
-"¿Qué harías tú en esta situación?",
+"¿Qué harías tú?",
 
 "Guárdalo para probarlo después.",
 
@@ -804,99 +955,48 @@ const CTA = [
 
 "Etiqueta a alguien que haría esto.",
 
-"¿Cuál de las dos opciones elegirías?",
+"¿Cuál elegirías?",
 
 "Ahora toca ponerlo a prueba."
 
 ];
 
+const effects={
 
-const GAMES = [
-"Valorant",
-"Clash Royale",
-"Fortnite",
-"Minecraft",
-"Roblox",
-"Free Fire",
-"GTA",
-"Call of Duty",
-"FIFA",
-"EA Sports FC",
-"League of Legends",
-"Apex Legends"
-];
-
-
-const CHARACTERS = [
-
-"reyna",
-"jett",
-"sage",
-"omen",
-"killjoy",
-"raze",
-"neon",
-"cypher",
-"sova",
-"gekko",
-"skye",
-"viper",
-"phoenix",
-"yoru",
-"chamber",
-"clove",
-"iso",
-"deadlock",
-"fade",
-"breach"
-
-];
-
-
-const EFFECTS = {
-
-gaming: [
-
-"Zoom de impacto en la jugada principal.",
-"Texto sincronizado con cada acción importante.",
-"Pequeño shake justo en el momento del impacto.",
-"Slow motion durante el instante decisivo.",
-"Corte al beat para aumentar el ritmo.",
+gaming:[
+"Zoom de impacto.",
+"Texto sincronizado con la jugada.",
+"Shake en el momento clave.",
+"Slow motion breve.",
+"Corte al beat.",
 "Repetición rápida del mejor momento."
-
 ],
 
-food: [
-
+food:[
 "Plano cercano del producto.",
-"Movimiento rápido entre ingredientes.",
-"Sonido ambiente de la preparación.",
-"Slow motion del momento más apetitoso.",
-"Texto corto resaltando el beneficio.",
-"Corte al beat entre planos."
-
+"Cortes rápidos entre ingredientes.",
+"Sonidos reales de preparación.",
+"Slow motion del resultado.",
+"Texto resaltando el detalle importante.",
+"Cortes sincronizados con la música."
 ],
 
-business: [
-
+business:[
 "Texto grande mostrando el problema.",
 "Transición rápida hacia la solución.",
-"Plano cercano del producto o servicio.",
+"Plano cercano del producto.",
 "Antes y después.",
-"Palabras clave apareciendo en pantalla.",
-"Cierre limpio con llamada a la acción."
-
+"Palabras clave animadas.",
+"Cierre limpio con CTA."
 ],
 
-general: [
-
+general:[
 "Texto dinámico.",
 "Cortes rápidos.",
-"Zoom suave en el momento importante.",
+"Zoom suave.",
 "Sonido de impacto.",
 "Cambio de plano inesperado.",
-"Subtítulos para reforzar la idea."
-
+"Subtítulos dinámicos."
 ]
 
 };
@@ -906,44 +1006,34 @@ general: [
 ESTADO
 ===================================================== */
 
-let chats =
-JSON.parse(
-localStorage.getItem("sparky_chats") || "[]"
+let chats=JSON.parse(
+localStorage.getItem("sparky_chats")||"[]"
 );
 
-let saved =
-JSON.parse(
-localStorage.getItem("sparky_saved") || "[]"
+let saved=JSON.parse(
+localStorage.getItem("sparky_saved")||"[]"
 );
 
-let currentChat = null;
-
-let currentIdea = null;
-
-let usedIdeas =
-JSON.parse(
-localStorage.getItem("sparky_used") || "[]"
-);
+let currentChat=null;
+let currentIdea=null;
 
 
 /* =====================================================
 UTILIDADES
 ===================================================== */
 
-function random(arr) {
+function normal(t){
 
-return arr[
-Math.floor(
-Math.random() * arr.length
-)
-];
+return String(t)
+.toLowerCase()
+.normalize("NFD")
+.replace(/[\u0300-\u036f]/g,"");
 
 }
 
+function escape(t){
 
-function escape(text) {
-
-return String(text)
+return String(t)
 .replace(/&/g,"&amp;")
 .replace(/</g,"&lt;")
 .replace(/>/g,"&gt;")
@@ -952,18 +1042,19 @@ return String(text)
 
 }
 
+function random(arr){
 
-function normal(text) {
-
-return String(text)
-.toLowerCase()
-.normalize("NFD")
-.replace(/[\u0300-\u036f]/g,"");
+return arr[Math.floor(Math.random()*arr.length)];
 
 }
 
+function strip(t){
 
-function guardarDatos() {
+return String(t).replace(/<[^>]*>/g,"");
+
+}
+
+function saveData(){
 
 localStorage.setItem(
 "sparky_chats",
@@ -975,54 +1066,39 @@ localStorage.setItem(
 JSON.stringify(saved)
 );
 
-localStorage.setItem(
-"sparky_used",
-JSON.stringify(usedIdeas)
-);
-
-actualizarContador();
+updateCount();
 
 }
 
+function toast(text){
 
-function toast(text) {
+const el=document.getElementById("toast");
 
-const el =
-document.getElementById("toast");
-
-el.textContent = text;
+el.textContent=text;
 
 el.classList.remove("opacity-0");
-
 el.classList.add("opacity-100");
 
 clearTimeout(window.toastTimer);
 
-window.toastTimer =
-setTimeout(() => {
+window.toastTimer=setTimeout(()=>{
 
 el.classList.remove("opacity-100");
-
 el.classList.add("opacity-0");
 
 },2200);
 
 }
 
+function scrollBottom(){
 
-function scrollBottom() {
+setTimeout(()=>{
 
-const chat =
-document.getElementById("chat");
+const c=document.getElementById("chat");
 
-setTimeout(() => {
-
-chat.scrollTo({
-
-top: chat.scrollHeight,
-
-behavior: "smooth"
-
+c.scrollTo({
+top:c.scrollHeight,
+behavior:"smooth"
 });
 
 },50);
@@ -1031,109 +1107,71 @@ behavior: "smooth"
 
 
 /* =====================================================
-DETECTAR INTENCIÓN
+DETECTAR CATEGORÍA
 ===================================================== */
 
-function quiereIdeas(text) {
+function categoria(text){
 
-const t = normal(text);
+const t=normal(text);
 
-return (
+if(
+/valorant|clash royale|fortnite|minecraft|roblox|free fire|gta|call of duty|fifa|gaming|gamer|videojuego|partida|jugada|clip|juego/.test(t)
+)return"gaming";
 
-/no se que hacer/.test(t) ||
+if(
+/hamburguesa|burger|pizza|pollo|comida|restaurante|cafe|cafeteria|postre|helado|torta|pastel|pan|bebida|receta/.test(t)
+)return"food";
 
-/no se que publicar/.test(t) ||
+if(
+/negocio|empresa|tienda|marca|producto|servicio|cliente|ventas|vender|emprendimiento|publicidad|marketing/.test(t)
+)return"business";
 
-/no tengo ideas/.test(t) ||
+return"general";
 
-/dame ideas/.test(t) ||
+}
 
-/dame alguna idea/.test(t) ||
 
-/que puedo publicar/.test(t) ||
+/* =====================================================
+¿QUIERE IDEAS?
+===================================================== */
 
-/que puedo hacer/.test(t) ||
+function quiereIdeas(text){
 
-/que publico/.test(t) ||
+const t=normal(text);
 
-/ideas para/.test(t) ||
-
-/necesito ideas/.test(t) ||
-
-/recomiendame algo/.test(t) ||
-
-/recomiendame/.test(t) ||
-
-/ayudame a pensar/.test(t) ||
-
-/ayudame con ideas/.test(t) ||
-
+return(
+/no se que hacer/.test(t)||
+/no se que publicar/.test(t)||
+/no tengo ideas/.test(t)||
+/dame ideas/.test(t)||
+/que puedo publicar/.test(t)||
+/que puedo hacer/.test(t)||
+/que publico/.test(t)||
+/necesito ideas/.test(t)||
+/ayudame con ideas/.test(t)||
+/ideas para/.test(t)||
+/recomiendame/.test(t)||
 /que contenido/.test(t)
-
 );
 
 }
 
 
-function detectarCategoria(text) {
+/* =====================================================
+DURACIÓN
+===================================================== */
 
-const t = normal(text);
+function duracion(text){
 
-if (
+const t=normal(text);
 
-/valorant|clash royale|fortnite|minecraft|roblox|free fire|gta|call of duty|fifa|fc 24|fc 25|fc 26|league of legends|apex|gaming|gamer|videojuego|juego|partida|jugada|clip/.test(t)
+let m=t.match(/(\d+)\s*(segundo|segundos|seg)/);
 
-) {
+if(m)return parseInt(m[1]);
 
-return "gaming";
+m=t.match(/(\d+)\s*(minuto|minutos|min)/);
 
-}
-
-
-if (
-
-/hamburguesa|burger|pizza|pollo|comida|restaurante|cafe|cafeteria|postre|helado|torta|pastel|pan|bebida|receta/.test(t)
-
-) {
-
-return "food";
-
-}
-
-
-if (
-
-/negocio|empresa|tienda|marca|producto|servicio|cliente|ventas|vender|emprendimiento|publicidad|marketing/.test(t)
-
-) {
-
-return "business";
-
-}
-
-
-return "general";
-
-}
-
-
-function extraerDuracion(text) {
-
-const t = normal(text);
-
-let m =
-t.match(/(\d+)\s*(segundo|segundos|seg)/);
-
-if(m)
-return parseInt(m[1]);
-
-
-m =
-t.match(/(\d+)\s*(minuto|minutos|min)/);
-
-if(m)
-return parseInt(m[1]) * 60;
-
+if(m)return parseInt(m[1])*60;
 
 return 30;
 
@@ -1141,50 +1179,136 @@ return 30;
 
 
 /* =====================================================
-TÍTULOS
+IDEAS
 ===================================================== */
 
-function tituloIdea(topic, categoria) {
+function generarIdeas(text){
 
-const opciones = {
+const cat=categoria(text);
 
-gaming: [
+const bancos={
 
-"Una forma diferente de convertir esto en contenido",
+gaming:[
 
-"El clip que yo probaría primero",
+"Convierte una partida normal en un reto con una regla que cambie completamente la forma de jugar.",
 
-"Una idea de gaming con potencial",
+"Haz una serie donde cada video intentes superar una meta concreta.",
 
-"El concepto para hacer que la partida destaque"
+"Compara una estrategia popular contra una estrategia que casi nadie utiliza.",
+
+"Empieza mostrando el mejor momento y después cuenta cómo llegaste hasta ahí.",
+
+"Haz que los comentarios decidan qué debes intentar en el siguiente video.",
+
+"Cuenta el error más absurdo de una partida y conviértelo en una historia."
 
 ],
 
-food: [
+food:[
 
-"Una forma distinta de vender este producto",
+"Muestra el proceso desde un plano muy cercano y guarda el resultado para el final.",
+
+"Haz una prueba de sabor con una pregunta al principio y responde solamente al final.",
+
+"Compara dos opciones y deja que la audiencia elija.",
+
+"Muestra qué puede conseguir alguien con un presupuesto determinado.",
+
+"Cuenta la historia del producto en vez de simplemente enseñarlo."
+
+],
+
+business:[
+
+"Muestra un problema común de tus clientes y haz que tu producto sea la solución.",
+
+"Haz un antes y después que permita entender el valor de lo que vendes.",
+
+"Responde una pregunta que tus clientes hacen constantemente.",
+
+"Cuenta una historia corta detrás de tu negocio.",
+
+"Demuestra algo de tu producto que la gente probablemente no esperaba."
+
+],
+
+general:[
+
+"Empieza con una situación completamente normal y añade un giro inesperado.",
+
+"Haz una lista de tres cosas que casi nadie conoce sobre el tema.",
+
+"Convierte una experiencia cotidiana en una historia corta.",
+
+"Compara dos opciones y obliga a la audiencia a elegir.",
+
+"Empieza mostrando el resultado y haz que quieran descubrir cómo llegaste ahí.",
+
+"Haz una serie donde cada publicación continúe la anterior."
+
+]
+
+};
+
+return{
+
+categoria:cat,
+
+ideas:bancos[cat]
+
+.sort(()=>Math.random()-.5)
+.slice(0,5)
+
+};
+
+}
+
+
+/* =====================================================
+TÍTULO
+===================================================== */
+
+function titulo(cat){
+
+const titulos={
+
+gaming:[
+
+"El concepto que probaría primero",
+
+"Una forma diferente de convertir esto en contenido",
+
+"El clip que puede destacar",
+
+"Una idea de gaming con potencial"
+
+],
+
+food:[
+
+"Una forma distinta de mostrarlo",
 
 "El video que haría para llamar la atención",
 
 "Convierte este producto en contenido",
 
-"Una idea para que se les haga agua la boca"
+"Una idea para hacerlo irresistible"
 
 ],
 
-business: [
-
-"Una campaña alrededor de tu negocio",
-
-"Cómo convertir tu producto en contenido",
+business:[
 
 "Una forma diferente de presentar tu marca",
 
-"El concepto que probaría primero"
+"El concepto que probaría primero",
+
+"Convierte tu producto en contenido",
+
+"Una campaña alrededor de esta idea"
 
 ],
 
-general: [
+general:[
 
 "Una idea con un giro diferente",
 
@@ -1192,527 +1316,214 @@ general: [
 
 "El concepto que probaría",
 
-"Una forma diferente de contarlo"
+"Una forma diferente de contarlo",
+
+"Una idea que vale la pena probar"
 
 ]
 
 };
 
-return random(opciones[categoria]);
+return random(titulos[cat]);
 
 }
 
 
 /* =====================================================
-GENERAR IDEAS CUANDO NO TIENE IDEA
+PROPUESTA
 ===================================================== */
 
-function generarIdeas(topic) {
+function generarPropuesta(topic,detalle="",seconds=30){
 
-const categoria =
-detectarCategoria(topic);
+const cat=categoria(topic+" "+detalle);
 
-const base =
-topic.replace(
-/no se que hacer|no se que publicar|dame ideas|no tengo ideas|que puedo publicar/gi,
-""
-).trim();
+const hookBank={
 
-
-const contexto =
-base || "tu contenido";
-
-
-const bancos = {
-
-gaming: [
-
-`Haz una serie de "3 cosas que casi nadie hace bien en ${contexto || "este juego"}".`,
-
-`Graba una partida intentando conseguir una meta concreta y convierte cada intento en un episodio.`,
-
-`Haz un reto con una regla absurda y deja que el resultado sea el protagonista.`,
-
-`Compara una estrategia popular contra una estrategia poco utilizada y demuestra cuál funciona.`,
-
-`Empieza el video mostrando el mejor momento y después explica cómo llegaste hasta ahí.`
-
-],
-
-food: [
-
-`Graba la preparación desde un plano muy cercano y termina mostrando el resultado de forma inesperada.`,
-
-`Haz una prueba de sabor con una pregunta al principio que solo se responda al final.`,
-
-`Muestra cuánto puede conseguir alguien con un presupuesto concreto.`,
-
-`Haz una comparación entre dos opciones y deja que la audiencia elija.`,
-
-`Cuenta una pequeña historia alrededor del producto en lugar de simplemente enseñarlo.`
-
-],
-
-business: [
-
-`Muestra un problema que tiene tu cliente y convierte tu producto en la solución dentro del video.`,
-
-`Haz un "antes y después" que permita entender el valor de tu producto en pocos segundos.`,
-
-`Responde una pregunta que tus clientes hacen constantemente.`,
-
-`Cuenta una pequeña historia real relacionada con tu negocio.`,
-
-`Haz una demostración rápida donde el producto haga algo que la gente no esperaba.`
-
-],
-
-general: [
-
-`Empieza con una situación normal y añade un giro inesperado antes de terminar.`,
-
-`Haz una lista de 3 cosas relacionadas con tu tema que casi nadie conoce.`,
-
-`Convierte una experiencia cotidiana en una pequeña historia.`,
-
-`Haz una comparación que obligue a la gente a elegir entre dos opciones.`,
-
-`Empieza por el resultado y haz que la audiencia quiera descubrir cómo llegaste ahí.`
-
-]
-
-};
-
-
-const ideas =
-bancos[categoria] || bancos.general;
-
-
-const seleccionadas = [];
-
-let intentos = 0;
-
-
-while(
-seleccionadas.length < 3 &&
-intentos < 20
-) {
-
-const idea = random(ideas);
-
-if(
-!seleccionadas.includes(idea)
-) {
-
-seleccionadas.push(idea);
-
-}
-
-intentos++;
-
-}
-
-
-return {
-
-categoria,
-
-ideas: seleccionadas,
-
-tema: contexto
-
-};
-
-}
-
-
-/* =====================================================
-GENERAR PROPUESTA
-===================================================== */
-
-function generarPropuesta(
-topic,
-detalle = "",
-duracion = 30
-) {
-
-const categoria =
-detectarCategoria(
-topic + " " + detalle
-);
-
-
-const efectos =
-EFFECTS[categoria] ||
-EFFECTS.general;
-
-
-const usados = [];
-
-
-function efecto() {
-
-let disponible =
-efectos.filter(
-x => !usados.includes(x)
-);
-
-let elegido =
-random(
-disponible.length
-? disponible
-: efectos
-);
-
-usados.push(elegido);
-
-return elegido;
-
-}
-
-
-const hooks = {
-
-gaming: [
-
-"Espera a ver cómo termina esta partida.",
-
-"Pensé que la ronda estaba perdida...",
-
-"Esta fue probablemente la jugada más rara de la partida.",
-
+gaming:[
+"Pensé que esta partida estaba perdida...",
 "Todo iba normal hasta que hice esto.",
-
-"El plan era sencillo. La ejecución fue otra historia."
-
+"Espera a ver cómo termina esto.",
+"Esta fue probablemente la jugada más rara de la partida.",
+"El plan parecía sencillo. La ejecución fue otra historia."
 ],
 
-food: [
-
+food:[
 "Esto parece una comida normal... hasta que ves el final.",
-
-"Si te gusta la comida, mira esto.",
-
 "Hay una razón por la que todos terminan pidiendo esto.",
-
-"Esto es lo que pasa cuando llevas una receta al siguiente nivel.",
-
-"El último plano es el que vende todo."
-
+"El último plano es el que vende todo.",
+"Si te gusta la comida, mira esto.",
+"Esto es lo que pasa cuando llevas una receta al siguiente nivel."
 ],
 
-business: [
-
+business:[
+"La mayoría muestra su producto así. Yo haría otra cosa.",
+"En lugar de decir que tu producto es bueno, vamos a demostrarlo.",
 "Si tienes este problema, mira esto.",
-
-"Esto puede cambiar la forma en que presentas tu negocio.",
-
-"La mayoría de negocios muestra su producto de esta manera. Yo haría otra cosa.",
-
 "Tu cliente debería entender esto antes de que termine el video.",
-
-"En lugar de decir que tu producto es bueno, vamos a demostrarlo."
-
+"Esto puede cambiar la forma en que presentas tu negocio."
 ],
 
-general: [
-
+general:[
 "Esto parecía una idea normal hasta que decidimos hacerlo diferente.",
-
 "Hay una forma mucho más interesante de contar esto.",
-
 "Espera al final porque ahí está el giro.",
-
 "Todo empieza de una manera bastante normal.",
-
-"Si yo tuviera que convertir esto en contenido, empezaría así."
-
+"Si tuviera que convertir esto en contenido, empezaría así."
 ]
 
 };
 
+const hook=random(hookBank[cat]);
 
-const hook =
-random(
-hooks[categoria] ||
-hooks.general
-);
+const efectos=[...effects[cat]]
+.sort(()=>Math.random()-.5)
+.slice(0,3);
 
+const motivacion=random(motivaciones);
+const cta=random(ctas);
 
-const musicas = {
-
-gaming:
-"Beat energético con un golpe fuerte en el momento de la jugada.",
-
-food:
-"Música alegre y moderna, dejando que los sonidos de la comida también se escuchen.",
-
-business:
-"Instrumental moderno y limpio que no compita con la voz.",
-
-general:
-"Beat moderno con pequeños cambios de ritmo para marcar los cortes."
-
-};
-
-
-const cta =
-random(CTA);
-
-
-const motivacion =
-random(
-MOTIVACIONES.filter(
-x => !usedIdeas.includes(x)
-)
-) || random(MOTIVACIONES);
-
-
-const titulo =
-tituloIdea(topic,categoria);
-
-
-const inicio =
-Math.max(
-3,
-Math.floor(duracion * .18)
-);
-
-
-const medio =
-Math.max(
-inicio + 2,
-Math.floor(duracion * .62)
-);
-
-
-const final =
-Math.max(
-medio + 1,
-duracion - 2
-);
-
+const a=Math.max(3,Math.floor(seconds*.18));
+const b=Math.max(a+2,Math.floor(seconds*.65));
 
 let escenas;
 
+if(cat==="gaming"){
 
-if(categoria === "gaming") {
-
-escenas = [
-
+escenas=[
 `Abre directamente con una parte interesante de <strong>${escape(topic)}</strong>. Nada de introducciones largas.`,
-
-`Introduce <strong>${escape(detalle || "la situación de la partida")}</strong> y aumenta progresivamente el ritmo.`,
-
+`Presenta la situación y aumenta progresivamente el ritmo. ${escape(detalle||"Haz que la audiencia quiera saber qué ocurrirá.")}`,
 `Guarda el mejor momento para el final y corta justo después de la reacción.`
-
 ];
 
-}
+}else if(cat==="food"){
 
-else if(categoria === "food") {
-
-escenas = [
-
-`Comienza con un plano cercano de <strong>${escape(topic)}</strong> que se vea especialmente atractivo.`,
-
-`Muestra el proceso o el detalle que hace diferente a <strong>${escape(detalle || "este producto")}</strong>.`,
-
-`Termina con el resultado final y una toma que invite a probarlo.`
-
+escenas=[
+`Empieza con un plano cercano de <strong>${escape(topic)}</strong>.`,
+`Muestra el proceso o el detalle que hace diferente a <strong>${escape(detalle||"este producto")}</strong>.`,
+`Termina con el resultado final y una toma atractiva.`
 ];
 
-}
+}else if(cat==="business"){
 
-else if(categoria === "business") {
-
-escenas = [
-
-`Presenta rápidamente el problema que tiene el cliente relacionado con <strong>${escape(topic)}</strong>.`,
-
-`Muestra cómo <strong>${escape(detalle || "tu producto o servicio")}</strong> resuelve ese problema.`,
-
-`Cierra con una razón concreta para dar el siguiente paso.`
-
+escenas=[
+`Presenta rápidamente el problema relacionado con <strong>${escape(topic)}</strong>.`,
+`Muestra cómo <strong>${escape(detalle||"tu producto o servicio")}</strong> resuelve ese problema.`,
+`Cierra con una razón concreta para continuar o conocer más.`
 ];
 
-}
+}else{
 
-else {
-
-escenas = [
-
+escenas=[
 `Empieza mostrando <strong>${escape(topic)}</strong> sin explicar demasiado.`,
-
-`Desarrolla la idea alrededor de <strong>${escape(detalle || "la parte más interesante")}</strong>.`,
-
+`Desarrolla la idea alrededor de <strong>${escape(detalle||"la parte más interesante")}</strong>.`,
 `Reserva el giro o la información más importante para los últimos segundos.`
-
 ];
 
 }
 
+const id="idea_"+Date.now()+"_"+Math.random().toString(36).slice(2,7);
 
-const id =
-"idea_" +
-Date.now() +
-"_" +
-Math.random()
-.toString(36)
-.substring(2,7);
-
-
-const html = `
+const html=`
 
 <div class="fade">
 
 <div class="card p-4 md:p-5">
 
-
-<div class="flex items-start
-justify-between gap-3 mb-5">
+<div class="flex items-start justify-between gap-3 mb-5">
 
 <div>
 
-<div class="text-[9px]
-uppercase
-tracking-widest
-text-verde
-font-bold mb-1">
+<div class="text-[9px] uppercase tracking-widest
+text-verde font-bold mb-1">
 
 PROPUESTA
 
 </div>
 
-<h2 class="text-base md:text-lg
-font-black">
+<h2 class="text-base md:text-lg font-black">
 
-${escape(titulo)}
+${titulo(cat)}
 
 </h2>
 
 </div>
 
-<div
-class="text-[9px]
-text-gray-500
-bg-panel
-border border-borde
-rounded-full
-px-2 py-1
-shrink-0">
+<div class="text-[9px] text-gray-500
+bg-panel border border-borde
+rounded-full px-2 py-1">
 
-${duracion}s
+${seconds}s
 
 </div>
 
 </div>
 
-
-<!-- IDEA -->
 
 <div class="mb-5">
 
-<div class="text-[11px]
-font-black text-verde mb-2">
-
+<div class="text-[11px] font-black text-verde mb-2">
 💡 CONCEPTO
-
 </div>
 
-<div class="text-xs
-text-gray-300
-leading-relaxed">
+<div class="text-xs text-gray-300 leading-relaxed">
 
 Convertir <strong>${escape(topic)}</strong>
-en una pieza de contenido donde
-${escape(detalle || "el resultado sea lo suficientemente interesante como para mantener la atención")}.
-La clave será mostrarlo en lugar de simplemente explicarlo.
+en contenido utilizando
+<strong>${escape(detalle||"un enfoque que genere curiosidad")}</strong>.
+La idea es mostrarlo de una forma que mantenga la atención
+en lugar de simplemente explicarlo.
 
 </div>
 
 </div>
 
-
-<!-- HOOK -->
 
 <div class="mb-5">
 
-<div class="text-[11px]
-font-black text-verde mb-2">
-
-🪝 PRIMEROS SEGUNDOS
-
+<div class="text-[11px] font-black text-verde mb-2">
+🪝 HOOK
 </div>
 
-<div
-class="bg-panel
-border border-borde
-rounded-xl
-p-3">
+<div class="bg-panel border border-borde rounded-xl p-3">
 
-<div class="text-sm
-font-bold
-leading-relaxed">
+<div class="text-sm font-bold leading-relaxed">
 
 "${escape(hook)}"
 
 </div>
 
-<div class="text-[9px]
-text-gray-600 mt-2">
-
-El objetivo es que la persona tenga una razón para quedarse.
-
+<div class="text-[9px] text-gray-600 mt-2">
+Los primeros segundos deben crear una razón para quedarse.
 </div>
 
 </div>
 
 </div>
 
-
-<!-- TIMELINE -->
 
 <div class="mb-5">
 
-<div class="text-[11px]
-font-black text-verde mb-2">
-
+<div class="text-[11px] font-black text-verde mb-2">
 🎬 GUION
-
 </div>
-
 
 <div class="space-y-2">
 
-
-<div
-class="bg-panel
-border border-borde
-rounded-xl
-p-3">
+<div class="bg-panel border border-borde rounded-xl p-3">
 
 <div class="flex gap-3">
 
-<div class="text-[10px]
-font-black
-text-verde">
-
-0-${inicio}s
-
+<div class="text-[10px] font-black text-verde">
+0-${a}s
 </div>
 
 <div>
 
-<div class="text-[9px]
-font-bold text-gray-500">
-
+<div class="text-[9px] font-bold text-gray-500">
 ENTRADA
-
 </div>
 
-<div class="text-[11px]
-text-gray-300
+<div class="text-[11px] text-gray-300
 leading-relaxed mt-1">
 
 ${escenas[0]}
@@ -1726,33 +1537,21 @@ ${escenas[0]}
 </div>
 
 
-<div
-class="bg-panel
-border border-borde
-rounded-xl
-p-3">
+<div class="bg-panel border border-borde rounded-xl p-3">
 
 <div class="flex gap-3">
 
-<div class="text-[10px]
-font-black
-text-verde">
-
-${inicio}-${medio}s
-
+<div class="text-[10px] font-black text-verde">
+${a}-${b}s
 </div>
 
 <div>
 
-<div class="text-[9px]
-font-bold text-gray-500">
-
+<div class="text-[9px] font-bold text-gray-500">
 DESARROLLO
-
 </div>
 
-<div class="text-[11px]
-text-gray-300
+<div class="text-[11px] text-gray-300
 leading-relaxed mt-1">
 
 ${escenas[1]}
@@ -1766,33 +1565,21 @@ ${escenas[1]}
 </div>
 
 
-<div
-class="bg-panel
-border border-borde
-rounded-xl
-p-3">
+<div class="bg-panel border border-borde rounded-xl p-3">
 
 <div class="flex gap-3">
 
-<div class="text-[10px]
-font-black
-text-verde">
-
-${medio}-${duracion}s
-
+<div class="text-[10px] font-black text-verde">
+${b}-${seconds}s
 </div>
 
 <div>
 
-<div class="text-[9px]
-font-bold text-gray-500">
-
+<div class="text-[9px] font-bold text-gray-500">
 CIERRE
-
 </div>
 
-<div class="text-[11px]
-text-gray-300
+<div class="text-[11px] text-gray-300
 leading-relaxed mt-1">
 
 ${escenas[2]}
@@ -1805,144 +1592,76 @@ ${escenas[2]}
 
 </div>
 
-
 </div>
 
 </div>
 
-
-<!-- EDICIÓN -->
 
 <div class="mb-5">
 
-<div class="text-[11px]
-font-black text-verde mb-2">
-
+<div class="text-[11px] font-black text-verde mb-2">
 ✂️ EDICIÓN
-
 </div>
 
+<div class="grid grid-cols-1 sm:grid-cols-3 gap-2">
 
-<div class="grid
-grid-cols-1
-sm:grid-cols-3
-gap-2">
+${efectos.map((e,i)=>`
 
-<div class="bg-panel
-border border-borde
+<div class="bg-panel border border-borde
 rounded-xl p-3">
 
-<div class="text-[9px]
-text-gray-600">
-
-ENTRADA
-
+<div class="text-[9px] text-gray-600">
+${["ENTRADA","MOMENTO CLAVE","CIERRE"][i]}
 </div>
 
-<div class="text-[10px]
-font-bold mt-1">
-
-${escape(efecto())}
-
+<div class="text-[10px] font-bold mt-1">
+${escape(e)}
 </div>
 
 </div>
 
-
-<div class="bg-panel
-border border-borde
-rounded-xl p-3">
-
-<div class="text-[9px]
-text-gray-600">
-
-MOMENTO CLAVE
-
-</div>
-
-<div class="text-[10px]
-font-bold mt-1">
-
-${escape(efecto())}
+`).join("")}
 
 </div>
 
 </div>
 
-
-<div class="bg-panel
-border border-borde
-rounded-xl p-3">
-
-<div class="text-[9px]
-text-gray-600">
-
-CIERRE
-
-</div>
-
-<div class="text-[10px]
-font-bold mt-1">
-
-${escape(efecto())}
-
-</div>
-
-</div>
-
-</div>
-
-</div>
-
-
-<!-- MÚSICA -->
 
 <div class="mb-5">
 
-<div class="text-[11px]
-font-black text-verde mb-2">
-
+<div class="text-[11px] font-black text-verde mb-2">
 🎵 AUDIO
+</div>
+
+<div class="bg-panel border border-borde rounded-xl p-3">
+
+<div class="text-[11px] text-gray-300">
+
+${cat==="gaming"
+?"Beat energético con un golpe fuerte en la jugada principal."
+:cat==="food"
+?"Música moderna dejando espacio para los sonidos reales."
+:cat==="business"
+?"Instrumental moderno y limpio que no compita con la voz."
+:"Beat moderno con cambios de ritmo para marcar los cortes."}
 
 </div>
 
-<div class="bg-panel
-border border-borde
-rounded-xl p-3">
-
-<div class="text-[11px]
-text-gray-300">
-
-${musicas[categoria]}
-
 </div>
 
 </div>
 
-</div>
-
-
-<!-- CTA -->
 
 <div class="mb-5">
 
-<div class="text-[11px]
-font-black text-verde mb-2">
-
-🎯 FINAL
-
+<div class="text-[11px] font-black text-verde mb-2">
+🎯 CTA
 </div>
 
-<div
-class="bg-vino/20
-border border-vino
-rounded-xl
-p-3">
+<div class="bg-vino/20 border border-vino rounded-xl p-3">
 
 <div class="text-xs font-bold">
-
 "${escape(cta)}"
-
 </div>
 
 </div>
@@ -1950,27 +1669,16 @@ p-3">
 </div>
 
 
-<!-- MOTIVACIÓN -->
+<div class="bg-panel border border-borde rounded-xl p-3">
 
-<div
-class="bg-panel
-border border-borde
-rounded-xl
-p-3">
+<div class="text-[9px] uppercase tracking-widest
+text-verde font-bold mb-1">
 
-<div class="text-[9px]
-uppercase
-tracking-widest
-text-verde
-font-bold mb-1">
-
-🚀 by SparkyKrea
+🚀 SPARKYKREA
 
 </div>
 
-<div class="text-[10px]
-text-gray-400
-leading-relaxed">
+<div class="text-[10px] text-gray-400 leading-relaxed">
 
 ${escape(motivacion)}
 
@@ -1979,15 +1687,10 @@ ${escape(motivacion)}
 </div>
 
 
-<!-- BOTONES -->
-
-<div
-class="flex flex-wrap gap-1.5
-pt-3 mt-4
+<div class="flex flex-wrap gap-1.5 pt-3 mt-4
 border-t border-borde">
 
-<button
-class="action"
+<button class="action"
 onclick="copiarIdea('${id}')">
 
 <i class="fa-regular fa-copy"></i>
@@ -1995,8 +1698,7 @@ Copiar
 
 </button>
 
-<button
-class="action"
+<button class="action"
 onclick="guardarIdea('${id}')">
 
 <i class="fa-regular fa-star"></i>
@@ -2004,8 +1706,7 @@ Guardar
 
 </button>
 
-<button
-class="action"
+<button class="action"
 onclick="otraVersion('${id}')">
 
 <i class="fa-solid fa-rotate"></i>
@@ -2013,8 +1714,7 @@ Otra versión
 
 </button>
 
-<button
-class="action"
+<button class="action"
 onclick="mejorarIdea('${id}')">
 
 <i class="fa-solid fa-wand-magic-sparkles"></i>
@@ -2027,106 +1727,50 @@ Mejorar
 </div>
 
 </div>
-
 `;
 
 
-const plain =
-`${titulo}
+const plain=strip(html);
 
-CONCEPTO
-Convertir ${topic} en contenido.
-
-HOOK
-${hook}
-
-GUION
-0-${inicio}s: ${strip(escenas[0])}
-
-${inicio}-${medio}s: ${strip(escenas[1])}
-
-${medio}-${duracion}s: ${strip(escenas[2])}
-
-EDICIÓN
-${usados.join(", ")}
-
-AUDIO
-${musicas[categoria]}
-
-CTA
-${cta}
-
-${motivacion}`;
-
-
-const data = {
-
+currentIdea={
 id,
 topic,
 detalle,
-categoria,
-duracion,
-titulo,
+categoria:cat,
+duracion:seconds,
 html,
 plain
-
 };
 
-
-currentIdea = data;
-
-return data;
+return currentIdea;
 
 }
 
 
 /* =====================================================
-QUITAR HTML
+MENSAJES
 ===================================================== */
 
-function strip(text) {
+function mensajeUsuario(text){
 
-return String(text)
-.replace(/<[^>]*>/g,"");
-
-}
-
-
-/* =====================================================
-MOSTRAR MENSAJE
-===================================================== */
-
-function mensajeUsuario(text) {
-
-const box =
-document.getElementById("messages");
+const box=document.getElementById("messages");
 
 box.classList.remove("hidden");
 
+const el=document.createElement("div");
 
-const el =
-document.createElement("div");
+el.className="fade flex justify-end";
 
-el.className =
-"fade flex justify-end";
+el.innerHTML=`
 
-
-el.innerHTML = `
-
-<div class="max-w-[85%]
-bg-vino
-rounded-2xl
-rounded-br-md
-px-3.5 py-2.5
-text-xs
-leading-relaxed">
+<div class="max-w-[85%] bg-vino
+rounded-2xl rounded-br-md
+px-3.5 py-2.5 text-xs leading-relaxed">
 
 ${escape(text)}
 
 </div>
-
 `;
-
 
 box.appendChild(el);
 
@@ -2134,34 +1778,22 @@ scrollBottom();
 
 }
 
+function mensajeBot(html){
 
-function mensajeBot(html) {
-
-const box =
-document.getElementById("messages");
+const box=document.getElementById("messages");
 
 box.classList.remove("hidden");
 
+const el=document.createElement("div");
 
-const el =
-document.createElement("div");
+el.className="fade flex gap-2 items-start";
 
-el.className =
-"fade flex gap-2 items-start";
+el.innerHTML=`
 
+<div class="w-7 h-7 rounded-lg bg-vino
+shrink-0 flex items-center justify-center">
 
-el.innerHTML = `
-
-<div
-class="w-7 h-7
-rounded-lg
-bg-vino
-shrink-0
-flex items-center
-justify-center">
-
-<i class="fa-solid fa-bolt
-text-[10px]"></i>
+<i class="fa-solid fa-bolt text-[10px]"></i>
 
 </div>
 
@@ -2170,9 +1802,7 @@ text-[10px]"></i>
 ${html}
 
 </div>
-
 `;
-
 
 box.appendChild(el);
 
@@ -2182,102 +1812,75 @@ scrollBottom();
 
 
 /* =====================================================
-GENERAR RESPUESTA DE IDEAS
+MOSTRAR IDEAS
 ===================================================== */
 
-function mostrarIdeas(topic) {
+function mostrarIdeas(text){
 
-const resultado =
-generarIdeas(topic);
+const resultado=generarIdeas(text);
 
+const frases=[
 
-const frases = [
+"Vamos a quitarle presión a la página en blanco:",
 
-"Si todavía no tienes una idea concreta, yo empezaría por una de estas:",
+"No necesitas esperar a que aparezca la inspiración. Mira estas opciones:",
 
-"No hace falta esperar a que llegue la inspiración. Mira estas opciones:",
+"Si yo tuviera que empezar desde cero, probaría estas:",
 
-"Vamos a quitarle presión a la página en blanco. Estas son algunas rutas que podrías probar:",
+"Hay varias formas de convertir ese tema en contenido:",
 
-"Si yo tuviera que empezar desde cero, probaría estas ideas:",
-
-"Hay varias formas de convertir ese tema en contenido. Estas son las que más me llaman la atención:"
+"Vamos a buscar un ángulo diferente:"
 
 ];
 
-
-let html = `
+let html=`
 
 <div class="fade">
 
 <div class="card p-4 md:p-5">
 
-<div class="text-sm
-font-bold
-mb-2">
+<div class="text-sm font-bold mb-4">
 
 ${random(frases)}
 
 </div>
 
-<div class="text-[10px]
-text-gray-600 mb-4">
-
-Tema detectado:
-<span class="text-verde">
-${escape(resultado.tema)}
-</span>
-
-</div>
-
-
 <div class="space-y-2">
 
 `;
 
+resultado.ideas.forEach((idea,i)=>{
 
-resultado.ideas.forEach(
-(idea,index) => {
-
-html += `
+html+=`
 
 <div
-class="bg-panel
-border border-borde
-rounded-xl
-p-3">
+class="bg-panel border border-borde
+rounded-xl p-3 cursor-pointer
+hover:border-verde transition"
+onclick="usarIdea(${JSON.stringify(idea).replace(/"/g,'&quot;')})">
 
 <div class="flex gap-3">
 
-<div
-class="w-6 h-6
-rounded-lg
-bg-vino
-flex items-center
-justify-center
-text-[10px]
-font-black
-shrink-0">
+<div class="w-6 h-6 rounded-lg bg-vino
+flex items-center justify-center
+text-[10px] font-black shrink-0">
 
-${index + 1}
+${i+1}
 
 </div>
 
 <div>
 
-<div class="text-[11px]
-font-semibold
-text-gray-200
-leading-relaxed">
+<div class="text-[11px] font-semibold
+text-gray-200 leading-relaxed">
 
 ${escape(idea)}
 
 </div>
 
-<div class="text-[9px]
-text-gray-600 mt-1.5">
+<div class="text-[9px] text-gray-600 mt-1.5">
 
-Puedes pedirme que desarrolle esta idea.
+Toca esta idea para desarrollarla.
 
 </div>
 
@@ -2291,25 +1894,17 @@ Puedes pedirme que desarrolle esta idea.
 
 });
 
-
-html += `
+html+=`
 
 </div>
 
+<div class="mt-4 pt-3 border-t border-borde">
 
-<div
-class="mt-4
-pt-3
-border-t border-borde">
+<div class="text-[10px] text-gray-500">
 
-<div class="text-[10px]
-text-gray-500">
-
-💡 Dime cuál te gusta, o escribe
-<strong class="text-gray-300">
-"otra"
-</strong>
-y te propongo opciones completamente diferentes.
+💡 Puedes tocar una idea para desarrollarla
+o escribir <strong class="text-gray-300">"otra"</strong>
+para buscar algo diferente.
 
 </div>
 
@@ -2320,7 +1915,6 @@ y te propongo opciones completamente diferentes.
 </div>
 
 `;
-
 
 mensajeBot(html);
 
@@ -2328,53 +1922,75 @@ mensajeBot(html);
 
 
 /* =====================================================
-PROCESAR TEXTO
+USAR IDEA
 ===================================================== */
 
-function procesar(text) {
+function usarIdea(idea){
 
-const t =
-normal(text);
+const input=document.getElementById("input");
 
+input.value=idea;
 
-/* SALUDO */
+input.focus();
 
-if(
-/^(hola|holaa|holaaa|hey|hello|buenas|saludos)$/.test(t)
-) {
-
-return `
-
-<div class="text-xs text-gray-300">
-
-${saludo()}
-
-<br><br>
-
-Cuéntame qué quieres crear.
-Puede ser una idea concreta o simplemente decirme
-<strong>"no sé qué publicar"</strong> y buscamos opciones.
-
-</div>
-
-`;
+toast("💡 Idea lista para desarrollar");
 
 }
 
 
-/* OTRA IDEA */
+/* =====================================================
+PROCESAR
+===================================================== */
+
+function procesar(text){
+
+const t=normal(text);
+
+
+/* SALUDOS */
+
+if(
+/^(hola|holaa|holaaa|hey|hello|buenas|saludos)$/.test(t)
+){
+
+return{
+
+html:`
+
+<div class="text-xs text-gray-300">
+
+${random([
+"¡Hey! ⚡ Cuéntame qué quieres crear.",
+"¡Buenas! 🚀 Vamos a darle forma a una idea.",
+"¡Hola! 😎 Escríbeme lo que tengas en mente.",
+"¡Hey! ✨ No hace falta que tengas todo pensado."
+])}
+
+<br><br>
+
+Puedes contarme una idea completa,
+una frase suelta o simplemente decirme
+que no sabes qué publicar.
+
+</div>
+
+`,
+
+id:null
+
+};
+
+}
+
+
+/* OTRA */
 
 if(
 /^(otra|otro|otra idea|dame otra|otra mas|otra más|ninguna|no me gusta)$/.test(t)
-) {
-
-const tema =
-currentIdea?.topic ||
-"mi contenido";
-
+){
 
 mostrarIdeas(
-tema
+currentIdea?.topic||"contenido"
 );
 
 return null;
@@ -2382,11 +1998,9 @@ return null;
 }
 
 
-/* SIN IDEA */
+/* IDEAS */
 
-if(
-quiereIdeas(text)
-) {
+if(quiereIdeas(text)){
 
 mostrarIdeas(text);
 
@@ -2395,140 +2009,13 @@ return null;
 }
 
 
-/* IDEA NORMAL */
+/* PROPUESTA */
 
-const categoria =
-detectarCategoria(text);
-
-
-let detalle = "";
-
-
-/* DETECTAR PERSONAJE */
-
-for(
-const personaje of CHARACTERS
-) {
-
-if(
-t.includes(personaje)
-) {
-
-detalle =
-"centrando el contenido en " +
-personaje;
-
-break;
-
-}
-
-}
-
-
-/* DETECTAR JUEGO */
-
-if(!detalle) {
-
-for(
-const juego of GAMES
-) {
-
-if(
-t.includes(
-normal(juego)
-)
-) {
-
-detalle =
-"centrando el contenido en " +
-juego;
-
-break;
-
-}
-
-}
-
-}
-
-
-/* GENERAR */
-
-const duracion =
-extraerDuracion(text);
-
-
-const data =
-generarPropuesta(
+return generarPropuesta(
 text,
-detalle,
-duracion
+"",
+duracion(text)
 );
-
-
-mensajeBot(data.html);
-
-
-/* GUARDAR REFERENCIA */
-
-currentIdea =
-data;
-
-
-return data;
-
-}
-
-
-/* =====================================================
-SALUDO
-===================================================== */
-
-function saludo() {
-
-const hora =
-new Date().getHours();
-
-
-if(hora < 12) {
-
-return random([
-
-"¡Buenos días! ⚡ Vamos a darle forma a una idea.",
-
-"¡Buenos días! ☀️ ¿Qué quieres crear hoy?",
-
-"Arrancamos. 🚀 Cuéntame qué tienes en mente."
-
-]);
-
-}
-
-
-if(hora < 19) {
-
-return random([
-
-"¡Buenas! ⚡ ¿Qué vamos a crear?",
-
-"Hey 😎, cuéntame qué tienes pensado.",
-
-"Vamos a crear algo interesante. 🔥"
-
-]);
-
-}
-
-
-return random([
-
-"¡Buenas noches! 🌙 ¿Qué vamos a crear?",
-
-"Hey, todavía queda tiempo para una buena idea. ⚡",
-
-"Buenas noches. Cuéntame qué tienes en mente. 🚀"
-
-]);
 
 }
 
@@ -2537,49 +2024,34 @@ return random([
 ENVIAR
 ===================================================== */
 
-function enviar(event) {
+function enviar(event){
 
 event.preventDefault();
 
+const input=document.getElementById("input");
 
-const input =
-document.getElementById("input");
+const text=input.value.trim();
 
+if(!text)return;
 
-const text =
-input.value.trim();
-
-
-if(!text)
-return;
-
-
-input.value = "";
-
+input.value="";
 
 mensajeUsuario(text);
 
 
-/* CARGANDO */
+/* TYPING */
 
-const loading =
-document.createElement("div");
+const loading=document.createElement("div");
 
-loading.id =
-"loading";
+loading.id="loading";
 
-loading.className =
-"flex gap-2 items-center text-gray-600 text-[10px]";
+loading.className=
+"fade flex gap-2 items-center text-gray-600 text-[10px]";
 
+loading.innerHTML=`
 
-loading.innerHTML = `
-
-<div
-class="w-7 h-7
-rounded-lg
-bg-vino
-flex items-center
-justify-center">
+<div class="w-7 h-7 rounded-lg bg-vino
+flex items-center justify-center">
 
 <i class="fa-solid fa-bolt text-[10px]"></i>
 
@@ -2587,40 +2059,48 @@ justify-center">
 
 <div>
 
-Pensando una propuesta...
+SparkyKrea está creando
 
-<i class="fa-solid fa-circle-notch fa-spin ml-1"></i>
+<span class="typingDot"></span>
+<span class="typingDot"></span>
+<span class="typingDot"></span>
 
 </div>
-
 `;
 
-
-document.getElementById(
-"messages"
-).appendChild(loading);
-
+document.getElementById("messages")
+.appendChild(loading);
 
 scrollBottom();
 
 
-setTimeout(() => {
+setTimeout(()=>{
 
 loading.remove();
 
+const result=procesar(text);
 
-const result =
-procesar(text);
+if(result){
 
+if(result.html){
 
-/* Guardar chat */
+mensajeBot(result.html);
 
-guardarChat(
-text,
-result
-);
+}
 
-},450);
+if(result.id){
+
+guardarChat(text,result);
+
+}
+
+}else{
+
+guardarChat(text,null);
+
+}
+
+},550);
 
 }
 
@@ -2629,85 +2109,64 @@ result
 HISTORIAL
 ===================================================== */
 
-function guardarChat(
-userText,
-result
-) {
+function guardarChat(text,result){
 
-if(!currentChat) {
+if(!currentChat){
 
-currentChat = {
+currentChat={
 
-id: Date.now().toString(),
+id:Date.now().toString(),
 
-title:
-userText.length > 35
-? userText.substring(0,35) + "..."
-: userText,
+title:text.length>40
+?text.substring(0,40)+"..."
+:text,
 
-messages: [],
+messages:[],
 
-createdAt: Date.now()
+createdAt:Date.now()
 
 };
 
-chats.unshift(
-currentChat
-);
+chats.unshift(currentChat);
 
 }
 
-
-/* No guardamos el HTML completo del DOM,
-   solamente el mensaje del usuario y,
-   cuando existe, la propuesta. */
-
 currentChat.messages.push({
 
-user: userText,
+user:text,
 
-idea:
-result?.id || null
+idea:result?.id||null
 
 });
 
-
-guardarDatos();
+saveData();
 
 renderHistory();
 
 }
 
 
-function renderHistory() {
+function renderHistory(){
 
-const history =
-document.getElementById(
-"history"
-);
+const history=document.getElementById("history");
 
-history.innerHTML = "";
+history.innerHTML="";
 
+chats.slice(0,20).forEach(chat=>{
 
-chats
-.slice(0,20)
-.forEach(chat => {
+const row=document.createElement("div");
 
-const row =
-document.createElement("div");
-
-row.className =
+row.className=
 "group flex items-center gap-1";
 
+const btn=document.createElement("button");
 
-const button =
-document.createElement("button");
+btn.className=
+"flex-1 text-left truncate px-2.5 py-2
+rounded-lg text-[10px] text-gray-500
+hover:bg-card hover:text-gray-300 transition";
 
-button.className =
-"flex-1 text-left truncate px-2.5 py-2 rounded-lg text-[10px] text-gray-500 hover:bg-card hover:text-gray-300 transition";
-
-
-button.innerHTML = `
+btn.innerHTML=`
 
 <i class="fa-regular fa-message mr-1.5 text-[8px]"></i>
 
@@ -2715,24 +2174,18 @@ ${escape(chat.title)}
 
 `;
 
+btn.onclick=()=>abrirChat(chat.id);
 
-button.onclick =
-() => abrirChat(chat.id);
+const del=document.createElement("button");
 
+del.className=
+"opacity-0 group-hover:opacity-100
+text-gray-600 hover:text-red-400 p-1";
 
-const borrar =
-document.createElement("button");
-
-borrar.className =
-"opacity-0 group-hover:opacity-100 text-gray-600 hover:text-red-400 p-1";
-
-
-borrar.innerHTML =
+del.innerHTML=
 '<i class="fa-solid fa-trash text-[9px]"></i>';
 
-
-borrar.onclick =
-e => {
+del.onclick=e=>{
 
 e.stopPropagation();
 
@@ -2740,10 +2193,8 @@ borrarChat(chat.id);
 
 };
 
-
-row.appendChild(button);
-
-row.appendChild(borrar);
+row.appendChild(btn);
+row.appendChild(del);
 
 history.appendChild(row);
 
@@ -2752,139 +2203,80 @@ history.appendChild(row);
 }
 
 
-function abrirChat(id) {
+function abrirChat(id){
 
-const chat =
-chats.find(
-x => x.id === id
-);
+const chat=chats.find(x=>x.id===id);
 
-if(!chat)
-return;
+if(!chat)return;
 
+currentChat=chat;
 
-currentChat =
-chat;
+document.getElementById("welcome")
+.classList.add("hidden");
 
-
-document.getElementById(
-"welcome"
-).classList.add("hidden");
-
-
-const box =
-document.getElementById(
-"messages"
-);
+const box=document.getElementById("messages");
 
 box.classList.remove("hidden");
 
-box.innerHTML = "";
+box.innerHTML="";
 
+chat.messages.forEach(m=>{
 
-/*
-No almacenamos todas las propuestas como HTML
-dentro del historial para mantenerlo ligero.
-Si la propuesta sigue en memoria se recupera.
-*/
-
-chat.messages.forEach(
-message => {
-
-mensajeUsuario(
-message.user
-);
-
-if(
-message.idea &&
-currentIdea &&
-currentIdea.id === message.idea
-) {
-
-mensajeBot(
-currentIdea.html
-);
-
-}
+mensajeUsuario(m.user);
 
 });
 
-
 closeSidebar();
 
-}
-
-
-function borrarChat(id) {
-
-chats =
-chats.filter(
-x => x.id !== id
-);
-
-
-if(
-currentChat &&
-currentChat.id === id
-) {
-
-nuevoProyecto(false);
-
-}
-
-
-guardarDatos();
-
-renderHistory();
-
-toast(
-"Proyecto eliminado"
-);
+scrollBottom();
 
 }
 
 
 /* =====================================================
-NUEVO
+BORRAR
 ===================================================== */
 
-function nuevoProyecto(
-cerrar = true
-) {
+function borrarChat(id){
 
-currentChat = null;
+chats=chats.filter(x=>x.id!==id);
 
-currentIdea = null;
+if(currentChat?.id===id){
 
+nuevoProyecto(false);
 
-document.getElementById(
-"welcome"
-).classList.remove(
-"hidden"
-);
+}
 
+saveData();
 
-document.getElementById(
-"messages"
-).classList.add(
-"hidden"
-);
+renderHistory();
+
+toast("Proyecto eliminado");
+
+}
 
 
-document.getElementById(
-"messages"
-).innerHTML = "";
+/* =====================================================
+NUEVO PROYECTO
+===================================================== */
 
+function nuevoProyecto(close=true){
 
-document.getElementById(
-"input"
-).value = "";
+currentChat=null;
+currentIdea=null;
 
+document.getElementById("welcome")
+.classList.remove("hidden");
 
-document.getElementById(
-"welcomeTitle"
-).textContent =
-random([
+document.getElementById("messages")
+.classList.add("hidden");
+
+document.getElementById("messages").innerHTML="";
+
+document.getElementById("input").value="";
+
+document.getElementById("welcomeTitle")
+.textContent=random([
 
 "¿Qué vamos a crear?",
 
@@ -2898,151 +2290,13 @@ random([
 
 ]);
 
-
-if(
-cerrar &&
-window.innerWidth < 768
-) {
-
+if(close && innerWidth<768)
 closeSidebar();
 
-}
-
-
 setTimeout(
-() => document.getElementById("input").focus(),
+()=>document.getElementById("input").focus(),
 100
 );
-
-}
-
-
-/* =====================================================
-EJEMPLOS
-===================================================== */
-
-function usarEjemplo(text) {
-
-document.getElementById(
-"input"
-).value = text;
-
-document.getElementById(
-"input"
-).focus();
-
-}
-
-
-/* =====================================================
-GUARDAR IDEA
-===================================================== */
-
-function guardarIdea(id) {
-
-if(!currentIdea)
-return;
-
-
-if(
-currentIdea.id !== id
-)
-return;
-
-
-if(
-saved.some(
-x => x.id === id
-)
-) {
-
-toast(
-"⭐ Esta idea ya está guardada"
-);
-
-return;
-
-}
-
-
-saved.unshift({
-
-id:
-currentIdea.id,
-
-title:
-currentIdea.titulo,
-
-topic:
-currentIdea.topic,
-
-html:
-currentIdea.html,
-
-plain:
-currentIdea.plain,
-
-createdAt:
-Date.now()
-
-});
-
-
-guardarDatos();
-
-
-toast(
-"⭐ Idea guardada"
-);
-
-}
-
-
-async function copiarIdea(id) {
-
-if(
-!currentIdea ||
-currentIdea.id !== id
-) {
-
-return;
-
-}
-
-
-try {
-
-await navigator.clipboard.writeText(
-currentIdea.plain
-);
-
-toast(
-"📋 Idea copiada"
-);
-
-}
-
-catch {
-
-const area =
-document.createElement("textarea");
-
-area.value =
-currentIdea.plain;
-
-document.body.appendChild(area);
-
-area.select();
-
-document.execCommand("copy");
-
-area.remove();
-
-toast(
-"📋 Idea copiada"
-);
-
-}
 
 }
 
@@ -3051,29 +2305,11 @@ toast(
 OTRA VERSIÓN
 ===================================================== */
 
-function otraVersion(id) {
+function otraVersion(id){
 
-if(
-!currentIdea ||
-currentIdea.id !== id
-) {
+if(!currentIdea||currentIdea.id!==id)return;
 
-return;
-
-}
-
-
-const old =
-currentIdea;
-
-
-let nuevoDetalle =
-old.detalle;
-
-
-/* Cambiamos el enfoque */
-
-const enfoques = [
+const enfoques=[
 
 "con un giro inesperado",
 
@@ -3087,42 +2323,25 @@ const enfoques = [
 
 "con un reto",
 
-"con una pregunta que genere curiosidad"
+"con una pregunta que genere curiosidad",
+
+"haciendo que el final sea inesperado"
 
 ];
 
+const nueva=generarPropuesta(
 
-nuevoDetalle =
-random(
-enfoques.filter(
-x => x !== old.detalle
-)
-);
+currentIdea.topic,
 
+random(enfoques),
 
-const nueva =
-generarPropuesta(
-
-old.topic,
-
-nuevoDetalle,
-
-old.duracion
+currentIdea.duracion
 
 );
 
+mensajeBot(nueva.html);
 
-mensajeBot(
-nueva.html
-);
-
-
-guardarChat(
-"⚡ Otra versión: " +
-old.topic,
-
-nueva
-);
+toast("🔄 Nueva versión creada");
 
 }
 
@@ -3131,20 +2350,11 @@ nueva
 MEJORAR
 ===================================================== */
 
-function mejorarIdea(id) {
+function mejorarIdea(id){
 
-if(
-!currentIdea ||
-currentIdea.id !== id
-)
-return;
+if(!currentIdea||currentIdea.id!==id)return;
 
-
-const old =
-currentIdea;
-
-
-const mejoras = [
+const mejoras=[
 
 "con un hook más directo",
 
@@ -3152,35 +2362,105 @@ const mejoras = [
 
 "con una historia más rápida",
 
-"haciendo que el producto sea protagonista",
-
 "con un final más fuerte",
 
-"con un giro inesperado"
+"con un giro inesperado",
+
+"haciendo que la audiencia participe",
+
+"con una edición más dinámica"
 
 ];
 
+const nueva=generarPropuesta(
 
-const nueva =
-generarPropuesta(
-
-old.topic,
+currentIdea.topic,
 
 random(mejoras),
 
-old.duracion
+currentIdea.duracion
 
 );
 
+mensajeBot(nueva.html);
 
-mensajeBot(
-nueva.html
+toast("✨ Idea mejorada");
+
+}
+
+
+/* =====================================================
+COPIAR
+===================================================== */
+
+async function copiarIdea(id){
+
+if(!currentIdea||currentIdea.id!==id)return;
+
+try{
+
+await navigator.clipboard.writeText(
+currentIdea.plain
 );
 
+toast("📋 Idea copiada");
 
-toast(
-"✨ Propuesta mejorada"
-);
+}catch{
+
+const area=document.createElement("textarea");
+
+area.value=currentIdea.plain;
+
+document.body.appendChild(area);
+
+area.select();
+
+document.execCommand("copy");
+
+area.remove();
+
+toast("📋 Idea copiada");
+
+}
+
+}
+
+
+/* =====================================================
+GUARDAR
+===================================================== */
+
+function guardarIdea(id){
+
+if(!currentIdea||currentIdea.id!==id)return;
+
+if(saved.some(x=>x.id===id)){
+
+toast("⭐ Ya está guardada");
+
+return;
+
+}
+
+saved.unshift({
+
+id:currentIdea.id,
+
+title:currentIdea.topic,
+
+topic:currentIdea.topic,
+
+html:currentIdea.html,
+
+plain:currentIdea.plain,
+
+createdAt:Date.now()
+
+});
+
+saveData();
+
+toast("⭐ Idea guardada");
 
 }
 
@@ -3189,90 +2469,57 @@ toast(
 GUARDADOS
 ===================================================== */
 
-function actualizarContador() {
+function updateCount(){
 
-document.getElementById(
-"savedCount"
-).textContent =
-saved.length;
+document.getElementById("savedCount")
+.textContent=saved.length;
 
 }
 
-
-function abrirGuardados() {
+function abrirGuardados(){
 
 renderSaved();
 
+const modal=document.getElementById("savedModal");
 
-const modal =
-document.getElementById(
-"savedModal"
-);
-
-modal.classList.remove(
-"hidden"
-);
-
-modal.classList.add(
-"flex"
-);
-
+modal.classList.remove("hidden");
+modal.classList.add("flex");
 
 closeSidebar();
 
 }
 
+function cerrarGuardados(){
 
-function cerrarGuardados() {
+const modal=document.getElementById("savedModal");
 
-const modal =
-document.getElementById(
-"savedModal"
-);
-
-modal.classList.add(
-"hidden"
-);
-
-modal.classList.remove(
-"flex"
-);
+modal.classList.add("hidden");
+modal.classList.remove("flex");
 
 }
 
+function renderSaved(){
 
-function renderSaved() {
+const list=document.getElementById("savedList");
 
-const list =
-document.getElementById(
-"savedList"
-);
+if(!saved.length){
 
+list.innerHTML=`
 
-if(!saved.length) {
+<div class="text-center py-12">
 
-list.innerHTML = `
+<div class="text-4xl mb-3">⭐</div>
 
-<div class="text-center
-py-12">
-
-<div class="text-4xl mb-3">
-⭐
-</div>
-
-<div class="text-xs
-font-semibold
-text-gray-400">
+<div class="text-xs font-semibold text-gray-400">
 
 Todavía no tienes ideas guardadas.
 
 </div>
 
-<div class="text-[9px]
-text-gray-600 mt-1">
+<div class="text-[9px] text-gray-600 mt-1">
 
 Cuando encuentres una propuesta que te guste,
-pulsa "Guardar".
+pulsa Guardar.
 
 </div>
 
@@ -3284,37 +2531,28 @@ return;
 
 }
 
+list.innerHTML="";
 
-list.innerHTML = "";
+saved.forEach(item=>{
 
+const div=document.createElement("div");
 
-saved.forEach(item => {
+div.className="card p-3";
 
-const div =
-document.createElement("div");
-
-div.className =
-"card p-3";
-
-
-div.innerHTML = `
+div.innerHTML=`
 
 <div class="flex items-start
 justify-between gap-2">
 
 <div class="min-w-0">
 
-<div class="text-xs
-font-bold
-truncate">
+<div class="text-xs font-bold truncate">
 
 ${escape(item.title)}
 
 </div>
 
-<div class="text-[9px]
-text-gray-600 mt-1
-truncate">
+<div class="text-[9px] text-gray-600 mt-1">
 
 ${escape(item.topic)}
 
@@ -3328,11 +2566,9 @@ ${escape(item.topic)}
 
 </div>
 
-
 <div class="flex gap-1.5 mt-3">
 
-<button
-class="action"
+<button class="action"
 onclick="abrirIdeaGuardada('${item.id}')">
 
 <i class="fa-regular fa-folder-open"></i>
@@ -3340,8 +2576,7 @@ Abrir
 
 </button>
 
-<button
-class="action"
+<button class="action"
 onclick="copiarGuardada('${item.id}')">
 
 <i class="fa-regular fa-copy"></i>
@@ -3349,8 +2584,7 @@ Copiar
 
 </button>
 
-<button
-class="action"
+<button class="action"
 onclick="eliminarGuardada('${item.id}')">
 
 <i class="fa-solid fa-trash"></i>
@@ -3362,7 +2596,6 @@ Eliminar
 
 `;
 
-
 list.appendChild(div);
 
 });
@@ -3370,96 +2603,58 @@ list.appendChild(div);
 }
 
 
-function abrirIdeaGuardada(id) {
+function abrirIdeaGuardada(id){
 
-const item =
-saved.find(
-x => x.id === id
-);
+const item=saved.find(x=>x.id===id);
 
-if(!item)
-return;
-
+if(!item)return;
 
 cerrarGuardados();
 
+document.getElementById("welcome")
+.classList.add("hidden");
 
-document.getElementById(
-"welcome"
-).classList.add(
-"hidden"
-);
+document.getElementById("messages")
+.classList.remove("hidden");
 
+document.getElementById("messages").innerHTML="";
 
-const box =
-document.getElementById(
-"messages"
-);
+currentIdea={
 
-box.classList.remove(
-"hidden"
-);
+id:item.id,
 
-box.innerHTML = "";
+topic:item.topic,
 
+html:item.html,
 
-currentIdea = {
+plain:item.plain,
 
-id: item.id,
-
-titulo: item.title,
-
-topic: item.topic,
-
-html: item.html,
-
-plain: item.plain,
-
-duracion: 30
+duracion:30
 
 };
 
-
-mensajeBot(
-item.html
-);
-
-
-scrollBottom();
+mensajeBot(item.html);
 
 }
 
 
-async function copiarGuardada(id) {
+async function copiarGuardada(id){
 
-const item =
-saved.find(
-x => x.id === id
-);
+const item=saved.find(x=>x.id===id);
 
-if(!item)
-return;
+if(!item)return;
 
+try{
 
-try {
+await navigator.clipboard.writeText(item.plain);
 
-await navigator.clipboard.writeText(
-item.plain
-);
+toast("📋 Copiado");
 
-toast(
-"📋 Copiado"
-);
+}catch{
 
-}
+const area=document.createElement("textarea");
 
-catch {
-
-const area =
-document.createElement("textarea");
-
-area.value =
-item.plain;
+area.value=item.plain;
 
 document.body.appendChild(area);
 
@@ -3469,30 +2664,22 @@ document.execCommand("copy");
 
 area.remove();
 
-toast(
-"📋 Copiado"
-);
+toast("📋 Copiado");
 
 }
 
 }
 
 
-function eliminarGuardada(id) {
+function eliminarGuardada(id){
 
-saved =
-saved.filter(
-x => x.id !== id
-);
+saved=saved.filter(x=>x.id!==id);
 
-
-guardarDatos();
+saveData();
 
 renderSaved();
 
-toast(
-"Guardado eliminado"
-);
+toast("Guardado eliminado");
 
 }
 
@@ -3501,44 +2688,25 @@ toast(
 SIDEBAR
 ===================================================== */
 
-function toggleSidebar() {
+function toggleSidebar(){
 
-const sidebar =
-document.getElementById(
-"sidebar"
-);
+const sidebar=document.getElementById("sidebar");
 
-const overlay =
-document.getElementById(
-"overlay"
-);
+const overlay=document.getElementById("overlay");
 
+sidebar.classList.toggle("-translate-x-full");
 
-sidebar.classList.toggle(
-"-translate-x-full"
-);
-
-overlay.classList.toggle(
-"hidden"
-);
+overlay.classList.toggle("hidden");
 
 }
 
+function closeSidebar(){
 
-function closeSidebar() {
+document.getElementById("sidebar")
+.classList.add("-translate-x-full");
 
-document.getElementById(
-"sidebar"
-).classList.add(
-"-translate-x-full"
-);
-
-
-document.getElementById(
-"overlay"
-).classList.add(
-"hidden"
-);
+document.getElementById("overlay")
+.classList.add("hidden");
 
 }
 
@@ -3547,17 +2715,29 @@ document.getElementById(
 MODAL
 ===================================================== */
 
-document
-.getElementById("savedModal")
-.addEventListener(
-"click",
-function(event) {
+document.getElementById("savedModal")
+.addEventListener("click",function(e){
+
+if(e.target===this)
+cerrarGuardados();
+
+});
+
+
+/* =====================================================
+ATAJO /
+===================================================== */
+
+document.addEventListener("keydown",e=>{
 
 if(
-event.target === this
-) {
+e.key==="/" &&
+document.activeElement.tagName!=="INPUT"
+){
 
-cerrarGuardados();
+e.preventDefault();
+
+document.getElementById("input").focus();
 
 }
 
@@ -3569,35 +2749,31 @@ INICIO
 ===================================================== */
 
 renderHistory();
-
-actualizarContador();
+updateCount();
 
 nuevoProyecto(false);
 
 
 /* =====================================================
-ATAJOS
+ANIMACIÓN DE ENTRADA
 ===================================================== */
 
-document.addEventListener(
-"keydown",
-function(event) {
+window.addEventListener("load",()=>{
 
-if(
-event.key === "/" &&
-document.activeElement.tagName !== "INPUT"
-) {
+setTimeout(()=>{
 
-event.preventDefault();
+document.getElementById("splash")
+.classList.add("hide");
 
-document.getElementById(
-"input"
-).focus();
+setTimeout(()=>{
 
-}
+document.getElementById("input").focus();
+
+},700);
+
+},2300);
 
 });
-
 
 </script>
 
