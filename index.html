@@ -37,11 +37,11 @@ body{
     overflow:hidden;
 }
 
-/* ================= LOGO SVG REUTILIZABLE ================= */
-.app-logo {
-    display: flex;
-    align-items: center;
-    gap: 10px;
+/* ================= LOGO SVG OFICIAL (CASA + CÁMARA) ================= */
+.sparky-logo-svg{
+    width:100%;
+    height:100%;
+    display:block;
 }
 
 /* ================= SPLASH ================= */
@@ -62,9 +62,9 @@ body{
     animation:logoIn 1s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.splash-svg{
-    width:90px;
-    height:90px;
+.splash-svg-box{
+    width:100px;
+    height:100px;
     margin:auto;
     filter: drop-shadow(0 15px 25px rgba(0,0,0,0.5));
 }
@@ -103,35 +103,54 @@ body{
     to{ opacity:0; visibility:hidden; pointer-events:none; }
 }
 
-/* ================= APP ================= */
+/* ================= APP LAYOUT ================= */
 
 #app{
     height:100vh;
     display:flex;
+    position:relative;
+}
+
+/* Capa oscura de fondo para cerrar menú al hacer clic en móvil */
+.overlay{
+    display:none;
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,0.6);
+    z-index:90;
+    backdrop-filter:blur(3px);
+}
+
+.overlay.active{
+    display:block;
 }
 
 /* ================= SIDEBAR ================= */
 
 .sidebar{
-    width:280px;
+    width:300px;
     background:var(--panel);
     border-right:1px solid var(--border);
     display:flex;
     flex-direction:column;
     padding:20px 16px;
     flex-shrink:0;
+    z-index:100;
 }
 
 .brand{
     display:flex;
     align-items:center;
-    gap:10px;
-    padding:4px 4px 20px;
+    gap:12px;
+    padding:6px 4px 22px;
+    border-bottom:1px solid var(--border);
+    margin-bottom:16px;
 }
 
-.brand-svg{
-    width:36px;
-    height:36px;
+.brand-svg-box{
+    width:42px;
+    height:42px;
+    flex-shrink:0;
 }
 
 .brand-text{
@@ -186,7 +205,7 @@ body{
     font-size:10px;
     text-transform:uppercase;
     letter-spacing:1.5px;
-    margin:24px 8px 10px;
+    margin:20px 8px 10px;
     font-weight:700;
 }
 
@@ -205,30 +224,30 @@ body{
     border-radius:4px;
 }
 
-/* CHATS REMARCADOS EN EL HISTORIAL */
+/* HISTORIAL REMARCADO Y ESPACIADO */
 .history-item{
-    padding:12px 14px;
-    border-radius:10px;
+    padding:14px 16px;
+    border-radius:12px;
     color:#cbd5e1;
-    font-size:12.5px;
+    font-size:13px;
     font-weight:500;
     cursor:pointer;
     white-space:nowrap;
     overflow:hidden;
     text-overflow:ellipsis;
-    margin-bottom:6px;
-    background:rgba(255, 255, 255, 0.01);
-    border:1px solid rgba(255, 255, 255, 0.03);
+    margin-bottom:10px;
+    background:rgba(255, 255, 255, 0.015);
+    border:1px solid rgba(255, 255, 255, 0.04);
     transition:all .2s ease;
     display:flex;
     align-items:center;
-    gap:10px;
+    gap:12px;
 }
 
 .history-item::before{
     content:"";
-    width:6px;
-    height:6px;
+    width:7px;
+    height:7px;
     border-radius:50%;
     background:var(--muted);
     flex-shrink:0;
@@ -244,7 +263,7 @@ body{
 
 .history-item:hover::before{
     background:var(--green-glow);
-    box-shadow:0 0 8px var(--green-glow);
+    box-shadow:0 0 10px var(--green-glow);
 }
 
 .sidebar-bottom{
@@ -255,7 +274,7 @@ body{
     font-size:10px;
 }
 
-/* ================= MAIN ================= */
+/* ================= MAIN CONTENT ================= */
 
 .main{
     flex:1;
@@ -275,7 +294,7 @@ body{
     justify-content:space-between;
     padding:0 24px;
     flex-shrink:0;
-    background:rgba(11, 12, 16, 0.8);
+    background:rgba(11, 12, 16, 0.85);
     backdrop-filter:blur(10px);
 }
 
@@ -294,9 +313,9 @@ body{
     gap:10px;
 }
 
-.header-svg{
-    width:28px;
-    height:28px;
+.header-svg-box{
+    width:30px;
+    height:30px;
 }
 
 .header-logo-text{
@@ -322,7 +341,7 @@ body{
     color:var(--muted);
 }
 
-/* ================= CHAT ================= */
+/* ================= CHAT AREA ================= */
 
 .chat{
     flex:1;
@@ -346,9 +365,9 @@ body{
     text-align:center;
 }
 
-.welcome-svg{
-    width:76px;
-    height:76px;
+.welcome-svg-box{
+    width:84px;
+    height:84px;
     margin-bottom:20px;
     filter: drop-shadow(0 10px 20px rgba(0,0,0,0.4));
 }
@@ -363,7 +382,7 @@ body{
 .welcome p{
     color:var(--muted);
     font-size:13.5px;
-    max-width:460px;
+    max-width:480px;
     line-height:1.7;
 }
 
@@ -405,7 +424,7 @@ body{
     border-bottom-left-radius:4px;
 }
 
-/* BOT CONTENT TYPOGRAPHY */
+/* BOT CONTENT FORMATTING */
 
 .bot-title{
     font-size:16px;
@@ -472,10 +491,11 @@ body{
 .composer-area{
     position:fixed;
     bottom:0;
-    left:280px;
+    left:300px;
     right:0;
     padding:15px 24px 20px;
     background:linear-gradient(transparent, var(--bg) 45%);
+    transition:left .25s ease;
 }
 
 .composer{
@@ -608,8 +628,7 @@ textarea::placeholder{
 @media(max-width:768px){
     .sidebar{
         position:fixed;
-        z-index:100;
-        left:-290px;
+        left:-310px;
         top:0;
         bottom:0;
         transition:left .25s ease;
@@ -633,27 +652,32 @@ textarea::placeholder{
 
 <body>
 
-<!-- ================= SVG LOGO TEMPLATE ================= -->
+<!-- ================= SVG LOGO DEFINITION (CASA + CÁMARA) ================= -->
 <svg style="display:none;">
-    <g id="sparky-logo-template">
-        <circle cx="50" cy="50" r="45" fill="none" stroke="#ffffff" stroke-width="3" opacity="0.15"/>
-        <circle cx="50" cy="50" r="38" fill="none" stroke="#ffffff" stroke-width="2" opacity="0.3"/>
-        <circle cx="50" cy="50" r="31" fill="#059669"/>
-        <path d="M28 42 H35 L38 37 H62 L65 42 H72 C75.3 42 78 44.7 78 48 V65 C78 68.3 75.3 71 72 71 H28 C24.7 71 22 68.3 22 65 V48 C22 44.7 24.7 42 28 42 Z" fill="none" stroke="#ffffff" stroke-width="3" stroke-linejoin="round"/>
-        <circle cx="50" cy="56.5" r="11" fill="none" stroke="#ffffff" stroke-width="3"/>
-        <path d="M46 56.5 L50 50.5 L54 56.5 L50 62.5 Z" fill="#ffffff"/>
-        <rect x="67" y="46" width="5" height="15" rx="1" fill="#ffffff"/>
-        <rect x="25" y="45" width="4" height="3" rx="1" fill="#ffffff"/>
+    <g id="sparky-house-camera-logo">
+        <!-- Contorno exterior sutil -->
+        <circle cx="50" cy="50" r="46" fill="none" stroke="#ffffff" stroke-width="2" opacity="0.12"/>
+        <!-- Silueta de Casa con Cámara Integrada -->
+        <path d="M50 14 L80 37 V76 C80 79.3 77.3 82 74 82 H26 C22.7 82 20 79.3 20 76 V37 Z" fill="none" stroke="url(#logoGrad)" stroke-width="3.5" stroke-linejoin="round"/>
+        <path d="M68 30 V20 H74 V35" fill="none" stroke="url(#logoGrad)" stroke-width="3" stroke-linecap="round"/>
+        <!-- Lente de Cámara dentro de la casa -->
+        <rect x="31" y="44" width="38" height="26" rx="6" fill="#111318" stroke="#059669" stroke-width="2.5"/>
+        <circle cx="50" cy="57" r="8.5" fill="none" stroke="#ffffff" stroke-width="3"/>
+        <circle cx="52" cy="55" r="2.5" fill="#ffffff"/>
     </g>
+    <linearGradient id="logoGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stop-color="#f43f5e"/>
+        <stop offset="100%" stop-color="#10b981"/>
+    </linearGradient>
 </svg>
 
 <!-- ================= SPLASH ================= -->
 
 <div id="splash">
     <div class="splash-content">
-        <svg class="splash-svg" viewBox="0 0 100 100">
-            <use href="#sparky-logo-template"/>
-        </svg>
+        <div class="splash-svg-box">
+            <svg class="sparky-logo-svg" viewBox="0 0 100 100"><use href="#sparky-house-camera-logo"/></svg>
+        </div>
         <div class="splash-name">
             <span>Sparky</span><span>Krea</span>
         </div>
@@ -661,15 +685,18 @@ textarea::placeholder{
     </div>
 </div>
 
+<!-- ================= OVERLAY PARA CERRAR MENÚ CON 1 CLIC FUERA ================= -->
+<div class="overlay" id="overlay" onclick="closeSidebar()"></div>
+
 <!-- ================= APP ================= -->
 
 <div id="app">
 
     <aside class="sidebar" id="sidebar">
         <div class="brand">
-            <svg class="brand-svg" viewBox="0 0 100 100">
-                <use href="#sparky-logo-template"/>
-            </svg>
+            <div class="brand-svg-box">
+                <svg class="sparky-logo-svg" viewBox="0 0 100 100"><use href="#sparky-house-camera-logo"/></svg>
+            </div>
             <div class="brand-text">
                 <span>Sparky</span><span>Krea</span>
                 <small>STUDIO'S</small>
@@ -699,9 +726,9 @@ textarea::placeholder{
             </div>
 
             <div class="header-right">
-                <svg class="header-svg" viewBox="0 0 100 100">
-                    <use href="#sparky-logo-template"/>
-                </svg>
+                <div class="header-svg-box">
+                    <svg class="sparky-logo-svg" viewBox="0 0 100 100"><use href="#sparky-house-camera-logo"/></svg>
+                </div>
                 <div class="header-logo-text">
                     <span>Sparky</span><span>Krea</span>
                     <small>STUDIO'S</small>
@@ -712,12 +739,12 @@ textarea::placeholder{
         <section class="chat" id="chat">
             <div class="chat-inner">
                 <div class="welcome" id="welcome">
-                    <svg class="welcome-svg" viewBox="0 0 100 100">
-                        <use href="#sparky-logo-template"/>
-                    </svg>
+                    <div class="welcome-svg-box">
+                        <svg class="sparky-logo-svg" viewBox="0 0 100 100"><use href="#sparky-house-camera-logo"/></svg>
+                    </div>
                     <h1>¿Qué estrategia creamos hoy?</h1>
                     <p>
-                        Diseña campañas de publicidad para negocios, restaurantes, panaderías, supermercados o videojuegos como Valorant, LoL, FIFA, Wild Rift y más.
+                        Diseña campañas de publicidad para negocios, panaderías, supermercados o videojuegos como Valorant, LoL, FIFA y más.
                     </p>
                 </div>
             </div>
@@ -727,12 +754,12 @@ textarea::placeholder{
 
 <!-- ================= COMPOSER ================= -->
 
-<div class="composer-area">
+<div class="composer-area" id="composerArea">
     <div class="composer">
         <textarea
             id="input"
             rows="1"
-            placeholder="Escribe tu idea, juego, negocio o duda (ej: Valorant, Panadería, Xd)..."
+            placeholder="Escribe tu idea, juego, negocio o duda (ej: Valorant, Panadería)..."
         ></textarea>
         <button class="send" id="send">↑</button>
     </div>
@@ -749,6 +776,8 @@ const chat = document.getElementById("chat");
 const chatInner = chat.querySelector(".chat-inner");
 const welcome = document.getElementById("welcome");
 const history = document.getElementById("history");
+const sidebar = document.getElementById("sidebar");
+const overlay = document.getElementById("overlay");
 
 let greetingShown = false;
 let pendingDuration = false;
@@ -866,24 +895,45 @@ function analyzeTopic(text){
     return { type: "general", name: text };
 }
 
+function getMusicRecommendation(category, topic){
+    const t = normalize(topic);
+    if(category === "game" || t.includes("valorant") || t.includes("lol") || t.includes("cod")){
+        return {
+            artist: "League of Legends / Imagine Dragons",
+            track: "«Enemy» o «Legends Never Die» (Versión instrumental con drops pesados)"
+        };
+    } else if(category === "business" || t.includes("panaderia") || t.includes("pasteleria") || t.includes("supermercado")){
+        return {
+            artist: "Lauv & Troye Sivan / upbeat acoustic indie",
+            track: "«i'm so tired...» (Versión instrumental comercial o alegre)"
+        };
+    } else {
+        return {
+            artist: "The Weeknd / Electronic Pop Commercial",
+            track: "«Blinding Lights» (Ritmo acelerado con sintetizadores vibrantes)"
+        };
+    }
+}
+
 function buildCompleteStrategy(project){
     const topic = project.topic || "tu proyecto";
     const duration = project.duration || "30 segundos";
     const category = project.category || "general";
+    const music = getMusicRecommendation(category, topic);
 
     let extraPrompt = "";
     if(category === "game"){
         extraPrompt = `
             <div class="section">
                 <strong>🎮 Enfoque de Gaming / Personaje</strong>
-                Enfocado en jugabilidad, jugadas épicas, momentos divertidos o análisis de personaje/rol para conectar con la comunidad gamer.
+                Enfocado en jugabilidad, clips destacados, jugadas clutch y conexión directa con la comunidad de jugadores.
             </div>
         `;
     } else if(category === "business"){
         extraPrompt = `
             <div class="section">
                 <strong>🏪 Enfoque Comercial (Local/Negocio)</strong>
-                Estrategia orientada a generar antojo, llamadas a la acción locales (¡Visítanos hoy!) y destacar la calidad del producto.
+                Estrategia orientada a generar antojo visual, llamadas a la acción directas y destacar calidad o frescura.
             </div>
         `;
     }
@@ -902,16 +952,17 @@ function buildCompleteStrategy(project){
         <div class="section">
             <strong>🎙️ Guión Sugerido (${duration})</strong>
             <p style="margin-top:6px; color:#cbd5e1;">
-              <b>[0s - 3s (Gancho)]</b> "¿Sabías que la mayoría se pierde esto? Si te interesa ${topic}, mira lo que sucede cuando haces esto bien..."<br><br>
-              <b>[3s - 20s (Desarrollo)]</b> Mostramos las características principales, el valor agregado o la jugada clave. Ritmo dinámico en pantalla.<br><br>
-              <b>[Cierre & CTA]</b> "No te quedes atrás. Haz clic en el enlace y descúbrelo ahora mismo."
+              <b>[0s - 3s (Gancho)]</b> "¿Buscas llevar tu experiencia al siguiente nivel? Si te interesa ${topic}, mira esto..."<br><br>
+              <b>[3s - Desarrollo]</b> Destacamos el valor principal con ritmo visual dinámico y transiciones sincronizadas.<br><br>
+              <b>[Cierre & CTA]</b> "Haz clic abajo, descúbrelo ahora y aprovecha la promoción."
             </p>
         </div>
 
         <div class="section">
-            <strong>🎵 Recomendación de Música y Estilo</strong>
-            • <b>Estilo de audio:</b> Beats rítmicos con subidas de tensión y efectos de sonido (SFX) en las transiciones.<br>
-            • <b>Edición visual:</b> Cortes rápidos cada 2.5 segundos, subtítulos grandes resaltados en amarillo/blanco.
+            <strong>🎵 Música, Artista y Estilo de Audio</strong>
+            • <b>Artista / Intérprete recomendado:</b> ${music.artist}<br>
+            • <b>Tema / Canción específica:</b> ${music.track}<br>
+            • <b>Edición:</b> Cortes dinámicos cada 2 segundos con efectos de sonido (SFX) en transiciones.
         </div>
 
         ${motivation()}
@@ -959,9 +1010,9 @@ function generateResponse(text){
 
     let subMsg = "";
     if(analysis.type === "game"){
-        subMsg = `Detecté que se trata de un videojuego (<b>${analysis.name}</b>). ¿Hay algún personaje, arma o rol específico en el que nos enfoquemos (por ejemplo, un personaje principal)?`;
+        subMsg = `Detecté que se trata de un videojuego (<b>${analysis.name}</b>). ¿Hay algún personaje, arma o rol específico en el que nos enfoquemos?`;
     } else if(analysis.type === "business"){
-        subMsg = `Excelente, analicé que es para el sector de <b>${analysis.name}</b>. ¿Qué producto estrella o promoción principal quieres destacar en el anuncio?`;
+        subMsg = `Excelente, analicé que es para el sector de <b>${analysis.name}</b>. ¿Qué producto o promoción principal quieres destacar?`;
     } else {
         subMsg = `He registrado tu propuesta sobre <b>"${capitalize(text)}"</b>.`;
     }
@@ -970,7 +1021,7 @@ function generateResponse(text){
         <div class="bot-title">✨ Análisis de Propuesta Publicitaria</div>
         <div class="section">${subMsg}</div>
         <div class="section">
-            Para terminar de armar tu estrategia, guión y música, <b>selecciona la duración ideal:</b>
+            Para terminar de armar tu estrategia, guión y música con artista, <b>selecciona la duración ideal:</b>
         </div>
         ${showDurationSelector()}
     `);
@@ -1075,6 +1126,7 @@ function renderHistory(){
         item.onclick = () => {
             input.value = title;
             input.focus();
+            closeSidebar(); // Cierra el menú al hacer clic en un chat del historial
         };
         history.appendChild(item);
     });
@@ -1088,11 +1140,19 @@ document.getElementById("newProject").addEventListener("click", () => {
     pendingDuration = false;
     currentProject = null;
     input.value = "";
+    closeSidebar();
 });
 
-document.getElementById("mobileMenu").addEventListener("click", () => {
-    document.getElementById("sidebar").classList.toggle("open");
+const mobileMenuBtn = document.getElementById("mobileMenu");
+mobileMenuBtn.addEventListener("click", () => {
+    sidebar.classList.toggle("open");
+    overlay.classList.toggle("active");
 });
+
+function closeSidebar(){
+    sidebar.classList.remove("open");
+    overlay.classList.remove("active");
+}
 
 renderHistory();
 
