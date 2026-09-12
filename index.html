@@ -213,7 +213,7 @@ body{
 .header-logo-text span:nth-child(2){ color:#10b981; }
 .header-logo-text small{ display:block; font-size:6px; letter-spacing:2px; color:var(--muted); }
 
-/* Menú de tres puntos en la cabecera */
+/* Menú de tres puntos y selector de idiomas múltiple */
 .header-menu-container{ position:relative; }
 .header-dots-btn{
     background:none;
@@ -238,30 +238,38 @@ body{
     background:var(--panel);
     border:1px solid var(--border);
     border-radius:12px;
-    padding:8px;
+    padding:12px;
     box-shadow:0 10px 25px rgba(0,0,0,0.5);
     z-index:200;
-    min-width:180px;
+    min-width:210px;
 }
 .header-dropdown.active{ display:block; }
 
-.dropdown-item{
-    width:100%;
-    background:none;
-    border:0;
-    color:var(--white);
-    text-align:left;
-    padding:10px 12px;
-    font-size:13px;
-    font-weight:600;
-    cursor:pointer;
-    border-radius:8px;
-    transition:background 0.2s;
-    display:flex;
-    align-items:center;
-    gap:8px;
+.dropdown-label{
+    font-size:11px;
+    color:var(--muted);
+    text-transform:uppercase;
+    letter-spacing:1px;
+    margin-bottom:8px;
+    font-weight:700;
 }
-.dropdown-item:hover{ background:var(--card); color:var(--green-glow); }
+
+.lang-select{
+    width:100%;
+    background:var(--card);
+    border:1px solid var(--border);
+    color:var(--white);
+    padding:9px 10px;
+    border-radius:8px;
+    font-family:inherit;
+    font-size:13px;
+    outline:none;
+    cursor:pointer;
+}
+.lang-select option{
+    background:var(--panel);
+    color:var(--white);
+}
 
 .chat{ flex:1; overflow-y:auto; padding:50px 24px 150px; }
 .chat-inner{ max-width:850px; margin:auto; }
@@ -481,11 +489,23 @@ textarea::placeholder{ color:#4b5563; }
         <header class="header">
             <div class="header-title"><button class="mobile-menu" id="mobileMenu">☰</button></div>
             <div class="header-right">
-                <!-- Menú desplegable con tres puntos -->
+                <!-- Selector de 10 idiomas dentro del menú de tres puntos -->
                 <div class="header-menu-container">
-                    <button class="header-dots-btn" id="headerDotsBtn" title="Opciones / Opciones de Idioma">⋮</button>
+                    <button class="header-dots-btn" id="headerDotsBtn" title="Opciones / Idiomas">⋮</button>
                     <div class="header-dropdown" id="headerDropdown">
-                        <button class="dropdown-item" id="toggleLangBtn">🌐 English (EN)</button>
+                        <div class="dropdown-label" id="langMenuTitle">🌐 Idioma / Language</div>
+                        <select id="langSelect" class="lang-select">
+                            <option value="es">🇪🇸 Español</option>
+                            <option value="en">🇬🇧 English</option>
+                            <option value="pt">🇧🇷 Português</option>
+                            <option value="fr">🇫🇷 Français</option>
+                            <option value="de">🇩🇪 Deutsch</option>
+                            <option value="it">🇮🇹 Italiano</option>
+                            <option value="ru">🇷🇺 Русский</option>
+                            <option value="zh">🇨🇳 中文</option>
+                            <option value="ja">🇯🇵 日本語</option>
+                            <option value="ar">🇸🇦 العربية</option>
+                        </select>
                     </div>
                 </div>
                 <div class="header-svg-box">
@@ -528,16 +548,17 @@ const sidebar = document.getElementById("sidebar");
 const overlay = document.getElementById("overlay");
 const headerDotsBtn = document.getElementById("headerDotsBtn");
 const headerDropdown = document.getElementById("headerDropdown");
+const langSelect = document.getElementById("langSelect");
 
 let currentProject = null;
 let motivationIndex = 0;
-let currentLang = "es"; // "es" o "en"
+let currentLang = "es";
 
 const i18n = {
     es: {
         newProj: "+ Nuevo proyecto",
         pdfBtn: "📄 Descargar Guión en PDF",
-        langText: "🌐 English (EN)",
+        langMenuTitle: "🌐 Idioma / Language",
         historyTitle: "Historial de chats",
         welcomeTitle: "¿En qué publicidad te puedo ayudar hoy?",
         welcomeDesc: "Diseña guiones profesionales, estrategias detalladas y selección musical ideal para tu negocio o videojuego al instante.",
@@ -561,7 +582,7 @@ const i18n = {
     en: {
         newProj: "+ New Project",
         pdfBtn: "📄 Download Script PDF",
-        langText: "🌐 Español (ES)",
+        langMenuTitle: "🌐 Language",
         historyTitle: "Chat History",
         welcomeTitle: "What advertising can I help you with today?",
         welcomeDesc: "Design professional scripts, detailed strategies, and ideal music selection for your business or game instantly.",
@@ -581,6 +602,198 @@ const i18n = {
         customPrompt: "Enter desired duration (e.g., 40 seconds):",
         defaultDuration: "30 seconds",
         defaultCampaign: "General campaign"
+    },
+    pt: {
+        newProj: "+ Novo projeto",
+        pdfBtn: "📄 Baixar Roteiro em PDF",
+        langMenuTitle: "🌐 Idioma",
+        historyTitle: "Histórico de chats",
+        welcomeTitle: "Com qual publicidade posso te ajudar hoje?",
+        welcomeDesc: "Crie roteiros profissionais, estratégias detalhadas e seleção musical ideal para o seu negócio ou jogo instantaneamente.",
+        placeholder: "Digite sua ideia, jogo ou negócio...",
+        footer: "SparkyKrea Studio's - Consultoria Publicitária Inteligente",
+        durationPrompt: "⏱ Quanto tempo exato durará seu anúncio? (Clique aqui)",
+        errInvalid: "⚠️ Isso não parece um negócio ou projeto válido. Por favor, escreva um nome de produto, jogo ou serviço real.",
+        successMsg: (topic) => `Excelente proposta sobre <b>"${capitalize(topic)}"</b>!<br>Para construir um roteiro exato segundo a segundo e a música perfeita, <b>selecione a duração do anúncio:</b>`,
+        scriptTitle: "🎬 Roteiro Educativo e Estratégia Publicitária",
+        projectLabel: "📌 Projeto:",
+        durationLabel: "Duração:",
+        categoryLabel: "Categoria:",
+        scriptHeader: "🎙️ Detalhamento do Roteiro Profissional",
+        musicHeader: "🎵 Recomendação Musical Ideal:",
+        artistLabel: "Cantor / Artista:",
+        trackLabel: "Nome da Música:",
+        customPrompt: "Digite a duração desejada (ex: 40 segundos):",
+        defaultDuration: "30 segundos",
+        defaultCampaign: "Campanha geral"
+    },
+    fr: {
+        newProj: "+ Nouveau projet",
+        pdfBtn: "📄 Télécharger le script PDF",
+        langMenuTitle: "🌐 Langue",
+        historyTitle: "Historique des chats",
+        welcomeTitle: "Quelle publicité puis-je vous aider à créer ?",
+        welcomeDesc: "Concevez instantanément des scripts professionnels, des stratégies détaillées et une sélection musicale idéale.",
+        placeholder: "Tapez votre idée, jeu ou entreprise...",
+        footer: "SparkyKrea Studio's - Conseil Publicitaire Intelligent",
+        durationPrompt: "⏱ Quelle sera la durée exacte de votre annonce ? (Cliquez ici)",
+        errInvalid: "⚠️ Cela ne ressemble pas à un projet valide. Veuillez saisir un produit, un jeu ou un service réel.",
+        successMsg: (topic) => `Excellente proposition concernant <b>"${capitalize(topic)}"</b> !<br>Pour créer un script précis seconde par seconde, <b>sélectionnez la durée :</b>`,
+        scriptTitle: "🎬 Script Éducatif et Stratégie Publicitaire",
+        projectLabel: "📌 Projet :",
+        durationLabel: "Durée :",
+        categoryLabel: "Catégorie :",
+        scriptHeader: "🎙️ Décomposition du Script Professionnel",
+        musicHeader: "🎵 Recommandation Musicale Idéale :",
+        artistLabel: "Chanteur / Artiste :",
+        trackLabel: "Nom de la Piste :",
+        customPrompt: "Entrez la durée souhaitée (ex : 40 secondes) :",
+        defaultDuration: "30 secondes",
+        defaultCampaign: "Campagne générale"
+    },
+    de: {
+        newProj: "+ Neues Projekt",
+        pdfBtn: "📄 Skript-PDF herunterladen",
+        langMenuTitle: "🌐 Sprache",
+        historyTitle: "Chat-Verlauf",
+        welcomeTitle: "Bei welcher Werbung kann ich dir heute helfen?",
+        welcomeDesc: "Erstelle sofort professionelle Skripte, detaillierte Strategien und die ideale Musikauswahl.",
+        placeholder: "Gib deine Idee, dein Spiel oder Geschäft ein...",
+        footer: "SparkyKrea Studio's - Intelligente Werbeberatung",
+        durationPrompt: "⏱ Wie lange wird deine Anzeige dauern? (Hier klicken)",
+        errInvalid: "⚠️ Das sieht nach keinem gültigen Projekt aus. Bitte gib einen echten Produkt- oder Dienstleistungsnamen ein.",
+        successMsg: (topic) => `Ausgezeichneter Vorschlag zu <b>"${capitalize(topic)}"</b>!<br>Um ein sekundengenaues Skript zu erstellen, <b>wähle die Anzeigendauer:</b>`,
+        scriptTitle: "🎬 Didaktisches Skript & Werbestrategie",
+        projectLabel: "📌 Projekt:",
+        durationLabel: "Dauer:",
+        categoryLabel: "Kategorie:",
+        scriptHeader: "🎙️ Professionelle Skript-Aufteilung",
+        musicHeader: "🎵 Ideale Musikempfehlung:",
+        artistLabel: "Sänger / Künstler:",
+        trackLabel: "Titelname:",
+        customPrompt: "Gewünschte Dauer eingeben (z.B. 40 Sekunden):",
+        defaultDuration: "30 Sekunden",
+        defaultCampaign: "Allgemeine Kampagne"
+    },
+    it: {
+        newProj: "+ Nuovo progetto",
+        pdfBtn: "📄 Scarica script in PDF",
+        langMenuTitle: "🌐 Lingua",
+        historyTitle: "Cronologia chat",
+        welcomeTitle: "Con quale pubblicità posso aiutarti oggi?",
+        welcomeDesc: "Crea script professionali, strategie dettagliate e la selezione musicale ideale all'istante.",
+        placeholder: "Scrivi la tua idea, gioco o azienda...",
+        footer: "SparkyKrea Studio's - Consulenza Pubblicitaria Intelligente",
+        durationPrompt: "⏱ Quanto durerà esattamente il tuo annuncio? (Clicca qui)",
+        errInvalid: "⚠️ Non sembra un progetto valido. Inserisci un nome di prodotto, gioco o servizio reale.",
+        successMsg: (topic) => `Ottima proposta su <b>"${capitalize(topic)}"</b>!<br>Per creare uno script secondo per secondo, <b>seleziona la durata dell'annuncio:</b>`,
+        scriptTitle: "🎬 Script Didattico e Strategia Pubblicitaria",
+        projectLabel: "📌 Progetto:",
+        durationLabel: "Durata:",
+        categoryLabel: "Categoria:",
+        scriptHeader: "🎙️ Dettaglio dello Script Professionale",
+        musicHeader: "🎵 Raccomandazione Musicale Ideale:",
+        artistLabel: "Cantante / Artista:",
+        trackLabel: "Nome della Traccia:",
+        customPrompt: "Inserisci la durata desiderata (es: 40 secondi):",
+        defaultDuration: "30 secondi",
+        defaultCampaign: "Campagna generale"
+    },
+    ru: {
+        newProj: "+ Новый проект",
+        pdfBtn: "📄 Скачать сценарий PDF",
+        langMenuTitle: "🌐 Язык",
+        historyTitle: "История чатов",
+        welcomeTitle: "Какая реклама вам нужна сегодня?",
+        welcomeDesc: "Создавайте профессиональные сценарии, детальные стратегии и идеальное музыкальное сопровождение.",
+        placeholder: "Введите вашу идею, игру или бизнес...",
+        footer: "SparkyKrea Studio's - Интеллектуальный рекламный консалтинг",
+        durationPrompt: "⏱ Какова будет точная длительность рекламы? (Нажмите здесь)",
+        errInvalid: "⚠️ Это не похоже на реальный проект. Пожалуйста, введите название продукта, игры или услуги.",
+        successMsg: (topic) => `Отличное предложение по теме <b>"${capitalize(topic)}"</b>!<br>Чтобы составить точный сценарий, <b>выберите длительность:</b>`,
+        scriptTitle: "🎬 Сценарий и рекламная стратегия",
+        projectLabel: "📌 Проект:",
+        durationLabel: "Длительность:",
+        categoryLabel: "Категория:",
+        scriptHeader: "🎙️ Разбор профессионального сценария",
+        musicHeader: "🎵 Идеальная музыкальная рекомендация:",
+        artistLabel: "Исполнитель / Артист:",
+        trackLabel: "Название трека:",
+        customPrompt: "Введите желаемую длительность (например: 40 секунд):",
+        defaultDuration: "30 секунд",
+        defaultCampaign: "Общая кампания"
+    },
+    zh: {
+        newProj: "+ 新项目",
+        pdfBtn: "📄 下载剧本PDF",
+        langMenuTitle: "🌐 语言",
+        historyTitle: "聊天记录",
+        welcomeTitle: "今天需要什么广告帮助？",
+        welcomeDesc: "立即为您的大盘或业务设计专业剧本、详细策略和完美的音乐选择。",
+        placeholder: "输入您的创意、游戏或业务...",
+        footer: "SparkyKrea Studio's - 智能广告顾问",
+        durationPrompt: "⏱ 您的广告确切时长是多少？（点击此处）",
+        errInvalid: "⚠️ 这看起来不像一个有效的项目名称。请输入真实的产品、游戏或服务。",
+        successMsg: (topic) => `关于 <b>"${capitalize(topic)}"</b> 的优秀提议！<br>为了打造秒级精准的剧本和完美音乐，<b>请选择广告时长：</b>`,
+        scriptTitle: "🎬 教学剧本与广告策略",
+        projectLabel: "📌 项目：",
+        durationLabel: "时长：",
+        categoryLabel: "类别：",
+        scriptHeader: "🎙️ 专业剧本分解",
+        musicHeader: "🎵 理想音乐推荐：",
+        artistLabel: "歌手 / 艺术家：",
+        trackLabel: "曲目名称：",
+        customPrompt: "输入所需时长（例如：40秒）：",
+        defaultDuration: "30秒",
+        defaultCampaign: "通用活动"
+    },
+    ja: {
+        newProj: "+ 新しいプロジェクト",
+        pdfBtn: "📄 スクリプトPDFをダウンロード",
+        langMenuTitle: "🌐 言語",
+        historyTitle: "チャット履歴",
+        welcomeTitle: "今日はどのような広告をお手伝いできますか？",
+        welcomeDesc: "ビジネスやゲームに最適なプロのスクリプト、詳細な戦略、音楽の選択を瞬時に作成します。",
+        placeholder: "アイデア、ゲーム、ビジネスを入力...",
+        footer: "SparkyKrea Studio's - インテリジェント広告アドバイザリー",
+        durationPrompt: "⏱ 広告の正確な長さは何秒ですか？（ここをクリック）",
+        errInvalid: "⚠️ 有効なプロジェクト名ではありません。実際の製品名やサービス名を入力してください。",
+        successMsg: (topic) => `<b>"${capitalize(topic)}"</b> に関する素晴らしい提案です！<br>秒単位の正確なスクリプトと完璧な音楽を作成するには、<b>広告の長さを選択してください：</b>`,
+        scriptTitle: "🎬 教育用スクリプトと広告戦略",
+        projectLabel: "📌 プロジェクト：",
+        durationLabel: "長さ：",
+        categoryLabel: "カテゴリ：",
+        scriptHeader: "🎙️ プロフェッショナル・スクリプトの内訳",
+        musicHeader: "🎵 おすすめの音楽：",
+        artistLabel: "歌手 / アーティスト：",
+        trackLabel: "トラック名：",
+        customPrompt: "希望する長さを入力してください（例：40秒）：",
+        defaultDuration: "30秒",
+        defaultCampaign: "一般キャンペーン"
+    },
+    ar: {
+        newProj: "+ مشروع جديد",
+        pdfBtn: "📄 تنزيل النص بتنسيق PDF",
+        langMenuTitle: "🌐 اللغة",
+        historyTitle: "سجل الدردشة",
+        welcomeTitle: "ما هي الإعلانات التي يمكنني مساعدتك بها اليوم؟",
+        welcomeDesc: "قم بتصميم نصوص احترافية واستراتيجيات مفصلة واختيار موسيقي مثالي لعملك أو لعبتك فوراً.",
+        placeholder: "اكتب فكرتك أو لعبتك أو عملك...",
+        footer: "SparkyKrea Studio's - الاستشارات الإعلانية الذكية",
+        durationPrompt: "⏱ ما هي المدة الدقيقة لإعلانك؟ (انقر هنا)",
+        errInvalid: "⚠️ هذا لا يبدو وكأنه مشروع صالح. يرجى كتابة اسم منتج أو لعبة أو خدمة حقيقية.",
+        successMsg: (topic) => `اقتراح ممتاز حول <b>"${capitalize(topic)}"</b>!<br>لبناء نص دقيق ثانية بثانية والموسيقى المثالية، <b>اختر مدة الإعلان:</b>`,
+        scriptTitle: "🎬 النص التعليمي والاستراتيجية الإعلانية",
+        projectLabel: "📌 المشروع:",
+        durationLabel: "المدة:",
+        categoryLabel: "الفئة:",
+        scriptHeader: "🎙️ تفصيل النص الاحترافي",
+        musicHeader: "🎵 التوصية الموسيقية المثالية:",
+        artistLabel: "المغني / الفنان:",
+        trackLabel: "اسم المسار:",
+        customPrompt: "أدخل المدة المطلوبة (مثال: 40 ثانية):",
+        defaultDuration: "30 ثانية",
+        defaultCampaign: "حملة عامة"
     }
 };
 
@@ -588,7 +801,7 @@ function updateLanguageUI(){
     const t = i18n[currentLang];
     document.getElementById("newProjectBtn").textContent = t.newProj;
     document.getElementById("exportPdfBtn").textContent = t.pdfBtn;
-    document.getElementById("toggleLangBtn").textContent = t.langText;
+    document.getElementById("langMenuTitle").textContent = t.langMenuTitle;
     document.getElementById("historyTitleTxt").textContent = t.historyTitle;
     document.getElementById("welcomeTitle").textContent = t.welcomeTitle;
     document.getElementById("welcomeDesc").textContent = t.welcomeDesc;
@@ -606,10 +819,9 @@ window.addEventListener("click", () => {
     headerDropdown.classList.remove("active");
 });
 
-document.getElementById("toggleLangBtn").addEventListener("click", () => {
-    currentLang = currentLang === "es" ? "en" : "es";
+langSelect.addEventListener("change", (e) => {
+    currentLang = e.target.value;
     updateLanguageUI();
-    headerDropdown.classList.remove("active");
 });
 
 const motivations = [
@@ -912,17 +1124,17 @@ function saveHistory(){
     const firstUser = chatInner.querySelector(".message.user .bubble");
     if(!firstUser) return;
     const title = firstUser.innerText.substring(0, 35);
-    let chats = JSON.parse(localStorage.getItem("sparky_dots_menu_chats") || "[]");
+    let chats = JSON.parse(localStorage.getItem("sparky_10_langs_chats") || "[]");
     if(!chats.includes(title)){
         chats.unshift(title);
         chats = chats.slice(0, 30);
-        localStorage.setItem("sparky_dots_menu_chats", JSON.stringify(chats));
+        localStorage.setItem("sparky_10_langs_chats", JSON.stringify(chats));
         renderHistory();
     }
 }
 
 function renderHistory(){
-    const chats = JSON.parse(localStorage.getItem("sparky_dots_menu_chats") || "[]");
+    const chats = JSON.parse(localStorage.getItem("sparky_10_langs_chats") || "[]");
     history.innerHTML = "";
     chats.forEach((title, index) => {
         const item = document.createElement("div");
@@ -954,9 +1166,9 @@ function renderHistory(){
 }
 
 function deleteChat(index){
-    let chats = JSON.parse(localStorage.getItem("sparky_dots_menu_chats") || "[]");
+    let chats = JSON.parse(localStorage.getItem("sparky_10_langs_chats") || "[]");
     chats.splice(index, 1);
-    localStorage.setItem("sparky_dots_menu_chats", JSON.stringify(chats));
+    localStorage.setItem("sparky_10_langs_chats", JSON.stringify(chats));
     renderHistory();
 }
 
