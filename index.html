@@ -17,7 +17,7 @@
 }
 
 :root{
-    --wine:#9f1239;
+    --wine:#7a1135; /* Vinotinto profundo ajustado a la imagen oficial */
     --wine-glow:#f43f5e;
     --green:#059669;
     --green-glow:#10b981;
@@ -37,7 +37,7 @@ body{
     overflow:hidden;
 }
 
-/* ================= LOGO CIRCULAR OFICIAL (3RA FOTO) ================= */
+/* ================= LOGO CIRCULAR OFICIAL ================= */
 .sparky-logo-svg{
     width:100%;
     height:100%;
@@ -77,11 +77,11 @@ body{
 }
 
 .splash-name span:first-child{
-    color:#9f1239; /* Color vino exacto de la letra de la marca */
+    color:var(--wine);
 }
 
 .splash-name span:nth-child(2){
-    color:#10b981; /* Verde esmeralda exacto de la marca */
+    color:#10b981;
 }
 
 .splash-studio{
@@ -158,7 +158,7 @@ body{
 }
 
 .brand-text span:first-child{
-    color:#9f1239;
+    color:var(--wine);
 }
 
 .brand-text span:nth-child(2){
@@ -322,7 +322,7 @@ body{
 }
 
 .header-logo-text span:first-child{
-    color:#9f1239;
+    color:var(--wine);
 }
 
 .header-logo-text span:nth-child(2){
@@ -399,7 +399,7 @@ body{
     border-radius:14px;
     font-size:13.5px;
     line-height:1.7;
-    font-weight:750; /* Negrita pronunciada como pediste */
+    font-weight:750;
 }
 
 .user .bubble{
@@ -644,21 +644,16 @@ textarea::placeholder{
 
 <body>
 
-<!-- ================= LOGO CIRCULAR SVG DEFINITION (3RA FOTO) ================= -->
+<!-- ================= LOGO CIRCULAR SVG DEFINITION ================= -->
 <svg style="display:none;">
     <g id="sparky-circular-logo">
         <circle cx="50" cy="50" r="47" fill="none" stroke="#ffffff" stroke-width="2.5"/>
         <circle cx="50" cy="50" r="41" fill="none" stroke="#222630" stroke-width="1.5"/>
-        <!-- Fondo verde del círculo -->
         <circle cx="50" cy="50" r="37.5" fill="#059669"/>
-        <!-- Anillo interior -->
         <circle cx="50" cy="50" r="34" fill="none" stroke="#ffffff" stroke-width="1.5" opacity="0.3"/>
-        <!-- Cámara blanca -->
         <path d="M26 42 H34 L37 37 H63 L66 42 H74 C76.2 42 78 43.8 78 46 V64 C78 66.2 76.2 68 74 68 H26 C23.8 68 22 66.2 22 64 V46 C22 43.8 23.8 42 26 42 Z" fill="#ffffff"/>
-        <!-- Lente estrella -->
         <circle cx="50" cy="55" r="13" fill="#059669" stroke="#ffffff" stroke-width="2.5"/>
         <path d="M50 44 L52.5 52.5 L61 55 L52.5 57.5 L50 66 L47.5 57.5 L39 55 L47.5 52.5 Z" fill="#ffffff"/>
-        <!-- Cuadro de rollo fotográfico lateral -->
         <rect x="65" y="45" width="4" height="20" rx="1.5" fill="#059669"/>
         <circle cx="67" cy="48" r="1" fill="#ffffff"/>
         <circle cx="67" cy="55" r="1" fill="#ffffff"/>
@@ -716,7 +711,6 @@ textarea::placeholder{
         <header class="header">
             <div class="header-title">
                 <button class="mobile-menu" id="mobileMenu">☰</button>
-                Asesoría Publicitaria Inteligente
             </div>
 
             <div class="header-right">
@@ -758,7 +752,7 @@ textarea::placeholder{
         <button class="send" id="send">↑</button>
     </div>
     <div class="footer">
-        Powered by SparkyKrea Engine
+        SparkyKrea Studio's - Asesoría Publicitaria Inteligente
     </div>
 </div>
 
@@ -774,8 +768,16 @@ const sidebar = document.getElementById("sidebar");
 const overlay = document.getElementById("overlay");
 
 let greetingShown = false;
+let hasWelcomedWithTime = false; // Controla que el saludo por hora ocurra solo una vez
 let currentProject = null;
 let motivationIndex = 0;
+
+function getTimeBasedGreeting(){
+    const hour = new Date().getHours();
+    if(hour < 12) return "¡Buenos días!";
+    if(hour < 18) return "¡Buenas tardes!";
+    return "¡Buenas noches!";
+}
 
 function showGreeting(){
     if(greetingShown) return;
@@ -840,44 +842,81 @@ function selectDurationOption(dur){
     }, 700);
 }
 
-function getMusicRecommendation(topic){
-    const t = topic.toLowerCase();
-    if(t.includes("valorant") || t.includes("lol") || t.includes("juego")){
-        return {
-            artist: "League of Legends / Imagine Dragons",
-            track: "«Enemy» (Versión instrumental con beats intensos)"
-        };
-    } else if(t.includes("panaderia") || t.includes("restaurante") || t.includes("supermercado")){
-        return {
-            artist: "Lauv & Troye Sivan / Upbeat Acoustic",
-            track: "«i'm so tired...» (Versión comercial alegre)"
-        };
-    } else {
-        return {
-            artist: "The Weeknd / Electronic Pop Commercial",
-            track: "«Blinding Lights» (Ritmo dinámico y comercial)"
-        };
+// Base de datos de nichos ampliada
+const nicheDatabase = {
+    juego: {
+        musicArtist: "League of Legends / Imagine Dragons",
+        musicTrack: "«Enemy» (Versión instrumental con beats intensos)",
+        gancho: "¡Prepárate para la batalla! Si te apasiona el gaming, esto te interesa.",
+        desarrollo: "Muestra las jugadas épicas, los gráficos o la adrenalina pura del título.",
+        cierre: "¡Únete a la comunidad y descarga el juego hoy mismo!"
+    },
+    comida: {
+        musicArtist: "Lauv & Troye Sivan / Upbeat Acoustic",
+        musicTrack: "«i'm so tired...» (Versión comercial alegre)",
+        gancho: "¿Antojo de algo irresistible? Tenemos justo lo que buscas.",
+        desarrollo: "Enseña los ingredientes frescos, el proceso de preparación o el resultado final humeante.",
+        cierre: "¡Pide el tuyo ahora y deléitate con el mejor sabor!"
+    },
+    moda: {
+        musicArtist: "Dua Lipa / Modern Electronic Pop",
+        musicTrack: "«Levitating» (Remix dinámico para pasarela)",
+        gancho: "Define tu propio estilo y marca tendencia dondequiera que vayas.",
+        desarrollo: "Destaca los detalles de la tela, los colores de temporada y cómo combinan.",
+        cierre: "¡Renueva tu armario hoy con nuestra nueva colección!"
+    },
+    tecnologia: {
+        musicArtist: "The Weeknd / Synthwave Futuristic",
+        musicTrack: "«Blinding Lights» (Ritmo dinámico y comercial)",
+        gancho: "Lleva tu productividad y entretenimiento al siguiente nivel.",
+        desarrollo: "Muestra las funciones inteligentes, la velocidad y el diseño minimalista.",
+        cierre: "¡Consigue el tuyo al mejor precio con envío inmediato!"
+    },
+    fitness: {
+        musicArtist: "Phonk / Workout Energy Beats",
+        musicTrack: "«METAMORPHOSIS» (Ritmo pesado y motivacional)",
+        gancho: "Es hora de romper tus límites y alcanzar tu mejor versión.",
+        desarrollo: "Enfoca la energía, el esfuerzo y los resultados de entrenar con disciplina.",
+        cierre: "¡Empieza tu transformación hoy mismo en el enlace de abajo!"
+    },
+    general: {
+        musicArtist: "Commercial Pop / Uplifting Beats",
+        musicTrack: "«Good Vibe» (Instrumental enérgico)",
+        gancho: "¿Buscas una solución rápida, efectiva y de confianza para ti?",
+        desarrollo: "Presenta las ventajas principales y por qué este servicio marca la diferencia.",
+        cierre: "¡Haz clic abajo y aprovecha esta oportunidad única!"
     }
+};
+
+function detectNiche(topic){
+    const t = topic.toLowerCase();
+    if(t.includes("valorant") || t.includes("lol") || t.includes("juego") || t.includes("videojuego") || t.includes("gaming")) return "juego";
+    if(t.includes("panaderia") || t.includes("restaurante") || t.includes("comida") || t.includes("burger") || t.includes("café")) return "comida";
+    if(t.includes("ropa") || t.includes("moda") || t.includes("tienda") || t.includes("zapatos") || t.includes("outfit")) return "moda";
+    if(t.includes("tec") || t.includes("celular") || t.includes("computadora") || t.includes("app") || t.includes("software")) return "tecnologia";
+    if(t.includes("gym") || t.includes("fitness") || t.includes("entreno") || t.includes("deporte") || t.includes("salud")) return "fitness";
+    return "general";
 }
 
 function buildFinalStrategy(proj){
     const topic = proj.topic || "tu negocio";
     const duration = proj.duration || "30 seg";
-    const music = getMusicRecommendation(topic);
+    const nicheKey = detectNiche(topic);
+    const data = nicheDatabase[nicheKey];
 
     return `
         <div class="bot-title">🎬 Estrategia, Guión y Música Publicitaria</div>
-        <div class="section"><b>📌 Proyecto:</b> ${capitalize(topic)} (${duration})</div>
+        <div class="section"><b>📌 Proyecto:</b> ${capitalize(topic)} (${duration}) - <i>Categoría: ${nicheKey.toUpperCase()}</i></div>
         <div class="section">
             <b>🎙️ Guión Sugerido (${duration}):</b><br>
-            • <b>[Gancho 0-3s]:</b> ¡Atención! Si te interesa ${topic}, esto es para ti.<br>
-            • <b>[Desarrollo]:</b> Mostramos las ventajas clave de forma dinámica y directa.<br>
-            • <b>[Cierre & CTA]:</b> ¡Haz clic abajo y descúbrelo ahora mismo!
+            • <b>[Gancho 0-3s]:</b> ${data.gancho}<br>
+            • <b>[Desarrollo]:</b> ${data.desarrollo}<br>
+            • <b>[Cierre & CTA]:</b> ${data.cierre}
         </div>
         <div class="section">
             <b>🎵 Música y Audio:</b><br>
-            • <b>Artista:</b> ${music.artist}<br>
-            • <b>Canción:</b> ${music.track}
+            • <b>Artista:</b> ${data.musicArtist}<br>
+            • <b>Canción:</b> ${data.musicTrack}
         </div>
         ${motivation()}
     `;
@@ -885,6 +924,24 @@ function buildFinalStrategy(proj){
 
 function generateResponse(text){
     const cleanText = text.trim();
+    const lower = cleanText.toLowerCase();
+
+    // Filtro para detectar saludos y responder por hora una sola vez
+    const greetings = ["hola", "buenas", "saludos", "hi", "hey", "buenos dias", "buenas tardes", "buenas noches"];
+    if (greetings.includes(lower) && !hasWelcomedWithTime) {
+        hasWelcomedWithTime = true;
+        const timeGreeting = getTimeBasedGreeting();
+        addBotMessage(`${timeGreeting} ${timeGreeting === '¡Buenos días!' ? 'Buenos días' : timeGreeting === '¡Buenas tardes!' ? 'Buenas tardes' : 'Buenas noches'}, ¿en qué idea, negocio o videojuego trabajaremos hoy?`);
+        return;
+    }
+
+    // Filtro anti-nonsense o palabras inadecuadas/vacías
+    const blacklist = ["mojon", "mierda", "nada", "test", "asdf", "xd", "ninguno"];
+    if (blacklist.some(word => lower.includes(word)) || cleanText.length < 3) {
+        addBotMessage(`⚠️ Hmm, eso no parece un negocio o proyecto válido para hacer publicidad. Por favor, escribe el nombre de un producto, videojuego, servicio o negocio real (ej: Panadería, Valorant, Tienda de Ropa).`);
+        return;
+    }
+
     currentProject = { topic: cleanText };
 
     addBotMessage(`
@@ -974,17 +1031,17 @@ function saveHistory(){
     const firstUser = chatInner.querySelector(".message.user .bubble");
     if(!firstUser) return;
     const title = firstUser.innerText.substring(0, 35);
-    let chats = JSON.parse(localStorage.getItem("sparky_final_v2_chats") || "[]");
+    let chats = JSON.parse(localStorage.getItem("sparky_final_v3_chats") || "[]");
     if(!chats.includes(title)){
         chats.unshift(title);
         chats = chats.slice(0, 30);
-        localStorage.setItem("sparky_final_v2_chats", JSON.stringify(chats));
+        localStorage.setItem("sparky_final_v3_chats", JSON.stringify(chats));
         renderHistory();
     }
 }
 
 function renderHistory(){
-    const chats = JSON.parse(localStorage.getItem("sparky_final_v2_chats") || "[]");
+    const chats = JSON.parse(localStorage.getItem("sparky_final_v3_chats") || "[]");
     history.innerHTML = "";
     chats.forEach((title, index) => {
         const item = document.createElement("div");
@@ -1015,9 +1072,9 @@ function renderHistory(){
 }
 
 function deleteChat(index){
-    let chats = JSON.parse(localStorage.getItem("sparky_final_v2_chats") || "[]");
+    let chats = JSON.parse(localStorage.getItem("sparky_final_v3_chats") || "[]");
     chats.splice(index, 1);
-    localStorage.setItem("sparky_final_v2_chats", JSON.stringify(chats));
+    localStorage.setItem("sparky_final_v3_chats", JSON.stringify(chats));
     renderHistory();
 }
 
@@ -1026,6 +1083,7 @@ document.getElementById("newProject").addEventListener("click", () => {
     chatInner.appendChild(welcome);
     welcome.style.display = "flex";
     greetingShown = false;
+    hasWelcomedWithTime = false;
     currentProject = null;
     input.value = "";
     closeSidebar();
