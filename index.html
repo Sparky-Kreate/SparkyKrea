@@ -210,7 +210,6 @@ body{
 .header-logo-text span:nth-child(2){ color:#10b981; }
 .header-logo-text small{ display:block; font-size:6px; letter-spacing:2px; color:var(--muted); }
 
-/* Menú 100% sólido sin transparencias para WhatsApp Webview */
 .header-menu-container{ position:relative; }
 .header-dots-btn{
     background:#161920;
@@ -930,13 +929,19 @@ function generateResponse(text){
     const lower = cleanText.toLowerCase();
     const t = i18n[currentLang];
 
-    const greetings = ["hola", "buenas", "buenos días", "buenas tardes", "buenas noches", "hey", "hi", "saludos", "hallo", "bonjour", "ciao", "привет", "你好", "こんにちは", "مرحباً"];
-    if(greetings.some(g => lower.includes(g)) && cleanText.length < 25){
+    // Lista ampliada de saludos y palabras conversacionales para que NO se tomen como negocios
+    const nonProjectWords = [
+        "hola", "ola", "hello", "hi", "hey", "saludos", "hallo", "bonjour", "ciao", "привет", "你好", "こんにちは", "مرحباً",
+        "gracias", "thank you", "merci", "grazie", "danke", "gracie", "ok", "okay", "vale", "bien", "perfecto",
+        "ahh", "oh", "eh", "hmm", "si", "no", "yes", "cool", "ah"
+    ];
+
+    if(nonProjectWords.some(word => lower === word || lower.includes(word)) && cleanText.length < 15){
         addBotMessage(t.greeting);
         return;
     }
 
-    if (cleanText.length < 3) {
+    if (cleanText.length < 4) {
         addBotMessage(t.errInvalid);
         return;
     }
