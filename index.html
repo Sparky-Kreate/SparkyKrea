@@ -1,2548 +1,2560 @@
-<!DOCTYPE html>  <html lang="es" class="h-full w-full">  <head>  
-    <meta charset="UTF-8">  
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">  <title>SparkyKrea Studio's - Asesoría Publicitaria Pro</title>  
-
-<!-- Tailwind CSS -->  
-<script src="https://cdn.tailwindcss.com"></script>  
-
-<!-- FontAwesome Icons -->  
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">  
-
-<!-- Google Fonts -->  
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">  
-
-<script>  
-    tailwind.config = {  
-        darkMode: 'class',  
-        theme: {  
-            extend: {  
-                colors: {  
-                    brandVinotinto: '#800020',  
-                    brandVinotintoHover: '#600018',  
-
-                    brandVerde: '#10B981',  
-                    brandVerdeHover: '#059669',  
-
-                    darkBg: '#121212',  
-                    darkSidebar: '#18181b',  
-                    darkCard: '#242427',  
-                    darkBorder: '#3f3f46'  
-                },  
-
-                fontFamily: {  
-                    sans: ['Inter', 'sans-serif']  
-                }  
-            }  
-        }  
-    }  
-</script>  
-
-<style>  
-    html,  
-    body {  
-        height: 100%;  
-        height: 100dvh;  
-        width: 100%;  
-        margin: 0;  
-        padding: 0;  
-        overflow: hidden;  
-    }  
-
-    .custom-scrollbar::-webkit-scrollbar {  
-        width: 4px;  
-    }  
-
-    .custom-scrollbar::-webkit-scrollbar-track {  
-        background: transparent;  
-    }  
-
-    .custom-scrollbar::-webkit-scrollbar-thumb {  
-        background: #3f3f46;  
-        border-radius: 10px;  
-    }  
-</style>
-
-</head>  <body class="bg-darkBg text-gray-100 h-full w-full flex flex-col md:flex-row antialiased select-none overflow-hidden">  <!-- OVERLAY MÓVIL -->  
-<div id="sidebar-overlay"  
-    onclick="toggleSidebar()"  
-    class="fixed inset-0 bg-black/70 z-30 hidden md:hidden transition-opacity">  
-</div>  
-
-
-<!-- SIDEBAR -->  
-<aside id="sidebar"  
-    class="fixed md:static inset-y-0 left-0 z-40 w-72 bg-darkSidebar border-r border-darkBorder flex flex-col transform -translate-x-full md:translate-x-0 transition-transform duration-300 ease-in-out h-full shrink-0">  
-
-    <!-- HEADER SIDEBAR -->  
-    <div class="p-3.5 flex items-center justify-between border-b border-darkBorder shrink-0">  
-
-        <div class="flex items-center space-x-2.5">  
-
-            <!-- LOGO -->  
-            <svg width="180" height="40" viewBox="0 0 240 60"  
-                xmlns="http://www.w3.org/2000/svg"  
-                class="h-9 w-auto">  
-
-                <defs>  
-                    <filter id="proGlowSidebar"  
-                        x="-20%" y="-20%"  
-                        width="140%" height="140%">  
-
-                        <feGaussianBlur stdDeviation="1" result="blur" />  
-
-                        <feComposite  
-                            in="SourceGraphic"  
-                            in2="blur"  
-                            operator="over" />  
-                    </filter>  
-                </defs>  
-
-                <g transform="translate(8, 6)" filter="url(#proGlowSidebar)">  
-
-                    <circle cx="24" cy="24" r="22" fill="#10B981" />  
+<!DOCTYPE html>
+<html lang="es" class="h-full w-full">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+
+    <title>SparkyKrea Studio's - Asesoría Publicitaria Pro</title>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        brandVinotinto: '#800020',
+                        brandVinotintoHover: '#600018',
+
+                        brandVerde: '#10B981',
+                        brandVerdeHover: '#059669',
+
+                        darkBg: '#121212',
+                        darkSidebar: '#18181b',
+                        darkCard: '#242427',
+                        darkBorder: '#3f3f46'
+                    },
+
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        html,
+        body {
+            height: 100%;
+            height: 100dvh;
+            width: 100%;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 4px;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #3f3f46;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+
+<body class="bg-darkBg text-gray-100 h-full w-full flex flex-col md:flex-row antialiased select-none overflow-hidden">
+
+    <!-- OVERLAY MÓVIL -->
+    <div id="sidebar-overlay"
+        onclick="toggleSidebar()"
+        class="fixed inset-0 bg-black/70 z-30 hidden md:hidden transition-opacity">
+    </div>
+
+
+    <!-- SIDEBAR -->
+    <aside id="sidebar"
+        class="fixed md:static inset-y-0 left-0 z-40 w-72 bg-darkSidebar border-r border-darkBorder flex flex-col transform -translate-x-full md:translate-x-0 transition-transform duration-300 ease-in-out h-full shrink-0">
+
+        <!-- HEADER SIDEBAR -->
+        <div class="p-3.5 flex items-center justify-between border-b border-darkBorder shrink-0">
+
+            <div class="flex items-center space-x-2.5">
+
+                <!-- LOGO -->
+                <svg width="180" height="40" viewBox="0 0 240 60"
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="h-9 w-auto">
+
+                    <defs>
+                        <filter id="proGlowSidebar"
+                            x="-20%" y="-20%"
+                            width="140%" height="140%">
+
+                            <feGaussianBlur stdDeviation="1" result="blur" />
+
+                            <feComposite
+                                in="SourceGraphic"
+                                in2="blur"
+                                operator="over" />
+                        </filter>
+                    </defs>
 
-                    <rect x="13" y="17"  
-                        width="15"  
-                        height="14"  
-                        rx="2.5"  
-                        fill="#FFFFFF" />  
+                    <g transform="translate(8, 6)" filter="url(#proGlowSidebar)">
 
-                    <polygon  
-                        points="28,21 35,16 35,32 28,27"  
-                        fill="#FFFFFF" />  
+                        <circle cx="24" cy="24" r="22" fill="#10B981" />
 
-                    <path  
-                        d="M 11 18 L 20.5 10 L 30 18"  
-                        fill="none"  
-                        stroke="#FFFFFF"  
-                        stroke-width="2"  
-                        stroke-linecap="round"  
-                        stroke-linejoin="round" />  
+                        <rect x="13" y="17"
+                            width="15"
+                            height="14"
+                            rx="2.5"
+                            fill="#FFFFFF" />
 
-                    <circle  
-                        cx="20.5"  
-                        cy="24"  
-                        r="5"  
-                        fill="none"  
-                        stroke="#10B981"  
-                        stroke-width="0.8"  
-                        opacity="0.8" />  
+                        <polygon
+                            points="28,21 35,16 35,32 28,27"
+                            fill="#FFFFFF" />
 
-                    <circle  
-                        cx="20.5"  
-                        cy="24"  
-                        r="3.8"  
-                        fill="none"  
-                        stroke="#10B981"  
-                        stroke-width="0.8" />  
+                        <path
+                            d="M 11 18 L 20.5 10 L 30 18"
+                            fill="none"
+                            stroke="#FFFFFF"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round" />
 
-                    <path  
-                        d="M 20.5 21.5 C 20.5 22.88 19.38 24 18 24 C 19.38 24 20.5 25.12 20.5 26.5 C 20.5 25.12 21.62 24 23 24 C 21.62 24 20.5 22.88 20.5 21.5 Z"  
-                        fill="#10B981" />  
-                </g>  
+                        <circle
+                            cx="20.5"
+                            cy="24"
+                            r="5"
+                            fill="none"
+                            stroke="#10B981"
+                            stroke-width="0.8"
+                            opacity="0.8" />
 
-                <g transform="translate(68, 30)">  
+                        <circle
+                            cx="20.5"
+                            cy="24"
+                            r="3.8"
+                            fill="none"
+                            stroke="#10B981"
+                            stroke-width="0.8" />
 
-                    <text  
-                        font-family="'Inter', sans-serif"  
-                        font-weight="800"  
-                        font-size="20"  
-                        letter-spacing="-0.5">  
+                        <path
+                            d="M 20.5 21.5 C 20.5 22.88 19.38 24 18 24 C 19.38 24 20.5 25.12 20.5 26.5 C 20.5 25.12 21.62 24 23 24 C 21.62 24 20.5 22.88 20.5 21.5 Z"
+                            fill="#10B981" />
+                    </g>
 
-                        <tspan fill="#800020">Sparky</tspan>  
-                        <tspan fill="#10B981">Krea</tspan>  
+                    <g transform="translate(68, 30)">
 
-                    </text>  
+                        <text
+                            font-family="'Inter', sans-serif"
+                            font-weight="800"
+                            font-size="20"
+                            letter-spacing="-0.5">
 
-                    <!-- STUDIO'S BLANCO -->  
-                    <text  
-                        x="1"  
-                        y="14"  
-                        font-family="'Inter', sans-serif"  
-                        font-weight="600"  
-                        font-size="9"  
-                        fill="#FFFFFF"  
-                        letter-spacing="2.5">  
+                            <tspan fill="#800020">Sparky</tspan>
+                            <tspan fill="#10B981">Krea</tspan>
 
-                        STUDIO'S  
+                        </text>
 
-                    </text>  
+                        <!-- STUDIO'S BLANCO -->
+                        <text
+                            x="1"
+                            y="14"
+                            font-family="'Inter', sans-serif"
+                            font-weight="600"
+                            font-size="9"
+                            fill="#FFFFFF"
+                            letter-spacing="2.5">
 
-                </g>  
-            </svg>  
+                            STUDIO'S
 
-        </div>  
+                        </text>
 
-        <button  
-            onclick="toggleSidebar()"  
-            class="md:hidden text-gray-400 hover:text-white p-1.5">  
+                    </g>
+                </svg>
 
-            <i class="fa-solid fa-xmark text-lg"></i>  
+            </div>
 
-        </button>  
+            <button
+                onclick="toggleSidebar()"
+                class="md:hidden text-gray-400 hover:text-white p-1.5">
 
-    </div>  
+                <i class="fa-solid fa-xmark text-lg"></i>
 
+            </button>
 
-    <!-- NUEVO CHAT -->  
-    <div class="p-3 shrink-0">  
+        </div>
 
-        <button  
-            onclick="startNewChat()"  
-            class="w-full py-2 px-3 bg-brandVinotinto hover:bg-brandVinotintoHover text-white rounded-xl font-medium shadow-md transition flex items-center justify-center gap-2 text-xs border border-rose-900/40">  
 
-            <i class="fa-solid fa-plus text-[10px]"></i>  
+        <!-- NUEVO CHAT -->
+        <div class="p-3 shrink-0">
 
-            <span>Nuevo proyecto publicitario</span>  
+            <button
+                onclick="startNewChat()"
+                class="w-full py-2 px-3 bg-brandVinotinto hover:bg-brandVinotintoHover text-white rounded-xl font-medium shadow-md transition flex items-center justify-center gap-2 text-xs border border-rose-900/40">
 
-        </button>  
+                <i class="fa-solid fa-plus text-[10px]"></i>
 
-    </div>  
+                <span>Nuevo proyecto publicitario</span>
 
+            </button>
 
-    <!-- HISTORIAL -->  
-    <div class="flex-1 overflow-y-auto custom-scrollbar px-3 py-1">  
+        </div>
 
-        <div class="text-[10px] font-semibold text-gray-400 uppercase tracking-wider px-2 mb-2 flex items-center justify-between">  
 
-            <span>Campañas Recientes</span>  
+        <!-- HISTORIAL -->
+        <div class="flex-1 overflow-y-auto custom-scrollbar px-3 py-1">
 
-        </div>  
+            <div class="text-[10px] font-semibold text-gray-400 uppercase tracking-wider px-2 mb-2 flex items-center justify-between">
 
-        <div id="chat-history" class="space-y-1"></div>  
+                <span>Campañas Recientes</span>
 
-    </div>  
+            </div>
 
+            <div id="chat-history" class="space-y-1"></div>
 
-    <!-- FOOTER -->  
-    <div class="p-2.5 border-t border-darkBorder text-[10px] text-gray-500 text-center shrink-0">  
+        </div>
 
-        SparkyKrea Studio's &copy; 2026  
 
-    </div>  
+        <!-- FOOTER -->
+        <div class="p-2.5 border-t border-darkBorder text-[10px] text-gray-500 text-center shrink-0">
 
-</aside>  
+            SparkyKrea Studio's &copy; 2026
 
+        </div>
 
+    </aside>
 
-<!-- ÁREA PRINCIPAL -->  
-<main class="flex-1 flex flex-col h-full w-full overflow-hidden bg-darkBg relative">  
 
 
-    <!-- HEADER -->  
-    <header class="h-12 border-b border-darkBorder flex items-center justify-between px-4 bg-darkBg shrink-0">  
+    <!-- ÁREA PRINCIPAL -->
+    <main class="flex-1 flex flex-col h-full w-full overflow-hidden bg-darkBg relative">
 
-        <div class="flex items-center gap-2.5">  
 
-            <button  
-                onclick="toggleSidebar()"  
-                class="p-1.5 text-gray-300 hover:text-white bg-darkCard rounded-lg border border-darkBorder md:hidden">  
+        <!-- HEADER -->
+        <header class="h-12 border-b border-darkBorder flex items-center justify-between px-4 bg-darkBg shrink-0">
 
-                <i class="fa-solid fa-bars-staggered text-xs"></i>  
+            <div class="flex items-center gap-2.5">
 
-            </button>  
+                <button
+                    onclick="toggleSidebar()"
+                    class="p-1.5 text-gray-300 hover:text-white bg-darkCard rounded-lg border border-darkBorder md:hidden">
 
+                    <i class="fa-solid fa-bars-staggered text-xs"></i>
 
-            <!-- LOGO HEADER -->  
-            <div class="flex items-center cursor-pointer select-none">  
+                </button>
 
-                <svg width="180" height="40"  
-                    viewBox="0 0 240 60"  
-                    xmlns="http://www.w3.org/2000/svg"  
-                    class="h-8 w-auto">  
 
-                    <defs>  
+                <!-- LOGO HEADER -->
+                <div class="flex items-center cursor-pointer select-none">
 
-                        <filter  
-                            id="proGlowHeader"  
-                            x="-20%"  
-                            y="-20%"  
-                            width="140%"  
-                            height="140%">  
+                    <svg width="180" height="40"
+                        viewBox="0 0 240 60"
+                        xmlns="http://www.w3.org/2000/svg"
+                        class="h-8 w-auto">
 
-                            <feGaussianBlur  
-                                stdDeviation="1"  
-                                result="blur" />  
+                        <defs>
 
-                            <feComposite  
-                                in="SourceGraphic"  
-                                in2="blur"  
-                                operator="over" />  
+                            <filter
+                                id="proGlowHeader"
+                                x="-20%"
+                                y="-20%"
+                                width="140%"
+                                height="140%">
 
-                        </filter>  
+                                <feGaussianBlur
+                                    stdDeviation="1"
+                                    result="blur" />
 
-                    </defs>  
+                                <feComposite
+                                    in="SourceGraphic"
+                                    in2="blur"
+                                    operator="over" />
 
-                    <g transform="translate(8, 6)" filter="url(#proGlowHeader)">  
+                            </filter>
 
-                        <circle cx="24" cy="24" r="22" fill="#10B981" />  
+                        </defs>
 
-                        <rect  
-                            x="13"  
-                            y="17"  
-                            width="15"  
-                            height="14"  
-                            rx="2.5"  
-                            fill="#FFFFFF" />  
+                        <g transform="translate(8, 6)" filter="url(#proGlowHeader)">
 
-                        <polygon  
-                            points="28,21 35,16 35,32 28,27"  
-                            fill="#FFFFFF" />  
+                            <circle cx="24" cy="24" r="22" fill="#10B981" />
 
-                        <path  
-                            d="M 11 18 L 20.5 10 L 30 18"  
-                            fill="none"  
-                            stroke="#FFFFFF"  
-                            stroke-width="2"  
-                            stroke-linecap="round"  
-                            stroke-linejoin="round" />  
+                            <rect
+                                x="13"
+                                y="17"
+                                width="15"
+                                height="14"
+                                rx="2.5"
+                                fill="#FFFFFF" />
 
-                        <circle  
-                            cx="20.5"  
-                            cy="24"  
-                            r="5"  
-                            fill="none"  
-                            stroke="#10B981"  
-                            stroke-width="0.8"  
-                            opacity="0.8" />  
+                            <polygon
+                                points="28,21 35,16 35,32 28,27"
+                                fill="#FFFFFF" />
 
-                        <circle  
-                            cx="20.5"  
-                            cy="24"  
-                            r="3.8"  
-                            fill="none"  
-                            stroke="#10B981"  
-                            stroke-width="0.8" />  
+                            <path
+                                d="M 11 18 L 20.5 10 L 30 18"
+                                fill="none"
+                                stroke="#FFFFFF"
+                                stroke-width="2"
+                                stroke-linecap="round"
+                                stroke-linejoin="round" />
 
-                        <path  
-                            d="M 20.5 21.5 C 20.5 22.88 19.38 24 18 24 C 19.38 24 20.5 25.12 20.5 26.5 C 20.5 25.12 21.62 24 23 24 C 21.62 24 20.5 22.88 20.5 21.5 Z"  
-                            fill="#10B981" />  
+                            <circle
+                                cx="20.5"
+                                cy="24"
+                                r="5"
+                                fill="none"
+                                stroke="#10B981"
+                                stroke-width="0.8"
+                                opacity="0.8" />
 
-                    </g>  
+                            <circle
+                                cx="20.5"
+                                cy="24"
+                                r="3.8"
+                                fill="none"
+                                stroke="#10B981"
+                                stroke-width="0.8" />
 
-                    <g transform="translate(68, 30)">  
+                            <path
+                                d="M 20.5 21.5 C 20.5 22.88 19.38 24 18 24 C 19.38 24 20.5 25.12 20.5 26.5 C 20.5 25.12 21.62 24 23 24 C 21.62 24 20.5 22.88 20.5 21.5 Z"
+                                fill="#10B981" />
 
-                        <text  
-                            font-family="'Inter', sans-serif"  
-                            font-weight="800"  
-                            font-size="20"  
-                            letter-spacing="-0.5">  
+                        </g>
 
-                            <tspan fill="#800020">Sparky</tspan>  
-                            <tspan fill="#10B981">Krea</tspan>  
+                        <g transform="translate(68, 30)">
 
-                        </text>  
+                            <text
+                                font-family="'Inter', sans-serif"
+                                font-weight="800"
+                                font-size="20"
+                                letter-spacing="-0.5">
 
-                        <!-- STUDIO'S BLANCO -->  
-                        <text  
-                            x="1"  
-                            y="14"  
-                            font-family="'Inter', sans-serif"  
-                            font-weight="600"  
-                            font-size="9"  
-                            fill="#FFFFFF"  
-                            letter-spacing="2.5">  
+                                <tspan fill="#800020">Sparky</tspan>
+                                <tspan fill="#10B981">Krea</tspan>
 
-                            STUDIO'S  
+                            </text>
 
-                        </text>  
+                            <!-- STUDIO'S BLANCO -->
+                            <text
+                                x="1"
+                                y="14"
+                                font-family="'Inter', sans-serif"
+                                font-weight="600"
+                                font-size="9"
+                                fill="#FFFFFF"
+                                letter-spacing="2.5">
 
-                    </g>  
+                                STUDIO'S
 
-                </svg>  
+                            </text>
 
-            </div>  
+                        </g>
 
-        </div>  
+                    </svg>
 
+                </div>
 
-        <button  
-            onclick="startNewChat()"  
-            class="flex items-center gap-1.5 text-xs bg-darkCard hover:bg-darkBorder text-gray-200 px-2.5 py-1 rounded-lg border border-darkBorder transition">  
+            </div>
 
-            <i class="fa-solid fa-rotate-right text-brandVerde text-[11px]"></i>  
 
-            <span class="hidden sm:inline">Nueva Asesoría</span>  
+            <button
+                onclick="startNewChat()"
+                class="flex items-center gap-1.5 text-xs bg-darkCard hover:bg-darkBorder text-gray-200 px-2.5 py-1 rounded-lg border border-darkBorder transition">
 
-        </button>  
+                <i class="fa-solid fa-rotate-right text-brandVerde text-[11px]"></i>
 
-    </header>  
+                <span class="hidden sm:inline">Nueva Asesoría</span>
 
+            </button>
 
+        </header>
 
-    <!-- CHAT -->  
-    <div  
-        id="chat-container"  
-        class="flex-1 overflow-y-auto custom-scrollbar p-3 md:p-5 max-w-3xl mx-auto w-full flex flex-col">  
 
 
-        <!-- BIENVENIDA -->  
-        <div  
-            id="welcome-screen"  
-            class="my-auto text-center py-2 flex flex-col items-center justify-center">  
+        <!-- CHAT -->
+        <div
+            id="chat-container"
+            class="flex-1 overflow-y-auto custom-scrollbar p-3 md:p-5 max-w-3xl mx-auto w-full flex flex-col">
 
-            <div class="mb-4 flex justify-center">  
 
-                <svg  
-                    width="120"  
-                    height="120"  
-                    viewBox="0 0 100 100"  
-                    xmlns="http://www.w3.org/2000/svg"  
-                    class="w-20 h-20 md:w-24 md:y-24 drop-shadow-xl">  
+            <!-- BIENVENIDA -->
+            <div
+                id="welcome-screen"
+                class="my-auto text-center py-2 flex flex-col items-center justify-center">
 
-                    <defs>  
+                <div class="mb-4 flex justify-center">
 
-                        <filter  
-                            id="welcomeGlow"  
-                            x="-20%"  
-                            y="-20%"  
-                            width="140%"  
-                            height="140%">  
+                    <svg
+                        width="120"
+                        height="120"
+                        viewBox="0 0 100 100"
+                        xmlns="http://www.w3.org/2000/svg"
+                        class="w-20 h-20 md:w-24 md:y-24 drop-shadow-xl">
 
-                            <feGaussianBlur  
-                                stdDeviation="2"  
-                                result="blur" />  
+                        <defs>
 
-                            <feComposite  
-                                in="SourceGraphic"  
-                                in2="blur"  
-                                operator="over" />  
+                            <filter
+                                id="welcomeGlow"
+                                x="-20%"
+                                y="-20%"
+                                width="140%"
+                                height="140%">
 
-                        </filter>  
+                                <feGaussianBlur
+                                    stdDeviation="2"
+                                    result="blur" />
 
-                    </defs>  
+                                <feComposite
+                                    in="SourceGraphic"
+                                    in2="blur"
+                                    operator="over" />
 
-                    <g filter="url(#welcomeGlow)">  
+                            </filter>
 
-                        <circle  
-                            cx="50"  
-                            cy="50"  
-                            r="46"  
-                            fill="#10B981" />  
+                        </defs>
 
-                        <rect  
-                            x="25"  
-                            y="35"  
-                            width="32"  
-                            height="30"  
-                            rx="5"  
-                            fill="#FFFFFF" />  
+                        <g filter="url(#welcomeGlow)">
 
-                        <polygon  
-                            points="57,43 72,32 72,68 57,57"  
-                            fill="#FFFFFF" />  
+                            <circle
+                                cx="50"
+                                cy="50"
+                                r="46"
+                                fill="#10B981" />
 
-                        <path  
-                            d="M 22 37 L 41 20 L 60 37"  
-                            fill="none"  
-                            stroke="#FFFFFF"  
-                            stroke-width="4"  
-                            stroke-linecap="round"  
-                            stroke-linejoin="round" />  
+                            <rect
+                                x="25"
+                                y="35"
+                                width="32"
+                                height="30"
+                                rx="5"
+                                fill="#FFFFFF" />
 
-                        <circle  
-                            cx="41"  
-                            cy="50"  
-                            r="10"  
-                            fill="none"  
-                            stroke="#10B981"  
-                            stroke-width="1.8"  
-                            opacity="0.8" />  
+                            <polygon
+                                points="57,43 72,32 72,68 57,57"
+                                fill="#FFFFFF" />
 
-                        <circle  
-                            cx="41"  
-                            cy="50"  
-                            r="7.5"  
-                            fill="none"  
-                            stroke="#10B981"  
-                            stroke-width="1.8" />  
+                            <path
+                                d="M 22 37 L 41 20 L 60 37"
+                                fill="none"
+                                stroke="#FFFFFF"
+                                stroke-width="4"
+                                stroke-linecap="round"
+                                stroke-linejoin="round" />
 
-                        <path  
-                            d="M 41 44.5 C 41 47.5 38.5 50 35.5 50 C 38.5 50 41 52.5 41 55.5 C 41 52.5 43.5 50 46.5 50 C 43.5 50 41 47.5 41 44.5 Z"  
-                            fill="#10B981" />  
+                            <circle
+                                cx="41"
+                                cy="50"
+                                r="10"
+                                fill="none"
+                                stroke="#10B981"
+                                stroke-width="1.8"
+                                opacity="0.8" />
 
-                    </g>  
+                            <circle
+                                cx="41"
+                                cy="50"
+                                r="7.5"
+                                fill="none"
+                                stroke="#10B981"
+                                stroke-width="1.8" />
 
-                </svg>  
+                            <path
+                                d="M 41 44.5 C 41 47.5 38.5 50 35.5 50 C 38.5 50 41 52.5 41 55.5 C 41 52.5 43.5 50 46.5 50 C 43.5 50 41 47.5 41 44.5 Z"
+                                fill="#10B981" />
 
-            </div>  
+                        </g>
 
+                    </svg>
 
-            <h1  
-                id="dynamic-greeting"  
-                class="text-xl md:text-2xl font-bold text-white mb-1.5">  
+                </div>
 
-                ¡Hola! ¿En qué publicidad te puedo ayudar hoy?  
 
-            </h1>  
+                <h1
+                    id="dynamic-greeting"
+                    class="text-xl md:text-2xl font-bold text-white mb-1.5">
 
+                    ¡Hola! ¿En qué publicidad te puedo ayudar hoy?
 
-            <p  
-                class="text-gray-400 text-xs max-w-sm mx-auto leading-relaxed">  
+                </h1>
 
-                Escribe el nombre de tu producto, juego, servicio o marca para comenzar a estructurar tu guion.  
 
-            </p>  
+                <p
+                    class="text-gray-400 text-xs max-w-sm mx-auto leading-relaxed">
 
-        </div>  
+                    Escribe el nombre de tu producto, juego, servicio o marca para comenzar a estructurar tu guion.
 
+                </p>
 
-        <!-- MENSAJES -->  
-        <div  
-            id="messages-list"  
-            class="space-y-3 hidden w-full pb-2">  
-        </div>  
+            </div>
 
-    </div>  
 
+            <!-- MENSAJES -->
+            <div
+                id="messages-list"
+                class="space-y-3 hidden w-full pb-2">
+            </div>
 
+        </div>
 
-    <!-- INPUT -->  
-    <div  
-        class="p-2.5 md:p-3 border-t border-darkBorder bg-darkBg shrink-0">  
 
-        <div class="max-w-3xl mx-auto relative">  
 
-            <form  
-                onsubmit="handleSend(event)"  
-                class="relative flex items-center">  
+        <!-- INPUT -->
+        <div
+            class="p-2.5 md:p-3 border-t border-darkBorder bg-darkBg shrink-0">
 
-                <input  
-                    type="text"  
-                    id="user-input"  
-                    placeholder="Escribe tu producto, servicio o consulta aquí..."  
-                    autocomplete="off"  
-                    class="w-full pl-3.5 pr-10 py-2.5 bg-darkCard border border-darkBorder focus:border-brandVerde rounded-xl text-white placeholder-gray-500 focus:outline-none text-xs transition"  
-                />  
+            <div class="max-w-3xl mx-auto relative">
 
-                <button  
-                    type="submit"  
-                    class="absolute right-1.5 p-1.5 bg-brandVinotinto hover:bg-brandVinotintoHover text-white rounded-lg transition flex items-center justify-center">  
+                <form
+                    onsubmit="handleSend(event)"
+                    class="relative flex items-center">
 
-                    <i class="fa-solid fa-paper-plane text-[10px]"></i>  
+                    <input
+                        type="text"
+                        id="user-input"
+                        placeholder="Escribe tu producto, servicio o consulta aquí..."
+                        autocomplete="off"
+                        class="w-full pl-3.5 pr-10 py-2.5 bg-darkCard border border-darkBorder focus:border-brandVerde rounded-xl text-white placeholder-gray-500 focus:outline-none text-xs transition"
+                    />
 
-                </button>  
+                    <button
+                        type="submit"
+                        class="absolute right-1.5 p-1.5 bg-brandVinotinto hover:bg-brandVinotintoHover text-white rounded-lg transition flex items-center justify-center">
 
-            </form>  
+                        <i class="fa-solid fa-paper-plane text-[10px]"></i>
 
+                    </button>
 
-            <div  
-                class="text-center text-[10px] text-gray-500 mt-1">  
+                </form>
 
-                SparkyKrea Studio's • Asesoría técnica, guiones profesionales y banda sonora.  
 
-            </div>  
+                <div
+                    class="text-center text-[10px] text-gray-500 mt-1">
 
-        </div>  
+                    SparkyKrea Studio's • Asesoría técnica, guiones profesionales y banda sonora.
 
-    </div>  
+                </div>
 
-</main>
+            </div>
 
-<script>  
-  
-/* =========================================================  
-   SPARKYKREA  
-   MOTOR PUBLICITARIO PRO  
-   ACTUALIZACIÓN  
-   ========================================================= */  
-  
-  
-let conversations =  
-    JSON.parse(localStorage.getItem('sparkykrea_chats')) || [];  
-  
-let currentChatId = null;  
-  
-let pendingTopic = null;  
-let pendingDetail = null;  
-let pendingCategory = null;  
-  
-let awaitingCharacterChoice = false;  
-let awaitingCharacterName = false;  
-let awaitingDuration = false;  
-  
-  
-/* =========================================================  
-   SALUDOS  
-   ========================================================= */  
-  
-const greetingsMorning = [  
-    '¡Buenos días! 👋 ¿En qué puedo ayudarte hoy?',  
-    '¡Buenos días! ☀️ ¿Qué vamos a crear hoy?',  
-    '¡Buenos días! 👋 Cuéntame tu idea y empezamos.',  
-    '¡Buenos días! ✨ ¿Qué proyecto tienes en mente?'  
-];  
-  
-const greetingsAfternoon = [  
-    '¡Buenas tardes! 👋 ¿En qué puedo ayudarte hoy?',  
-    '¡Buenas tardes! ✨ ¿Qué vamos a crear hoy?',  
-    '¡Buenas tardes! 👋 Cuéntame qué tienes en mente.',  
-    '¡Buenas tardes! 🚀 Vamos a darle forma a esa idea.'  
-];  
-  
-const greetingsNight = [  
-    '¡Buenas noches! 🌙 ¿En qué puedo ayudarte hoy?',  
-    '¡Buenas noches! ✨ ¿Listo para crear algo increíble?',  
-    '¡Buenas noches! 👋 Cuéntame qué quieres preparar.',  
-    '¡Buenas noches! 🚀 Vamos a convertir esa idea en algo genial.'  
-];  
-  
-  
-function randomItem(array) {  
-    return array[Math.floor(Math.random() * array.length)];  
-}  
-  
-  
-function getTimeGreeting() {  
-  
-    const hour = new Date().getHours();  
-  
-    if (hour >= 5 && hour < 12) {  
-        return randomItem(greetingsMorning);  
-    }  
-  
-    if (hour >= 12 && hour < 19) {  
-        return randomItem(greetingsAfternoon);  
-    }  
-  
-    return randomItem(greetingsNight);  
-}  
-  
-  
-/* =========================================================  
-   INICIO  
-   ========================================================= */  
-  
-document.addEventListener('DOMContentLoaded', () => {  
-  
-    document.getElementById('dynamic-greeting').textContent =  
-        getTimeGreeting();  
-  
-    renderSidebar();  
-  
-});  
-  
-  
-/* =========================================================  
-   SIDEBAR  
-   ========================================================= */  
-  
-function toggleSidebar() {  
-  
-    const sidebar =  
-        document.getElementById('sidebar');  
-  
-    const overlay =  
-        document.getElementById('sidebar-overlay');  
-  
-    sidebar.classList.toggle('-translate-x-full');  
-  
-    overlay.classList.toggle('hidden');  
-  
-}  
-  
-  
-function startNewChat() {  
-  
-    currentChatId = Date.now().toString();  
-  
-    pendingTopic = null;  
-    pendingDetail = null;  
-    pendingCategory = null;  
-  
-    awaitingCharacterChoice = false;  
-    awaitingCharacterName = false;  
-    awaitingDuration = false;  
-  
-    document  
-        .getElementById('welcome-screen')  
-        .classList.remove('hidden');  
-  
-    document  
-        .getElementById('messages-list')  
-        .classList.add('hidden');  
-  
-    document  
-        .getElementById('messages-list')  
-        .innerHTML = '';  
-  
-    document  
-        .getElementById('user-input')  
-        .value = '';  
-  
-    const sidebar =  
-        document.getElementById('sidebar');  
-  
-    if (!sidebar.classList.contains('-translate-x-full')) {  
-        toggleSidebar();  
-    }  
-  
-}  
-  
-  
-function deleteChat(id, e) {  
-  
-    e.stopPropagation();  
-  
-    conversations =  
-        conversations.filter(c => c.id !== id);  
-  
-    localStorage.setItem(  
-        'sparkykrea_chats',  
-        JSON.stringify(conversations)  
-    );  
-  
-    if (currentChatId === id) {  
-  
-        startNewChat();  
-  
-    } else {  
-  
-        renderSidebar();  
-  
-    }  
-  
-}  
-  
-  
-/* =========================================================  
-   SALUDOS DEL USUARIO  
-   ========================================================= */  
-  
-function isSimpleGreeting(text) {  
-  
-    const clean =  
-        text  
-        .toLowerCase()  
-        .trim()  
-        .replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g, "");  
-  
-    const greetings = [  
-        'hola',  
-        'buenas',  
-        'buenos dias',  
-        'buenas tardes',  
-        'buenas noches',  
-        'que tal',  
-        'saludos',  
-        'hey',  
-        'holaa',  
-        'holaaa'  
-    ];  
-  
-    return greetings.includes(clean);  
-  
-}  
-  
-  
-/* =========================================================  
-   DETECCIÓN DE CATEGORÍAS  
-   ========================================================= */  
-  
-function detectCategory(text) {  
-  
-    const clean =  
-        text  
-        .toLowerCase()  
-        .normalize("NFD")  
-        .replace(/[\u0300-\u036f]/g, "");  
-  
-    if (  
-        /\bvalorant\b/.test(clean) ||  
-        /\blol\b/.test(clean) ||  
-        /league of legends/.test(clean) ||  
-        /\btft\b/.test(clean) ||  
-        /\boverwatch\b/.test(clean) ||  
-        /\bfree fire\b/.test(clean) ||  
-        /\bfortnite\b/.test(clean) ||  
-        /\bcall of duty\b/.test(clean) ||  
-        /\bcod\b/.test(clean) ||  
-        /\bapex\b/.test(clean) ||  
-        /\bpubg\b/.test(clean) ||  
-        /\bgta\b/.test(clean) ||  
-        /\bminecraft\b/.test(clean) ||  
-        /\bclash royale\b/.test(clean) ||  
-        /\bjuego\b/.test(clean) ||  
-        /\bgaming\b/.test(clean)  
-    ) {  
-        return 'gaming';  
-    }  
-  
-  
-    if (  
-        /\bpizza\b/.test(clean) ||  
-        /\bpizzeria\b/.test(clean) ||  
-        /\brestaurante\b/.test(clean) ||  
-        /\bcomida\b/.test(clean) ||  
-        /\bburger\b/.test(clean) ||  
-        /\bhamburguesa\b/.test(clean) ||  
-        /\bcafe\b/.test(clean) ||  
-        /\bcafeteria\b/.test(clean) ||  
-        /\bpanaderia\b/.test(clean) ||  
-        /\bpostre\b/.test(clean) ||  
-        /\bhelado\b/.test(clean)  
-    ) {  
-        return 'food';  
-    }  
-  
-  
-    if (  
-        /\bfutbol\b/.test(clean) ||  
-        /\bfutbolista\b/.test(clean) ||  
-        /\bdeporte\b/.test(clean) ||  
-        /\bdeportivo\b/.test(clean) ||  
-        /\bequipo\b/.test(clean) ||  
-        /\bbaloncesto\b/.test(clean) ||  
-        /\bbasket\b/.test(clean) ||  
-        /\btenis\b/.test(clean)  
-    ) {  
-        return 'sports';  
-    }  
-  
-  
-    if (  
-        /\bservicio\b/.test(clean) ||  
-        /\btienda\b/.test(clean) ||  
-        /\bmarca\b/.test(clean) ||  
-        /\bproducto\b/.test(clean) ||  
-        /\bnegocio\b/.test(clean)  
-    ) {  
-        return 'business';  
-    }  
-  
-  
-    return 'general';  
-  
-}  
-  
-  
-/* =========================================================  
-   ENVÍO  
-   ========================================================= */  
-  
-function handleSend(e) {  
-  
-    if (e) e.preventDefault();  
-  
-    const input =  
-        document.getElementById('user-input');  
-  
-    const query =  
-        input.value.trim();  
-  
-    if (!query) return;  
-  
-  
-    if (!currentChatId) {  
-        currentChatId = Date.now().toString();  
-    }  
-  
-  
-    document  
-        .getElementById('welcome-screen')  
-        .classList.add('hidden');  
-  
-  
-    const messagesList =  
-        document.getElementById('messages-list');  
-  
-    messagesList.classList.remove('hidden');  
-  
-  
-    messagesList.innerHTML += `  
-  
-        <div class="flex gap-2.5 justify-end">  
-  
-            <div class="bg-brandVinotinto text-white py-2 px-3 rounded-xl rounded-tr-none max-w-[85%] text-xs shadow-md">  
-  
-                ${escapeHtml(query)}  
-  
-            </div>  
-  
-        </div>  
-  
-    `;  
-  
-  
-    input.value = '';  
-  
-    scrollToBottom();  
-  
-  
-    const loadingId =  
-        'loading-' + Date.now();  
-  
-  
-    messagesList.innerHTML += `  
-  
-        <div id="${loadingId}"  
-            class="flex gap-2.5 justify-start items-center text-gray-400 text-xs py-1">  
-  
-            <div class="w-6 h-6 rounded-lg bg-darkCard border border-darkBorder flex items-center justify-center text-brandVerde">  
-  
-                <i class="fa-solid fa-spinner fa-spin text-[10px]"></i>  
-  
-            </div>  
-  
-            <span class="text-[11px]">  
-                Preparando una idea diferente...  
-            </span>  
-  
-        </div>  
-  
-    `;  
-  
-  
-    scrollToBottom();  
-  
-  
-    setTimeout(() => {  
-  
-        document  
-            .getElementById(loadingId)  
-            ?.remove();  
-  
-  
-        const botResponse =  
-            processPublicityRequest(query);  
-  
-  
-        messagesList.innerHTML += `  
-  
-            <div class="flex gap-2.5 justify-start">  
-  
-                <div class="w-7 h-7 rounded-lg bg-gradient-to-tr from-brandVinotinto to-brandVerde flex-shrink-0 flex items-center justify-center text-white font-bold text-[10px] shadow-md">  
-  
-                    SK  
-  
-                </div>  
-  
-  
-                <div class="bg-darkCard border border-darkBorder text-gray-200 p-3 rounded-xl rounded-tl-none max-w-[90%] text-xs leading-relaxed shadow-md space-y-2">  
-  
-                    ${botResponse}  
-  
-                </div>  
-  
-            </div>  
-  
-        `;  
-  
-  
-        saveMessageToHistory(  
-            query,  
-            botResponse  
-        );  
-  
-  
-        scrollToBottom();  
-  
-    }, 450);  
-  
-}  
-  
-  
-/* =========================================================  
-   DURACIÓN  
-   ========================================================= */  
-  
-function selectDurationFromDropdown(val) {  
-  
-    if (!val) return;  
-  
-  
-    if (val === 'custom') {  
-  
-        const customVal =  
-            prompt(  
-                "Indica la duración exacta. Ejemplo: 45 segundos, 2 minutos."  
-            );  
-  
-        if (customVal) {  
-  
-            document  
-                .getElementById('user-input')  
-                .value = customVal;  
-  
-            handleSend();  
-  
-        }  
-  
-    } else {  
-  
-        document  
-            .getElementById('user-input')  
-            .value = val;  
-  
-        handleSend();  
-  
-    }  
-  
-}  
-  
-  
-function durationSelector() {  
-  
-    return `  
-  
-        <div class="pt-1">  
-  
-            <select  
-                onchange="selectDurationFromDropdown(this.value)"  
-                class="w-full bg-darkSidebar border border-darkBorder hover:border-brandVerde text-gray-200 text-xs rounded-xl p-2 focus:outline-none cursor-pointer transition">  
-  
-                <option value="">  
-                    ⏱️ Selecciona la duración...  
-                </option>  
-  
-                <option value="15 segundos">  
-                    15 segundos  
-                </option>  
-  
-                <option value="30 segundos">  
-                    30 segundos  
-                </option>  
-  
-                <option value="45 segundos">  
-                    45 segundos  
-                </option>  
-  
-                <option value="60 segundos">  
-                    1 minuto  
-                </option>  
-  
-                <option value="2 minutos">  
-                    2 minutos  
-                </option>  
-  
-                <option value="3 minutos">  
-                    3 minutos  
-                </option>  
-  
-                <option value="custom">  
-                    ✍️ Duración personalizada  
-                </option>  
-  
-            </select>  
-  
-        </div>  
-  
-    `;  
-  
-}  
-  
-  
-/* =========================================================  
-   PARSEAR DURACIÓN  
-   ========================================================= */  
-  
-function parseDurationInSeconds(text) {  
-  
-    const clean =  
-        text.toLowerCase();  
-  
-    let minutes = 0;  
-    let seconds = 0;  
-  
-  
-    const minMatch =  
-        clean.match(/(\d+)\s*(min|minuto|minutos)/);  
-  
-    const secMatch =  
-        clean.match(/(\d+)\s*(seg|segundo|segundos)/);  
-  
-    const onlyNumberMatch =  
-        clean.match(/\b(\d+)\b/);  
-  
-  
-    if (minMatch) {  
-        minutes = parseInt(minMatch[1]);  
-    }  
-  
-  
-    if (secMatch) {  
-        seconds = parseInt(secMatch[1]);  
-    }  
-  
-  
-    if (!minMatch && !secMatch && onlyNumberMatch) {  
-  
-        const num =  
-            parseInt(onlyNumberMatch[1]);  
-  
-        if (num <= 10) {  
-            minutes = num;  
-        } else {  
-            seconds = num;  
-        }  
-  
-    }  
-  
-  
-    const totalSeconds =  
-        (minutes * 60) + seconds;  
-  
-  
-    return totalSeconds > 0  
-        ? totalSeconds  
-        : 30;  
-  
-}  
-  
-  
-function formatTime(sec) {  
-  
-    const m =  
-        Math.floor(sec / 60);  
-  
-    const s =  
-        sec % 60;  
-  
-    return `${m}:${s < 10 ? '0' : ''}${s}`;  
-  
-}  
-  
-  
-/* =========================================================  
-   GENERADOR DE TIEMPOS  
-   ========================================================= */  
-  
-function createTimeline(totalSeconds, category) {  
-  
-    const safe =  
-        Math.max(totalSeconds, 10);  
-  
-  
-    let first =  
-        Math.max(3, Math.floor(safe * 0.25));  
-  
-    let second =  
-        Math.max(first + 2, Math.floor(safe * 0.65));  
-  
-  
-    if (second >= safe) {  
-        second = Math.max(first + 1, safe - 2);  
-    }  
-  
-  
-    if (first >= second) {  
-        first = Math.max(1, Math.floor(safe * 0.2));  
-        second = Math.max(first + 1, Math.floor(safe * 0.7));  
-    }  
-  
-  
-    return {  
-        first,  
-        second,  
-        final: safe  
-    };  
-  
-}  
-  
-  
-/* =========================================================  
-   GUIONES  
-   ========================================================= */  
-  
-function generateSpecificScript(topic, detail, totalSeconds) {  
-  
-    const category =  
-        detectCategory(topic);  
-  
-    const cleanTopic =  
-        topic.toLowerCase();  
-  
-    const timeline =  
-        createTimeline(totalSeconds, category);  
-  
-  
-    const t1 =  
-        formatTime(timeline.first);  
-  
-    const t2 =  
-        formatTime(timeline.second);  
-  
-    const tf =  
-        formatTime(timeline.final);  
-  
-  
-    let hooks = [];  
-    let effects = [];  
-    let steps = [];  
-  
-  
-    /* =====================================================  
-       COMIDA  
-       ===================================================== */  
-  
-    if (category === 'food') {  
-  
-        hooks = [  
-  
-            `🔥 <strong>Gancho visual:</strong> comenzar con el producto "${escapeHtml(topic)}" en primer plano, mostrando textura, vapor o el detalle más apetitoso.`,  
-  
-            `🔥 <strong>Gancho sensorial:</strong> abrir con una toma cercana del plato mientras aparece una frase corta que despierte hambre y curiosidad.`,  
-  
-            `🔥 <strong>Gancho directo:</strong> mostrar el producto terminado desde el primer segundo y luego revelar cómo se prepara.`  
-        ];  
-  
-  
-        effects = [  
-  
-            `✨ <strong>Macro:</strong> acercamientos a ingredientes, textura, queso, salsas o detalles del plato.`,  
-  
-            `✨ <strong>Transiciones rápidas:</strong> cortes al ritmo de la música entre preparación, cocción y presentación.`,  
-  
-            `✨ <strong>Plano final:</strong> producto centrado con nombre del negocio y llamada a la acción.`  
-        ];  
-  
-  
-        steps = [  
-  
-            {  
-                time: `0:00 - ${t1}`,  
-                visual: `Primerísimo primer plano de ${topic}. Mostrar el producto de forma apetitosa, con movimiento lento de cámara.`,  
-                audio: `Sonido ambiente de cocina + música comercial suave. Voz: "Hay sabores que no necesitan presentación."`  
-            },  
-  
-            {  
-                time: `${t1} - ${t2}`,  
-                visual: `Mostrar preparación, ingredientes y el proceso que hace especial a ${topic}. Alternar planos generales y detalles.`,  
-                audio: `Sonidos reales de preparación mezclados con música. Voz: "Ingredientes bien elegidos, preparación cuidada y un resultado que habla por sí solo."`  
-            },  
-  
-            {  
-                time: `${t2} - ${tf}`,  
-                visual: `Plano final del producto listo para comer. Añadir nombre, ubicación, redes o método de pedido.`,  
-                audio: `La música sube ligeramente. Voz: "Ahora solo falta una cosa: probarlo. ¿Te animas?"`  
-            }  
-  
-        ];  
-  
-    }  
-  
-  
-    /* =====================================================  
-       GAMING  
-       ===================================================== */  
-  
-    else if (category === 'gaming') {  
-  
-        const game =  
-            topic;  
-  
-        const character =  
-            detail && detail.trim()  
-                ? detail  
-                : 'el personaje elegido';  
-  
-  
-        /* VALORANT */  
-  
-        if (/valorant/i.test(game)) {  
-  
-            hooks = [  
-  
-                `🔥 <strong>Hook competitivo:</strong> mostrar inmediatamente una jugada de ${character} y cortar justo antes del momento decisivo.`,  
-  
-                `🔥 <strong>Hook de curiosidad:</strong> "¿Qué tan peligroso puede ser ${character} en las manos correctas?"`,  
-  
-                `🔥 <strong>Hook de jugada:</strong> empezar con un clutch, habilidad o entrada agresiva de ${character}.`  
-            ];  
-  
-  
-            effects = [  
-  
-                `✨ HUD inspirado en competitivo para señalar posición, habilidad o momento clave.`,  
-  
-                `✨ Cámara lenta justo antes de la jugada principal.`,  
-  
-                `✨ Zoom rápido y golpe de sonido en el momento decisivo.`  
-            ];  
-  
-  
-            steps = [  
-  
-                {  
-                    time: `0:00 - ${t1}`,  
-                    visual: `Abrir con una jugada impactante de ${character}. Usar un corte rápido justo antes del momento clave.`,  
-                    audio: `Beat electrónico + sonido del juego. Voz: "Si creías que conocías a ${character}, espera a ver esto."`  
-                },  
-  
-                {  
-                    time: `${t1} - ${t2}`,  
-                    visual: `Mostrar gameplay real de ${character}, explicando posicionamiento, habilidades y decisiones durante la ronda.`,  
-                    audio: `Música gaming energética + efectos originales del juego. Narración explicando qué ocurre en pantalla.`  
-                },  
-  
-                {  
-                    time: `${t2} - ${tf}`,  
-                    visual: `Mostrar la jugada completa y terminar con una pantalla limpia con el nombre del creador o comunidad.`,  
-                    audio: `Golpe musical + CTA: "Ahora te toca probarlo. ¿Qué jugada harías tú?"`  
-                }  
-  
-            ];  
-  
-        }  
-  
-  
-        /* LEAGUE OF LEGENDS */  
-  
-        else if (/lol|league of legends/i.test(game)) {  
-  
-            hooks = [  
-  
-                `🔥 <strong>Hook:</strong> comenzar con una jugada decisiva de ${character}.`,  
-  
-                `🔥 <strong>Curiosidad:</strong> mostrar el resultado de una jugada antes de explicar cómo se consiguió.`,  
-  
-                `🔥 <strong>Competitivo:</strong> destacar una mecánica, combo o decisión importante de ${character}.`  
-            ];  
-  
-  
-            effects = [  
-  
-                `✨ Zoom sobre habilidades utilizadas.`,  
-  
-                `✨ Texto breve señalando combo, timing o posicionamiento.`,  
-  
-                `✨ Cámara lenta en la eliminación o jugada clave.`  
-            ];  
-  
-  
-            steps = [  
-  
-                {  
-                    time: `0:00 - ${t1}`,  
-                    visual: `Abrir con una jugada llamativa de ${character}.`,  
-                    audio: `Música gaming + voz: "Esta jugada con ${character} cambia completamente la partida."`  
-                },  
-  
-                {  
-                    time: `${t1} - ${t2}`,  
-                    visual: `Mostrar gameplay explicando habilidades, posicionamiento, decisiones y momento correcto para actuar.`,  
-                    audio: `Narración dinámica acompañada por sonidos del juego.`  
-                },  
-  
-                {  
-                    time: `${t2} - ${tf}`,  
-                    visual: `Repetición rápida de la jugada y cierre con el nombre del creador.`,  
-                    audio: `CTA: "¿Lo intentarías en tu próxima partida?"`  
-                }  
-  
-            ];  
-  
-        }  
-  
-  
-        /* CLASH ROYALE */  
-  
-        else if (/clash royale/i.test(game)) {  
-  
-            hooks = [  
-  
-                `🔥 <strong>Hook:</strong> comenzar justo antes de una defensa o ataque decisivo.`,  
-  
-                `🔥 <strong>Sorpresa:</strong> mostrar una jugada inesperada que cambie la torre enemiga.`,  
-  
-                `🔥 <strong>Reto:</strong> plantear una jugada difícil y mostrar si funciona.`  
-            ];  
-  
-  
-            effects = [  
-  
-                `✨ Zoom sobre la carta utilizada.`,  
-  
-                `✨ Flechas y marcas sobre el campo para explicar la estrategia.`,  
-  
-                `✨ Cámara lenta en el momento del ataque decisivo.`  
-            ];  
-  
-  
-            steps = [  
-  
-                {  
-                    time: `0:00 - ${t1}`,  
-                    visual: `Mostrar la situación de la partida justo antes de la jugada clave.`,  
-                    audio: `Música rápida + voz: "Todo parecía perdido... hasta esta jugada."`  
-                },  
-  
-                {  
-                    time: `${t1} - ${t2}`,  
-                    visual: `Explicar la colocación de cartas y cómo se desarrolla la estrategia.`,  
-                    audio: `Narración clara + sonidos reales del juego.`  
-                },  
-  
-                {  
-                    time: `${t2} - ${tf}`,  
-                    visual: `Mostrar el resultado y repetir brevemente la jugada clave.`,  
-                    audio: `CTA: "¿La probarías en tu próxima partida?"`  
-                }  
-  
-            ];  
-  
-        }  
-  
-  
-        /* GENERAL GAMING */  
-  
-        else {  
-  
-            hooks = [  
-  
-                `🔥 <strong>Hook:</strong> empezar con la jugada más llamativa del video.`,  
-  
-                `🔥 <strong>Curiosidad:</strong> mostrar el resultado antes de explicar cómo ocurrió.`,  
-  
-                `🔥 <strong>Reto:</strong> plantear una situación difícil y demostrar cómo resolverla.`  
-            ];  
-  
-  
-            effects = [  
-  
-                `✨ Zoom dinámico en la acción principal.`,  
-  
-                `✨ Cámara lenta para momentos importantes.`,  
-  
-                `✨ Texto breve para destacar decisiones y jugadas.`  
-            ];  
-  
-  
-            steps = [  
-  
-                {  
-                    time: `0:00 - ${t1}`,  
-                    visual: `Mostrar inmediatamente el momento más interesante del gameplay.`,  
-                    audio: `Música gaming energética + una frase corta relacionada con la jugada.`  
-                },  
-  
-                {  
-                    time: `${t1} - ${t2}`,  
-                    visual: `Desarrollar el gameplay explicando qué ocurre y por qué la jugada funciona.`,  
-                    audio: `Narración dinámica + sonidos originales del juego.`  
-                },  
-  
-                {  
-                    time: `${t2} - ${tf}`,  
-                    visual: `Cerrar con el resultado de la partida o jugada y una llamada a la acción.`,  
-                    audio: `CTA: "¿Tú cómo habrías jugado esta situación?"`  
-                }  
-  
-            ];  
-  
-        }  
-  
-    }  
-  
-  
-    /* =====================================================  
-       DEPORTES  
-       ===================================================== */  
-  
-    else if (category === 'sports') {  
-  
-        const protagonist =  
-            detail || 'el protagonista';  
-  
-  
-        hooks = [  
-  
-            `🔥 <strong>Hook deportivo:</strong> abrir con el momento más intenso de ${protagonist}.`,  
-  
-            `🔥 <strong>Historia:</strong> comenzar mostrando el esfuerzo antes del resultado.`,  
-  
-            `🔥 <strong>Motivación:</strong> mostrar una acción poderosa y construir la historia alrededor de ella.`  
-        ];  
-  
-  
-        effects = [  
-  
-            `✨ Cámara lenta en las acciones importantes.`,  
-  
-            `✨ Cortes rápidos sincronizados con golpes de música.`,  
-  
-            `✨ Texto breve con estadísticas o frases motivacionales.`  
-        ];  
-  
-  
-        steps = [  
-  
-            {  
-                time: `0:00 - ${t1}`,  
-                visual: `Primer plano de ${protagonist} preparándose para competir.`,  
-                audio: `Música cinematográfica. Voz: "Antes de cada gran momento existe una decisión: darlo todo."`  
-            },  
-  
-            {  
-                time: `${t1} - ${t2}`,  
-                visual: `Montaje de acciones, entrenamiento, velocidad y momentos importantes relacionados con ${protagonist}.`,  
-                audio: `Música creciendo + sonidos naturales del deporte.`  
-            },  
-  
-            {  
-                time: `${t2} - ${tf}`,  
-                visual: `Momento culminante seguido del producto, marca, equipo o mensaje principal.`,  
-                audio: `Cierre musical + CTA motivacional.`  
-            }  
-  
-        ];  
-  
-    }  
-  
-  
-    /* =====================================================  
-       NEGOCIOS / PRODUCTOS  
-       ===================================================== */  
-  
-    else if (category === 'business') {  
-  
-        hooks = [  
-  
-            `🔥 <strong>Problema → solución:</strong> comenzar mostrando una necesidad que ${topic} puede resolver.`,  
-  
-            `🔥 <strong>Producto primero:</strong> enseñar ${topic} desde el primer segundo con una presentación visual limpia.`,  
-  
-            `🔥 <strong>Estilo premium:</strong> utilizar planos cuidados para transmitir confianza y calidad.`  
-        ];  
-  
-  
-        effects = [  
-  
-            `✨ Planos detalle del producto o servicio.`,  
-  
-            `✨ Texto minimalista resaltando beneficios reales.`,  
-  
-            `✨ Transiciones limpias en vinotinto y verde para mantener identidad de marca.`  
-        ];  
-  
-  
-        steps = [  
-  
-            {  
-                time: `0:00 - ${t1}`,  
-                visual: `Presentación atractiva de ${topic}, mostrando rápidamente qué es y por qué llama la atención.`,  
-                audio: `Música moderna y elegante + frase de apertura relacionada directamente con el producto.`  
-            },  
-  
-            {  
-                time: `${t1} - ${t2}`,  
-                visual: `Demostrar características, funcionamiento y beneficios de ${topic} mediante situaciones reales.`,  
-                audio: `Narración clara explicando qué problema resuelve y qué lo diferencia.`  
-            },  
-  
-            {  
-                time: `${t2} - ${tf}`,  
-                visual: `Plano final limpio de ${topic} con nombre de marca, redes y llamada a la acción.`,  
-                audio: `CTA: "Conoce ${topic} y descubre todo lo que puede hacer por ti."`  
-            }  
-  
-        ];  
-  
-    }  
-  
-  
-    /* =====================================================  
-       GENERAL  
-       ===================================================== */  
-  
-    else {  
-  
-        hooks = [  
-  
-            `🔥 <strong>Curiosidad:</strong> comenzar con una pregunta relacionada directamente con ${topic}.`,  
-  
-            `🔥 <strong>Impacto:</strong> mostrar el resultado final antes de explicar cómo se consigue.`,  
-  
-            `🔥 <strong>Historia corta:</strong> presentar un problema y convertir ${topic} en el centro de la solución.`  
-        ];  
-  
-  
-        effects = [  
-  
-            `✨ Combinar planos generales con primeros planos.`,  
-  
-            `✨ Utilizar textos cortos para destacar las ideas principales.`,  
-  
-            `✨ Mantener una paleta coherente con la identidad vinotinto + verde de SparkyKrea.`  
-        ];  
-  
-  
-        steps = [  
-  
-            {  
-                time: `0:00 - ${t1}`,  
-                visual: `Presentación visual de ${topic} con una imagen que genere curiosidad.`,  
-                audio: `Música moderna + introducción breve relacionada con ${topic}.`  
-            },  
-  
-            {  
-                time: `${t1} - ${t2}`,  
-                visual: `Mostrar de forma clara qué es ${topic}, cómo funciona y por qué puede interesar al público.`,  
-                audio: `Narración natural explicando sus puntos fuertes.`  
-            },  
-  
-            {  
-                time: `${t2} - ${tf}`,  
-                visual: `Cierre mostrando ${topic} de forma limpia junto con la llamada a la acción.`,  
-                audio: `CTA final adaptada al objetivo de la campaña.`  
-            }  
-  
-        ];  
-  
-    }  
-  
-  
-    return {  
-  
-        hooks,  
-  
-        effects,  
-  
-        scriptSteps: steps.map(s => `  
-  
-            <div class="border-l-2 border-brandVerde pl-2.5 my-1.5 space-y-0.5">  
-  
-                <p class="font-bold text-white text-[11px]">  
-  
-                    🎬 <span>Toma ${s.time}</span>  
-  
-                </p>  
-  
-                <p class="text-gray-300">  
-  
-                    📹 <strong>Visual:</strong>  
-                    ${s.visual}  
-  
-                </p>  
-  
-                <p class="text-gray-400">  
-  
-                    🎙️ <strong>Audio & Locución:</strong>  
-                    ${s.audio}  
-  
-                </p>  
-  
-            </div>  
-  
-        `).join("")  
-  
-    };  
-  
-}  
-  
-  
-/* =========================================================  
-   MÚSICA  
-   ========================================================= */  
-  
-function getDiverseMusicSugg(category) {  
-  
-    if (category === 'gaming') {  
-  
-        return `  
-  
-            <ul class="space-y-1.5 text-gray-300 text-[11px]">  
-  
-                <li>  
-                    🎮 <strong>Gaming electrónico:</strong>  
-                    beats rápidos, sintetizadores y bajos marcados.  
-                    Ideal para jugadas, clips y momentos competitivos.  
-                </li>  
-  
-                <li>  
-                    ⚡ <strong>Phonk / Trap instrumental:</strong>  
-                    energía agresiva y ritmo fuerte para entradas, clutchs y montajes.  
-                </li>  
-  
-                <li>  
-                    🚀 <strong>Future Bass / EDM:</strong>  
-                    sonido moderno para videos con muchas transiciones y efectos.  
-                </li>  
-  
-                <li>  
-                    🎧 <strong>Dark ambient:</strong>  
-                    opción más misteriosa para trailers o presentaciones de personajes.  
-                </li>  
-  
-            </ul>  
-  
-        `;  
-  
-    }  
-  
-  
-    if (category === 'food') {  
-  
-        return `  
-  
-            <ul class="space-y-1.5 text-gray-300 text-[11px]">  
-  
-                <li>  
-                    🍕 <strong>Pop alegre:</strong>  
-                    ritmo comercial y fresco para restaurantes y comida rápida.  
-                </li>  
-  
-                <li>  
-                    ☕ <strong>Lo-fi / Chill:</strong>  
-                    ambiente relajado para cafeterías, postres y contenido acogedor.  
-                </li>  
-  
-                <li>  
-                    ✨ <strong>Jazz moderno:</strong>  
-                    elegante para restaurantes premium y gastronomía sofisticada.  
-                </li>  
-  
-                <li>  
-                    🔥 <strong>Latin instrumental:</strong>  
-                    energía cálida para contenido gastronómico juvenil.  
-                </li>  
-  
-            </ul>  
-  
-        `;  
-  
-    }  
-  
-  
-    if (category === 'sports') {  
-  
-        return `  
-  
-            <ul class="space-y-1.5 text-gray-300 text-[11px]">  
-  
-                <li>  
-                    🏆 <strong>Cinemática épica:</strong>  
-                    cuerdas, percusión y crescendos para momentos importantes.  
-                </li>  
-  
-                <li>  
-                    ⚡ <strong>Drum & Bass:</strong>  
-                    ritmo rápido para entrenamientos y jugadas.  
-                </li>  
-  
-                <li>  
-                    🔥 <strong>Hip-Hop instrumental:</strong>  
-                    actitud y energía para contenido deportivo moderno.  
-                </li>  
-  
-            </ul>  
-  
-        `;  
-  
-    }  
-  
-  
-    return `  
-  
-        <ul class="space-y-1.5 text-gray-300 text-[11px]">  
-  
-            <li>  
-                🎵 <strong>Pop comercial:</strong>  
-                moderno, limpio y fácil de adaptar a marcas.  
-            </li>  
-  
-            <li>  
-                ✨ <strong>Ambient corporativo:</strong>  
-                elegante para productos, servicios y presentaciones.  
-            </li>  
-  
-            <li>  
-                🔥 <strong>Urbano instrumental:</strong>  
-                juvenil y energético para contenido de redes.  
-            </li>  
-  
-            <li>  
-                🎹 <strong>Lo-fi / Chill:</strong>  
-                tranquilo y cercano para contenido relajado.  
-            </li>  
-  
-            <li>  
-                🎬 <strong>Cinemático:</strong>  
-                ideal para historias, lanzamientos y anuncios emocionales.  
-            </li>  
-  
-        </ul>  
-  
-    `;  
-  
-}  
-  
-  
-/* =========================================================  
-   PROCESAR SOLICITUD  
-   ========================================================= */  
-  
-function processPublicityRequest(input) {  
-  
-    const clean =  
-        input.toLowerCase().trim();  
-  
-  
-    /* SALUDO */  
-  
-    if (  
-        isSimpleGreeting(clean) &&  
-        !pendingTopic &&  
-        !awaitingCharacterChoice &&  
-        !awaitingCharacterName &&  
-        !awaitingDuration  
-    ) {  
-  
-        return `  
-  
-            <p>  
-                ${getTimeGreeting()}  
-            </p>  
-  
-            <p class="text-gray-300">  
-                Cuéntame qué quieres promocionar y  
-                SparkyKrea te ayuda a convertirlo en una idea.  
-            </p>  
-  
-        `;  
-  
-    }  
-  
-  
-    /* =====================================================  
-       RESPUESTA: ¿ES SOBRE UN PERSONAJE?  
-       ===================================================== */  
-  
-    if (awaitingCharacterChoice) {  
-  
-        const answer =  
-            clean;  
-  
-        const yes =  
-            /^(si|sí|yes|claro|exacto|correcto|aja|ajá)$/i.test(answer);  
-  
-        const no =  
-            /^(no|nop|nah|ninguno)$/i.test(answer);  
-  
-  
-        if (yes) {  
-  
-            awaitingCharacterChoice = false;  
-            awaitingCharacterName = true;  
-  
-            return `  
-  
-                <div class="space-y-2">  
-  
-                    <p>  
-                        Perfecto 🎯. Entonces vamos a hacerlo mucho más preciso.  
-                    </p>  
-  
-                    <p class="text-gray-300">  
-                        🎮 ¿Qué personaje, agente, campeón o héroe quieres que sea el protagonista?  
-                    </p>  
-  
-                    <p class="text-gray-500 text-[11px]">  
-                        Por ejemplo: Reyna, Jett, Sage, Yasuo, Garen, etc.  
-                    </p>  
-  
-                </div>  
-  
-            `;  
-  
-        }  
-  
-  
-        if (no) {  
-  
-            pendingDetail = null;  
-  
-            awaitingCharacterChoice = false;  
-            awaitingDuration = true;  
-  
-            return `  
-  
-                <div class="space-y-2">  
-  
-                    <p>  
-                        Perfecto 👍. Entonces enfocaremos el anuncio en  
-                        <strong class="text-brandVerde">  
-                            ${escapeHtml(pendingTopic)}  
-                        </strong>  
-                        como juego en general.  
-                    </p>  
-  
-                    <p class="text-gray-300">  
-                        Ahora dime cuánto quieres que dure el video:  
-                    </p>  
-  
-                    ${durationSelector()}  
-  
-                </div>  
-  
-            `;  
-  
-        }  
-  
-  
-        return `  
-  
-            <div class="space-y-2">  
-  
-                <p>  
-                    Solo necesito saber una cosa:  
-                </p>  
-  
-                <p class="text-gray-300">  
-                    🎮 ¿Quieres que el anuncio sea sobre un personaje específico?  
-                </p>  
-  
-                <p class="text-gray-500 text-[11px]">  
-                    Responde simplemente <strong>Sí</strong> o <strong>No</strong>.  
-                </p>  
-  
-            </div>  
-  
-        `;  
-  
-    }  
-  
-  
-    /* =====================================================  
-       NOMBRE DEL PERSONAJE  
-       ===================================================== */  
-  
-    if (awaitingCharacterName) {  
-  
-        pendingDetail =  
-            input.trim();  
-  
-        awaitingCharacterName = false;  
-        awaitingDuration = true;  
-  
-  
-        return `  
-  
-            <div class="space-y-2">  
-  
-                <p>  
-                    🔥 Perfecto. El protagonista será  
-                    <strong class="text-brandVerde">  
-                        "${escapeHtml(pendingDetail)}"  
-                    </strong>.  
-                </p>  
-  
-                <p class="text-gray-300">  
-                    Ahora podemos construir el guion alrededor de ese personaje.  
-                </p>  
-  
-                <p class="text-gray-300">  
-                    ⏱️ ¿Cuánto quieres que dure el video?  
-                </p>  
-  
-                ${durationSelector()}  
-  
-            </div>  
-  
-        `;  
-  
-    }  
-  
-  
-    /* =====================================================  
-       DURACIÓN  
-       ===================================================== */  
-  
-    const hasTimeKeywords =  
-        /(\d+|segundo|segundos|minuto|minutos|min|seg)/i.test(clean);  
-  
-  
-    if (  
-        (awaitingDuration || pendingTopic) &&  
-        hasTimeKeywords  
-    ) {  
-  
-        const totalSec =  
-            parseDurationInSeconds(clean);  
-  
-  
-        const category =  
-            pendingCategory ||  
-            detectCategory(pendingTopic);  
-  
-  
-        const generated =  
-            generateSpecificScript(  
-                pendingTopic,  
-                pendingDetail,  
-                totalSec  
-            );  
-  
-  
-        const mainTopic =  
-            pendingTopic;  
-  
-        const detailTopic =  
-            pendingDetail;  
-  
-  
-        pendingTopic = null;  
-        pendingDetail = null;  
-        pendingCategory = null;  
-        awaitingDuration = false;  
-  
-  
-        return `  
-  
-            <div class="space-y-3">  
-  
-  
-                <!-- ENCABEZADO -->  
-  
-                <div class="border-b border-darkBorder pb-1.5">  
-  
-                    <h2 class="text-xs font-bold text-brandVerde">  
-  
-                        🎬 Guion creativo de SparkyKrea  
-  
-                    </h2>  
-  
-                    <p class="text-[11px] text-gray-400">  
-  
-                        Campaña:  
-                        <strong class="text-white">  
-                            ${escapeHtml(mainTopic)}  
-                            ${detailTopic  
-                                ? '(' + escapeHtml(detailTopic) + ')'  
-                                : ''  
-                            }  
-                        </strong>  
-  
-                        |  
-  
-                        Duración:  
-                        <strong class="text-white">  
-                            ${formatTime(totalSec)}  
-                        </strong>  
-  
-                    </p>  
-  
-                </div>  
-  
-  
-                <!-- GANCHOS -->  
-  
-                <div class="bg-darkSidebar p-2.5 rounded-xl border border-darkBorder text-[11px] space-y-1">  
-  
-                    <p class="text-brandVerde font-bold uppercase tracking-wider">  
-  
-                        💡 IDEAS PARA EMPEZAR  
-  
-                    </p>  
-  
-                    ${generated.hooks.join('<br>')}  
-  
-                </div>  
-  
-  
-                <!-- GUION -->  
-  
-                <div class="bg-darkSidebar p-2.5 rounded-xl border border-darkBorder text-[11px]">  
-  
-                    <p class="text-brandVerde font-bold uppercase tracking-wider mb-1.5">  
-  
-                        📜 GUION PASO A PASO  
-  
-                    </p>  
-  
-                    ${generated.scriptSteps}  
-  
-                </div>  
-  
-  
-                <!-- EFECTOS -->  
-  
-                <div class="bg-darkSidebar p-2.5 rounded-xl border border-darkBorder text-[11px] space-y-1">  
-  
-                    <p class="text-brandVerde font-bold uppercase tracking-wider">  
-  
-                        ⚡ EFECTOS Y EDICIÓN  
-  
-                    </p>  
-  
-                    ${generated.effects.join('<br>')}  
-  
-                </div>  
-  
-  
-                <!-- MÚSICA -->  
-  
-                <div class="bg-darkSidebar p-2.5 rounded-xl border border-darkBorder text-[11px] space-y-1">  
-  
-                    <p class="text-brandVerde font-bold uppercase tracking-wider">  
-  
-                        🎵 ESTILO MUSICAL  
-  
-                    </p>  
-  
-                    ${getDiverseMusicSugg(category)}  
-  
-                </div>  
-  
-  
-                <!-- MOTIVACIÓN -->  
-  
-                <div class="bg-brandVinotinto/20 border border-brandVinotinto/40 p-2.5 rounded-xl text-[11px]">  
-  
-                    <p class="text-white font-semibold">  
-  
-                        🚀 Y ahora viene lo bueno:  
-  
-                    </p>  
-  
-                    <p class="text-gray-300">  
-  
-                        No necesitas hacerlo perfecto desde el primer intento.  
-                        Empieza con una idea, prueba una versión y ve mejorándola.  
-                        Una buena campaña también nace de una chispa.  
-  
-                    </p>  
-  
-                </div>  
-  
-  
-            </div>  
-  
-        `;  
-  
-    }  
-  
-  
-    /* =====================================================  
-       NUEVO TEMA  
-       ===================================================== */  
-  
-    pendingTopic =  
-        input.trim();  
-  
-    pendingCategory =  
-        detectCategory(input);  
-  
-  
-    /* =====================================================  
-       GAMING  
-       ===================================================== */  
-  
-    if (pendingCategory === 'gaming') {  
-  
-        awaitingCharacterChoice = true;  
-  
-        return `  
-  
-            <div class="space-y-2">  
-  
-                <p>  
-                    🎮 Buena elección.  
-                </p>  
-  
-                <p>  
-                    Vamos a preparar algo específico para  
-                    <strong class="text-brandVerde">  
-                        "${escapeHtml(input)}"  
-                    </strong>.  
-                </p>  
-  
-                <p class="text-gray-300">  
-                    Antes de crear el guion necesito afinar una cosa:  
-                </p>  
-  
-                <p class="text-white font-semibold">  
-                    ¿Quieres que el anuncio sea sobre un personaje específico?  
-                </p>  
-  
-                <p class="text-gray-500 text-[11px]">  
-                    Responde <strong>Sí</strong> o <strong>No</strong>.  
-                </p>  
-  
-            </div>  
-  
-        `;  
-  
-    }  
-  
-  
-    /* =====================================================  
-       DEPORTES  
-       ===================================================== */  
-  
-    if (pendingCategory === 'sports') {  
-  
-        awaitingCharacterName = true;  
-  
-        return `  
-  
-            <div class="space-y-2">  
-  
-                <p>  
-                    ⚽ Perfecto. Podemos hacer que el anuncio tenga una identidad mucho más marcada.  
-                </p>  
-  
-                <p class="text-gray-300">  
-                    ¿Quién quieres que sea el protagonista?  
-                </p>  
-  
-                <p class="text-gray-500 text-[11px]">  
-                    Puede ser un futbolista, atleta, equipo o figura deportiva.  
-                </p>  
-  
-            </div>  
-  
-        `;  
-  
-    }  
-  
-  
-    /* =====================================================  
-       COMIDA / RESTAURANTE  
-       ===================================================== */  
-  
-    if (pendingCategory === 'food') {  
-  
-        awaitingDuration = true;  
-  
-        return `  
-  
-            <div class="space-y-2">  
-  
-                <p>  
-                    🍕 ¡Perfecto!  
-                </p>  
-  
-                <p>  
-                    Vamos a hacer que el anuncio se centre realmente en  
-                    <strong class="text-brandVerde">  
-                        "${escapeHtml(input)}"  
-                    </strong>.  
-                </p>  
-  
-                <p class="text-gray-300">  
-                    El guion puede enfocarse en preparación, ingredientes,  
-                    presentación y la experiencia de probarlo.  
-                </p>  
-  
-                <p class="text-gray-300">  
-                    ⏱️ Ahora dime cuánto quieres que dure:  
-                </p>  
-  
-                ${durationSelector()}  
-  
-            </div>  
-  
-        `;  
-  
-    }  
-  
-  
-    /* =====================================================  
-       GENERAL  
-       ===================================================== */  
-  
-    awaitingDuration = true;  
-  
-    return `  
-  
-        <div class="space-y-2">  
-  
-            <p>  
-                ✨ Me gusta la idea.  
-            </p>  
-  
-            <p>  
-                Vamos a trabajar específicamente con  
-                <strong class="text-brandVerde">  
-                    "${escapeHtml(input)}"  
-                </strong>.  
-            </p>  
-  
-            <p class="text-gray-300">  
-                Para ajustar el ritmo, la cantidad de escenas  
-                y la narración necesito saber la duración.  
-            </p>  
-  
-            ${durationSelector()}  
-  
-        </div>  
-  
-    `;  
-  
-}  
-  
-  
-/* =========================================================  
-   SCROLL  
-   ========================================================= */  
-  
-function scrollToBottom() {  
-  
-    const container =  
-        document.getElementById('chat-container');  
-  
-    container.scrollTop =  
-        container.scrollHeight;  
-  
-}  
-  
-  
-/* =========================================================  
-   GUARDAR HISTORIAL  
-   ========================================================= */  
-  
-function saveMessageToHistory(userText, botText) {  
-  
-    let chat =  
-        conversations.find(  
-            c => c.id === currentChatId  
-        );  
-  
-  
-    if (!chat) {  
-  
-        chat = {  
-  
-            id: currentChatId,  
-  
-            title:  
-                userText.substring(0, 20) +  
-                (userText.length > 20 ? '...' : ''),  
-  
-            messages: []  
-  
-        };  
-  
-  
-        conversations.unshift(chat);  
-  
-    }  
-  
-  
-    chat.messages.push({  
-  
-        sender: 'user',  
-        text: userText  
-  
-    });  
-  
-  
-    chat.messages.push({  
-  
-        sender: 'bot',  
-        text: botText  
-  
-    });  
-  
-  
-    localStorage.setItem(  
-        'sparkykrea_chats',  
-        JSON.stringify(conversations)  
-    );  
-  
-  
-    renderSidebar();  
-  
-}  
-  
-  
-/* =========================================================  
-   RENDER SIDEBAR  
-   ========================================================= */  
-  
-function renderSidebar() {  
-  
-    const historyContainer =  
-        document.getElementById('chat-history');  
-  
-  
-    if (conversations.length === 0) {  
-  
-        historyContainer.innerHTML = `  
-  
-            <div class="text-[11px] text-gray-500 italic px-2 py-1">  
-  
-                Sin campañas guardadas  
-  
-            </div>  
-  
-        `;  
-  
-        return;  
-  
-    }  
-  
-  
-    historyContainer.innerHTML = '';  
-  
-  
-    conversations.forEach(c => {  
-  
-        const active =  
-            c.id === currentChatId;  
-  
-  
-        historyContainer.innerHTML += `  
-  
-            <div  
-                onclick="selectChat('${c.id}')"  
-                class="group flex items-center justify-between px-2.5 py-1.5 rounded-lg cursor-pointer text-xs transition  
-                ${active  
-                    ? 'bg-brandVinotinto/30 border border-brandVinotinto/50 text-white font-medium'  
-                    : 'text-gray-400 hover:bg-darkCard hover:text-gray-200'  
-                }">  
-  
-  
-                <div class="flex items-center gap-2 truncate">  
-  
-                    <i class="fa-solid fa-film text-brandVerde text-[10px]"></i>  
-  
-                    <span class="truncate text-[11px]">  
-  
-                        ${escapeHtml(c.title)}  
-  
-                    </span>  
-  
-                </div>  
-  
-  
-                <button  
-                    onclick="deleteChat('${c.id}', event)"  
-                    class="opacity-0 group-hover:opacity-100 p-1 text-gray-500 hover:text-rose-400 transition"  
-                    title="Eliminar chat">  
-  
-                    <i class="fa-solid fa-trash-can text-[10px]"></i>  
-  
-                </button>  
-  
-  
-            </div>  
-  
-        `;  
-  
-    });  
-  
-}  
-  
-  
-/* =========================================================  
-   SELECCIONAR CHAT  
-   ========================================================= */  
-  
-function selectChat(id) {  
-  
-    currentChatId = id;  
-  
-  
-    const chat =  
-        conversations.find(c => c.id === id);  
-  
-  
-    if (!chat) return;  
-  
-  
-    pendingTopic = null;  
-    pendingDetail = null;  
-    pendingCategory = null;  
-  
-    awaitingCharacterChoice = false;  
-    awaitingCharacterName = false;  
-    awaitingDuration = false;  
-  
-  
-    document  
-        .getElementById('welcome-screen')  
-        .classList.add('hidden');  
-  
-  
-    const messagesList =  
-        document.getElementById('messages-list');  
-  
-  
-    messagesList.classList.remove('hidden');  
-  
-    messagesList.innerHTML = '';  
-  
-  
-    chat.messages.forEach(m => {  
-  
-        if (m.sender === 'user') {  
-  
-            messagesList.innerHTML += `  
-  
-                <div class="flex gap-2.5 justify-end">  
-  
-                    <div class="bg-brandVinotinto text-white py-2 px-3 rounded-xl rounded-tr-none max-w-[85%] text-xs shadow-md">  
-  
-                        ${escapeHtml(m.text)}  
-  
-                    </div>  
-  
-                </div>  
-  
-            `;  
-  
-        } else {  
-  
-            messagesList.innerHTML += `  
-  
-                <div class="flex gap-2.5 justify-start">  
-  
-                    <div class="w-7 h-7 rounded-lg bg-gradient-to-tr from-brandVinotinto to-brandVerde flex-shrink-0 flex items-center justify-center text-white font-bold text-[10px] shadow-md">  
-  
-                        SK  
-  
-                    </div>  
-  
-  
-                    <div class="bg-darkCard border border-darkBorder text-gray-200 p-3 rounded-xl rounded-tl-none max-w-[90%] text-xs leading-relaxed shadow-md space-y-2">  
-  
-                        ${m.text}  
-  
-                    </div>  
-  
-                </div>  
-  
-            `;  
-  
-        }  
-  
-    });  
-  
-  
-    renderSidebar();  
-  
-    scrollToBottom();  
-  
-  
-    const sidebar =  
-        document.getElementById('sidebar');  
-  
-  
-    if (!sidebar.classList.contains('-translate-x-full')) {  
-  
-        toggleSidebar();  
-  
-    }  
-  
-}  
-  
-  
-/* =========================================================  
-   SEGURIDAD HTML  
-   ========================================================= */  
-  
-function escapeHtml(str) {  
-  
-    return String(str)  
-        .replace(/&/g, "&amp;")  
-        .replace(/</g, "&lt;")  
-        .replace(/>/g, "&gt;")  
-        .replace(/"/g, "&quot;")  
-        .replace(/'/g, "&#039;");  
-  
-}  
-  
-</script>  </body>  
+        </div>
+
+    </main>
+
+
+
+<script>
+
+/* =========================================================
+   SPARKYKREA
+   MOTOR PUBLICITARIO PRO
+   ACTUALIZACIÓN
+   ========================================================= */
+
+
+let conversations =
+    JSON.parse(localStorage.getItem('sparkykrea_chats')) || [];
+
+let currentChatId = null;
+
+let pendingTopic = null;
+let pendingDetail = null;
+let pendingCategory = null;
+
+let awaitingCharacterChoice = false;
+let awaitingCharacterName = false;
+let awaitingDuration = false;
+
+
+/* =========================================================
+   SALUDOS
+   ========================================================= */
+
+const greetingsMorning = [
+    '¡Buenos días! 👋 ¿En qué puedo ayudarte hoy?',
+    '¡Buenos días! ☀️ ¿Qué vamos a crear hoy?',
+    '¡Buenos días! 👋 Cuéntame tu idea y empezamos.',
+    '¡Buenos días! ✨ ¿Qué proyecto tienes en mente?'
+];
+
+const greetingsAfternoon = [
+    '¡Buenas tardes! 👋 ¿En qué puedo ayudarte hoy?',
+    '¡Buenas tardes! ✨ ¿Qué vamos a crear hoy?',
+    '¡Buenas tardes! 👋 Cuéntame qué tienes en mente.',
+    '¡Buenas tardes! 🚀 Vamos a darle forma a esa idea.'
+];
+
+const greetingsNight = [
+    '¡Buenas noches! 🌙 ¿En qué puedo ayudarte hoy?',
+    '¡Buenas noches! ✨ ¿Listo para crear algo increíble?',
+    '¡Buenas noches! 👋 Cuéntame qué quieres preparar.',
+    '¡Buenas noches! 🚀 Vamos a convertir esa idea en algo genial.'
+];
+
+
+function randomItem(array) {
+    return array[Math.floor(Math.random() * array.length)];
+}
+
+
+function getTimeGreeting() {
+
+    const hour = new Date().getHours();
+
+    if (hour >= 5 && hour < 12) {
+        return randomItem(greetingsMorning);
+    }
+
+    if (hour >= 12 && hour < 19) {
+        return randomItem(greetingsAfternoon);
+    }
+
+    return randomItem(greetingsNight);
+}
+
+
+/* =========================================================
+   INICIO
+   ========================================================= */
+
+document.addEventListener('DOMContentLoaded', () => {
+
+    document.getElementById('dynamic-greeting').textContent =
+        getTimeGreeting();
+
+    renderSidebar();
+
+});
+
+
+/* =========================================================
+   SIDEBAR
+   ========================================================= */
+
+function toggleSidebar() {
+
+    const sidebar =
+        document.getElementById('sidebar');
+
+    const overlay =
+        document.getElementById('sidebar-overlay');
+
+    sidebar.classList.toggle('-translate-x-full');
+
+    overlay.classList.toggle('hidden');
+
+}
+
+
+function startNewChat() {
+
+    currentChatId = Date.now().toString();
+
+    pendingTopic = null;
+    pendingDetail = null;
+    pendingCategory = null;
+
+    awaitingCharacterChoice = false;
+    awaitingCharacterName = false;
+    awaitingDuration = false;
+
+    document
+        .getElementById('welcome-screen')
+        .classList.remove('hidden');
+
+    document
+        .getElementById('messages-list')
+        .classList.add('hidden');
+
+    document
+        .getElementById('messages-list')
+        .innerHTML = '';
+
+    document
+        .getElementById('user-input')
+        .value = '';
+
+    const sidebar =
+        document.getElementById('sidebar');
+
+    if (!sidebar.classList.contains('-translate-x-full')) {
+        toggleSidebar();
+    }
+
+}
+
+
+function deleteChat(id, e) {
+
+    e.stopPropagation();
+
+    conversations =
+        conversations.filter(c => c.id !== id);
+
+    localStorage.setItem(
+        'sparkykrea_chats',
+        JSON.stringify(conversations)
+    );
+
+    if (currentChatId === id) {
+
+        startNewChat();
+
+    } else {
+
+        renderSidebar();
+
+    }
+
+}
+
+
+/* =========================================================
+   SALUDOS DEL USUARIO
+   ========================================================= */
+
+function isSimpleGreeting(text) {
+
+    const clean =
+        text
+        .toLowerCase()
+        .trim()
+        .replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g, "");
+
+    const greetings = [
+        'hola',
+        'buenas',
+        'buenos dias',
+        'buenas tardes',
+        'buenas noches',
+        'que tal',
+        'saludos',
+        'hey',
+        'holaa',
+        'holaaa'
+    ];
+
+    return greetings.includes(clean);
+
+}
+
+
+/* =========================================================
+   DETECCIÓN DE CATEGORÍAS
+   ========================================================= */
+
+function detectCategory(text) {
+
+    const clean =
+        text
+        .toLowerCase()
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "");
+
+    if (
+        /\bvalorant\b/.test(clean) ||
+        /\blol\b/.test(clean) ||
+        /league of legends/.test(clean) ||
+        /\btft\b/.test(clean) ||
+        /\boverwatch\b/.test(clean) ||
+        /\bfree fire\b/.test(clean) ||
+        /\bfortnite\b/.test(clean) ||
+        /\bcall of duty\b/.test(clean) ||
+        /\bcod\b/.test(clean) ||
+        /\bapex\b/.test(clean) ||
+        /\bpubg\b/.test(clean) ||
+        /\bgta\b/.test(clean) ||
+        /\bminecraft\b/.test(clean) ||
+        /\bclash royale\b/.test(clean) ||
+        /\bjuego\b/.test(clean) ||
+        /\bgaming\b/.test(clean)
+    ) {
+        return 'gaming';
+    }
+
+
+    if (
+        /\bpizza\b/.test(clean) ||
+        /\bpizzeria\b/.test(clean) ||
+        /\brestaurante\b/.test(clean) ||
+        /\bcomida\b/.test(clean) ||
+        /\bburger\b/.test(clean) ||
+        /\bhamburguesa\b/.test(clean) ||
+        /\bcafe\b/.test(clean) ||
+        /\bcafeteria\b/.test(clean) ||
+        /\bpanaderia\b/.test(clean) ||
+        /\bpostre\b/.test(clean) ||
+        /\bhelado\b/.test(clean)
+    ) {
+        return 'food';
+    }
+
+
+    if (
+        /\bfutbol\b/.test(clean) ||
+        /\bfutbolista\b/.test(clean) ||
+        /\bdeporte\b/.test(clean) ||
+        /\bdeportivo\b/.test(clean) ||
+        /\bequipo\b/.test(clean) ||
+        /\bbaloncesto\b/.test(clean) ||
+        /\bbasket\b/.test(clean) ||
+        /\btenis\b/.test(clean)
+    ) {
+        return 'sports';
+    }
+
+
+    if (
+        /\bservicio\b/.test(clean) ||
+        /\btienda\b/.test(clean) ||
+        /\bmarca\b/.test(clean) ||
+        /\bproducto\b/.test(clean) ||
+        /\bnegocio\b/.test(clean)
+    ) {
+        return 'business';
+    }
+
+
+    return 'general';
+
+}
+
+
+/* =========================================================
+   ENVÍO
+   ========================================================= */
+
+function handleSend(e) {
+
+    if (e) e.preventDefault();
+
+    const input =
+        document.getElementById('user-input');
+
+    const query =
+        input.value.trim();
+
+    if (!query) return;
+
+
+    if (!currentChatId) {
+        currentChatId = Date.now().toString();
+    }
+
+
+    document
+        .getElementById('welcome-screen')
+        .classList.add('hidden');
+
+
+    const messagesList =
+        document.getElementById('messages-list');
+
+    messagesList.classList.remove('hidden');
+
+
+    messagesList.innerHTML += `
+
+        <div class="flex gap-2.5 justify-end">
+
+            <div class="bg-brandVinotinto text-white py-2 px-3 rounded-xl rounded-tr-none max-w-[85%] text-xs shadow-md">
+
+                ${escapeHtml(query)}
+
+            </div>
+
+        </div>
+
+    `;
+
+
+    input.value = '';
+
+    scrollToBottom();
+
+
+    const loadingId =
+        'loading-' + Date.now();
+
+
+    messagesList.innerHTML += `
+
+        <div id="${loadingId}"
+            class="flex gap-2.5 justify-start items-center text-gray-400 text-xs py-1">
+
+            <div class="w-6 h-6 rounded-lg bg-darkCard border border-darkBorder flex items-center justify-center text-brandVerde">
+
+                <i class="fa-solid fa-spinner fa-spin text-[10px]"></i>
+
+            </div>
+
+            <span class="text-[11px]">
+                Preparando una idea diferente...
+            </span>
+
+        </div>
+
+    `;
+
+
+    scrollToBottom();
+
+
+    setTimeout(() => {
+
+        document
+            .getElementById(loadingId)
+            ?.remove();
+
+
+        const botResponse =
+            processPublicityRequest(query);
+
+
+        messagesList.innerHTML += `
+
+            <div class="flex gap-2.5 justify-start">
+
+                <div class="w-7 h-7 rounded-lg bg-gradient-to-tr from-brandVinotinto to-brandVerde flex-shrink-0 flex items-center justify-center text-white font-bold text-[10px] shadow-md">
+
+                    SK
+
+                </div>
+
+
+                <div class="bg-darkCard border border-darkBorder text-gray-200 p-3 rounded-xl rounded-tl-none max-w-[90%] text-xs leading-relaxed shadow-md space-y-2">
+
+                    ${botResponse}
+
+                </div>
+
+            </div>
+
+        `;
+
+
+        saveMessageToHistory(
+            query,
+            botResponse
+        );
+
+
+        scrollToBottom();
+
+    }, 450);
+
+}
+
+
+/* =========================================================
+   DURACIÓN
+   ========================================================= */
+
+function selectDurationFromDropdown(val) {
+
+    if (!val) return;
+
+
+    if (val === 'custom') {
+
+        const customVal =
+            prompt(
+                "Indica la duración exacta. Ejemplo: 45 segundos, 2 minutos."
+            );
+
+        if (customVal) {
+
+            document
+                .getElementById('user-input')
+                .value = customVal;
+
+            handleSend();
+
+        }
+
+    } else {
+
+        document
+            .getElementById('user-input')
+            .value = val;
+
+        handleSend();
+
+    }
+
+}
+
+
+function durationSelector() {
+
+    return `
+
+        <div class="pt-1">
+
+            <select
+                onchange="selectDurationFromDropdown(this.value)"
+                class="w-full bg-darkSidebar border border-darkBorder hover:border-brandVerde text-gray-200 text-xs rounded-xl p-2 focus:outline-none cursor-pointer transition">
+
+                <option value="">
+                    ⏱️ Selecciona la duración...
+                </option>
+
+                <option value="15 segundos">
+                    15 segundos
+                </option>
+
+                <option value="30 segundos">
+                    30 segundos
+                </option>
+
+                <option value="45 segundos">
+                    45 segundos
+                </option>
+
+                <option value="60 segundos">
+                    1 minuto
+                </option>
+
+                <option value="2 minutos">
+                    2 minutos
+                </option>
+
+                <option value="3 minutos">
+                    3 minutos
+                </option>
+
+                <option value="custom">
+                    ✍️ Duración personalizada
+                </option>
+
+            </select>
+
+        </div>
+
+    `;
+
+}
+
+
+/* =========================================================
+   PARSEAR DURACIÓN
+   ========================================================= */
+
+function parseDurationInSeconds(text) {
+
+    const clean =
+        text.toLowerCase();
+
+    let minutes = 0;
+    let seconds = 0;
+
+
+    const minMatch =
+        clean.match(/(\d+)\s*(min|minuto|minutos)/);
+
+    const secMatch =
+        clean.match(/(\d+)\s*(seg|segundo|segundos)/);
+
+    const onlyNumberMatch =
+        clean.match(/\b(\d+)\b/);
+
+
+    if (minMatch) {
+        minutes = parseInt(minMatch[1]);
+    }
+
+
+    if (secMatch) {
+        seconds = parseInt(secMatch[1]);
+    }
+
+
+    if (!minMatch && !secMatch && onlyNumberMatch) {
+
+        const num =
+            parseInt(onlyNumberMatch[1]);
+
+        if (num <= 10) {
+            minutes = num;
+        } else {
+            seconds = num;
+        }
+
+    }
+
+
+    const totalSeconds =
+        (minutes * 60) + seconds;
+
+
+    return totalSeconds > 0
+        ? totalSeconds
+        : 30;
+
+}
+
+
+function formatTime(sec) {
+
+    const m =
+        Math.floor(sec / 60);
+
+    const s =
+        sec % 60;
+
+    return `${m}:${s < 10 ? '0' : ''}${s}`;
+
+}
+
+
+/* =========================================================
+   GENERADOR DE TIEMPOS
+   ========================================================= */
+
+function createTimeline(totalSeconds, category) {
+
+    const safe =
+        Math.max(totalSeconds, 10);
+
+
+    let first =
+        Math.max(3, Math.floor(safe * 0.25));
+
+    let second =
+        Math.max(first + 2, Math.floor(safe * 0.65));
+
+
+    if (second >= safe) {
+        second = Math.max(first + 1, safe - 2);
+    }
+
+
+    if (first >= second) {
+        first = Math.max(1, Math.floor(safe * 0.2));
+        second = Math.max(first + 1, Math.floor(safe * 0.7));
+    }
+
+
+    return {
+        first,
+        second,
+        final: safe
+    };
+
+}
+
+
+/* =========================================================
+   GUIONES
+   ========================================================= */
+
+function generateSpecificScript(topic, detail, totalSeconds) {
+
+    const category =
+        detectCategory(topic);
+
+    const cleanTopic =
+        topic.toLowerCase();
+
+    const timeline =
+        createTimeline(totalSeconds, category);
+
+
+    const t1 =
+        formatTime(timeline.first);
+
+    const t2 =
+        formatTime(timeline.second);
+
+    const tf =
+        formatTime(timeline.final);
+
+
+    let hooks = [];
+    let effects = [];
+    let steps = [];
+
+
+    /* =====================================================
+       COMIDA
+       ===================================================== */
+
+    if (category === 'food') {
+
+        hooks = [
+
+            `🔥 <strong>Gancho visual:</strong> comenzar con el producto "${escapeHtml(topic)}" en primer plano, mostrando textura, vapor o el detalle más apetitoso.`,
+
+            `🔥 <strong>Gancho sensorial:</strong> abrir con una toma cercana del plato mientras aparece una frase corta que despierte hambre y curiosidad.`,
+
+            `🔥 <strong>Gancho directo:</strong> mostrar el producto terminado desde el primer segundo y luego revelar cómo se prepara.`
+        ];
+
+
+        effects = [
+
+            `✨ <strong>Macro:</strong> acercamientos a ingredientes, textura, queso, salsas o detalles del plato.`,
+
+            `✨ <strong>Transiciones rápidas:</strong> cortes al ritmo de la música entre preparación, cocción y presentación.`,
+
+            `✨ <strong>Plano final:</strong> producto centrado con nombre del negocio y llamada a la acción.`
+        ];
+
+
+        steps = [
+
+            {
+                time: `0:00 - ${t1}`,
+                visual: `Primerísimo primer plano de ${topic}. Mostrar el producto de forma apetitosa, con movimiento lento de cámara.`,
+                audio: `Sonido ambiente de cocina + música comercial suave. Voz: "Hay sabores que no necesitan presentación."`
+            },
+
+            {
+                time: `${t1} - ${t2}`,
+                visual: `Mostrar preparación, ingredientes y el proceso que hace especial a ${topic}. Alternar planos generales y detalles.`,
+                audio: `Sonidos reales de preparación mezclados con música. Voz: "Ingredientes bien elegidos, preparación cuidada y un resultado que habla por sí solo."`
+            },
+
+            {
+                time: `${t2} - ${tf}`,
+                visual: `Plano final del producto listo para comer. Añadir nombre, ubicación, redes o método de pedido.`,
+                audio: `La música sube ligeramente. Voz: "Ahora solo falta una cosa: probarlo. ¿Te animas?"`
+            }
+
+        ];
+
+    }
+
+
+    /* =====================================================
+       GAMING
+       ===================================================== */
+
+    else if (category === 'gaming') {
+
+        const game =
+            topic;
+
+        const character =
+            detail && detail.trim()
+                ? detail
+                : 'el personaje elegido';
+
+
+        /* VALORANT */
+
+        if (/valorant/i.test(game)) {
+
+            hooks = [
+
+                `🔥 <strong>Hook competitivo:</strong> mostrar inmediatamente una jugada de ${character} y cortar justo antes del momento decisivo.`,
+
+                `🔥 <strong>Hook de curiosidad:</strong> "¿Qué tan peligroso puede ser ${character} en las manos correctas?"`,
+
+                `🔥 <strong>Hook de jugada:</strong> empezar con un clutch, habilidad o entrada agresiva de ${character}.`
+            ];
+
+
+            effects = [
+
+                `✨ HUD inspirado en competitivo para señalar posición, habilidad o momento clave.`,
+
+                `✨ Cámara lenta justo antes de la jugada principal.`,
+
+                `✨ Zoom rápido y golpe de sonido en el momento decisivo.`
+            ];
+
+
+            steps = [
+
+                {
+                    time: `0:00 - ${t1}`,
+                    visual: `Abrir con una jugada impactante de ${character}. Usar un corte rápido justo antes del momento clave.`,
+                    audio: `Beat electrónico + sonido del juego. Voz: "Si creías que conocías a ${character}, espera a ver esto."`
+                },
+
+                {
+                    time: `${t1} - ${t2}`,
+                    visual: `Mostrar gameplay real de ${character}, explicando posicionamiento, habilidades y decisiones durante la ronda.`,
+                    audio: `Música gaming energética + efectos originales del juego. Narración explicando qué ocurre en pantalla.`
+                },
+
+                {
+                    time: `${t2} - ${tf}`,
+                    visual: `Mostrar la jugada completa y terminar con una pantalla limpia con el nombre del creador o comunidad.`,
+                    audio: `Golpe musical + CTA: "Ahora te toca probarlo. ¿Qué jugada harías tú?"`
+                }
+
+            ];
+
+        }
+
+
+        /* LEAGUE OF LEGENDS */
+
+        else if (/lol|league of legends/i.test(game)) {
+
+            hooks = [
+
+                `🔥 <strong>Hook:</strong> comenzar con una jugada decisiva de ${character}.`,
+
+                `🔥 <strong>Curiosidad:</strong> mostrar el resultado de una jugada antes de explicar cómo se consiguió.`,
+
+                `🔥 <strong>Competitivo:</strong> destacar una mecánica, combo o decisión importante de ${character}.`
+            ];
+
+
+            effects = [
+
+                `✨ Zoom sobre habilidades utilizadas.`,
+
+                `✨ Texto breve señalando combo, timing o posicionamiento.`,
+
+                `✨ Cámara lenta en la eliminación o jugada clave.`
+            ];
+
+
+            steps = [
+
+                {
+                    time: `0:00 - ${t1}`,
+                    visual: `Abrir con una jugada llamativa de ${character}.`,
+                    audio: `Música gaming + voz: "Esta jugada con ${character} cambia completamente la partida."`
+                },
+
+                {
+                    time: `${t1} - ${t2}`,
+                    visual: `Mostrar gameplay explicando habilidades, posicionamiento, decisiones y momento correcto para actuar.`,
+                    audio: `Narración dinámica acompañada por sonidos del juego.`
+                },
+
+                {
+                    time: `${t2} - ${tf}`,
+                    visual: `Repetición rápida de la jugada y cierre con el nombre del creador.`,
+                    audio: `CTA: "¿Lo intentarías en tu próxima partida?"`
+                }
+
+            ];
+
+        }
+
+
+        /* CLASH ROYALE */
+
+        else if (/clash royale/i.test(game)) {
+
+            hooks = [
+
+                `🔥 <strong>Hook:</strong> comenzar justo antes de una defensa o ataque decisivo.`,
+
+                `🔥 <strong>Sorpresa:</strong> mostrar una jugada inesperada que cambie la torre enemiga.`,
+
+                `🔥 <strong>Reto:</strong> plantear una jugada difícil y mostrar si funciona.`
+            ];
+
+
+            effects = [
+
+                `✨ Zoom sobre la carta utilizada.`,
+
+                `✨ Flechas y marcas sobre el campo para explicar la estrategia.`,
+
+                `✨ Cámara lenta en el momento del ataque decisivo.`
+            ];
+
+
+            steps = [
+
+                {
+                    time: `0:00 - ${t1}`,
+                    visual: `Mostrar la situación de la partida justo antes de la jugada clave.`,
+                    audio: `Música rápida + voz: "Todo parecía perdido... hasta esta jugada."`
+                },
+
+                {
+                    time: `${t1} - ${t2}`,
+                    visual: `Explicar la colocación de cartas y cómo se desarrolla la estrategia.`,
+                    audio: `Narración clara + sonidos reales del juego.`
+                },
+
+                {
+                    time: `${t2} - ${tf}`,
+                    visual: `Mostrar el resultado y repetir brevemente la jugada clave.`,
+                    audio: `CTA: "¿La probarías en tu próxima partida?"`
+                }
+
+            ];
+
+        }
+
+
+        /* GENERAL GAMING */
+
+        else {
+
+            hooks = [
+
+                `🔥 <strong>Hook:</strong> empezar con la jugada más llamativa del video.`,
+
+                `🔥 <strong>Curiosidad:</strong> mostrar el resultado antes de explicar cómo ocurrió.`,
+
+                `🔥 <strong>Reto:</strong> plantear una situación difícil y demostrar cómo resolverla.`
+            ];
+
+
+            effects = [
+
+                `✨ Zoom dinámico en la acción principal.`,
+
+                `✨ Cámara lenta para momentos importantes.`,
+
+                `✨ Texto breve para destacar decisiones y jugadas.`
+            ];
+
+
+            steps = [
+
+                {
+                    time: `0:00 - ${t1}`,
+                    visual: `Mostrar inmediatamente el momento más interesante del gameplay.`,
+                    audio: `Música gaming energética + una frase corta relacionada con la jugada.`
+                },
+
+                {
+                    time: `${t1} - ${t2}`,
+                    visual: `Desarrollar el gameplay explicando qué ocurre y por qué la jugada funciona.`,
+                    audio: `Narración dinámica + sonidos originales del juego.`
+                },
+
+                {
+                    time: `${t2} - ${tf}`,
+                    visual: `Cerrar con el resultado de la partida o jugada y una llamada a la acción.`,
+                    audio: `CTA: "¿Tú cómo habrías jugado esta situación?"`
+                }
+
+            ];
+
+        }
+
+    }
+
+
+    /* =====================================================
+       DEPORTES
+       ===================================================== */
+
+    else if (category === 'sports') {
+
+        const protagonist =
+            detail || 'el protagonista';
+
+
+        hooks = [
+
+            `🔥 <strong>Hook deportivo:</strong> abrir con el momento más intenso de ${protagonist}.`,
+
+            `🔥 <strong>Historia:</strong> comenzar mostrando el esfuerzo antes del resultado.`,
+
+            `🔥 <strong>Motivación:</strong> mostrar una acción poderosa y construir la historia alrededor de ella.`
+        ];
+
+
+        effects = [
+
+            `✨ Cámara lenta en las acciones importantes.`,
+
+            `✨ Cortes rápidos sincronizados con golpes de música.`,
+
+            `✨ Texto breve con estadísticas o frases motivacionales.`
+        ];
+
+
+        steps = [
+
+            {
+                time: `0:00 - ${t1}`,
+                visual: `Primer plano de ${protagonist} preparándose para competir.`,
+                audio: `Música cinematográfica. Voz: "Antes de cada gran momento existe una decisión: darlo todo."`
+            },
+
+            {
+                time: `${t1} - ${t2}`,
+                visual: `Montaje de acciones, entrenamiento, velocidad y momentos importantes relacionados con ${protagonist}.`,
+                audio: `Música creciendo + sonidos naturales del deporte.`
+            },
+
+            {
+                time: `${t2} - ${tf}`,
+                visual: `Momento culminante seguido del producto, marca, equipo o mensaje principal.`,
+                audio: `Cierre musical + CTA motivacional.`
+            }
+
+        ];
+
+    }
+
+
+    /* =====================================================
+       NEGOCIOS / PRODUCTOS
+       ===================================================== */
+
+    else if (category === 'business') {
+
+        hooks = [
+
+            `🔥 <strong>Problema → solución:</strong> comenzar mostrando una necesidad que ${topic} puede resolver.`,
+
+            `🔥 <strong>Producto primero:</strong> enseñar ${topic} desde el primer segundo con una presentación visual limpia.`,
+
+            `🔥 <strong>Estilo premium:</strong> utilizar planos cuidados para transmitir confianza y calidad.`
+        ];
+
+
+        effects = [
+
+            `✨ Planos detalle del producto o servicio.`,
+
+            `✨ Texto minimalista resaltando beneficios reales.`,
+
+            `✨ Transiciones limpias en vinotinto y verde para mantener identidad de marca.`
+        ];
+
+
+        steps = [
+
+            {
+                time: `0:00 - ${t1}`,
+                visual: `Presentación atractiva de ${topic}, mostrando rápidamente qué es y por qué llama la atención.`,
+                audio: `Música moderna y elegante + frase de apertura relacionada directamente con el producto.`
+            },
+
+            {
+                time: `${t1} - ${t2}`,
+                visual: `Demostrar características, funcionamiento y beneficios de ${topic} mediante situaciones reales.`,
+                audio: `Narración clara explicando qué problema resuelve y qué lo diferencia.`
+            },
+
+            {
+                time: `${t2} - ${tf}`,
+                visual: `Plano final limpio de ${topic} con nombre de marca, redes y llamada a la acción.`,
+                audio: `CTA: "Conoce ${topic} y descubre todo lo que puede hacer por ti."`
+            }
+
+        ];
+
+    }
+
+
+    /* =====================================================
+       GENERAL
+       ===================================================== */
+
+    else {
+
+        hooks = [
+
+            `🔥 <strong>Curiosidad:</strong> comenzar con una pregunta relacionada directamente con ${topic}.`,
+
+            `🔥 <strong>Impacto:</strong> mostrar el resultado final antes de explicar cómo se consigue.`,
+
+            `🔥 <strong>Historia corta:</strong> presentar un problema y convertir ${topic} en el centro de la solución.`
+        ];
+
+
+        effects = [
+
+            `✨ Combinar planos generales con primeros planos.`,
+
+            `✨ Utilizar textos cortos para destacar las ideas principales.`,
+
+            `✨ Mantener una paleta coherente con la identidad vinotinto + verde de SparkyKrea.`
+        ];
+
+
+        steps = [
+
+            {
+                time: `0:00 - ${t1}`,
+                visual: `Presentación visual de ${topic} con una imagen que genere curiosidad.`,
+                audio: `Música moderna + introducción breve relacionada con ${topic}.`
+            },
+
+            {
+                time: `${t1} - ${t2}`,
+                visual: `Mostrar de forma clara qué es ${topic}, cómo funciona y por qué puede interesar al público.`,
+                audio: `Narración natural explicando sus puntos fuertes.`
+            },
+
+            {
+                time: `${t2} - ${tf}`,
+                visual: `Cierre mostrando ${topic} de forma limpia junto con la llamada a la acción.`,
+                audio: `CTA final adaptada al objetivo de la campaña.`
+            }
+
+        ];
+
+    }
+
+
+    return {
+
+        hooks,
+
+        effects,
+
+        scriptSteps: steps.map(s => `
+
+            <div class="border-l-2 border-brandVerde pl-2.5 my-1.5 space-y-0.5">
+
+                <p class="font-bold text-white text-[11px]">
+
+                    🎬 <span>Toma ${s.time}</span>
+
+                </p>
+
+                <p class="text-gray-300">
+
+                    📹 <strong>Visual:</strong>
+                    ${s.visual}
+
+                </p>
+
+                <p class="text-gray-400">
+
+                    🎙️ <strong>Audio & Locución:</strong>
+                    ${s.audio}
+
+                </p>
+
+            </div>
+
+        `).join("")
+
+    };
+
+}
+
+
+/* =========================================================
+   MÚSICA
+   ========================================================= */
+
+function getDiverseMusicSugg(category) {
+
+    if (category === 'gaming') {
+
+        return `
+
+            <ul class="space-y-1.5 text-gray-300 text-[11px]">
+
+                <li>
+                    🎮 <strong>Gaming electrónico:</strong>
+                    beats rápidos, sintetizadores y bajos marcados.
+                    Ideal para jugadas, clips y momentos competitivos.
+                </li>
+
+                <li>
+                    ⚡ <strong>Phonk / Trap instrumental:</strong>
+                    energía agresiva y ritmo fuerte para entradas, clutchs y montajes.
+                </li>
+
+                <li>
+                    🚀 <strong>Future Bass / EDM:</strong>
+                    sonido moderno para videos con muchas transiciones y efectos.
+                </li>
+
+                <li>
+                    🎧 <strong>Dark ambient:</strong>
+                    opción más misteriosa para trailers o presentaciones de personajes.
+                </li>
+
+            </ul>
+
+        `;
+
+    }
+
+
+    if (category === 'food') {
+
+        return `
+
+            <ul class="space-y-1.5 text-gray-300 text-[11px]">
+
+                <li>
+                    🍕 <strong>Pop alegre:</strong>
+                    ritmo comercial y fresco para restaurantes y comida rápida.
+                </li>
+
+                <li>
+                    ☕ <strong>Lo-fi / Chill:</strong>
+                    ambiente relajado para cafeterías, postres y contenido acogedor.
+                </li>
+
+                <li>
+                    ✨ <strong>Jazz moderno:</strong>
+                    elegante para restaurantes premium y gastronomía sofisticada.
+                </li>
+
+                <li>
+                    🔥 <strong>Latin instrumental:</strong>
+                    energía cálida para contenido gastronómico juvenil.
+                </li>
+
+            </ul>
+
+        `;
+
+    }
+
+
+    if (category === 'sports') {
+
+        return `
+
+            <ul class="space-y-1.5 text-gray-300 text-[11px]">
+
+                <li>
+                    🏆 <strong>Cinemática épica:</strong>
+                    cuerdas, percusión y crescendos para momentos importantes.
+                </li>
+
+                <li>
+                    ⚡ <strong>Drum & Bass:</strong>
+                    ritmo rápido para entrenamientos y jugadas.
+                </li>
+
+                <li>
+                    🔥 <strong>Hip-Hop instrumental:</strong>
+                    actitud y energía para contenido deportivo moderno.
+                </li>
+
+            </ul>
+
+        `;
+
+    }
+
+
+    return `
+
+        <ul class="space-y-1.5 text-gray-300 text-[11px]">
+
+            <li>
+                🎵 <strong>Pop comercial:</strong>
+                moderno, limpio y fácil de adaptar a marcas.
+            </li>
+
+            <li>
+                ✨ <strong>Ambient corporativo:</strong>
+                elegante para productos, servicios y presentaciones.
+            </li>
+
+            <li>
+                🔥 <strong>Urbano instrumental:</strong>
+                juvenil y energético para contenido de redes.
+            </li>
+
+            <li>
+                🎹 <strong>Lo-fi / Chill:</strong>
+                tranquilo y cercano para contenido relajado.
+            </li>
+
+            <li>
+                🎬 <strong>Cinemático:</strong>
+                ideal para historias, lanzamientos y anuncios emocionales.
+            </li>
+
+        </ul>
+
+    `;
+
+}
+
+
+/* =========================================================
+   PROCESAR SOLICITUD
+   ========================================================= */
+
+function processPublicityRequest(input) {
+
+    const clean =
+        input.toLowerCase().trim();
+
+
+    /* SALUDO */
+
+    if (
+        isSimpleGreeting(clean) &&
+        !pendingTopic &&
+        !awaitingCharacterChoice &&
+        !awaitingCharacterName &&
+        !awaitingDuration
+    ) {
+
+        return `
+
+            <p>
+                ${getTimeGreeting()}
+            </p>
+
+            <p class="text-gray-300">
+                Cuéntame qué quieres promocionar y
+                SparkyKrea te ayuda a convertirlo en una idea.
+            </p>
+
+        `;
+
+    }
+
+
+    /* =====================================================
+       RESPUESTA: ¿ES SOBRE UN PERSONAJE?
+       ===================================================== */
+
+    if (awaitingCharacterChoice) {
+
+        const answer =
+            clean;
+
+        const yes =
+            /^(si|sí|yes|claro|exacto|correcto|aja|ajá)$/i.test(answer);
+
+        const no =
+            /^(no|nop|nah|ninguno)$/i.test(answer);
+
+
+        if (yes) {
+
+            awaitingCharacterChoice = false;
+            awaitingCharacterName = true;
+
+            return `
+
+                <div class="space-y-2">
+
+                    <p>
+                        Perfecto 🎯. Entonces vamos a hacerlo mucho más preciso.
+                    </p>
+
+                    <p class="text-gray-300">
+                        🎮 ¿Qué personaje, agente, campeón o héroe quieres que sea el protagonista?
+                    </p>
+
+                    <p class="text-gray-500 text-[11px]">
+                        Por ejemplo: Reyna, Jett, Sage, Yasuo, Garen, etc.
+                    </p>
+
+                </div>
+
+            `;
+
+        }
+
+
+        if (no) {
+
+            pendingDetail = null;
+
+            awaitingCharacterChoice = false;
+            awaitingDuration = true;
+
+            return `
+
+                <div class="space-y-2">
+
+                    <p>
+                        Perfecto 👍. Entonces enfocaremos el anuncio en
+                        <strong class="text-brandVerde">
+                            ${escapeHtml(pendingTopic)}
+                        </strong>
+                        como juego en general.
+                    </p>
+
+                    <p class="text-gray-300">
+                        Ahora dime cuánto quieres que dure el video:
+                    </p>
+
+                    ${durationSelector()}
+
+                </div>
+
+            `;
+
+        }
+
+
+        return `
+
+            <div class="space-y-2">
+
+                <p>
+                    Solo necesito saber una cosa:
+                </p>
+
+                <p class="text-gray-300">
+                    🎮 ¿Quieres que el anuncio sea sobre un personaje específico?
+                </p>
+
+                <p class="text-gray-500 text-[11px]">
+                    Responde simplemente <strong>Sí</strong> o <strong>No</strong>.
+                </p>
+
+            </div>
+
+        `;
+
+    }
+
+
+    /* =====================================================
+       NOMBRE DEL PERSONAJE
+       ===================================================== */
+
+    if (awaitingCharacterName) {
+
+        pendingDetail =
+            input.trim();
+
+        awaitingCharacterName = false;
+        awaitingDuration = true;
+
+
+        return `
+
+            <div class="space-y-2">
+
+                <p>
+                    🔥 Perfecto. El protagonista será
+                    <strong class="text-brandVerde">
+                        "${escapeHtml(pendingDetail)}"
+                    </strong>.
+                </p>
+
+                <p class="text-gray-300">
+                    Ahora podemos construir el guion alrededor de ese personaje.
+                </p>
+
+                <p class="text-gray-300">
+                    ⏱️ ¿Cuánto quieres que dure el video?
+                </p>
+
+                ${durationSelector()}
+
+            </div>
+
+        `;
+
+    }
+
+
+    /* =====================================================
+       DURACIÓN
+       ===================================================== */
+
+    const hasTimeKeywords =
+        /(\d+|segundo|segundos|minuto|minutos|min|seg)/i.test(clean);
+
+
+    if (
+        (awaitingDuration || pendingTopic) &&
+        hasTimeKeywords
+    ) {
+
+        const totalSec =
+            parseDurationInSeconds(clean);
+
+
+        const category =
+            pendingCategory ||
+            detectCategory(pendingTopic);
+
+
+        const generated =
+            generateSpecificScript(
+                pendingTopic,
+                pendingDetail,
+                totalSec
+            );
+
+
+        const mainTopic =
+            pendingTopic;
+
+        const detailTopic =
+            pendingDetail;
+
+
+        pendingTopic = null;
+        pendingDetail = null;
+        pendingCategory = null;
+        awaitingDuration = false;
+
+
+        return `
+
+            <div class="space-y-3">
+
+
+                <!-- ENCABEZADO -->
+
+                <div class="border-b border-darkBorder pb-1.5">
+
+                    <h2 class="text-xs font-bold text-brandVerde">
+
+                        🎬 Guion creativo de SparkyKrea
+
+                    </h2>
+
+                    <p class="text-[11px] text-gray-400">
+
+                        Campaña:
+                        <strong class="text-white">
+                            ${escapeHtml(mainTopic)}
+                            ${detailTopic
+                                ? '(' + escapeHtml(detailTopic) + ')'
+                                : ''
+                            }
+                        </strong>
+
+                        |
+
+                        Duración:
+                        <strong class="text-white">
+                            ${formatTime(totalSec)}
+                        </strong>
+
+                    </p>
+
+                </div>
+
+
+                <!-- GANCHOS -->
+
+                <div class="bg-darkSidebar p-2.5 rounded-xl border border-darkBorder text-[11px] space-y-1">
+
+                    <p class="text-brandVerde font-bold uppercase tracking-wider">
+
+                        💡 IDEAS PARA EMPEZAR
+
+                    </p>
+
+                    ${generated.hooks.join('<br>')}
+
+                </div>
+
+
+                <!-- GUION -->
+
+                <div class="bg-darkSidebar p-2.5 rounded-xl border border-darkBorder text-[11px]">
+
+                    <p class="text-brandVerde font-bold uppercase tracking-wider mb-1.5">
+
+                        📜 GUION PASO A PASO
+
+                    </p>
+
+                    ${generated.scriptSteps}
+
+                </div>
+
+
+                <!-- EFECTOS -->
+
+                <div class="bg-darkSidebar p-2.5 rounded-xl border border-darkBorder text-[11px] space-y-1">
+
+                    <p class="text-brandVerde font-bold uppercase tracking-wider">
+
+                        ⚡ EFECTOS Y EDICIÓN
+
+                    </p>
+
+                    ${generated.effects.join('<br>')}
+
+                </div>
+
+
+                <!-- MÚSICA -->
+
+                <div class="bg-darkSidebar p-2.5 rounded-xl border border-darkBorder text-[11px] space-y-1">
+
+                    <p class="text-brandVerde font-bold uppercase tracking-wider">
+
+                        🎵 ESTILO MUSICAL
+
+                    </p>
+
+                    ${getDiverseMusicSugg(category)}
+
+                </div>
+
+
+                <!-- MOTIVACIÓN -->
+
+                <div class="bg-brandVinotinto/20 border border-brandVinotinto/40 p-2.5 rounded-xl text-[11px]">
+
+                    <p class="text-white font-semibold">
+
+                        🚀 Y ahora viene lo bueno:
+
+                    </p>
+
+                    <p class="text-gray-300">
+
+                        No necesitas hacerlo perfecto desde el primer intento.
+                        Empieza con una idea, prueba una versión y ve mejorándola.
+                        Una buena campaña también nace de una chispa.
+
+                    </p>
+
+                </div>
+
+
+            </div>
+
+        `;
+
+    }
+
+
+    /* =====================================================
+       NUEVO TEMA
+       ===================================================== */
+
+    pendingTopic =
+        input.trim();
+
+    pendingCategory =
+        detectCategory(input);
+
+
+    /* =====================================================
+       GAMING
+       ===================================================== */
+
+    if (pendingCategory === 'gaming') {
+
+        awaitingCharacterChoice = true;
+
+        return `
+
+            <div class="space-y-2">
+
+                <p>
+                    🎮 Buena elección.
+                </p>
+
+                <p>
+                    Vamos a preparar algo específico para
+                    <strong class="text-brandVerde">
+                        "${escapeHtml(input)}"
+                    </strong>.
+                </p>
+
+                <p class="text-gray-300">
+                    Antes de crear el guion necesito afinar una cosa:
+                </p>
+
+                <p class="text-white font-semibold">
+                    ¿Quieres que el anuncio sea sobre un personaje específico?
+                </p>
+
+                <p class="text-gray-500 text-[11px]">
+                    Responde <strong>Sí</strong> o <strong>No</strong>.
+                </p>
+
+            </div>
+
+        `;
+
+    }
+
+
+    /* =====================================================
+       DEPORTES
+       ===================================================== */
+
+    if (pendingCategory === 'sports') {
+
+        awaitingCharacterName = true;
+
+        return `
+
+            <div class="space-y-2">
+
+                <p>
+                    ⚽ Perfecto. Podemos hacer que el anuncio tenga una identidad mucho más marcada.
+                </p>
+
+                <p class="text-gray-300">
+                    ¿Quién quieres que sea el protagonista?
+                </p>
+
+                <p class="text-gray-500 text-[11px]">
+                    Puede ser un futbolista, atleta, equipo o figura deportiva.
+                </p>
+
+            </div>
+
+        `;
+
+    }
+
+
+    /* =====================================================
+       COMIDA / RESTAURANTE
+       ===================================================== */
+
+    if (pendingCategory === 'food') {
+
+        awaitingDuration = true;
+
+        return `
+
+            <div class="space-y-2">
+
+                <p>
+                    🍕 ¡Perfecto!
+                </p>
+
+                <p>
+                    Vamos a hacer que el anuncio se centre realmente en
+                    <strong class="text-brandVerde">
+                        "${escapeHtml(input)}"
+                    </strong>.
+                </p>
+
+                <p class="text-gray-300">
+                    El guion puede enfocarse en preparación, ingredientes,
+                    presentación y la experiencia de probarlo.
+                </p>
+
+                <p class="text-gray-300">
+                    ⏱️ Ahora dime cuánto quieres que dure:
+                </p>
+
+                ${durationSelector()}
+
+            </div>
+
+        `;
+
+    }
+
+
+    /* =====================================================
+       GENERAL
+       ===================================================== */
+
+    awaitingDuration = true;
+
+    return `
+
+        <div class="space-y-2">
+
+            <p>
+                ✨ Me gusta la idea.
+            </p>
+
+            <p>
+                Vamos a trabajar específicamente con
+                <strong class="text-brandVerde">
+                    "${escapeHtml(input)}"
+                </strong>.
+            </p>
+
+            <p class="text-gray-300">
+                Para ajustar el ritmo, la cantidad de escenas
+                y la narración necesito saber la duración.
+            </p>
+
+            ${durationSelector()}
+
+        </div>
+
+    `;
+
+}
+
+
+/* =========================================================
+   SCROLL
+   ========================================================= */
+
+function scrollToBottom() {
+
+    const container =
+        document.getElementById('chat-container');
+
+    container.scrollTop =
+        container.scrollHeight;
+
+}
+
+
+/* =========================================================
+   GUARDAR HISTORIAL
+   ========================================================= */
+
+function saveMessageToHistory(userText, botText) {
+
+    let chat =
+        conversations.find(
+            c => c.id === currentChatId
+        );
+
+
+    if (!chat) {
+
+        chat = {
+
+            id: currentChatId,
+
+            title:
+                userText.substring(0, 20) +
+                (userText.length > 20 ? '...' : ''),
+
+            messages: []
+
+        };
+
+
+        conversations.unshift(chat);
+
+    }
+
+
+    chat.messages.push({
+
+        sender: 'user',
+        text: userText
+
+    });
+
+
+    chat.messages.push({
+
+        sender: 'bot',
+        text: botText
+
+    });
+
+
+    localStorage.setItem(
+        'sparkykrea_chats',
+        JSON.stringify(conversations)
+    );
+
+
+    renderSidebar();
+
+}
+
+
+/* =========================================================
+   RENDER SIDEBAR
+   ========================================================= */
+
+function renderSidebar() {
+
+    const historyContainer =
+        document.getElementById('chat-history');
+
+
+    if (conversations.length === 0) {
+
+        historyContainer.innerHTML = `
+
+            <div class="text-[11px] text-gray-500 italic px-2 py-1">
+
+                Sin campañas guardadas
+
+            </div>
+
+        `;
+
+        return;
+
+    }
+
+
+    historyContainer.innerHTML = '';
+
+
+    conversations.forEach(c => {
+
+        const active =
+            c.id === currentChatId;
+
+
+        historyContainer.innerHTML += `
+
+            <div
+                onclick="selectChat('${c.id}')"
+                class="group flex items-center justify-between px-2.5 py-1.5 rounded-lg cursor-pointer text-xs transition
+                ${active
+                    ? 'bg-brandVinotinto/30 border border-brandVinotinto/50 text-white font-medium'
+                    : 'text-gray-400 hover:bg-darkCard hover:text-gray-200'
+                }">
+
+
+                <div class="flex items-center gap-2 truncate">
+
+                    <i class="fa-solid fa-film text-brandVerde text-[10px]"></i>
+
+                    <span class="truncate text-[11px]">
+
+                        ${escapeHtml(c.title)}
+
+                    </span>
+
+                </div>
+
+
+                <button
+                    onclick="deleteChat('${c.id}', event)"
+                    class="opacity-0 group-hover:opacity-100 p-1 text-gray-500 hover:text-rose-400 transition"
+                    title="Eliminar chat">
+
+                    <i class="fa-solid fa-trash-can text-[10px]"></i>
+
+                </button>
+
+
+            </div>
+
+        `;
+
+    });
+
+}
+
+
+/* =========================================================
+   SELECCIONAR CHAT
+   ========================================================= */
+
+function selectChat(id) {
+
+    currentChatId = id;
+
+
+    const chat =
+        conversations.find(c => c.id === id);
+
+
+    if (!chat) return;
+
+
+    pendingTopic = null;
+    pendingDetail = null;
+    pendingCategory = null;
+
+    awaitingCharacterChoice = false;
+    awaitingCharacterName = false;
+    awaitingDuration = false;
+
+
+    document
+        .getElementById('welcome-screen')
+        .classList.add('hidden');
+
+
+    const messagesList =
+        document.getElementById('messages-list');
+
+
+    messagesList.classList.remove('hidden');
+
+    messagesList.innerHTML = '';
+
+
+    chat.messages.forEach(m => {
+
+        if (m.sender === 'user') {
+
+            messagesList.innerHTML += `
+
+                <div class="flex gap-2.5 justify-end">
+
+                    <div class="bg-brandVinotinto text-white py-2 px-3 rounded-xl rounded-tr-none max-w-[85%] text-xs shadow-md">
+
+                        ${escapeHtml(m.text)}
+
+                    </div>
+
+                </div>
+
+            `;
+
+        } else {
+
+            messagesList.innerHTML += `
+
+                <div class="flex gap-2.5 justify-start">
+
+                    <div class="w-7 h-7 rounded-lg bg-gradient-to-tr from-brandVinotinto to-brandVerde flex-shrink-0 flex items-center justify-center text-white font-bold text-[10px] shadow-md">
+
+                        SK
+
+                    </div>
+
+
+                    <div class="bg-darkCard border border-darkBorder text-gray-200 p-3 rounded-xl rounded-tl-none max-w-[90%] text-xs leading-relaxed shadow-md space-y-2">
+
+                        ${m.text}
+
+                    </div>
+
+                </div>
+
+            `;
+
+        }
+
+    });
+
+
+    renderSidebar();
+
+    scrollToBottom();
+
+
+    const sidebar =
+        document.getElementById('sidebar');
+
+
+    if (!sidebar.classList.contains('-translate-x-full')) {
+
+        toggleSidebar();
+
+    }
+
+}
+
+
+/* =========================================================
+   SEGURIDAD HTML
+   ========================================================= */
+
+function escapeHtml(str) {
+
+    return String(str)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+
+}
+
+</script>
+
+</body>
 </html>
