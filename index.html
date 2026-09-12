@@ -1,4801 +1,3039 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#070708">
 
-<title>SparkyKrea Studio's</title>
+  <title>SparkyKrea Studio's</title>
 
-<!-- =====================================================
-     LIBRERÍAS
-===================================================== -->
+  <script src="https://cdn.tailwindcss.com"></script>
 
-<script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-
-<link rel="stylesheet"
-href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-
-
-<script>
-tailwind.config = {
-    theme: {
-        extend: {
-            colors: {
-                vino: "#800020",
-                verde: "#10B981",
-                fondo: "#101010",
-                panel: "#18181b",
-                card: "#222225",
-                borde: "#3f3f46"
-            }
-        }
-    }
-}
-</script>
-
-
-<style>
-
-/* =====================================================
-   BASE
-===================================================== */
-
-* {
-    box-sizing: border-box;
-}
-
-html,
-body {
-    margin: 0;
-    width: 100%;
-    height: 100%;
-    height: 100dvh;
-    overflow: hidden;
-    background: #101010;
-    color: white;
-    font-family: "Inter", Arial, sans-serif;
-}
-
-button,
-input {
-    font-family: inherit;
-    -webkit-tap-highlight-color: transparent;
-}
-
-button {
-    cursor: pointer;
-}
-
-input {
-    min-width: 0;
-}
-
-::-webkit-scrollbar {
-    width: 6px;
-    height: 6px;
-}
-
-::-webkit-scrollbar-track {
-    background: transparent;
-}
-
-::-webkit-scrollbar-thumb {
-    background: #3f3f46;
-    border-radius: 20px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-    background: #55555c;
-}
-
-
-/* =====================================================
-   ANIMACIONES
-===================================================== */
-
-.fade {
-    animation: fadeIn .35s ease both;
-}
-
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(10px);
+  <style>
+    :root {
+      --vino: #800020;
+      --verde: #10B981;
+      --fondo: #070708;
+      --card: #101012;
+      --card2: #151518;
+      --borde: rgba(255,255,255,.08);
+      --texto: #f5f5f5;
+      --gris: #9ca3af;
     }
 
-    to {
+    * {
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      margin: 0;
+      width: 100%;
+      min-height: 100%;
+      background: var(--fondo);
+      color: var(--texto);
+      font-family: "Inter", sans-serif;
+    }
+
+    body {
+      overflow-x: hidden;
+    }
+
+    button,
+    textarea {
+      font-family: inherit;
+    }
+
+    /* =====================================================
+       SPLASH
+       ===================================================== */
+
+    #splash {
+      position: fixed;
+      inset: 0;
+      z-index: 99999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #070708;
+
+      /*
+        IMPORTANTE:
+        Esta animación funciona aunque falle JavaScript.
+        Así nunca debería quedarse atrapada en la pantalla inicial.
+      */
+      animation: splashAutoHide 1.25s ease forwards;
+    }
+
+    @keyframes splashAutoHide {
+      0% {
         opacity: 1;
-        transform: translateY(0);
-    }
-}
+        visibility: visible;
+      }
 
-
-.slideUp {
-    animation: slideUp .45s ease both;
-}
-
-@keyframes slideUp {
-    from {
-        opacity: 0;
-        transform: translateY(18px);
-    }
-
-    to {
+      78% {
         opacity: 1;
-        transform: translateY(0);
-    }
-}
+        visibility: visible;
+      }
 
-
-.scaleIn {
-    animation: scaleIn .3s ease both;
-}
-
-@keyframes scaleIn {
-    from {
+      100% {
         opacity: 0;
-        transform: scale(.94);
+        visibility: hidden;
+        pointer-events: none;
+      }
     }
 
-    to {
+    .splash-content {
+      text-align: center;
+      animation: splashAppear .7s ease;
+    }
+
+    @keyframes splashAppear {
+      from {
+        opacity: 0;
+        transform: scale(.92);
+      }
+
+      to {
         opacity: 1;
         transform: scale(1);
+      }
     }
-}
 
+    .splash-logo {
+      width: min(420px, 78vw);
+      height: auto;
+    }
 
-/* =====================================================
-   SPLASH
-===================================================== */
+    /* =====================================================
+       APP
+       ===================================================== */
 
-#splash {
-    position: fixed;
-    inset: 0;
-    z-index: 999999;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    background:
+    #app {
+      min-height: 100vh;
+      display: flex;
+      background:
         radial-gradient(
-            circle at 50% 45%,
-            rgba(128,0,32,.22),
-            transparent 32%
+          circle at 75% 10%,
+          rgba(128,0,32,.12),
+          transparent 30%
         ),
-        radial-gradient(
-            circle at 65% 60%,
-            rgba(16,185,129,.08),
-            transparent 38%
-        ),
-        #050505;
-
-    transition:
-        opacity .7s ease,
-        visibility .7s ease;
-}
-
-#splash.hide {
-    opacity: 0;
-    visibility: hidden;
-    pointer-events: none;
-}
-
-
-.splashGlow {
-    position: absolute;
-
-    width: min(500px, 80vw);
-    height: min(500px, 80vw);
-
-    border-radius: 50%;
-
-    background:
-        radial-gradient(
-            circle,
-            rgba(128,0,32,.18),
-            transparent 68%
-        );
-
-    animation: splashGlow 3s ease-in-out infinite;
-}
-
-@keyframes splashGlow {
-
-    0%,
-    100% {
-        transform: scale(.85);
-        opacity: .45;
+        var(--fondo);
     }
 
-    50% {
-        transform: scale(1.15);
-        opacity: 1;
+    /* =====================================================
+       SIDEBAR
+       ===================================================== */
+
+    .sidebar {
+      width: 260px;
+      min-width: 260px;
+      height: 100vh;
+      position: sticky;
+      top: 0;
+      display: flex;
+      flex-direction: column;
+
+      background: rgba(9,9,11,.96);
+      border-right: 1px solid var(--borde);
+      padding: 20px 14px;
+      z-index: 100;
     }
-}
 
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 4px 8px 24px;
+    }
 
-.splashContent {
-    position: relative;
-    z-index: 2;
+    .brand-icon {
+      width: 38px;
+      height: 38px;
+      flex-shrink: 0;
+    }
 
-    width: min(500px, 90vw);
+    .brand-text {
+      line-height: 1;
+    }
 
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    .brand-main {
+      font-size: 18px;
+      font-weight: 800;
+      letter-spacing: -.5px;
+    }
 
-    text-align: center;
+    .brand-sparky {
+      color: var(--vino);
+    }
 
-    animation:
-        splashEnter 1s cubic-bezier(.2,.8,.2,1);
-}
+    .brand-krea {
+      color: var(--verde);
+    }
 
-@keyframes splashEnter {
+    .brand-sub {
+      color: white;
+      font-size: 8px;
+      letter-spacing: 2px;
+      margin-top: 4px;
+      font-weight: 700;
+    }
 
-    from {
+    .side-button {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+
+      border: 1px solid transparent;
+      border-radius: 12px;
+
+      padding: 12px 13px;
+      margin-bottom: 7px;
+
+      color: #d1d5db;
+      background: transparent;
+
+      cursor: pointer;
+      transition: .2s ease;
+      text-align: left;
+    }
+
+    .side-button:hover {
+      background: rgba(255,255,255,.05);
+      border-color: var(--borde);
+      color: white;
+    }
+
+    .side-button.active {
+      background: rgba(128,0,32,.16);
+      border-color: rgba(128,0,32,.4);
+      color: white;
+    }
+
+    .side-button i {
+      width: 18px;
+      text-align: center;
+    }
+
+    .recent-title {
+      color: #6b7280;
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      padding: 20px 10px 8px;
+    }
+
+    #recentList {
+      overflow-y: auto;
+      flex: 1;
+    }
+
+    .recent-item {
+      border: 0;
+      background: transparent;
+      color: #9ca3af;
+      width: 100%;
+      padding: 9px 10px;
+      border-radius: 9px;
+      text-align: left;
+      cursor: pointer;
+      font-size: 12px;
+
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .recent-item:hover {
+      background: rgba(255,255,255,.04);
+      color: white;
+    }
+
+    .sidebar-footer {
+      color: #6b7280;
+      font-size: 11px;
+      text-align: center;
+      padding-top: 14px;
+      border-top: 1px solid var(--borde);
+    }
+
+    .sidebar-footer span {
+      color: white;
+    }
+
+    /* =====================================================
+       MAIN
+       ===================================================== */
+
+    .main {
+      flex: 1;
+      min-width: 0;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .topbar {
+      height: 62px;
+      min-height: 62px;
+      border-bottom: 1px solid var(--borde);
+      display: flex;
+      align-items: center;
+      padding: 0 24px;
+      justify-content: space-between;
+      background: rgba(7,7,8,.75);
+      backdrop-filter: blur(14px);
+      position: sticky;
+      top: 0;
+      z-index: 50;
+    }
+
+    .topbar-title {
+      font-size: 13px;
+      font-weight: 600;
+      color: #d1d5db;
+    }
+
+    .mobile-menu {
+      display: none;
+      border: 1px solid var(--borde);
+      background: var(--card);
+      color: white;
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+
+    /* =====================================================
+       CONTENT
+       ===================================================== */
+
+    .content {
+      width: min(1050px, 100%);
+      margin: 0 auto;
+      padding: 45px 25px 30px;
+      flex: 1;
+    }
+
+    .welcome {
+      text-align: center;
+      max-width: 750px;
+      margin: 0 auto 40px;
+    }
+
+    .welcome-logo {
+      width: min(420px, 80vw);
+      margin: 0 auto 25px;
+      display: block;
+    }
+
+    .welcome h1 {
+      font-size: clamp(27px, 4vw, 43px);
+      line-height: 1.05;
+      font-weight: 800;
+      letter-spacing: -1.5px;
+      margin: 0;
+    }
+
+    .welcome h1 span {
+      color: var(--verde);
+    }
+
+    .welcome p {
+      margin: 13px auto 0;
+      color: var(--gris);
+      font-size: 14px;
+      max-width: 570px;
+      line-height: 1.6;
+    }
+
+    /* =====================================================
+       CHAT
+       ===================================================== */
+
+    #chat {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    .message {
+      animation: messageIn .3s ease;
+    }
+
+    @keyframes messageIn {
+      from {
         opacity: 0;
-        transform: scale(.82) translateY(18px);
-    }
+        transform: translateY(7px);
+      }
 
-    to {
+      to {
         opacity: 1;
-        transform: scale(1) translateY(0);
-    }
-}
-
-
-.splashLogo {
-    width: 110px;
-    height: 110px;
-
-    animation:
-        logoFloat 2.8s ease-in-out infinite;
-
-    filter:
-        drop-shadow(0 0 20px rgba(128,0,32,.55))
-        drop-shadow(0 0 18px rgba(16,185,129,.15));
-}
-
-@keyframes logoFloat {
-
-    0%,
-    100% {
         transform: translateY(0);
+      }
     }
 
-    50% {
-        transform: translateY(-7px);
-    }
-}
-
-
-.splashName {
-    margin-top: 20px;
-
-    font-size: clamp(28px, 6vw, 38px);
-
-    font-weight: 900;
-
-    letter-spacing: -1.5px;
-
-    animation:
-        nameAppear .9s .2s both;
-}
-
-@keyframes nameAppear {
-
-    from {
-        opacity: 0;
-        letter-spacing: 8px;
+    .user-message {
+      display: flex;
+      justify-content: flex-end;
     }
 
-    to {
-        opacity: 1;
-        letter-spacing: -1.5px;
-    }
-}
-
-
-.splashStudio {
-    margin-top: 8px;
-
-    font-size: 8px;
-
-    letter-spacing: 7px;
-
-    color: white;
-
-    opacity: .7;
-
-    animation:
-        studioAppear .8s .45s both;
-}
-
-@keyframes studioAppear {
-
-    from {
-        opacity: 0;
-        transform: translateY(8px);
+    .user-bubble {
+      max-width: 75%;
+      background: rgba(128,0,32,.2);
+      border: 1px solid rgba(128,0,32,.4);
+      padding: 12px 15px;
+      border-radius: 16px 16px 4px 16px;
+      font-size: 14px;
+      line-height: 1.5;
+      white-space: pre-wrap;
     }
 
-    to {
-        opacity: .7;
-        transform: translateY(0);
+    .bot-message {
+      display: flex;
+      justify-content: flex-start;
     }
-}
 
-
-.splashLine {
-    width: 0;
-    height: 2px;
-
-    margin-top: 22px;
-
-    background:
+    .response-card {
+      width: min(850px, 100%);
+      background:
         linear-gradient(
-            90deg,
-            #800020,
-            #10B981
+          145deg,
+          rgba(255,255,255,.035),
+          rgba(255,255,255,.015)
         );
-
-    animation:
-        lineAppear .9s .7s forwards;
-}
-
-@keyframes lineAppear {
-    to {
-        width: 180px;
-    }
-}
-
-
-/* =====================================================
-   CARDS
-===================================================== */
-
-.card {
-    background: #222225;
-    border: 1px solid #3f3f46;
-    border-radius: 16px;
-
-    transition:
-        border-color .25s ease,
-        transform .25s ease,
-        box-shadow .25s ease;
-}
-
-.card:hover {
-    border-color: #55555c;
-}
-
-
-/* =====================================================
-   BOTONES
-===================================================== */
-
-.action {
-    border: 1px solid #3f3f46;
-
-    background: #18181b;
-
-    color: #a1a1aa;
-
-    padding: 8px 11px;
-
-    border-radius: 9px;
-
-    font-size: 10px;
-
-    transition:
-        background .2s ease,
-        color .2s ease,
-        border-color .2s ease,
-        transform .15s ease;
-}
-
-.action:hover {
-    color: white;
-    border-color: #10B981;
-    background: #27272a;
-}
-
-.action:active {
-    transform: scale(.96);
-}
-
-
-/* =====================================================
-   PUNTOS DE ESCRITURA
-===================================================== */
-
-.typingDot {
-    display: inline-block;
-
-    width: 4px;
-    height: 4px;
-
-    margin: 0 2px;
-
-    border-radius: 50%;
-
-    background: #777;
-
-    animation: typing 1s infinite;
-}
-
-.typingDot:nth-child(2) {
-    animation-delay: .15s;
-}
-
-.typingDot:nth-child(3) {
-    animation-delay: .3s;
-}
-
-@keyframes typing {
-
-    0%,
-    100% {
-        opacity: .25;
-        transform: translateY(0);
+      border: 1px solid var(--borde);
+      border-radius: 18px;
+      padding: 20px;
+      box-shadow: 0 12px 40px rgba(0,0,0,.18);
     }
 
-    50% {
-        opacity: 1;
-        transform: translateY(-3px);
-    }
-}
-
-
-/* =====================================================
-   LOGO PEQUEÑO
-===================================================== */
-
-.brand {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
-.brandIcon {
-    width: 42px;
-    height: 42px;
-    flex-shrink: 0;
-}
-
-.brandTitle {
-    font-size: 20px;
-    line-height: 1;
-    font-weight: 900;
-}
-
-.brandSparky {
-    color: #800020;
-}
-
-.brandKrea {
-    color: #10B981;
-}
-
-.brandStudio {
-    margin-top: 5px;
-
-    font-size: 7px;
-
-    letter-spacing: 4px;
-
-    color: white;
-
-    opacity: .65;
-}
-
-
-/* =====================================================
-   SIDEBAR
-===================================================== */
-
-#sidebar {
-    width: 285px;
-    flex-shrink: 0;
-}
-
-
-/* =====================================================
-   INPUT
-===================================================== */
-
-#input {
-    transition:
-        border-color .2s ease,
-        box-shadow .2s ease,
-        background .2s ease;
-}
-
-#input:focus {
-    border-color: #10B981;
-    box-shadow: 0 0 0 3px rgba(16,185,129,.07);
-}
-
-
-/* =====================================================
-   BOT AVATAR
-===================================================== */
-
-.botAvatar {
-    width: 30px;
-    height: 30px;
-
-    flex-shrink: 0;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    border-radius: 9px;
-
-    background: #800020;
-
-    box-shadow:
-        0 0 20px rgba(128,0,32,.12);
-}
-
-
-/* =====================================================
-   MODAL
-===================================================== */
-
-.modalBox {
-    animation: modalIn .25s ease both;
-}
-
-@keyframes modalIn {
-
-    from {
-        opacity: 0;
-        transform: scale(.95) translateY(10px);
+    .response-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 15px;
     }
 
-    to {
-        opacity: 1;
-        transform: scale(1) translateY(0);
+    .response-avatar {
+      width: 34px;
+      height: 34px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      background: linear-gradient(
+        135deg,
+        var(--vino),
+        #4c0014
+      );
+
+      border: 1px solid rgba(255,255,255,.1);
     }
-}
 
+    .response-name {
+      font-size: 12px;
+      font-weight: 700;
+    }
 
-/* =====================================================
-   RESPONSIVE
-===================================================== */
+    .response-label {
+      color: #6b7280;
+      font-size: 10px;
+      margin-top: 2px;
+    }
 
-@media (max-width: 767px) {
+    .response-title {
+      font-size: 20px;
+      font-weight: 800;
+      margin-bottom: 9px;
+    }
 
-    #sidebar {
+    .response-text {
+      color: #d1d5db;
+      font-size: 14px;
+      line-height: 1.65;
+    }
+
+    .idea-box {
+      background: rgba(16,185,129,.055);
+      border: 1px solid rgba(16,185,129,.16);
+      border-radius: 13px;
+      padding: 15px;
+      margin-top: 14px;
+    }
+
+    .idea-box-title {
+      color: var(--verde);
+      font-weight: 700;
+      font-size: 12px;
+      margin-bottom: 7px;
+    }
+
+    .idea-box p {
+      margin: 0;
+      color: #e5e7eb;
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    .motivation {
+      margin-top: 17px;
+      padding-top: 14px;
+      border-top: 1px solid var(--borde);
+      color: #a7f3d0;
+      font-size: 12px;
+      font-style: italic;
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+      margin-top: 16px;
+    }
+
+    .action-button {
+      border: 1px solid var(--borde);
+      background: rgba(255,255,255,.035);
+      color: #b9bec8;
+      border-radius: 9px;
+      padding: 8px 10px;
+      font-size: 11px;
+      cursor: pointer;
+      transition: .2s;
+    }
+
+    .action-button:hover {
+      color: white;
+      background: rgba(255,255,255,.07);
+      border-color: rgba(255,255,255,.14);
+    }
+
+    .action-button i {
+      margin-right: 5px;
+    }
+
+    /* =====================================================
+       INPUT
+       ===================================================== */
+
+    .composer-wrap {
+      position: sticky;
+      bottom: 0;
+      padding: 18px 0 20px;
+      background:
+        linear-gradient(
+          to bottom,
+          transparent,
+          rgba(7,7,8,.96) 22%
+        );
+    }
+
+    .composer {
+      width: min(850px, 100%);
+      margin: 0 auto;
+      background: #101012;
+      border: 1px solid rgba(255,255,255,.11);
+      border-radius: 17px;
+      padding: 8px;
+
+      display: flex;
+      align-items: flex-end;
+      gap: 7px;
+
+      box-shadow: 0 10px 40px rgba(0,0,0,.3);
+    }
+
+    #prompt {
+      flex: 1;
+      resize: none;
+      min-height: 42px;
+      max-height: 150px;
+
+      border: 0;
+      outline: 0;
+      background: transparent;
+      color: white;
+
+      padding: 11px 10px;
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    #prompt::placeholder {
+      color: #666b75;
+    }
+
+    .send-button {
+      width: 43px;
+      height: 43px;
+      flex-shrink: 0;
+
+      border: 0;
+      border-radius: 12px;
+
+      background: linear-gradient(
+        135deg,
+        var(--verde),
+        #059669
+      );
+
+      color: #03130e;
+      cursor: pointer;
+      font-size: 15px;
+      transition: .2s;
+    }
+
+    .send-button:hover {
+      transform: translateY(-1px);
+      filter: brightness(1.1);
+    }
+
+    .composer-hint {
+      text-align: center;
+      color: #555963;
+      font-size: 10px;
+      margin-top: 7px;
+    }
+
+    /* =====================================================
+       IDEAS
+       ===================================================== */
+
+    .ideas-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0,1fr));
+      gap: 13px;
+      margin-top: 15px;
+    }
+
+    .idea-card {
+      background: rgba(255,255,255,.025);
+      border: 1px solid var(--borde);
+      border-radius: 14px;
+      padding: 15px;
+    }
+
+    .idea-number {
+      color: var(--verde);
+      font-size: 10px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .idea-card h3 {
+      font-size: 14px;
+      margin: 7px 0;
+      font-weight: 750;
+    }
+
+    .idea-card p {
+      color: #aeb3bd;
+      font-size: 12px;
+      line-height: 1.55;
+      margin: 0;
+    }
+
+    /* =====================================================
+       SAVED MODAL
+       ===================================================== */
+
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,.68);
+      backdrop-filter: blur(8px);
+      z-index: 500;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .modal-backdrop.open {
+      display: flex;
+    }
+
+    .modal {
+      width: min(700px, 100%);
+      max-height: 80vh;
+      overflow-y: auto;
+
+      background: #101012;
+      border: 1px solid var(--borde);
+      border-radius: 18px;
+      padding: 20px;
+    }
+
+    .modal-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 17px;
+    }
+
+    .modal-header h2 {
+      font-size: 18px;
+      margin: 0;
+    }
+
+    .close-button {
+      width: 34px;
+      height: 34px;
+      border-radius: 9px;
+      border: 1px solid var(--borde);
+      background: transparent;
+      color: #aaa;
+      cursor: pointer;
+    }
+
+    .saved-item {
+      padding: 14px;
+      border: 1px solid var(--borde);
+      border-radius: 12px;
+      margin-bottom: 9px;
+      background: rgba(255,255,255,.025);
+    }
+
+    .saved-item p {
+      color: #d1d5db;
+      font-size: 13px;
+      line-height: 1.55;
+      margin: 0;
+    }
+
+    .saved-item small {
+      color: #6b7280;
+      display: block;
+      margin-top: 7px;
+    }
+
+    .empty {
+      color: #777;
+      text-align: center;
+      padding: 35px 10px;
+      font-size: 13px;
+    }
+
+    /* =====================================================
+       TOAST
+       ===================================================== */
+
+    #toast {
+      position: fixed;
+      left: 50%;
+      bottom: 25px;
+      transform: translate(-50%, 20px);
+
+      background: #18181b;
+      border: 1px solid rgba(255,255,255,.1);
+      color: white;
+
+      padding: 10px 15px;
+      border-radius: 10px;
+
+      font-size: 12px;
+      opacity: 0;
+      pointer-events: none;
+      transition: .25s;
+      z-index: 1000;
+    }
+
+    #toast.show {
+      opacity: 1;
+      transform: translate(-50%,0);
+    }
+
+    /* =====================================================
+       MOBILE
+       ===================================================== */
+
+    @media (max-width: 768px) {
+
+      .sidebar {
         position: fixed;
         left: 0;
         top: 0;
         bottom: 0;
+        transform: translateX(-105%);
+        transition: transform .25s ease;
+        box-shadow: 20px 0 50px rgba(0,0,0,.4);
+      }
 
-        z-index: 100;
-
-        transform: translateX(-100%);
-    }
-
-    #sidebar.mobileOpen {
+      .sidebar.open {
         transform: translateX(0);
-    }
+      }
 
-    .mobileHide {
+      .mobile-menu {
+        display: block;
+      }
+
+      .topbar {
+        padding: 0 14px;
+      }
+
+      .content {
+        padding: 30px 13px 20px;
+      }
+
+      .welcome {
+        margin-bottom: 28px;
+      }
+
+      .welcome-logo {
+        width: min(340px, 84vw);
+        margin-bottom: 20px;
+      }
+
+      .welcome h1 {
+        font-size: 29px;
+      }
+
+      .welcome p {
+        font-size: 13px;
+      }
+
+      .user-bubble {
+        max-width: 88%;
+      }
+
+      .response-card {
+        padding: 15px;
+        border-radius: 15px;
+      }
+
+      .response-title {
+        font-size: 18px;
+      }
+
+      .response-text {
+        font-size: 13px;
+      }
+
+      .ideas-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .composer-wrap {
+        padding: 13px 0 13px;
+      }
+
+      .composer {
+        border-radius: 14px;
+      }
+
+      .composer-hint {
         display: none;
+      }
     }
 
-}
+    @media (max-width: 380px) {
 
+      .content {
+        padding-left: 9px;
+        padding-right: 9px;
+      }
 
-@media (min-width: 768px) {
+      .action-button {
+        font-size: 10px;
+      }
 
-    #sidebar {
-        transform: translateX(0) !important;
+      .response-card {
+        padding: 13px;
+      }
     }
 
-}
+    /* =====================================================
+       DESKTOP GRANDE
+       ===================================================== */
 
+    @media (min-width: 1400px) {
 
-@media (max-width: 420px) {
+      .sidebar {
+        width: 280px;
+        min-width: 280px;
+      }
 
-    .action {
-        padding: 8px 9px;
-        font-size: 9px;
+      .content {
+        max-width: 1150px;
+      }
     }
-
-}
-
-
-/* =====================================================
-   ACCESIBILIDAD / MENOS ANIMACIONES
-===================================================== */
-
-@media (prefers-reduced-motion: reduce) {
-
-    *,
-    *::before,
-    *::after {
-        animation-duration: .01ms !important;
-        animation-iteration-count: 1 !important;
-        transition-duration: .01ms !important;
-    }
-
-}
-
-</style>
+  </style>
 </head>
-
 
 <body>
 
+  <!-- ===================================================
+       SPLASH
+       NO HAY BOTÓN.
+       ENTRA AUTOMÁTICAMENTE.
+       =================================================== -->
 
-<!-- =====================================================
-     SPLASH
-===================================================== -->
+  <div id="splash">
 
-<div id="splash">
+    <div class="splash-content">
 
-    <div class="splashGlow"></div>
+      <svg
+        class="splash-logo"
+        viewBox="0 0 900 220"
+        xmlns="http://www.w3.org/2000/svg"
+        aria-label="SparkyKrea Studio's">
 
-    <div class="splashContent">
+        <!-- Casa -->
+        <g transform="translate(30 25)">
+          <path
+            d="M35 92 L95 38 L155 92 V160 H35 Z"
+            fill="none"
+            stroke="#800020"
+            stroke-width="9"
+            stroke-linejoin="round"/>
 
-        <!-- CASITA + CÁMARA -->
+          <!-- Cámara -->
+          <rect
+            x="65"
+            y="82"
+            width="70"
+            height="55"
+            rx="9"
+            fill="#070708"
+            stroke="#10B981"
+            stroke-width="7"/>
+
+          <circle
+            cx="100"
+            cy="109"
+            r="17"
+            fill="none"
+            stroke="#10B981"
+            stroke-width="7"/>
+
+          <path
+            d="M80 82 L88 69 H112 L120 82"
+            fill="none"
+            stroke="#10B981"
+            stroke-width="7"
+            stroke-linecap="round"/>
+        </g>
+
+        <!-- Texto -->
+        <text
+          x="220"
+          y="118"
+          font-family="Inter, Arial, sans-serif"
+          font-size="68"
+          font-weight="800"
+          letter-spacing="-3">
+
+          <tspan fill="#800020">Sparky</tspan>
+          <tspan fill="#10B981">Krea</tspan>
+
+        </text>
+
+        <text
+          x="225"
+          y="153"
+          font-family="Inter, Arial, sans-serif"
+          font-size="17"
+          font-weight="700"
+          letter-spacing="7"
+          fill="#ffffff">
+
+          STUDIO'S
+
+        </text>
+
+      </svg>
+
+    </div>
+  </div>
+
+
+  <!-- ===================================================
+       APP
+       =================================================== -->
+
+  <div id="app">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar" id="sidebar">
+
+      <div class="brand">
 
         <svg
-            class="splashLogo"
-            viewBox="0 0 120 120"
+          class="brand-icon"
+          viewBox="0 0 190 190"
+          xmlns="http://www.w3.org/2000/svg">
+
+          <path
+            d="M30 86 L95 30 L160 86 V166 H30 Z"
             fill="none"
-        >
+            stroke="#800020"
+            stroke-width="12"
+            stroke-linejoin="round"/>
 
-            <!-- Casa -->
+          <rect
+            x="59"
+            y="80"
+            width="72"
+            height="58"
+            rx="9"
+            fill="#070708"
+            stroke="#10B981"
+            stroke-width="9"/>
 
-            <path
-                d="M18 56L60 20L102 56"
-                stroke="#800020"
-                stroke-width="5"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-            />
+          <circle
+            cx="95"
+            cy="109"
+            r="18"
+            fill="none"
+            stroke="#10B981"
+            stroke-width="8"/>
 
-            <path
-                d="M28 51V94C28 98 30 100 34 100H86C90 100 92 98 92 94V51"
-                stroke="#800020"
-                stroke-width="5"
-                stroke-linecap="round"
-            />
-
-
-            <!-- Cámara -->
-
-            <rect
-                x="35"
-                y="55"
-                width="50"
-                height="33"
-                rx="8"
-                stroke="#10B981"
-                stroke-width="4"
-            />
-
-            <circle
-                cx="60"
-                cy="71"
-                r="9"
-                stroke="#10B981"
-                stroke-width="4"
-            />
-
-            <path
-                d="M45 55L49 49H63L67 55"
-                stroke="#10B981"
-                stroke-width="4"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-            />
-
-
-            <!-- Brillo -->
-
-            <path
-                d="M95 28L97 35L104 37L97 39L95 46L93 39L86 37L93 35L95 28Z"
-                fill="#10B981"
-            />
+          <path
+            d="M75 80 L84 65 H106 L115 80"
+            fill="none"
+            stroke="#10B981"
+            stroke-width="8"
+            stroke-linecap="round"/>
 
         </svg>
 
+        <div class="brand-text">
 
-        <div class="splashName">
+          <div class="brand-main">
+            <span class="brand-sparky">Sparky</span><span class="brand-krea">Krea</span>
+          </div>
 
-            <span style="color:#800020">
-                Sparky
-            </span>
-
-            <span style="color:#10B981">
-                Krea
-            </span>
-
-        </div>
-
-
-        <div class="splashStudio">
+          <div class="brand-sub">
             STUDIO'S
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <button class="side-button active" id="newProjectBtn">
+        <i class="fa-solid fa-plus"></i>
+        <span>Nuevo proyecto</span>
+      </button>
+
+      <button class="side-button" id="savedBtn">
+        <i class="fa-regular fa-star"></i>
+        <span>Guardados</span>
+      </button>
+
+
+      <div class="recent-title">
+        Proyectos recientes
+      </div>
+
+      <div id="recentList"></div>
+
+
+      <div class="sidebar-footer">
+        by <span>SparkyKrea</span>
+      </div>
+
+    </aside>
+
+
+    <!-- MAIN -->
+    <main class="main">
+
+      <header class="topbar">
+
+        <div style="display:flex;align-items:center;gap:10px;">
+
+          <button
+            class="mobile-menu"
+            id="mobileMenu"
+            aria-label="Abrir menú">
+
+            <i class="fa-solid fa-bars"></i>
+
+          </button>
+
+          <div class="topbar-title">
+            SparkyKrea Studio's
+          </div>
+
+        </div>
+
+      </header>
+
+
+      <section class="content">
+
+        <!-- WELCOME -->
+        <div class="welcome" id="welcome">
+
+          <svg
+            class="welcome-logo"
+            viewBox="0 0 900 220"
+            xmlns="http://www.w3.org/2000/svg">
+
+            <g transform="translate(30 25)">
+
+              <path
+                d="M35 92 L95 38 L155 92 V160 H35 Z"
+                fill="none"
+                stroke="#800020"
+                stroke-width="9"
+                stroke-linejoin="round"/>
+
+              <rect
+                x="65"
+                y="82"
+                width="70"
+                height="55"
+                rx="9"
+                fill="#070708"
+                stroke="#10B981"
+                stroke-width="7"/>
+
+              <circle
+                cx="100"
+                cy="109"
+                r="17"
+                fill="none"
+                stroke="#10B981"
+                stroke-width="7"/>
+
+              <path
+                d="M80 82 L88 69 H112 L120 82"
+                fill="none"
+                stroke="#10B981"
+                stroke-width="7"
+                stroke-linecap="round"/>
+
+            </g>
+
+            <text
+              x="220"
+              y="118"
+              font-family="Inter, Arial, sans-serif"
+              font-size="68"
+              font-weight="800"
+              letter-spacing="-3">
+
+              <tspan fill="#800020">Sparky</tspan>
+              <tspan fill="#10B981">Krea</tspan>
+
+            </text>
+
+            <text
+              x="225"
+              y="153"
+              font-family="Inter, Arial, sans-serif"
+              font-size="17"
+              font-weight="700"
+              letter-spacing="7"
+              fill="#ffffff">
+
+              STUDIO'S
+
+            </text>
+
+          </svg>
+
+
+          <h1>
+            ¿Qué vamos a crear <span>hoy?</span>
+          </h1>
+
+          <p>
+            Cuéntame lo que tienes en mente. Una idea, un problema,
+            algo que quieras publicar o simplemente dime que no sabes
+            qué hacer. SparkyKrea se encarga de darle forma.
+          </p>
+
         </div>
 
 
-        <div class="splashLine"></div>
-
-    </div>
-
-</div>
+        <!-- CHAT -->
+        <div id="chat"></div>
 
 
-<!-- =====================================================
-     OVERLAY MÓVIL
-===================================================== -->
+        <!-- COMPOSER -->
+        <div class="composer-wrap">
 
-<div
-    id="overlay"
-    onclick="closeSidebar()"
-    class="fixed inset-0 bg-black/70 z-[90] hidden"
-></div>
+          <div class="composer">
 
-
-<!-- =====================================================
-     APP
-===================================================== -->
-
-<div class="w-full h-full flex">
-
-
-<!-- =====================================================
-     SIDEBAR
-===================================================== -->
-
-<aside
-    id="sidebar"
-    class="bg-panel border-r border-borde flex flex-col transition-transform duration-300"
->
-
-
-    <!-- LOGO -->
-
-    <div class="px-4 py-4 border-b border-borde">
-
-        <div class="flex items-center justify-between">
-
-            <div class="brand">
-
-                <svg
-                    class="brandIcon"
-                    viewBox="0 0 120 120"
-                    fill="none"
-                >
-
-                    <path
-                        d="M18 56L60 20L102 56"
-                        stroke="#800020"
-                        stroke-width="6"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                    />
-
-                    <path
-                        d="M28 51V94C28 98 30 100 34 100H86C90 100 92 98 92 94V51"
-                        stroke="#800020"
-                        stroke-width="6"
-                        stroke-linecap="round"
-                    />
-
-                    <rect
-                        x="35"
-                        y="55"
-                        width="50"
-                        height="33"
-                        rx="8"
-                        stroke="#10B981"
-                        stroke-width="5"
-                    />
-
-                    <circle
-                        cx="60"
-                        cy="71"
-                        r="9"
-                        stroke="#10B981"
-                        stroke-width="5"
-                    />
-
-                    <path
-                        d="M45 55L49 49H63L67 55"
-                        stroke="#10B981"
-                        stroke-width="5"
-                        stroke-linecap="round"
-                    />
-
-                    <path
-                        d="M95 28L97 35L104 37L97 39L95 46L93 39L86 37L93 35L95 28Z"
-                        fill="#10B981"
-                    />
-
-                </svg>
-
-
-                <div>
-
-                    <div class="brandTitle">
-
-                        <span class="brandSparky">
-                            Sparky
-                        </span>
-
-                        <span class="brandKrea">
-                            Krea
-                        </span>
-
-                    </div>
-
-                    <div class="brandStudio">
-                        STUDIO'S
-                    </div>
-
-                </div>
-
-            </div>
-
+            <textarea
+              id="prompt"
+              rows="1"
+              placeholder="Cuéntame qué quieres crear..."></textarea>
 
             <button
-                onclick="closeSidebar()"
-                class="md:hidden text-gray-500 p-2"
-            >
+              class="send-button"
+              id="sendBtn"
+              aria-label="Enviar">
 
-                <i class="fa-solid fa-xmark"></i>
+              <i class="fa-solid fa-arrow-up"></i>
 
             </button>
 
+          </div>
+
+          <div class="composer-hint">
+            Pulsa Enter para enviar · Shift + Enter para nueva línea
+          </div>
+
         </div>
 
-    </div>
+      </section>
+
+    </main>
+
+  </div>
 
 
-    <!-- NUEVO -->
+  <!-- ===================================================
+       SAVED MODAL
+       =================================================== -->
 
-    <div class="p-3">
+  <div class="modal-backdrop" id="savedModal">
 
-        <button
-            onclick="nuevoProyecto()"
-            class="w-full bg-vino hover:bg-[#600018]
-            rounded-xl py-3 font-bold text-xs
-            flex items-center justify-center gap-2
-            transition active:scale-[.98]"
-        >
+    <div class="modal">
 
-            <i class="fa-solid fa-plus"></i>
+      <div class="modal-header">
 
-            Nuevo proyecto
+        <h2>
+          <i class="fa-regular fa-star" style="color:#10B981;"></i>
+          Ideas guardadas
+        </h2>
 
+        <button class="close-button" id="closeSaved">
+          <i class="fa-solid fa-xmark"></i>
         </button>
 
-    </div>
+      </div>
 
-
-    <!-- GUARDADOS -->
-
-    <div class="px-3">
-
-        <button
-            onclick="abrirGuardados()"
-            class="w-full flex items-center justify-between
-            px-3 py-2.5 rounded-xl
-            bg-card border border-borde
-            hover:border-verde transition"
-        >
-
-            <div class="flex items-center gap-2 text-xs">
-
-                <i class="fa-solid fa-star text-yellow-400"></i>
-
-                Guardados
-
-            </div>
-
-
-            <span
-                id="savedCount"
-                class="bg-vino rounded-full
-                px-1.5 py-0.5 text-[9px]"
-            >
-                0
-            </span>
-
-        </button>
+      <div id="savedContent"></div>
 
     </div>
 
+  </div>
 
-    <!-- HISTORIAL -->
 
-    <div class="flex-1 overflow-y-auto px-3 mt-5">
+  <div id="toast"></div>
 
-        <div
-            class="text-[9px] uppercase
-            tracking-widest text-gray-600
-            font-bold px-2 mb-2"
-        >
 
-            Proyectos recientes
+  <!-- ===================================================
+       SPLASH FALLBACK
+       ESTE SCRIPT ES INDEPENDIENTE DEL RESTO.
+       =================================================== -->
 
-        </div>
+  <script>
+    (function () {
 
+      const splash = document.getElementById("splash");
 
-        <div
-            id="history"
-            class="space-y-1"
-        ></div>
+      if (!splash) return;
 
-    </div>
+      setTimeout(function () {
 
+        splash.classList.add("splash-gone");
 
-    <!-- FOOTER -->
+        splash.style.opacity = "0";
+        splash.style.visibility = "hidden";
+        splash.style.pointerEvents = "none";
 
-    <div class="border-t border-borde p-3 text-center">
+        setTimeout(function () {
 
-        <div class="text-xs font-bold">
+          if (splash && splash.parentNode) {
+            splash.remove();
+          }
 
-            <span class="text-gray-400">
-                by
-            </span>
+        }, 350);
 
-            <span class="text-verde">
-                SparkyKrea
-            </span>
+      }, 1050);
 
-        </div>
+    })();
+  </script>
 
-    </div>
 
-</aside>
+  <!-- ===================================================
+       SPARKYKREA ENGINE
+       =================================================== -->
 
+  <script>
+    "use strict";
 
-<!-- =====================================================
-     CONTENIDO PRINCIPAL
-===================================================== -->
+    /* =====================================================
+       STORAGE SEGURO
+       ===================================================== */
 
-<main
-    class="h-full flex-1 min-w-0
-    flex flex-col bg-fondo"
->
+    function loadStorage(key, fallback) {
 
-
-    <!-- HEADER -->
-
-    <header
-        class="h-14 shrink-0
-        border-b border-borde
-        flex items-center justify-between
-        px-3 md:px-5"
-    >
-
-        <div class="flex items-center gap-3">
-
-
-            <!-- BOTÓN MÓVIL -->
-
-            <button
-                onclick="toggleSidebar()"
-                class="md:hidden
-                w-9 h-9 rounded-lg
-                bg-card border border-borde"
-            >
-
-                <i class="fa-solid fa-bars text-xs"></i>
-
-            </button>
-
-
-            <!-- MARCA MÓVIL -->
-
-            <div class="md:hidden flex items-center gap-2">
-
-                <div class="font-black">
-
-                    <span class="text-vino">
-                        Sparky
-                    </span>
-
-                    <span class="text-verde">
-                        Krea
-                    </span>
-
-                </div>
-
-            </div>
-
-
-            <!-- TEXTO PC -->
-
-            <div class="hidden md:block">
-
-                <span class="text-gray-400 text-sm">
-                    Asesor creativo
-                </span>
-
-                <span class="text-gray-700 mx-1">
-                    /
-                </span>
-
-                <span
-                    id="headerStatus"
-                    class="text-verde text-sm font-semibold"
-                >
-                    Nuevo proyecto
-                </span>
-
-            </div>
-
-        </div>
-
-
-        <!-- NUEVO -->
-
-        <button
-            onclick="nuevoProyecto()"
-            class="text-[10px]
-            bg-card border border-borde
-            rounded-lg px-3 py-2
-            hover:border-verde transition"
-        >
-
-            <i class="fa-solid fa-plus text-verde mr-1"></i>
-
-            Nuevo
-
-        </button>
-
-    </header>
-
-
-    <!-- =================================================
-         CHAT
-    ================================================== -->
-
-    <section
-        id="chat"
-        class="flex-1 overflow-y-auto
-        px-3 md:px-5 py-5"
-    >
-
-        <div
-            class="max-w-4xl mx-auto
-            min-h-full flex flex-col"
-        >
-
-
-            <!-- BIENVENIDA -->
-
-            <div
-                id="welcome"
-                class="my-auto
-                flex flex-col
-                items-center
-                text-center py-8"
-            >
-
-
-                <!-- LOGO -->
-
-                <svg
-                    width="90"
-                    height="90"
-                    viewBox="0 0 120 120"
-                    fill="none"
-                    class="mb-5"
-                >
-
-                    <path
-                        d="M18 56L60 20L102 56"
-                        stroke="#800020"
-                        stroke-width="5"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                    />
-
-                    <path
-                        d="M28 51V94C28 98 30 100 34 100H86C90 100 92 98 92 94V51"
-                        stroke="#800020"
-                        stroke-width="5"
-                        stroke-linecap="round"
-                    />
-
-                    <rect
-                        x="35"
-                        y="55"
-                        width="50"
-                        height="33"
-                        rx="8"
-                        stroke="#10B981"
-                        stroke-width="4"
-                    />
-
-                    <circle
-                        cx="60"
-                        cy="71"
-                        r="9"
-                        stroke="#10B981"
-                        stroke-width="4"
-                    />
-
-                    <path
-                        d="M45 55L49 49H63L67 55"
-                        stroke="#10B981"
-                        stroke-width="4"
-                        stroke-linecap="round"
-                    />
-
-                    <path
-                        d="M95 28L97 35L104 37L97 39L95 46L93 39L86 37L93 35L95 28Z"
-                        fill="#10B981"
-                    />
-
-                </svg>
-
-
-                <h1
-                    id="welcomeTitle"
-                    class="text-2xl md:text-3xl
-                    font-black mb-2"
-                >
-                    ¿Qué vamos a crear?
-                </h1>
-
-
-                <p
-                    class="text-gray-500
-                    text-xs md:text-sm
-                    max-w-lg
-                    leading-relaxed"
-                >
-
-                    Cuéntame cualquier cosa que tengas
-                    en mente. No necesitas elegir una
-                    categoría ni saber exactamente cómo hacerlo.
-
-                    <br><br>
-
-                    SparkyKrea convierte tu idea en una
-                    propuesta de contenido.
-
-                </p>
-
-
-                <div
-                    class="mt-7 text-[10px]
-                    text-gray-700"
-                >
-
-                    Escribe abajo y empezamos.
-
-                </div>
-
-            </div>
-
-
-            <!-- MENSAJES -->
-
-            <div
-                id="messages"
-                class="hidden space-y-5 pb-6"
-            ></div>
-
-
-        </div>
-
-    </section>
-
-
-    <!-- =================================================
-         INPUT
-    ================================================== -->
-
-    <footer
-        class="shrink-0
-        border-t border-borde
-        px-2.5 md:px-5
-        pt-2.5 pb-2"
-    >
-
-        <div class="max-w-4xl mx-auto">
-
-
-            <form
-                onsubmit="enviar(event)"
-                class="relative"
-            >
-
-                <input
-                    id="input"
-                    type="text"
-                    autocomplete="off"
-                    autocorrect="on"
-                    spellcheck="true"
-                    placeholder="Cuéntame tu idea..."
-                    class="w-full
-                    bg-card
-                    border border-borde
-                    focus:border-verde
-                    outline-none
-                    rounded-xl
-                    pl-4 pr-12
-                    py-3.5
-                    text-xs
-                    placeholder-gray-600
-                    transition"
-                >
-
-
-                <button
-                    type="submit"
-                    class="absolute
-                    right-1.5 top-1.5
-                    w-9 h-9
-                    rounded-lg
-                    bg-vino
-                    hover:bg-[#600018]
-                    active:scale-95
-                    transition"
-                >
-
-                    <i class="fa-solid fa-paper-plane text-xs"></i>
-
-                </button>
-
-            </form>
-
-
-            <div
-                class="text-center
-                text-[8px]
-                text-gray-700
-                mt-1.5"
-            >
-
-                by SparkyKrea
-
-            </div>
-
-        </div>
-
-    </footer>
-
-</main>
-
-</div>
-
-
-<!-- =====================================================
-     MODAL GUARDADOS
-===================================================== -->
-
-<div
-    id="savedModal"
-    class="fixed inset-0
-    bg-black/80
-    backdrop-blur-sm
-    z-[200]
-    hidden
-    items-center
-    justify-center
-    p-3"
->
-
-    <div
-        class="modalBox
-        bg-panel
-        border border-borde
-        rounded-2xl
-        w-full max-w-2xl
-        max-h-[85vh]
-        flex flex-col
-        overflow-hidden"
-    >
-
-
-        <div
-            class="p-4
-            border-b border-borde
-            flex items-center
-            justify-between"
-        >
-
-            <div>
-
-                <div class="font-black">
-                    ⭐ Mis ideas
-                </div>
-
-                <div
-                    class="text-[9px]
-                    text-gray-600 mt-1"
-                >
-                    Tus mejores propuestas guardadas.
-                </div>
-
-            </div>
-
-
-            <button
-                onclick="cerrarGuardados()"
-                class="text-gray-500 p-2"
-            >
-
-                <i class="fa-solid fa-xmark"></i>
-
-            </button>
-
-        </div>
-
-
-        <div
-            id="savedList"
-            class="flex-1
-            overflow-y-auto
-            p-3 space-y-2"
-        ></div>
-
-    </div>
-
-</div>
-
-
-<!-- TOAST -->
-
-<div
-    id="toast"
-    class="fixed
-    bottom-5
-    left-1/2
-    -translate-x-1/2
-    bg-card
-    border border-borde
-    rounded-xl
-    px-4 py-2
-    text-[10px]
-    z-[300]
-    opacity-0
-    pointer-events-none
-    transition"
-></div>
-
-
-<script>
-
-/* =====================================================
-   DATOS
-===================================================== */
-
-const MOTIVACIONES = [
-
-"Una idea sencilla puede convertirse en algo enorme cuando encuentras el ángulo correcto.",
-
-"No necesitas que la primera versión sea perfecta. Necesitas empezar.",
-
-"La creatividad aparece cuando pruebas caminos diferentes.",
-
-"Tu próxima buena idea puede estar escondida en algo completamente normal.",
-
-"No busques hacer lo mismo que todos. Busca tu propia forma de contarlo.",
-
-"El contenido que se recuerda no siempre es el más complicado.",
-
-"Una buena idea merece una oportunidad. Ahora toca convertirla en realidad.",
-
-"Cada publicación te enseña algo que no habrías descubierto quedándote pensando.",
-
-"Si puedes imaginar el video, ya tienes el primer paso.",
-
-"No necesitas cien ideas. Necesitas una que realmente quieras probar.",
-
-"Lo diferente llama la atención. Atrévete a experimentar.",
-
-"Empieza pequeño, prueba, aprende y vuelve a crear.",
-
-"El primer intento no tiene que ser perfecto; tiene que existir.",
-
-"Tu estilo aparece cuando dejas de copiar fórmulas y empiezas a probar las tuyas.",
-
-"A veces el mejor contenido nace de una idea que parecía demasiado simple."
-
-];
-
-
-const CTAS = [
-
-"¿Tú lo probarías?",
-
-"¿Qué harías tú?",
-
-"Comenta qué cambiarías.",
-
-"¿Cuál elegirías?",
-
-"Guárdalo para probarlo después.",
-
-"¿Quieres ver la segunda parte?",
-
-"Etiqueta a alguien que haría esto.",
-
-"Ahora toca ponerlo a prueba.",
-
-"¿Te gustaría ver el resultado?",
-
-"¿Qué opción escogerías?"
-
-];
-
-
-const FORMATOS = [
-
-"reto",
-
-"POV",
-
-"comparación",
-
-"historia corta",
-
-"antes y después",
-
-"prueba",
-
-"reacción",
-
-"ranking",
-
-"error común",
-
-"mito vs realidad",
-
-"pregunta + demostración",
-
-"resultado primero",
-
-"experimento",
-
-"serie por partes"
-
-];
-
-
-const HOOKS = {
-
-gaming: [
-
-"Pensé que esta partida estaba perdida...",
-
-"Todo iba normal hasta que hice esto.",
-
-"Espera a ver cómo termina esto.",
-
-"Esta fue probablemente la jugada más rara de la partida.",
-
-"El plan parecía sencillo. La ejecución fue otra historia.",
-
-"Hay una parte de esta partida que cambia completamente el resultado.",
-
-"No esperaba que la partida terminara así.",
-
-"Esto empezó como una partida normal y terminó de otra manera."
-
-],
-
-food: [
-
-"Esto parece una comida normal... hasta que ves el final.",
-
-"Hay una razón por la que esto llama tanto la atención.",
-
-"Antes de probarlo tenía una duda: ¿realmente funciona?",
-
-"El último plano es el que cambia todo.",
-
-"En vez de decirte que está bueno, mejor te lo demuestro.",
-
-"Esto empezó como una idea simple y terminó así."
-
-],
-
-business: [
-
-"La mayoría presenta su producto de esta forma. Yo haría otra cosa.",
-
-"Si tu cliente tiene este problema, mira esto.",
-
-"En lugar de decir que funciona, vamos a demostrarlo.",
-
-"Hay una forma más interesante de explicar lo que vendes.",
-
-"Esto es lo primero que debería entender alguien antes de comprar.",
-
-"Tu producto puede contar la historia por sí solo.",
-
-"Si yo tuviera que vender esto en pocos segundos, empezaría aquí."
-
-],
-
-general: [
-
-"Esto parecía una idea normal hasta que decidimos hacerlo diferente.",
-
-"Espera al final porque ahí está el giro.",
-
-"Hay una forma mucho más interesante de contar esto.",
-
-"Todo empieza de una manera bastante normal.",
-
-"Si yo tuviera que convertir esto en contenido, empezaría así.",
-
-"Lo interesante no es lo que parece al principio.",
-
-"Hay un detalle aquí que puede cambiar completamente el video.",
-
-"Esta idea puede parecer sencilla, pero mira cómo la convertiría en contenido."
-
-]
-
-};
-
-
-const EFFECTS = {
-
-gaming: [
-
-"Zoom de impacto en la jugada principal.",
-
-"Texto sincronizado con cada acción importante.",
-
-"Shake breve justo en el impacto.",
-
-"Slow motion durante el instante decisivo.",
-
-"Corte al beat para aumentar el ritmo.",
-
-"Repetición rápida del mejor momento.",
-
-"Subtítulos grandes siguiendo la reacción."
-
-],
-
-food: [
-
-"Plano cercano del producto.",
-
-"Movimiento rápido entre ingredientes.",
-
-"Sonido ambiente del proceso.",
-
-"Slow motion del momento más atractivo.",
-
-"Texto corto resaltando el beneficio.",
-
-"Corte al beat entre planos.",
-
-"Plano final limpio del resultado."
-
-],
-
-business: [
-
-"Texto grande mostrando el problema.",
-
-"Transición rápida hacia la solución.",
-
-"Plano cercano del producto.",
-
-"Antes y después.",
-
-"Palabras clave apareciendo en pantalla.",
-
-"Demostración visual del beneficio.",
-
-"Cierre limpio con llamada a la acción."
-
-],
-
-general: [
-
-"Texto dinámico.",
-
-"Cortes rápidos.",
-
-"Zoom suave en el momento importante.",
-
-"Sonido de impacto.",
-
-"Cambio de plano inesperado.",
-
-"Subtítulos para reforzar la idea.",
-
-"Silencio breve antes del giro."
-
-]
-
-};
-
-
-const GAMES = [
-
-"valorant",
-"clash royale",
-"fortnite",
-"minecraft",
-"roblox",
-"free fire",
-"gta",
-"call of duty",
-"fifa",
-"ea sports fc",
-"league of legends",
-"apex legends"
-
-];
-
-
-const CHARACTERS = [
-
-"reyna",
-"jett",
-"sage",
-"omen",
-"killjoy",
-"raze",
-"neon",
-"cypher",
-"sova",
-"gekko",
-"skye",
-"viper",
-"phoenix",
-"yoru",
-"chamber",
-"clove",
-"iso",
-"deadlock",
-"fade",
-"breach"
-
-];
-
-
-/* =====================================================
-   ESTADO
-===================================================== */
-
-let chats = safeJSON("sparky_chats", []);
-
-let saved = safeJSON("sparky_saved", []);
-
-let generations = safeJSON(
-    "sparky_generations",
-    {}
-);
-
-let currentChat = null;
-
-let currentIdea = null;
-
-
-/* =====================================================
-   LOCAL STORAGE SEGURO
-===================================================== */
-
-function safeJSON(key, fallback) {
-
-    try {
+      try {
 
         const value = localStorage.getItem(key);
 
         if (!value) {
-            return fallback;
+          return fallback;
         }
 
         return JSON.parse(value);
 
-    } catch (error) {
-
-        console.warn(
-            "No se pudo leer:",
-            key
-        );
+      } catch (error) {
 
         return fallback;
 
-    }
-
-}
-
-
-function saveData() {
-
-    try {
-
-        localStorage.setItem(
-            "sparky_chats",
-            JSON.stringify(chats)
-        );
-
-        localStorage.setItem(
-            "sparky_saved",
-            JSON.stringify(saved)
-        );
-
-        localStorage.setItem(
-            "sparky_generations",
-            JSON.stringify(generations)
-        );
-
-    } catch (error) {
-
-        console.warn(
-            "No se pudo guardar localStorage."
-        );
+      }
 
     }
 
-    updateCount();
+    function saveStorage(key, value) {
 
-}
+      try {
 
+        localStorage.setItem(
+          key,
+          JSON.stringify(value)
+        );
 
-/* =====================================================
-   UTILIDADES
-===================================================== */
+      } catch (error) {
 
-function random(arr) {
+        console.warn("No se pudo guardar:", error);
 
-    if (!arr || !arr.length) {
-        return "";
+      }
+
     }
 
-    return arr[
-        Math.floor(
-            Math.random() * arr.length
-        )
+
+    /* =====================================================
+       DATOS CREATIVOS
+       ===================================================== */
+
+    const MOTIVACIONES = [
+
+      "No necesitas tenerlo perfecto; necesitas empezar.",
+      "Una buena idea puede parecer pequeña antes de hacerse grande.",
+      "Hazlo a tu manera. Ahí es donde aparece lo diferente.",
+      "No busques copiar lo que funciona: busca tu propia versión.",
+      "La próxima publicación podría ser la que cambie todo.",
+      "Si la idea te emociona, ya tienes una razón para probarla.",
+      "Crear también es experimentar. No tengas miedo de probar.",
+      "Lo original casi siempre empieza con una idea rara.",
+      "Publicar algo imperfecto enseña más que esperar eternamente.",
+      "Tu estilo se construye publicación tras publicación.",
+      "No necesitas permiso para empezar a crear.",
+      "Prueba, mide, mejora y vuelve a intentarlo.",
+      "Las mejores ideas muchas veces aparecen jugando con posibilidades.",
+      "Que sea tuyo vale más que intentar ser igual a todos.",
+      "Hoy puede ser simplemente el primer intento."
     ];
 
-}
+
+    const HOOKS = [
+
+      "Espera a ver cómo termina esto...",
+      "Nadie me dijo que esto podía pasar.",
+      "La idea parecía malísima hasta que la probé.",
+      "Ok, esto salió MUCHO mejor de lo esperado.",
+      "Tengo una teoría y necesito comprobarla.",
+      "No sé quién necesitaba ver esto, pero...",
+      "Probablemente esta sea mi peor idea... o la mejor.",
+      "Cinco segundos y vas a entenderlo.",
+      "Esto empezó como una tontería.",
+      "Hay un pequeño problema con esta idea...",
+      "Yo también pensé que no iba a funcionar.",
+      "Vamos a intentar algo completamente distinto.",
+      "Esto puede salir increíblemente bien o increíblemente mal.",
+      "La parte importante viene al final.",
+      "Hoy toca experimentar."
+    ];
 
 
-function escapeHTML(text) {
+    const CTA = [
 
-    return String(text)
+      "¿Tú qué harías?",
+      "Si lo probarías, déjamelo saber.",
+      "¿Parte 2 o lo dejamos aquí?",
+      "Quiero ver qué se te ocurre a ti.",
+      "Guárdalo para probarlo después.",
+      "¿Cuál versión elegirías?",
+      "Ahora falta convertirlo en realidad.",
+      "Si tienes una mejor idea, quiero escucharla.",
+      "¿Lo intentarías?",
+      "Esto apenas empieza."
+    ];
+
+
+    const FORMATOS = [
+
+      "video corto con cortes rápidos",
+      "historia en primera persona",
+      "comparación antes/después",
+      "video tipo reto",
+      "mini tutorial",
+      "video con texto grande en pantalla",
+      "reacción con giro final",
+      "storytime breve",
+      "video dividido en 3 partes",
+      "formato pregunta → respuesta",
+      "experimento rápido",
+      "video narrado"
+    ];
+
+
+    const GAMES = [
+      "Valorant",
+      "Clash Royale",
+      "Minecraft",
+      "Fortnite",
+      "Roblox",
+      "un juego que tengas instalado"
+    ];
+
+
+    const EFFECTS = [
+      "zoom rápido",
+      "texto sincronizado con los golpes de la música",
+      "corte justo antes del momento importante",
+      "sonido de impacto",
+      "subtítulos dinámicos",
+      "pequeño efecto de cámara",
+      "silencio antes del remate",
+      "acercamiento progresivo"
+    ];
+
+
+    const MUSICA = [
+      "un beat rápido",
+      "una instrumental energética",
+      "un audio que esté empezando a moverse",
+      "una base electrónica",
+      "una canción con subida marcada",
+      "un sonido minimalista que deje protagonismo a la voz"
+    ];
+
+
+    const RESPUESTAS = [
+
+      "Podemos convertir eso en algo mucho más interesante si le damos un giro propio.",
+
+      "Sí, hay material ahí. Yo no intentaría hacerlo demasiado complicado.",
+
+      "La clave sería tomar esa idea y darle una razón para que alguien quiera quedarse hasta el final.",
+
+      "Yo lo plantearía de forma sencilla, pero con un detalle inesperado que lo diferencie.",
+
+      "Eso tiene potencial para convertirse en contenido si el comienzo engancha rápido.",
+
+      "En lugar de hacer lo típico, podemos construir una versión que tenga tu propio estilo.",
+
+      "Me gusta más si lo tratamos como una mini historia en vez de simplemente mostrar el resultado.",
+
+      "Aquí hay una oportunidad para hacer algo corto, fácil de editar y con personalidad.",
+
+      "Yo probaría una primera versión y después usaría los resultados para mejorar la segunda."
+    ];
+
+
+    /* =====================================================
+       ESTADO
+       ===================================================== */
+
+    let chats = loadStorage(
+      "sparkykrea_chats",
+      []
+    );
+
+    let savedIdeas = loadStorage(
+      "sparkykrea_saved",
+      []
+    );
+
+    let usedHooks = loadStorage(
+      "sparkykrea_hooks",
+      []
+    );
+
+    let usedFormats = loadStorage(
+      "sparkykrea_formats",
+      []
+    );
+
+    let usedMotivations = loadStorage(
+      "sparkykrea_motivations",
+      []
+    );
+
+    let currentChat = [];
+
+
+    /* =====================================================
+       UTILIDADES
+       ===================================================== */
+
+    function randomFrom(array) {
+
+      return array[
+        Math.floor(Math.random() * array.length)
+      ];
+
+    }
+
+
+    function uniqueRandom(array, used) {
+
+      let available = array.filter(
+        item => !used.includes(item)
+      );
+
+      if (available.length === 0) {
+
+        used.length = 0;
+        available = [...array];
+
+      }
+
+      const selected = randomFrom(available);
+
+      used.push(selected);
+
+      return selected;
+
+    }
+
+
+    function cleanText(text) {
+
+      return text
+        .replace(/[<>]/g, "")
+        .trim();
+
+    }
+
+
+    function escapeHTML(text) {
+
+      return text
         .replace(/&/g, "&amp;")
         .replace(/</g, "&lt;")
         .replace(/>/g, "&gt;")
         .replace(/"/g, "&quot;")
         .replace(/'/g, "&#039;");
 
-}
+    }
 
 
-function stripHTML(text) {
+    function containsAny(text, words) {
 
-    const div =
-        document.createElement("div");
+      return words.some(
+        word => text.includes(word)
+      );
 
-    div.innerHTML = text;
-
-    return div.textContent || div.innerText || "";
-
-}
+    }
 
 
-function normal(text) {
+    function getMotivation() {
 
-    return String(text)
-        .toLowerCase()
-        .normalize("NFD")
-        .replace(
-            /[\u0300-\u036f]/g,
-            ""
-        );
+      const value = uniqueRandom(
+        MOTIVACIONES,
+        usedMotivations
+      );
 
-}
+      saveStorage(
+        "sparkykrea_motivations",
+        usedMotivations
+      );
 
+      return value;
 
-function unique(arr) {
-
-    return [
-        ...new Set(arr)
-    ];
-
-}
+    }
 
 
-function toast(text) {
+    /* =====================================================
+       DETECTAR INTENCIÓN
+       ===================================================== */
 
-    const el =
-        document.getElementById("toast");
+    function detectIntent(text) {
 
-    el.textContent = text;
+      const t = text.toLowerCase();
 
-    el.classList.remove("opacity-0");
-
-    el.classList.add("opacity-100");
-
-    clearTimeout(
-        window.toastTimer
-    );
-
-    window.toastTimer =
-        setTimeout(() => {
-
-            el.classList.remove(
-                "opacity-100"
-            );
-
-            el.classList.add(
-                "opacity-0"
-            );
-
-        }, 2200);
-
-}
+      if (
+        containsAny(t, [
+          "no sé",
+          "no se",
+          "qué publico",
+          "que publico",
+          "qué subo",
+          "que subo",
+          "qué puedo subir",
+          "que puedo subir",
+          "ideas para tiktok",
+          "dame ideas",
+          "no tengo ideas"
+        ])
+      ) {
+        return "ideas";
+      }
 
 
-function scrollBottom() {
-
-    setTimeout(() => {
-
-        const chat =
-            document.getElementById("chat");
-
-        chat.scrollTo({
-
-            top: chat.scrollHeight,
-
-            behavior: "smooth"
-
-        });
-
-    }, 60);
-
-}
+      if (
+        containsAny(t, [
+          "tiktok",
+          "viral",
+          "video",
+          "contenido",
+          "publicar",
+          "subir"
+        ])
+      ) {
+        return "content";
+      }
 
 
-/* =====================================================
-   DETECTAR CATEGORÍA
-===================================================== */
-
-function detectarCategoria(text) {
-
-    const t = normal(text);
-
-
-    if (
-        /valorant|clash royale|fortnite|minecraft|roblox|free fire|gta|call of duty|fifa|ea sports fc|league of legends|apex|gaming|gamer|videojuego|juego|partida|jugada|clip|stream/.test(t)
-    ) {
-
+      if (
+        containsAny(t, [
+          "valorant",
+          "reyna",
+          "clash",
+          "clash royale",
+          "minecraft",
+          "fortnite",
+          "roblox",
+          "gaming",
+          "juego",
+          "partida"
+        ])
+      ) {
         return "gaming";
-
-    }
-
-
-    if (
-        /hamburguesa|burger|pizza|pollo|comida|restaurante|cafe|cafeteria|postre|helado|torta|pastel|pan|bebida|receta|cocina/.test(t)
-    ) {
-
-        return "food";
-
-    }
+      }
 
 
-    if (
-        /negocio|empresa|tienda|marca|producto|servicio|cliente|ventas|vender|emprendimiento|publicidad|marketing|local/.test(t)
-    ) {
-
+      if (
+        containsAny(t, [
+          "negocio",
+          "marca",
+          "empresa",
+          "emprendimiento",
+          "vender",
+          "producto"
+        ])
+      ) {
         return "business";
+      }
+
+
+      if (
+        containsAny(t, [
+          "meme",
+          "gracioso",
+          "humor",
+          "risa"
+        ])
+      ) {
+        return "meme";
+      }
+
+
+      return "general";
 
     }
 
 
-    return "general";
-
-}
-
-
-/* =====================================================
-   DETECTAR IDEAS
-===================================================== */
-
-function quiereIdeas(text) {
-
-    const t = normal(text);
-
-    return (
-
-        /no se que hacer/.test(t) ||
-
-        /no se que publicar/.test(t) ||
-
-        /no tengo ideas/.test(t) ||
-
-        /dame ideas/.test(t) ||
-
-        /dame alguna idea/.test(t) ||
-
-        /que puedo publicar/.test(t) ||
-
-        /que puedo hacer/.test(t) ||
-
-        /que publico/.test(t) ||
-
-        /necesito ideas/.test(t) ||
-
-        /ayudame con ideas/.test(t) ||
-
-        /ideas para/.test(t) ||
-
-        /recomiendame/.test(t) ||
-
-        /que contenido/.test(t) ||
-
-        /que podria subir/.test(t) ||
-
-        /que puedo subir/.test(t)
-
-    );
-
-}
-
-
-/* =====================================================
-   SALUDO
-===================================================== */
-
-function esSaludo(text) {
-
-    return /^(hola|holaa|holaaa|hey|hello|buenas|saludos|que tal)$/
-        .test(
-            normal(text).trim()
-        );
-
-}
-
-
-function saludo() {
-
-    const hora =
-        new Date().getHours();
-
-
-    if (hora < 12) {
-
-        return random([
-
-            "¡Buenos días! ⚡ Vamos a darle forma a una idea.",
-
-            "¡Buenos días! ☀️ ¿Qué quieres crear hoy?",
-
-            "Arrancamos. 🚀 Cuéntame qué tienes en mente."
-
-        ]);
-
-    }
-
-
-    if (hora < 19) {
-
-        return random([
-
-            "¡Buenas! ⚡ ¿Qué vamos a crear?",
-
-            "Hey 😎, cuéntame qué tienes pensado.",
-
-            "Vamos a crear algo interesante. 🔥"
-
-        ]);
-
-    }
-
-
-    return random([
-
-        "¡Buenas noches! 🌙 ¿Qué vamos a crear?",
-
-        "Todavía queda tiempo para una buena idea. ⚡",
-
-        "Buenas noches. Cuéntame qué tienes en mente. 🚀"
-
-    ]);
-
-}
-
-
-/* =====================================================
-   OTRA IDEA
-===================================================== */
-
-function esOtra(text) {
-
-    return /^(otra|otro|otra idea|dame otra|otra mas|ninguna|no me gusta|cambia la idea)$/
-        .test(
-            normal(text).trim()
-        );
-
-}
-
-
-/* =====================================================
-   DURACIÓN
-===================================================== */
-
-function detectarDuracion(text) {
-
-    const t = normal(text);
-
-    let m =
-        t.match(
-            /(\d+)\s*(segundo|segundos|seg)/
-        );
-
-    if (m) {
-
-        return Math.max(
-            5,
-            parseInt(m[1])
-        );
-
-    }
-
-
-    m =
-        t.match(
-            /(\d+)\s*(minuto|minutos|min)/
-        );
-
-    if (m) {
-
-        return Math.max(
-            5,
-            parseInt(m[1]) * 60
-        );
-
-    }
-
-
-    return 30;
-
-}
-
-
-/* =====================================================
-   DETALLES
-===================================================== */
-
-function detectarDetalle(text) {
-
-    const t = normal(text);
-
-
-    for (
-        const personaje of CHARACTERS
-    ) {
-
-        if (
-            t.includes(personaje)
-        ) {
-
-            return (
-                "centrando el contenido en " +
-                personaje
-            );
-
+    /* =====================================================
+       GENERAR IDEAS
+       ===================================================== */
+
+    function generateIdeas(text) {
+
+      const t = text.toLowerCase();
+
+      let context = "tu estilo";
+
+      if (
+        containsAny(t, [
+          "gaming",
+          "juego",
+          "valorant",
+          "clash",
+          "minecraft",
+          "fortnite",
+          "roblox"
+        ])
+      ) {
+
+        context = randomFrom(GAMES);
+
+      } else if (
+        containsAny(t, [
+          "negocio",
+          "marca",
+          "producto",
+          "vender"
+        ])
+      ) {
+
+        context = "un proyecto o negocio";
+
+      } else if (
+        containsAny(t, [
+          "meme",
+          "humor"
+        ])
+      ) {
+
+        context = "humor";
+
+      } else if (
+        containsAny(t, [
+          "tiktok",
+          "video",
+          "contenido"
+        ])
+      ) {
+
+        context = "TikTok";
+
+      }
+
+
+      const ideas = [];
+
+      const bases = [
+
+        {
+          title: "El experimento",
+          text:
+            `Haz algo relacionado con ${context} que normalmente no harías. Empieza mostrando el reto y guarda el resultado para los últimos segundos.`
+        },
+
+        {
+          title: "La opinión inesperada",
+          text:
+            `Empieza con una opinión que provoque curiosidad sobre ${context}. Explica tu punto rápidamente y termina preguntando qué piensa la gente.`
+        },
+
+        {
+          title: "La prueba",
+          text:
+            `Toma una idea popular relacionada con ${context} y pruébala por ti mismo. Lo importante es mostrar el proceso, no solamente el resultado.`
+        },
+
+        {
+          title: "El giro",
+          text:
+            `Construye el video como si fuera a pasar una cosa y cambia completamente la situación cerca del final. Ese cambio puede ser el motivo para quedarse mirando.`
         }
 
-    }
-
-
-    for (
-        const juego of GAMES
-    ) {
-
-        if (
-            t.includes(juego)
-        ) {
-
-            return (
-                "centrando el contenido en " +
-                juego
-            );
-
-        }
-
-    }
-
-
-    return "";
-
-}
-
-
-/* =====================================================
-   GENERAR IDEAS
-===================================================== */
-
-function generarIdeas(text) {
-
-    const cat =
-        detectarCategoria(text);
-
-
-    const bancos = {
-
-        gaming: [
-
-            "Haz una serie de retos donde cada video tenga una regla diferente y el resultado sea lo que mantenga la atención.",
-
-            "Compara una estrategia popular contra una que casi nadie utiliza y demuestra cuál funciona mejor.",
-
-            "Empieza el video con el mejor momento y después cuenta cómo llegaste hasta ahí.",
-
-            "Convierte un error de la partida en el protagonista del video.",
-
-            "Haz que los comentarios decidan qué debes intentar en el siguiente video.",
-
-            "Crea una serie intentando conseguir algo específico antes de que termine el video."
-
-        ],
-
-
-        food: [
-
-            "Empieza mostrando el resultado final y después haz que la audiencia descubra cómo llegaste hasta ahí.",
-
-            "Haz una prueba de sabor con una pregunta al principio que solo respondas al final.",
-
-            "Compara dos opciones y deja que la audiencia decida cuál gana.",
-
-            "Muestra qué puedes conseguir con un presupuesto determinado.",
-
-            "Cuenta una pequeña historia alrededor de la comida en lugar de simplemente enseñarla.",
-
-            "Haz una prueba donde el resultado sea imposible de saber hasta el último momento."
-
-        ],
-
-
-        business: [
-
-            "Muestra un problema real del cliente y convierte tu producto o servicio en la solución.",
-
-            "Haz un antes y después que permita entender el valor de lo que ofreces.",
-
-            "Responde una pregunta frecuente de tus clientes mediante una demostración.",
-
-            "Cuenta una historia corta sobre cómo nació tu negocio.",
-
-            "Demuestra algo que la gente probablemente no espera que tu producto pueda hacer.",
-
-            "Convierte una característica de tu producto en una pequeña historia."
-
-        ],
-
-
-        general: [
-
-            "Empieza con una situación completamente normal y añade un giro inesperado.",
-
-            "Haz una lista de tres cosas relacionadas con el tema que poca gente conoce.",
-
-            "Convierte una experiencia cotidiana en una historia de menos de un minuto.",
-
-            "Compara dos opciones y deja que la audiencia tenga que elegir.",
-
-            "Empieza por el resultado y haz que quieran descubrir cómo llegaste ahí.",
-
-            "Convierte una pregunta común en una pequeña prueba y muestra el resultado.",
-
-            "Haz una serie donde cada publicación continúe la anterior."
-
-        ]
-
-    };
-
-
-    return {
-
-        categoria: cat,
-
-        ideas: bancos[cat]
-            .sort(() => Math.random() - .5)
-            .slice(0, 5)
-
-    };
-
-}
-
-
-/* =====================================================
-   MOSTRAR IDEAS
-===================================================== */
-
-function mostrarIdeas(text) {
-
-    const resultado =
-        generarIdeas(text);
-
-
-    const frases = [
-
-        "Vamos a quitarle presión a la página en blanco:",
-
-        "No necesitas esperar a que llegue la inspiración. Mira estas opciones:",
-
-        "Si yo tuviera que empezar desde cero, probaría estas:",
-
-        "Hay varias formas de convertir ese tema en contenido:",
-
-        "Vamos a buscar un ángulo diferente:",
-
-        "Aquí hay varias rutas que podrían funcionar:"
-
-    ];
-
-
-    let html = `
-
-    <div class="fade">
-
-        <div class="card p-4 md:p-5">
-
-            <div class="text-sm font-bold mb-4">
-
-                ${random(frases)}
-
-            </div>
-
-            <div class="space-y-2">
-
-    `;
-
-
-    resultado.ideas.forEach(
-        (idea, index) => {
-
-            const safeIdea =
-                encodeURIComponent(
-                    idea
-                );
-
-
-            html += `
-
-            <button
-                onclick="usarIdea('${safeIdea}')"
-                class="w-full text-left
-                bg-panel
-                border border-borde
-                rounded-xl p-3
-                hover:border-verde
-                hover:-translate-y-[1px]
-                transition"
-            >
-
-                <div class="flex gap-3">
-
-                    <div
-                        class="w-6 h-6
-                        rounded-lg bg-vino
-                        flex items-center
-                        justify-center
-                        text-[10px]
-                        font-black
-                        shrink-0"
-                    >
-
-                        ${index + 1}
-
-                    </div>
-
-
-                    <div>
-
-                        <div
-                            class="text-[11px]
-                            font-semibold
-                            text-gray-200
-                            leading-relaxed"
-                        >
-
-                            ${escapeHTML(idea)}
-
-                        </div>
-
-
-                        <div
-                            class="text-[9px]
-                            text-gray-600
-                            mt-1.5"
-                        >
-
-                            Toca para desarrollar esta idea.
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-            </button>
-
-            `;
-
-        }
-    );
-
-
-    html += `
-
-            </div>
-
-
-            <div
-                class="mt-4 pt-3
-                border-t border-borde
-                text-[10px] text-gray-500"
-            >
-
-                También puedes escribir
-                <strong class="text-gray-300">
-                    "otra"
-                </strong>
-                para buscar un enfoque diferente.
-
-            </div>
-
-        </div>
-
-    </div>
-
-    `;
-
-
-    mensajeBot(html);
-
-}
-
-
-/* =====================================================
-   USAR IDEA
-===================================================== */
-
-function usarIdea(encoded) {
-
-    const idea =
-        decodeURIComponent(encoded);
-
-
-    const input =
-        document.getElementById("input");
-
-
-    input.value =
-        "Desarrolla esta idea: " +
-        idea;
-
-
-    input.focus();
-
-
-    toast("💡 Idea preparada");
-
-}
-
-
-/* =====================================================
-   CREAR PROPUESTA
-===================================================== */
-
-function generarPropuesta(
-    topic,
-    detalle = "",
-    seconds = 30
-) {
-
-    const cat =
-        detectarCategoria(
-            topic + " " + detalle
-        );
-
-
-    const formato =
-        random(FORMATOS);
-
-
-    const hook =
-        random(
-            HOOKS[cat]
-        );
-
-
-    const motivacion =
-        random(MOTIVACIONES);
-
-
-    const cta =
-        random(CTAS);
-
-
-    const effectPool =
-        [...EFFECTS[cat]];
-
-
-    effectPool.sort(
-        () => Math.random() - .5
-    );
-
-
-    const selectedEffects =
-        effectPool.slice(0, 3);
-
-
-    const start =
-        Math.max(
-            3,
-            Math.floor(seconds * .18)
-        );
-
-
-    const middle =
-        Math.max(
-            start + 2,
-            Math.floor(seconds * .65)
-        );
-
-
-    let escenas;
-
-
-    if (cat === "gaming") {
-
-        escenas = [
-
-            `Abre directamente con una parte interesante de <strong>${escapeHTML(topic)}</strong>. Evita una introducción larga.`,
-
-            `Presenta rápidamente la situación y aumenta el ritmo. ${escapeHTML(detalle || "Haz que la audiencia quiera descubrir qué ocurre.")}`,
-
-            `Guarda el mejor momento para el final y corta cerca de la reacción o del resultado.`
-
-        ];
-
-    }
-
-
-    else if (cat === "food") {
-
-        escenas = [
-
-            `Empieza con un plano cercano de <strong>${escapeHTML(topic)}</strong> y enseña primero el resultado que quieres conseguir.`,
-
-            `Muestra el proceso alrededor de <strong>${escapeHTML(detalle || "el detalle más atractivo")}</strong> y elimina todo lo que no aporte.`,
-
-            `Termina con el resultado final y una toma que haga que la audiencia quiera probarlo.`
-
-        ];
-
-    }
-
-
-    else if (cat === "business") {
-
-        escenas = [
-
-            `Presenta rápidamente el problema relacionado con <strong>${escapeHTML(topic)}</strong>.`,
-
-            `Demuestra cómo <strong>${escapeHTML(detalle || "tu producto o servicio")}</strong> puede resolverlo.`,
-
-            `Cierra con un beneficio concreto y una llamada a la acción sencilla.`
-
-        ];
-
-    }
-
-
-    else {
-
-        escenas = [
-
-            `Empieza mostrando <strong>${escapeHTML(topic)}</strong> sin explicar demasiado.`,
-
-            `Desarrolla la idea alrededor de <strong>${escapeHTML(detalle || "la parte más interesante")}</strong>.`,
-
-            `Reserva el giro, resultado o dato más importante para los últimos segundos.`
-
-        ];
-
-    }
-
-
-    const id =
-        "idea_" +
-        Date.now() +
-        "_" +
-        Math.random()
-            .toString(36)
-            .slice(2, 8);
-
-
-    const titulo = {
-
-        gaming: [
-
-            "El concepto que probaría primero",
-
-            "Una forma diferente de convertir esto en contenido",
-
-            "El clip que puede destacar",
-
-            "Una idea de gaming con otro giro"
-
-        ],
-
-        food: [
-
-            "Una forma distinta de mostrarlo",
-
-            "El video que haría para llamar la atención",
-
-            "Convierte esto en contenido",
-
-            "Una idea que entra por los ojos"
-
-        ],
-
-        business: [
-
-            "Una forma diferente de presentar tu marca",
-
-            "El concepto que probaría primero",
-
-            "Convierte tu producto en contenido",
-
-            "Una campaña alrededor de esta idea"
-
-        ],
-
-        general: [
-
-            "Una idea con un giro diferente",
-
-            "Así convertiría esto en contenido",
-
-            "El concepto que probaría",
-
-            "Una forma diferente de contarlo",
-
-            "Una idea que vale la pena probar"
-
-        ]
-
-    };
-
-
-    const ideaHTML = `
-
-    <div class="fade">
-
-        <div class="card p-4 md:p-5">
-
-
-            <!-- CABECERA -->
-
-            <div
-                class="flex items-start
-                justify-between gap-3 mb-5"
-            >
-
-                <div>
-
-                    <div
-                        class="text-[9px]
-                        uppercase
-                        tracking-widest
-                        text-verde
-                        font-bold mb-1"
-                    >
-
-                        PROPUESTA
-
-                    </div>
-
-
-                    <h2
-                        class="text-base
-                        md:text-lg
-                        font-black"
-                    >
-
-                        ${escapeHTML(
-                            random(titulo[cat])
-                        )}
-
-                    </h2>
-
-                </div>
-
-
-                <div
-                    class="text-[9px]
-                    text-gray-500
-                    bg-panel
-                    border border-borde
-                    rounded-full
-                    px-2 py-1
-                    shrink-0"
-                >
-
-                    ${seconds}s
-
-                </div>
-
-            </div>
-
-
-            <!-- CONCEPTO -->
-
-            <div class="mb-5">
-
-                <div
-                    class="text-[11px]
-                    font-black
-                    text-verde mb-2"
-                >
-
-                    💡 CONCEPTO
-
-                </div>
-
-
-                <div
-                    class="text-xs
-                    text-gray-300
-                    leading-relaxed"
-                >
-
-                    Convertir
-                    <strong>${escapeHTML(topic)}</strong>
-                    en una pieza de contenido
-                    usando un enfoque de
-                    <strong>${escapeHTML(formato)}</strong>.
-
-                    La clave será mostrar la idea
-                    en acción en lugar de simplemente
-                    explicarla.
-
-                </div>
-
-            </div>
-
-
-            <!-- HOOK -->
-
-            <div class="mb-5">
-
-                <div
-                    class="text-[11px]
-                    font-black
-                    text-verde mb-2"
-                >
-
-                    🪝 PRIMEROS SEGUNDOS
-
-                </div>
-
-
-                <div
-                    class="bg-panel
-                    border border-borde
-                    rounded-xl p-3"
-                >
-
-                    <div
-                        class="text-sm
-                        font-bold
-                        leading-relaxed"
-                    >
-
-                        "${escapeHTML(hook)}"
-
-                    </div>
-
-
-                    <div
-                        class="text-[9px]
-                        text-gray-600 mt-2"
-                    >
-
-                        La primera frase crea curiosidad
-                        y evita que el video empiece demasiado lento.
-
-                    </div>
-
-                </div>
-
-            </div>
-
-
-            <!-- GUION -->
-
-            <div class="mb-5">
-
-                <div
-                    class="text-[11px]
-                    font-black
-                    text-verde mb-2"
-                >
-
-                    🎬 GUION
-
-                </div>
-
-
-                <div class="space-y-2">
-
-
-                    <div
-                        class="bg-panel
-                        border border-borde
-                        rounded-xl p-3"
-                    >
-
-                        <div class="flex gap-3">
-
-                            <div
-                                class="text-[10px]
-                                font-black
-                                text-verde
-                                shrink-0"
-                            >
-
-                                0-${start}s
-
-                            </div>
-
-
-                            <div>
-
-                                <div
-                                    class="text-[9px]
-                                    font-bold
-                                    text-gray-500"
-                                >
-
-                                    ENTRADA
-
-                                </div>
-
-
-                                <div
-                                    class="text-[11px]
-                                    text-gray-300
-                                    leading-relaxed
-                                    mt-1"
-                                >
-
-                                    ${escenas[0]}
-
-                                </div>
-
-                            </div>
-
-                        </div>
-
-                    </div>
-
-
-                    <div
-                        class="bg-panel
-                        border border-borde
-                        rounded-xl p-3"
-                    >
-
-                        <div class="flex gap-3">
-
-                            <div
-                                class="text-[10px]
-                                font-black
-                                text-verde
-                                shrink-0"
-                            >
-
-                                ${start}-${middle}s
-
-                            </div>
-
-
-                            <div>
-
-                                <div
-                                    class="text-[9px]
-                                    font-bold
-                                    text-gray-500"
-                                >
-
-                                    DESARROLLO
-
-                                </div>
-
-
-                                <div
-                                    class="text-[11px]
-                                    text-gray-300
-                                    leading-relaxed
-                                    mt-1"
-                                >
-
-                                    ${escenas[1]}
-
-                                </div>
-
-                            </div>
-
-                        </div>
-
-                    </div>
-
-
-                    <div
-                        class="bg-panel
-                        border border-borde
-                        rounded-xl p-3"
-                    >
-
-                        <div class="flex gap-3">
-
-                            <div
-                                class="text-[10px]
-                                font-black
-                                text-verde
-                                shrink-0"
-                            >
-
-                                ${middle}-${seconds}s
-
-                            </div>
-
-
-                            <div>
-
-                                <div
-                                    class="text-[9px]
-                                    font-bold
-                                    text-gray-500"
-                                >
-
-                                    CIERRE
-
-                                </div>
-
-
-                                <div
-                                    class="text-[11px]
-                                    text-gray-300
-                                    leading-relaxed
-                                    mt-1"
-                                >
-
-                                    ${escenas[2]}
-
-                                </div>
-
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-
-            <!-- EDICIÓN -->
-
-            <div class="mb-5">
-
-                <div
-                    class="text-[11px]
-                    font-black
-                    text-verde mb-2"
-                >
-
-                    ✂️ EDICIÓN
-
-                </div>
-
-
-                <div
-                    class="grid
-                    grid-cols-1
-                    sm:grid-cols-3
-                    gap-2"
-                >
-
-                    ${selectedEffects.map(
-                        (effect, i) => `
-
-                        <div
-                            class="bg-panel
-                            border border-borde
-                            rounded-xl p-3"
-                        >
-
-                            <div
-                                class="text-[9px]
-                                text-gray-600"
-                            >
-
-                                ${
-                                    [
-                                        "ENTRADA",
-                                        "MOMENTO CLAVE",
-                                        "CIERRE"
-                                    ][i]
-                                }
-
-                            </div>
-
-
-                            <div
-                                class="text-[10px]
-                                font-bold mt-1"
-                            >
-
-                                ${escapeHTML(effect)}
-
-                            </div>
-
-                        </div>
-
-                    `).join("")}
-
-                </div>
-
-            </div>
-
-
-            <!-- AUDIO -->
-
-            <div class="mb-5">
-
-                <div
-                    class="text-[11px]
-                    font-black
-                    text-verde mb-2"
-                >
-
-                    🎵 AUDIO
-
-                </div>
-
-
-                <div
-                    class="bg-panel
-                    border border-borde
-                    rounded-xl p-3"
-                >
-
-                    <div
-                        class="text-[11px]
-                        text-gray-300"
-                    >
-
-                        ${
-                            cat === "gaming"
-
-                            ? "Beat energético con un golpe fuerte en el momento clave."
-
-                            : cat === "food"
-
-                            ? "Música moderna dejando respirar los sonidos reales del proceso."
-
-                            : cat === "business"
-
-                            ? "Instrumental moderno y limpio que no compita con la explicación."
-
-                            : "Beat moderno con cambios de ritmo para marcar los cortes."
-                        }
-
-                    </div>
-
-                </div>
-
-            </div>
-
-
-            <!-- CTA -->
-
-            <div class="mb-5">
-
-                <div
-                    class="text-[11px]
-                    font-black
-                    text-verde mb-2"
-                >
-
-                    🎯 FINAL
-
-                </div>
-
-
-                <div
-                    class="bg-vino/20
-                    border border-vino
-                    rounded-xl p-3"
-                >
-
-                    <div
-                        class="text-xs
-                        font-bold"
-                    >
-
-                        "${escapeHTML(cta)}"
-
-                    </div>
-
-                </div>
-
-            </div>
-
-
-            <!-- MOTIVACIÓN -->
-
-            <div
-                class="bg-panel
-                border border-borde
-                rounded-xl p-3"
-            >
-
-                <div
-                    class="text-[9px]
-                    uppercase
-                    tracking-widest
-                    text-verde
-                    font-bold mb-1"
-                >
-
-                    🚀 by SparkyKrea
-
-                </div>
-
-
-                <div
-                    class="text-[10px]
-                    text-gray-400
-                    leading-relaxed"
-                >
-
-                    ${escapeHTML(motivacion)}
-
-                </div>
-
-            </div>
-
-
-            <!-- ACCIONES -->
-
-            <div
-                class="flex flex-wrap
-                gap-1.5
-                pt-3 mt-4
-                border-t border-borde"
-            >
-
-                <button
-                    class="action"
-                    onclick="copiarIdea('${id}')"
-                >
-
-                    <i class="fa-regular fa-copy"></i>
-
-                    Copiar
-
-                </button>
-
-
-                <button
-                    class="action"
-                    onclick="guardarIdea('${id}')"
-                >
-
-                    <i class="fa-regular fa-star"></i>
-
-                    Guardar
-
-                </button>
-
-
-                <button
-                    class="action"
-                    onclick="otraVersion('${id}')"
-                >
-
-                    <i class="fa-solid fa-rotate"></i>
-
-                    Otra versión
-
-                </button>
-
-
-                <button
-                    class="action"
-                    onclick="mejorarIdea('${id}')"
-                >
-
-                    <i class="fa-solid fa-wand-magic-sparkles"></i>
-
-                    Mejorar
-
-                </button>
-
-            </div>
-
-        </div>
-
-    </div>
-
-    `;
-
-
-    const plain =
-
-`SPARKYKREA
-
-PROPUESTA
-
-${random(titulo[cat])}
-
-CONCEPTO
-
-Convertir ${topic} en contenido usando un enfoque de ${formato}.
-
-HOOK
-
-"${hook}"
-
-GUION
-
-0-${start}s:
-${stripHTML(escenas[0])}
-
-${start}-${middle}s:
-${stripHTML(escenas[1])}
-
-${middle}-${seconds}s:
-${stripHTML(escenas[2])}
-
-EDICIÓN
-
-${selectedEffects.join("\n")}
-
-CTA
-
-"${cta}"
-
-MOTIVACIÓN
-
-${motivacion}`;
-
-
-    const data = {
-
-        id,
-
-        topic,
-
-        detalle,
-
-        categoria: cat,
-
-        duracion: seconds,
-
-        html: ideaHTML,
-
-        plain,
-
-        createdAt: Date.now()
-
-    };
-
-
-    generations[id] = data;
-
-    currentIdea = data;
-
-    saveData();
-
-
-    return data;
-
-}
-
-
-/* =====================================================
-   MENSAJE USUARIO
-===================================================== */
-
-function mensajeUsuario(text) {
-
-    const box =
-        document.getElementById("messages");
-
-
-    box.classList.remove("hidden");
-
-
-    const el =
-        document.createElement("div");
-
-
-    el.className =
-        "fade flex justify-end";
-
-
-    el.innerHTML = `
-
-        <div
-            class="max-w-[85%]
-            bg-vino
-            rounded-2xl
-            rounded-br-md
-            px-3.5 py-2.5
-            text-xs
-            leading-relaxed"
-        >
-
-            ${escapeHTML(text)}
-
-        </div>
-
-    `;
-
-
-    box.appendChild(el);
-
-    scrollBottom();
-
-}
-
-
-/* =====================================================
-   MENSAJE BOT
-===================================================== */
-
-function mensajeBot(html) {
-
-    const box =
-        document.getElementById("messages");
-
-
-    box.classList.remove("hidden");
-
-
-    const el =
-        document.createElement("div");
-
-
-    el.className =
-        "fade flex gap-2 items-start";
-
-
-    el.innerHTML = `
-
-        <div class="botAvatar">
-
-            <i class="fa-solid fa-bolt text-[10px]"></i>
-
-        </div>
-
-
-        <div class="min-w-0 flex-1">
-
-            ${html}
-
-        </div>
-
-    `;
-
-
-    box.appendChild(el);
-
-    scrollBottom();
-
-}
-
-
-/* =====================================================
-   PROCESAR MENSAJE
-===================================================== */
-
-function procesar(text) {
-
-
-    /* SALUDO */
-
-    if (esSaludo(text)) {
-
-        return {
-
-            html: `
-
-                <div
-                    class="card p-4
-                    text-xs
-                    text-gray-300
-                    leading-relaxed"
-                >
-
-                    ${saludo()}
-
-                    <br><br>
-
-                    Cuéntame qué quieres crear.
-                    Puedes traerme una idea concreta,
-                    una duda o simplemente decirme
-                    que no sabes qué publicar.
-
-                </div>
-
-            `,
-
-            id: null
-
-        };
-
-    }
-
-
-    /* OTRA */
-
-    if (esOtra(text)) {
-
-        mostrarIdeas(
-            currentIdea?.topic ||
-            "contenido"
-        );
-
-        return null;
-
-    }
-
-
-    /* IDEAS */
-
-    if (quiereIdeas(text)) {
-
-        mostrarIdeas(text);
-
-        return null;
-
-    }
-
-
-    /* PROPUESTA */
-
-    return generarPropuesta(
-
-        text,
-
-        detectarDetalle(text),
-
-        detectarDuracion(text)
-
-    );
-
-}
-
-
-/* =====================================================
-   ENVIAR
-===================================================== */
-
-function enviar(event) {
-
-    event.preventDefault();
-
-
-    const input =
-        document.getElementById("input");
-
-
-    const text =
-        input.value.trim();
-
-
-    if (!text) {
-        return;
-    }
-
-
-    input.value = "";
-
-
-    /* Ocultar bienvenida */
-
-    document
-        .getElementById("welcome")
-        .classList.add("hidden");
-
-
-    /* Estado */
-
-    document
-        .getElementById("headerStatus")
-        .textContent =
-        "Proyecto en curso";
-
-
-    mensajeUsuario(text);
-
-
-    /* CARGANDO */
-
-    const loading =
-        document.createElement("div");
-
-
-    loading.id = "loading";
-
-
-    loading.className =
-        "fade flex gap-2 items-center text-gray-600 text-[10px]";
-
-
-    loading.innerHTML = `
-
-        <div class="botAvatar">
-
-            <i class="fa-solid fa-bolt text-[10px]"></i>
-
-        </div>
-
-
-        <div>
-
-            SparkyKrea está creando
-
-            <span class="typingDot"></span>
-            <span class="typingDot"></span>
-            <span class="typingDot"></span>
-
-        </div>
-
-    `;
-
-
-    document
-        .getElementById("messages")
-        .appendChild(loading);
-
-
-    scrollBottom();
-
-
-    setTimeout(() => {
-
-        if (loading.parentNode) {
-            loading.remove();
-        }
-
-
-        const result =
-            procesar(text);
-
-
-        if (result) {
-
-            if (result.html) {
-                mensajeBot(result.html);
-            }
-
-            if (result.id) {
-                guardarChat(
-                    text,
-                    result.id
-                );
-            }
-
-        }
-        else {
-
-            guardarChat(
-                text,
-                null
-            );
-
-        }
-
-    }, 550);
-
-}
-
-
-/* =====================================================
-   GUARDAR CHAT
-===================================================== */
-
-function guardarChat(
-    text,
-    ideaID
-) {
-
-    if (!currentChat) {
-
-        currentChat = {
-
-            id:
-                Date.now().toString(),
-
-            title:
-                text.length > 42
-                ? text.substring(0, 42) + "..."
-                : text,
-
-            messages: [],
-
-            createdAt:
-                Date.now()
-
-        };
-
-
-        chats.unshift(
-            currentChat
-        );
-
-    }
-
-
-    currentChat.messages.push({
-
-        user: text,
-
-        idea: ideaID || null
-
-    });
-
-
-    saveData();
-
-    renderHistory();
-
-}
-
-
-/* =====================================================
-   HISTORIAL
-===================================================== */
-
-function renderHistory() {
-
-    const history =
-        document.getElementById(
-            "history"
-        );
-
-
-    history.innerHTML = "";
-
-
-    chats
-        .slice(0, 25)
-        .forEach(chat => {
-
-
-            const row =
-                document.createElement("div");
-
-
-            row.className =
-                "group flex items-center gap-1";
-
-
-            const button =
-                document.createElement("button");
-
-
-            button.className =
-                "flex-1 text-left truncate " +
-                "px-2.5 py-2 rounded-lg " +
-                "text-[10px] text-gray-500 " +
-                "hover:bg-card " +
-                "hover:text-gray-300 " +
-                "transition";
-
-
-            button.innerHTML = `
-
-                <i
-                    class="fa-regular
-                    fa-message
-                    mr-1.5
-                    text-[8px]"
-                ></i>
-
-                ${escapeHTML(
-                    chat.title
-                )}
-
-            `;
-
-
-            button.onclick = () =>
-                abrirChat(chat.id);
-
-
-            const borrar =
-                document.createElement("button");
-
-
-            borrar.className =
-                "opacity-0 " +
-                "group-hover:opacity-100 " +
-                "text-gray-600 " +
-                "hover:text-red-400 " +
-                "p-1";
-
-
-            borrar.innerHTML =
-                '<i class="fa-solid fa-trash text-[9px]"></i>';
-
-
-            borrar.onclick = event => {
-
-                event.stopPropagation();
-
-                borrarChat(
-                    chat.id
-                );
-
-            };
-
-
-            row.appendChild(button);
-
-            row.appendChild(borrar);
-
-            history.appendChild(row);
-
+      ];
+
+
+      bases.forEach((idea, index) => {
+
+        ideas.push({
+          ...idea,
+          hook: uniqueRandom(HOOKS, usedHooks),
+          format: uniqueRandom(FORMATOS, usedFormats),
+          music: randomFrom(MUSICA),
+          effect: randomFrom(EFFECTS),
+          cta: randomFrom(CTA),
+          id: Date.now() + index + Math.random()
         });
 
-}
+      });
 
 
-/* =====================================================
-   ABRIR CHAT
-===================================================== */
+      saveStorage(
+        "sparkykrea_hooks",
+        usedHooks
+      );
 
-function abrirChat(id) {
-
-    const chat =
-        chats.find(
-            x => x.id === id
-        );
+      saveStorage(
+        "sparkykrea_formats",
+        usedFormats
+      );
 
 
-    if (!chat) {
+      return ideas;
+
+    }
+
+
+    /* =====================================================
+       GENERAR RESPUESTA NORMAL
+       ===================================================== */
+
+    function generateResponse(text) {
+
+      const intent = detectIntent(text);
+
+      const hook = uniqueRandom(
+        HOOKS,
+        usedHooks
+      );
+
+      const format = uniqueRandom(
+        FORMATOS,
+        usedFormats
+      );
+
+      const motivation = getMotivation();
+
+      saveStorage(
+        "sparkykrea_hooks",
+        usedHooks
+      );
+
+      saveStorage(
+        "sparkykrea_formats",
+        usedFormats
+      );
+
+
+      let title = "Vamos a darle forma";
+
+      let intro = randomFrom(RESPUESTAS);
+
+
+      if (intent === "gaming") {
+
+        title = "Tenemos contenido aquí";
+
+        intro =
+          "Yo aprovecharía el momento del juego y construiría el video alrededor de una situación concreta, en vez de simplemente subir la partida completa.";
+
+      }
+
+
+      if (intent === "meme") {
+
+        title = "Haz que el meme tenga historia";
+
+        intro =
+          "En vez de depender solamente del chiste, puedes crear una mini situación que prepare el remate.";
+
+      }
+
+
+      if (intent === "business") {
+
+        title = "Convirtámoslo en contenido";
+
+        intro =
+          "Para un negocio, intentaría que el contenido entretenga primero y venda después. La gente debe tener una razón para quedarse.";
+
+      }
+
+
+      if (intent === "content") {
+
+        title = "Una forma de convertirlo en video";
+
+        intro =
+          "La idea puede funcionar mejor si el comienzo plantea una pregunta o problema y el resultado aparece después.";
+
+      }
+
+
+      const html = `
+
+        <div class="response-header">
+
+          <div class="response-avatar">
+            <i class="fa-solid fa-wand-magic-sparkles"></i>
+          </div>
+
+          <div>
+            <div class="response-name">
+              SparkyKrea
+            </div>
+
+            <div class="response-label">
+              propuesta creativa
+            </div>
+          </div>
+
+        </div>
+
+
+        <div class="response-title">
+          ${escapeHTML(title)}
+        </div>
+
+
+        <div class="response-text">
+          ${escapeHTML(intro)}
+        </div>
+
+
+        <div class="idea-box">
+
+          <div class="idea-box-title">
+            CONCEPTO
+          </div>
+
+          <p>
+            <strong>Hook:</strong>
+            ${escapeHTML(hook)}
+            <br><br>
+
+            <strong>Formato:</strong>
+            ${escapeHTML(format)}
+            <br><br>
+
+            <strong>Desarrollo:</strong>
+            Empieza rápido, elimina las partes que no aporten y guarda el momento más fuerte para después de crear suficiente curiosidad.
+          </p>
+
+        </div>
+
+
+        <div class="idea-box">
+
+          <div class="idea-box-title">
+            EDICIÓN
+          </div>
+
+          <p>
+            Usa
+            ${escapeHTML(randomFrom(EFFECTS))}
+            y acompáñalo con
+            ${escapeHTML(randomFrom(MUSICA))}.
+            No llenes cada segundo de efectos: deja que los momentos importantes respiren.
+          </p>
+
+        </div>
+
+
+        <div class="motivation">
+          ✦ ${escapeHTML(motivation)}
+        </div>
+
+
+        <div class="actions">
+
+          <button
+            class="action-button"
+            onclick="saveCurrentResponse(this)">
+
+            <i class="fa-regular fa-star"></i>
+            Guardar
+
+          </button>
+
+
+          <button
+            class="action-button"
+            onclick="copyCurrentResponse(this)">
+
+            <i class="fa-regular fa-copy"></i>
+            Copiar
+
+          </button>
+
+
+          <button
+            class="action-button"
+            onclick="anotherVersion()">
+
+            <i class="fa-solid fa-rotate"></i>
+            Otra versión
+
+          </button>
+
+
+          <button
+            class="action-button"
+            onclick="improveCurrentResponse()">
+
+            <i class="fa-solid fa-pen"></i>
+            Mejorar
+
+          </button>
+
+        </div>
+
+      `;
+
+
+      return {
+        html,
+        plain:
+          `${title}\n\n${intro}\n\nHook: ${hook}\nFormato: ${format}\n\nMotivación: ${motivation}`
+      };
+
+    }
+
+
+    /* =====================================================
+       MOSTRAR RESPUESTA
+       ===================================================== */
+
+    function addUserMessage(text) {
+
+      const div = document.createElement("div");
+
+      div.className =
+        "message user-message";
+
+      div.innerHTML = `
+
+        <div class="user-bubble">
+          ${escapeHTML(text)}
+        </div>
+
+      `;
+
+      document
+        .getElementById("chat")
+        .appendChild(div);
+
+    }
+
+
+    function addBotResponse(result) {
+
+      const div = document.createElement("div");
+
+      div.className =
+        "message bot-message";
+
+      div.innerHTML = `
+
+        <div class="response-card"
+             data-plain="${escapeHTML(result.plain)}">
+
+          ${result.html}
+
+        </div>
+
+      `;
+
+      document
+        .getElementById("chat")
+        .appendChild(div);
+
+      div.scrollIntoView({
+        behavior: "smooth",
+        block: "nearest"
+      });
+
+    }
+
+
+    /* =====================================================
+       MOSTRAR IDEAS
+       ===================================================== */
+
+    function addIdeas(ideas) {
+
+      const motivation = getMotivation();
+
+      const div = document.createElement("div");
+
+      div.className =
+        "message bot-message";
+
+      let cards = "";
+
+      ideas.forEach((idea, index) => {
+
+        cards += `
+
+          <div class="idea-card">
+
+            <div class="idea-number">
+              Idea ${index + 1}
+            </div>
+
+            <h3>
+              ${escapeHTML(idea.title)}
+            </h3>
+
+            <p>
+              ${escapeHTML(idea.text)}
+            </p>
+
+            <div style="
+              margin-top:11px;
+              color:#10B981;
+              font-size:11px;
+              line-height:1.5;
+            ">
+
+              <strong>Hook:</strong>
+              ${escapeHTML(idea.hook)}
+
+              <br>
+
+              <strong>Formato:</strong>
+              ${escapeHTML(idea.format)}
+
+            </div>
+
+            <div class="actions">
+
+              <button
+                class="action-button"
+                onclick="saveIdeaFromCard(this)">
+
+                <i class="fa-regular fa-star"></i>
+                Guardar
+
+              </button>
+
+              <button
+                class="action-button"
+                onclick="copyIdeaFromCard(this)">
+
+                <i class="fa-regular fa-copy"></i>
+                Copiar
+
+              </button>
+
+            </div>
+
+          </div>
+
+        `;
+
+      });
+
+
+      div.innerHTML = `
+
+        <div class="response-card">
+
+          <div class="response-header">
+
+            <div class="response-avatar">
+              <i class="fa-solid fa-lightbulb"></i>
+            </div>
+
+            <div>
+
+              <div class="response-name">
+                SparkyKrea
+              </div>
+
+              <div class="response-label">
+                ideas para explorar
+              </div>
+
+            </div>
+
+          </div>
+
+
+          <div class="response-title">
+            Vamos a probar algo diferente.
+          </div>
+
+
+          <div class="response-text">
+            No hace falta esperar a que aparezca una idea perfecta.
+            Aquí tienes varias direcciones que puedes convertir en contenido.
+          </div>
+
+
+          <div class="ideas-grid">
+            ${cards}
+          </div>
+
+
+          <div class="motivation">
+            ✦ ${escapeHTML(motivation)}
+          </div>
+
+        </div>
+
+      `;
+
+
+      document
+        .getElementById("chat")
+        .appendChild(div);
+
+    }
+
+
+    /* =====================================================
+       ENVIAR
+       ===================================================== */
+
+    function sendMessage() {
+
+      const input =
+        document.getElementById("prompt");
+
+      const text =
+        cleanText(input.value);
+
+      if (!text) return;
+
+
+      input.value = "";
+      input.style.height = "auto";
+
+
+      const welcome =
+        document.getElementById("welcome");
+
+      if (welcome) {
+
+        welcome.style.display = "none";
+
+      }
+
+
+      addUserMessage(text);
+
+
+      const intent =
+        detectIntent(text);
+
+
+      let result;
+
+
+      if (intent === "ideas") {
+
+        const ideas =
+          generateIdeas(text);
+
+        addIdeas(ideas);
+
+        currentChat.push({
+          type: "ideas",
+          user: text,
+          data: ideas
+        });
+
+      } else {
+
+        result =
+          generateResponse(text);
+
+        addBotResponse(result);
+
+        currentChat.push({
+          type: "response",
+          user: text,
+          bot: result.plain
+        });
+
+      }
+
+
+      saveCurrentChat();
+
+    }
+
+
+    /* =====================================================
+       GUARDAR CHAT
+       ===================================================== */
+
+    function saveCurrentChat() {
+
+      if (!currentChat.length) {
         return;
-    }
+      }
 
 
-    currentChat = chat;
+      const first =
+        currentChat[0].user || "Proyecto sin nombre";
 
 
-    document
-        .getElementById("welcome")
-        .classList.add("hidden");
-
-
-    const box =
-        document.getElementById(
-            "messages"
+      const existing =
+        chats.find(
+          chat => chat.id === currentChat.id
         );
 
 
-    box.classList.remove("hidden");
+      if (existing) {
 
-    box.innerHTML = "";
+        existing.messages =
+          currentChat;
 
+        existing.updated =
+          Date.now();
 
-    chat.messages.forEach(message => {
+      } else {
 
-        mensajeUsuario(
-            message.user
-        );
+        const chat = {
 
+          id: Date.now(),
 
-        if (message.idea) {
+          title:
+            first.substring(0, 45),
 
-            const idea =
-                generations[
-                    message.idea
-                ];
+          messages:
+            currentChat,
 
+          updated:
+            Date.now()
 
-            if (idea) {
+        };
 
-                mensajeBot(
-                    idea.html
-                );
+        chats.unshift(chat);
 
-            }
+        currentChat.id =
+          chat.id;
 
-        }
-
-    });
-
-
-    document
-        .getElementById("headerStatus")
-        .textContent =
-        "Proyecto en curso";
+      }
 
 
-    closeSidebar();
-
-    scrollBottom();
-
-}
+      chats =
+        chats.slice(0, 30);
 
 
-/* =====================================================
-   BORRAR CHAT
-===================================================== */
-
-function borrarChat(id) {
-
-    chats =
-        chats.filter(
-            x => x.id !== id
-        );
+      saveStorage(
+        "sparkykrea_chats",
+        chats
+      );
 
 
-    if (
-        currentChat &&
-        currentChat.id === id
-    ) {
-
-        nuevoProyecto(false);
+      renderRecent();
 
     }
 
 
-    saveData();
+    /* =====================================================
+       NUEVO PROYECTO
+       ===================================================== */
 
-    renderHistory();
+    function newProject() {
 
-    toast("Proyecto eliminado");
+      currentChat = [];
 
-}
-
-
-/* =====================================================
-   NUEVO PROYECTO
-===================================================== */
-
-function nuevoProyecto(close = true) {
-
-    currentChat = null;
-
-    currentIdea = null;
-
-
-    document
-        .getElementById("welcome")
-        .classList.remove("hidden");
-
-
-    document
-        .getElementById("messages")
-        .classList.add("hidden");
-
-
-    document
-        .getElementById("messages")
+      document
+        .getElementById("chat")
         .innerHTML = "";
 
 
-    document
-        .getElementById("input")
-        .value = "";
+      const welcome =
+        document.getElementById("welcome");
+
+      if (welcome) {
+
+        welcome.style.display = "block";
+
+      }
 
 
-    document
-        .getElementById("headerStatus")
-        .textContent =
-        "Nuevo proyecto";
+      document
+        .getElementById("prompt")
+        .focus();
 
 
-    document
-        .getElementById("welcomeTitle")
-        .textContent =
-        random([
-
-            "¿Qué vamos a crear?",
-
-            "Cuéntame tu idea.",
-
-            "¿Qué tienes en mente?",
-
-            "Vamos a crear algo.",
-
-            "¿Qué quieres convertir en contenido?",
-
-            "Dale, ¿qué hacemos hoy?"
-
-        ]);
-
-
-    if (
-        close &&
-        window.innerWidth < 768
-    ) {
-
-        closeSidebar();
+      closeMobileMenu();
 
     }
 
 
-    setTimeout(() => {
+    /* =====================================================
+       RECIENTES
+       ===================================================== */
 
-        document
-            .getElementById("input")
-            .focus();
+    function renderRecent() {
 
-    }, 100);
+      const list =
+        document.getElementById("recentList");
 
-}
+      list.innerHTML = "";
 
 
-/* =====================================================
-   COPIAR
-===================================================== */
-
-async function copiarIdea(id) {
-
-    const idea =
-        generations[id];
-
-
-    if (!idea) {
-
-        toast("No encontré esa idea");
-
-        return;
-
-    }
-
-
-    try {
-
-        await navigator.clipboard.writeText(
-            idea.plain
-        );
-
-
-        toast("📋 Idea copiada");
-
-    }
-    catch {
-
-        const area =
-            document.createElement(
-                "textarea"
-            );
-
-
-        area.value =
-            idea.plain;
-
-
-        document
-            .body
-            .appendChild(area);
-
-
-        area.select();
-
-
-        document.execCommand(
-            "copy"
-        );
-
-
-        area.remove();
-
-
-        toast("📋 Idea copiada");
-
-    }
-
-}
-
-
-/* =====================================================
-   GUARDAR IDEA
-===================================================== */
-
-function guardarIdea(id) {
-
-    const idea =
-        generations[id];
-
-
-    if (!idea) {
-
-        toast("No encontré esa idea");
-
-        return;
-
-    }
-
-
-    if (
-        saved.some(
-            x => x.id === id
-        )
-    ) {
-
-        toast("⭐ Esta idea ya está guardada");
-
-        return;
-
-    }
-
-
-    saved.unshift({
-
-        ...idea,
-
-        savedAt:
-            Date.now()
-
-    });
-
-
-    saveData();
-
-
-    toast("⭐ Idea guardada");
-
-}
-
-
-/* =====================================================
-   OTRA VERSIÓN
-===================================================== */
-
-function otraVersion(id) {
-
-    const old =
-        generations[id];
-
-
-    if (!old) {
-
-        toast("No encontré esa propuesta");
-
-        return;
-
-    }
-
-
-    const enfoques = [
-
-        "con un giro inesperado",
-
-        "desde el punto de vista de la audiencia",
-
-        "como una historia corta",
-
-        "empezando por el resultado",
-
-        "con una comparación",
-
-        "con un reto",
-
-        "con una pregunta que genere curiosidad",
-
-        "haciendo que el final sea inesperado",
-
-        "con un ritmo mucho más rápido"
-
-    ];
-
-
-    const nueva =
-        generarPropuesta(
-
-            old.topic,
-
-            random(enfoques),
-
-            old.duracion
-
-        );
-
-
-    mensajeBot(
-        nueva.html
-    );
-
-
-    guardarChat(
-        "⚡ Otra versión: " +
-        old.topic,
-        nueva.id
-    );
-
-
-    toast("🔄 Nueva versión creada");
-
-}
-
-
-/* =====================================================
-   MEJORAR
-===================================================== */
-
-function mejorarIdea(id) {
-
-    const old =
-        generations[id];
-
-
-    if (!old) {
-
-        toast("No encontré esa propuesta");
-
-        return;
-
-    }
-
-
-    const mejoras = [
-
-        "con un hook más directo",
-
-        "con mayor curiosidad",
-
-        "con una historia más rápida",
-
-        "haciendo protagonista el resultado",
-
-        "con un final más fuerte",
-
-        "con un giro inesperado",
-
-        "con una edición más dinámica",
-
-        "haciendo participar a la audiencia"
-
-    ];
-
-
-    const nueva =
-        generarPropuesta(
-
-            old.topic,
-
-            random(mejoras),
-
-            old.duracion
-
-        );
-
-
-    mensajeBot(
-        nueva.html
-    );
-
-
-    guardarChat(
-        "✨ Mejora: " +
-        old.topic,
-        nueva.id
-    );
-
-
-    toast("✨ Propuesta mejorada");
-
-}
-
-
-/* =====================================================
-   GUARDADOS
-===================================================== */
-
-function updateCount() {
-
-    document
-        .getElementById(
-            "savedCount"
-        )
-        .textContent =
-        saved.length;
-
-}
-
-
-function abrirGuardados() {
-
-    renderSaved();
-
-
-    const modal =
-        document.getElementById(
-            "savedModal"
-        );
-
-
-    modal.classList.remove(
-        "hidden"
-    );
-
-
-    modal.classList.add(
-        "flex"
-    );
-
-
-    closeSidebar();
-
-}
-
-
-function cerrarGuardados() {
-
-    const modal =
-        document.getElementById(
-            "savedModal"
-        );
-
-
-    modal.classList.add(
-        "hidden"
-    );
-
-
-    modal.classList.remove(
-        "flex"
-    );
-
-}
-
-
-function renderSaved() {
-
-    const list =
-        document.getElementById(
-            "savedList"
-        );
-
-
-    if (!saved.length) {
+      if (!chats.length) {
 
         list.innerHTML = `
-
-            <div
-                class="text-center
-                py-12"
-            >
-
-                <div
-                    class="text-4xl mb-3"
-                >
-                    ⭐
-                </div>
-
-
-                <div
-                    class="text-xs
-                    font-semibold
-                    text-gray-400"
-                >
-
-                    Todavía no tienes
-                    ideas guardadas.
-
-                </div>
-
-
-                <div
-                    class="text-[9px]
-                    text-gray-600 mt-1"
-                >
-
-                    Cuando encuentres
-                    una propuesta que te guste,
-                    pulsa "Guardar".
-
-                </div>
-
-            </div>
-
+          <div style="
+            padding:10px;
+            color:#555963;
+            font-size:11px;
+          ">
+            Todavía no hay proyectos.
+          </div>
         `;
 
         return;
 
+      }
+
+
+      chats
+        .slice(0, 12)
+        .forEach(chat => {
+
+          const button =
+            document.createElement("button");
+
+          button.className =
+            "recent-item";
+
+          button.textContent =
+            chat.title;
+
+          button.onclick =
+            () => openChat(chat.id);
+
+          list.appendChild(button);
+
+        });
+
     }
 
 
-    list.innerHTML = "";
+    /* =====================================================
+       ABRIR CHAT
+       ===================================================== */
+
+    function openChat(id) {
+
+      const chat =
+        chats.find(
+          item => item.id === id
+        );
+
+      if (!chat) return;
 
 
-    saved.forEach(item => {
+      currentChat =
+        chat.messages || [];
 
-        const div =
-            document.createElement(
-                "div"
-            );
-
-
-        div.className =
-            "card p-3";
+      currentChat.id =
+        chat.id;
 
 
-        div.innerHTML = `
+      const chatElement =
+        document.getElementById("chat");
 
-            <div
-                class="flex items-start
-                justify-between gap-2"
-            >
-
-                <div class="min-w-0">
-
-                    <div
-                        class="text-xs
-                        font-bold
-                        truncate"
-                    >
-
-                        ${escapeHTML(
-                            item.topic
-                        )}
-
-                    </div>
+      chatElement.innerHTML = "";
 
 
-                    <div
-                        class="text-[9px]
-                        text-gray-600 mt-1"
-                    >
+      const welcome =
+        document.getElementById("welcome");
 
-                        ${escapeHTML(
-                            item.categoria
-                        )}
+      if (welcome) {
 
-                    </div>
+        welcome.style.display = "none";
+
+      }
+
+
+      currentChat.forEach(message => {
+
+        addUserMessage(
+          message.user
+        );
+
+
+        if (message.type === "response") {
+
+          const result = {
+
+            html: `
+
+              <div class="response-header">
+
+                <div class="response-avatar">
+                  <i class="fa-solid fa-wand-magic-sparkles"></i>
+                </div>
+
+                <div>
+
+                  <div class="response-name">
+                    SparkyKrea
+                  </div>
+
+                  <div class="response-label">
+                    proyecto guardado
+                  </div>
 
                 </div>
 
+              </div>
 
-                <div class="text-yellow-400">
-                    ⭐
-                </div>
+              <div class="response-text">
+                ${escapeHTML(message.bot)}
+              </div>
 
-            </div>
+            `,
 
+            plain:
+              message.bot
 
-            <div
-                class="flex flex-wrap
-                gap-1.5 mt-3"
-            >
+          };
 
-                <button
-                    class="action"
-                    onclick="abrirIdeaGuardada('${item.id}')"
-                >
+          addBotResponse(result);
 
-                    <i class="fa-regular fa-folder-open"></i>
+        }
 
-                    Abrir
-
-                </button>
+      });
 
 
-                <button
-                    class="action"
-                    onclick="copiarGuardada('${item.id}')"
-                >
+      closeMobileMenu();
 
-                    <i class="fa-regular fa-copy"></i>
-
-                    Copiar
-
-                </button>
+    }
 
 
-                <button
-                    class="action"
-                    onclick="eliminarGuardada('${item.id}')"
-                >
+    /* =====================================================
+       GUARDAR RESPUESTA
+       ===================================================== */
 
-                    <i class="fa-solid fa-trash"></i>
+    function saveCurrentResponse(button) {
 
-                    Eliminar
+      const card =
+        button.closest(".response-card");
 
-                </button>
-
-            </div>
-
-        `;
+      if (!card) return;
 
 
-        list.appendChild(div);
-
-    });
-
-}
+      const text =
+        card.innerText;
 
 
-/* =====================================================
-   ABRIR GUARDADA
-===================================================== */
+      savedIdeas.unshift({
 
-function abrirIdeaGuardada(id) {
+        id: Date.now(),
 
-    const item =
-        saved.find(
-            x => x.id === id
-        );
+        text,
+
+        date:
+          new Date().toLocaleString("es-ES")
+
+      });
 
 
-    if (!item) {
-        return;
+      savedIdeas =
+        savedIdeas.slice(0, 100);
+
+
+      saveStorage(
+        "sparkykrea_saved",
+        savedIdeas
+      );
+
+
+      showToast(
+        "⭐ Idea guardada"
+      );
+
     }
 
 
-    cerrarGuardados();
+    /* =====================================================
+       COPIAR RESPUESTA
+       ===================================================== */
+
+    async function copyCurrentResponse(button) {
+
+      const card =
+        button.closest(".response-card");
+
+      if (!card) return;
 
 
-    currentIdea = item;
+      const text =
+        card.innerText;
 
 
-    document
-        .getElementById("welcome")
-        .classList.add("hidden");
-
-
-    const box =
-        document.getElementById(
-            "messages"
-        );
-
-
-    box.classList.remove("hidden");
-
-    box.innerHTML = "";
-
-
-    mensajeBot(
-        item.html
-    );
-
-
-    document
-        .getElementById("headerStatus")
-        .textContent =
-        "Idea guardada";
-
-
-    scrollBottom();
-
-}
-
-
-/* =====================================================
-   COPIAR GUARDADA
-===================================================== */
-
-async function copiarGuardada(id) {
-
-    const item =
-        saved.find(
-            x => x.id === id
-        );
-
-
-    if (!item) {
-        return;
-    }
-
-
-    try {
-
-        await navigator.clipboard.writeText(
-            item.plain
-        );
-
-
-        toast("📋 Copiado");
+      await copyText(text);
 
     }
-    catch {
+
+
+    async function copyText(text) {
+
+      try {
+
+        await navigator.clipboard.writeText(text);
+
+        showToast(
+          "📋 Copiado"
+        );
+
+      } catch (error) {
 
         const area =
-            document.createElement(
-                "textarea"
-            );
+          document.createElement("textarea");
 
+        area.value = text;
 
-        area.value =
-            item.plain;
-
-
-        document
-            .body
-            .appendChild(area);
-
+        document.body.appendChild(area);
 
         area.select();
 
-
-        document.execCommand(
-            "copy"
-        );
-
+        document.execCommand("copy");
 
         area.remove();
 
+        showToast(
+          "📋 Copiado"
+        );
 
-        toast("📋 Copiado");
+      }
 
     }
 
-}
 
+    /* =====================================================
+       OTRA VERSIÓN
+       ===================================================== */
 
-/* =====================================================
-   ELIMINAR GUARDADA
-===================================================== */
+    function anotherVersion() {
 
-function eliminarGuardada(id) {
+      if (!currentChat.length) {
 
-    saved =
-        saved.filter(
-            x => x.id !== id
+        showToast(
+          "Primero escribe una idea."
         );
 
-
-    saveData();
-
-    renderSaved();
-
-    toast("Guardado eliminado");
-
-}
-
-
-/* =====================================================
-   SIDEBAR
-===================================================== */
-
-function toggleSidebar() {
-
-    if (
-        window.innerWidth >= 768
-    ) {
         return;
+
+      }
+
+
+      const last =
+        currentChat[
+          currentChat.length - 1
+        ];
+
+
+      if (!last || !last.user) return;
+
+
+      const result =
+        generateResponse(last.user);
+
+
+      addBotResponse(result);
+
+
+      currentChat.push({
+
+        type: "response",
+
+        user:
+          last.user + " — otra versión",
+
+        bot:
+          result.plain
+
+      });
+
+
+      saveCurrentChat();
+
     }
 
 
-    const sidebar =
-        document.getElementById(
-            "sidebar"
+    /* =====================================================
+       MEJORAR
+       ===================================================== */
+
+    function improveCurrentResponse() {
+
+      if (!currentChat.length) return;
+
+
+      const last =
+        currentChat[
+          currentChat.length - 1
+        ];
+
+
+      if (!last) return;
+
+
+      const result =
+        generateResponse(
+          last.user +
+          " hazlo más original, concreto y llamativo"
         );
 
 
-    const overlay =
-        document.getElementById(
-            "overlay"
-        );
+      addBotResponse(result);
 
 
-    const abierto =
-        sidebar.classList.contains(
-            "mobileOpen"
-        );
+      currentChat.push({
+
+        type: "response",
+
+        user:
+          last.user + " — mejorado",
+
+        bot:
+          result.plain
+
+      });
 
 
-    if (abierto) {
-
-        closeSidebar();
+      saveCurrentChat();
 
     }
-    else {
 
-        sidebar.classList.add(
-            "mobileOpen"
-        );
 
-        overlay.classList.remove(
-            "hidden"
-        );
+    /* =====================================================
+       GUARDAR IDEA DE TARJETA
+       ===================================================== */
+
+    function saveIdeaFromCard(button) {
+
+      const card =
+        button.closest(".idea-card");
+
+      if (!card) return;
+
+
+      savedIdeas.unshift({
+
+        id: Date.now(),
+
+        text:
+          card.innerText,
+
+        date:
+          new Date().toLocaleString("es-ES")
+
+      });
+
+
+      savedIdeas =
+        savedIdeas.slice(0, 100);
+
+
+      saveStorage(
+        "sparkykrea_saved",
+        savedIdeas
+      );
+
+
+      showToast(
+        "⭐ Idea guardada"
+      );
 
     }
 
-}
+
+    /* =====================================================
+       COPIAR IDEA
+       ===================================================== */
+
+    async function copyIdeaFromCard(button) {
+
+      const card =
+        button.closest(".idea-card");
+
+      if (!card) return;
 
 
-function closeSidebar() {
+      await copyText(
+        card.innerText
+      );
 
-    const sidebar =
-        document.getElementById(
-            "sidebar"
-        );
-
-
-    const overlay =
-        document.getElementById(
-            "overlay"
-        );
+    }
 
 
-    sidebar.classList.remove(
-        "mobileOpen"
-    );
+    /* =====================================================
+       MODAL GUARDADOS
+       ===================================================== */
+
+    function openSaved() {
+
+      const modal =
+        document.getElementById("savedModal");
+
+      const content =
+        document.getElementById("savedContent");
 
 
-    overlay.classList.add(
-        "hidden"
-    );
-
-}
+      content.innerHTML = "";
 
 
-/* =====================================================
-   MODAL CLICK FUERA
-===================================================== */
+      if (!savedIdeas.length) {
 
-document
-    .getElementById("savedModal")
-    .addEventListener(
+        content.innerHTML = `
+
+          <div class="empty">
+
+            <i
+              class="fa-regular fa-star"
+              style="
+                font-size:28px;
+                margin-bottom:12px;
+                opacity:.4;
+              ">
+            </i>
+
+            <br>
+
+            Todavía no has guardado ideas.
+
+          </div>
+
+        `;
+
+      } else {
+
+        savedIdeas.forEach(item => {
+
+          const div =
+            document.createElement("div");
+
+          div.className =
+            "saved-item";
+
+
+          div.innerHTML = `
+
+            <p>
+              ${escapeHTML(item.text)}
+            </p>
+
+            <small>
+              ${escapeHTML(item.date)}
+            </small>
+
+          `;
+
+
+          content.appendChild(div);
+
+        });
+
+      }
+
+
+      modal.classList.add("open");
+
+      closeMobileMenu();
+
+    }
+
+
+    function closeSaved() {
+
+      document
+        .getElementById("savedModal")
+        .classList.remove("open");
+
+    }
+
+
+    /* =====================================================
+       TOAST
+       ===================================================== */
+
+    let toastTimer;
+
+
+    function showToast(text) {
+
+      const toast =
+        document.getElementById("toast");
+
+
+      toast.textContent =
+        text;
+
+
+      toast.classList.add("show");
+
+
+      clearTimeout(
+        toastTimer
+      );
+
+
+      toastTimer =
+        setTimeout(() => {
+
+          toast.classList.remove("show");
+
+        }, 1800);
+
+    }
+
+
+    /* =====================================================
+       MOBILE MENU
+       ===================================================== */
+
+    function toggleMobileMenu() {
+
+      document
+        .getElementById("sidebar")
+        .classList.toggle("open");
+
+    }
+
+
+    function closeMobileMenu() {
+
+      document
+        .getElementById("sidebar")
+        .classList.remove("open");
+
+    }
+
+
+    /* =====================================================
+       AUTO RESIZE TEXTAREA
+       ===================================================== */
+
+    function resizeTextarea() {
+
+      const textarea =
+        document.getElementById("prompt");
+
+      textarea.style.height =
+        "auto";
+
+      textarea.style.height =
+        Math.min(
+          textarea.scrollHeight,
+          150
+        ) + "px";
+
+    }
+
+
+    /* =====================================================
+       EVENTOS
+       ===================================================== */
+
+    document
+      .getElementById("sendBtn")
+      .addEventListener(
         "click",
-        function(event) {
-
-            if (
-                event.target === this
-            ) {
-
-                cerrarGuardados();
-
-            }
-
-        }
-    );
+        sendMessage
+      );
 
 
-/* =====================================================
-   TECLADO
-===================================================== */
+    document
+      .getElementById("newProjectBtn")
+      .addEventListener(
+        "click",
+        newProject
+      );
 
-document.addEventListener(
-    "keydown",
-    event => {
+
+    document
+      .getElementById("savedBtn")
+      .addEventListener(
+        "click",
+        openSaved
+      );
 
 
-        /* Atajo "/" */
+    document
+      .getElementById("closeSaved")
+      .addEventListener(
+        "click",
+        closeSaved
+      );
 
-        if (
-            event.key === "/" &&
-            document.activeElement.tagName !== "INPUT"
-        ) {
+
+    document
+      .getElementById("mobileMenu")
+      .addEventListener(
+        "click",
+        toggleMobileMenu
+      );
+
+
+    document
+      .getElementById("prompt")
+      .addEventListener(
+        "input",
+        resizeTextarea
+      );
+
+
+    document
+      .getElementById("prompt")
+      .addEventListener(
+        "keydown",
+        function (event) {
+
+          if (
+            event.key === "Enter" &&
+            !event.shiftKey
+          ) {
 
             event.preventDefault();
 
-            document
-                .getElementById("input")
-                .focus();
+            sendMessage();
+
+          }
 
         }
+      );
 
 
-        /* Escape */
+    document.addEventListener(
+      "keydown",
+      function (event) {
 
         if (
-            event.key === "Escape"
+          event.key === "/" &&
+          document.activeElement.tagName !== "TEXTAREA"
         ) {
 
-            cerrarGuardados();
+          event.preventDefault();
 
-            closeSidebar();
-
-        }
-
-    }
-);
-
-
-/* =====================================================
-   INICIALIZAR
-===================================================== */
-
-function iniciarApp() {
-
-    try {
-
-        renderHistory();
-
-        updateCount();
-
-        nuevoProyecto(false);
-
-    }
-    catch (error) {
-
-        console.error(
-            "Error iniciando SparkyKrea:",
-            error
-        );
-
-        /* Incluso si algo falla,
-           mostramos la interfaz */
-
-        const welcome =
-            document.getElementById(
-                "welcome"
-            );
-
-        if (welcome) {
-
-            welcome.classList.remove(
-                "hidden"
-            );
+          document
+            .getElementById("prompt")
+            .focus();
 
         }
 
-    }
 
-}
+        if (event.key === "Escape") {
 
+          closeSaved();
 
-/* =====================================================
-   SPLASH ULTRA SEGURO
-===================================================== */
+          closeMobileMenu();
 
-function quitarSplash() {
+        }
 
-    const splash =
-        document.getElementById(
-            "splash"
-        );
-
-
-    if (!splash) {
-        return;
-    }
-
-
-    splash.classList.add(
-        "hide"
+      }
     );
 
 
-    setTimeout(() => {
+    /* =====================================================
+       INICIALIZAR
+       ===================================================== */
 
-        if (
-            splash &&
-            splash.parentNode
-        ) {
-
-            splash.remove();
-
-        }
-
-    }, 800);
-
-}
+    renderRecent();
 
 
-/* =====================================================
-   ARRANQUE
-===================================================== */
+    /*
+      Dejamos el input listo inmediatamente.
+      No depende de window.onload.
+    */
 
-iniciarApp();
+    setTimeout(function () {
 
+      const input =
+        document.getElementById("prompt");
 
-/*
-   La animación dura 2.3 segundos.
+      if (input) {
+        input.focus();
+      }
 
-   Pero existe un segundo temporizador
-   de seguridad a los 4 segundos.
+    }, 300);
 
-   Por lo tanto, aunque el navegador
-   tenga algún problema con la animación,
-   la web NO debería quedarse atrapada
-   en la pantalla de entrada.
-*/
-
-setTimeout(
-    quitarSplash,
-    2300
-);
-
-
-setTimeout(
-    quitarSplash,
-    4000
-);
-
-
-/* Si la página ya terminó de cargar,
-   enfocamos el input después del splash. */
-
-window.addEventListener(
-    "load",
-    () => {
-
-        setTimeout(() => {
-
-            const input =
-                document.getElementById(
-                    "input"
-                );
-
-            if (input) {
-                input.focus();
-            }
-
-        }, 2800);
-
-    }
-);
-
-
-/* =====================================================
-   SI CAMBIA EL TAMAÑO DE PANTALLA
-===================================================== */
-
-window.addEventListener(
-    "resize",
-    () => {
-
-        if (
-            window.innerWidth >= 768
-        ) {
-
-            const sidebar =
-                document.getElementById(
-                    "sidebar"
-                );
-
-            const overlay =
-                document.getElementById(
-                    "overlay"
-                );
-
-
-            sidebar.classList.remove(
-                "mobileOpen"
-            );
-
-            overlay.classList.add(
-                "hidden"
-            );
-
-        }
-
-    }
-);
-
-</script>
+  </script>
 
 </body>
 </html>
