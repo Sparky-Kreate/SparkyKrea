@@ -69,7 +69,9 @@ button{
     display:none!important;
 }
 
-/* SPLASH */
+/* =========================================================
+   SPLASH
+   ========================================================= */
 
 #splash{
     position:fixed;
@@ -105,11 +107,20 @@ button{
 }
 
 @keyframes splashPulse{
-    from{transform:scale(.94);opacity:.65}
-    to{transform:scale(1);opacity:1}
+    from{
+        transform:scale(.94);
+        opacity:.65;
+    }
+
+    to{
+        transform:scale(1);
+        opacity:1;
+    }
 }
 
-/* APP */
+/* =========================================================
+   APP
+   ========================================================= */
 
 #app{
     width:100%;
@@ -117,12 +128,19 @@ button{
     display:flex;
 }
 
-/* SIDEBAR */
+/* =========================================================
+   SIDEBAR
+   ========================================================= */
 
 #sidebar{
     width:270px;
     height:100%;
-    background:rgba(12,13,17,.96);
+    background:
+        linear-gradient(
+            180deg,
+            rgba(16,17,22,.98),
+            rgba(9,10,13,.98)
+        );
     border-right:1px solid var(--border);
     display:flex;
     flex-direction:column;
@@ -141,6 +159,7 @@ button{
 .brand-logo{
     width:36px;
     height:36px;
+    filter:drop-shadow(0 0 12px rgba(84,214,138,.08));
 }
 
 .brand-text{
@@ -166,15 +185,28 @@ button{
 
 .sidebar-button:hover{
     background:rgba(255,255,255,.055);
+    transform:translateX(1px);
 }
 
 .sidebar-button.primary{
-    background:linear-gradient(135deg,var(--wine),#4d1428);
+    background:
+        linear-gradient(
+            135deg,
+            var(--wine),
+            #4d1428
+        );
     border:1px solid rgba(157,40,80,.35);
+    box-shadow:
+        0 8px 25px rgba(113,29,56,.12);
 }
 
 .sidebar-button.primary:hover{
-    background:linear-gradient(135deg,#842341,#57152e);
+    background:
+        linear-gradient(
+            135deg,
+            #842341,
+            #57152e
+        );
 }
 
 .history-title{
@@ -190,6 +222,21 @@ button{
     flex:1;
     overflow-y:auto;
     padding-right:3px;
+}
+
+#history::-webkit-scrollbar,
+#chat::-webkit-scrollbar,
+.modal::-webkit-scrollbar,
+.admin-table-wrap::-webkit-scrollbar{
+    width:5px;
+}
+
+#history::-webkit-scrollbar-thumb,
+#chat::-webkit-scrollbar-thumb,
+.modal::-webkit-scrollbar-thumb,
+.admin-table-wrap::-webkit-scrollbar-thumb{
+    background:#25262d;
+    border-radius:999px;
 }
 
 .history-empty{
@@ -240,7 +287,9 @@ button{
     margin-top:10px;
 }
 
-/* MAIN */
+/* =========================================================
+   MAIN
+   ========================================================= */
 
 .main{
     flex:1;
@@ -251,7 +300,9 @@ button{
     flex-direction:column;
 }
 
-/* HEADER */
+/* =========================================================
+   HEADER
+   ========================================================= */
 
 .header{
     height:64px;
@@ -282,6 +333,7 @@ button{
 .header-logo-text{
     font-weight:800;
     font-size:14px;
+    letter-spacing:-.2px;
 }
 
 .header-logo-text span{
@@ -322,16 +374,26 @@ button{
     height:8px;
     border-radius:50%;
     background:var(--green);
+    box-shadow:0 0 9px rgba(84,214,138,.5);
 }
 
-/* DROPDOWN */
+/* =========================================================
+   DROPDOWN
+   ========================================================= */
 
 .dropdown{
     position:absolute;
     right:18px;
     top:55px;
     width:220px;
-    background:#131419;
+    max-height:420px;
+    overflow-y:auto;
+    background:
+        linear-gradient(
+            180deg,
+            #15161b,
+            #101116
+        );
     border:1px solid var(--border);
     border-radius:14px;
     box-shadow:var(--shadow);
@@ -342,6 +404,19 @@ button{
 
 .dropdown.show{
     display:block;
+    animation:dropdownIn .16s ease;
+}
+
+@keyframes dropdownIn{
+    from{
+        opacity:0;
+        transform:translateY(-5px);
+    }
+
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
 }
 
 .dropdown-title{
@@ -368,7 +443,9 @@ button{
     background:rgba(255,255,255,.06);
 }
 
-/* CHAT */
+/* =========================================================
+   CHAT
+   ========================================================= */
 
 #chat{
     flex:1;
@@ -383,7 +460,9 @@ button{
     padding:40px 22px 190px;
 }
 
-/* WELCOME */
+/* =========================================================
+   WELCOME
+   ========================================================= */
 
 #welcome{
     min-height:calc(100vh - 250px);
@@ -403,6 +482,7 @@ button{
     width:72px;
     height:72px;
     margin:auto auto 22px;
+    filter:drop-shadow(0 0 20px rgba(84,214,138,.07));
 }
 
 #welcomeTitle{
@@ -439,13 +519,35 @@ button{
     background:rgba(255,255,255,.025);
     color:#aaa;
     font-size:11px;
+    transition:.2s;
 }
 
-/* MESSAGES */
+.welcome-tag:hover{
+    border-color:rgba(84,214,138,.25);
+    color:#ccc;
+    transform:translateY(-1px);
+}
+
+/* =========================================================
+   MESSAGES
+   ========================================================= */
 
 .message{
     display:flex;
     margin-bottom:20px;
+    animation:messageIn .22s ease;
+}
+
+@keyframes messageIn{
+    from{
+        opacity:0;
+        transform:translateY(5px);
+    }
+
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
 }
 
 .message.user{
@@ -465,13 +567,24 @@ button{
 }
 
 .message.user .message-bubble{
-    background:linear-gradient(135deg,#651a34,#451426);
+    background:
+        linear-gradient(
+            135deg,
+            #651a34,
+            #451426
+        );
     border:1px solid rgba(157,40,80,.3);
 }
 
 .message.bot .message-bubble{
-    background:#111218;
+    background:
+        linear-gradient(
+            145deg,
+            rgba(17,18,24,.98),
+            rgba(13,14,19,.98)
+        );
     border:1px solid var(--border);
+    box-shadow:0 8px 30px rgba(0,0,0,.08);
 }
 
 .message-label{
@@ -479,6 +592,7 @@ button{
     color:#777984;
     margin-bottom:5px;
     font-weight:700;
+    letter-spacing:.7px;
 }
 
 .message.bot strong{
@@ -498,7 +612,9 @@ button{
     margin:5px 0;
 }
 
-/* TYPING */
+/* =========================================================
+   TYPING
+   ========================================================= */
 
 .typing{
     display:flex;
@@ -523,11 +639,20 @@ button{
 }
 
 @keyframes typing{
-    0%,70%,100%{opacity:.3;transform:translateY(0)}
-    35%{opacity:1;transform:translateY(-3px)}
+    0%,70%,100%{
+        opacity:.3;
+        transform:translateY(0);
+    }
+
+    35%{
+        opacity:1;
+        transform:translateY(-3px);
+    }
 }
 
-/* DURATION */
+/* =========================================================
+   DURATION
+   ========================================================= */
 
 .duration-panel{
     margin-top:13px;
@@ -543,15 +668,19 @@ button{
     border:1px solid var(--border);
     border-radius:9px;
     font-size:11px;
+    transition:.2s;
 }
 
 .duration-option:hover,
 .duration-option.selected{
     border-color:var(--green);
     color:var(--green);
+    background:rgba(84,214,138,.05);
 }
 
-/* COMPOSER */
+/* =========================================================
+   COMPOSER
+   ========================================================= */
 
 #composerArea{
     position:absolute;
@@ -560,7 +689,12 @@ button{
     bottom:0;
     z-index:20;
     padding:12px 20px 17px;
-    background:linear-gradient(to top,var(--bg) 70%,transparent);
+    background:
+        linear-gradient(
+            to top,
+            var(--bg) 70%,
+            transparent
+        );
 }
 
 .composer{
@@ -578,6 +712,14 @@ button{
     border-radius:16px;
     padding:9px;
     box-shadow:0 15px 40px rgba(0,0,0,.3);
+    transition:.2s;
+}
+
+.composer-box:focus-within{
+    border-color:rgba(84,214,138,.18);
+    box-shadow:
+        0 15px 40px rgba(0,0,0,.3),
+        0 0 0 1px rgba(84,214,138,.03);
 }
 
 #input{
@@ -613,6 +755,11 @@ button{
 #send.active{
     background:var(--green);
     color:#07100b;
+    box-shadow:0 0 18px rgba(84,214,138,.12);
+}
+
+#send.active:hover{
+    transform:translateY(-1px);
 }
 
 .composer-info{
@@ -622,8 +769,6 @@ button{
     margin-top:7px;
 }
 
-/* FOOTER */
-
 #footerText{
     text-align:center;
     color:#484a53;
@@ -631,7 +776,9 @@ button{
     margin-top:6px;
 }
 
-/* MOBILE */
+/* =========================================================
+   MOBILE
+   ========================================================= */
 
 #mobileMenu{
     display:none;
@@ -704,9 +851,16 @@ button{
         max-width:94%;
         font-size:12px;
     }
+
+    .dropdown{
+        right:10px;
+        width:210px;
+    }
 }
 
-/* OVERLAY */
+/* =========================================================
+   OVERLAY
+   ========================================================= */
 
 #overlay{
     position:fixed;
@@ -721,7 +875,9 @@ button{
     display:block;
 }
 
-/* MODALS */
+/* =========================================================
+   MODALS
+   ========================================================= */
 
 .modal-layer{
     position:fixed;
@@ -737,17 +893,44 @@ button{
 
 .modal-layer.show{
     display:flex;
+    animation:modalFade .18s ease;
+}
+
+@keyframes modalFade{
+    from{
+        opacity:0;
+    }
+
+    to{
+        opacity:1;
+    }
 }
 
 .modal{
     width:min(450px,100%);
     max-height:90vh;
     overflow:auto;
-    background:#111218;
+    background:
+        linear-gradient(
+            145deg,
+            #14151b,
+            #0f1015
+        );
     border:1px solid rgba(255,255,255,.1);
     border-radius:19px;
     box-shadow:0 30px 90px rgba(0,0,0,.55);
     padding:23px;
+    animation:modalIn .2s ease;
+}
+
+@keyframes modalIn{
+    from{
+        transform:translateY(8px) scale(.99);
+    }
+
+    to{
+        transform:translateY(0) scale(1);
+    }
 }
 
 .modal.large{
@@ -777,6 +960,14 @@ button{
     background:transparent;
     color:#888;
     font-size:20px;
+    width:30px;
+    height:30px;
+    border-radius:8px;
+}
+
+.close-modal:hover{
+    color:#fff;
+    background:rgba(255,255,255,.05);
 }
 
 .auth-tabs{
@@ -831,10 +1022,12 @@ button{
     border-radius:10px;
     padding:11px;
     font-size:12px;
+    transition:.2s;
 }
 
 .field input:focus{
     border-color:rgba(84,214,138,.5);
+    box-shadow:0 0 0 3px rgba(84,214,138,.04);
 }
 
 .auth-submit{
@@ -845,6 +1038,12 @@ button{
     background:var(--green);
     font-weight:800;
     margin-top:4px;
+    transition:.2s;
+}
+
+.auth-submit:hover{
+    background:#67e29a;
+    transform:translateY(-1px);
 }
 
 .auth-message{
@@ -861,7 +1060,9 @@ button{
     line-height:1.6;
 }
 
-/* ADMIN */
+/* =========================================================
+   ADMIN
+   ========================================================= */
 
 .admin-table-wrap{
     overflow:auto;
@@ -894,6 +1095,10 @@ button{
     color:#ccc;
 }
 
+.admin-table tr:last-child td{
+    border-bottom:0;
+}
+
 .admin-stats{
     display:grid;
     grid-template-columns:repeat(3,1fr);
@@ -920,7 +1125,9 @@ button{
     margin-top:3px;
 }
 
-/* ACCOUNT */
+/* =========================================================
+   ACCOUNT
+   ========================================================= */
 
 .account-box{
     background:#0c0d11;
@@ -956,11 +1163,17 @@ button{
     font-size:10px;
 }
 
+.small-btn:hover{
+    background:#24252c;
+}
+
 .small-btn.danger{
     color:#ef7797;
 }
 
-/* PRINT */
+/* =========================================================
+   PRINT
+   ========================================================= */
 
 @media print{
 
@@ -1013,7 +1226,9 @@ button{
 
 <body>
 
-<!-- SPLASH -->
+<!-- =========================================================
+     SPLASH
+     ========================================================= -->
 
 <div id="splash">
 
@@ -1051,7 +1266,9 @@ button{
 
 <div id="app">
 
-    <!-- SIDEBAR -->
+    <!-- =====================================================
+         SIDEBAR
+         ===================================================== -->
 
     <aside id="sidebar">
 
@@ -1100,7 +1317,9 @@ button{
 
 
         <div class="history-title">
-            <span id="historyTitleTxt">Historial de chats</span>
+            <span id="historyTitleTxt">
+                Historial de chats
+            </span>
         </div>
 
 
@@ -1132,12 +1351,12 @@ button{
     </aside>
 
 
-    <div
-        id="overlay">
-    </div>
+    <div id="overlay"></div>
 
 
-    <!-- MAIN -->
+    <!-- =====================================================
+         MAIN
+         ===================================================== -->
 
     <main class="main">
 
@@ -1252,7 +1471,9 @@ button{
         </header>
 
 
-        <!-- CHAT -->
+        <!-- =================================================
+             CHAT
+             ================================================= -->
 
         <section id="chat">
 
@@ -1328,7 +1549,9 @@ button{
         </section>
 
 
-        <!-- COMPOSER -->
+        <!-- =================================================
+             COMPOSER
+             ================================================= -->
 
         <div id="composerArea">
 
@@ -1374,11 +1597,11 @@ button{
 </div>
 
 
-<!-- AUTH MODAL -->
+<!-- =========================================================
+     AUTH MODAL
+     ========================================================= -->
 
-<div
-    id="authModal"
-    class="modal-layer">
+<div id="authModal" class="modal-layer">
 
     <div class="modal">
 
@@ -1589,11 +1812,11 @@ button{
 </div>
 
 
-<!-- ACCOUNT MODAL -->
+<!-- =========================================================
+     ACCOUNT MODAL
+     ========================================================= -->
 
-<div
-    id="accountModal"
-    class="modal-layer">
+<div id="accountModal" class="modal-layer">
 
     <div class="modal">
 
@@ -1655,11 +1878,11 @@ button{
 </div>
 
 
-<!-- ADMIN MODAL -->
+<!-- =========================================================
+     ADMIN MODAL
+     ========================================================= -->
 
-<div
-    id="adminModal"
-    class="modal-layer">
+<div id="adminModal" class="modal-layer">
 
     <div class="modal large">
 
@@ -1799,7 +2022,9 @@ button{
    ========================================================= */
 
 
-/* ---------- ELEMENTOS ---------- */
+/* =========================================================
+   ELEMENTOS
+   ========================================================= */
 
 const input =
     document.getElementById("input");
@@ -1993,8 +2218,6 @@ async function hashPassword(password){
 
     }
 
-    /* fallback local demo */
-
     let hash=0;
 
     for(let i=0;i<password.length;i++){
@@ -2071,8 +2294,6 @@ document
 });
 
 
-/* click outside */
-
 document
 .querySelectorAll(".modal-layer")
 .forEach(layer=>{
@@ -2087,7 +2308,9 @@ document
 });
 
 
-/* tabs */
+/* =========================================================
+   AUTH TABS
+   ========================================================= */
 
 const loginTab =
     document.getElementById("loginTab");
@@ -2133,7 +2356,9 @@ function openLogin(){
 }
 
 
-/* registration */
+/* =========================================================
+   REGISTRATION
+   ========================================================= */
 
 registerForm.addEventListener(
     "submit",
@@ -2238,6 +2463,17 @@ registerForm.addEventListener(
             await hashPassword(password);
 
 
+        /*
+         * ADMIN INICIAL
+         *
+         * La primera cuenta creada se convierte
+         * automáticamente en administrador.
+         */
+
+        const firstUser =
+            users.length===0;
+
+
         const user = {
 
             id:
@@ -2263,7 +2499,7 @@ registerForm.addEventListener(
 
             loginCount:0,
 
-            isAdmin:false
+            isAdmin:firstUser
 
         };
 
@@ -2288,17 +2524,33 @@ registerForm.addEventListener(
         registerForm.reset();
 
 
-        addBotMessage(
-            "Cuenta creada correctamente. " +
-            "Desde ahora tus chats podrán guardarse " +
-            "en este navegador y tendrás acceso a la opción PDF."
-        );
+        if(user.isAdmin){
+
+            addBotMessage(
+                "Cuenta creada correctamente. " +
+                "Esta es la primera cuenta de SparkyKrea, " +
+                "por lo que tienes acceso al Panel administrador. " +
+                "Tus chats podrán guardarse en este navegador " +
+                "y tendrás acceso a la opción PDF."
+            );
+
+        }else{
+
+            addBotMessage(
+                "Cuenta creada correctamente. " +
+                "Desde ahora tus chats podrán guardarse " +
+                "en este navegador y tendrás acceso a la opción PDF."
+            );
+
+        }
 
     }
 );
 
 
-/* login */
+/* =========================================================
+   LOGIN
+   ========================================================= */
 
 loginForm.addEventListener(
     "submit",
@@ -2426,7 +2678,9 @@ loginForm.addEventListener(
 );
 
 
-/* auth button */
+/* =========================================================
+   ACCOUNT
+   ========================================================= */
 
 authBtn.addEventListener("click",()=>{
 
@@ -2477,7 +2731,9 @@ function openAccount(){
 }
 
 
-/* logout */
+/* =========================================================
+   LOGOUT
+   ========================================================= */
 
 document
 .getElementById("logoutBtn")
@@ -2534,7 +2790,7 @@ function renderAdmin(){
 
         try{
 
-            const history =
+            const savedHistory =
                 JSON.parse(
                     localStorage.getItem(
                         "sparky_history_" +
@@ -2542,8 +2798,8 @@ function renderAdmin(){
                     ) || "[]"
                 );
 
-            if(Array.isArray(history))
-                chatCount += history.length;
+            if(Array.isArray(savedHistory))
+                chatCount += savedHistory.length;
 
         }catch{}
 
@@ -2583,7 +2839,14 @@ function renderAdmin(){
 
     }else{
 
-        users.forEach(user=>{
+        users
+        .slice()
+        .sort(
+            (a,b)=>
+                new Date(a.createdAt) -
+                new Date(b.createdAt)
+        )
+        .forEach(user=>{
 
             const row =
                 document.createElement("tr");
@@ -2597,6 +2860,20 @@ function renderAdmin(){
                         " " +
                         user.surname
                     )}
+                    ${
+                        user.isAdmin
+                        ? `
+                            <span
+                                style="
+                                    color:#54d68a;
+                                    margin-left:5px;
+                                    font-size:9px;
+                                ">
+                                ADMIN
+                            </span>
+                        `
+                        : ""
+                    }
                 </td>
 
                 <td>
@@ -2637,66 +2914,143 @@ function renderAdmin(){
     logsBox.innerHTML="";
 
 
-    logs
-    .slice(0,30)
-    .forEach(log=>{
+    if(!logs.length){
 
-        const item =
-            document.createElement("div");
+        logsBox.innerHTML=`
 
+            <div class="account-box">
 
-        item.className="account-box";
+                <div class="account-email">
+                    Todavía no hay actividad de inicio de sesión.
+                </div>
 
-
-        item.innerHTML=`
-
-            <div class="account-name">
-                ${escapeHTML(log.name)}
-            </div>
-
-            <div class="account-email">
-                ${escapeHTML(log.email)}
-            </div>
-
-            <div class="account-email">
-                ${formatDate(log.timestamp)}
             </div>
 
         `;
 
+    }else{
 
-        logsBox.appendChild(item);
+        logs
+        .slice(0,30)
+        .forEach(log=>{
 
-    });
+            const item =
+                document.createElement("div");
+
+
+            item.className="account-box";
+
+
+            item.innerHTML=`
+
+                <div class="account-name">
+                    ${escapeHTML(log.name)}
+                </div>
+
+                <div class="account-email">
+                    ${escapeHTML(log.email)}
+                </div>
+
+                <div class="account-email">
+                    ${formatDate(log.timestamp)}
+                </div>
+
+            `;
+
+
+            logsBox.appendChild(item);
+
+        });
+
+    }
 
 }
 
 
-function seedAdmin(){
+/* =========================================================
+   ADMIN INITIALIZATION / MIGRATION
+   ========================================================= */
+
+/*
+ * Si ya existía una cuenta antes de instalar esta versión
+ * y todavía no hay ningún administrador, la cuenta más antigua
+ * se convierte automáticamente en admin.
+ *
+ * Esto evita que tengas que borrar tu cuenta y registrarte otra vez.
+ */
+
+function ensureAdminAccount(){
+
+    const users =
+        getUsers();
+
+
+    if(!users.length)
+        return;
+
+
+    let admin =
+        users.find(
+            user=>user.isAdmin===true
+        );
+
 
     /*
-       DEMO ADMIN:
+     * Si ya existe un admin, no se toca.
+     */
 
-       Para no poner una contraseña de administrador
-       visible en el código, el primer usuario registrado
-       será un usuario normal.
+    if(!admin){
 
-       Puedes convertir manualmente una cuenta en admin
-       desde la consola del navegador:
+        users.sort(
+            (a,b)=>
+                new Date(a.createdAt) -
+                new Date(b.createdAt)
+        );
 
-       localStorage -> sparky_users_v2
 
-       cambiando:
+        users[0].isAdmin=true;
 
-       "isAdmin":false
+        admin=users[0];
 
-       por:
+        setUsers(users);
 
-       "isAdmin":true
+    }
 
-       En una versión real esto debe hacerse
-       desde el backend.
-    */
+
+    /*
+     * Sincronizar la sesión actual con los datos
+     * reales del usuario guardado.
+     */
+
+    if(currentUser){
+
+        const freshUser =
+            users.find(
+                user=>user.id===currentUser.id
+            );
+
+
+        if(freshUser){
+
+            currentUser=freshUser;
+
+            setSession(freshUser);
+
+        }
+
+    }
+
+}
+
+
+/*
+ * Se mantiene como función para conservar
+ * compatibilidad con la estructura anterior.
+ */
+
+function seedAdmin(){
+
+    ensureAdminAccount();
 
 }
 
@@ -3166,7 +3520,6 @@ const typoDictionary={
     bn:"bien",
     qiero:"quiero",
     kiero:"quiero",
-    qiero:"quiero",
     videos:"vídeos",
     videoo:"video",
     musika:"música",
@@ -3233,7 +3586,7 @@ function conversationalNoise(text){
         "lol",
         "bro",
         "mano",
-        "dios",
+        "dios"
 
     ].some(
         word=>
@@ -3283,7 +3636,6 @@ const gameDatabase={
 
     minecraft:{
         names:[
-            "minecraft",
             "minecraft"
         ],
         music:"Lo-fi aventurero / electrónica ligera"
@@ -4802,13 +5154,6 @@ function loadUserHistory(){
 
 function saveCurrentProject(){
 
-    /*
-       IMPORTANTE:
-
-       Los usuarios que no han iniciado sesión
-       NO guardan historial.
-    */
-
     if(!currentUser)
         return;
 
@@ -5080,6 +5425,9 @@ document
     input.style.height="auto";
 
 
+    send.classList.remove("active");
+
+
     closeSidebar();
 
 });
@@ -5232,6 +5580,13 @@ input.addEventListener("input",()=>{
 /* =========================================================
    INITIALIZATION
    ========================================================= */
+
+/*
+ * IMPORTANTE:
+ * Primero comprobamos/creamos el administrador.
+ * Esto también convierte la cuenta más antigua existente
+ * en administrador si todavía no había ninguno.
+ */
 
 seedAdmin();
 
