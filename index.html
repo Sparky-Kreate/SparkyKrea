@@ -2,5734 +2,1296 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>SparkyKrea Studio's - Ultimate Edition</title>
-
-<meta property="og:title" content="SparkyKrea Studio's">
-<meta property="og:description" content="Asesoría creativa, guiones, estrategia y música.">
-<meta name="theme-color" content="#09090d">
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>SparkyKrea Studio</title>
 
 <style>
-*{box-sizing:border-box;margin:0;padding:0}
-
 :root{
---bg:#07080b;
---bg2:#0b0c10;
---panel:#101116;
---panel2:#14151b;
---panel3:#1a1b22;
---wine:#711d38;
---wine2:#a62c55;
---wine3:#421326;
---green:#54d68a;
---green2:#2bb86d;
---white:#f7f7f8;
---muted:#9496a2;
---border:rgba(255,255,255,.075);
---border2:rgba(255,255,255,.11);
---shadow:0 25px 80px rgba(0,0,0,.42);
+ --bg:#080909;
+ --panel:#101313;
+ --panel2:#151817;
+ --wine:#8c2037;
+ --wine2:#63172a;
+ --green:#72d58b;
+ --white:#f4f5f3;
+ --gray:#9da5a1;
+ --line:#262c29;
 }
 
-html,body{width:100%;height:100%}
+*{box-sizing:border-box}
 
 body{
-background:
-radial-gradient(circle at 8% -10%,rgba(166,44,85,.19),transparent 28%),
-radial-gradient(circle at 92% 105%,rgba(84,214,138,.08),transparent 30%),
-linear-gradient(135deg,#07080b,#0a0b0f 55%,#08090c);
-color:var(--white);
-font-family:"Plus Jakarta Sans",sans-serif;
-overflow:hidden;
+ margin:0;
+ background:
+ radial-gradient(circle at 50% -15%,#35111d,transparent 45%),
+ var(--bg);
+ color:var(--white);
+ font-family:Arial,system-ui,sans-serif;
+ min-height:100vh;
 }
 
-body:before{
-content:"";
-position:fixed;
-inset:0;
-pointer-events:none;
-background-image:
-linear-gradient(rgba(255,255,255,.012) 1px,transparent 1px),
-linear-gradient(90deg,rgba(255,255,255,.012) 1px,transparent 1px);
-background-size:50px 50px;
-mask-image:linear-gradient(to bottom,rgba(0,0,0,.45),transparent);
+button,input,textarea,select{font:inherit}
+
+button{
+ cursor:pointer;
+ border:0;
+ transition:.2s;
 }
 
-button,input,textarea{font:inherit}
-button{border:0;cursor:pointer}
+button:hover{
+ transform:translateY(-1px);
+ filter:brightness(1.08);
+}
+
 .hidden{display:none!important}
 
-.sk-logo{
-width:42px;
-height:42px;
-display:block;
-filter:drop-shadow(0 0 14px rgba(84,214,138,.10));
+/* ===== ENTRADA ===== */
+
+#entry{
+ min-height:100vh;
+ display:grid;
+ place-items:center;
+ padding:20px;
 }
 
-.sk-logo.small{width:36px;height:36px}
-.sk-logo.large{width:78px;height:78px}
-.sk-logo.splash{width:94px;height:94px}
-
-#splash{
-position:fixed;
-inset:0;
-z-index:9999;
-display:flex;
-align-items:center;
-justify-content:center;
-background:
-radial-gradient(circle at center,rgba(113,29,56,.16),transparent 42%),
-#07080b;
-transition:.65s ease;
+.entry{
+ width:min(650px,100%);
+ text-align:center;
+ padding:45px 25px;
+ background:#0d100fdd;
+ border:1px solid #4b202c;
+ border-radius:28px;
+ box-shadow:0 30px 90px #000b;
 }
 
-.splash-inner{text-align:center}
-
-.splash-logo{
-margin:auto;
-animation:splashPulse 1.6s ease-in-out infinite alternate;
+.logo{
+ width:82px;
+ height:82px;
+ margin:auto;
+ display:grid;
+ place-items:center;
+ border-radius:24px;
+ background:linear-gradient(135deg,var(--wine),var(--green));
+ font-weight:900;
+ font-size:25px;
+ box-shadow:0 0 35px #8c203733;
 }
 
-.splash-title{
-margin-top:18px;
-font-size:24px;
-font-weight:800;
-letter-spacing:-.8px;
+h1{
+ font-size:clamp(36px,8vw,60px);
+ margin:20px 0 8px;
+ letter-spacing:-2px;
 }
 
-.splash-title span{color:var(--green)}
+.sparky{color:var(--wine)}
+.krea{color:var(--green)}
+.studio{color:var(--white)}
 
-.splash-line{
-width:50px;
-height:2px;
-margin:14px auto 0;
-border-radius:99px;
-background:linear-gradient(90deg,var(--wine2),var(--green));
-box-shadow:0 0 15px rgba(84,214,138,.18);
+.subtitle{
+ max-width:550px;
+ margin:0 auto 28px;
+ color:var(--gray);
+ line-height:1.6;
 }
 
-@keyframes splashPulse{
-from{transform:scale(.94);opacity:.65}
-to{transform:scale(1);opacity:1}
+.primary{
+ background:var(--green);
+ color:#071009;
+ padding:13px 20px;
+ border-radius:13px;
+ font-weight:bold;
 }
 
-#app{
-width:100%;
-height:100%;
-display:flex;
-position:relative;
+.secondary{
+ background:#171b19;
+ color:var(--white);
+ border:1px solid var(--line);
+ padding:12px 18px;
+ border-radius:13px;
 }
 
-#sidebar{
-width:276px;
-height:100%;
-flex-shrink:0;
-position:relative;
-z-index:50;
-display:flex;
-flex-direction:column;
-padding:18px 14px;
-background:
-linear-gradient(180deg,rgba(17,18,23,.97),rgba(8,9,12,.99));
-border-right:1px solid var(--border);
-box-shadow:15px 0 60px rgba(0,0,0,.12);
+/* ===== HEADER ===== */
+
+header{
+ position:sticky;
+ top:0;
+ z-index:10;
+ background:#080a0aee;
+ border-bottom:1px solid var(--line);
+ backdrop-filter:blur(16px);
 }
 
-#sidebar:after{
-content:"";
-position:absolute;
-right:-1px;
-top:0;
-bottom:0;
-width:1px;
-background:linear-gradient(180deg,transparent,var(--wine2),transparent);
-opacity:.28;
-pointer-events:none;
+.nav{
+ max-width:1150px;
+ margin:auto;
+ padding:13px 18px;
+ display:flex;
+ align-items:center;
+ justify-content:space-between;
 }
 
 .brand{
-display:flex;
-align-items:center;
-gap:11px;
-padding:5px 9px 24px;
+ font-weight:900;
+ font-size:18px;
 }
 
-.brand-text{
-font-size:14px;
-font-weight:800;
-letter-spacing:-.35px;
+.brand .s{color:var(--wine)}
+.brand .k{color:var(--green)}
+.brand .st{color:var(--white)}
+
+.nav button{
+ background:#151918;
+ color:white;
+ border:1px solid var(--line);
+ padding:8px 12px;
+ border-radius:10px;
 }
 
-.brand-text span{color:var(--green)}
+/* ===== APP ===== */
 
-.sidebar-button{
-width:100%;
-min-height:43px;
-padding:11px 13px;
-margin-bottom:7px;
-border-radius:12px;
-background:transparent;
-color:#d7d7dc;
-text-align:left;
-font-size:12px;
-font-weight:600;
-border:1px solid transparent;
-transition:.22s ease;
+main{
+ max-width:1150px;
+ margin:auto;
+ padding:30px 18px 70px;
 }
 
-.sidebar-button:hover{
-background:rgba(255,255,255,.045);
-border-color:var(--border);
-transform:translateX(2px);
-color:#fff;
+.hero{
+ padding:25px 0;
 }
 
-.sidebar-button.primary{
-background:
-linear-gradient(135deg,rgba(125,31,61,.95),rgba(63,17,36,.95));
-border-color:rgba(166,44,85,.32);
-box-shadow:
-0 10px 30px rgba(113,29,56,.16),
-inset 0 1px rgba(255,255,255,.06);
+.hero h2{
+ font-size:clamp(30px,6vw,50px);
+ margin:0 0 10px;
 }
 
-.sidebar-button.primary:hover{
-background:linear-gradient(135deg,#842344,#54152d);
-box-shadow:0 12px 35px rgba(113,29,56,.24);
+.hero p{
+ color:var(--gray);
+ line-height:1.6;
+ max-width:720px;
 }
 
-.history-title{
-padding:20px 9px 9px;
-font-size:9px;
-text-transform:uppercase;
-letter-spacing:1.7px;
-color:#70727c;
-font-weight:800;
+.layout{
+ display:grid;
+ grid-template-columns:220px 1fr;
+ gap:16px;
 }
 
-#history{
-flex:1;
-min-height:0;
-overflow-y:auto;
-padding-right:3px;
+.menu{
+ background:#0d100f;
+ border:1px solid var(--line);
+ border-radius:18px;
+ padding:10px;
+ height:max-content;
 }
 
-#history::-webkit-scrollbar,
-#chat::-webkit-scrollbar,
-.modal::-webkit-scrollbar,
-.admin-table-wrap::-webkit-scrollbar,
-#adminLogs::-webkit-scrollbar{
-width:5px;
+.menu button{
+ width:100%;
+ text-align:left;
+ color:#cbd0cd;
+ background:transparent;
+ padding:12px;
+ border-radius:10px;
+ margin:2px 0;
 }
 
-#history::-webkit-scrollbar-thumb,
-#chat::-webkit-scrollbar-thumb,
-.modal::-webkit-scrollbar-thumb,
-.admin-table-wrap::-webkit-scrollbar-thumb,
-#adminLogs::-webkit-scrollbar-thumb{
-background:#272830;
-border-radius:999px;
+.menu button.active,
+.menu button:hover{
+ background:#18201c;
+ color:var(--green);
 }
 
-.history-empty{
-padding:11px 8px;
-color:#686a74;
-font-size:11px;
-line-height:1.65;
+/* ===== PANELES ===== */
+
+.panel{
+ background:#0d100f;
+ border:1px solid var(--line);
+ border-radius:20px;
+ padding:20px;
 }
 
-.history-item{
-position:relative;
-padding:11px 34px 11px 11px;
-margin-bottom:5px;
-border:1px solid transparent;
-border-radius:11px;
-cursor:pointer;
-transition:.2s;
+.panel h2{margin-top:0}
+
+.grid{
+ display:grid;
+ grid-template-columns:repeat(3,1fr);
+ gap:12px;
+ margin:20px 0;
 }
 
-.history-item:hover{
-background:rgba(255,255,255,.035);
-border-color:var(--border);
+.card{
+ background:var(--panel);
+ border:1px solid var(--line);
+ border-radius:16px;
+ padding:18px;
 }
 
-.history-topic{
-font-size:11px;
-color:#e4e4e7;
-white-space:nowrap;
-overflow:hidden;
-text-overflow:ellipsis;
+.card h3{margin:7px 0}
+
+.card p{
+ color:var(--gray);
+ line-height:1.5;
+ font-size:14px;
 }
 
-.history-date{
-font-size:9px;
-color:#686a73;
-margin-top:4px;
+.tag{
+ display:inline-block;
+ padding:5px 8px;
+ border-radius:20px;
+ background:#18231d;
+ color:var(--green);
+ font-size:11px;
 }
 
-.history-delete{
-position:absolute;
-right:8px;
-top:9px;
-color:#686970;
-background:none;
-font-size:13px;
-opacity:.7;
+/* ===== CHAT ===== */
+
+.chat{
+ height:590px;
+ display:flex;
+ flex-direction:column;
+ background:#0b0e0d;
+ border:1px solid var(--line);
+ border-radius:18px;
+ overflow:hidden;
 }
 
-.history-delete:hover{color:#ef7797}
-
-.sidebar-bottom{
-border-top:1px solid var(--border);
-padding-top:12px;
-margin-top:10px;
+.chat-head{
+ padding:15px;
+ border-bottom:1px solid var(--line);
+ display:flex;
+ justify-content:space-between;
 }
 
-.main{
-flex:1;
-min-width:0;
-height:100%;
-position:relative;
-display:flex;
-flex-direction:column;
-}
+.chat-head small{color:var(--gray)}
 
-.header{
-height:68px;
-min-height:68px;
-display:flex;
-align-items:center;
-justify-content:space-between;
-padding:0 21px;
-position:relative;
-z-index:30;
-background:rgba(7,8,11,.76);
-backdrop-filter:blur(22px);
--webkit-backdrop-filter:blur(22px);
-border-bottom:1px solid var(--border);
-}
-
-.header:after{
-content:"";
-position:absolute;
-left:20px;
-right:20px;
-bottom:-1px;
-height:1px;
-background:linear-gradient(90deg,transparent,rgba(166,44,85,.35),rgba(84,214,138,.2),transparent);
-}
-
-.header-left,.header-right{
-display:flex;
-align-items:center;
-gap:10px;
-}
-
-.header-logo-text{
-font-size:13px;
-font-weight:800;
-letter-spacing:-.25px;
-}
-
-.header-logo-text span{color:var(--green)}
-
-.header-icon{
-width:38px;
-height:38px;
-display:flex;
-align-items:center;
-justify-content:center;
-border-radius:11px;
-background:transparent;
-color:#aaa;
-font-size:17px;
-transition:.2s;
-}
-
-.header-icon:hover{
-background:rgba(255,255,255,.055);
-color:#fff;
-}
-
-.user-header{
-display:flex;
-align-items:center;
-gap:8px;
-max-width:190px;
-padding:7px 11px;
-border-radius:11px;
-font-size:10px;
-color:#d9d9dc;
-background:rgba(255,255,255,.035);
-border:1px solid var(--border);
-}
-
-.user-dot{
-width:7px;
-height:7px;
-flex-shrink:0;
-border-radius:50%;
-background:var(--green);
-box-shadow:0 0 10px rgba(84,214,138,.55);
-}
-
-.dropdown{
-position:absolute;
-right:18px;
-top:59px;
-width:225px;
-max-height:420px;
-overflow-y:auto;
-padding:7px;
-display:none;
-z-index:100;
-border:1px solid var(--border2);
-border-radius:15px;
-background:linear-gradient(145deg,#17181e,#0f1015);
-box-shadow:var(--shadow);
-}
-
-.dropdown.show{
-display:block;
-animation:dropdownIn .16s ease;
-}
-
-@keyframes dropdownIn{
-from{opacity:0;transform:translateY(-6px) scale(.98)}
-to{opacity:1;transform:translateY(0) scale(1)}
-}
-
-.dropdown-title{
-padding:9px;
-font-size:9px;
-font-weight:800;
-letter-spacing:1.4px;
-text-transform:uppercase;
-color:#6e7079;
-}
-
-.lang-option,.dropdown-item{
-width:100%;
-padding:10px;
-border-radius:9px;
-background:transparent;
-color:#ccc;
-text-align:left;
-font-size:11px;
-transition:.18s;
-}
-
-.lang-option:hover,.dropdown-item:hover{
-background:rgba(255,255,255,.055);
-color:#fff;
-}
-
-#chat{
-flex:1;
-min-height:0;
-overflow-y:auto;
-scroll-behavior:smooth;
-}
-
-.chat-inner{
-width:min(880px,100%);
-min-height:100%;
-margin:auto;
-padding:38px 23px 190px;
-}
-
-#welcome{
-min-height:calc(100vh - 265px);
-display:flex;
-align-items:center;
-justify-content:center;
-}
-
-.welcome-box{
-width:100%;
-max-width:700px;
-padding:28px;
-text-align:center;
-animation:welcomeIn .55s ease;
-}
-
-@keyframes welcomeIn{
-from{opacity:0;transform:translateY(10px)}
-to{opacity:1;transform:translateY(0)}
-}
-
-.welcome-logo{
-margin:0 auto 23px;
-}
-
-#welcomeTitle{
-font-size:clamp(28px,5vw,46px);
-line-height:1.05;
-font-weight:800;
-letter-spacing:-2px;
-}
-
-#welcomeTitle span{
-color:var(--green);
-text-shadow:0 0 30px rgba(84,214,138,.09);
-}
-
-#welcomeDesc{
-max-width:590px;
-margin:18px auto 0;
-font-size:13px;
-line-height:1.8;
-color:#8d8f9a;
-}
-
-.welcome-tags{
-display:flex;
-justify-content:center;
-flex-wrap:wrap;
-gap:8px;
-margin-top:27px;
-}
-
-.welcome-tag{
-padding:8px 13px;
-border-radius:999px;
-font-size:10px;
-color:#a7a8af;
-background:rgba(255,255,255,.025);
-border:1px solid var(--border);
-transition:.2s;
-}
-
-.welcome-tag:hover{
-color:#ddd;
-border-color:rgba(84,214,138,.25);
-background:rgba(84,214,138,.035);
-transform:translateY(-2px);
+.messages{
+ flex:1;
+ overflow-y:auto;
+ padding:18px;
+ display:flex;
+ flex-direction:column;
+ gap:10px;
 }
 
 .message{
-display:flex;
-margin-bottom:22px;
-animation:messageIn .24s ease;
+ max-width:85%;
+ padding:11px 14px;
+ border-radius:14px;
+ line-height:1.5;
+ white-space:pre-wrap;
 }
 
-.message.user{justify-content:flex-end}
-.message.bot{justify-content:flex-start}
-
-@keyframes messageIn{
-from{opacity:0;transform:translateY(6px)}
-to{opacity:1;transform:translateY(0)}
+.bot{
+ align-self:flex-start;
+ background:#151918;
+ border:1px solid var(--line);
 }
 
-.message-bubble{
-max-width:min(730px,90%);
-padding:14px 16px;
-border-radius:17px;
-font-size:12.5px;
-line-height:1.75;
+.user{
+ align-self:flex-end;
+ background:var(--wine2);
 }
 
-.message.user .message-bubble{
-background:
-linear-gradient(135deg,#701c3b,#471426);
-border:1px solid rgba(166,44,85,.34);
-box-shadow:0 8px 28px rgba(64,15,35,.18);
+.chat-form{
+ display:flex;
+ gap:8px;
+ padding:10px;
+ border-top:1px solid var(--line);
 }
 
-.message.bot .message-bubble{
-background:
-linear-gradient(145deg,rgba(19,20,26,.98),rgba(13,14,19,.98));
-border:1px solid var(--border);
-box-shadow:0 10px 35px rgba(0,0,0,.11);
+.chat-form textarea{
+ flex:1;
+ min-height:48px;
+ max-height:130px;
+ resize:none;
+ padding:12px;
+ background:#121615;
+ color:white;
+ border:1px solid var(--line);
+ border-radius:12px;
+ outline:none;
 }
 
-.message-label{
-margin-bottom:6px;
-font-size:8px;
-font-weight:800;
-letter-spacing:1.3px;
-color:#666973;
+/* ===== FORMULARIOS ===== */
+
+.fields{
+ display:grid;
+ grid-template-columns:1fr 1fr;
+ gap:12px;
 }
 
-.message.bot strong{color:#f3f3f5}
-.message.bot .accent{color:var(--green)}
-
-.message.bot p{margin:7px 0}
-.message.bot ul{padding-left:18px;margin:8px 0}
-.message.bot li{margin:5px 0}
-
-.typing{
-display:flex;
-align-items:center;
-gap:5px;
-height:15px;
+.field{
+ display:flex;
+ flex-direction:column;
+ gap:7px;
+ margin-bottom:12px;
 }
-
-.typing span{
-width:5px;
-height:5px;
-border-radius:50%;
-background:#777;
-animation:typing 1s infinite;
-}
-
-.typing span:nth-child(2){animation-delay:.15s}
-.typing span:nth-child(3){animation-delay:.3s}
-
-@keyframes typing{
-0%,70%,100%{opacity:.25;transform:translateY(0)}
-35%{opacity:1;transform:translateY(-3px)}
-}
-
-.duration-panel{
-display:flex;
-flex-wrap:wrap;
-gap:7px;
-margin-top:13px;
-}
-
-.duration-option{
-padding:8px 11px;
-border-radius:9px;
-font-size:10px;
-color:#c9c9ce;
-background:#191a20;
-border:1px solid var(--border);
-transition:.2s;
-}
-
-.duration-option:hover,.duration-option.selected{
-color:var(--green);
-background:rgba(84,214,138,.045);
-border-color:rgba(84,214,138,.48);
-transform:translateY(-1px);
-}
-
-#composerArea{
-position:absolute;
-left:0;
-right:0;
-bottom:0;
-z-index:20;
-padding:13px 20px 17px;
-background:linear-gradient(to top,var(--bg) 63%,rgba(7,8,11,.88) 80%,transparent);
-}
-
-.composer{
-width:min(880px,100%);
-margin:auto;
-}
-
-.composer-box{
-display:flex;
-align-items:flex-end;
-gap:9px;
-padding:9px;
-border-radius:17px;
-background:rgba(16,17,22,.96);
-border:1px solid rgba(255,255,255,.10);
-box-shadow:
-0 18px 50px rgba(0,0,0,.35),
-inset 0 1px rgba(255,255,255,.025);
-transition:.2s;
-}
-
-.composer-box:focus-within{
-border-color:rgba(84,214,138,.25);
-box-shadow:
-0 18px 50px rgba(0,0,0,.4),
-0 0 0 1px rgba(84,214,138,.035);
-}
-
-#input{
-flex:1;
-min-height:42px;
-max-height:140px;
-resize:none;
-outline:none;
-border:0;
-background:transparent;
-color:#eee;
-padding:11px 9px;
-font-size:12px;
-line-height:1.5;
-}
-
-#input::placeholder{color:#60626c}
-
-#send{
-width:40px;
-height:40px;
-flex-shrink:0;
-display:flex;
-align-items:center;
-justify-content:center;
-border-radius:11px;
-background:#24252c;
-color:#686a73;
-font-size:15px;
-transition:.2s;
-}
-
-#send.active{
-background:var(--green);
-color:#07100b;
-box-shadow:0 0 22px rgba(84,214,138,.14);
-}
-
-#send.active:hover{transform:translateY(-2px)}
-
-.composer-info{
-margin-top:7px;
-text-align:center;
-font-size:8px;
-color:#4f515a;
-}
-
-#footerText{
-margin-top:5px;
-text-align:center;
-font-size:8px;
-color:#3e4048;
-}
-
-#mobileMenu{display:none}
-
-@media(max-width:800px){
-
-#sidebar{
-position:fixed;
-left:-292px;
-top:0;
-bottom:0;
-z-index:200;
-transition:.28s ease;
-box-shadow:25px 0 70px rgba(0,0,0,.5);
-}
-
-#sidebar.open{left:0}
-#mobileMenu{display:flex}
-
-.header{
-height:62px;
-min-height:62px;
-padding:0 11px;
-}
-
-.header-logo-text{font-size:12px}
-
-.user-header{
-max-width:125px;
-padding:7px 9px;
-}
-
-.user-header span:last-child{
-max-width:82px;
-overflow:hidden;
-text-overflow:ellipsis;
-white-space:nowrap;
-}
-
-.chat-inner{
-padding:25px 12px 178px;
-}
-
-#welcome{
-min-height:calc(100vh - 215px);
-}
-
-.welcome-box{padding:14px}
-
-#welcomeTitle{
-font-size:30px;
-letter-spacing:-1.3px;
-}
-
-#welcomeDesc{
-font-size:11.5px;
-line-height:1.7;
-}
-
-.welcome-logo{
-width:68px;
-height:68px;
-}
-
-.message-bubble{
-max-width:94%;
-font-size:12px;
-}
-
-#composerArea{
-padding:8px 9px 12px;
-}
-
-.composer-info{font-size:7.5px}
-
-.dropdown{
-right:9px;
-top:55px;
-width:215px;
-}
-}
-
-#overlay{
-position:fixed;
-inset:0;
-z-index:150;
-display:none;
-background:rgba(0,0,0,.6);
-backdrop-filter:blur(3px);
-}
-
-#overlay.show{display:block}
-
-.modal-layer{
-position:fixed;
-inset:0;
-z-index:500;
-display:none;
-align-items:center;
-justify-content:center;
-padding:18px;
-background:rgba(0,0,0,.74);
-backdrop-filter:blur(9px);
-}
-
-.modal-layer.show{
-display:flex;
-animation:modalFade .18s ease;
-}
-
-@keyframes modalFade{
-from{opacity:0}
-to{opacity:1}
-}
-
-.modal{
-width:min(450px,100%);
-max-height:90vh;
-overflow:auto;
-padding:24px;
-border-radius:20px;
-background:
-linear-gradient(145deg,#16171d,#0e0f14);
-border:1px solid rgba(255,255,255,.105);
-box-shadow:0 35px 100px rgba(0,0,0,.6);
-animation:modalIn .2s ease;
-}
-
-.modal.large{width:min(850px,100%)}
-
-@keyframes modalIn{
-from{opacity:0;transform:translateY(8px) scale(.985)}
-to{opacity:1;transform:translateY(0) scale(1)}
-}
-
-.modal-header{
-display:flex;
-justify-content:space-between;
-align-items:flex-start;
-margin-bottom:19px;
-}
-
-.modal-title{
-font-size:19px;
-font-weight:800;
-letter-spacing:-.5px;
-}
-
-.modal-subtitle{
-margin-top:5px;
-font-size:10px;
-line-height:1.55;
-color:#777983;
-}
-
-.close-modal{
-width:30px;
-height:30px;
-border-radius:9px;
-background:transparent;
-color:#777;
-font-size:20px;
-transition:.18s;
-}
-
-.close-modal:hover{
-background:rgba(255,255,255,.05);
-color:#fff;
-}
-
-.auth-tabs{
-display:flex;
-gap:5px;
-padding:4px;
-margin-bottom:17px;
-border-radius:11px;
-background:#0a0b0f;
-border:1px solid var(--border);
-}
-
-.auth-tab{
-flex:1;
-padding:9px;
-border-radius:8px;
-background:transparent;
-color:#777;
-font-size:10px;
-}
-
-.auth-tab.active{
-background:#1b1c22;
-color:#fff;
-box-shadow:0 3px 12px rgba(0,0,0,.2);
-}
-
-.auth-form{display:none}
-.auth-form.active{display:block}
-
-.field{margin-bottom:11px}
 
 .field label{
-display:block;
-margin-bottom:5px;
-font-size:9px;
-color:#858791;
+ color:var(--gray);
+ font-size:13px;
 }
 
-.field input{
-width:100%;
-padding:11px;
-outline:none;
-border-radius:10px;
-border:1px solid var(--border);
-background:#0a0b0f;
-color:#fff;
-font-size:11px;
-transition:.2s;
+input,select{
+ width:100%;
+ background:#121615;
+ color:white;
+ border:1px solid var(--line);
+ border-radius:11px;
+ padding:11px;
+ outline:none;
 }
 
-.field input:focus{
-border-color:rgba(84,214,138,.45);
-box-shadow:0 0 0 3px rgba(84,214,138,.035);
+.result{
+ margin-top:16px;
+ padding:16px;
+ background:#111614;
+ border:1px solid var(--line);
+ border-radius:14px;
+ line-height:1.6;
 }
 
-.auth-submit{
-width:100%;
-margin-top:4px;
-padding:12px;
-border-radius:10px;
-background:var(--green);
-color:#061009;
-font-size:11px;
-font-weight:800;
-transition:.2s;
+.result strong{color:var(--green)}
+
+/* ===== AUTH ===== */
+
+#auth{
+ position:fixed;
+ inset:0;
+ z-index:50;
+ background:#050706f5;
+ display:grid;
+ place-items:center;
+ padding:20px;
 }
 
-.auth-submit:hover{
-background:#68e29a;
-transform:translateY(-1px);
+.auth{
+ width:min(430px,100%);
+ background:#101312;
+ border:1px solid var(--line);
+ border-radius:22px;
+ padding:24px;
 }
 
-.auth-message{
-min-height:18px;
-margin-top:9px;
-font-size:9px;
-color:#dc6b8d;
+.auth h2{margin-top:0}
+
+.auth-actions{
+ display:flex;
+ gap:8px;
 }
 
-.auth-note{
-margin-top:13px;
-font-size:8px;
-line-height:1.65;
-color:#5e6069;
+.auth-actions button{flex:1}
+
+/* ===== ADMIN ===== */
+
+.admin-box{
+ display:grid;
+ grid-template-columns:repeat(3,1fr);
+ gap:12px;
 }
 
-.admin-stats{
-display:grid;
-grid-template-columns:repeat(3,1fr);
-gap:8px;
-margin-bottom:15px;
+.stat{
+ background:#121615;
+ border:1px solid var(--line);
+ border-radius:15px;
+ padding:18px;
 }
 
-.admin-stat{
-padding:12px;
-border-radius:12px;
-background:#0b0c10;
-border:1px solid var(--border);
+.stat b{
+ display:block;
+ font-size:27px;
+ color:var(--green);
+ margin-top:6px;
 }
 
-.admin-stat-number{
-font-size:20px;
-font-weight:800;
-color:var(--green);
+table{
+ width:100%;
+ border-collapse:collapse;
+ margin-top:15px;
 }
 
-.admin-stat-label{
-margin-top:3px;
-font-size:8px;
-color:#70727c;
+th,td{
+ padding:10px;
+ border-bottom:1px solid var(--line);
+ text-align:left;
+ font-size:13px;
 }
 
-.admin-table-wrap{
-overflow:auto;
-border-radius:12px;
-border:1px solid var(--border);
+th{color:var(--green)}
+
+footer{
+ text-align:center;
+ color:#66706a;
+ font-size:12px;
+ padding:25px;
 }
 
-.admin-table{
-width:100%;
-min-width:650px;
-border-collapse:collapse;
-}
-
-.admin-table th,.admin-table td{
-padding:10px;
-border-bottom:1px solid var(--border);
-text-align:left;
-font-size:9px;
-}
-
-.admin-table th{
-color:#70727a;
-text-transform:uppercase;
-letter-spacing:.7px;
-font-size:8px;
-}
-
-.admin-table td{color:#c9c9ce}
-.admin-table tr:last-child td{border-bottom:0}
-
-#adminLogs{
-max-height:180px;
-overflow:auto;
-}
-
-.account-box{
-padding:14px;
-margin-bottom:10px;
-border-radius:13px;
-background:#0b0c10;
-border:1px solid var(--border);
-}
-
-.account-name{
-font-size:12px;
-font-weight:800;
-}
-
-.account-email{
-margin-top:3px;
-font-size:9px;
-color:#777983;
-}
-
-.account-actions{
-display:flex;
-gap:7px;
-margin-top:13px;
-}
-
-.small-btn{
-padding:8px 10px;
-border-radius:8px;
-background:#1b1c22;
-border:1px solid var(--border);
-color:#ccc;
-font-size:9px;
-}
-
-.small-btn:hover{background:#25262d}
-.small-btn.danger{color:#ef7797}
-
-@media print{
-body{
-background:white;
-color:#111;
-overflow:visible;
-}
-
-#sidebar,.header,#composerArea,#splash,#overlay,.modal-layer,#footerText{
-display:none!important;
-}
-
-.main,#chat{
-height:auto;
-overflow:visible;
-}
-
-.chat-inner{
-width:100%;
-padding:0;
-}
-
-#welcome{display:none}
-
-.message-bubble{
-max-width:100%;
-color:#111!important;
-background:white!important;
-border:1px solid #ddd!important;
-}
-
-.message.user{display:none}
-}
-
-@media(max-width:430px){
-.admin-stats{grid-template-columns:1fr}
-.header-logo-text{display:none}
-.user-header{max-width:145px}
-#welcomeTitle{font-size:27px}
-.welcome-tags{gap:6px}
-.welcome-tag{padding:7px 10px}
+@media(max-width:800px){
+ .layout{grid-template-columns:1fr}
+ .menu{display:flex;overflow:auto}
+ .menu button{white-space:nowrap}
+ .grid{grid-template-columns:1fr}
+ .fields{grid-template-columns:1fr}
+ .admin-box{grid-template-columns:1fr}
 }
 </style>
 </head>
 
 <body>
 
-<div id="splash">
-<div class="splash-inner">
+<!-- ================= ENTRADA ================= -->
 
-<svg class="sk-logo splash-logo" viewBox="0 0 100 100">
-<defs>
-<linearGradient id="houseWine" x1="0" y1="0" x2="1" y2="1">
-<stop offset="0" stop-color="#b33460"/>
-<stop offset="1" stop-color="#68182f"/>
-</linearGradient>
-<linearGradient id="camGreen" x1="0" y1="0" x2="1" y2="1">
-<stop offset="0" stop-color="#67e39a"/>
-<stop offset="1" stop-color="#2bb86d"/>
-</linearGradient>
-</defs>
-<circle cx="50" cy="50" r="46" fill="#101116" stroke="#54d68a" stroke-width="2.5"/>
-<path d="M20 47.5 50 22l30 25.5" fill="none" stroke="url(#houseWine)" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
-<path d="M28 45v30h44V45" fill="#16171d" stroke="url(#houseWine)" stroke-width="5" stroke-linejoin="round"/>
-<path d="M39 75V57h22v18" fill="#0b0c10" stroke="#54d68a" stroke-width="3"/>
-<rect x="34" y="47" width="32" height="20" rx="5" fill="#111218" stroke="url(#camGreen)" stroke-width="3"/>
-<circle cx="50" cy="57" r="7" fill="#0a0b0f" stroke="#54d68a" stroke-width="3"/>
-<circle cx="50" cy="57" r="2.2" fill="#54d68a"/>
-<path d="M40 47l4-5h8l3 5" fill="none" stroke="#54d68a" stroke-width="3" stroke-linecap="round"/>
-<circle cx="61" cy="51" r="1.8" fill="#b33460"/>
-</svg>
+<section id="entry">
+ <div class="entry">
 
-<div class="splash-title">SparkyKrea <span>Studio's</span></div>
-<div class="splash-line"></div>
+  <div class="logo">SK</div>
+
+  <h1>
+   <span class="sparky">Sparky</span><span class="krea">Krea</span>
+   <span class="studio">Studio</span>
+  </h1>
+
+  <p class="subtitle">
+   Tu espacio creativo para crear guiones, estrategias,
+   ideas y dirección musical sin complicarte.
+  </p>
+
+  <button class="primary" onclick="openAuth('login')">
+   Entrar
+  </button>
+
+  <button class="secondary" onclick="openAuth('register')">
+   Crear cuenta
+  </button>
+
+ </div>
+</section>
+
+
+<!-- ================= AUTENTICACIÓN ================= -->
+
+<section id="auth" class="hidden">
+ <div class="auth">
+
+  <h2 id="authTitle">Iniciar sesión</h2>
+
+  <div id="registerFields" class="hidden">
+
+   <div class="field">
+    <label>Nombre</label>
+    <input id="name" placeholder="Tu nombre">
+   </div>
+
+   <div class="field">
+    <label>Apellido</label>
+    <input id="lastname" placeholder="Tu apellido">
+   </div>
+
+  </div>
+
+  <div class="field">
+   <label>Correo electrónico</label>
+   <input id="email" type="email" placeholder="correo@ejemplo.com">
+  </div>
+
+  <div class="field">
+   <label>Contraseña</label>
+   <input id="password" type="password" placeholder="Contraseña">
+  </div>
+
+  <p id="authError"></p>
+
+  <div class="auth-actions">
+   <button class="primary" onclick="authSubmit()">Continuar</button>
+   <button class="secondary" onclick="closeAuth()">Cerrar</button>
+  </div>
+
+  <button
+   id="authSwitch"
+   class="secondary"
+   style="width:100%;margin-top:10px"
+   onclick="switchAuth()">
+   ¿No tienes cuenta? Regístrate
+  </button>
+
+ </div>
+</section>
+
+
+<!-- ================= APLICACIÓN ================= -->
+
+<div id="app" class="hidden">
+
+<header>
+ <div class="nav">
+
+  <div class="brand">
+   <span class="s">Sparky</span><span class="k">Krea</span>
+   <span class="st"> Studio</span>
+  </div>
+
+  <div>
+   <span id="welcome"></span>
+   <button onclick="logout()">Salir</button>
+  </div>
+
+ </div>
+</header>
+
+
+<main>
+
+<section class="hero">
+
+ <h2>¿Qué vamos a crear hoy?</h2>
+
+ <p>
+  Puedes hablar normalmente. Decir
+  <b>hola</b>, <b>ola</b>, <b>xd</b>, <b>lol</b>,
+  <b>jajaja</b>, <b>jsjs</b> o <b>gracias</b>
+  no será interpretado automáticamente como publicidad.
+ </p>
+
+</section>
+
+
+<div class="grid">
+
+ <div class="card">
+  <span class="tag">01</span>
+  <h3>Guiones</h3>
+  <p>Hooks, estructura, desarrollo y cierre adaptados a la duración.</p>
+ </div>
+
+ <div class="card">
+  <span class="tag">02</span>
+  <h3>Estrategia</h3>
+  <p>Ideas para publicar, crecer y presentar mejor tu contenido.</p>
+ </div>
+
+ <div class="card">
+  <span class="tag">03</span>
+  <h3>Música</h3>
+  <p>Direcciones musicales según el ambiente de tu contenido.</p>
+ </div>
 
 </div>
-</div>
 
-<div id="app">
 
-<aside id="sidebar">
+<section class="layout">
 
-<div class="brand">
+<aside class="menu">
 
-<svg class="sk-logo small" viewBox="0 0 100 100">
-<defs>
-<linearGradient id="houseWine2" x1="0" y1="0" x2="1" y2="1">
-<stop offset="0" stop-color="#b33460"/>
-<stop offset="1" stop-color="#68182f"/>
-</linearGradient>
-<linearGradient id="camGreen2" x1="0" y1="0" x2="1" y2="1">
-<stop offset="0" stop-color="#67e39a"/>
-<stop offset="1" stop-color="#2bb86d"/>
-</linearGradient>
-</defs>
-<circle cx="50" cy="50" r="46" fill="#101116" stroke="#54d68a" stroke-width="2.5"/>
-<path d="M20 47.5 50 22l30 25.5" fill="none" stroke="url(#houseWine2)" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
-<path d="M28 45v30h44V45" fill="#16171d" stroke="url(#houseWine2)" stroke-width="5" stroke-linejoin="round"/>
-<path d="M39 75V57h22v18" fill="#0b0c10" stroke="#54d68a" stroke-width="3"/>
-<rect x="34" y="47" width="32" height="20" rx="5" fill="#111218" stroke="url(#camGreen2)" stroke-width="3"/>
-<circle cx="50" cy="57" r="7" fill="#0a0b0f" stroke="#54d68a" stroke-width="3"/>
-<circle cx="50" cy="57" r="2.2" fill="#54d68a"/>
-<path d="M40 47l4-5h8l3 5" fill="none" stroke="#54d68a" stroke-width="3" stroke-linecap="round"/>
-<circle cx="61" cy="51" r="1.8" fill="#b33460"/>
-</svg>
+ <button class="active" onclick="tool('chat',this)">
+  🏠 📷 Chat
+ </button>
 
-<div class="brand-text">SparkyKrea <span>Studio's</span></div>
-</div>
+ <button onclick="tool('script',this)">
+  ✍️ Guiones
+ </button>
 
-<button id="newProjectBtn" class="sidebar-button primary">＋ Nuevo proyecto</button>
-<button id="exportPdfBtn" class="sidebar-button">▣ Descargar Guión en PDF</button>
+ <button onclick="tool('strategy',this)">
+  📈 Estrategia
+ </button>
 
-<div class="history-title"><span id="historyTitleTxt">Historial de chats</span></div>
+ <button onclick="tool('music',this)">
+  🎵 Música
+ </button>
 
-<div id="history">
-<div class="history-empty">Inicia sesión para guardar tus chats.</div>
-</div>
-
-<div class="sidebar-bottom">
-<button id="authBtn" class="sidebar-button">◉ Iniciar sesión</button>
-<button id="adminBtn" class="sidebar-button hidden">⚙ Panel administrador</button>
-</div>
+ <button id="adminButton" class="hidden" onclick="tool('admin',this)">
+  ⚙️ Administración
+ </button>
 
 </aside>
 
-<div id="overlay"></div>
 
-<main class="main">
+<section>
 
-<header class="header">
+<!-- CHAT -->
 
-<div class="header-left">
+<div id="chat" class="chat">
 
-<button id="mobileMenu" class="header-icon">☰</button>
+ <div class="chat-head">
+  <b>SparkyKrea AI</b>
+  <small>Asistente creativo</small>
+ </div>
 
-<div class="header-logo-text">SparkyKrea <span>Studio's</span></div>
+ <div id="messages" class="messages">
+
+  <div class="message bot">
+   ¡Hola! Soy SparkyKrea.
+   Puedes hablar conmigo normalmente o pedirme
+   ayuda con guiones, estrategia, música o contenido.
+  </div>
+
+ </div>
+
+ <form class="chat-form" onsubmit="sendMessage(event)">
+  <textarea id="chatInput"
+   placeholder="Escribe aquí..."></textarea>
+
+  <button class="primary">Enviar</button>
+ </form>
+
+</div>
+
+
+<!-- GUIONES -->
+
+<div id="script" class="panel hidden">
+
+ <h2>Generador de guiones</h2>
+
+ <div class="fields">
+
+  <div class="field">
+   <label>Tema</label>
+   <input id="scriptTopic" placeholder="Ej. Valorant">
+  </div>
+
+  <div class="field">
+   <label>Duración</label>
+   <select id="duration">
+    <option>15 segundos</option>
+    <option>30 segundos</option>
+    <option>60 segundos</option>
+    <option>90 segundos</option>
+   </select>
+  </div>
+
+ </div>
+
+ <button class="primary" onclick="generateScript()">
+  Generar
+ </button>
+
+ <div id="scriptResult" class="result hidden"></div>
 
 </div>
 
-<div class="header-right">
 
-<div id="userHeader" class="user-header hidden">
-<span class="user-dot"></span>
-<span id="userHeaderName">Usuario</span>
-</div>
+<!-- ESTRATEGIA -->
 
-<button id="headerDotsBtn" class="header-icon">⋮</button>
+<div id="strategy" class="panel hidden">
 
-</div>
+ <h2>Estrategia</h2>
 
-<div id="headerDropdown" class="dropdown">
+ <div class="field">
+  <label>¿Qué quieres impulsar?</label>
+  <input id="strategyTopic"
+   placeholder="Ej. mi cuenta de gaming">
+ </div>
 
-<div class="dropdown-title" id="langMenuTitle">Idioma</div>
+ <div class="field">
+  <label>Objetivo</label>
+  <select id="goal">
+   <option>Conseguir visitas</option>
+   <option>Conseguir seguidores</option>
+   <option>Promocionar un negocio</option>
+   <option>Presentar un producto</option>
+  </select>
+ </div>
 
-<div id="langOptionsList">
+ <button class="primary" onclick="generateStrategy()">
+  Crear estrategia
+ </button>
 
-<button class="lang-option" data-lang="es">Español</button>
-<button class="lang-option" data-lang="en">English</button>
-<button class="lang-option" data-lang="pt">Português</button>
-<button class="lang-option" data-lang="fr">Français</button>
-<button class="lang-option" data-lang="de">Deutsch</button>
-<button class="lang-option" data-lang="it">Italiano</button>
-<button class="lang-option" data-lang="ru">Русский</button>
-<button class="lang-option" data-lang="zh">中文</button>
-<button class="lang-option" data-lang="ja">日本語</button>
-<button class="lang-option" data-lang="ar">العربية</button>
-
-</div>
-</div>
-
-</header>
-
-<section id="chat">
-
-<div class="chat-inner">
-
-<div id="welcome">
-
-<div class="welcome-box">
-
-<svg class="sk-logo large welcome-logo" viewBox="0 0 100 100">
-<defs>
-<linearGradient id="houseWine3" x1="0" y1="0" x2="1" y2="1">
-<stop offset="0" stop-color="#b33460"/>
-<stop offset="1" stop-color="#68182f"/>
-</linearGradient>
-<linearGradient id="camGreen3" x1="0" y1="0" x2="1" y2="1">
-<stop offset="0" stop-color="#67e39a"/>
-<stop offset="1" stop-color="#2bb86d"/>
-</linearGradient>
-</defs>
-<circle cx="50" cy="50" r="46" fill="#101116" stroke="#54d68a" stroke-width="2.5"/>
-<path d="M20 47.5 50 22l30 25.5" fill="none" stroke="url(#houseWine3)" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
-<path d="M28 45v30h44V45" fill="#16171d" stroke="url(#houseWine3)" stroke-width="5" stroke-linejoin="round"/>
-<path d="M39 75V57h22v18" fill="#0b0c10" stroke="#54d68a" stroke-width="3"/>
-<rect x="34" y="47" width="32" height="20" rx="5" fill="#111218" stroke="url(#camGreen3)" stroke-width="3"/>
-<circle cx="50" cy="57" r="7" fill="#0a0b0f" stroke="#54d68a" stroke-width="3"/>
-<circle cx="50" cy="57" r="2.2" fill="#54d68a"/>
-<path d="M40 47l4-5h8l3 5" fill="none" stroke="#54d68a" stroke-width="3" stroke-linecap="round"/>
-<circle cx="61" cy="51" r="1.8" fill="#b33460"/>
-</svg>
-
-<h1 id="welcomeTitle">
-Tu idea puede convertirse en algo <span>increíble.</span>
-</h1>
-
-<p id="welcomeDesc">
-SparkyKrea te ayuda a crear guiones, estrategias, conceptos y música para llevar tus ideas a otro nivel.
-</p>
-
-<div class="welcome-tags">
-<span class="welcome-tag">Guiones</span>
-<span class="welcome-tag">Estrategia</span>
-<span class="welcome-tag">Música</span>
-<span class="welcome-tag">Ideas</span>
-</div>
+ <div id="strategyResult" class="result hidden"></div>
 
 </div>
-</div>
+
+
+<!-- MÚSICA -->
+
+<div id="music" class="panel hidden">
+
+ <h2>Música</h2>
+
+ <div class="fields">
+
+  <div class="field">
+   <label>Contenido</label>
+   <input id="musicTopic" placeholder="Ej. clip competitivo">
+  </div>
+
+  <div class="field">
+   <label>Ambiente</label>
+   <select id="vibe">
+    <option>Energética</option>
+    <option>Épica</option>
+    <option>Divertida</option>
+    <option>Relajada</option>
+    <option>Oscura</option>
+   </select>
+  </div>
+
+ </div>
+
+ <button class="primary" onclick="generateMusic()">
+  Crear dirección musical
+ </button>
+
+ <div id="musicResult" class="result hidden"></div>
 
 </div>
+
+
+<!-- ADMIN -->
+
+<div id="admin" class="panel hidden">
+
+ <h2>Panel de administración</h2>
+
+ <div class="admin-box">
+
+  <div class="stat">
+   Usuarios registrados
+   <b id="usersCount">0</b>
+  </div>
+
+  <div class="stat">
+   Inicios de sesión
+   <b id="loginCount">0</b>
+  </div>
+
+  <div class="stat">
+   Estado
+   <b>ADMIN</b>
+  </div>
+
+ </div>
+
+ <h3>Usuarios registrados</h3>
+
+ <div style="overflow:auto">
+  <table>
+   <thead>
+    <tr>
+     <th>Nombre</th>
+     <th>Apellido</th>
+     <th>Correo</th>
+    </tr>
+   </thead>
+   <tbody id="usersTable"></tbody>
+  </table>
+ </div>
+
+ <h3>Últimos accesos</h3>
+
+ <div id="accessList" class="result"></div>
+
+</div>
+
+</section>
 </section>
 
-<div id="composerArea">
-
-<div class="composer">
-
-<div class="composer-box">
-
-<textarea id="input" rows="1" placeholder="Cuéntame qué quieres crear..."></textarea>
-
-<!-- NO CAMBIAR: BOTÓN DE ENVÍO -->
-<button id="send" title="Enviar">➤</button>
-
-</div>
-
-<div class="composer-info">
-SparkyKrea puede ayudarte con guiones, estrategia, música e ideas creativas.
-</div>
-
-<div id="footerText">
-SparkyKrea Studio's · Creative Intelligence
-</div>
-
-</div>
-</div>
-
 </main>
-</div>
 
-<div id="authModal" class="modal-layer">
-
-<div class="modal">
-
-<div class="modal-header">
-
-<div>
-<div class="modal-title">Tu cuenta</div>
-<div class="modal-subtitle">
-Guarda tus proyectos y desbloquea las funciones para usuarios.
-</div>
-</div>
-
-<button class="close-modal" data-close="authModal">×</button>
+<footer>
+ SparkyKrea Studio · Creative Studio
+</footer>
 
 </div>
 
-<div class="auth-tabs">
-
-<button id="loginTab" class="auth-tab active">Iniciar sesión</button>
-<button id="registerTab" class="auth-tab">Crear cuenta</button>
-
-</div>
-
-<form id="loginForm" class="auth-form active">
-
-<div class="field">
-<label>Correo electrónico</label>
-<input id="loginEmail" type="email" autocomplete="email" placeholder="tu@email.com" required>
-</div>
-
-<div class="field">
-<label>Contraseña</label>
-<input id="loginPassword" type="password" autocomplete="current-password" placeholder="Tu contraseña" required>
-</div>
-
-<button class="auth-submit" type="submit">Entrar</button>
-
-<div id="loginMessage" class="auth-message"></div>
-
-</form>
-
-<form id="registerForm" class="auth-form">
-
-<div class="field">
-<label>Nombre</label>
-<input id="registerName" type="text" placeholder="Tu nombre" required>
-</div>
-
-<div class="field">
-<label>Apellido</label>
-<input id="registerSurname" type="text" placeholder="Tu apellido" required>
-</div>
-
-<div class="field">
-<label>Correo electrónico</label>
-<input id="registerEmail" type="email" autocomplete="email" placeholder="tu@email.com" required>
-</div>
-
-<div class="field">
-<label>Contraseña</label>
-<input id="registerPassword" type="password" autocomplete="new-password" placeholder="Mínimo 8 caracteres" minlength="8" required>
-</div>
-
-<div class="field">
-<label>Confirmar contraseña</label>
-<input id="registerPassword2" type="password" autocomplete="new-password" placeholder="Repite tu contraseña" minlength="8" required>
-</div>
-
-<button class="auth-submit" type="submit">Crear cuenta</button>
-
-<div id="registerMessage" class="auth-message"></div>
-
-</form>
-
-<div class="auth-note">
-En esta versión de GitHub Pages las cuentas se guardan únicamente en este navegador. Para una autenticación real y segura entre dispositivos será necesario conectar un servicio como Firebase o Supabase.
-</div>
-
-</div>
-</div>
-
-<div id="accountModal" class="modal-layer">
-
-<div class="modal">
-
-<div class="modal-header">
-
-<div>
-<div class="modal-title">Mi cuenta</div>
-<div class="modal-subtitle">Información de tu cuenta SparkyKrea.</div>
-</div>
-
-<button class="close-modal" data-close="accountModal">×</button>
-
-</div>
-
-<div class="account-box">
-
-<div id="accountName" class="account-name"></div>
-<div id="accountEmail" class="account-email"></div>
-<div id="accountCreated" class="account-email"></div>
-
-</div>
-
-<div class="account-actions">
-
-<button id="logoutBtn" class="small-btn danger">Cerrar sesión</button>
-
-</div>
-
-</div>
-</div>
-
-<div id="adminModal" class="modal-layer">
-
-<div class="modal large">
-
-<div class="modal-header">
-
-<div>
-<div class="modal-title">Panel administrador</div>
-<div class="modal-subtitle">Usuarios y actividad de SparkyKrea.</div>
-</div>
-
-<button class="close-modal" data-close="adminModal">×</button>
-
-</div>
-
-<div class="admin-stats">
-
-<div class="admin-stat">
-<div id="adminUserCount" class="admin-stat-number">0</div>
-<div class="admin-stat-label">Usuarios registrados</div>
-</div>
-
-<div class="admin-stat">
-<div id="adminLoginCount" class="admin-stat-number">0</div>
-<div class="admin-stat-label">Inicios de sesión</div>
-</div>
-
-<div class="admin-stat">
-<div id="adminChatCount" class="admin-stat-number">0</div>
-<div class="admin-stat-label">Chats guardados</div>
-</div>
-
-</div>
-
-<div class="admin-table-wrap">
-
-<table class="admin-table">
-
-<thead>
-<tr>
-<th>Usuario</th>
-<th>Correo</th>
-<th>Registro</th>
-<th>Último acceso</th>
-<th>Accesos</th>
-</tr>
-</thead>
-
-<tbody id="adminUsersBody"></tbody>
-
-</table>
-
-</div>
-
-<div class="history-title" style="padding-left:0;margin-top:12px">
-Actividad reciente
-</div>
-
-<div id="adminLogs"></div>
-
-</div>
-</div>
 
 <script>
 
-/* =========================================================
-   SPARKYKREA STUDIO'S
-   CREATIVE INTELLIGENCE ENGINE
-   ========================================================= */
+/* =====================================================
+   CONFIGURACIÓN
+   ===================================================== */
 
-const input=document.getElementById("input");
-const send=document.getElementById("send");
-const chat=document.getElementById("chat");
-const chatInner=chat.querySelector(".chat-inner");
-const welcome=document.getElementById("welcome");
-const history=document.getElementById("history");
-const sidebar=document.getElementById("sidebar");
-const overlay=document.getElementById("overlay");
-const headerDotsBtn=document.getElementById("headerDotsBtn");
-const headerDropdown=document.getElementById("headerDropdown");
-const langOptionsList=document.getElementById("langOptionsList");
+/*
+ IMPORTANTE:
+ Este ADMIN_ID solamente controla la interfaz local.
+ NO es seguridad real.
 
-/* =========================================================
-   AUTH
-========================================================= */
+ Para que solamente tú puedas acceder al panel
+ desde cualquier dispositivo necesitaremos conectar
+ una autenticación real posteriormente.
+*/
 
-const USERS_KEY="sparky_users_v2";
-const SESSION_KEY="sparky_session_v2";
-const LOGS_KEY="sparky_login_logs_v2";
+const ADMIN_EMAIL="TU_CORREO_ADMIN@EJEMPLO.COM";
 
-function getUsers(){
-try{
-const data=JSON.parse(localStorage.getItem(USERS_KEY)||"[]");
-return Array.isArray(data)?data:[];
-}catch{return[]}
+let mode="login";
+
+
+/* =====================================================
+   AUTENTICACIÓN
+   ===================================================== */
+
+function openAuth(type){
+ mode=type;
+
+ document.getElementById("auth").classList.remove("hidden");
+
+ document.getElementById("registerFields")
+ .classList.toggle("hidden",type==="login");
+
+ document.getElementById("authTitle").textContent=
+ type==="login"?"Iniciar sesión":"Crear cuenta";
+
+ document.getElementById("authSwitch").textContent=
+ type==="login"
+ ?"¿No tienes cuenta? Regístrate"
+ :"¿Ya tienes cuenta? Inicia sesión";
+
+ document.getElementById("authError").textContent="";
 }
 
-function setUsers(users){
-localStorage.setItem(USERS_KEY,JSON.stringify(users));
+
+function closeAuth(){
+ document.getElementById("auth").classList.add("hidden");
 }
 
-function getLogs(){
-try{
-const data=JSON.parse(localStorage.getItem(LOGS_KEY)||"[]");
-return Array.isArray(data)?data:[];
-}catch{return[]}
+
+function switchAuth(){
+ openAuth(mode==="login"?"register":"login");
 }
 
-function setLogs(logs){
-localStorage.setItem(LOGS_KEY,JSON.stringify(logs.slice(0,200)));
+
+function authSubmit(){
+
+ const email=
+ document.getElementById("email").value.trim().toLowerCase();
+
+ const pass=
+ document.getElementById("password").value;
+
+ const error=document.getElementById("authError");
+
+ if(!email||!pass){
+  error.textContent="Completa todos los campos.";
+  return;
+ }
+
+
+ let users=
+ JSON.parse(localStorage.getItem("skUsers")||"[]");
+
+
+ if(mode==="register"){
+
+  const name=
+  document.getElementById("name").value.trim();
+
+  const lastname=
+  document.getElementById("lastname").value.trim();
+
+  if(!name||!lastname){
+   error.textContent="Completa nombre y apellido.";
+   return;
+  }
+
+  if(users.some(u=>u.email===email)){
+   error.textContent="Ese correo ya está registrado.";
+   return;
+  }
+
+  users.push({
+   name,
+   lastname,
+   email,
+   password:pass,
+   created:new Date().toLocaleString()
+  });
+
+  localStorage.setItem("skUsers",JSON.stringify(users));
+
+  enter(name,email);
+
+ }else{
+
+  const user=
+  users.find(u=>u.email===email&&u.password===pass);
+
+  if(!user){
+   error.textContent=
+   "Correo o contraseña incorrectos.";
+   return;
+  }
+
+  saveAccess(user.email);
+
+  enter(user.name,user.email);
+ }
 }
 
-function getSession(){
-try{
-return JSON.parse(localStorage.getItem(SESSION_KEY)||"null")||null;
-}catch{return null}
+
+function enter(name,email){
+
+ localStorage.setItem("skSession",
+ JSON.stringify({name,email}));
+
+ document.getElementById("entry")
+ .classList.add("hidden");
+
+ document.getElementById("auth")
+ .classList.add("hidden");
+
+ document.getElementById("app")
+ .classList.remove("hidden");
+
+ document.getElementById("welcome")
+ .textContent="Hola, "+name;
+
+ if(email===ADMIN_EMAIL){
+  document.getElementById("adminButton")
+  .classList.remove("hidden");
+  updateAdmin();
+ }
 }
 
-function setSession(user){
-if(user){
-localStorage.setItem(SESSION_KEY,JSON.stringify({
-id:user.id,
-email:user.email,
-name:user.name,
-surname:user.surname,
-isAdmin:!!user.isAdmin
-}));
-}else{
-localStorage.removeItem(SESSION_KEY);
-}
+
+function logout(){
+
+ localStorage.removeItem("skSession");
+
+ document.getElementById("app")
+ .classList.add("hidden");
+
+ document.getElementById("entry")
+ .classList.remove("hidden");
 }
 
-let currentUser=getSession();
 
-/* =========================================================
-   HASH
-========================================================= */
+/* =====================================================
+   ACCESOS
+   ===================================================== */
 
-async function hashPassword(password){
+function saveAccess(email){
 
-if(window.crypto&&crypto.subtle){
+ let accesses=
+ JSON.parse(localStorage.getItem("skAccess")||"[]");
 
-const data=new TextEncoder().encode(password);
+ accesses.push({
+  email,
+  date:new Date().toLocaleString()
+ });
 
-const hash=await crypto.subtle.digest(
-"SHA-256",
-data
-);
-
-return Array.from(
-new Uint8Array(hash)
-)
-.map(b=>b.toString(16).padStart(2,"0"))
-.join("");
-
+ localStorage.setItem(
+  "skAccess",
+  JSON.stringify(accesses)
+ );
 }
 
-let hash=0;
 
-for(let i=0;i<password.length;i++){
+/* =====================================================
+   NAVEGACIÓN
+   ===================================================== */
 
-hash=((hash<<5)-hash)+password.charCodeAt(i);
-hash|=0;
+function tool(name,button){
 
+ document.querySelectorAll(".menu button")
+ .forEach(b=>b.classList.remove("active"));
+
+ button.classList.add("active");
+
+ ["chat","script","strategy","music","admin"]
+ .forEach(id=>{
+  document.getElementById(id)
+  .classList.toggle("hidden",id!==name);
+ });
 }
 
-return String(hash);
-}
 
-/* =========================================================
-   MODALS
-========================================================= */
-
-const authModal=document.getElementById("authModal");
-const accountModal=document.getElementById("accountModal");
-const adminModal=document.getElementById("adminModal");
-const authBtn=document.getElementById("authBtn");
-const adminBtn=document.getElementById("adminBtn");
-const userHeader=document.getElementById("userHeader");
-const userHeaderName=document.getElementById("userHeaderName");
-
-function openModal(modal){
-modal.classList.add("show");
-}
-
-function closeModal(modal){
-modal.classList.remove("show");
-}
-
-document.querySelectorAll("[data-close]").forEach(button=>{
-
-button.addEventListener("click",()=>{
-
-const modal=document.getElementById(
-button.dataset.close
-);
-
-if(modal)closeModal(modal);
-
-});
-
-});
-
-document.querySelectorAll(".modal-layer").forEach(layer=>{
-
-layer.addEventListener("click",e=>{
-
-if(e.target===layer)closeModal(layer);
-
-});
-
-});
-
-/* =========================================================
-   TABS
-========================================================= */
-
-const loginTab=document.getElementById("loginTab");
-const registerTab=document.getElementById("registerTab");
-const loginForm=document.getElementById("loginForm");
-const registerForm=document.getElementById("registerForm");
-
-loginTab.addEventListener("click",()=>{
-
-loginTab.classList.add("active");
-registerTab.classList.remove("active");
-
-loginForm.classList.add("active");
-registerForm.classList.remove("active");
-
-});
-
-registerTab.addEventListener("click",()=>{
-
-registerTab.classList.add("active");
-loginTab.classList.remove("active");
-
-registerForm.classList.add("active");
-loginForm.classList.remove("active");
-
-});
-
-function openLogin(){
-
-openModal(authModal);
-loginTab.click();
-
-}
-
-/* =========================================================
-   REGISTER
-========================================================= */
-
-registerForm.addEventListener("submit",async e=>{
-
-e.preventDefault();
-
-const name=document.getElementById("registerName").value.trim();
-const surname=document.getElementById("registerSurname").value.trim();
-const email=document.getElementById("registerEmail").value.trim().toLowerCase();
-const password=document.getElementById("registerPassword").value;
-const password2=document.getElementById("registerPassword2").value;
-const message=document.getElementById("registerMessage");
-
-message.textContent="";
-
-if(!name||!surname){
-
-message.textContent="Completa tu nombre y apellido.";
-return;
-
-}
-
-if(!email.includes("@")){
-
-message.textContent="Introduce un correo válido.";
-return;
-
-}
-
-if(password.length<8){
-
-message.textContent="La contraseña debe tener al menos 8 caracteres.";
-return;
-
-}
-
-if(password!==password2){
-
-message.textContent="Las contraseñas no coinciden.";
-return;
-
-}
-
-const users=getUsers();
-
-if(users.some(user=>user.email===email)){
-
-message.textContent="Ese correo ya está registrado.";
-return;
-
-}
-
-const passwordHash=await hashPassword(password);
-const firstUser=users.length===0;
-
-const user={
-id:"u_"+Date.now()+"_"+Math.random().toString(36).slice(2,8),
-name,
-surname,
-email,
-passwordHash,
-createdAt:new Date().toISOString(),
-lastLogin:null,
-loginCount:0,
-isAdmin:firstUser
-};
-
-users.push(user);
-setUsers(users);
-
-currentUser=user;
-setSession(user);
-
-updateAuthUI();
-loadUserHistory();
-
-closeModal(authModal);
-registerForm.reset();
-
-addBotMessage(
-user.isAdmin
-?"Cuenta creada correctamente. Esta es la primera cuenta de SparkyKrea, por lo que tienes acceso al Panel administrador."
-:"Cuenta creada correctamente. Desde ahora tus chats podrán guardarse en este navegador y tendrás acceso a la opción PDF."
-);
-
-});
-
-/* =========================================================
-   LOGIN
-========================================================= */
-
-loginForm.addEventListener("submit",async e=>{
-
-e.preventDefault();
-
-const email=document.getElementById("loginEmail").value.trim().toLowerCase();
-const password=document.getElementById("loginPassword").value;
-const message=document.getElementById("loginMessage");
-
-message.textContent="";
-
-const users=getUsers();
-
-const user=users.find(
-item=>item.email===email
-);
-
-if(!user){
-
-message.textContent="No existe una cuenta con ese correo.";
-return;
-
-}
-
-const passwordHash=await hashPassword(password);
-
-if(user.passwordHash!==passwordHash){
-
-message.textContent="La contraseña no es correcta.";
-return;
-
-}
-
-user.lastLogin=new Date().toISOString();
-user.loginCount=(user.loginCount||0)+1;
-
-setUsers(users);
-
-currentUser=user;
-setSession(user);
-
-const logs=getLogs();
-
-logs.unshift({
-
-id:Date.now(),
-userId:user.id,
-email:user.email,
-name:user.name+" "+user.surname,
-timestamp:new Date().toISOString(),
-type:"login"
-
-});
-
-setLogs(logs);
-
-updateAuthUI();
-loadUserHistory();
-
-closeModal(authModal);
-loginForm.reset();
-
-addBotMessage(
-"Bienvenido de nuevo, "+escapeHTML(user.name)+". Tus proyectos guardados vuelven a estar disponibles."
-);
-
-});
-
-/* =========================================================
-   ACCOUNT
-========================================================= */
-
-authBtn.addEventListener("click",()=>{
-
-if(currentUser)openAccount();
-else openLogin();
-
-});
-
-function openAccount(){
-
-if(!currentUser)return openLogin();
-
-document.getElementById("accountName").textContent=
-currentUser.name+" "+currentUser.surname;
-
-document.getElementById("accountEmail").textContent=
-currentUser.email;
-
-document.getElementById("accountCreated").textContent=
-"Cuenta creada: "+formatDate(currentUser.createdAt);
-
-openModal(accountModal);
-
-}
-
-document.getElementById("logoutBtn").addEventListener("click",()=>{
-
-currentUser=null;
-
-setSession(null);
-
-projectHistory=[];
-renderHistory();
-updateAuthUI();
-
-closeModal(accountModal);
-
-});
-
-/* =========================================================
-   ADMIN
-========================================================= */
-
-adminBtn.addEventListener("click",()=>{
-
-if(!currentUser||!currentUser.isAdmin)return;
-
-renderAdmin();
-openModal(adminModal);
-
-});
-
-function renderAdmin(){
-
-if(!currentUser||!currentUser.isAdmin)return;
-
-const users=getUsers();
-const logs=getLogs();
-
-let chatCount=0;
-
-users.forEach(user=>{
-
-try{
-
-const savedHistory=
-JSON.parse(
-localStorage.getItem("sparky_history_"+user.id)||"[]"
-);
-
-if(Array.isArray(savedHistory)){
-chatCount+=savedHistory.length;
-}
-
-}catch{}
-
-});
-
-document.getElementById("adminUserCount").textContent=users.length;
-document.getElementById("adminLoginCount").textContent=logs.length;
-document.getElementById("adminChatCount").textContent=chatCount;
-
-const body=document.getElementById("adminUsersBody");
-
-body.innerHTML="";
-
-if(!users.length){
-
-body.innerHTML="<tr><td colspan='5'>No hay usuarios.</td></tr>";
-
-}else{
-
-users
-.slice()
-.sort((a,b)=>new Date(a.createdAt)-new Date(b.createdAt))
-.forEach(user=>{
-
-const row=document.createElement("tr");
-
-row.innerHTML=`
-<td>
-${escapeHTML(user.name+" "+user.surname)}
-${user.isAdmin?`<span style="color:#54d68a;margin-left:5px;font-size:8px">ADMIN</span>`:""}
-</td>
-<td>${escapeHTML(user.email)}</td>
-<td>${formatDate(user.createdAt)}</td>
-<td>${user.lastLogin?formatDate(user.lastLogin):"Nunca"}</td>
-<td>${user.loginCount||0}</td>
-`;
-
-body.appendChild(row);
-
-});
-
-}
-
-const logsBox=document.getElementById("adminLogs");
-
-logsBox.innerHTML="";
-
-if(!logs.length){
-
-logsBox.innerHTML=`
-<div class="account-box">
-<div class="account-email">
-Todavía no hay actividad de inicio de sesión.
-</div>
-</div>
-`;
-
-}else{
-
-logs.slice(0,30).forEach(log=>{
-
-const item=document.createElement("div");
-
-item.className="account-box";
-
-item.innerHTML=`
-<div class="account-name">${escapeHTML(log.name)}</div>
-<div class="account-email">${escapeHTML(log.email)}</div>
-<div class="account-email">${formatDate(log.timestamp)}</div>
-`;
-
-logsBox.appendChild(item);
-
-});
-
-}
-
-}
-
-/* =========================================================
-   ADMIN MIGRATION
-========================================================= */
-
-function ensureAdminAccount(){
-
-const users=getUsers();
-
-if(!users.length)return;
-
-let admin=users.find(
-user=>user.isAdmin===true
-);
-
-if(!admin){
-
-users.sort(
-(a,b)=>new Date(a.createdAt)-new Date(b.createdAt)
-);
-
-users[0].isAdmin=true;
-
-setUsers(users);
-
-}
-
-if(currentUser){
-
-const freshUser=users.find(
-user=>user.id===currentUser.id
-);
-
-if(freshUser){
-
-currentUser=freshUser;
-setSession(freshUser);
-
-}
-
-}
-
-}
-
-function seedAdmin(){
-ensureAdminAccount();
-}
-
-/* =========================================================
-   AUTH UI
-========================================================= */
-
-function updateAuthUI(){
-
-if(currentUser){
-
-authBtn.textContent="◉ Mi cuenta";
-
-userHeader.classList.remove("hidden");
-
-userHeaderName.textContent=currentUser.name;
-
-if(currentUser.isAdmin){
-adminBtn.classList.remove("hidden");
-}else{
-adminBtn.classList.add("hidden");
-}
-
-}else{
-
-authBtn.textContent="◉ Iniciar sesión";
-
-userHeader.classList.add("hidden");
-
-adminBtn.classList.add("hidden");
-
-}
-
-renderHistory();
-
-}
-
-/* =========================================================
-   LANGUAGES
-========================================================= */
-
-let currentLang=
-localStorage.getItem("sparky_lang")||"es";
-
-const translations={
-
-es:{
-welcome:"Tu idea puede convertirse en algo <span>increíble.</span>",
-desc:"SparkyKrea te ayuda a crear guiones, estrategias, conceptos y música para llevar tus ideas a otro nivel.",
-placeholder:"Cuéntame qué quieres crear...",
-history:"Historial de chats",
-newProject:"＋ Nuevo proyecto",
-pdf:"▣ Descargar Guión en PDF",
-language:"Idioma"
-},
-
-en:{
-welcome:"Your idea can become something <span>incredible.</span>",
-desc:"SparkyKrea helps you create scripts, strategies, concepts and music to take your ideas further.",
-placeholder:"Tell me what you want to create...",
-history:"Chat history",
-newProject:"＋ New project",
-pdf:"▣ Download Script as PDF",
-language:"Language"
-},
-
-pt:{
-welcome:"Sua ideia pode se tornar algo <span>incrível.</span>",
-desc:"A SparkyKrea ajuda você a criar roteiros, estratégias, conceitos e músicas.",
-placeholder:"Conte-me o que você quer criar...",
-history:"Histórico de chats",
-newProject:"＋ Novo projeto",
-pdf:"▣ Baixar roteiro em PDF",
-language:"Idioma"
-},
-
-fr:{
-welcome:"Votre idée peut devenir quelque chose de <span>génial.</span>",
-desc:"SparkyKrea vous aide à créer des scripts, stratégies, concepts et musiques.",
-placeholder:"Dites-moi ce que vous voulez créer...",
-history:"Historique des chats",
-newProject:"＋ Nouveau projet",
-pdf:"▣ Télécharger le script en PDF",
-language:"Langue"
-},
-
-de:{
-welcome:"Deine Idee kann etwas <span>Großartiges</span> werden.",
-desc:"SparkyKrea hilft dir bei Skripten, Strategien, Konzepten und Musik.",
-placeholder:"Erzähl mir, was du erstellen möchtest...",
-history:"Chatverlauf",
-newProject:"＋ Neues Projekt",
-pdf:"▣ Skript als PDF speichern",
-language:"Sprache"
-},
-
-it:{
-welcome:"La tua idea può diventare qualcosa di <span>incredibile.</span>",
-desc:"SparkyKrea ti aiuta con script, strategie, concept e musica.",
-placeholder:"Dimmi cosa vuoi creare...",
-history:"Cronologia chat",
-newProject:"＋ Nuovo progetto",
-pdf:"▣ Scarica script in PDF",
-language:"Lingua"
-},
-
-ru:{
-welcome:"Твоя идея может стать чем-то <span>невероятным.</span>",
-desc:"SparkyKrea помогает создавать сценарии, стратегии, концепции и музыку.",
-placeholder:"Расскажи, что ты хочешь создать...",
-history:"История чатов",
-newProject:"＋ Новый проект",
-pdf:"▣ Скачать сценарий PDF",
-language:"Язык"
-},
-
-zh:{
-welcome:"你的想法可以变成真正的<span>精彩作品。</span>",
-desc:"SparkyKrea 可以帮助你制作脚本、策略、概念和音乐。",
-placeholder:"告诉我你想创作什么...",
-history:"聊天记录",
-newProject:"＋ 新项目",
-pdf:"▣ 下载脚本 PDF",
-language:"语言"
-},
-
-ja:{
-welcome:"あなたのアイデアは<span>素晴らしい作品</span>になります。",
-desc:"SparkyKreaは脚本、戦略、コンセプト、音楽制作をサポートします。",
-placeholder:"何を作りたいですか？",
-history:"チャット履歴",
-newProject:"＋ 新しいプロジェクト",
-pdf:"▣ PDFとして保存",
-language:"言語"
-},
-
-ar:{
-welcome:"يمكن لفكرتك أن تصبح شيئًا <span>رائعًا.</span>",
-desc:"يساعدك SparkyKrea على إنشاء النصوص والاستراتيجيات والمفاهيم والموسيقى.",
-placeholder:"أخبرني ماذا تريد أن تصنع...",
-history:"سجل المحادثات",
-newProject:"＋ مشروع جديد",
-pdf:"▣ تنزيل النص بصيغة PDF",
-language:"اللغة"
-}
-
-};
-
-function updateLanguageUI(){
-
-const t=translations[currentLang]||translations.es;
-
-document.getElementById("welcomeTitle").innerHTML=t.welcome;
-document.getElementById("welcomeDesc").textContent=t.desc;
-
-input.placeholder=t.placeholder;
-
-document.getElementById("historyTitleTxt").textContent=t.history;
-
-document.getElementById("newProjectBtn").textContent=t.newProject;
-
-document.getElementById("exportPdfBtn").textContent=t.pdf;
-
-document.getElementById("langMenuTitle").textContent=t.language;
-
-}
-
-langOptionsList.querySelectorAll(".lang-option")
-.forEach(option=>{
-
-option.addEventListener("click",()=>{
-
-currentLang=option.dataset.lang;
-
-localStorage.setItem(
-"sparky_lang",
-currentLang
-);
-
-updateLanguageUI();
-
-headerDropdown.classList.remove("show");
-
-});
-
-});
-
-headerDotsBtn.addEventListener("click",e=>{
-
-e.stopPropagation();
-
-headerDropdown.classList.toggle("show");
-
-});
-
-document.addEventListener("click",e=>{
-
-if(
-!headerDropdown.contains(e.target)&&
-e.target!==headerDotsBtn
-){
-headerDropdown.classList.remove("show");
-}
-
-});
-
-/* =========================================================
-   MOTIVATION
-========================================================= */
-
-const motivations=[
-
-"Una buena idea no necesita ser perfecta para empezar; necesita una oportunidad.",
-
-"Lo que hoy es un borrador puede convertirse mañana en tu mejor proyecto.",
-
-"La creatividad mejora cuando dejas de buscar la idea perfecta y empiezas a construir.",
-
-"No subestimes una idea pequeña: muchas veces ahí empieza algo grande.",
-
-"Tu siguiente proyecto puede estar escondido en esa idea que todavía no te convence.",
-
-"Crear también es probar, equivocarse y volver a intentarlo con más claridad.",
-
-"No necesitas tenerlo todo resuelto. Solo necesitas dar el siguiente paso.",
-
-"Una idea con dirección puede avanzar muchísimo más que una idea perfecta sin acción.",
-
-"El contenido mejora cuando dejas de pensar solamente en publicar y empiezas a pensar en conectar.",
-
-"Una buena ejecución puede convertir una idea sencilla en algo memorable.",
-
-"Tu próximo gran resultado puede empezar con una prueba que hagas hoy.",
-
-"La constancia convierte experimentos pequeños en proyectos grandes.",
-
-"No busques solamente llamar la atención; busca dejar algo en la mente de quien mira.",
-
-"Cada publicación también es información: observa, aprende y vuelve a crear.",
-
-"Cuando una idea tiene personalidad, es mucho más difícil que pase desapercibida."
-
+/* =====================================================
+   DETECCIÓN INTELIGENTE
+   ===================================================== */
+
+const casual=[
+ /^hola[!. ]*$/i,
+ /^ola[!. ]*$/i,
+ /^holi[!. ]*$/i,
+ /^hey[!. ]*$/i,
+ /^xd+[!. ]*$/i,
+ /^lol+[!. ]*$/i,
+ /^jaja+[!. ]*$/i,
+ /^jajaja+[!. ]*$/i,
+ /^jeje+[!. ]*$/i,
+ /^jsjs+[!. ]*$/i,
+ /^ok[!. ]*$/i,
+ /^okay[!. ]*$/i,
+ /^dale[!. ]*$/i,
+ /^gracias[!. ]*$/i,
+ /^grx[!. ]*$/i
 ];
 
-let motivationIndex=0;
+const business=
+/\b(vender|venta|vendo|comprar|producto|servicio|negocio|empresa|marca|cliente|publicidad|anuncio|promoción|promo|oferta|precio|tienda|restaurante|marketing)\b/i;
 
-function motivation(){
+const gaming=
+/\b(valorant|reyna|clash royale|minecraft|fortnite|roblox|gaming|gamer|juego|partida|ranked|clip|videojuego)\b/i;
 
-const text=
-motivations[
-motivationIndex%motivations.length
-];
+const content=
+/\b(tiktok|youtube|video|reel|short|contenido|guion|guión|viral|seguidores|visitas|creador)\b/i;
 
-motivationIndex++;
 
-return`
-<br><br>
-<span class="accent">${text}</span>
-`;
+function classify(text){
 
-}
-
-/* =========================================================
-   SPELLING / NORMALIZATION
-========================================================= */
-
-/*
-   IMPORTANTE:
-   Primero corregimos el texto.
-   Después analizamos la intención.
-*/
-
-const typoDictionary={
-
-q:"que",
-k:"que",
-ke:"que",
-xq:"porque",
-pq:"porque",
-porq:"porque",
-tmb:"también",
-tb:"también",
-d:"de",
-pa:"para",
-pro:"pero",
-bn:"bien",
-
-qiero:"quiero",
-kiero:"quiero",
-qiero:"quiero",
-qiero:"quiero",
-
-videos:"video",
-videoo:"video",
-vidoe:"video",
-vidio:"video",
-
-musika:"música",
-musiq:"música",
-musicaa:"música",
-
-guion:"guión",
-guionn:"guión",
-guio:"guión",
-
-estrateguia:"estrategia",
-estrategiaa:"estrategia",
-estratejia:"estrategia",
-
-publi:"publicidad",
-publisidad:"publicidad",
-publicidadd:"publicidad",
-publicida:"publicidad",
-publiciddad:"publicidad",
-publicidá:"publicidad",
-publicidad:"publicidad",
-anunsio:"anuncio",
-anuncioo:"anuncio",
-anunico:"anuncio",
-
-balorant:"valorant",
-valoran:"valorant",
-valorannt:"valorant",
-valorat:"valorant",
-valorantt:"valorant",
-valrant:"valorant",
-valornat:"valorant",
-
-fornite:"fortnite",
-fortnit:"fortnite",
-fortnait:"fortnite",
-fortnitee:"fortnite",
-
-maincra:"minecraft",
-maicra:"minecraft",
-minecrat:"minecraft",
-minecraf:"minecraft",
-minecraftt:"minecraft",
-
-clashroyal:"clash royale",
-clashroyale:"clash royale",
-clashroyall:"clash royale",
-clashrol:"clash royale",
-clash:"clash royale",
-
-freefie:"free fire",
-freefire:"free fire",
-freefir:"free fire",
-freefaire:"free fire",
-
-roblx:"roblox",
-robloxx:"roblox",
-roblox:"roblox",
-
-lol:"league of legends",
-ligoflegends:"league of legends",
-lol:"league of legends",
-
-cod:"call of duty",
-codm:"call of duty mobile",
-warzonee:"warzone",
-warzon:"warzone",
-
-apexx:"apex legends",
-apex:"apex legends",
-
-overwacth:"overwatch",
-overwath:"overwatch",
-
-csgo:"counter strike",
-cs2:"counter strike 2",
-counterstrike:"counter strike",
-
-rocketleage:"rocket league",
-rocketlegue:"rocket league",
-
-brawlstar:"brawl stars",
-brawlstars:"brawl stars",
-
-pubgmobile:"pubg mobile",
-pubj:"pubg",
-
-gta:"gta",
-gtav:"gta v",
-gta5:"gta v",
-
-tikok:"tiktok",
-tikttok:"tiktok",
-tiktokk:"tiktok",
-tiktok:"tiktok",
-
-youtbe:"youtube",
-yutube:"youtube",
-youtub:"youtube",
-
-intagram:"instagram",
-instgram:"instagram",
-instagran:"instagram",
-
-facebok:"facebook",
-
-discordd:"discord",
-discrod:"discord"
-
-};
-
-function normalizeText(text){
-
-return text
-.toLowerCase()
-.normalize("NFD")
-.replace(/[\u0300-\u036f]/g,"")
-.replace(/[¿¡]/g,"")
-.replace(/\s+/g," ")
-.trim();
-
-}
-
-function correctSpelling(text){
-
-return text
-.split(/\s+/)
-.map(word=>{
-
-const punctuation=
-word.match(/[.,!?;:]+$/)?.[0]||"";
-
-const clean=
-normalizeText(
-word.replace(/[.,!?;:]+$/g,"")
-);
-
-const corrected=
-typoDictionary[clean]||clean;
-
-return corrected+punctuation;
-
-})
-.join(" ");
-
-}
-
-/* =========================================================
-   CASUAL / SOCIAL CHAT
-========================================================= */
-
-const casualExact=[
-
-"hola",
-"holaa",
-"holaaa",
-"hey",
-"heyy",
-"buenas",
-"buenas tardes",
-"buenos dias",
-"buenas noches",
-"que tal",
-"como estas",
-"xd",
-"xddd",
-"jajaja",
-"jajajaja",
-"jeje",
-"jejeje",
-"jaja",
-"lol",
-"lmao",
-"bro",
-"broo",
-"mano",
-"ok",
-"okay",
-"oki",
-"vale",
-"gracias",
-"grx",
-"gracias bro",
-"perfecto",
-"dale",
-"listo",
-"si",
-"no",
-"nop",
-"jajaja xd",
-"xd jajaja"
-
-];
-
-function isCasualMessage(text){
-
-const n=normalizeText(text);
-
-if(casualExact.includes(n))return true;
-
-if(/^(hola|hey|buenas|bro|mano|xd|jaja|jajaja|jeje|lol|lmao)\s*(xd|jaja|jajaja|lol|jeje)?$/.test(n)){
-return true;
-}
-
-return false;
-
-}
-
-function casualResponse(text){
-
-const n=normalizeText(text);
-
-if(n.includes("gracias")){
-return`
-<strong>De nada.</strong>
-
-Cuando quieras, seguimos con el proyecto.
-${motivation()}
-`;
-}
-
-if(n.includes("hola")||n.includes("hey")||n.includes("buenas")){
-return showGreeting();
-}
-
-if(/xd|jaja|jeje|lol|lmao/.test(n)){
-return`
-<strong>Jajaja, entendido.</strong>
-
-Eso no es una publicidad ni un proyecto todavía. Solo estamos hablando.
-
-Cuando quieras crear algo, dime la idea y lo armamos.
-${motivation()}
-`;
-}
-
-return`
-<strong>Entendido.</strong>
-
-Eso todavía no parece una solicitud de contenido. Cuando quieras, dime qué quieres crear y lo convertimos en algo concreto.
-${motivation()}
-`;
-
-}
-
-/* =========================================================
-   GAME DATABASE
-========================================================= */
-
-const gameDatabase={
-
-valorant:{
-label:"Valorant",
-aliases:[
-"valorant","balorant","valoran","valrant","valorat"
-],
-characters:[
-"reyna","jett","omen","sage","killjoy","raze","chamber",
-"cypher","viper","gekko","phoenix","yoru","neon","iso",
-"clove","fade","sova","breach","skye","kayo","tejo",
-"waylay","vyse","brimstone","astra","harbor","deadlock",
-"vyse","cypher"
-],
-roles:[
-"duelista","duelist","iniciador","initiator",
-"centinela","sentinel","controlador","controller"
-],
-music:[
-"Phonk competitivo",
-"Trap oscuro",
-"Drill instrumental",
-"Electrónica intensa",
-"Phonk rápido",
-"Beat agresivo con bajos profundos"
-]
-},
-
-minecraft:{
-label:"Minecraft",
-aliases:[
-"minecraft","maincra","maicra","minecrat","minecraftt"
-],
-characters:[],
-roles:[],
-music:[
-"Lo-fi aventurero",
-"Ambient cinematográfico",
-"Indie relajado",
-"Electrónica ligera",
-"Beat nostálgico",
-"Chill gaming"
-]
-},
-
-fortnite:{
-label:"Fortnite",
-aliases:[
-"fortnite","fornite","fortnit","fortnait"
-],
-characters:[
-"jonesy","peely","midas","skye","drift","omega",
-"lynx","fishstick"
-],
-roles:[],
-music:[
-"Trap energético",
-"Phonk",
-"Drill",
-"Hyperpop",
-"Beat épico",
-"Electrónica rápida"
-]
-},
-
-clashroyale:{
-label:"Clash Royale",
-aliases:[
-"clash royale","clashroyal","clashroyale","clashroyall","clashrol"
-],
-characters:[
-"caballero","principe","princesa","bruja","mago",
-"mega caballero","montapuercos","pekka","pekka",
-"esqueleto gigante","minero","bandida","leñador",
-"arquero","mosquetera","valquiria","golem",
-"bruja nocturna","fantasma real","rey"
-],
-roles:[],
-music:[
-"Beat meme",
-"Phonk rápido",
-"Electrónica divertida",
-"Trap acelerado",
-"Beat de tensión",
-"Hyperpop"
-]
-},
-
-freefire:{
-label:"Free Fire",
-aliases:[
-"free fire","freefire","freefie","freefir","freefaire"
-],
-characters:[
-"alvaro","alok","kelly","hayato","moco","chrono",
-"skyler","wukong","k","dimitri","tatsuya"
-],
-roles:[],
-music:[
-"Phonk agresivo",
-"Trap",
-"Drill",
-"Beat competitivo",
-"Electrónica intensa",
-"Brazilian phonk"
-]
-},
-
-roblox:{
-label:"Roblox",
-aliases:[
-"roblox","roblx","robloxx"
-],
-characters:[],
-roles:[],
-music:[
-"Hyperpop",
-"Electrónica divertida",
-"Meme beat",
-"Phonk ligero",
-"Pop gaming",
-"Beat acelerado"
-]
-},
-
-league:{
-label:"League of Legends",
-aliases:[
-"league of legends","league","lol","ligue of legends"
-],
-characters:[
-"ahri","yasuo","yone","jinx","zed","lux","akali",
-"zed","leesin","lee sin","vi","caitlyn","ekko",
-"sett","katarina","irelia","riven","thresh","lux"
-],
-roles:[
-"top","mid","medio","jungla","jungle","adc","bot",
-"support","soporte"
-],
-music:[
-"Trap oscuro",
-"Phonk",
-"Cinematic fantasy",
-"Electrónica épica",
-"Drill",
-"Ambient competitivo"
-]
-},
-
-callofduty:{
-label:"Call of Duty",
-aliases:[
-"call of duty","cod","callofduty","cod mobile",
-"call of duty mobile","modern warfare"
-],
-characters:[
-"ghost","soap","price","mason","woods",
-"alex","farah","captain price"
-],
-roles:[],
-music:[
-"Drill",
-"Trap militar",
-"Phonk",
-"Electrónica intensa",
-"Cinematic action"
-]
-},
-
-warzone:{
-label:"Warzone",
-aliases:[
-"warzone","call of duty warzone"
-],
-characters:[
-"ghost","soap","price","mason"
-],
-roles:[],
-music:[
-"Drill",
-"Trap oscuro",
-"Phonk",
-"Cinematic action",
-"Beat de tensión"
-]
-},
-
-apex:{
-label:"Apex Legends",
-aliases:[
-"apex legends","apex"
-],
-characters:[
-"wraith","octane","pathfinder","lifeline","bloodhound",
-"revenant","horizon","bangalore","wattson","caustic",
-"mirage","loba","valkyrie","newcastle","conduit"
-],
-roles:[],
-music:[
-"Drum & bass",
-"Phonk",
-"Electrónica intensa",
-"Trap",
-"Cyberpunk"
-]
-},
-
-overwatch:{
-label:"Overwatch",
-aliases:[
-"overwatch","overwacth","overwath"
-],
-characters:[
-"tracer","genji","mercy","widowmaker","reaper",
-"kiriko","dva","soldier 76","ana","hanzo",
-"cassidy","ashe","junker queen","sigma"
-],
-roles:[
-"tank","dps","support","tanque","soporte"
-],
-music:[
-"Electrónica",
-"Hyperpop",
-"Drum & bass",
-"Phonk",
-"Cinematic gaming"
-]
-},
-
-counterstrike:{
-label:"Counter-Strike",
-aliases:[
-"counter strike","counter-strike","csgo","cs2",
-"counterstrike"
-],
-characters:[],
-roles:[],
-music:[
-"Techno",
-"Phonk",
-"Drum & bass",
-"Trap",
-"Electronic dark"
-]
-},
-
-rocketleague:{
-label:"Rocket League",
-aliases:[
-"rocket league","rocketleage","rocketlegue"
-],
-characters:[],
-roles:[],
-music:[
-"Drum & bass",
-"House",
-"Phonk",
-"Electrónica",
-"Hyperpop"
-]
-},
-
-brawlstars:{
-label:"Brawl Stars",
-aliases:[
-"brawl stars","brawlstar","brawlstars"
-],
-characters:[
-"shelly","colt","spike","crow","leon","mortis",
-"edgar","stu","fang","cordelius","kit","buzz",
-"rico","dynamike","poco","sandy"
-],
-roles:[],
-music:[
-"Hyperpop",
-"Beat meme",
-"Phonk",
-"Electrónica divertida",
-"Trap rápido"
-]
-},
-
-pubg:{
-label:"PUBG",
-aliases:[
-"pubg","pubg mobile","pubj"
-],
-characters:[],
-roles:[],
-music:[
-"Trap",
-"Drill",
-"Cinematic",
-"Phonk",
-"Ambient tensión"
-]
-},
-
-gtav:{
-label:"GTA V",
-aliases:[
-"gta","gta v","gta5","grand theft auto"
-],
-characters:[
-"trevor","michael","franklin"
-],
-roles:[],
-music:[
-"Trap",
-"West Coast hip-hop instrumental",
-"Phonk",
-"Funk",
-"Drill"
-]
-},
-
-terraria:{
-label:"Terraria",
-aliases:[
-"terraria"
-],
-characters:[],
-roles:[],
-music:[
-"Chiptune",
-"Lo-fi adventure",
-"Fantasy ambient",
-"Electrónica retro"
-]
-},
-
-amongus:{
-label:"Among Us",
-aliases:[
-"among us","amongus"
-],
-characters:[],
-roles:[],
-music:[
-"Meme beat",
-"Suspense",
-"Electrónica cómica",
-"Hyperpop"
-]
-},
-
-fallguys:{
-label:"Fall Guys",
-aliases:[
-"fall guys","fallguys"
-],
-characters:[],
-roles:[],
-music:[
-"Funky",
-"Hyperpop",
-"Meme beat",
-"Electrónica divertida"
-]
-},
-
-palworld:{
-label:"Palworld",
-aliases:[
-"palworld"
-],
-characters:[],
-roles:[],
-music:[
-"Fantasy",
-"Lo-fi adventure",
-"Electronic cinematic"
-]
-},
-
-genshin:{
-label:"Genshin Impact",
-aliases:[
-"genshin","genshin impact"
-],
-characters:[
-"hu tao","raiden","furina","nahida","zhongli",
-"wanderer","ayaka","kazuha","arlecchino"
-],
-roles:[],
-music:[
-"Anime cinematic",
-"Lo-fi fantasy",
-"Orchestral",
-"Electronic fantasy"
-]
-},
-
-pokemon:{
-label:"Pokémon",
-aliases:[
-"pokemon","pokémon"
-],
-characters:[
-"pikachu","charizard","mewtwo","eevee","lucario",
-"gengar","greninja","snorlax"
-],
-roles:[],
-music:[
-"Chiptune",
-"Adventure",
-"Electrónica",
-"Orchestral fantasy"
-]
-},
-
-fifa:{
-label:"EA Sports FC / FIFA",
-aliases:[
-"fifa","fc 24","fc 25","fc 26","ea fc","ea sports fc"
-],
-characters:[],
-roles:[],
-music:[
-"House",
-"Afrobeat",
-"Electronic",
-"Trap",
-"Drum & bass"
-]
-},
-
-stumble:{
-label:"Stumble Guys",
-aliases:[
-"stumble guys","stumbleguys"
-],
-characters:[],
-roles:[],
-music:[
-"Hyperpop",
-"Meme beat",
-"Electrónica divertida",
-"Funky"
-]
-},
-
-dota:{
-label:"Dota 2",
-aliases:[
-"dota","dota 2","dota2"
-],
-characters:[
-"invoker","pudge","juggernaut","phantom assassin",
-"crystal maiden","axe","sniper"
-],
-roles:[],
-music:[
-"Dark fantasy",
-"Cinematic",
-"Electronic",
-"Orchestral"
-]
-},
-
-eldenring:{
-label:"Elden Ring",
-aliases:[
-"elden ring","eldenring"
-],
-characters:[
-"malenia","radahn","margit","melina"
-],
-roles:[],
-music:[
-"Dark cinematic",
-"Orchestral",
-"Dark ambient",
-"Epic fantasy"
-]
-},
-
-genshinimpact:{
-label:"Genshin Impact",
-aliases:[
-"genshin impact"
-],
-characters:[
-"hu tao","raiden","furina","nahida","zhongli",
-"wanderer","kazuha","ayaka","arlecchino"
-],
-roles:[],
-music:[
-"Anime cinematic",
-"Fantasy",
-"Orchestral",
-"Lo-fi"
-]
-}
-
-};
-
-function detectGame(text){
-
-const n=normalizeText(text);
-
-for(const key in gameDatabase){
-
-const game=gameDatabase[key];
-
-if(
-game.aliases.some(alias=>
-n.includes(normalizeText(alias))
-)
-){
-return key;
-}
-
-}
-
-return null;
-
-}
-
-function detectCharacter(text,gameKey){
-
-const n=normalizeText(text);
-
-if(gameKey&&gameDatabase[gameKey]){
-
-const characters=
-gameDatabase[gameKey].characters||[];
-
-const found=characters.find(character=>
-n.includes(normalizeText(character))
-);
-
-if(found)return found;
-
-}
-
-const universalCharacters=[
-"reyna","jett","omen","sage","killjoy","raze",
-"chamber","cypher","viper","gekko","phoenix",
-"trevor","michael","franklin","ghost","soap","price"
-];
-
-return universalCharacters.find(character=>
-n.includes(normalizeText(character))
-)||null;
-
-}
-
-function detectRole(text,gameKey){
-
-const n=normalizeText(text);
-
-const roles=gameKey&&gameDatabase[gameKey]
-?gameDatabase[gameKey].roles||[]
-:[];
-
-const found=roles.find(role=>
-n.includes(normalizeText(role))
-);
-
-if(found)return found;
-
-if(/duelista|duelist|entry|frag/.test(n))
-return"Duelista";
-
-if(/iniciador|initiator/.test(n))
-return"Iniciador";
-
-if(/centinela|sentinel/.test(n))
-return"Centinela";
-
-if(/humos|controlador|controller|smoke/.test(n))
-return"Controlador";
-
-if(/tanque|tank/.test(n))
-return"Tanque";
-
-if(/soporte|support/.test(n))
-return"Soporte";
-
-return null;
-
-}
-
-function detectPlatform(text){
-
-const n=normalizeText(text);
-
-if(n.includes("tiktok"))return"TikTok";
-
-if(
-n.includes("youtube")||
-n.includes("short")
-){
-return"YouTube Shorts";
-}
-
-if(
-n.includes("instagram")||
-n.includes("reel")
-){
-return"Instagram Reels";
-}
-
-if(n.includes("facebook"))
-return"Facebook";
-
-if(
-n.includes("twitch")||
-n.includes("stream")
-){
-return"Twitch";
-}
-
-return"Redes sociales";
-
-}
-
-function detectNiche(text){
-
-const n=normalizeText(text);
-
-if(
-/gaming|videojuego|valorant|minecraft|fortnite|clash|roblox|free fire|league|call of duty|warzone|apex|overwatch|counter strike|rocket league|brawl stars|pubg|gta/.test(n)
-){
-return"Gaming";
-}
-
-if(
-/comida|cocina|receta|restaurant|restaurante|food/.test(n)
-){
-return"Gastronomía";
-}
-
-if(
-/ropa|moda|outfit|fashion/.test(n)
-){
-return"Moda";
-}
-
-if(
-/gym|fitness|entrenamiento|deporte/.test(n)
-){
-return"Fitness";
-}
-
-if(
-/musica|cancion|artista|album/.test(n)
-){
-return"Música";
-}
-
-if(
-/negocio|empresa|marca|emprendimiento|tienda/.test(n)
-){
-return"Negocios";
-}
-
-if(
-/tecnologia|programacion|software|app/.test(n)
-){
-return"Tecnología";
-}
-
-if(
-/humor|meme|comedia|gracioso/.test(n)
-){
-return"Humor";
-}
-
-if(
-/historia|storytelling|relato/.test(n)
-){
-return"Storytelling";
-}
-
-return"Contenido digital";
-
-}
-
-/* =========================================================
-   INTENT RECOGNITION
-========================================================= */
-
-const advertisingKeywords=[
-"publicidad",
-"anuncio",
-"campaña",
-"vender",
-"venta",
-"producto",
-"servicio",
-"cliente",
-"marketing",
-"promocionar",
-"promocion",
-"marca",
-"negocio",
-"emprendimiento",
-"lanzamiento",
-"oferta",
-"descuento",
-"patrocinio",
-"patrocinado",
-"comercial"
-];
-
-const contentKeywords=[
-"video",
-"video corto",
-"clip",
-"reel",
-"short",
-"tiktok",
-"contenido",
-"guion",
-"idea",
-"crear",
-"publicar",
-"subir",
-"stream",
-"edit",
-"editar"
-];
-
-function advertisingStrongSignals(text){
-
-const n=normalizeText(text);
-
-return advertisingKeywords.filter(
-word=>n.includes(normalizeText(word))
-).length;
-
-}
-
-function contentSignals(text){
-
-const n=normalizeText(text);
-
-return contentKeywords.filter(
-word=>n.includes(normalizeText(word))
-).length;
-
-}
-
-function obviousNonAdvertisingTopics(text){
-
-const n=normalizeText(text);
-
-return[
-"matematicas",
-"matematica",
-"fraccion",
-"ecuacion",
-"historia",
-"geografia",
-"biologia",
-"tarea escolar",
-"quimica",
-"fisica",
-"ingles",
-"gramatica",
-"programacion",
-"codigo html",
-"javascript",
-"css"
-].some(
-topic=>n.includes(topic)
-);
-
-}
-
-function detectAdvertisingIntent(text){
-
-if(obviousNonAdvertisingTopics(text))
-return false;
-
-const n=normalizeText(text);
-
-const strong=advertisingStrongSignals(text);
-const content=contentSignals(text);
-
-const directAdvertising=
-/quiero hacer una publicidad|quiero crear una publicidad|necesito una publicidad|hazme una publicidad|hacer un anuncio|crear un anuncio|quiero promocionar|necesito promocionar|quiero vender/.test(n);
-
-if(directAdvertising)return true;
-
-if(strong>=2)return true;
-
-if(
-strong===1&&
-/quiero|necesito|hazme|crear|hacer|dame|ayudame/.test(n)
-){
-return true;
-}
-
-/*
-   IMPORTANTE:
-   palabras como "video", "contenido" o "viral"
-   por sí solas NO convierten el mensaje en publicidad.
-*/
-
-if(content>=2&&strong>=1)return true;
-
-return false;
-
-}
-
-/* =========================================================
-   ADVERTISING TYPE
-========================================================= */
-
-const advertisingTypes=[
-
-{
-test:/producto|producto fisico|objeto|articulo/,
-label:"Producto"
-},
-
-{
-test:/servicio|trabajo|asesoria|consultoria/,
-label:"Servicio"
-},
-
-{
-test:/marca|branding|empresa|negocio/,
-label:"Marca o negocio"
-},
-
-{
-test:/app|aplicacion|aplicación|software|web|pagina/,
-label:"Aplicación o plataforma"
-},
-
-{
-test:/evento|fiesta|concierto|torneo/,
-label:"Evento"
-},
-
-{
-test:/curso|clase|academia|educacion/,
-label:"Curso o educación"
-}
-
-];
-
-function detectAdvertisingType(text){
-
-const n=normalizeText(text);
-
-const found=
-advertisingTypes.find(
-item=>item.test.test(n)
-);
-
-return found?found.label:null;
-
-}
-
-function advertisingQuestion(){
-
-return`
-<strong>Claro. Podemos crear la publicidad.</strong>
-
-Pero necesito saber primero <span class="accent">qué vas a promocionar</span>.
-
-Por ejemplo:
-
-<ul>
-<li>Un producto.</li>
-<li>Un servicio.</li>
-<li>Una marca o negocio.</li>
-<li>Una aplicación o página web.</li>
-<li>Un evento.</li>
-<li>Un curso.</li>
-</ul>
-
-Dime qué quieres promocionar y, si quieres, también la plataforma donde vas a publicarlo.
-${motivation()}
-`;
-
-}
-
-/* =========================================================
-   TOPIC
-========================================================= */
-
-function cleanTopic(text){
-
-return text
-.replace(
-/^(hola|hey|buenas|oye|bro|mano)[,\s]*/i,
-""
-)
-.replace(/\s+/g," ")
-.trim()
-.slice(0,240);
-
-}
-
-/* =========================================================
-   DURATIONS
-========================================================= */
-
-const timeOptions=[
-
-{label:"15 segundos",seconds:15},
-{label:"30 segundos",seconds:30},
-{label:"45 segundos",seconds:45},
-{label:"1 minuto",seconds:60},
-{label:"1:30",seconds:90},
-{label:"2 minutos",seconds:120},
-{label:"3 minutos",seconds:180}
-
-];
-
-function durationToSeconds(duration){
-
-if(!duration)return 0;
-
-const n=normalizeText(duration);
-
-if(/15/.test(n))return 15;
-if(/30/.test(n))return 30;
-if(/45/.test(n))return 45;
-if(/1:30|90 segundos/.test(n))return 90;
-if(/2 minutos|120 segundos/.test(n))return 120;
-if(/3 minutos|180 segundos/.test(n))return 180;
-if(/1 minuto|60 segundos/.test(n))return 60;
-
-return 0;
-
-}
-
-function extractDuration(text){
-
-const n=normalizeText(text);
-
-if(/15\s*(segundos|s|sec)/.test(n))return 15;
-if(/30\s*(segundos|s|sec)/.test(n))return 30;
-if(/45\s*(segundos|s|sec)/.test(n))return 45;
-if(/1:30/.test(n))return 90;
-if(/90\s*(segundos|s|sec)/.test(n))return 90;
-if(/2\s*(minutos|min|m)/.test(n))return 120;
-if(/120\s*(segundos|s|sec)/.test(n))return 120;
-if(/3\s*(minutos|min|m)/.test(n))return 180;
-if(/180\s*(segundos|s|sec)/.test(n))return 180;
-if(/1\s*(minuto|min|m)/.test(n))return 60;
-if(/60\s*(segundos|s|sec)/.test(n))return 60;
-
-return 0;
+ text=text.trim();
 
-}
-
-/* =========================================================
-   MUSIC ENGINE
-========================================================= */
-
-const musicDatabase={
-
-gaming:[
-"Phonk competitivo",
-"Trap energético",
-"Drill instrumental",
-"Electrónica intensa",
-"Phonk oscuro",
-"Drum & bass",
-"Cyberpunk electronic",
-"Beat glitch",
-"Trap cinematográfico",
-"Electronic bass"
-],
-
-marketing:[
-"Electrónica moderna",
-"Future bass",
-"Beat corporativo dinámico",
-"Pop instrumental moderno",
-"Lo-fi elegante",
-"House minimalista",
-"Electrónica premium",
-"Beat tecnológico"
-],
-
-humor:[
-"Meme beat",
-"Hyperpop",
-"Beat acelerado",
-"Electrónica absurda",
-"Percusión cómica",
-"Funky rápido",
-"Beat cartoon"
-],
-
-storytelling:[
-"Piano cinematográfico",
-"Ambient emocional",
-"Lo-fi narrativo",
-"Cinematic build",
-"Electrónica atmosférica",
-"Ambient minimalista",
-"Orchestral soft"
-],
-
-moda:[
-"House moderno",
-"Afrobeat",
-"Pop fashion",
-"Deep house",
-"Electrónica minimalista",
-"R&B instrumental",
-"Luxury lounge"
-],
-
-fitness:[
-"Drum & bass",
-"Hard electronic",
-"Trap agresivo",
-"Phonk energético",
-"Techno",
-"Industrial electronic"
-],
-
-general:[
-"Lo-fi moderno",
-"Pop instrumental",
-"Electrónica suave",
-"Hip-hop instrumental",
-"Ambient",
-"Indie instrumental",
-"Chill electronic"
-]
-
-};
-
-function getMusicSuggestions(project){
-
-let pool=[];
-
-if(project.game&&gameDatabase[project.game]){
-pool=gameDatabase[project.game].music||[];
-}
-
-if(!pool.length){
-pool=musicDatabase[project.niche.toLowerCase()]||
-musicDatabase.general;
-}
-
-const shuffled=pool
-.slice()
-.sort(()=>Math.random()-.5);
-
-return shuffled.slice(0,3);
-
-}
-
-function musicReason(project,music){
-
-const n=normalizeText(music);
-
-if(
-n.includes("phonk")||
-n.includes("trap")||
-n.includes("drill")
-){
-return"funciona especialmente bien para momentos rápidos, competitivos o de impacto.";
-}
-
-if(
-n.includes("lo-fi")||
-n.includes("ambient")
-){
-return"ayuda a dejar espacio para la narración y no competir con la voz.";
-}
-
-if(
-n.includes("cinematic")||
-n.includes("orchestral")
-){
-return"permite construir tensión y hacer que el resultado tenga más sensación de evento.";
-}
-
-if(
-n.includes("hyperpop")||
-n.includes("meme")
-){
-return"refuerza un montaje rápido, humorístico y con cortes inesperados.";
-}
-
-return"puede adaptarse bien al ritmo general del contenido.";
-
-}
-
-/* =========================================================
-   PROJECT
-========================================================= */
-
-let currentProject=null;
-let waitingForDuration=false;
-let waitingForCharacter=false;
-let waitingForAdvertisingType=false;
-let lastGeneratedHTML="";
-
-function analyzeProject(text){
-
-const game=detectGame(text);
-
-return{
-
-topic:cleanTopic(text),
-
-game,
-
-gameLabel:
-game&&gameDatabase[game]
-?gameDatabase[game].label
-:null,
-
-character:detectCharacter(text,game),
-
-role:detectRole(text,game),
-
-platform:detectPlatform(text),
-
-niche:detectNiche(text),
-
-duration:extractDuration(text)||null,
-
-advertisingType:detectAdvertisingType(text)
-
-};
-
-}
-
-/* =========================================================
-   CHARACTER QUESTION
-========================================================= */
-
-function gameNeedsCharacter(game){
-
-if(!game||!gameDatabase[game])return false;
-
-return(
-gameDatabase[game].characters||
-[]
-).length>0;
-
-}
-
-function buildCharacterQuestion(project){
-
-const label=project.gameLabel||"ese juego";
-
-return`
-<strong>Perfecto, vamos con ${escapeHTML(label)}.</strong>
-
-Antes de escribir el guión necesito definir una cosa:
-
-<br><br>
-
-<strong class="accent">¿Quieres usar un personaje/agente específico?</strong>
-
-<br><br>
-
-Puedes decirme el nombre directamente, por ejemplo:
-${gameDatabase[project.game].characters.slice(0,8).map(
-x=>escapeHTML(capitalize(x))
-).join(", ")}...
-
-<br><br>
-
-Si no te importa el personaje, también puedes decirme <strong>"cualquiera"</strong> y continuaré.
-${motivation()}
-`;
-
-}
-
-/* =========================================================
-   PROJECT ANALYSIS MESSAGE
-========================================================= */
-
-function buildAnalysisMessage(project){
-
-const gameText=
-project.gameLabel||
-"No especificado";
-
-return`
-<strong>Perfecto. Ya tengo el punto de partida.</strong>
-
-<ul>
-
-<li>
-<strong>Proyecto:</strong>
-${escapeHTML(project.topic)}
-</li>
-
-<li>
-<strong>Plataforma:</strong>
-${escapeHTML(project.platform)}
-</li>
-
-<li>
-<strong>Nicho:</strong>
-${escapeHTML(project.niche)}
-</li>
-
-${project.game?`
-<li>
-<strong>Juego:</strong>
-${escapeHTML(gameText)}
-</li>
-`:""}
-
-${project.character?`
-<li>
-<strong>Personaje:</strong>
-${escapeHTML(capitalize(project.character))}
-</li>
-`:""}
-
-${project.role?`
-<li>
-<strong>Rol:</strong>
-${escapeHTML(project.role)}
-</li>
-`:""}
-
-</ul>
-
-<strong class="accent">
-Ahora definamos la duración.
-</strong>
-
-${motivation()}
-`;
-
-}
-
-/* =========================================================
-   TIMELINE
-========================================================= */
-
-function formatSeconds(seconds){
-
-if(seconds<60){
-return`${seconds} segundos`;
-}
-
-const minutes=Math.floor(seconds/60);
-const remaining=seconds%60;
-
-if(!remaining){
-return`${minutes} minuto${minutes>1?"s":""}`;
-}
-
-return`${minutes}:${String(remaining).padStart(2,"0")}`;
-
-}
-
-function buildTimeline(seconds){
-
-const parts=[];
-
-if(seconds<=15){
-
-parts.push(
-`<li><strong>0–2s:</strong> Hook inmediato.</li>`
-);
-
-parts.push(
-`<li><strong>2–10s:</strong> Acción o información principal.</li>`
-);
-
-parts.push(
-`<li><strong>10–${seconds}s:</strong> Remate y CTA.</li>`
-);
-
-return parts.join("");
-
-}
-
-if(seconds<=30){
-
-const hook=Math.max(3,Math.round(seconds*.17));
-const context=Math.max(4,Math.round(seconds*.20));
-const development=Math.max(8,Math.round(seconds*.40));
-const payoff=seconds-hook-context-development;
-
-parts.push(
-`<li><strong>0–${hook}s:</strong> Hook diseñado para detener el scroll.</li>`
-);
-
-parts.push(
-`<li><strong>${hook}–${hook+context}s:</strong> Contexto mínimo necesario.</li>`
-);
-
-parts.push(
-`<li><strong>${hook+context}–${hook+context+development}s:</strong> Desarrollo y progresión.</li>`
-);
-
-parts.push(
-`<li><strong>${seconds-payoff}–${seconds}s:</strong> Resultado, giro o CTA.</li>`
-);
-
-return parts.join("");
-
-}
-
-const hook=Math.round(seconds*.12);
-const development=Math.round(seconds*.48);
-const payoff=Math.round(seconds*.25);
-
-parts.push(
-`<li><strong>0–${hook}s:</strong> Hook + promesa.</li>`
-);
-
-parts.push(
-`<li><strong>${hook}–${hook+development}s:</strong> Desarrollo con cambios visuales.</li>`
-);
-
-parts.push(
-`<li><strong>${hook+development}–${hook+development+payoff}s:</strong> Punto fuerte o revelación.</li>`
-);
-
-parts.push(
-`<li><strong>Últimos segundos:</strong> Cierre y CTA.</li>`
-);
-
-return parts.join("");
+ if(!text)return "empty";
 
-}
-
-/* =========================================================
-   IDEA ENGINE
-========================================================= */
-
-function buildIdeas(project){
-
-const ideas=[];
-
-if(project.game){
-
-const game=project.gameLabel;
-
-ideas.push(
-`Abre con el momento más fuerte de ${game} y explica el contexto después.`
-);
-
-ideas.push(
-`Convierte una jugada, error o situación del juego en una mini-historia.`
-);
-
-ideas.push(
-`Deja una pequeña recompensa visual para el final para aumentar la retención.`
-);
-
-ideas.push(
-`Usa texto en pantalla solamente cuando aporte información que la imagen no explique.`
-);
-
-}else if(project.niche==="Humor"){
-
-ideas.push(
-"Construye el chiste rápidamente y elimina cualquier introducción que retrase el remate."
-);
-
-ideas.push(
-"Usa una pausa corta antes del punchline para aumentar el efecto."
-);
-
-ideas.push(
-"Puedes cerrar con una reacción inesperada en lugar de explicar el chiste."
-);
-
-}else if(project.niche==="Marketing"||project.advertisingType){
-
-ideas.push(
-"Presenta primero el problema que tiene el público y después introduce la solución."
-);
-
-ideas.push(
-"Convierte el beneficio principal en una demostración visible."
-);
-
-ideas.push(
-"Termina con una llamada a la acción concreta y fácil de recordar."
-);
-
-}else{
-
-ideas.push(
-"Abre con una pregunta, resultado o afirmación que genere curiosidad."
-);
-
-ideas.push(
-"Convierte la idea principal en una secuencia visual para evitar un bloque estático."
-);
-
-ideas.push(
-"Guarda el dato o momento más interesante para la parte final."
-);
-
-ideas.push(
-"Termina con una razón concreta para seguir viendo tu contenido."
-);
+ if(casual.some(r=>r.test(text)))
+ return "casual";
 
-}
-
-return ideas;
-
-}
-
-/* =========================================================
-   SCRIPT ENGINE
-========================================================= */
-
-const hookBank={
-
-gaming:[
-"Espera a ver cómo termina esta partida.",
-"Pensé que esta jugada iba a salir completamente mal.",
-"Esto parecía una partida normal hasta que pasó esto.",
-"Si juegas a esto, probablemente hayas cometido este error.",
-"Hay algo que casi nadie hace cuando juega así.",
-"El plan parecía perfecto... hasta este momento.",
-"No esperaba que la partida terminara de esta manera."
-],
-
-marketing:[
-"Si tienes un negocio, presta atención a esto.",
-"Hay un error que puede hacer que tu publicidad pase desapercibida.",
-"Antes de publicar otro anuncio, mira esto.",
-"Tu producto puede ser bueno y aun así necesitar una mejor presentación.",
-"La mayoría intenta vender demasiado pronto.",
-"Si quieres que alguien se detenga a mirar, empieza por aquí."
-],
-
-humor:[
-"Yo pensando que esto iba a salir bien...",
-"Todo iba normal hasta que cometí este error.",
-"Hay momentos en los que simplemente debes aceptar la derrota.",
-"Esto no estaba en el plan.",
-"Creo que acabamos de descubrir la peor manera de hacerlo."
-],
-
-storytelling:[
-"Todo empezó con una decisión que parecía insignificante.",
-"Al principio nadie pensó que esto fuera importante.",
-"Lo curioso es que todo cambió por una sola cosa.",
-"Hay una parte de esta historia que casi nadie conoce."
-],
-
-general:[
-"Te voy a enseñar una forma diferente de hacer esto.",
-"Hay una manera mucho más interesante de plantear esta idea.",
-"Antes de empezar, mira esto.",
-"Si estás pensando en hacer algo parecido, empieza por aquí.",
-"Esta idea puede funcionar mucho mejor de lo que parece."
-]
-
-};
-
-function randomItem(array){
-
-return array[
-Math.floor(Math.random()*array.length)
-];
-
-}
-
-function buildHook(project){
-
-let pool=hookBank.general;
-
-if(project.niche==="Gaming")
-pool=hookBank.gaming;
-
-if(project.niche==="Humor")
-pool=hookBank.humor;
-
-if(project.advertisingType)
-pool=hookBank.marketing;
+ if(business.test(text))
+ return "business";
 
-if(project.niche==="Storytelling")
-pool=hookBank.storytelling;
+ if(gaming.test(text))
+ return "gaming";
 
-return randomItem(pool);
+ if(content.test(text))
+ return "content";
 
+ return "general";
 }
 
-function buildFullScript(project){
 
-const seconds=project.duration||30;
+function getReply(text){
 
-const hook=buildHook(project);
+ const type=classify(text);
 
-const gameText=
-project.gameLabel
-?project.gameLabel
-:"el proyecto";
+ if(type==="casual"){
+  const replies=[
+   "Jajaja, entendido.",
+   "XD. Aquí estamos.",
+   "Todo chill. ¿Qué hacemos?",
+   "JAJA, recibido.",
+   "Dale."
+  ];
 
-const characterText=
-project.character
-?capitalize(project.character)
-:"el personaje";
+  return replies[
+   Math.floor(Math.random()*replies.length)
+  ];
+ }
 
-let body="";
+ if(type==="business")
+ return "Esto sí parece relacionado con un negocio, producto o promoción. Puedo ayudarte a convertirlo en una idea publicitaria.";
 
-if(project.game){
+ if(type==="gaming")
+ return "Esto parece contenido de gaming. Puedo ayudarte con el hook, guion, estrategia y dirección musical.";
 
-body=`
-<strong>DESARROLLO</strong>
+ if(type==="content")
+ return "Esto parece una idea de contenido. Cuéntame qué quieres conseguir y la estructuramos.";
 
-<p>
-La idea es entrar directamente en la acción de ${escapeHTML(gameText)}.
-No expliques demasiado al principio: deja que la imagen haga parte del trabajo.
-</p>
-
-<p>
-${project.character
-?`El enfoque estará centrado en <strong>${escapeHTML(characterText)}</strong>, aprovechando su identidad y estilo de juego para darle personalidad al clip.`
-:`Presenta la situación rápidamente y deja que la jugada o el momento principal sea el protagonista.`
+ return "Te entendí. Cuéntame un poco más y vemos cómo podemos convertir esa idea en algo mejor.";
 }
-</p>
-
-<p>
-Añade cortes en los momentos donde cambie la acción y utiliza texto únicamente para remarcar información importante.
-</p>
-`;
-
-}else if(project.advertisingType){
 
-body=`
-<strong>DESARROLLO</strong>
 
-<p>
-Primero presenta el problema o deseo que tiene el público.
-Después introduce <strong>${escapeHTML(project.advertisingType.toLowerCase())}</strong>
-como la solución.
-</p>
+/* =====================================================
+   CHAT
+   ===================================================== */
 
-<p>
-Muestra el beneficio principal de manera visual y evita llenar el anuncio de información secundaria.
-</p>
+function sendMessage(e){
 
-<p>
-En la parte final, utiliza una llamada a la acción sencilla: qué hacer, dónde hacerlo y por qué hacerlo ahora.
-</p>
-`;
+ e.preventDefault();
 
-}else{
+ const input=document.getElementById("chatInput");
 
-body=`
-<strong>DESARROLLO</strong>
+ const text=input.value.trim();
 
-<p>
-Presenta la idea de forma directa y construye el contenido alrededor de una sola promesa principal.
-</p>
+ if(!text)return;
 
-<p>
-Utiliza cambios visuales, ejemplos o demostraciones para evitar que el ritmo se vuelva plano.
-</p>
+ addMessage(text,"user");
 
-<p>
-Reserva el punto más interesante para la segunda mitad del contenido y termina con una conclusión clara.
-</p>
-`;
+ input.value="";
 
+ setTimeout(()=>{
+  addMessage(getReply(text),"bot");
+ },250);
 }
-
-const music=getMusicSuggestions(project);
-
-const musicHTML=music.map(
-m=>`<li><strong>${escapeHTML(m)}</strong> — ${escapeHTML(musicReason(project,m))}</li>`
-).join("");
-
-return`
-
-<strong class="accent">GUION COMPLETO · ${formatSeconds(seconds)}</strong>
-
-<br><br>
-
-<strong>1. HOOK · 0–${Math.max(3,Math.round(seconds*.15))}s</strong>
-
-<p>
-"${escapeHTML(hook)}"
-</p>
-
-${body}
-
-<strong>ESTRUCTURA TEMPORAL</strong>
 
-<ul>
-${buildTimeline(seconds)}
-</ul>
 
-<strong>EDICIÓN</strong>
+function addMessage(text,type){
 
-<ul>
-<li>Empieza con la imagen más interesante, no con una presentación larga.</li>
-<li>Haz que cada corte tenga una función.</li>
-<li>Sincroniza los cambios importantes con el ritmo.</li>
-<li>Utiliza texto breve y fácil de leer.</li>
-<li>Evita llenar la pantalla de elementos al mismo tiempo.</li>
-</ul>
+ const box=document.getElementById("messages");
 
-<strong>MÚSICA RECOMENDADA</strong>
+ const div=document.createElement("div");
 
-<ul>
-${musicHTML}
-</ul>
+ div.className="message "+type;
 
-<strong>CTA</strong>
+ div.textContent=text;
 
-<p>
-"${project.niche==="Gaming"
-?"Si quieres ver más partidas así, quédate por aquí."
-:project.advertisingType
-?"Descubre más y prueba la propuesta."
-:"Si quieres ver la siguiente parte, sigue el proyecto."
-}"
-</p>
+ box.appendChild(div);
 
-<strong>OBJETIVO</strong>
-
-<p>
-Captar atención rápidamente, mantener una progresión clara y terminar dejando una razón para continuar con el siguiente contenido.
-</p>
-
-${motivation()}
-
-`;
-
+ box.scrollTop=box.scrollHeight;
 }
-
-/* =========================================================
-   STRATEGY ENGINE
-========================================================= */
-
-function buildStrategy(project){
-
-const seconds=project.duration||30;
-
-const music=getMusicSuggestions(project);
-
-const ideas=buildIdeas(project);
-
-const strategyPoints=[];
-
-if(project.platform==="TikTok"){
 
-strategyPoints.push(
-"Prioriza el primer segundo: el espectador debe entender rápidamente por qué vale la pena quedarse."
-);
 
-strategyPoints.push(
-"Evita una introducción larga; entra directamente en la acción o promesa."
-);
+/* =====================================================
+   GUIONES
+   ===================================================== */
 
-strategyPoints.push(
-"Termina de forma que el vídeo pueda dejar una pregunta abierta o generar continuación."
-);
+function generateScript(){
 
-}else if(project.platform==="YouTube Shorts"){
+ const topic=
+ document.getElementById("scriptTopic")
+ .value.trim()||"tu idea";
 
-strategyPoints.push(
-"Construye una mini-historia con inicio, desarrollo y recompensa."
-);
+ const duration=
+ document.getElementById("duration").value;
 
-strategyPoints.push(
-"Utiliza el texto para reforzar la idea principal sin repetir exactamente la voz."
-);
+ const hooks=[
+  "Espera, mira esto antes de seguir scrolleando.",
+  "Ok, esto no salió como esperaba...",
+  "Te enseño rápidamente por qué esto importa.",
+  "¿Y si te dijera que puedes hacerlo diferente?"
+ ];
 
-strategyPoints.push(
-"El cierre debe sentirse como un resultado, no como una despedida."
-);
+ const endings=[
+  "Sígueme para ver la siguiente parte.",
+  "¿Tú qué harías? Déjamelo abajo.",
+  "Guárdalo para probarlo después.",
+  "Y ahora viene lo interesante."
+ ];
 
-}else{
+ const hook=
+ hooks[Math.floor(Math.random()*hooks.length)];
 
-strategyPoints.push(
-"Adapta el ritmo al comportamiento de la audiencia de la plataforma."
-);
+ const end=
+ endings[Math.floor(Math.random()*endings.length)];
 
-strategyPoints.push(
-"Mantén una sola idea principal por pieza."
-);
+ const result=document.getElementById("scriptResult");
 
-strategyPoints.push(
-"Utiliza el final para provocar una acción concreta."
-);
+ result.innerHTML=
+ "<strong>Guion · "+duration+"</strong><br><br>"+
+ "<b>HOOK:</b> "+hook+"<br><br>"+
+ "<b>DESARROLLO:</b> Presenta "+topic+
+ " de forma rápida, muestra el punto más interesante, "+
+ "añade ejemplos visuales y mantén frases cortas para "+
+ "que el ritmo no decaiga.<br><br>"+
+ "<b>CIERRE:</b> "+end;
 
+ result.classList.remove("hidden");
 }
 
-if(project.niche==="Gaming"){
 
-strategyPoints.push(
-"En gaming, muestra primero el momento de mayor impacto y luego explica cómo se llegó a él."
-);
+/* =====================================================
+   ESTRATEGIA
+   ===================================================== */
 
-strategyPoints.push(
-"Los sonidos del juego pueden utilizarse como parte del ritmo en vez de cubrirlos completamente con música."
-);
+function generateStrategy(){
 
-}
+ const topic=
+ document.getElementById("strategyTopic")
+ .value.trim()||"tu proyecto";
 
-if(project.advertisingType){
+ const goal=
+ document.getElementById("goal").value;
 
-strategyPoints.push(
-"El beneficio debe aparecer antes que una explicación extensa del producto."
-);
+ const result=
+ document.getElementById("strategyResult");
 
-strategyPoints.push(
-"La llamada a la acción debe decir exactamente qué puede hacer la persona después de ver el anuncio."
-);
+ result.innerHTML=
+ "<strong>Estrategia para "+topic+"</strong><br><br>"+
+ "<b>Objetivo:</b> "+goal+"<br>"+
+ "<b>Hook:</b> captar atención desde el inicio.<br>"+
+ "<b>Contenido:</b> una idea clara por publicación.<br>"+
+ "<b>Ritmo:</b> eliminar partes que no aporten.<br>"+
+ "<b>CTA:</b> terminar con una acción sencilla.<br>"+
+ "<b>Prueba:</b> variar hooks y cierres para comparar resultados.";
 
+ result.classList.remove("hidden");
 }
-
-return`
-
-<strong class="accent">ESTRATEGIA · ${formatSeconds(seconds)}</strong>
-
-<br><br>
-
-<strong>POSICIONAMIENTO</strong>
-
-<p>
-La pieza debe tener una idea central fácil de entender.
-El objetivo no es contar absolutamente todo, sino conseguir que la persona quiera continuar.
-</p>
-
-<strong>ESTRATEGIA PRINCIPAL</strong>
-
-<ul>
-${strategyPoints.map(
-x=>`<li>${escapeHTML(x)}</li>`
-).join("")}
-</ul>
-
-<strong>IDEAS DE CONTENIDO</strong>
-
-<ul>
-${ideas.map(
-x=>`<li>${escapeHTML(x)}</li>`
-).join("")}
-</ul>
-
-<strong>RETENCIÓN</strong>
-
-<ul>
-<li>Abre con curiosidad o resultado.</li>
-<li>Introduce pequeños cambios visuales durante el desarrollo.</li>
-<li>Evita repetir información.</li>
-<li>Coloca el momento más importante después de haber generado suficiente curiosidad.</li>
-<li>Cierra con una razón para continuar viendo contenido relacionado.</li>
-</ul>
 
-<strong>MÚSICA</strong>
 
-<ul>
-${music.map(
-m=>`<li>${escapeHTML(m)}</li>`
-).join("")}
-</ul>
+/* =====================================================
+   MÚSICA
+   ===================================================== */
 
-<strong>PUBLICACIÓN</strong>
+function generateMusic(){
 
-<ul>
-<li>Utiliza una descripción corta y relacionada directamente con el vídeo.</li>
-<li>Prioriza una portada que comunique la idea sin depender de demasiado texto.</li>
-<li>Observa dónde pierde atención la audiencia y utiliza ese dato para el siguiente vídeo.</li>
-</ul>
+ const topic=
+ document.getElementById("musicTopic")
+ .value.trim()||"tu contenido";
 
-<strong>OBJETIVO</strong>
+ const vibe=
+ document.getElementById("vibe").value;
 
-<p>
-Conseguir una pieza clara, reconocible y suficientemente dinámica como para que la audiencia tenga un motivo para quedarse hasta el final.
-</p>
+ const styles={
+  "Energética":"beat rápido y cambios marcados",
+  "Épica":"percusión cinematográfica y subida progresiva",
+  "Divertida":"ritmo juguetón y cortes rápidos",
+  "Relajada":"lo-fi suave y ambiente ligero",
+  "Oscura":"bajo profundo y atmósfera tensa"
+ };
 
-${motivation()}
+ const result=
+ document.getElementById("musicResult");
 
-`;
+ result.innerHTML=
+ "<strong>Dirección musical</strong><br><br>"+
+ "<b>Contenido:</b> "+topic+"<br>"+
+ "<b>Ambiente:</b> "+vibe+"<br>"+
+ "<b>Estilo:</b> "+styles[vibe]+".<br><br>"+
+ "La música debe acompañar el contenido sin tapar "+
+ "la voz ni los efectos.";
 
+ result.classList.remove("hidden");
 }
 
-/* =========================================================
-   MUSIC RESPONSE
-========================================================= */
 
-function buildMusicResponse(project){
+/* =====================================================
+   PANEL ADMIN
+   ===================================================== */
 
-const suggestions=getMusicSuggestions(project);
+function updateAdmin(){
 
-return`
+ const users=
+ JSON.parse(localStorage.getItem("skUsers")||"[]");
 
-<strong class="accent">DIRECCIÓN MUSICAL</strong>
+ const access=
+ JSON.parse(localStorage.getItem("skAccess")||"[]");
 
-<p>
-Para este proyecto buscaría una música que acompañe el ritmo sin robarle protagonismo al contenido.
-</p>
+ document.getElementById("usersCount")
+ .textContent=users.length;
 
-<ul>
+ document.getElementById("loginCount")
+ .textContent=access.length;
 
-${suggestions.map(
-music=>`
-<li>
-<strong>${escapeHTML(music)}</strong><br>
-<span>
-${escapeHTML(musicReason(project,music))}
-</span>
-</li>
-`
-).join("")}
+ const table=
+ document.getElementById("usersTable");
 
-</ul>
+ table.innerHTML="";
 
-<strong>Consejo de mezcla</strong>
+ users.forEach(u=>{
 
-<p>
-Si hay voz, narración o diálogos, mantén la música por debajo de ellos.
-En momentos de impacto puedes subir brevemente el volumen o sincronizar un golpe musical con el corte.
-</p>
+  const tr=document.createElement("tr");
 
-${motivation()}
+  tr.innerHTML=
+   "<td>"+u.name+"</td>"+
+   "<td>"+u.lastname+"</td>"+
+   "<td>"+u.email+"</td>";
 
-`;
+  table.appendChild(tr);
+ });
 
-}
-
-/* =========================================================
-   IDEAS RESPONSE
-========================================================= */
-
-function buildIdeasResponse(project){
-
-const ideas=buildIdeas(project);
-
-return`
-
-<strong>Tengo varias rutas para este proyecto.</strong>
 
-<ul>
-${ideas.map(
-idea=>`<li>${escapeHTML(idea)}</li>`
-).join("")}
-</ul>
+ const list=
+ document.getElementById("accessList");
 
-<strong>Mi recomendación:</strong>
-
-<p>
-Empieza por la primera idea y haz que el primer momento tenga una razón clara para existir.
-Después deja que el contenido demuestre la promesa.
-</p>
-
-${motivation()}
-
-`;
-
+ list.innerHTML=
+ access.length
+ ?access.slice().reverse().map(a=>
+   "• "+a.email+" — "+a.date
+  ).join("<br>")
+ :"Todavía no hay accesos registrados.";
 }
-
-/* =========================================================
-   DURATION SELECTOR
-========================================================= */
-
-function showDurationSelectorInsideChat(){
-
-const wrapper=document.createElement("div");
-
-wrapper.className="message bot";
-
-wrapper.innerHTML=`
-
-<div class="message-bubble">
-
-<div class="message-label">SPARKYKREA</div>
-
-<strong>¿Cuánto quieres que dure?</strong>
-
-<div class="duration-panel">
-
-${timeOptions.map(option=>`
-
-<button
-class="duration-option"
-data-seconds="${option.seconds}"
->
-${option.label}
-</button>
-
-`).join("")}
-
-</div>
-
-</div>
 
-`;
 
-chatInner.appendChild(wrapper);
+/* =====================================================
+   SESIÓN AL RECARGAR
+   ===================================================== */
 
-wrapper.querySelectorAll(".duration-option")
-.forEach(button=>{
+window.addEventListener("load",()=>{
 
-button.addEventListener("click",()=>{
+ const session=
+ JSON.parse(localStorage.getItem("skSession")||"null");
 
-selectDurationOption(
-Number(button.dataset.seconds)
-);
+ if(session)
+ enter(session.name,session.email);
 
 });
-
-});
-
-scrollChat();
-
-}
-
-/* =========================================================
-   HELP
-========================================================= */
-
-function showHelp(){
-
-return`
-
-<strong>Puedo ayudarte con mucho más que un simple guión.</strong>
-
-<br><br>
-
-<strong class="accent">GUIONES</strong>
-
-<ul>
-<li>Hooks.</li>
-<li>Guiones para TikTok, Reels y Shorts.</li>
-<li>Guiones gaming.</li>
-<li>Publicidad.</li>
-<li>Storytelling.</li>
-<li>Contenido educativo.</li>
-<li>Contenido humorístico.</li>
-</ul>
-
-<strong class="accent">ESTRATEGIA</strong>
-
-<ul>
-<li>Ideas de contenido.</li>
-<li>Retención.</li>
-<li>Publicación.</li>
-<li>Posicionamiento.</li>
-<li>Series de contenido.</li>
-<li>CTA.</li>
-</ul>
-
-<strong class="accent">MÚSICA</strong>
-
-<ul>
-<li>Estilos musicales.</li>
-<li>Ritmo.</li>
-<li>Ambiente.</li>
-<li>Música para gaming.</li>
-<li>Música para publicidad.</li>
-</ul>
-
-<br>
-
-Puedes empezar con algo tan sencillo como:
-
-<br><br>
-
-<span class="accent">
-"Quiero hacer un video de Valorant para TikTok."
-</span>
-
-${motivation()}
-
-`;
-
-}
-
-function showGreeting(){
-
-return`
-
-<strong>Bienvenido a SparkyKrea.</strong>
-
-<br><br>
-
-Cuéntame qué quieres crear.
-
-Puede ser un vídeo, una publicidad, una estrategia, música, una idea de contenido o incluso algo que todavía no tengas completamente pensado.
-
-${motivation()}
-
-`;
-
-}
-
-function startNoIdeaFlow(){
-
-return`
-
-<strong>No pasa nada si todavía no tienes una idea.</strong>
-
-<br><br>
-
-Podemos construirla desde cero.
-
-<ul>
-<li>Qué tema te interesa.</li>
-<li>Qué plataforma quieres usar.</li>
-<li>A quién quieres llegar.</li>
-<li>Qué quieres conseguir.</li>
-<li>Qué estilo quieres darle.</li>
-</ul>
-
-Dime solamente el tema que te interesa y empezamos desde ahí.
-
-${motivation()}
-
-`;
-
-}
-
-function modifyCurrentProject(text){
-
-if(!currentProject)
-return generateResponse(text);
-
-const corrected=correctSpelling(text);
-
-const newProject=analyzeProject(corrected);
-
-currentProject={
-...currentProject,
-...newProject,
-topic:
-newProject.topic&&
-newProject.topic.length>3
-?newProject.topic
-:currentProject.topic
-};
-
-return buildIdeasResponse(currentProject);
-
-}
-
-/* =========================================================
-   INTENT TYPE
-========================================================= */
-
-function detectContentRequest(text){
-
-const n=normalizeText(text);
-
-if(
-/guion|guiones|script|libreto/.test(n)
-){
-return"script";
-}
-
-if(
-/estrategia|estrategias|como crecer|crecer en|crecimiento|plan de contenido|planificar/.test(n)
-){
-return"strategy";
-}
-
-if(
-/musica|musica para|cancion|beat|sonido|audio/.test(n)
-){
-return"music";
-}
-
-if(
-/idea|ideas|que puedo hacer|dame ideas|concepto|conceptos/.test(n)
-){
-return"ideas";
-}
-
-if(
-/publicidad|anuncio|campana|promocionar|vender|marketing/.test(n)
-){
-return"advertising";
-}
-
-if(
-/video|clip|tiktok|reel|short|partida|gameplay|jugando|jugar/.test(n)
-){
-return"video";
-}
-
-return null;
-
-}
-
-/* =========================================================
-   MAIN GENERATOR
-========================================================= */
-
-function generateResponse(rawText){
-
-/*
-   PASO 1:
-   corregir escritura
-*/
-
-const corrected=correctSpelling(rawText);
-
-/*
-   PASO 2:
-   normalizar
-*/
-
-const normalized=normalizeText(corrected);
-
-/*
-   PASO 3:
-   mensajes casuales
-   antes de publicidad
-*/
-
-if(isCasualMessage(corrected)){
-
-addBotMessage(
-casualResponse(corrected)
-);
-
-return;
-
-}
-
-/*
-   PASO 4:
-   saludos con contenido adicional
-*/
-
-if(
-/^(hola|hey|buenas|buenos dias|buenas tardes|buenas noches)\b/.test(normalized)&&
-normalized.split(" ").length<=4
-){
-
-addBotMessage(showGreeting());
-
-return;
-
-}
-
-/*
-   PASO 5:
-   no idea
-*/
-
-if(
-/no se|no tengo idea|ninguna idea|sin idea|no tengo nada|no se que hacer/.test(normalized)
-){
-
-addBotMessage(startNoIdeaFlow());
-
-return;
-
-}
-
-/*
-   PASO 6:
-   ayuda
-*/
-
-if(
-/ayuda|que puedes hacer|como funcionas|que haces/.test(normalized)
-){
-
-addBotMessage(showHelp());
-
-return;
-
-}
-
-/*
-   PASO 7:
-   duración
-*/
-
-const duration=extractDuration(corrected);
-
-if(waitingForDuration){
-
-if(duration){
-
-selectDurationOption(duration);
-return;
-
-}
-
-}
-
-/*
-   PASO 8:
-   personaje pendiente
-*/
-
-if(waitingForCharacter&&currentProject){
-
-const character=
-detectCharacter(corrected,currentProject.game);
-
-if(character){
-
-currentProject.character=character;
-waitingForCharacter=false;
-
-addBotMessage(buildAnalysisMessage(currentProject));
-
-waitingForDuration=true;
-
-showDurationSelectorInsideChat();
-
-return;
-
-}
-
-if(
-/cualquiera|no importa|el que sea|cualquier personaje/.test(normalized)
-){
-
-waitingForCharacter=false;
-
-addBotMessage(buildAnalysisMessage(currentProject));
-
-waitingForDuration=true;
-
-showDurationSelectorInsideChat();
-
-return;
-
-}
-
-}
-
-/*
-   PASO 9:
-   publicidad pendiente
-*/
-
-if(waitingForAdvertisingType){
-
-const type=detectAdvertisingType(corrected);
-
-if(type){
-
-currentProject=currentProject||{
-topic:cleanTopic(corrected),
-platform:detectPlatform(corrected),
-niche:"Marketing"
-};
-
-currentProject.advertisingType=type;
-
-waitingForAdvertisingType=false;
-
-if(!currentProject.duration){
-
-addBotMessage(`
-<strong>Perfecto.</strong>
-
-Entonces trabajaremos una publicidad de <strong>${escapeHTML(type)}</strong>.
-
-Ahora dime cuánto quieres que dure.
-`);
-
-waitingForDuration=true;
-
-showDurationSelectorInsideChat();
-
-return;
-
-}
-
-}
-
-}
-
-/*
-   PASO 10:
-   cambios del proyecto
-*/
-
-if(
-currentProject&&
-/cambiar|modificar|hazlo diferente|otra idea|otra opcion|otra opción|cambia el juego|cambia el personaje/.test(normalized)
-){
-
-addBotMessage(
-modifyCurrentProject(corrected)
-);
-
-return;
-
-}
-
-/*
-   PASO 11:
-   analizar proyecto
-*/
-
-const project=analyzeProject(corrected);
-
-currentProject=project;
-
-/*
-   PASO 12:
-   publicidad ambigua
-*/
-
-if(
-detectAdvertisingIntent(corrected)
-){
-
-const advertisingType=
-detectAdvertisingType(corrected);
-
-if(!advertisingType){
-
-waitingForAdvertisingType=true;
-
-addBotMessage(
-advertisingQuestion()
-);
-
-return;
-
-}
-
-currentProject.advertisingType=
-advertisingType;
-
-}
-
-/*
-   PASO 13:
-   detectar juego sin personaje
-*/
-
-if(
-project.game&&
-gameNeedsCharacter(project.game)&&
-!project.character&&
-!project.duration
-){
-
-waitingForCharacter=true;
-
-addBotMessage(
-buildCharacterQuestion(project)
-);
-
-return;
-
-}
-
-/*
-   PASO 14:
-   contenido musical
-*/
-
-const contentType=
-detectContentRequest(corrected);
-
-if(
-contentType==="music"&&
-!project.game&&
-!project.advertisingType
-){
-
-waitingForDuration=false;
-
-addBotMessage(
-buildMusicResponse(project)
-);
-
-return;
-
-}
-
-/*
-   PASO 15:
-   ideas
-*/
-
-if(
-contentType==="ideas"&&
-!project.game&&
-!project.advertisingType
-){
-
-addBotMessage(
-buildIdeasResponse(project)
-);
-
-return;
-
-}
-
-/*
-   PASO 16:
-   si pide estrategia explícitamente
-*/
-
-if(
-contentType==="strategy"&&
-!project.duration
-){
-
-addBotMessage(`
-<strong>Perfecto. Vamos a construir la estrategia.</strong>
-
-Antes de hacerla completa, dime qué duración quieres trabajar.
-
-`);
-
-waitingForDuration=true;
-
-showDurationSelectorInsideChat();
-
-return;
-
-}
-
-/*
-   PASO 17:
-   si pide guión
-*/
-
-if(
-contentType==="script"&&
-!project.duration
-){
-
-addBotMessage(`
-<strong>Vamos a construir el guión.</strong>
-
-Primero necesito saber cuánto quieres que dure para distribuir correctamente el hook, desarrollo y cierre.
-`);
-
-waitingForDuration=true;
-
-showDurationSelectorInsideChat();
-
-return;
-
-}
-
-/*
-   PASO 18:
-   si no hay duración
-*/
-
-if(!project.duration){
-
-waitingForDuration=true;
-
-addBotMessage(
-buildAnalysisMessage(project)
-);
-
-showDurationSelectorInsideChat();
-
-return;
-
-}
-
-/*
-   PASO 19:
-   proyecto completo
-*/
-
-waitingForDuration=false;
-
-currentProject.duration=
-project.duration;
-
-let result;
-
-if(contentType==="music"){
-
-result=buildMusicResponse(currentProject);
-
-}else if(contentType==="strategy"){
-
-result=buildStrategy(currentProject);
-
-}else if(contentType==="ideas"){
-
-result=buildIdeasResponse(currentProject);
-
-}else{
-
-result=buildFullScript(currentProject);
-
-}
-
-addBotMessage(result);
-
-saveCurrentProject();
-
-}
-
-/* =========================================================
-   DURATION
-========================================================= */
-
-function selectDurationOption(seconds){
-
-if(!currentProject){
-
-currentProject={
-topic:"Nuevo proyecto",
-platform:"Redes sociales",
-niche:"Contenido digital"
-};
-
-}
-
-currentProject.duration=seconds;
-
-waitingForDuration=false;
-
-addUserMessage(
-`Duración: ${formatSeconds(seconds)}`
-);
-
-showTyping();
-
-setTimeout(()=>{
-
-removeTyping();
-
-const type=
-detectContentRequest(
-currentProject.topic
-);
-
-let result;
-
-if(type==="music"){
-
-result=buildMusicResponse(
-currentProject
-);
-
-}else if(type==="strategy"){
-
-result=buildStrategy(
-currentProject
-);
-
-}else if(type==="ideas"){
-
-result=buildIdeasResponse(
-currentProject
-);
-
-}else{
-
-result=buildFullScript(
-currentProject
-);
-
-}
-
-addBotMessage(result);
-
-saveCurrentProject();
-
-},450);
-
-}
-
-/* =========================================================
-   MESSAGES
-========================================================= */
-
-function addUserMessage(text){
-
-welcome.style.display="none";
-
-const wrapper=document.createElement("div");
-
-wrapper.className="message user";
-
-wrapper.innerHTML=`
-<div class="message-bubble">
-${escapeHTML(text)}
-</div>
-`;
-
-chatInner.appendChild(wrapper);
-
-scrollChat();
-
-}
-
-function addBotMessage(html){
-
-welcome.style.display="none";
-
-const wrapper=document.createElement("div");
-
-wrapper.className="message bot";
-
-wrapper.innerHTML=`
-
-<div class="message-bubble">
-
-<div class="message-label">SPARKYKREA</div>
-
-${html}
-
-</div>
-
-`;
-
-chatInner.appendChild(wrapper);
-
-lastGeneratedHTML=html;
-
-scrollChat();
-
-}
-
-function showTyping(){
-
-removeTyping();
-
-const wrapper=document.createElement("div");
-
-wrapper.id="typingMessage";
-wrapper.className="message bot";
-
-wrapper.innerHTML=`
-
-<div class="message-bubble">
-
-<div class="typing">
-<span></span>
-<span></span>
-<span></span>
-</div>
-
-</div>
-
-`;
-
-chatInner.appendChild(wrapper);
-
-scrollChat();
-
-}
-
-function removeTyping(){
-
-const typing=
-document.getElementById("typingMessage");
-
-if(typing)typing.remove();
-
-}
-
-function scrollChat(){
-
-setTimeout(()=>{
-
-chat.scrollTo({
-top:chat.scrollHeight,
-behavior:"smooth"
-});
-
-},30);
-
-}
-
-function escapeHTML(value){
-
-return String(value)
-.replace(/&/g,"&amp;")
-.replace(/</g,"&lt;")
-.replace(/>/g,"&gt;")
-.replace(/"/g,"&quot;")
-.replace(/'/g,"&#039;");
-
-}
-
-function capitalize(value){
-
-if(!value)return"";
-
-return value.charAt(0).toUpperCase()+value.slice(1);
-
-}
-
-function formatDate(date){
-
-if(!date)return"—";
-
-try{
-
-return new Date(date).toLocaleString(
-currentLang==="es"
-?"es-ES"
-:currentLang
-);
-
-}catch{
-
-return"—";
-
-}
-
-}
-
-/* =========================================================
-   HISTORY
-========================================================= */
-
-let projectHistory=[];
-
-function getHistoryKey(){
-
-if(!currentUser)return null;
-
-return"sparky_history_"+currentUser.id;
-
-}
-
-function loadUserHistory(){
-
-projectHistory=[];
-
-if(!currentUser){
-
-renderHistory();
-return;
-
-}
-
-try{
-
-const data=
-JSON.parse(
-localStorage.getItem(
-getHistoryKey()
-)||"[]"
-);
-
-if(Array.isArray(data))
-projectHistory=data;
-
-}catch{
-
-projectHistory=[];
-
-}
-
-renderHistory();
-
-}
-
-function saveCurrentProject(){
-
-if(!currentUser)return;
-
-if(
-!currentProject||
-!currentProject.topic
-)return;
-
-const record={
-
-id:Date.now(),
-
-topic:currentProject.topic,
-
-duration:
-currentProject.duration||
-"Sin duración",
-
-platform:
-currentProject.platform||
-"Redes sociales",
-
-niche:
-currentProject.niche||
-"general",
-
-game:
-currentProject.game||
-null,
-
-gameLabel:
-currentProject.gameLabel||
-null,
-
-character:
-currentProject.character||
-null,
-
-advertisingType:
-currentProject.advertisingType||
-null,
-
-html:lastGeneratedHTML,
-
-savedAt:new Date().toISOString()
-
-};
-
-projectHistory.unshift(record);
-
-projectHistory=
-projectHistory.slice(0,30);
-
-localStorage.setItem(
-getHistoryKey(),
-JSON.stringify(projectHistory)
-);
-
-renderHistory();
-
-}
-
-function renderHistory(){
-
-history.innerHTML="";
-
-if(!currentUser){
-
-history.innerHTML=`
-<div class="history-empty">
-Inicia sesión para guardar tus chats.
-</div>
-`;
-
-return;
-
-}
-
-if(!projectHistory.length){
-
-history.innerHTML=`
-<div class="history-empty">
-Todavía no tienes proyectos guardados.
-</div>
-`;
-
-return;
-
-}
-
-projectHistory.forEach(item=>{
-
-const wrapper=
-document.createElement("div");
-
-wrapper.className="history-item";
-
-wrapper.innerHTML=`
-
-<button
-class="history-delete"
-title="Eliminar"
->×</button>
-
-<div class="history-topic">
-${escapeHTML(item.topic)}
-</div>
-
-<div class="history-date">
-${formatDate(item.savedAt)}
-</div>
-
-`;
-
-wrapper
-.querySelector(".history-delete")
-.addEventListener("click",e=>{
-
-e.stopPropagation();
-
-deleteHistoryItem(item.id);
-
-});
-
-wrapper.addEventListener("click",()=>{
-
-loadHistoryItem(item.id);
-
-closeSidebar();
-
-});
-
-history.appendChild(wrapper);
-
-});
-
-}
-
-function deleteHistoryItem(id){
-
-if(!currentUser)return;
-
-projectHistory=
-projectHistory.filter(
-item=>item.id!==id
-);
-
-localStorage.setItem(
-getHistoryKey(),
-JSON.stringify(projectHistory)
-);
-
-renderHistory();
-
-}
-
-function loadHistoryItem(id){
-
-if(!currentUser)return;
-
-const item=
-projectHistory.find(
-x=>x.id===id
-);
-
-if(!item)return;
-
-chatInner.innerHTML="";
-
-welcome.style.display="none";
-
-currentProject={
-
-topic:item.topic,
-
-duration:
-typeof item.duration==="number"
-?item.duration
-:durationToSeconds(item.duration),
-
-platform:item.platform,
-
-niche:item.niche,
-
-game:item.game||null,
-
-gameLabel:item.gameLabel||null,
-
-character:item.character||null,
-
-advertisingType:item.advertisingType||null
-
-};
-
-addBotMessage(
-item.html||
-buildFullScript(currentProject)
-);
-
-}
-
-/* =========================================================
-   NEW PROJECT
-========================================================= */
-
-document
-.getElementById("newProjectBtn")
-.addEventListener("click",()=>{
-
-currentProject=null;
-
-waitingForDuration=false;
-waitingForCharacter=false;
-waitingForAdvertisingType=false;
-
-lastGeneratedHTML="";
-
-chatInner.innerHTML="";
-
-chatInner.appendChild(welcome);
-
-welcome.style.display="flex";
-
-input.value="";
-
-input.style.height="auto";
-
-send.classList.remove("active");
-
-closeSidebar();
-
-});
-
-/* =========================================================
-   PDF
-========================================================= */
-
-document
-.getElementById("exportPdfBtn")
-.addEventListener("click",()=>{
-
-if(!currentUser){
-
-openLogin();
-
-document.getElementById("loginMessage")
-.textContent=
-"Inicia sesión para guardar o descargar tus proyectos en PDF.";
-
-return;
-
-}
-
-if(
-!currentProject&&
-!lastGeneratedHTML
-){
-
-addBotMessage(
-"Primero crea un proyecto y luego podrás guardarlo como PDF."
-);
-
-return;
-
-}
-
-window.print();
-
-});
-
-/* =========================================================
-   MOBILE
-========================================================= */
-
-document
-.getElementById("mobileMenu")
-.addEventListener("click",()=>{
-
-sidebar.classList.add("open");
-
-overlay.classList.add("show");
-
-});
-
-overlay.addEventListener(
-"click",
-closeSidebar
-);
-
-function closeSidebar(){
-
-sidebar.classList.remove("open");
-
-overlay.classList.remove("show");
-
-}
-
-/* =========================================================
-   SEND
-   NO SE CAMBIA EL BOTÓN
-========================================================= */
-
-function sendMessage(){
-
-const text=input.value.trim();
-
-if(!text)return;
-
-input.value="";
-
-input.style.height="auto";
-
-send.classList.remove("active");
-
-addUserMessage(text);
-
-showTyping();
-
-setTimeout(()=>{
-
-removeTyping();
-
-generateResponse(text);
-
-},500);
-
-}
-
-send.addEventListener("click",()=>{
-
-if(send.classList.contains("active")){
-sendMessage();
-}
-
-});
-
-input.addEventListener("keydown",e=>{
-
-if(
-e.key==="Enter"&&
-!e.shiftKey
-){
-
-e.preventDefault();
-
-if(input.value.trim()){
-sendMessage();
-}
-
-}
-
-});
-
-input.addEventListener("input",()=>{
-
-input.style.height="auto";
-
-input.style.height=
-Math.min(
-input.scrollHeight,
-140
-)+"px";
-
-if(input.value.trim()){
-
-send.classList.add("active");
-
-}else{
-
-send.classList.remove("active");
-
-}
-
-});
-
-/* =========================================================
-   INITIALIZATION
-========================================================= */
-
-seedAdmin();
-
-updateLanguageUI();
-
-updateAuthUI();
-
-loadUserHistory();
-
-setTimeout(()=>{
-
-const splash=
-document.getElementById("splash");
-
-if(splash){
-
-splash.style.opacity="0";
-
-setTimeout(()=>{
-
-splash.remove();
-
-},600);
-
-}
-
-},1100);
 
 </script>
 
