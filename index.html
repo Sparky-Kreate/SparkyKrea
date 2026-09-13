@@ -7,1289 +7,1743 @@
 
 <style>
 :root{
- --bg:#080909;
- --panel:#101313;
- --panel2:#151817;
- --wine:#8c2037;
- --wine2:#63172a;
- --green:#72d58b;
- --white:#f4f5f3;
- --gray:#9da5a1;
- --line:#262c29;
+--bg:#070a0f;
+--panel:#0c1219;
+--panel2:#101923;
+--line:#263541;
+--text:#f1f5f6;
+--muted:#91a1ab;
+--wine:#970943;
+--wine2:#d31362;
+--green:#10c875;
+--green2:#58e495;
 }
 
 *{box-sizing:border-box}
 
-body{
- margin:0;
- background:
- radial-gradient(circle at 50% -15%,#35111d,transparent 45%),
- var(--bg);
- color:var(--white);
- font-family:Arial,system-ui,sans-serif;
- min-height:100vh;
+html,body{
+margin:0;
+width:100%;
+height:100%;
+background:radial-gradient(circle at 50% 20%,#111820,#070a0f 55%,#040609);
+color:var(--text);
+font-family:Arial,Helvetica,sans-serif;
+overflow:hidden;
 }
 
-button,input,textarea,select{font:inherit}
+button,input,textarea{font:inherit}
 
 button{
- cursor:pointer;
- border:0;
- transition:.2s;
+cursor:pointer;
+border:0;
+color:white;
 }
 
-button:hover{
- transform:translateY(-1px);
- filter:brightness(1.08);
+.top{
+height:68px;
+display:flex;
+align-items:center;
+justify-content:space-between;
+padding:0 18px;
+border-bottom:1px solid var(--line);
+background:#080c12ee;
+backdrop-filter:blur(15px);
+position:relative;
+z-index:20;
 }
 
-.hidden{display:none!important}
-
-/* ===== ENTRADA ===== */
-
-#entry{
- min-height:100vh;
- display:grid;
- place-items:center;
- padding:20px;
+.row{
+display:flex;
+align-items:center;
+gap:10px;
 }
 
-.entry{
- width:min(650px,100%);
- text-align:center;
- padding:45px 25px;
- background:#0d100fdd;
- border:1px solid #4b202c;
- border-radius:28px;
- box-shadow:0 30px 90px #000b;
+.menuBtn{
+width:45px;
+height:42px;
+border-radius:12px;
+background:#150c13;
+border:1px solid #a30a4b;
+font-size:25px;
 }
 
-.logo{
- width:82px;
- height:82px;
- margin:auto;
- display:grid;
- place-items:center;
- border-radius:24px;
- background:linear-gradient(135deg,var(--wine),var(--green));
- font-weight:900;
- font-size:25px;
- box-shadow:0 0 35px #8c203733;
+.loginBtn{
+height:42px;
+padding:0 17px;
+border-radius:11px;
+background:linear-gradient(135deg,#8d063d,#c20d58);
+font-weight:bold;
 }
 
-h1{
- font-size:clamp(36px,8vw,60px);
- margin:20px 0 8px;
- letter-spacing:-2px;
-}
-
-.sparky{color:var(--wine)}
-.krea{color:var(--green)}
-.studio{color:var(--white)}
-
-.subtitle{
- max-width:550px;
- margin:0 auto 28px;
- color:var(--gray);
- line-height:1.6;
-}
-
-.primary{
- background:var(--green);
- color:#071009;
- padding:13px 20px;
- border-radius:13px;
- font-weight:bold;
-}
-
-.secondary{
- background:#171b19;
- color:var(--white);
- border:1px solid var(--line);
- padding:12px 18px;
- border-radius:13px;
-}
-
-/* ===== HEADER ===== */
-
-header{
- position:sticky;
- top:0;
- z-index:10;
- background:#080a0aee;
- border-bottom:1px solid var(--line);
- backdrop-filter:blur(16px);
-}
-
-.nav{
- max-width:1150px;
- margin:auto;
- padding:13px 18px;
- display:flex;
- align-items:center;
- justify-content:space-between;
+.langBtn{
+height:42px;
+padding:0 13px;
+border-radius:11px;
+background:#0b1219;
+border:1px solid var(--line);
 }
 
 .brand{
- font-weight:900;
- font-size:18px;
+display:flex;
+align-items:center;
+gap:7px;
+font-size:20px;
+font-weight:bold;
 }
 
-.brand .s{color:var(--wine)}
+.brand .s{color:white}
 .brand .k{color:var(--green)}
-.brand .st{color:var(--white)}
 
-.nav button{
- background:#151918;
- color:white;
- border:1px solid var(--line);
- padding:8px 12px;
- border-radius:10px;
+.logo{
+width:40px;
+height:40px;
 }
 
-/* ===== APP ===== */
-
-main{
- max-width:1150px;
- margin:auto;
- padding:30px 18px 70px;
+.main{
+height:calc(100% - 68px);
+position:relative;
 }
-
-.hero{
- padding:25px 0;
-}
-
-.hero h2{
- font-size:clamp(30px,6vw,50px);
- margin:0 0 10px;
-}
-
-.hero p{
- color:var(--gray);
- line-height:1.6;
- max-width:720px;
-}
-
-.layout{
- display:grid;
- grid-template-columns:220px 1fr;
- gap:16px;
-}
-
-.menu{
- background:#0d100f;
- border:1px solid var(--line);
- border-radius:18px;
- padding:10px;
- height:max-content;
-}
-
-.menu button{
- width:100%;
- text-align:left;
- color:#cbd0cd;
- background:transparent;
- padding:12px;
- border-radius:10px;
- margin:2px 0;
-}
-
-.menu button.active,
-.menu button:hover{
- background:#18201c;
- color:var(--green);
-}
-
-/* ===== PANELES ===== */
-
-.panel{
- background:#0d100f;
- border:1px solid var(--line);
- border-radius:20px;
- padding:20px;
-}
-
-.panel h2{margin-top:0}
-
-.grid{
- display:grid;
- grid-template-columns:repeat(3,1fr);
- gap:12px;
- margin:20px 0;
-}
-
-.card{
- background:var(--panel);
- border:1px solid var(--line);
- border-radius:16px;
- padding:18px;
-}
-
-.card h3{margin:7px 0}
-
-.card p{
- color:var(--gray);
- line-height:1.5;
- font-size:14px;
-}
-
-.tag{
- display:inline-block;
- padding:5px 8px;
- border-radius:20px;
- background:#18231d;
- color:var(--green);
- font-size:11px;
-}
-
-/* ===== CHAT ===== */
 
 .chat{
- height:590px;
- display:flex;
- flex-direction:column;
- background:#0b0e0d;
- border:1px solid var(--line);
- border-radius:18px;
- overflow:hidden;
+height:100%;
+display:flex;
+flex-direction:column;
+max-width:1100px;
+margin:auto;
 }
 
-.chat-head{
- padding:15px;
- border-bottom:1px solid var(--line);
- display:flex;
- justify-content:space-between;
+.welcome{
+flex:1;
+display:flex;
+flex-direction:column;
+align-items:center;
+justify-content:center;
+text-align:center;
+padding:20px;
 }
 
-.chat-head small{color:var(--gray)}
+.bigLogo{
+width:105px;
+height:105px;
+margin-bottom:12px;
+}
+
+.welcome h1{
+font-size:46px;
+margin:0 0 10px;
+}
+
+.welcome h1 span{color:var(--green)}
+
+.welcome p{
+font-size:19px;
+color:var(--muted);
+}
 
 .messages{
- flex:1;
- overflow-y:auto;
- padding:18px;
- display:flex;
- flex-direction:column;
- gap:10px;
+display:none;
+flex:1;
+overflow-y:auto;
+padding:25px 18px 130px;
 }
 
 .message{
- max-width:85%;
- padding:11px 14px;
- border-radius:14px;
- line-height:1.5;
- white-space:pre-wrap;
+max-width:820px;
+margin:0 auto 16px;
+display:flex;
 }
 
-.bot{
- align-self:flex-start;
- background:#151918;
- border:1px solid var(--line);
+.message.user{justify-content:flex-end}
+
+.bubble{
+max-width:82%;
+padding:13px 16px;
+border-radius:18px;
+line-height:1.5;
+white-space:pre-wrap;
 }
 
-.user{
- align-self:flex-end;
- background:var(--wine2);
+.user .bubble{
+background:#351027;
+border:1px solid #721542;
 }
 
-.chat-form{
- display:flex;
- gap:8px;
- padding:10px;
- border-top:1px solid var(--line);
+.bot .bubble{
+background:#0d151c;
+border:1px solid var(--line);
 }
 
-.chat-form textarea{
- flex:1;
- min-height:48px;
- max-height:130px;
- resize:none;
- padding:12px;
- background:#121615;
- color:white;
- border:1px solid var(--line);
- border-radius:12px;
- outline:none;
+.composer{
+padding:14px 18px 20px;
 }
 
-/* ===== FORMULARIOS ===== */
+.inputBox{
+max-width:820px;
+margin:auto;
+display:flex;
+align-items:flex-end;
+background:#0a1017;
+border:1px solid #30414d;
+border-radius:22px;
+padding:8px;
+box-shadow:0 15px 50px #0008;
+}
 
-.fields{
- display:grid;
- grid-template-columns:1fr 1fr;
- gap:12px;
+textarea{
+flex:1;
+resize:none;
+background:transparent;
+border:0;
+outline:0;
+color:white;
+padding:10px 12px;
+min-height:45px;
+max-height:140px;
+}
+
+.send{
+width:45px;
+height:45px;
+border-radius:50%;
+background:linear-gradient(135deg,#90063f,#d21461);
+font-size:19px;
+}
+
+.drawer{
+display:none;
+position:absolute;
+left:0;
+top:0;
+bottom:0;
+width:315px;
+background:#090f16f7;
+border-right:1px solid var(--line);
+z-index:30;
+padding:18px;
+backdrop-filter:blur(20px);
+overflow-y:auto;
+}
+
+.drawer.open{display:block}
+
+.overlay{
+display:none;
+position:fixed;
+inset:0;
+background:#0009;
+z-index:25;
+}
+
+.overlay.open{display:block}
+
+.drawerHead{
+display:flex;
+align-items:center;
+justify-content:space-between;
+margin-bottom:15px;
+}
+
+.close{
+background:transparent;
+font-size:23px;
+}
+
+.item{
+width:100%;
+display:flex;
+align-items:center;
+gap:12px;
+padding:13px;
+margin:4px 0;
+border-radius:10px;
+background:transparent;
+text-align:left;
+color:#dce4e8;
+}
+
+.item:hover{
+background:#151d26;
+}
+
+.icon{
+width:25px;
+text-align:center;
+color:var(--wine2);
+}
+
+.line{
+height:1px;
+background:var(--line);
+margin:14px 0;
+}
+
+.lock{color:#91a1ab}
+
+.langMenu{
+display:none;
+position:absolute;
+right:18px;
+top:55px;
+width:190px;
+background:#0b1219;
+border:1px solid var(--line);
+border-radius:14px;
+padding:8px;
+z-index:40;
+box-shadow:0 20px 60px #0009;
+}
+
+.langMenu.open{display:block}
+
+.langOption{
+padding:11px;
+border-radius:9px;
+cursor:pointer;
+}
+
+.langOption:hover{
+background:#11221a;
+}
+
+.modal{
+display:none;
+position:fixed;
+inset:0;
+background:#000a;
+z-index:50;
+align-items:center;
+justify-content:center;
+}
+
+.modal.open{display:flex}
+
+.card{
+width:min(430px,92vw);
+background:#0b1118;
+border:1px solid #2c3c48;
+border-radius:18px;
+padding:24px;
+box-shadow:0 25px 80px #000;
+}
+
+.card h2{margin:0 0 8px}
+
+.card p{
+font-size:14px;
+color:var(--muted);
 }
 
 .field{
- display:flex;
- flex-direction:column;
- gap:7px;
- margin-bottom:12px;
+width:100%;
+padding:13px;
+margin:6px 0;
+border-radius:10px;
+border:1px solid #293b47;
+background:#081018;
+color:white;
+outline:none;
 }
 
-.field label{
- color:var(--gray);
- font-size:13px;
+.primary{
+width:100%;
+padding:13px;
+border-radius:10px;
+background:var(--wine2);
+font-weight:bold;
+margin-top:7px;
 }
 
-input,select{
- width:100%;
- background:#121615;
- color:white;
- border:1px solid var(--line);
- border-radius:11px;
- padding:11px;
- outline:none;
+.secondary{
+width:100%;
+padding:12px;
+border-radius:10px;
+background:#111a22;
+margin-top:7px;
 }
 
-.result{
- margin-top:16px;
- padding:16px;
- background:#111614;
- border:1px solid var(--line);
- border-radius:14px;
- line-height:1.6;
+.small{
+font-size:11px;
+color:#82929b;
+margin-top:12px;
+line-height:1.5;
 }
 
-.result strong{color:var(--green)}
-
-/* ===== AUTH ===== */
-
-#auth{
- position:fixed;
- inset:0;
- z-index:50;
- background:#050706f5;
- display:grid;
- place-items:center;
- padding:20px;
+.admin{
+display:none;
+height:100%;
+overflow:auto;
+padding:25px;
 }
 
-.auth{
- width:min(430px,100%);
- background:#101312;
- border:1px solid var(--line);
- border-radius:22px;
- padding:24px;
-}
+.admin.show{display:block}
 
-.auth h2{margin-top:0}
-
-.auth-actions{
- display:flex;
- gap:8px;
-}
-
-.auth-actions button{flex:1}
-
-/* ===== ADMIN ===== */
-
-.admin-box{
- display:grid;
- grid-template-columns:repeat(3,1fr);
- gap:12px;
+.stats{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:12px;
 }
 
 .stat{
- background:#121615;
- border:1px solid var(--line);
- border-radius:15px;
- padding:18px;
+background:var(--panel);
+border:1px solid var(--line);
+border-radius:14px;
+padding:18px;
 }
 
 .stat b{
- display:block;
- font-size:27px;
- color:var(--green);
- margin-top:6px;
+font-size:27px;
 }
 
-table{
- width:100%;
- border-collapse:collapse;
- margin-top:15px;
+.table{
+width:100%;
+border-collapse:collapse;
+margin-top:20px;
 }
 
-th,td{
- padding:10px;
- border-bottom:1px solid var(--line);
- text-align:left;
- font-size:13px;
+.table th,
+.table td{
+padding:11px;
+border-bottom:1px solid var(--line);
+text-align:left;
+font-size:13px;
 }
 
-th{color:var(--green)}
-
-footer{
- text-align:center;
- color:#66706a;
- font-size:12px;
- padding:25px;
+.back{
+background:#111a22;
+padding:10px 13px;
+border-radius:9px;
+margin-bottom:15px;
 }
 
-@media(max-width:800px){
- .layout{grid-template-columns:1fr}
- .menu{display:flex;overflow:auto}
- .menu button{white-space:nowrap}
- .grid{grid-template-columns:1fr}
- .fields{grid-template-columns:1fr}
- .admin-box{grid-template-columns:1fr}
+@media(max-width:700px){
+
+.top{
+height:60px;
+padding:0 9px;
+}
+
+.main{
+height:calc(100% - 60px);
+}
+
+.menuBtn{
+width:40px;
+height:38px;
+}
+
+.loginBtn{
+height:38px;
+padding:0 10px;
+font-size:13px;
+}
+
+.langBtn{
+height:38px;
+padding:0 9px;
+font-size:13px;
+}
+
+.brand{
+font-size:15px;
+gap:4px;
+}
+
+.logo{
+width:31px;
+height:31px;
+}
+
+.welcome{
+padding:15px;
+}
+
+.bigLogo{
+width:78px;
+height:78px;
+}
+
+.welcome h1{
+font-size:31px;
+}
+
+.welcome p{
+font-size:16px;
+}
+
+.messages{
+padding:15px 9px 100px;
+}
+
+.bubble{
+max-width:91%;
+font-size:14px;
+}
+
+.composer{
+padding:9px 9px 13px;
+}
+
+.drawer{
+width:min(88vw,330px);
+}
+
+.langMenu{
+right:9px;
+top:48px;
+}
+
+.stats{
+grid-template-columns:1fr;
+}
+
+.admin{
+padding:14px;
+}
+
+.table{
+min-width:650px;
+}
+
 }
 </style>
 </head>
 
 <body>
 
-<!-- ================= ENTRADA ================= -->
+<header class="top">
 
-<section id="entry">
- <div class="entry">
+<div class="row">
 
-  <div class="logo">SK</div>
+<button class="menuBtn" onclick="toggleMenu()">☰</button>
 
-  <h1>
-   <span class="sparky">Sparky</span><span class="krea">Krea</span>
-   <span class="studio">Studio</span>
-  </h1>
+<button class="loginBtn" onclick="openLogin(false)">
+♙ Iniciar sesión
+</button>
 
-  <p class="subtitle">
-   Tu espacio creativo para crear guiones, estrategias,
-   ideas y dirección musical sin complicarte.
-  </p>
+</div>
 
-  <button class="primary" onclick="openAuth('login')">
-   Entrar
-  </button>
+<div class="row">
 
-  <button class="secondary" onclick="openAuth('register')">
-   Crear cuenta
-  </button>
+<button class="langBtn" onclick="toggleLang()">◎ ES⌄</button>
 
- </div>
-</section>
+<div class="brand">
 
+<svg class="logo" viewBox="0 0 60 60">
 
-<!-- ================= AUTENTICACIÓN ================= -->
+<path d="M8 28L30 8L52 28V53H8Z"
+fill="none"
+stroke="#d31362"
+stroke-width="5"/>
 
-<section id="auth" class="hidden">
- <div class="auth">
+<path d="M30 8L52 28M30 8L8 28"
+stroke="#10c875"
+stroke-width="5"/>
 
-  <h2 id="authTitle">Iniciar sesión</h2>
+<rect x="19" y="27"
+width="22"
+height="16"
+rx="4"
+fill="none"
+stroke="#10c875"
+stroke-width="4"/>
 
-  <div id="registerFields" class="hidden">
+<circle cx="30" cy="35"
+r="5"
+fill="none"
+stroke="#d31362"
+stroke-width="3"/>
 
-   <div class="field">
-    <label>Nombre</label>
-    <input id="name" placeholder="Tu nombre">
-   </div>
+</svg>
 
-   <div class="field">
-    <label>Apellido</label>
-    <input id="lastname" placeholder="Tu apellido">
-   </div>
+<b class="s">Sparky</b>
+<b class="k">Krea</b>
 
-  </div>
+</div>
 
-  <div class="field">
-   <label>Correo electrónico</label>
-   <input id="email" type="email" placeholder="correo@ejemplo.com">
-  </div>
+</div>
 
-  <div class="field">
-   <label>Contraseña</label>
-   <input id="password" type="password" placeholder="Contraseña">
-  </div>
+<div id="langMenu" class="langMenu">
 
-  <p id="authError"></p>
+<div class="langOption" onclick="language('Español')">🇪🇸 Español</div>
+<div class="langOption" onclick="language('English')">🇬🇧 English</div>
+<div class="langOption" onclick="language('Português')">🇧🇷 Português</div>
+<div class="langOption" onclick="language('Français')">🇫🇷 Français</div>
 
-  <div class="auth-actions">
-   <button class="primary" onclick="authSubmit()">Continuar</button>
-   <button class="secondary" onclick="closeAuth()">Cerrar</button>
-  </div>
+</div>
 
-  <button
-   id="authSwitch"
-   class="secondary"
-   style="width:100%;margin-top:10px"
-   onclick="switchAuth()">
-   ¿No tienes cuenta? Regístrate
-  </button>
-
- </div>
-</section>
-
-
-<!-- ================= APLICACIÓN ================= -->
-
-<div id="app" class="hidden">
-
-<header>
- <div class="nav">
-
-  <div class="brand">
-   <span class="s">Sparky</span><span class="k">Krea</span>
-   <span class="st"> Studio</span>
-  </div>
-
-  <div>
-   <span id="welcome"></span>
-   <button onclick="logout()">Salir</button>
-  </div>
-
- </div>
 </header>
 
+<div class="main">
 
-<main>
+<div id="drawer" class="drawer">
 
-<section class="hero">
+<div class="drawerHead">
+<strong>Menú</strong>
+<button class="close" onclick="toggleMenu()">×</button>
+</div>
 
- <h2>¿Qué vamos a crear hoy?</h2>
+<button class="item" onclick="newChat()">
+<span class="icon">＋</span>
+Nuevo chat
+</button>
 
- <p>
-  Puedes hablar normalmente. Decir
-  <b>hola</b>, <b>ola</b>, <b>xd</b>, <b>lol</b>,
-  <b>jajaja</b>, <b>jsjs</b> o <b>gracias</b>
-  no será interpretado automáticamente como publicidad.
- </p>
+<button class="item" onclick="historyChats()">
+<span class="icon">◷</span>
+Historial de chats
+<span class="lock">🔒</span>
+</button>
 
-</section>
+<button class="item" onclick="clearChats()">
+<span class="icon">♲</span>
+Borrar chats
+</button>
 
+<button class="item" onclick="savePDF()">
+<span class="icon">▧</span>
+Guardar chat como PDF
+<span class="lock">🔒</span>
+</button>
 
-<div class="grid">
+<div class="line"></div>
 
- <div class="card">
-  <span class="tag">01</span>
-  <h3>Guiones</h3>
-  <p>Hooks, estructura, desarrollo y cierre adaptados a la duración.</p>
- </div>
+<button class="item" onclick="openLogin(false)">
+<span class="icon">♙</span>
+Iniciar sesión
+</button>
 
- <div class="card">
-  <span class="tag">02</span>
-  <h3>Estrategia</h3>
-  <p>Ideas para publicar, crecer y presentar mejor tu contenido.</p>
- </div>
+<button class="item" onclick="openLogin(true)">
+<span class="icon">＋</span>
+Crear cuenta
+</button>
 
- <div class="card">
-  <span class="tag">03</span>
-  <h3>Música</h3>
-  <p>Direcciones musicales según el ambiente de tu contenido.</p>
- </div>
+<div class="line"></div>
+
+<button class="item" onclick="openAdmin()">
+<span class="icon">⚙</span>
+Panel de administrador
+</button>
 
 </div>
 
+<div id="overlay"
+class="overlay"
+onclick="toggleMenu()">
+</div>
 
-<section class="layout">
+<section id="chat" class="chat">
 
-<aside class="menu">
+<div id="welcome" class="welcome">
 
- <button class="active" onclick="tool('chat',this)">
-  🏠 📷 Chat
- </button>
+<svg class="bigLogo" viewBox="0 0 60 60">
 
- <button onclick="tool('script',this)">
-  ✍️ Guiones
- </button>
+<path d="M8 28L30 8L52 28V53H8Z"
+fill="none"
+stroke="#d31362"
+stroke-width="5"/>
 
- <button onclick="tool('strategy',this)">
-  📈 Estrategia
- </button>
+<path d="M30 8L52 28M30 8L8 28"
+stroke="#10c875"
+stroke-width="5"/>
 
- <button onclick="tool('music',this)">
-  🎵 Música
- </button>
+<rect x="19" y="27"
+width="22"
+height="16"
+rx="4"
+fill="none"
+stroke="#10c875"
+stroke-width="4"/>
 
- <button id="adminButton" class="hidden" onclick="tool('admin',this)">
-  ⚙️ Administración
- </button>
+<circle cx="30" cy="35"
+r="5"
+fill="none"
+stroke="#d31362"
+stroke-width="3"/>
 
-</aside>
+</svg>
 
+<h1>Sparky<span>Krea</span></h1>
 
-<section>
-
-<!-- CHAT -->
-
-<div id="chat" class="chat">
-
- <div class="chat-head">
-  <b>SparkyKrea AI</b>
-  <small>Asistente creativo</small>
- </div>
-
- <div id="messages" class="messages">
-
-  <div class="message bot">
-   ¡Hola! Soy SparkyKrea.
-   Puedes hablar conmigo normalmente o pedirme
-   ayuda con guiones, estrategia, música o contenido.
-  </div>
-
- </div>
-
- <form class="chat-form" onsubmit="sendMessage(event)">
-  <textarea id="chatInput"
-   placeholder="Escribe aquí..."></textarea>
-
-  <button class="primary">Enviar</button>
- </form>
+<p>¿En qué puedo ayudarte?</p>
 
 </div>
 
+<div id="messages" class="messages"></div>
 
-<!-- GUIONES -->
+<div class="composer">
 
-<div id="script" class="panel hidden">
+<div class="inputBox">
 
- <h2>Generador de guiones</h2>
+<textarea
+id="input"
+rows="1"
+placeholder="Escribe un mensaje..."
+onkeydown="keySend(event)">
+</textarea>
 
- <div class="fields">
-
-  <div class="field">
-   <label>Tema</label>
-   <input id="scriptTopic" placeholder="Ej. Valorant">
-  </div>
-
-  <div class="field">
-   <label>Duración</label>
-   <select id="duration">
-    <option>15 segundos</option>
-    <option>30 segundos</option>
-    <option>60 segundos</option>
-    <option>90 segundos</option>
-   </select>
-  </div>
-
- </div>
-
- <button class="primary" onclick="generateScript()">
-  Generar
- </button>
-
- <div id="scriptResult" class="result hidden"></div>
+<button class="send" onclick="send()">➤</button>
 
 </div>
-
-
-<!-- ESTRATEGIA -->
-
-<div id="strategy" class="panel hidden">
-
- <h2>Estrategia</h2>
-
- <div class="field">
-  <label>¿Qué quieres impulsar?</label>
-  <input id="strategyTopic"
-   placeholder="Ej. mi cuenta de gaming">
- </div>
-
- <div class="field">
-  <label>Objetivo</label>
-  <select id="goal">
-   <option>Conseguir visitas</option>
-   <option>Conseguir seguidores</option>
-   <option>Promocionar un negocio</option>
-   <option>Presentar un producto</option>
-  </select>
- </div>
-
- <button class="primary" onclick="generateStrategy()">
-  Crear estrategia
- </button>
-
- <div id="strategyResult" class="result hidden"></div>
-
-</div>
-
-
-<!-- MÚSICA -->
-
-<div id="music" class="panel hidden">
-
- <h2>Música</h2>
-
- <div class="fields">
-
-  <div class="field">
-   <label>Contenido</label>
-   <input id="musicTopic" placeholder="Ej. clip competitivo">
-  </div>
-
-  <div class="field">
-   <label>Ambiente</label>
-   <select id="vibe">
-    <option>Energética</option>
-    <option>Épica</option>
-    <option>Divertida</option>
-    <option>Relajada</option>
-    <option>Oscura</option>
-   </select>
-  </div>
-
- </div>
-
- <button class="primary" onclick="generateMusic()">
-  Crear dirección musical
- </button>
-
- <div id="musicResult" class="result hidden"></div>
-
-</div>
-
-
-<!-- ADMIN -->
-
-<div id="admin" class="panel hidden">
-
- <h2>Panel de administración</h2>
-
- <div class="admin-box">
-
-  <div class="stat">
-   Usuarios registrados
-   <b id="usersCount">0</b>
-  </div>
-
-  <div class="stat">
-   Inicios de sesión
-   <b id="loginCount">0</b>
-  </div>
-
-  <div class="stat">
-   Estado
-   <b>ADMIN</b>
-  </div>
-
- </div>
-
- <h3>Usuarios registrados</h3>
-
- <div style="overflow:auto">
-  <table>
-   <thead>
-    <tr>
-     <th>Nombre</th>
-     <th>Apellido</th>
-     <th>Correo</th>
-    </tr>
-   </thead>
-   <tbody id="usersTable"></tbody>
-  </table>
- </div>
-
- <h3>Últimos accesos</h3>
-
- <div id="accessList" class="result"></div>
 
 </div>
 
 </section>
-</section>
 
-</main>
-
-<footer>
- SparkyKrea Studio · Creative Studio
-</footer>
+<section id="admin" class="admin"></section>
 
 </div>
 
+<div id="auth" class="modal">
+
+<div class="card">
+
+<button class="close"
+style="float:right"
+onclick="closeLogin()">×</button>
+
+<h2 id="authTitle">Iniciar sesión</h2>
+
+<p id="authText">
+Accede a tu cuenta para usar funciones privadas.
+</p>
+
+<input id="name"
+class="field"
+placeholder="Nombre"
+style="display:none">
+
+<input id="last"
+class="field"
+placeholder="Apellido"
+style="display:none">
+
+<input id="email"
+class="field"
+placeholder="Correo electrónico">
+
+<input id="password"
+type="password"
+class="field"
+placeholder="Contraseña">
+
+<button id="authButton"
+class="primary"
+onclick="authAction()">
+Iniciar sesión
+</button>
+
+<button
+class="secondary"
+onclick="switchAuth()">
+Crear cuenta
+</button>
+
+<div class="small">
+La versión actual usa almacenamiento local del navegador.
+Para cuentas reales, historial entre dispositivos y un administrador
+privado será necesario conectar una base de datos/backend.
+</div>
+
+</div>
+
+</div>
 
 <script>
 
-/* =====================================================
-   CONFIGURACIÓN
-   ===================================================== */
-
-/*
- IMPORTANTE:
- Este ADMIN_ID solamente controla la interfaz local.
- NO es seguridad real.
-
- Para que solamente tú puedas acceder al panel
- desde cualquier dispositivo necesitaremos conectar
- una autenticación real posteriormente.
-*/
-
-const ADMIN_EMAIL="TU_CORREO_ADMIN@EJEMPLO.COM";
-
-let mode="login";
-
-
-/* =====================================================
-   AUTENTICACIÓN
-   ===================================================== */
-
-function openAuth(type){
- mode=type;
-
- document.getElementById("auth").classList.remove("hidden");
-
- document.getElementById("registerFields")
- .classList.toggle("hidden",type==="login");
-
- document.getElementById("authTitle").textContent=
- type==="login"?"Iniciar sesión":"Crear cuenta";
-
- document.getElementById("authSwitch").textContent=
- type==="login"
- ?"¿No tienes cuenta? Regístrate"
- :"¿Ya tienes cuenta? Inicia sesión";
-
- document.getElementById("authError").textContent="";
-}
-
-
-function closeAuth(){
- document.getElementById("auth").classList.add("hidden");
-}
-
-
-function switchAuth(){
- openAuth(mode==="login"?"register":"login");
-}
-
-
-function authSubmit(){
-
- const email=
- document.getElementById("email").value.trim().toLowerCase();
-
- const pass=
- document.getElementById("password").value;
-
- const error=document.getElementById("authError");
-
- if(!email||!pass){
-  error.textContent="Completa todos los campos.";
-  return;
- }
-
-
- let users=
- JSON.parse(localStorage.getItem("skUsers")||"[]");
-
-
- if(mode==="register"){
-
-  const name=
-  document.getElementById("name").value.trim();
-
-  const lastname=
-  document.getElementById("lastname").value.trim();
-
-  if(!name||!lastname){
-   error.textContent="Completa nombre y apellido.";
-   return;
-  }
-
-  if(users.some(u=>u.email===email)){
-   error.textContent="Ese correo ya está registrado.";
-   return;
-  }
-
-  users.push({
-   name,
-   lastname,
-   email,
-   password:pass,
-   created:new Date().toLocaleString()
-  });
-
-  localStorage.setItem("skUsers",JSON.stringify(users));
-
-  enter(name,email);
-
- }else{
-
-  const user=
-  users.find(u=>u.email===email&&u.password===pass);
-
-  if(!user){
-   error.textContent=
-   "Correo o contraseña incorrectos.";
-   return;
-  }
-
-  saveAccess(user.email);
-
-  enter(user.name,user.email);
- }
-}
-
-
-function enter(name,email){
-
- localStorage.setItem("skSession",
- JSON.stringify({name,email}));
-
- document.getElementById("entry")
- .classList.add("hidden");
-
- document.getElementById("auth")
- .classList.add("hidden");
-
- document.getElementById("app")
- .classList.remove("hidden");
-
- document.getElementById("welcome")
- .textContent="Hola, "+name;
-
- if(email===ADMIN_EMAIL){
-  document.getElementById("adminButton")
-  .classList.remove("hidden");
-  updateAdmin();
- }
-}
-
-
-function logout(){
-
- localStorage.removeItem("skSession");
-
- document.getElementById("app")
- .classList.add("hidden");
-
- document.getElementById("entry")
- .classList.remove("hidden");
-}
-
-
-/* =====================================================
-   ACCESOS
-   ===================================================== */
-
-function saveAccess(email){
-
- let accesses=
- JSON.parse(localStorage.getItem("skAccess")||"[]");
-
- accesses.push({
-  email,
-  date:new Date().toLocaleString()
- });
-
- localStorage.setItem(
-  "skAccess",
-  JSON.stringify(accesses)
- );
-}
-
-
-/* =====================================================
-   NAVEGACIÓN
-   ===================================================== */
-
-function tool(name,button){
-
- document.querySelectorAll(".menu button")
- .forEach(b=>b.classList.remove("active"));
-
- button.classList.add("active");
-
- ["chat","script","strategy","music","admin"]
- .forEach(id=>{
-  document.getElementById(id)
-  .classList.toggle("hidden",id!==name);
- });
-}
-
-
-/* =====================================================
-   DETECCIÓN INTELIGENTE
-   ===================================================== */
-
-const casual=[
- /^hola[!. ]*$/i,
- /^ola[!. ]*$/i,
- /^holi[!. ]*$/i,
- /^hey[!. ]*$/i,
- /^xd+[!. ]*$/i,
- /^lol+[!. ]*$/i,
- /^jaja+[!. ]*$/i,
- /^jajaja+[!. ]*$/i,
- /^jeje+[!. ]*$/i,
- /^jsjs+[!. ]*$/i,
- /^ok[!. ]*$/i,
- /^okay[!. ]*$/i,
- /^dale[!. ]*$/i,
- /^gracias[!. ]*$/i,
- /^grx[!. ]*$/i
+/* =========================
+   JUEGOS Y PERSONAJES
+========================= */
+
+const GAMES={
+
+valorant:[
+"Reyna","Jett","Sage","Omen","Raze","Sova","Killjoy","Viper",
+"Cypher","Chamber","Neon","Clove","Gekko","Fade","Yoru",
+"Phoenix","Breach","Skye","Brimstone","KAY/O"
+],
+
+fortnite:[
+"Jonesy","Peely","Midas","Fishstick","Raven","Lynx",
+"Drift","Omega","Aura","Renegade Raider"
+],
+
+minecraft:[
+"Steve","Alex","Creeper","Enderman","Villager","Warden","Herobrine"
+],
+
+"clash royale":[
+"Caballero","Gigante","Princesa","Mago","Bruja","Montapuercos",
+"Mega Caballero","P.E.K.K.A"
+],
+
+"free fire":[
+"Alok","Kelly","Hayato","Moco","Chrono","K","Dimitri"
+],
+
+overwatch:[
+"Tracer","Genji","Mercy","Reinhardt","D.Va","Kiriko",
+"Widowmaker","Soldier: 76"
+],
+
+"apex legends":[
+"Wraith","Octane","Lifeline","Bloodhound","Pathfinder",
+"Wattson","Valkyrie","Revenant"
+],
+
+"league of legends":[
+"Ahri","Yasuo","Jinx","Lux","Lee Sin","Zed","Akali","Thresh"
+],
+
+"brawl stars":[
+"Shelly","Colt","Spike","Leon","Crow","Edgar","Mortis","Bibi"
+],
+
+"call of duty":[
+"Ghost","Soap","Price","Makarov"
+],
+
+"rocket league":[
+"Octane","Fennec","Dominus"
+],
+
+gta:[
+"Michael","Franklin","Trevor"
+],
+
+"among us":[
+"Tripulante","Impostor"
+],
+
+roblox:[
+"Noob","Builderman"
+],
+
+"counter-strike":[
+"Terrorista","Antiterrorista"
+]
+
+};
+
+
+/* =========================
+   CORRECCIÓN DE ESCRITURA
+========================= */
+
+const FIX={
+
+"balorant":"valorant",
+"balorant":"valorant",
+"fornait":"fortnite",
+"fortnait":"fortnite",
+"minecraf":"minecraft",
+"maincra":"minecraft",
+"clahs royale":"clash royale",
+"clash roayle":"clash royale",
+"free faiar":"free fire",
+"overwacht":"overwatch",
+"apex legens":"apex legends",
+"counter strike":"counter-strike",
+"csgo":"counter-strike",
+"lol":"league of legends",
+"brawl star":"brawl stars",
+"call of dutty":"call of duty",
+"rocket legue":"rocket league",
+
+"publisidad":"publicidad",
+"publisidad":"publicidad",
+"puvlicidad":"publicidad",
+"pubñicidad":"publicidad",
+"publicida":"publicidad",
+
+"ola":"hola",
+"holaa":"hola",
+"holaaa":"hola"
+
+};
+
+
+/* =========================
+   VARIEDAD DE GUIONES
+========================= */
+
+const HOOKS=[
+
+"Empezamos con una frase que detenga el scroll.",
+"Entramos directamente al punto fuerte.",
+"Comenzamos con una pregunta que genere curiosidad.",
+"Mostramos primero el problema y después la solución.",
+"Usamos una entrada rápida y natural.",
+"El inicio puede ser una afirmación sorprendente.",
+"Arrancamos con una situación que el público reconozca.",
+"Podemos comenzar con un reto.",
+"El primer segundo debe dejar una pregunta abierta.",
+"Empezamos con una escena que genere intriga.",
+"Entramos con una frase corta y fácil de recordar.",
+"Mostramos el resultado antes de explicar cómo llegamos ahí.",
+"Comenzamos con un contraste entre antes y después.",
+"Usamos una introducción que parezca una conversación.",
+"El gancho puede ser humorístico sin perder claridad."
 ];
 
-const business=
-/\b(vender|venta|vendo|comprar|producto|servicio|negocio|empresa|marca|cliente|publicidad|anuncio|promoción|promo|oferta|precio|tienda|restaurante|marketing)\b/i;
+const TONES=[
 
-const gaming=
-/\b(valorant|reyna|clash royale|minecraft|fortnite|roblox|gaming|gamer|juego|partida|ranked|clip|videojuego)\b/i;
+"energético",
+"cinematográfico",
+"natural",
+"humorístico",
+"misterioso",
+"competitivo",
+"elegante",
+"emocional",
+"rápido",
+"relajado",
+"dramático",
+"casual",
+"intenso",
+"motivador",
+"minimalista"
+];
 
-const content=
-/\b(tiktok|youtube|video|reel|short|contenido|guion|guión|viral|seguidores|visitas|creador)\b/i;
+const MUSIC=[
+
+"electrónica",
+"phonk instrumental",
+"trap instrumental",
+"hip-hop instrumental",
+"drum & bass",
+"synthwave",
+"lo-fi",
+"rock instrumental",
+"future bass",
+"cinemática",
+"house",
+"orquestal",
+"ambiental",
+"funk",
+"pop instrumental"
+];
+
+const DURATIONS=[
+
+"15 segundos",
+"20 segundos",
+"30 segundos",
+"45 segundos",
+"60 segundos",
+"90 segundos",
+"2 minutos",
+"3 minutos"
+];
+
+const ENDINGS=[
+
+"Terminamos invitando a comentar.",
+"Podemos cerrar pidiendo que sigan la cuenta.",
+"El final puede dejar una pregunta.",
+"Terminamos invitando a guardar el video.",
+"Cerramos con una llamada a la acción corta.",
+"Podemos dejar una continuación para otro video.",
+"El cierre puede pedir que lo compartan.",
+"Terminamos con una frase fácil de recordar."
+];
 
 
-function classify(text){
+/* =========================
+   ESTADO
+========================= */
 
- text=text.trim();
+let currentUser=
+JSON.parse(localStorage.getItem("sk_user")||"null");
 
- if(!text)return "empty";
+let messages=
+JSON.parse(localStorage.getItem("sk_messages")||"[]");
 
- if(casual.some(r=>r.test(text)))
- return "casual";
+let creating=false;
 
- if(business.test(text))
- return "business";
 
- if(gaming.test(text))
- return "gaming";
+/* =========================
+   UTILIDADES
+========================= */
 
- if(content.test(text))
- return "content";
+function $(id){
+return document.getElementById(id);
+}
 
- return "general";
+function normalize(text){
+
+let x=text
+.toLowerCase()
+.normalize("NFD")
+.replace(/[\u0300-\u036f]/g,"");
+
+for(const a in FIX){
+x=x.replaceAll(a,FIX[a]);
+}
+
+return x;
+}
+
+function random(arr){
+return arr[Math.floor(Math.random()*arr.length)];
+}
+
+function detectGame(text){
+
+let x=normalize(text);
+
+for(const game of Object.keys(GAMES)){
+
+if(x.includes(game))
+return game;
+
+}
+
+return null;
+}
+
+function detectCharacter(text,game){
+
+if(!game)return null;
+
+let x=normalize(text);
+
+return GAMES[game].find(
+c=>x.includes(normalize(c))
+)||null;
+
+}
+
+function greeting(text){
+
+return /^(hola|hey|hello|buenas|buenos dias|buenas tardes|buenas noches|jaja|jajaja|xd|xddd|que tal)[!. ]*$/i
+.test(text.trim());
+
 }
 
 
-function getReply(text){
+/* =========================
+   DETECTOR DE INTENCIÓN
+========================= */
 
- const type=classify(text);
+function intent(text){
 
- if(type==="casual"){
-  const replies=[
-   "Jajaja, entendido.",
-   "XD. Aquí estamos.",
-   "Todo chill. ¿Qué hacemos?",
-   "JAJA, recibido.",
-   "Dale."
-  ];
+let x=normalize(text);
 
-  return replies[
-   Math.floor(Math.random()*replies.length)
-  ];
- }
+if(greeting(text))
+return "chat";
 
- if(type==="business")
- return "Esto sí parece relacionado con un negocio, producto o promoción. Puedo ayudarte a convertirlo en una idea publicitaria.";
+if(
+/publicidad|anuncio|anunciar|promocion|promocionar|vender|venta/
+.test(x)
+)
+return "publicidad";
 
- if(type==="gaming")
- return "Esto parece contenido de gaming. Puedo ayudarte con el hook, guion, estrategia y dirección musical.";
+if(detectGame(text))
+return "juego";
 
- if(type==="content")
- return "Esto parece una idea de contenido. Cuéntame qué quieres conseguir y la estructuramos.";
+if(
+/guion|video|tiktok|reel|short|contenido/
+.test(x)
+)
+return "guion";
 
- return "Te entendí. Cuéntame un poco más y vemos cómo podemos convertir esa idea en algo mejor.";
+if(
+/musica|cancion|beat|instrumental|artista|genero|sonido/
+.test(x)
+)
+return "musica";
+
+if(
+/estrategia|crecer|viral|seguidores|views|vistas/
+.test(x)
+)
+return "estrategia";
+
+return "chat";
+
 }
 
 
-/* =====================================================
+/* =========================
+   RESPUESTA
+========================= */
+
+function reply(text){
+
+const type=intent(text);
+const game=detectGame(text);
+
+if(type==="chat"){
+
+if(greeting(text))
+return random([
+"¡Hola! ¿Qué tienes en mente?",
+"¡Hey! Cuéntame qué quieres hacer.",
+"¡Buenas! Estoy listo. ¿Qué vamos a crear?",
+"¡Hola! Dime la idea y la desarrollamos.",
+"¡Hey! ¿Qué quieres preparar hoy?"
+]);
+
+return random([
+"Claro. Cuéntame un poco más y lo armamos.",
+"Entendido. ¿Qué quieres conseguir exactamente?",
+"Perfecto. Dame la idea y la convertimos en algo concreto.",
+"Vamos con eso. ¿Qué tienes pensado?",
+"Te sigo. ¿Qué parte quieres trabajar primero?"
+]);
+
+}
+
+
+/* PUBLICIDAD */
+
+if(type==="publicidad"){
+
+const x=normalize(text);
+
+if(
+!/producto|servicio|negocio|tienda|restaurante|app|curso|evento|marca|juego/
+.test(x)
+){
+
+return random([
+"Perfecto. ¿Qué tipo de publicidad necesitas: producto, servicio, negocio, tienda online, restaurante, app, curso, evento, marca personal o juego?",
+"Claro. Antes de crearla, dime: ¿es publicidad para un producto, servicio, negocio, tienda, restaurante, aplicación, curso, evento, marca o juego?",
+"Vamos. ¿Qué quieres promocionar exactamente?",
+"¿La publicidad es para vender un producto, promocionar un servicio, impulsar un negocio o promocionar contenido?"
+]);
+
+}
+
+return buildScript("publicidad",game);
+
+}
+
+
+/* JUEGOS */
+
+if(type==="juego"){
+
+if(!detectCharacter(text,game)){
+
+return "Perfecto. Veo que hablas de "+game+
+". ¿Quieres que el guion sea sobre algún personaje o agente específico?";
+
+}
+
+let character=detectCharacter(text,game);
+
+return buildScript(game,character);
+
+}
+
+
+/* MÚSICA */
+
+if(type==="musica"){
+
+return random([
+"Podemos elegir la música según el ambiente. ¿La quieres energética, relajada, cinematográfica, competitiva o misteriosa?",
+"Para recomendarte algo preciso dime qué sensación quieres transmitir.",
+"¿Quieres una base electrónica, phonk, trap, hip-hop, rock, lo-fi o algo cinematográfico?",
+"También puedo decirte en qué segundo debería entrar la música y cuándo bajarla para que se escuche la voz."
+]);
+
+}
+
+
+/* GUION */
+
+if(type==="guion"){
+
+return buildScript("contenido");
+
+}
+
+
+/* ESTRATEGIA */
+
+if(type==="estrategia"){
+
+return random([
+"Para crecer, primero definiría público, formato, frecuencia, gancho y llamada a la acción.",
+"Podemos construir una estrategia alrededor de videos cortos, pruebas de distintos ganchos y análisis de retención.",
+"Lo ideal es probar varias ideas y quedarnos con las que generen mejor retención y comentarios.",
+"Podemos organizar una estrategia semanal con diferentes formatos para evitar publicar siempre lo mismo."
+]);
+
+}
+
+return random([
+"Entendido. Puedo ayudarte a desarrollar esa idea.",
+"Perfecto. Dame un poco más de contexto.",
+"Claro. Podemos hacerlo paso a paso.",
+"Te sigo. ¿Qué quieres conseguir con esto?"
+]);
+
+}
+
+
+/* =========================
+   GENERADOR DE GUIONES
+========================= */
+
+function buildScript(subject,character){
+
+let tone=random(TONES);
+let duration=random(DURATIONS);
+let hook=random(HOOKS);
+let ending=random(ENDINGS);
+let song=random(MUSIC);
+
+let target=character?
+"centrado específicamente en "+character:
+"adaptado al tema que mencionaste";
+
+return (
+"Te propongo un guion "+tone+" de "+duration+" "+target+".\n\n"+
+"GANCHO:\n"+
+hook+"\n\n"+
+"DESARROLLO:\n"+
+"Presentamos rápidamente la situación, mostramos el punto principal y hacemos que cada parte avance sin relleno. "+
+"El contenido debe mantener una idea clara desde el inicio hasta el final.\n\n"+
+"GIRO O MOMENTO FUERTE:\n"+
+"Introducimos el momento que más probablemente haga que la persona quiera seguir viendo.\n\n"+
+"CIERRE:\n"+
+ending+"\n\n"+
+"MÚSICA:\n"+
+"Podría funcionar una base de "+song+" colocada por debajo de la voz y aumentando ligeramente en el momento fuerte."
+);
+
+}
+
+
+/* =========================
    CHAT
-   ===================================================== */
+========================= */
 
-function sendMessage(e){
+function addMessage(role,text){
 
- e.preventDefault();
+const div=document.createElement("div");
 
- const input=document.getElementById("chatInput");
+div.className="message "+role;
 
- const text=input.value.trim();
+const bubble=document.createElement("div");
 
- if(!text)return;
+bubble.className="bubble";
 
- addMessage(text,"user");
+bubble.textContent=text;
 
- input.value="";
+div.appendChild(bubble);
 
- setTimeout(()=>{
-  addMessage(getReply(text),"bot");
- },250);
+$("messages").appendChild(div);
+
+$("messages").scrollTop=
+$("messages").scrollHeight;
+
+messages.push({
+role:role,
+text:text,
+date:new Date().toISOString()
+});
+
+localStorage.setItem(
+"sk_messages",
+JSON.stringify(messages)
+);
+
+}
+
+function send(){
+
+const input=$("input");
+
+const text=input.value.trim();
+
+if(!text)return;
+
+$("welcome").style.display="none";
+
+$("messages").style.display="block";
+
+addMessage("user",text);
+
+input.value="";
+
+setTimeout(()=>{
+
+addMessage(
+"bot",
+reply(text)
+);
+
+},300);
+
+}
+
+function keySend(e){
+
+if(e.key==="Enter"&&!e.shiftKey){
+
+e.preventDefault();
+
+send();
+
+}
+
 }
 
 
-function addMessage(text,type){
+/* =========================
+   MENÚ
+========================= */
 
- const box=document.getElementById("messages");
+function toggleMenu(){
 
- const div=document.createElement("div");
+$("drawer").classList.toggle("open");
 
- div.className="message "+type;
+$("overlay").classList.toggle("open");
 
- div.textContent=text;
+}
 
- box.appendChild(div);
+function toggleLang(){
 
- box.scrollTop=box.scrollHeight;
+$("langMenu").classList.toggle("open");
+
+}
+
+function language(name){
+
+$("langMenu").classList.remove("open");
+
+alert("Idioma seleccionado: "+name);
+
 }
 
 
-/* =====================================================
-   GUIONES
-   ===================================================== */
+/* =========================
+   NUEVO CHAT
+========================= */
 
-function generateScript(){
+function newChat(){
 
- const topic=
- document.getElementById("scriptTopic")
- .value.trim()||"tu idea";
+messages=[];
 
- const duration=
- document.getElementById("duration").value;
+localStorage.setItem(
+"sk_messages",
+"[]"
+);
 
- const hooks=[
-  "Espera, mira esto antes de seguir scrolleando.",
-  "Ok, esto no salió como esperaba...",
-  "Te enseño rápidamente por qué esto importa.",
-  "¿Y si te dijera que puedes hacerlo diferente?"
- ];
+$("messages").innerHTML="";
 
- const endings=[
-  "Sígueme para ver la siguiente parte.",
-  "¿Tú qué harías? Déjamelo abajo.",
-  "Guárdalo para probarlo después.",
-  "Y ahora viene lo interesante."
- ];
+$("messages").style.display="none";
 
- const hook=
- hooks[Math.floor(Math.random()*hooks.length)];
+$("welcome").style.display="flex";
 
- const end=
- endings[Math.floor(Math.random()*endings.length)];
+toggleMenu();
 
- const result=document.getElementById("scriptResult");
-
- result.innerHTML=
- "<strong>Guion · "+duration+"</strong><br><br>"+
- "<b>HOOK:</b> "+hook+"<br><br>"+
- "<b>DESARROLLO:</b> Presenta "+topic+
- " de forma rápida, muestra el punto más interesante, "+
- "añade ejemplos visuales y mantén frases cortas para "+
- "que el ritmo no decaiga.<br><br>"+
- "<b>CIERRE:</b> "+end;
-
- result.classList.remove("hidden");
 }
 
 
-/* =====================================================
-   ESTRATEGIA
-   ===================================================== */
+/* =========================
+   HISTORIAL
+========================= */
 
-function generateStrategy(){
+function historyChats(){
 
- const topic=
- document.getElementById("strategyTopic")
- .value.trim()||"tu proyecto";
+if(!currentUser){
 
- const goal=
- document.getElementById("goal").value;
+openLogin(false);
 
- const result=
- document.getElementById("strategyResult");
+return;
 
- result.innerHTML=
- "<strong>Estrategia para "+topic+"</strong><br><br>"+
- "<b>Objetivo:</b> "+goal+"<br>"+
- "<b>Hook:</b> captar atención desde el inicio.<br>"+
- "<b>Contenido:</b> una idea clara por publicación.<br>"+
- "<b>Ritmo:</b> eliminar partes que no aporten.<br>"+
- "<b>CTA:</b> terminar con una acción sencilla.<br>"+
- "<b>Prueba:</b> variar hooks y cierres para comparar resultados.";
+}
 
- result.classList.remove("hidden");
+alert(
+messages.length+
+" mensajes guardados en este navegador."
+);
+
+toggleMenu();
+
 }
 
 
-/* =====================================================
-   MÚSICA
-   ===================================================== */
+/* =========================
+   BORRAR
+========================= */
 
-function generateMusic(){
+function clearChats(){
 
- const topic=
- document.getElementById("musicTopic")
- .value.trim()||"tu contenido";
+if(!currentUser){
 
- const vibe=
- document.getElementById("vibe").value;
+openLogin(false);
 
- const styles={
-  "Energética":"beat rápido y cambios marcados",
-  "Épica":"percusión cinematográfica y subida progresiva",
-  "Divertida":"ritmo juguetón y cortes rápidos",
-  "Relajada":"lo-fi suave y ambiente ligero",
-  "Oscura":"bajo profundo y atmósfera tensa"
- };
+return;
 
- const result=
- document.getElementById("musicResult");
+}
 
- result.innerHTML=
- "<strong>Dirección musical</strong><br><br>"+
- "<b>Contenido:</b> "+topic+"<br>"+
- "<b>Ambiente:</b> "+vibe+"<br>"+
- "<b>Estilo:</b> "+styles[vibe]+".<br><br>"+
- "La música debe acompañar el contenido sin tapar "+
- "la voz ni los efectos.";
+if(confirm("¿Quieres borrar este chat?")){
 
- result.classList.remove("hidden");
+newChat();
+
+}
+
 }
 
 
-/* =====================================================
-   PANEL ADMIN
-   ===================================================== */
+/* =========================
+   PDF
+========================= */
 
-function updateAdmin(){
+function savePDF(){
 
- const users=
- JSON.parse(localStorage.getItem("skUsers")||"[]");
+if(!currentUser){
 
- const access=
- JSON.parse(localStorage.getItem("skAccess")||"[]");
+openLogin(false);
 
- document.getElementById("usersCount")
- .textContent=users.length;
+return;
 
- document.getElementById("loginCount")
- .textContent=access.length;
+}
 
- const table=
- document.getElementById("usersTable");
+let w=window.open("","_blank");
 
- table.innerHTML="";
+let html="";
 
- users.forEach(u=>{
+messages.forEach(m=>{
 
-  const tr=document.createElement("tr");
+html+=
+"<div style='padding:12px;border-bottom:1px solid #ddd'>"+
+"<b>"+(m.role==="user"?"Tú":"SparkyKrea")+
+"</b><p>"+
+m.text.replaceAll("<","&lt;")+
+"</p></div>";
 
-  tr.innerHTML=
-   "<td>"+u.name+"</td>"+
-   "<td>"+u.lastname+"</td>"+
-   "<td>"+u.email+"</td>";
+});
 
-  table.appendChild(tr);
- });
+w.document.write(`
+<html>
+<head>
+<title>SparkyKrea Chat</title>
+</head>
+<body style="font-family:Arial;padding:30px">
+<h1>SparkyKrea</h1>
+${html}
+</body>
+</html>
+`);
 
+w.document.close();
 
- const list=
- document.getElementById("accessList");
+w.print();
 
- list.innerHTML=
- access.length
- ?access.slice().reverse().map(a=>
-   "• "+a.email+" — "+a.date
-  ).join("<br>")
- :"Todavía no hay accesos registrados.";
 }
 
 
-/* =====================================================
-   SESIÓN AL RECARGAR
-   ===================================================== */
+/* =========================
+   LOGIN
+========================= */
+
+function openLogin(create){
+
+creating=create;
+
+$("authTitle").textContent=
+create?"Crear cuenta":"Iniciar sesión";
+
+$("authButton").textContent=
+create?"Crear cuenta":"Iniciar sesión";
+
+$("name").style.display=
+create?"block":"none";
+
+$("last").style.display=
+create?"block":"none";
+
+$("auth").classList.add("open");
+
+}
+
+function closeLogin(){
+
+$("auth").classList.remove("open");
+
+}
+
+function switchAuth(){
+
+openLogin(!creating);
+
+}
+
+function authAction(){
+
+let email=
+$("email").value.trim().toLowerCase();
+
+let pass=
+$("password").value;
+
+let users=
+JSON.parse(
+localStorage.getItem("sk_users")||"[]"
+);
+
+if(!email||!pass){
+
+alert("Completa los datos.");
+
+return;
+
+}
+
+if(creating){
+
+if(users.some(u=>u.email===email)){
+
+alert("Ese correo ya está registrado.");
+
+return;
+
+}
+
+let user={
+
+name:$("name").value.trim(),
+
+last:$("last").value.trim(),
+
+email:email,
+
+pass:pass,
+
+lastAccess:new Date().toISOString(),
+
+chats:[]
+
+};
+
+users.push(user);
+
+localStorage.setItem(
+"sk_users",
+JSON.stringify(users)
+);
+
+currentUser=user;
+
+localStorage.setItem(
+"sk_user",
+JSON.stringify(user)
+);
+
+alert("Cuenta creada correctamente.");
+
+closeLogin();
+
+}else{
+
+let user=
+users.find(
+u=>u.email===email&&u.pass===pass
+);
+
+if(!user){
+
+alert("Correo o contraseña incorrectos.");
+
+return;
+
+}
+
+user.lastAccess=
+new Date().toISOString();
+
+localStorage.setItem(
+"sk_users",
+JSON.stringify(users)
+);
+
+currentUser=user;
+
+localStorage.setItem(
+"sk_user",
+JSON.stringify(user)
+);
+
+alert("Sesión iniciada.");
+
+closeLogin();
+
+}
+
+}
+
+
+/* =========================
+   ADMIN
+========================= */
+
+/*
+IMPORTANTE:
+Este panel es únicamente una demostración
+local. No es seguridad real.
+
+Para que SOLO tú seas administrador,
+necesitaremos conectar Firebase/Supabase
+u otro backend.
+*/
+
+const ADMIN_EMAIL=
+"TU_CORREO_ADMIN@EJEMPLO.COM";
+
+function openAdmin(){
+
+if(!currentUser){
+
+openLogin(false);
+
+return;
+
+}
+
+if(
+currentUser.email.toLowerCase() !==
+ADMIN_EMAIL.toLowerCase()
+){
+
+alert(
+"Acceso de administrador no autorizado."
+);
+
+return;
+
+}
+
+$("chat").style.display="none";
+
+$("admin").classList.add("show");
+
+toggleMenu();
+
+renderAdmin();
+
+}
+
+function renderAdmin(){
+
+let users=
+JSON.parse(
+localStorage.getItem("sk_users")||"[]"
+);
+
+$("admin").innerHTML=`
+
+<button class="back"
+onclick="closeAdmin()">
+← Volver al chat
+</button>
+
+<h2>Panel de administración</h2>
+
+<p style="color:#91a1ab">
+Panel local de demostración.
+</p>
+
+<div class="stats">
+
+<div class="stat">
+Usuarios registrados<br>
+<b>${users.length}</b>
+</div>
+
+<div class="stat">
+Usuarios con acceso<br>
+<b>${users.filter(u=>u.lastAccess).length}</b>
+</div>
+
+<div class="stat">
+Mensajes actuales<br>
+<b>${messages.length}</b>
+</div>
+
+</div>
+
+<table class="table">
+
+<tr>
+<th>Nombre</th>
+<th>Correo</th>
+<th>Último acceso</th>
+</tr>
+
+${users.map(u=>`
+
+<tr>
+
+<td>
+${u.name||"—"} ${u.last||""}
+</td>
+
+<td>
+${u.email}
+</td>
+
+<td>
+${u.lastAccess?
+new Date(u.lastAccess).toLocaleString():
+"—"}
+</td>
+
+</tr>
+
+`).join("")}
+
+</table>
+
+`;
+
+}
+
+function closeAdmin(){
+
+$("admin").classList.remove("show");
+
+$("chat").style.display="flex";
+
+}
+
+
+/* =========================
+   INICIO
+========================= */
 
 window.addEventListener("load",()=>{
 
- const session=
- JSON.parse(localStorage.getItem("skSession")||"null");
+if(messages.length){
 
- if(session)
- enter(session.name,session.email);
+$("welcome").style.display="none";
+
+$("messages").style.display="block";
+
+messages.forEach(m=>{
+
+const div=document.createElement("div");
+
+div.className="message "+m.role;
+
+const bubble=document.createElement("div");
+
+bubble.className="bubble";
+
+bubble.textContent=m.text;
+
+div.appendChild(bubble);
+
+$("messages").appendChild(div);
+
+});
+
+}
 
 });
 
