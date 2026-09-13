@@ -1,5635 +1,3261 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>SparkyKrea Studio's - Ultimate Edition</title>
 
 <meta property="og:title" content="SparkyKrea Studio's">
 <meta property="og:description" content="Asesoría creativa, guiones, estrategia y música.">
-<meta name="theme-color" content="#0c0c0f">
+<meta name="theme-color" content="#09090d">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
 <style>
-
-*{
-    box-sizing:border-box;
-    margin:0;
-    padding:0;
-}
+*{box-sizing:border-box;margin:0;padding:0}
 
 :root{
-    --bg:#08090c;
-    --panel:#101116;
-    --panel2:#15161c;
-    --panel3:#1a1b22;
-    --wine:#711d38;
-    --wine2:#9d2850;
-    --green:#54d68a;
-    --green2:#2bb86d;
-    --white:#f5f5f7;
-    --muted:#9a9ca7;
-    --border:rgba(255,255,255,.08);
-    --shadow:0 20px 60px rgba(0,0,0,.35);
+--bg:#07080b;
+--bg2:#0b0c10;
+--panel:#101116;
+--panel2:#14151b;
+--panel3:#1a1b22;
+--wine:#711d38;
+--wine2:#a62c55;
+--wine3:#421326;
+--green:#54d68a;
+--green2:#2bb86d;
+--white:#f7f7f8;
+--muted:#9496a2;
+--border:rgba(255,255,255,.075);
+--border2:rgba(255,255,255,.11);
+--shadow:0 25px 80px rgba(0,0,0,.42);
 }
 
-html,
+html,body{width:100%;height:100%}
+
 body{
-    width:100%;
-    height:100%;
+background:
+radial-gradient(circle at 8% -10%,rgba(166,44,85,.19),transparent 28%),
+radial-gradient(circle at 92% 105%,rgba(84,214,138,.08),transparent 30%),
+linear-gradient(135deg,#07080b,#0a0b0f 55%,#08090c);
+color:var(--white);
+font-family:"Plus Jakarta Sans",sans-serif;
+overflow:hidden;
 }
 
-body{
-    background:
-        radial-gradient(circle at 20% 0%,rgba(113,29,56,.16),transparent 30%),
-        radial-gradient(circle at 100% 100%,rgba(84,214,138,.06),transparent 30%),
-        var(--bg);
-    color:var(--white);
-    font-family:"Plus Jakarta Sans",sans-serif;
-    overflow:hidden;
+body:before{
+content:"";
+position:fixed;
+inset:0;
+pointer-events:none;
+background-image:
+linear-gradient(rgba(255,255,255,.012) 1px,transparent 1px),
+linear-gradient(90deg,rgba(255,255,255,.012) 1px,transparent 1px);
+background-size:50px 50px;
+mask-image:linear-gradient(to bottom,rgba(0,0,0,.45),transparent);
 }
 
-button,
-textarea,
-input{
-    font:inherit;
+button,input,textarea{font:inherit}
+button{border:0;cursor:pointer}
+.hidden{display:none!important}
+
+/* =========================
+   LOGO
+========================= */
+
+.sk-logo{
+width:42px;
+height:42px;
+display:block;
+filter:drop-shadow(0 0 14px rgba(84,214,138,.10));
 }
 
-button{
-    border:0;
-    cursor:pointer;
-}
+.sk-logo.small{width:36px;height:36px}
+.sk-logo.large{width:78px;height:78px}
+.sk-logo.splash{width:94px;height:94px}
 
-.hidden{
-    display:none!important;
-}
-
-/* =========================================================
+/* =========================
    SPLASH
-   ========================================================= */
+========================= */
 
 #splash{
-    position:fixed;
-    inset:0;
-    background:#08090c;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    z-index:9999;
-    transition:.6s ease;
+position:fixed;
+inset:0;
+z-index:9999;
+display:flex;
+align-items:center;
+justify-content:center;
+background:
+radial-gradient(circle at center,rgba(113,29,56,.16),transparent 42%),
+#07080b;
+transition:.65s ease;
 }
 
-.splash-inner{
-    text-align:center;
-}
+.splash-inner{text-align:center}
 
 .splash-logo{
-    width:88px;
-    height:88px;
-    margin:auto;
-    animation:splashPulse 1.5s infinite alternate;
+margin:auto;
+animation:splashPulse 1.6s ease-in-out infinite alternate;
 }
 
 .splash-title{
-    margin-top:18px;
-    font-size:23px;
-    font-weight:800;
-    letter-spacing:-.6px;
+margin-top:18px;
+font-size:24px;
+font-weight:800;
+letter-spacing:-.8px;
 }
 
-.splash-title span{
-    color:var(--green);
+.splash-title span{color:var(--green)}
+
+.splash-line{
+width:50px;
+height:2px;
+margin:14px auto 0;
+border-radius:99px;
+background:linear-gradient(90deg,var(--wine2),var(--green));
+box-shadow:0 0 15px rgba(84,214,138,.18);
 }
 
 @keyframes splashPulse{
-    from{
-        transform:scale(.94);
-        opacity:.65;
-    }
-
-    to{
-        transform:scale(1);
-        opacity:1;
-    }
+from{transform:scale(.94);opacity:.65}
+to{transform:scale(1);opacity:1}
 }
 
-/* =========================================================
+/* =========================
    APP
-   ========================================================= */
+========================= */
 
 #app{
-    width:100%;
-    height:100%;
-    display:flex;
+width:100%;
+height:100%;
+display:flex;
+position:relative;
 }
 
-/* =========================================================
+/* =========================
    SIDEBAR
-   ========================================================= */
+========================= */
 
 #sidebar{
-    width:270px;
-    height:100%;
-    background:
-        linear-gradient(
-            180deg,
-            rgba(16,17,22,.98),
-            rgba(9,10,13,.98)
-        );
-    border-right:1px solid var(--border);
-    display:flex;
-    flex-direction:column;
-    padding:22px 15px;
-    position:relative;
-    z-index:50;
+width:276px;
+height:100%;
+flex-shrink:0;
+position:relative;
+z-index:50;
+display:flex;
+flex-direction:column;
+padding:18px 14px;
+background:
+linear-gradient(180deg,rgba(17,18,23,.97),rgba(8,9,12,.99));
+border-right:1px solid var(--border);
+box-shadow:15px 0 60px rgba(0,0,0,.12);
+}
+
+#sidebar:after{
+content:"";
+position:absolute;
+right:-1px;
+top:0;
+bottom:0;
+width:1px;
+background:linear-gradient(180deg,transparent,var(--wine2),transparent);
+opacity:.28;
+pointer-events:none;
 }
 
 .brand{
-    display:flex;
-    align-items:center;
-    gap:11px;
-    padding:4px 8px 24px;
-}
-
-.brand-logo{
-    width:36px;
-    height:36px;
-    filter:drop-shadow(0 0 12px rgba(84,214,138,.08));
+display:flex;
+align-items:center;
+gap:11px;
+padding:5px 9px 24px;
 }
 
 .brand-text{
-    font-size:15px;
-    font-weight:800;
+font-size:14px;
+font-weight:800;
+letter-spacing:-.35px;
 }
 
-.brand-text span{
-    color:var(--green);
-}
+.brand-text span{color:var(--green)}
 
 .sidebar-button{
-    width:100%;
-    padding:12px 13px;
-    border-radius:12px;
-    background:transparent;
-    color:#ddd;
-    text-align:left;
-    margin-bottom:7px;
-    transition:.2s;
-    font-size:13px;
+width:100%;
+min-height:43px;
+padding:11px 13px;
+margin-bottom:7px;
+border-radius:12px;
+background:transparent;
+color:#d7d7dc;
+text-align:left;
+font-size:12px;
+font-weight:600;
+border:1px solid transparent;
+transition:.22s ease;
 }
 
 .sidebar-button:hover{
-    background:rgba(255,255,255,.055);
-    transform:translateX(1px);
+background:rgba(255,255,255,.045);
+border-color:var(--border);
+transform:translateX(2px);
+color:#fff;
 }
 
 .sidebar-button.primary{
-    background:
-        linear-gradient(
-            135deg,
-            var(--wine),
-            #4d1428
-        );
-    border:1px solid rgba(157,40,80,.35);
-    box-shadow:
-        0 8px 25px rgba(113,29,56,.12);
+background:
+linear-gradient(135deg,rgba(125,31,61,.95),rgba(63,17,36,.95));
+border-color:rgba(166,44,85,.32);
+box-shadow:
+0 10px 30px rgba(113,29,56,.16),
+inset 0 1px rgba(255,255,255,.06);
 }
 
 .sidebar-button.primary:hover{
-    background:
-        linear-gradient(
-            135deg,
-            #842341,
-            #57152e
-        );
+background:linear-gradient(135deg,#842344,#54152d);
+box-shadow:0 12px 35px rgba(113,29,56,.24);
 }
 
 .history-title{
-    padding:20px 9px 8px;
-    font-size:11px;
-    text-transform:uppercase;
-    letter-spacing:1.4px;
-    color:#777984;
-    font-weight:700;
+padding:20px 9px 9px;
+font-size:9px;
+text-transform:uppercase;
+letter-spacing:1.7px;
+color:#70727c;
+font-weight:800;
 }
 
 #history{
-    flex:1;
-    overflow-y:auto;
-    padding-right:3px;
+flex:1;
+min-height:0;
+overflow-y:auto;
+padding-right:3px;
 }
 
 #history::-webkit-scrollbar,
 #chat::-webkit-scrollbar,
 .modal::-webkit-scrollbar,
-.admin-table-wrap::-webkit-scrollbar{
-    width:5px;
+.admin-table-wrap::-webkit-scrollbar,
+#adminLogs::-webkit-scrollbar{
+width:5px;
 }
 
 #history::-webkit-scrollbar-thumb,
 #chat::-webkit-scrollbar-thumb,
 .modal::-webkit-scrollbar-thumb,
-.admin-table-wrap::-webkit-scrollbar-thumb{
-    background:#25262d;
-    border-radius:999px;
+.admin-table-wrap::-webkit-scrollbar-thumb,
+#adminLogs::-webkit-scrollbar-thumb{
+background:#272830;
+border-radius:999px;
 }
 
 .history-empty{
-    color:#6e707a;
-    font-size:12px;
-    line-height:1.6;
-    padding:10px 8px;
+padding:11px 8px;
+color:#686a74;
+font-size:11px;
+line-height:1.65;
 }
 
 .history-item{
-    padding:10px;
-    border-radius:11px;
-    margin-bottom:5px;
-    cursor:pointer;
-    border:1px solid transparent;
-    transition:.2s;
+position:relative;
+padding:11px 34px 11px 11px;
+margin-bottom:5px;
+border:1px solid transparent;
+border-radius:11px;
+cursor:pointer;
+transition:.2s;
 }
 
 .history-item:hover{
-    background:#15161c;
-    border-color:var(--border);
+background:rgba(255,255,255,.035);
+border-color:var(--border);
 }
 
 .history-topic{
-    font-size:12px;
-    color:#e7e7ea;
-    white-space:nowrap;
-    overflow:hidden;
-    text-overflow:ellipsis;
+font-size:11px;
+color:#e4e4e7;
+white-space:nowrap;
+overflow:hidden;
+text-overflow:ellipsis;
 }
 
 .history-date{
-    font-size:10px;
-    color:#70727c;
-    margin-top:4px;
+font-size:9px;
+color:#686a73;
+margin-top:4px;
 }
 
 .history-delete{
-    float:right;
-    color:#777;
-    background:none;
-    font-size:12px;
+position:absolute;
+right:8px;
+top:9px;
+color:#686970;
+background:none;
+font-size:13px;
+opacity:.7;
 }
+
+.history-delete:hover{color:#ef7797}
 
 .sidebar-bottom{
-    border-top:1px solid var(--border);
-    padding-top:12px;
-    margin-top:10px;
+border-top:1px solid var(--border);
+padding-top:12px;
+margin-top:10px;
 }
 
-/* =========================================================
+/* =========================
    MAIN
-   ========================================================= */
+========================= */
 
 .main{
-    flex:1;
-    min-width:0;
-    height:100%;
-    position:relative;
-    display:flex;
-    flex-direction:column;
+flex:1;
+min-width:0;
+height:100%;
+position:relative;
+display:flex;
+flex-direction:column;
 }
 
-/* =========================================================
+/* =========================
    HEADER
-   ========================================================= */
+========================= */
 
 .header{
-    height:64px;
-    min-height:64px;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    padding:0 20px;
-    border-bottom:1px solid var(--border);
-    background:rgba(8,9,12,.78);
-    backdrop-filter:blur(18px);
-    position:relative;
-    z-index:30;
+height:68px;
+min-height:68px;
+display:flex;
+align-items:center;
+justify-content:space-between;
+padding:0 21px;
+position:relative;
+z-index:30;
+background:rgba(7,8,11,.76);
+backdrop-filter:blur(22px);
+-webkit-backdrop-filter:blur(22px);
+border-bottom:1px solid var(--border);
 }
 
-.header-left{
-    display:flex;
-    align-items:center;
-    gap:13px;
+.header:after{
+content:"";
+position:absolute;
+left:20px;
+right:20px;
+bottom:-1px;
+height:1px;
+background:linear-gradient(90deg,transparent,rgba(166,44,85,.35),rgba(84,214,138,.2),transparent);
 }
 
-.header-right{
-    display:flex;
-    align-items:center;
-    gap:9px;
+.header-left,.header-right{
+display:flex;
+align-items:center;
+gap:10px;
 }
 
 .header-logo-text{
-    font-weight:800;
-    font-size:14px;
-    letter-spacing:-.2px;
+font-size:13px;
+font-weight:800;
+letter-spacing:-.25px;
 }
 
-.header-logo-text span{
-    color:var(--green);
-}
+.header-logo-text span{color:var(--green)}
 
 .header-icon{
-    width:38px;
-    height:38px;
-    border-radius:10px;
-    color:#ddd;
-    background:transparent;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    transition:.2s;
+width:38px;
+height:38px;
+display:flex;
+align-items:center;
+justify-content:center;
+border-radius:11px;
+background:transparent;
+color:#aaa;
+font-size:17px;
+transition:.2s;
 }
 
 .header-icon:hover{
-    background:rgba(255,255,255,.07);
+background:rgba(255,255,255,.055);
+color:#fff;
 }
 
 .user-header{
-    display:flex;
-    align-items:center;
-    gap:7px;
-    max-width:180px;
-    color:#ddd;
-    font-size:11px;
-    background:rgba(255,255,255,.04);
-    border:1px solid var(--border);
-    padding:7px 10px;
-    border-radius:10px;
+display:flex;
+align-items:center;
+gap:8px;
+max-width:190px;
+padding:7px 11px;
+border-radius:11px;
+font-size:10px;
+color:#d9d9dc;
+background:rgba(255,255,255,.035);
+border:1px solid var(--border);
 }
 
 .user-dot{
-    width:8px;
-    height:8px;
-    border-radius:50%;
-    background:var(--green);
-    box-shadow:0 0 9px rgba(84,214,138,.5);
+width:7px;
+height:7px;
+flex-shrink:0;
+border-radius:50%;
+background:var(--green);
+box-shadow:0 0 10px rgba(84,214,138,.55);
 }
 
-/* =========================================================
+/* =========================
    DROPDOWN
-   ========================================================= */
+========================= */
 
 .dropdown{
-    position:absolute;
-    right:18px;
-    top:55px;
-    width:220px;
-    max-height:420px;
-    overflow-y:auto;
-    background:
-        linear-gradient(
-            180deg,
-            #15161b,
-            #101116
-        );
-    border:1px solid var(--border);
-    border-radius:14px;
-    box-shadow:var(--shadow);
-    padding:7px;
-    display:none;
-    z-index:100;
+position:absolute;
+right:18px;
+top:59px;
+width:225px;
+max-height:420px;
+overflow-y:auto;
+padding:7px;
+display:none;
+z-index:100;
+border:1px solid var(--border2);
+border-radius:15px;
+background:linear-gradient(145deg,#17181e,#0f1015);
+box-shadow:var(--shadow);
 }
 
 .dropdown.show{
-    display:block;
-    animation:dropdownIn .16s ease;
+display:block;
+animation:dropdownIn .16s ease;
 }
 
 @keyframes dropdownIn{
-    from{
-        opacity:0;
-        transform:translateY(-5px);
-    }
-
-    to{
-        opacity:1;
-        transform:translateY(0);
-    }
+from{opacity:0;transform:translateY(-6px) scale(.98)}
+to{opacity:1;transform:translateY(0) scale(1)}
 }
 
 .dropdown-title{
-    padding:9px;
-    font-size:10px;
-    color:#747681;
-    text-transform:uppercase;
-    letter-spacing:1px;
+padding:9px;
+font-size:9px;
+font-weight:800;
+letter-spacing:1.4px;
+text-transform:uppercase;
+color:#6e7079;
 }
 
-.lang-option,
-.dropdown-item{
-    width:100%;
-    background:transparent;
-    color:#ddd;
-    text-align:left;
-    padding:10px;
-    border-radius:9px;
-    font-size:12px;
+.lang-option,.dropdown-item{
+width:100%;
+padding:10px;
+border-radius:9px;
+background:transparent;
+color:#ccc;
+text-align:left;
+font-size:11px;
+transition:.18s;
 }
 
-.lang-option:hover,
-.dropdown-item:hover{
-    background:rgba(255,255,255,.06);
+.lang-option:hover,.dropdown-item:hover{
+background:rgba(255,255,255,.055);
+color:#fff;
 }
 
-/* =========================================================
+/* =========================
    CHAT
-   ========================================================= */
+========================= */
 
 #chat{
-    flex:1;
-    min-height:0;
-    overflow-y:auto;
-    scroll-behavior:smooth;
+flex:1;
+min-height:0;
+overflow-y:auto;
+scroll-behavior:smooth;
 }
 
 .chat-inner{
-    width:min(850px,100%);
-    margin:auto;
-    padding:40px 22px 190px;
+width:min(880px,100%);
+min-height:100%;
+margin:auto;
+padding:38px 23px 190px;
 }
 
-/* =========================================================
+/* =========================
    WELCOME
-   ========================================================= */
+========================= */
 
 #welcome{
-    min-height:calc(100vh - 250px);
-    display:flex;
-    align-items:center;
-    justify-content:center;
+min-height:calc(100vh - 265px);
+display:flex;
+align-items:center;
+justify-content:center;
 }
 
 .welcome-box{
-    max-width:680px;
-    width:100%;
-    text-align:center;
-    padding:25px;
+width:100%;
+max-width:700px;
+padding:28px;
+text-align:center;
+animation:welcomeIn .55s ease;
+}
+
+@keyframes welcomeIn{
+from{opacity:0;transform:translateY(10px)}
+to{opacity:1;transform:translateY(0)}
 }
 
 .welcome-logo{
-    width:72px;
-    height:72px;
-    margin:auto auto 22px;
-    filter:drop-shadow(0 0 20px rgba(84,214,138,.07));
+margin:0 auto 23px;
 }
 
 #welcomeTitle{
-    font-size:clamp(26px,5vw,43px);
-    line-height:1.08;
-    letter-spacing:-1.7px;
-    font-weight:800;
+font-size:clamp(28px,5vw,46px);
+line-height:1.05;
+font-weight:800;
+letter-spacing:-2px;
 }
 
 #welcomeTitle span{
-    color:var(--green);
+color:var(--green);
+text-shadow:0 0 30px rgba(84,214,138,.09);
 }
 
 #welcomeDesc{
-    margin:17px auto 0;
-    max-width:570px;
-    color:#9496a0;
-    line-height:1.7;
-    font-size:14px;
+max-width:590px;
+margin:18px auto 0;
+font-size:13px;
+line-height:1.8;
+color:#8d8f9a;
 }
 
 .welcome-tags{
-    display:flex;
-    justify-content:center;
-    flex-wrap:wrap;
-    gap:8px;
-    margin-top:25px;
+display:flex;
+justify-content:center;
+flex-wrap:wrap;
+gap:8px;
+margin-top:27px;
 }
 
 .welcome-tag{
-    padding:8px 12px;
-    border-radius:999px;
-    border:1px solid var(--border);
-    background:rgba(255,255,255,.025);
-    color:#aaa;
-    font-size:11px;
-    transition:.2s;
+padding:8px 13px;
+border-radius:999px;
+font-size:10px;
+color:#a7a8af;
+background:rgba(255,255,255,.025);
+border:1px solid var(--border);
+transition:.2s;
 }
 
 .welcome-tag:hover{
-    border-color:rgba(84,214,138,.25);
-    color:#ccc;
-    transform:translateY(-1px);
+color:#ddd;
+border-color:rgba(84,214,138,.25);
+background:rgba(84,214,138,.035);
+transform:translateY(-2px);
 }
 
-/* =========================================================
+/* =========================
    MESSAGES
-   ========================================================= */
+========================= */
 
 .message{
-    display:flex;
-    margin-bottom:20px;
-    animation:messageIn .22s ease;
+display:flex;
+margin-bottom:22px;
+animation:messageIn .24s ease;
 }
+
+.message.user{justify-content:flex-end}
+.message.bot{justify-content:flex-start}
 
 @keyframes messageIn{
-    from{
-        opacity:0;
-        transform:translateY(5px);
-    }
-
-    to{
-        opacity:1;
-        transform:translateY(0);
-    }
-}
-
-.message.user{
-    justify-content:flex-end;
-}
-
-.message.bot{
-    justify-content:flex-start;
+from{opacity:0;transform:translateY(6px)}
+to{opacity:1;transform:translateY(0)}
 }
 
 .message-bubble{
-    max-width:min(720px,88%);
-    border-radius:17px;
-    padding:13px 15px;
-    font-size:13px;
-    line-height:1.7;
+max-width:min(730px,90%);
+padding:14px 16px;
+border-radius:17px;
+font-size:12.5px;
+line-height:1.75;
 }
 
 .message.user .message-bubble{
-    background:
-        linear-gradient(
-            135deg,
-            #651a34,
-            #451426
-        );
-    border:1px solid rgba(157,40,80,.3);
+background:
+linear-gradient(135deg,#701c3b,#471426);
+border:1px solid rgba(166,44,85,.34);
+box-shadow:0 8px 28px rgba(64,15,35,.18);
 }
 
 .message.bot .message-bubble{
-    background:
-        linear-gradient(
-            145deg,
-            rgba(17,18,24,.98),
-            rgba(13,14,19,.98)
-        );
-    border:1px solid var(--border);
-    box-shadow:0 8px 30px rgba(0,0,0,.08);
+background:
+linear-gradient(145deg,rgba(19,20,26,.98),rgba(13,14,19,.98));
+border:1px solid var(--border);
+box-shadow:0 10px 35px rgba(0,0,0,.11);
 }
 
 .message-label{
-    font-size:10px;
-    color:#777984;
-    margin-bottom:5px;
-    font-weight:700;
-    letter-spacing:.7px;
+margin-bottom:6px;
+font-size:8px;
+font-weight:800;
+letter-spacing:1.3px;
+color:#666973;
 }
 
-.message.bot strong{
-    color:#fff;
-}
+.message.bot strong{color:#f3f3f5}
+.message.bot .accent{color:var(--green)}
 
-.message.bot .accent{
-    color:var(--green);
-}
+.message.bot p{margin:7px 0}
+.message.bot ul{padding-left:18px;margin:8px 0}
+.message.bot li{margin:5px 0}
 
-.message.bot ul{
-    padding-left:18px;
-    margin:8px 0;
-}
-
-.message.bot li{
-    margin:5px 0;
-}
-
-/* =========================================================
+/* =========================
    TYPING
-   ========================================================= */
+========================= */
 
 .typing{
-    display:flex;
-    gap:5px;
-    align-items:center;
+display:flex;
+align-items:center;
+gap:5px;
+height:15px;
 }
 
 .typing span{
-    width:5px;
-    height:5px;
-    border-radius:50%;
-    background:#888;
-    animation:typing 1s infinite;
+width:5px;
+height:5px;
+border-radius:50%;
+background:#777;
+animation:typing 1s infinite;
 }
 
-.typing span:nth-child(2){
-    animation-delay:.15s;
-}
-
-.typing span:nth-child(3){
-    animation-delay:.3s;
-}
+.typing span:nth-child(2){animation-delay:.15s}
+.typing span:nth-child(3){animation-delay:.3s}
 
 @keyframes typing{
-    0%,70%,100%{
-        opacity:.3;
-        transform:translateY(0);
-    }
-
-    35%{
-        opacity:1;
-        transform:translateY(-3px);
-    }
+0%,70%,100%{opacity:.25;transform:translateY(0)}
+35%{opacity:1;transform:translateY(-3px)}
 }
 
-/* =========================================================
+/* =========================
    DURATION
-   ========================================================= */
+========================= */
 
 .duration-panel{
-    margin-top:13px;
-    display:flex;
-    flex-wrap:wrap;
-    gap:7px;
+display:flex;
+flex-wrap:wrap;
+gap:7px;
+margin-top:13px;
 }
 
 .duration-option{
-    padding:8px 11px;
-    background:#191a20;
-    color:#ccc;
-    border:1px solid var(--border);
-    border-radius:9px;
-    font-size:11px;
-    transition:.2s;
+padding:8px 11px;
+border-radius:9px;
+font-size:10px;
+color:#c9c9ce;
+background:#191a20;
+border:1px solid var(--border);
+transition:.2s;
 }
 
-.duration-option:hover,
-.duration-option.selected{
-    border-color:var(--green);
-    color:var(--green);
-    background:rgba(84,214,138,.05);
+.duration-option:hover,.duration-option.selected{
+color:var(--green);
+background:rgba(84,214,138,.045);
+border-color:rgba(84,214,138,.48);
+transform:translateY(-1px);
 }
 
-/* =========================================================
+/* =========================
    COMPOSER
-   ========================================================= */
+========================= */
 
 #composerArea{
-    position:absolute;
-    left:0;
-    right:0;
-    bottom:0;
-    z-index:20;
-    padding:12px 20px 17px;
-    background:
-        linear-gradient(
-            to top,
-            var(--bg) 70%,
-            transparent
-        );
+position:absolute;
+left:0;
+right:0;
+bottom:0;
+z-index:20;
+padding:13px 20px 17px;
+background:linear-gradient(to top,var(--bg) 63%,rgba(7,8,11,.88) 80%,transparent);
 }
 
 .composer{
-    width:min(850px,100%);
-    margin:auto;
-    position:relative;
+width:min(880px,100%);
+margin:auto;
 }
 
 .composer-box{
-    display:flex;
-    align-items:flex-end;
-    gap:9px;
-    background:#111218;
-    border:1px solid rgba(255,255,255,.1);
-    border-radius:16px;
-    padding:9px;
-    box-shadow:0 15px 40px rgba(0,0,0,.3);
-    transition:.2s;
+display:flex;
+align-items:flex-end;
+gap:9px;
+padding:9px;
+border-radius:17px;
+background:rgba(16,17,22,.96);
+border:1px solid rgba(255,255,255,.10);
+box-shadow:
+0 18px 50px rgba(0,0,0,.35),
+inset 0 1px rgba(255,255,255,.025);
+transition:.2s;
 }
 
 .composer-box:focus-within{
-    border-color:rgba(84,214,138,.18);
-    box-shadow:
-        0 15px 40px rgba(0,0,0,.3),
-        0 0 0 1px rgba(84,214,138,.03);
+border-color:rgba(84,214,138,.25);
+box-shadow:
+0 18px 50px rgba(0,0,0,.4),
+0 0 0 1px rgba(84,214,138,.035);
 }
 
 #input{
-    flex:1;
-    min-height:42px;
-    max-height:140px;
-    resize:none;
-    outline:none;
-    border:0;
-    background:transparent;
-    color:#eee;
-    padding:11px 9px;
-    line-height:1.5;
-    font-size:13px;
+flex:1;
+min-height:42px;
+max-height:140px;
+resize:none;
+outline:none;
+border:0;
+background:transparent;
+color:#eee;
+padding:11px 9px;
+font-size:12px;
+line-height:1.5;
 }
 
-#input::placeholder{
-    color:#666873;
-}
+#input::placeholder{color:#60626c}
 
 #send{
-    width:40px;
-    height:40px;
-    border-radius:11px;
-    background:#24252c;
-    color:#666873;
-    transition:.2s;
-    display:flex;
-    justify-content:center;
-    align-items:center;
+width:40px;
+height:40px;
+flex-shrink:0;
+display:flex;
+align-items:center;
+justify-content:center;
+border-radius:11px;
+background:#24252c;
+color:#686a73;
+font-size:15px;
+transition:.2s;
 }
 
 #send.active{
-    background:var(--green);
-    color:#07100b;
-    box-shadow:0 0 18px rgba(84,214,138,.12);
+background:var(--green);
+color:#07100b;
+box-shadow:0 0 22px rgba(84,214,138,.14);
 }
 
-#send.active:hover{
-    transform:translateY(-1px);
-}
+#send.active:hover{transform:translateY(-2px)}
 
 .composer-info{
-    text-align:center;
-    font-size:9px;
-    color:#555762;
-    margin-top:7px;
+margin-top:7px;
+text-align:center;
+font-size:8px;
+color:#4f515a;
 }
 
 #footerText{
-    text-align:center;
-    color:#484a53;
-    font-size:9px;
-    margin-top:6px;
+margin-top:5px;
+text-align:center;
+font-size:8px;
+color:#3e4048;
 }
 
-/* =========================================================
+/* =========================
    MOBILE
-   ========================================================= */
+========================= */
 
-#mobileMenu{
-    display:none;
-}
+#mobileMenu{display:none}
 
 @media(max-width:800px){
 
-    #sidebar{
-        position:fixed;
-        left:-285px;
-        top:0;
-        bottom:0;
-        z-index:200;
-        transition:.25s ease;
-        box-shadow:20px 0 50px rgba(0,0,0,.4);
-    }
-
-    #sidebar.open{
-        left:0;
-    }
-
-    #mobileMenu{
-        display:flex;
-    }
-
-    .header{
-        padding:0 12px;
-    }
-
-    .header-logo-text{
-        display:block;
-    }
-
-    .user-header{
-        max-width:125px;
-    }
-
-    .user-header span:last-child{
-        max-width:85px;
-        overflow:hidden;
-        text-overflow:ellipsis;
-        white-space:nowrap;
-    }
-
-    .chat-inner{
-        padding:27px 13px 175px;
-    }
-
-    #composerArea{
-        padding:8px 10px 12px;
-    }
-
-    #welcome{
-        min-height:calc(100vh - 210px);
-    }
-
-    .welcome-box{
-        padding:15px;
-    }
-
-    #welcomeTitle{
-        font-size:29px;
-    }
-
-    #welcomeDesc{
-        font-size:12px;
-    }
-
-    .message-bubble{
-        max-width:94%;
-        font-size:12px;
-    }
-
-    .dropdown{
-        right:10px;
-        width:210px;
-    }
+#sidebar{
+position:fixed;
+left:-292px;
+top:0;
+bottom:0;
+z-index:200;
+transition:.28s ease;
+box-shadow:25px 0 70px rgba(0,0,0,.5);
 }
 
-/* =========================================================
+#sidebar.open{left:0}
+#mobileMenu{display:flex}
+
+.header{
+height:62px;
+min-height:62px;
+padding:0 11px;
+}
+
+.header-logo-text{font-size:12px}
+
+.user-header{
+max-width:125px;
+padding:7px 9px;
+}
+
+.user-header span:last-child{
+max-width:82px;
+overflow:hidden;
+text-overflow:ellipsis;
+white-space:nowrap;
+}
+
+.chat-inner{
+padding:25px 12px 178px;
+}
+
+#welcome{
+min-height:calc(100vh - 215px);
+}
+
+.welcome-box{padding:14px}
+
+#welcomeTitle{
+font-size:30px;
+letter-spacing:-1.3px;
+}
+
+#welcomeDesc{
+font-size:11.5px;
+line-height:1.7;
+}
+
+.welcome-logo{
+width:68px;
+height:68px;
+}
+
+.message-bubble{
+max-width:94%;
+font-size:12px;
+}
+
+#composerArea{
+padding:8px 9px 12px;
+}
+
+.composer-info{font-size:7.5px}
+
+.dropdown{
+right:9px;
+top:55px;
+width:215px;
+}
+}
+
+/* =========================
    OVERLAY
-   ========================================================= */
+========================= */
 
 #overlay{
-    position:fixed;
-    inset:0;
-    background:rgba(0,0,0,.55);
-    backdrop-filter:blur(3px);
-    z-index:150;
-    display:none;
+position:fixed;
+inset:0;
+z-index:150;
+display:none;
+background:rgba(0,0,0,.6);
+backdrop-filter:blur(3px);
 }
 
-#overlay.show{
-    display:block;
-}
+#overlay.show{display:block}
 
-/* =========================================================
+/* =========================
    MODALS
-   ========================================================= */
+========================= */
 
 .modal-layer{
-    position:fixed;
-    inset:0;
-    background:rgba(0,0,0,.72);
-    backdrop-filter:blur(8px);
-    display:none;
-    justify-content:center;
-    align-items:center;
-    padding:18px;
-    z-index:500;
+position:fixed;
+inset:0;
+z-index:500;
+display:none;
+align-items:center;
+justify-content:center;
+padding:18px;
+background:rgba(0,0,0,.74);
+backdrop-filter:blur(9px);
 }
 
 .modal-layer.show{
-    display:flex;
-    animation:modalFade .18s ease;
+display:flex;
+animation:modalFade .18s ease;
 }
 
 @keyframes modalFade{
-    from{
-        opacity:0;
-    }
-
-    to{
-        opacity:1;
-    }
+from{opacity:0}
+to{opacity:1}
 }
 
 .modal{
-    width:min(450px,100%);
-    max-height:90vh;
-    overflow:auto;
-    background:
-        linear-gradient(
-            145deg,
-            #14151b,
-            #0f1015
-        );
-    border:1px solid rgba(255,255,255,.1);
-    border-radius:19px;
-    box-shadow:0 30px 90px rgba(0,0,0,.55);
-    padding:23px;
-    animation:modalIn .2s ease;
+width:min(450px,100%);
+max-height:90vh;
+overflow:auto;
+padding:24px;
+border-radius:20px;
+background:
+linear-gradient(145deg,#16171d,#0e0f14);
+border:1px solid rgba(255,255,255,.105);
+box-shadow:0 35px 100px rgba(0,0,0,.6);
+animation:modalIn .2s ease;
 }
+
+.modal.large{width:min(850px,100%)}
 
 @keyframes modalIn{
-    from{
-        transform:translateY(8px) scale(.99);
-    }
-
-    to{
-        transform:translateY(0) scale(1);
-    }
-}
-
-.modal.large{
-    width:min(850px,100%);
+from{opacity:0;transform:translateY(8px) scale(.985)}
+to{opacity:1;transform:translateY(0) scale(1)}
 }
 
 .modal-header{
-    display:flex;
-    justify-content:space-between;
-    align-items:flex-start;
-    margin-bottom:18px;
+display:flex;
+justify-content:space-between;
+align-items:flex-start;
+margin-bottom:19px;
 }
 
 .modal-title{
-    font-size:19px;
-    font-weight:800;
+font-size:19px;
+font-weight:800;
+letter-spacing:-.5px;
 }
 
 .modal-subtitle{
-    color:#7e808a;
-    font-size:11px;
-    line-height:1.5;
-    margin-top:5px;
+margin-top:5px;
+font-size:10px;
+line-height:1.55;
+color:#777983;
 }
 
 .close-modal{
-    background:transparent;
-    color:#888;
-    font-size:20px;
-    width:30px;
-    height:30px;
-    border-radius:8px;
+width:30px;
+height:30px;
+border-radius:9px;
+background:transparent;
+color:#777;
+font-size:20px;
+transition:.18s;
 }
 
 .close-modal:hover{
-    color:#fff;
-    background:rgba(255,255,255,.05);
+background:rgba(255,255,255,.05);
+color:#fff;
 }
 
 .auth-tabs{
-    display:flex;
-    gap:5px;
-    background:#0b0c10;
-    border:1px solid var(--border);
-    padding:4px;
-    border-radius:10px;
-    margin-bottom:17px;
+display:flex;
+gap:5px;
+padding:4px;
+margin-bottom:17px;
+border-radius:11px;
+background:#0a0b0f;
+border:1px solid var(--border);
 }
 
 .auth-tab{
-    flex:1;
-    padding:9px;
-    border-radius:7px;
-    background:transparent;
-    color:#777;
-    font-size:11px;
+flex:1;
+padding:9px;
+border-radius:8px;
+background:transparent;
+color:#777;
+font-size:10px;
 }
 
 .auth-tab.active{
-    background:#1a1b21;
-    color:#fff;
+background:#1b1c22;
+color:#fff;
+box-shadow:0 3px 12px rgba(0,0,0,.2);
 }
 
-.auth-form{
-    display:none;
-}
+.auth-form{display:none}
+.auth-form.active{display:block}
 
-.auth-form.active{
-    display:block;
-}
-
-.field{
-    margin-bottom:11px;
-}
+.field{margin-bottom:11px}
 
 .field label{
-    display:block;
-    font-size:10px;
-    color:#898b94;
-    margin-bottom:5px;
+display:block;
+margin-bottom:5px;
+font-size:9px;
+color:#858791;
 }
 
 .field input{
-    width:100%;
-    border:1px solid var(--border);
-    background:#0b0c10;
-    color:#fff;
-    outline:none;
-    border-radius:10px;
-    padding:11px;
-    font-size:12px;
-    transition:.2s;
+width:100%;
+padding:11px;
+outline:none;
+border-radius:10px;
+border:1px solid var(--border);
+background:#0a0b0f;
+color:#fff;
+font-size:11px;
+transition:.2s;
 }
 
 .field input:focus{
-    border-color:rgba(84,214,138,.5);
-    box-shadow:0 0 0 3px rgba(84,214,138,.04);
+border-color:rgba(84,214,138,.45);
+box-shadow:0 0 0 3px rgba(84,214,138,.035);
 }
 
 .auth-submit{
-    width:100%;
-    padding:12px;
-    border-radius:10px;
-    color:#061009;
-    background:var(--green);
-    font-weight:800;
-    margin-top:4px;
-    transition:.2s;
+width:100%;
+margin-top:4px;
+padding:12px;
+border-radius:10px;
+background:var(--green);
+color:#061009;
+font-size:11px;
+font-weight:800;
+transition:.2s;
 }
 
 .auth-submit:hover{
-    background:#67e29a;
-    transform:translateY(-1px);
+background:#68e29a;
+transform:translateY(-1px);
 }
 
 .auth-message{
-    min-height:18px;
-    margin-top:9px;
-    font-size:10px;
-    color:#d86a8c;
+min-height:18px;
+margin-top:9px;
+font-size:9px;
+color:#dc6b8d;
 }
 
 .auth-note{
-    margin-top:13px;
-    color:#656770;
-    font-size:9px;
-    line-height:1.6;
+margin-top:13px;
+font-size:8px;
+line-height:1.65;
+color:#5e6069;
 }
 
-/* =========================================================
+/* =========================
    ADMIN
-   ========================================================= */
-
-.admin-table-wrap{
-    overflow:auto;
-    border:1px solid var(--border);
-    border-radius:12px;
-}
-
-.admin-table{
-    width:100%;
-    border-collapse:collapse;
-    min-width:650px;
-}
-
-.admin-table th,
-.admin-table td{
-    padding:10px;
-    border-bottom:1px solid var(--border);
-    text-align:left;
-    font-size:10px;
-}
-
-.admin-table th{
-    color:#777984;
-    text-transform:uppercase;
-    letter-spacing:.7px;
-    font-size:9px;
-}
-
-.admin-table td{
-    color:#ccc;
-}
-
-.admin-table tr:last-child td{
-    border-bottom:0;
-}
+========================= */
 
 .admin-stats{
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:8px;
-    margin-bottom:15px;
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:8px;
+margin-bottom:15px;
 }
 
 .admin-stat{
-    background:#0c0d11;
-    border:1px solid var(--border);
-    border-radius:12px;
-    padding:12px;
+padding:12px;
+border-radius:12px;
+background:#0b0c10;
+border:1px solid var(--border);
 }
 
 .admin-stat-number{
-    font-size:20px;
-    font-weight:800;
-    color:var(--green);
+font-size:20px;
+font-weight:800;
+color:var(--green);
 }
 
 .admin-stat-label{
-    font-size:9px;
-    color:#777984;
-    margin-top:3px;
+margin-top:3px;
+font-size:8px;
+color:#70727c;
 }
 
-/* =========================================================
+.admin-table-wrap{
+overflow:auto;
+border-radius:12px;
+border:1px solid var(--border);
+}
+
+.admin-table{
+width:100%;
+min-width:650px;
+border-collapse:collapse;
+}
+
+.admin-table th,.admin-table td{
+padding:10px;
+border-bottom:1px solid var(--border);
+text-align:left;
+font-size:9px;
+}
+
+.admin-table th{
+color:#70727a;
+text-transform:uppercase;
+letter-spacing:.7px;
+font-size:8px;
+}
+
+.admin-table td{color:#c9c9ce}
+.admin-table tr:last-child td{border-bottom:0}
+
+#adminLogs{
+max-height:180px;
+overflow:auto;
+}
+
+/* =========================
    ACCOUNT
-   ========================================================= */
+========================= */
 
 .account-box{
-    background:#0c0d11;
-    border:1px solid var(--border);
-    border-radius:13px;
-    padding:14px;
-    margin-bottom:10px;
+padding:14px;
+margin-bottom:10px;
+border-radius:13px;
+background:#0b0c10;
+border:1px solid var(--border);
 }
 
 .account-name{
-    font-weight:800;
-    font-size:13px;
+font-size:12px;
+font-weight:800;
 }
 
 .account-email{
-    color:#777984;
-    font-size:10px;
-    margin-top:3px;
+margin-top:3px;
+font-size:9px;
+color:#777983;
 }
 
 .account-actions{
-    display:flex;
-    gap:7px;
-    margin-top:13px;
+display:flex;
+gap:7px;
+margin-top:13px;
 }
 
 .small-btn{
-    background:#1b1c22;
-    border:1px solid var(--border);
-    color:#ccc;
-    border-radius:8px;
-    padding:8px 10px;
-    font-size:10px;
+padding:8px 10px;
+border-radius:8px;
+background:#1b1c22;
+border:1px solid var(--border);
+color:#ccc;
+font-size:9px;
 }
 
-.small-btn:hover{
-    background:#24252c;
-}
+.small-btn:hover{background:#25262d}
+.small-btn.danger{color:#ef7797}
 
-.small-btn.danger{
-    color:#ef7797;
-}
-
-/* =========================================================
+/* =========================
    PRINT
-   ========================================================= */
+========================= */
 
 @media print{
-
-    body{
-        background:white;
-        color:#111;
-        overflow:visible;
-    }
-
-    #sidebar,
-    .header,
-    #composerArea,
-    #splash,
-    #overlay,
-    .modal-layer,
-    #footerText{
-        display:none!important;
-    }
-
-    .main,
-    #chat{
-        height:auto;
-        overflow:visible;
-    }
-
-    .chat-inner{
-        width:100%;
-        padding:0;
-    }
-
-    #welcome{
-        display:none;
-    }
-
-    .message-bubble{
-        color:#111!important;
-        background:white!important;
-        border:1px solid #ddd!important;
-        max-width:100%;
-    }
-
-    .message.user{
-        display:none;
-    }
-
+body{
+background:white;
+color:#111;
+overflow:visible;
 }
 
+#sidebar,.header,#composerArea,#splash,#overlay,.modal-layer,#footerText{
+display:none!important;
+}
+
+.main,#chat{
+height:auto;
+overflow:visible;
+}
+
+.chat-inner{
+width:100%;
+padding:0;
+}
+
+#welcome{display:none}
+
+.message-bubble{
+max-width:100%;
+color:#111!important;
+background:white!important;
+border:1px solid #ddd!important;
+}
+
+.message.user{display:none}
+}
+
+/* =========================
+   SMALL SCREENS
+========================= */
+
+@media(max-width:430px){
+.admin-stats{grid-template-columns:1fr}
+.header-logo-text{display:none}
+.user-header{max-width:145px}
+#welcomeTitle{font-size:27px}
+.welcome-tags{gap:6px}
+.welcome-tag{padding:7px 10px}
+}
 </style>
 </head>
 
 <body>
 
-<!-- =========================================================
+<!-- =========================
      SPLASH
-     ========================================================= -->
+========================= -->
 
 <div id="splash">
+<div class="splash-inner">
 
-    <div class="splash-inner">
+<svg class="sk-logo splash-logo" viewBox="0 0 100 100">
+<defs>
+<linearGradient id="houseWine" x1="0" y1="0" x2="1" y2="1">
+<stop offset="0" stop-color="#b33460"/>
+<stop offset="1" stop-color="#68182f"/>
+</linearGradient>
+<linearGradient id="camGreen" x1="0" y1="0" x2="1" y2="1">
+<stop offset="0" stop-color="#67e39a"/>
+<stop offset="1" stop-color="#2bb86d"/>
+</linearGradient>
+</defs>
+<circle cx="50" cy="50" r="46" fill="#101116" stroke="#54d68a" stroke-width="2.5"/>
+<path d="M20 47.5 50 22l30 25.5" fill="none" stroke="url(#houseWine)" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M28 45v30h44V45" fill="#16171d" stroke="url(#houseWine)" stroke-width="5" stroke-linejoin="round"/>
+<path d="M39 75V57h22v18" fill="#0b0c10" stroke="#54d68a" stroke-width="3"/>
+<rect x="34" y="47" width="32" height="20" rx="5" fill="#111218" stroke="url(#camGreen)" stroke-width="3"/>
+<circle cx="50" cy="57" r="7" fill="#0a0b0f" stroke="#54d68a" stroke-width="3"/>
+<circle cx="50" cy="57" r="2.2" fill="#54d68a"/>
+<path d="M40 47l4-5h8l3 5" fill="none" stroke="#54d68a" stroke-width="3" stroke-linecap="round"/>
+<circle cx="61" cy="51" r="1.8" fill="#b33460"/>
+</svg>
 
-        <svg class="splash-logo" viewBox="0 0 100 100">
+<div class="splash-title">SparkyKrea <span>Studio's</span></div>
+<div class="splash-line"></div>
 
-            <circle cx="50" cy="50" r="46"
-                    fill="#111218"
-                    stroke="#54d68a"
-                    stroke-width="3"/>
-
-            <path d="M28 63
-                     C38 43 45 28 54 24
-                     C67 18 76 30 69 43
-                     C64 53 48 58 36 70"
-                  fill="none"
-                  stroke="#9d2850"
-                  stroke-width="8"
-                  stroke-linecap="round"/>
-
-            <circle cx="62" cy="37" r="5"
-                    fill="#54d68a"/>
-
-        </svg>
-
-        <div class="splash-title">
-            SparkyKrea <span>Studio's</span>
-        </div>
-
-    </div>
-
+</div>
 </div>
 
 
 <div id="app">
 
-    <!-- =====================================================
-         SIDEBAR
-         ===================================================== -->
+<!-- =========================
+     SIDEBAR
+========================= -->
 
-    <aside id="sidebar">
+<aside id="sidebar">
 
-        <div class="brand">
+<div class="brand">
 
-            <svg class="brand-logo" viewBox="0 0 100 100">
+<svg class="sk-logo small" viewBox="0 0 100 100">
+<defs>
+<linearGradient id="houseWine2" x1="0" y1="0" x2="1" y2="1">
+<stop offset="0" stop-color="#b33460"/>
+<stop offset="1" stop-color="#68182f"/>
+</linearGradient>
+<linearGradient id="camGreen2" x1="0" y1="0" x2="1" y2="1">
+<stop offset="0" stop-color="#67e39a"/>
+<stop offset="1" stop-color="#2bb86d"/>
+</linearGradient>
+</defs>
+<circle cx="50" cy="50" r="46" fill="#101116" stroke="#54d68a" stroke-width="2.5"/>
+<path d="M20 47.5 50 22l30 25.5" fill="none" stroke="url(#houseWine2)" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M28 45v30h44V45" fill="#16171d" stroke="url(#houseWine2)" stroke-width="5" stroke-linejoin="round"/>
+<path d="M39 75V57h22v18" fill="#0b0c10" stroke="#54d68a" stroke-width="3"/>
+<rect x="34" y="47" width="32" height="20" rx="5" fill="#111218" stroke="url(#camGreen2)" stroke-width="3"/>
+<circle cx="50" cy="57" r="7" fill="#0a0b0f" stroke="#54d68a" stroke-width="3"/>
+<circle cx="50" cy="57" r="2.2" fill="#54d68a"/>
+<path d="M40 47l4-5h8l3 5" fill="none" stroke="#54d68a" stroke-width="3" stroke-linecap="round"/>
+<circle cx="61" cy="51" r="1.8" fill="#b33460"/>
+</svg>
 
-                <circle cx="50" cy="50" r="46"
-                        fill="#111218"
-                        stroke="#54d68a"
-                        stroke-width="3"/>
+<div class="brand-text">SparkyKrea <span>Studio's</span></div>
+</div>
 
-                <path d="M28 63
-                         C38 43 45 28 54 24
-                         C67 18 76 30 69 43
-                         C64 53 48 58 36 70"
-                      fill="none"
-                      stroke="#9d2850"
-                      stroke-width="8"
-                      stroke-linecap="round"/>
+<button id="newProjectBtn" class="sidebar-button primary">＋ Nuevo proyecto</button>
 
-                <circle cx="62" cy="37" r="5"
-                        fill="#54d68a"/>
+<button id="exportPdfBtn" class="sidebar-button">▣ Descargar Guión en PDF</button>
 
-            </svg>
+<div class="history-title"><span id="historyTitleTxt">Historial de chats</span></div>
 
-            <div class="brand-text">
-                SparkyKrea <span>Studio's</span>
-            </div>
+<div id="history">
+<div class="history-empty">Inicia sesión para guardar tus chats.</div>
+</div>
 
-        </div>
+<div class="sidebar-bottom">
 
+<button id="authBtn" class="sidebar-button">◉ Iniciar sesión</button>
 
-        <button
-            id="newProjectBtn"
-            class="sidebar-button primary">
-            ＋ Nuevo proyecto
-        </button>
+<button id="adminBtn" class="sidebar-button hidden">⚙ Panel administrador</button>
 
+</div>
+</aside>
 
-        <button
-            id="exportPdfBtn"
-            class="sidebar-button">
-            ▣ Descargar Guión en PDF
-        </button>
+<div id="overlay"></div>
 
+<!-- =========================
+     MAIN
+========================= -->
 
-        <div class="history-title">
-            <span id="historyTitleTxt">
-                Historial de chats
-            </span>
-        </div>
+<main class="main">
 
+<header class="header">
 
-        <div id="history">
+<div class="header-left">
 
-            <div class="history-empty">
-                Inicia sesión para guardar tus chats.
-            </div>
+<button id="mobileMenu" class="header-icon">☰</button>
 
-        </div>
-
-
-        <div class="sidebar-bottom">
-
-            <button
-                id="authBtn"
-                class="sidebar-button">
-                ◉ Iniciar sesión
-            </button>
-
-            <button
-                id="adminBtn"
-                class="sidebar-button hidden">
-                ⚙ Panel administrador
-            </button>
-
-        </div>
-
-    </aside>
-
-
-    <div id="overlay"></div>
-
-
-    <!-- =====================================================
-         MAIN
-         ===================================================== -->
-
-    <main class="main">
-
-
-        <header class="header">
-
-            <div class="header-left">
-
-                <button
-                    id="mobileMenu"
-                    class="header-icon">
-                    ☰
-                </button>
-
-                <div class="header-logo-text">
-                    SparkyKrea <span>Studio's</span>
-                </div>
-
-            </div>
-
-
-            <div class="header-right">
-
-                <div
-                    id="userHeader"
-                    class="user-header hidden">
-
-                    <span class="user-dot"></span>
-
-                    <span id="userHeaderName">
-                        Usuario
-                    </span>
-
-                </div>
-
-
-                <button
-                    id="headerDotsBtn"
-                    class="header-icon">
-                    ⋮
-                </button>
-
-            </div>
-
-
-            <div
-                id="headerDropdown"
-                class="dropdown">
-
-                <div
-                    class="dropdown-title"
-                    id="langMenuTitle">
-                    Idioma
-                </div>
-
-                <div id="langOptionsList">
-
-                    <button class="lang-option"
-                            data-lang="es">
-                        Español
-                    </button>
-
-                    <button class="lang-option"
-                            data-lang="en">
-                        English
-                    </button>
-
-                    <button class="lang-option"
-                            data-lang="pt">
-                        Português
-                    </button>
-
-                    <button class="lang-option"
-                            data-lang="fr">
-                        Français
-                    </button>
-
-                    <button class="lang-option"
-                            data-lang="de">
-                        Deutsch
-                    </button>
-
-                    <button class="lang-option"
-                            data-lang="it">
-                        Italiano
-                    </button>
-
-                    <button class="lang-option"
-                            data-lang="ru">
-                        Русский
-                    </button>
-
-                    <button class="lang-option"
-                            data-lang="zh">
-                        中文
-                    </button>
-
-                    <button class="lang-option"
-                            data-lang="ja">
-                        日本語
-                    </button>
-
-                    <button class="lang-option"
-                            data-lang="ar">
-                        العربية
-                    </button>
-
-                </div>
-
-            </div>
-
-        </header>
-
-
-        <!-- =================================================
-             CHAT
-             ================================================= -->
-
-        <section id="chat">
-
-            <div class="chat-inner">
-
-
-                <div id="welcome">
-
-                    <div class="welcome-box">
-
-                        <svg class="welcome-logo"
-                             viewBox="0 0 100 100">
-
-                            <circle cx="50" cy="50" r="46"
-                                    fill="#111218"
-                                    stroke="#54d68a"
-                                    stroke-width="3"/>
-
-                            <path d="M28 63
-                                     C38 43 45 28 54 24
-                                     C67 18 76 30 69 43
-                                     C64 53 48 58 36 70"
-                                  fill="none"
-                                  stroke="#9d2850"
-                                  stroke-width="8"
-                                  stroke-linecap="round"/>
-
-                            <circle cx="62" cy="37" r="5"
-                                    fill="#54d68a"/>
-
-                        </svg>
-
-
-                        <h1 id="welcomeTitle">
-                            Tu idea puede convertirse en algo
-                            <span>increíble.</span>
-                        </h1>
-
-
-                        <p id="welcomeDesc">
-                            SparkyKrea te ayuda a crear guiones,
-                            estrategias, conceptos y música para
-                            llevar tus ideas a otro nivel.
-                        </p>
-
-
-                        <div class="welcome-tags">
-
-                            <span class="welcome-tag">
-                                Guiones
-                            </span>
-
-                            <span class="welcome-tag">
-                                Estrategia
-                            </span>
-
-                            <span class="welcome-tag">
-                                Música
-                            </span>
-
-                            <span class="welcome-tag">
-                                Ideas
-                            </span>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-        </section>
-
-
-        <!-- =================================================
-             COMPOSER
-             ================================================= -->
-
-        <div id="composerArea">
-
-            <div class="composer">
-
-                <div class="composer-box">
-
-                    <textarea
-                        id="input"
-                        rows="1"
-                        placeholder="Cuéntame qué quieres crear..."></textarea>
-
-
-                    <!-- NO CAMBIAR: BOTÓN DE ENVÍO -->
-
-                    <button
-                        id="send"
-                        title="Enviar">
-
-                        ➤
-
-                    </button>
-
-                </div>
-
-
-                <div class="composer-info">
-                    SparkyKrea puede ayudarte con guiones,
-                    estrategia, música e ideas creativas.
-                </div>
-
-
-                <div id="footerText">
-                    SparkyKrea Studio's · Creative Intelligence
-                </div>
-
-            </div>
-
-        </div>
-
-    </main>
+<div class="header-logo-text">SparkyKrea <span>Studio's</span></div>
 
 </div>
 
+<div class="header-right">
 
-<!-- =========================================================
+<div id="userHeader" class="user-header hidden">
+<span class="user-dot"></span>
+<span id="userHeaderName">Usuario</span>
+</div>
+
+<button id="headerDotsBtn" class="header-icon">⋮</button>
+
+</div>
+
+<div id="headerDropdown" class="dropdown">
+
+<div class="dropdown-title" id="langMenuTitle">Idioma</div>
+
+<div id="langOptionsList">
+
+<button class="lang-option" data-lang="es">Español</button>
+<button class="lang-option" data-lang="en">English</button>
+<button class="lang-option" data-lang="pt">Português</button>
+<button class="lang-option" data-lang="fr">Français</button>
+<button class="lang-option" data-lang="de">Deutsch</button>
+<button class="lang-option" data-lang="it">Italiano</button>
+<button class="lang-option" data-lang="ru">Русский</button>
+<button class="lang-option" data-lang="zh">中文</button>
+<button class="lang-option" data-lang="ja">日本語</button>
+<button class="lang-option" data-lang="ar">العربية</button>
+
+</div>
+</div>
+
+</header>
+
+<section id="chat">
+
+<div class="chat-inner">
+
+<div id="welcome">
+
+<div class="welcome-box">
+
+<svg class="sk-logo large welcome-logo" viewBox="0 0 100 100">
+<defs>
+<linearGradient id="houseWine3" x1="0" y1="0" x2="1" y2="1">
+<stop offset="0" stop-color="#b33460"/>
+<stop offset="1" stop-color="#68182f"/>
+</linearGradient>
+<linearGradient id="camGreen3" x1="0" y1="0" x2="1" y2="1">
+<stop offset="0" stop-color="#67e39a"/>
+<stop offset="1" stop-color="#2bb86d"/>
+</linearGradient>
+</defs>
+<circle cx="50" cy="50" r="46" fill="#101116" stroke="#54d68a" stroke-width="2.5"/>
+<path d="M20 47.5 50 22l30 25.5" fill="none" stroke="url(#houseWine3)" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M28 45v30h44V45" fill="#16171d" stroke="url(#houseWine3)" stroke-width="5" stroke-linejoin="round"/>
+<path d="M39 75V57h22v18" fill="#0b0c10" stroke="#54d68a" stroke-width="3"/>
+<rect x="34" y="47" width="32" height="20" rx="5" fill="#111218" stroke="url(#camGreen3)" stroke-width="3"/>
+<circle cx="50" cy="57" r="7" fill="#0a0b0f" stroke="#54d68a" stroke-width="3"/>
+<circle cx="50" cy="57" r="2.2" fill="#54d68a"/>
+<path d="M40 47l4-5h8l3 5" fill="none" stroke="#54d68a" stroke-width="3" stroke-linecap="round"/>
+<circle cx="61" cy="51" r="1.8" fill="#b33460"/>
+</svg>
+
+<h1 id="welcomeTitle">
+Tu idea puede convertirse en algo <span>increíble.</span>
+</h1>
+
+<p id="welcomeDesc">
+SparkyKrea te ayuda a crear guiones, estrategias, conceptos y música para llevar tus ideas a otro nivel.
+</p>
+
+<div class="welcome-tags">
+<span class="welcome-tag">Guiones</span>
+<span class="welcome-tag">Estrategia</span>
+<span class="welcome-tag">Música</span>
+<span class="welcome-tag">Ideas</span>
+</div>
+
+</div>
+</div>
+
+</div>
+</section>
+
+<div id="composerArea">
+
+<div class="composer">
+
+<div class="composer-box">
+
+<textarea id="input" rows="1" placeholder="Cuéntame qué quieres crear..."></textarea>
+
+<!-- NO CAMBIAR: BOTÓN DE ENVÍO -->
+<button id="send" title="Enviar">➤</button>
+
+</div>
+
+<div class="composer-info">
+SparkyKrea puede ayudarte con guiones, estrategia, música e ideas creativas.
+</div>
+
+<div id="footerText">
+SparkyKrea Studio's · Creative Intelligence
+</div>
+
+</div>
+</div>
+
+</main>
+</div>
+
+
+<!-- =========================
      AUTH MODAL
-     ========================================================= -->
+========================= -->
 
 <div id="authModal" class="modal-layer">
 
-    <div class="modal">
+<div class="modal">
 
-        <div class="modal-header">
+<div class="modal-header">
 
-            <div>
+<div>
+<div class="modal-title">Tu cuenta</div>
+<div class="modal-subtitle">
+Guarda tus proyectos y desbloquea las funciones para usuarios.
+</div>
+</div>
 
-                <div class="modal-title">
-                    Tu cuenta
-                </div>
-
-                <div class="modal-subtitle">
-                    Guarda tus proyectos y desbloquea
-                    las funciones para usuarios.
-                </div>
-
-            </div>
-
-            <button
-                class="close-modal"
-                data-close="authModal">
-                ×
-            </button>
-
-        </div>
-
-
-        <div class="auth-tabs">
-
-            <button
-                id="loginTab"
-                class="auth-tab active">
-                Iniciar sesión
-            </button>
-
-            <button
-                id="registerTab"
-                class="auth-tab">
-                Crear cuenta
-            </button>
-
-        </div>
-
-
-        <!-- LOGIN -->
-
-        <form
-            id="loginForm"
-            class="auth-form active">
-
-            <div class="field">
-
-                <label>
-                    Correo electrónico
-                </label>
-
-                <input
-                    id="loginEmail"
-                    type="email"
-                    autocomplete="email"
-                    placeholder="tu@email.com"
-                    required>
-
-            </div>
-
-
-            <div class="field">
-
-                <label>
-                    Contraseña
-                </label>
-
-                <input
-                    id="loginPassword"
-                    type="password"
-                    autocomplete="current-password"
-                    placeholder="Tu contraseña"
-                    required>
-
-            </div>
-
-
-            <button
-                class="auth-submit"
-                type="submit">
-                Entrar
-            </button>
-
-
-            <div
-                id="loginMessage"
-                class="auth-message">
-            </div>
-
-        </form>
-
-
-        <!-- REGISTER -->
-
-        <form
-            id="registerForm"
-            class="auth-form">
-
-            <div class="field">
-
-                <label>
-                    Nombre
-                </label>
-
-                <input
-                    id="registerName"
-                    type="text"
-                    placeholder="Tu nombre"
-                    required>
-
-            </div>
-
-
-            <div class="field">
-
-                <label>
-                    Apellido
-                </label>
-
-                <input
-                    id="registerSurname"
-                    type="text"
-                    placeholder="Tu apellido"
-                    required>
-
-            </div>
-
-
-            <div class="field">
-
-                <label>
-                    Correo electrónico
-                </label>
-
-                <input
-                    id="registerEmail"
-                    type="email"
-                    autocomplete="email"
-                    placeholder="tu@email.com"
-                    required>
-
-            </div>
-
-
-            <div class="field">
-
-                <label>
-                    Contraseña
-                </label>
-
-                <input
-                    id="registerPassword"
-                    type="password"
-                    autocomplete="new-password"
-                    placeholder="Mínimo 8 caracteres"
-                    minlength="8"
-                    required>
-
-            </div>
-
-
-            <div class="field">
-
-                <label>
-                    Confirmar contraseña
-                </label>
-
-                <input
-                    id="registerPassword2"
-                    type="password"
-                    autocomplete="new-password"
-                    placeholder="Repite tu contraseña"
-                    minlength="8"
-                    required>
-
-            </div>
-
-
-            <button
-                class="auth-submit"
-                type="submit">
-                Crear cuenta
-            </button>
-
-
-            <div
-                id="registerMessage"
-                class="auth-message">
-            </div>
-
-        </form>
-
-
-        <div class="auth-note">
-            En esta versión de GitHub Pages las cuentas se guardan
-            únicamente en este navegador. Para una autenticación
-            real y segura entre dispositivos será necesario conectar
-            un servicio como Firebase o Supabase.
-        </div>
-
-    </div>
+<button class="close-modal" data-close="authModal">×</button>
 
 </div>
 
+<div class="auth-tabs">
 
-<!-- =========================================================
+<button id="loginTab" class="auth-tab active">Iniciar sesión</button>
+<button id="registerTab" class="auth-tab">Crear cuenta</button>
+
+</div>
+
+<form id="loginForm" class="auth-form active">
+
+<div class="field">
+<label>Correo electrónico</label>
+<input id="loginEmail" type="email" autocomplete="email" placeholder="tu@email.com" required>
+</div>
+
+<div class="field">
+<label>Contraseña</label>
+<input id="loginPassword" type="password" autocomplete="current-password" placeholder="Tu contraseña" required>
+</div>
+
+<button class="auth-submit" type="submit">Entrar</button>
+
+<div id="loginMessage" class="auth-message"></div>
+
+</form>
+
+<form id="registerForm" class="auth-form">
+
+<div class="field">
+<label>Nombre</label>
+<input id="registerName" type="text" placeholder="Tu nombre" required>
+</div>
+
+<div class="field">
+<label>Apellido</label>
+<input id="registerSurname" type="text" placeholder="Tu apellido" required>
+</div>
+
+<div class="field">
+<label>Correo electrónico</label>
+<input id="registerEmail" type="email" autocomplete="email" placeholder="tu@email.com" required>
+</div>
+
+<div class="field">
+<label>Contraseña</label>
+<input id="registerPassword" type="password" autocomplete="new-password" placeholder="Mínimo 8 caracteres" minlength="8" required>
+</div>
+
+<div class="field">
+<label>Confirmar contraseña</label>
+<input id="registerPassword2" type="password" autocomplete="new-password" placeholder="Repite tu contraseña" minlength="8" required>
+</div>
+
+<button class="auth-submit" type="submit">Crear cuenta</button>
+
+<div id="registerMessage" class="auth-message"></div>
+
+</form>
+
+<div class="auth-note">
+En esta versión de GitHub Pages las cuentas se guardan únicamente en este navegador. Para una autenticación real y segura entre dispositivos será necesario conectar un servicio como Firebase o Supabase.
+</div>
+
+</div>
+</div>
+
+
+<!-- =========================
      ACCOUNT MODAL
-     ========================================================= -->
+========================= -->
 
 <div id="accountModal" class="modal-layer">
 
-    <div class="modal">
+<div class="modal">
 
-        <div class="modal-header">
+<div class="modal-header">
 
-            <div>
+<div>
+<div class="modal-title">Mi cuenta</div>
+<div class="modal-subtitle">Información de tu cuenta SparkyKrea.</div>
+</div>
 
-                <div class="modal-title">
-                    Mi cuenta
-                </div>
-
-                <div class="modal-subtitle">
-                    Información de tu cuenta SparkyKrea.
-                </div>
-
-            </div>
-
-            <button
-                class="close-modal"
-                data-close="accountModal">
-                ×
-            </button>
-
-        </div>
-
-
-        <div class="account-box">
-
-            <div
-                id="accountName"
-                class="account-name">
-            </div>
-
-            <div
-                id="accountEmail"
-                class="account-email">
-            </div>
-
-            <div
-                id="accountCreated"
-                class="account-email">
-            </div>
-
-        </div>
-
-
-        <div class="account-actions">
-
-            <button
-                id="logoutBtn"
-                class="small-btn danger">
-                Cerrar sesión
-            </button>
-
-        </div>
-
-    </div>
+<button class="close-modal" data-close="accountModal">×</button>
 
 </div>
 
+<div class="account-box">
 
-<!-- =========================================================
+<div id="accountName" class="account-name"></div>
+<div id="accountEmail" class="account-email"></div>
+<div id="accountCreated" class="account-email"></div>
+
+</div>
+
+<div class="account-actions">
+
+<button id="logoutBtn" class="small-btn danger">Cerrar sesión</button>
+
+</div>
+
+</div>
+</div>
+
+
+<!-- =========================
      ADMIN MODAL
-     ========================================================= -->
+========================= -->
 
 <div id="adminModal" class="modal-layer">
 
-    <div class="modal large">
+<div class="modal large">
 
-        <div class="modal-header">
+<div class="modal-header">
 
-            <div>
+<div>
+<div class="modal-title">Panel administrador</div>
+<div class="modal-subtitle">Usuarios y actividad de SparkyKrea.</div>
+</div>
 
-                <div class="modal-title">
-                    Panel administrador
-                </div>
+<button class="close-modal" data-close="adminModal">×</button>
 
-                <div class="modal-subtitle">
-                    Usuarios y actividad de SparkyKrea.
-                </div>
+</div>
 
-            </div>
+<div class="admin-stats">
 
-            <button
-                class="close-modal"
-                data-close="adminModal">
-                ×
-            </button>
+<div class="admin-stat">
+<div id="adminUserCount" class="admin-stat-number">0</div>
+<div class="admin-stat-label">Usuarios registrados</div>
+</div>
 
-        </div>
+<div class="admin-stat">
+<div id="adminLoginCount" class="admin-stat-number">0</div>
+<div class="admin-stat-label">Inicios de sesión</div>
+</div>
 
+<div class="admin-stat">
+<div id="adminChatCount" class="admin-stat-number">0</div>
+<div class="admin-stat-label">Chats guardados</div>
+</div>
 
-        <div class="admin-stats">
+</div>
 
-            <div class="admin-stat">
+<div class="admin-table-wrap">
 
-                <div
-                    id="adminUserCount"
-                    class="admin-stat-number">
-                    0
-                </div>
+<table class="admin-table">
 
-                <div class="admin-stat-label">
-                    Usuarios registrados
-                </div>
+<thead>
+<tr>
+<th>Usuario</th>
+<th>Correo</th>
+<th>Registro</th>
+<th>Último acceso</th>
+<th>Accesos</th>
+</tr>
+</thead>
 
-            </div>
+<tbody id="adminUsersBody"></tbody>
 
+</table>
 
-            <div class="admin-stat">
+</div>
 
-                <div
-                    id="adminLoginCount"
-                    class="admin-stat-number">
-                    0
-                </div>
+<div class="history-title" style="padding-left:0;margin-top:12px">
+Actividad reciente
+</div>
 
-                <div class="admin-stat-label">
-                    Inicios de sesión
-                </div>
+<div id="adminLogs"></div>
 
-            </div>
-
-
-            <div class="admin-stat">
-
-                <div
-                    id="adminChatCount"
-                    class="admin-stat-number">
-                    0
-                </div>
-
-                <div class="admin-stat-label">
-                    Chats guardados
-                </div>
-
-            </div>
-
-        </div>
-
-
-        <div class="admin-table-wrap">
-
-            <table class="admin-table">
-
-                <thead>
-
-                    <tr>
-
-                        <th>
-                            Usuario
-                        </th>
-
-                        <th>
-                            Correo
-                        </th>
-
-                        <th>
-                            Registro
-                        </th>
-
-                        <th>
-                            Último acceso
-                        </th>
-
-                        <th>
-                            Accesos
-                        </th>
-
-                    </tr>
-
-                </thead>
-
-                <tbody id="adminUsersBody">
-                </tbody>
-
-            </table>
-
-        </div>
-
-
-        <div
-            class="history-title"
-            style="padding-left:0;margin-top:12px">
-            Actividad reciente
-        </div>
-
-
-        <div
-            id="adminLogs"
-            style="max-height:180px;overflow:auto">
-        </div>
-
-    </div>
-
+</div>
 </div>
 
 
 <script>
-
 /* =========================================================
-   SPARKYKREA ULTIMATE ENGINE
+   SPARKYKREA ENGINE
    ========================================================= */
 
+const input=document.getElementById("input");
+const send=document.getElementById("send");
+const chat=document.getElementById("chat");
+const chatInner=chat.querySelector(".chat-inner");
+const welcome=document.getElementById("welcome");
+const history=document.getElementById("history");
+const sidebar=document.getElementById("sidebar");
+const overlay=document.getElementById("overlay");
+const headerDotsBtn=document.getElementById("headerDotsBtn");
+const headerDropdown=document.getElementById("headerDropdown");
+const langOptionsList=document.getElementById("langOptionsList");
 
-/* =========================================================
-   ELEMENTOS
-   ========================================================= */
+/* =========================
+   AUTH
+========================= */
 
-const input =
-    document.getElementById("input");
-
-const send =
-    document.getElementById("send");
-
-const chat =
-    document.getElementById("chat");
-
-const chatInner =
-    chat.querySelector(".chat-inner");
-
-const welcome =
-    document.getElementById("welcome");
-
-const history =
-    document.getElementById("history");
-
-const sidebar =
-    document.getElementById("sidebar");
-
-const overlay =
-    document.getElementById("overlay");
-
-const headerDotsBtn =
-    document.getElementById("headerDotsBtn");
-
-const headerDropdown =
-    document.getElementById("headerDropdown");
-
-const langOptionsList =
-    document.getElementById("langOptionsList");
-
-
-/* =========================================================
-   AUTHENTICATION / ACCOUNTS
-   ========================================================= */
-
-const USERS_KEY =
-    "sparky_users_v2";
-
-const SESSION_KEY =
-    "sparky_session_v2";
-
-const LOGS_KEY =
-    "sparky_login_logs_v2";
-
+const USERS_KEY="sparky_users_v2";
+const SESSION_KEY="sparky_session_v2";
+const LOGS_KEY="sparky_login_logs_v2";
 
 function getUsers(){
-
-    try{
-
-        const data =
-            JSON.parse(
-                localStorage.getItem(USERS_KEY) || "[]"
-            );
-
-        return Array.isArray(data)
-            ? data
-            : [];
-
-    }catch{
-
-        return [];
-
-    }
-
+try{
+const data=JSON.parse(localStorage.getItem(USERS_KEY)||"[]");
+return Array.isArray(data)?data:[];
+}catch{return[]}
 }
-
 
 function setUsers(users){
-
-    localStorage.setItem(
-        USERS_KEY,
-        JSON.stringify(users)
-    );
-
+localStorage.setItem(USERS_KEY,JSON.stringify(users));
 }
-
 
 function getLogs(){
-
-    try{
-
-        const data =
-            JSON.parse(
-                localStorage.getItem(LOGS_KEY) || "[]"
-            );
-
-        return Array.isArray(data)
-            ? data
-            : [];
-
-    }catch{
-
-        return [];
-
-    }
-
+try{
+const data=JSON.parse(localStorage.getItem(LOGS_KEY)||"[]");
+return Array.isArray(data)?data:[];
+}catch{return[]}
 }
-
 
 function setLogs(logs){
-
-    localStorage.setItem(
-        LOGS_KEY,
-        JSON.stringify(logs.slice(0,200))
-    );
-
+localStorage.setItem(LOGS_KEY,JSON.stringify(logs.slice(0,200)));
 }
-
 
 function getSession(){
-
-    try{
-
-        const session =
-            JSON.parse(
-                localStorage.getItem(SESSION_KEY) || "null"
-            );
-
-        return session || null;
-
-    }catch{
-
-        return null;
-
-    }
-
+try{
+return JSON.parse(localStorage.getItem(SESSION_KEY)||"null")||null;
+}catch{return null}
 }
-
 
 function setSession(user){
-
-    if(user){
-
-        localStorage.setItem(
-            SESSION_KEY,
-            JSON.stringify({
-                id:user.id,
-                email:user.email,
-                name:user.name,
-                surname:user.surname,
-                isAdmin:!!user.isAdmin
-            })
-        );
-
-    }else{
-
-        localStorage.removeItem(SESSION_KEY);
-
-    }
-
+if(user){
+localStorage.setItem(SESSION_KEY,JSON.stringify({
+id:user.id,
+email:user.email,
+name:user.name,
+surname:user.surname,
+isAdmin:!!user.isAdmin
+}));
+}else{
+localStorage.removeItem(SESSION_KEY);
+}
 }
 
+let currentUser=getSession();
 
-let currentUser =
-    getSession();
-
-
-/* =========================================================
-   PASSWORD HASH
-   ========================================================= */
+/* =========================
+   HASH
+========================= */
 
 async function hashPassword(password){
-
-    if(
-        window.crypto &&
-        crypto.subtle
-    ){
-
-        const data =
-            new TextEncoder()
-                .encode(password);
-
-        const hash =
-            await crypto.subtle.digest(
-                "SHA-256",
-                data
-            );
-
-        return Array
-            .from(new Uint8Array(hash))
-            .map(
-                b=>b
-                    .toString(16)
-                    .padStart(2,"0")
-            )
-            .join("");
-
-    }
-
-    let hash=0;
-
-    for(let i=0;i<password.length;i++){
-
-        hash =
-            ((hash<<5)-hash)
-            +password.charCodeAt(i);
-
-        hash|=0;
-
-    }
-
-    return String(hash);
-
+if(window.crypto&&crypto.subtle){
+const data=new TextEncoder().encode(password);
+const hash=await crypto.subtle.digest("SHA-256",data);
+return Array.from(new Uint8Array(hash)).map(b=>b.toString(16).padStart(2,"0")).join("");
+}
+let hash=0;
+for(let i=0;i<password.length;i++){
+hash=((hash<<5)-hash)+password.charCodeAt(i);
+hash|=0;
+}
+return String(hash);
 }
 
+/* =========================
+   MODALS
+========================= */
 
-/* =========================================================
-   AUTH UI
-   ========================================================= */
+const authModal=document.getElementById("authModal");
+const accountModal=document.getElementById("accountModal");
+const adminModal=document.getElementById("adminModal");
+const authBtn=document.getElementById("authBtn");
+const adminBtn=document.getElementById("adminBtn");
+const userHeader=document.getElementById("userHeader");
+const userHeaderName=document.getElementById("userHeaderName");
 
-const authModal =
-    document.getElementById("authModal");
+function openModal(modal){modal.classList.add("show")}
+function closeModal(modal){modal.classList.remove("show")}
 
-const accountModal =
-    document.getElementById("accountModal");
-
-const adminModal =
-    document.getElementById("adminModal");
-
-const authBtn =
-    document.getElementById("authBtn");
-
-const adminBtn =
-    document.getElementById("adminBtn");
-
-const userHeader =
-    document.getElementById("userHeader");
-
-const userHeaderName =
-    document.getElementById("userHeaderName");
-
-
-function openModal(modal){
-
-    modal.classList.add("show");
-
-}
-
-
-function closeModal(modal){
-
-    modal.classList.remove("show");
-
-}
-
-
-document
-.querySelectorAll("[data-close]")
-.forEach(button=>{
-
-    button.addEventListener("click",()=>{
-
-        const modal =
-            document.getElementById(
-                button.dataset.close
-            );
-
-        if(modal)
-            closeModal(modal);
-
-    });
-
+document.querySelectorAll("[data-close]").forEach(button=>{
+button.addEventListener("click",()=>{
+const modal=document.getElementById(button.dataset.close);
+if(modal)closeModal(modal);
+});
 });
 
-
-document
-.querySelectorAll(".modal-layer")
-.forEach(layer=>{
-
-    layer.addEventListener("click",e=>{
-
-        if(e.target===layer)
-            closeModal(layer);
-
-    });
-
+document.querySelectorAll(".modal-layer").forEach(layer=>{
+layer.addEventListener("click",e=>{
+if(e.target===layer)closeModal(layer);
+});
 });
 
+/* =========================
+   TABS
+========================= */
 
-/* =========================================================
-   AUTH TABS
-   ========================================================= */
-
-const loginTab =
-    document.getElementById("loginTab");
-
-const registerTab =
-    document.getElementById("registerTab");
-
-const loginForm =
-    document.getElementById("loginForm");
-
-const registerForm =
-    document.getElementById("registerForm");
-
+const loginTab=document.getElementById("loginTab");
+const registerTab=document.getElementById("registerTab");
+const loginForm=document.getElementById("loginForm");
+const registerForm=document.getElementById("registerForm");
 
 loginTab.addEventListener("click",()=>{
-
-    loginTab.classList.add("active");
-    registerTab.classList.remove("active");
-
-    loginForm.classList.add("active");
-    registerForm.classList.remove("active");
-
+loginTab.classList.add("active");
+registerTab.classList.remove("active");
+loginForm.classList.add("active");
+registerForm.classList.remove("active");
 });
-
 
 registerTab.addEventListener("click",()=>{
-
-    registerTab.classList.add("active");
-    loginTab.classList.remove("active");
-
-    registerForm.classList.add("active");
-    loginForm.classList.remove("active");
-
+registerTab.classList.add("active");
+loginTab.classList.remove("active");
+registerForm.classList.add("active");
+loginForm.classList.remove("active");
 });
-
 
 function openLogin(){
-
-    openModal(authModal);
-
-    loginTab.click();
-
+openModal(authModal);
+loginTab.click();
 }
 
-
-/* =========================================================
-   REGISTRATION
-   ========================================================= */
-
-registerForm.addEventListener(
-    "submit",
-    async e=>{
-
-        e.preventDefault();
-
-        const name =
-            document
-            .getElementById("registerName")
-            .value.trim();
-
-        const surname =
-            document
-            .getElementById("registerSurname")
-            .value.trim();
-
-        const email =
-            document
-            .getElementById("registerEmail")
-            .value
-            .trim()
-            .toLowerCase();
-
-        const password =
-            document
-            .getElementById("registerPassword")
-            .value;
-
-        const password2 =
-            document
-            .getElementById("registerPassword2")
-            .value;
-
-        const message =
-            document
-            .getElementById("registerMessage");
-
-
-        message.textContent="";
-
-
-        if(!name || !surname){
-
-            message.textContent =
-                "Completa tu nombre y apellido.";
-
-            return;
-
-        }
-
-
-        if(!email.includes("@")){
-
-            message.textContent =
-                "Introduce un correo válido.";
-
-            return;
-
-        }
-
-
-        if(password.length<8){
-
-            message.textContent =
-                "La contraseña debe tener al menos 8 caracteres.";
-
-            return;
-
-        }
-
-
-        if(password!==password2){
-
-            message.textContent =
-                "Las contraseñas no coinciden.";
-
-            return;
-
-        }
-
-
-        const users =
-            getUsers();
-
-
-        if(
-            users.some(
-                user=>user.email===email
-            )
-        ){
-
-            message.textContent =
-                "Ese correo ya está registrado.";
-
-            return;
-
-        }
-
-
-        const passwordHash =
-            await hashPassword(password);
-
-
-        /*
-         * ADMIN INICIAL
-         *
-         * La primera cuenta creada se convierte
-         * automáticamente en administrador.
-         */
-
-        const firstUser =
-            users.length===0;
-
-
-        const user = {
-
-            id:
-                "u_" +
-                Date.now() +
-                "_" +
-                Math.random()
-                    .toString(36)
-                    .slice(2,8),
-
-            name,
-
-            surname,
-
-            email,
-
-            passwordHash,
-
-            createdAt:
-                new Date().toISOString(),
-
-            lastLogin:null,
-
-            loginCount:0,
-
-            isAdmin:firstUser
-
-        };
-
-
-        users.push(user);
-
-        setUsers(users);
-
-
-        currentUser=user;
-
-        setSession(user);
-
-
-        updateAuthUI();
-
-        loadUserHistory();
-
-        closeModal(authModal);
-
-
-        registerForm.reset();
-
-
-        if(user.isAdmin){
-
-            addBotMessage(
-                "Cuenta creada correctamente. " +
-                "Esta es la primera cuenta de SparkyKrea, " +
-                "por lo que tienes acceso al Panel administrador. " +
-                "Tus chats podrán guardarse en este navegador " +
-                "y tendrás acceso a la opción PDF."
-            );
-
-        }else{
-
-            addBotMessage(
-                "Cuenta creada correctamente. " +
-                "Desde ahora tus chats podrán guardarse " +
-                "en este navegador y tendrás acceso a la opción PDF."
-            );
-
-        }
-
-    }
-);
-
-
-/* =========================================================
-   LOGIN
-   ========================================================= */
-
-loginForm.addEventListener(
-    "submit",
-    async e=>{
-
-        e.preventDefault();
-
-
-        const email =
-            document
-            .getElementById("loginEmail")
-            .value
-            .trim()
-            .toLowerCase();
-
-        const password =
-            document
-            .getElementById("loginPassword")
-            .value;
-
-        const message =
-            document
-            .getElementById("loginMessage");
-
-
-        message.textContent="";
-
-
-        const users =
-            getUsers();
-
-
-        const user =
-            users.find(
-                item=>item.email===email
-            );
-
-
-        if(!user){
-
-            message.textContent =
-                "No existe una cuenta con ese correo.";
-
-            return;
-
-        }
-
-
-        const passwordHash =
-            await hashPassword(password);
-
-
-        if(
-            user.passwordHash!==passwordHash
-        ){
-
-            message.textContent =
-                "La contraseña no es correcta.";
-
-            return;
-
-        }
-
-
-        user.lastLogin =
-            new Date().toISOString();
-
-        user.loginCount =
-            (user.loginCount||0)+1;
-
-
-        setUsers(users);
-
-
-        currentUser=user;
-
-        setSession(user);
-
-
-        const logs =
-            getLogs();
-
-
-        logs.unshift({
-
-            id:Date.now(),
-
-            userId:user.id,
-
-            email:user.email,
-
-            name:
-                user.name +
-                " " +
-                user.surname,
-
-            timestamp:
-                new Date().toISOString(),
-
-            type:"login"
-
-        });
-
-
-        setLogs(logs);
-
-
-        updateAuthUI();
-
-        loadUserHistory();
-
-        closeModal(authModal);
-
-
-        loginForm.reset();
-
-
-        addBotMessage(
-            "Bienvenido de nuevo, " +
-            escapeHTML(user.name) +
-            ". Tus proyectos guardados vuelven a estar disponibles."
-        );
-
-    }
-);
-
-
-/* =========================================================
-   ACCOUNT
-   ========================================================= */
-
-authBtn.addEventListener("click",()=>{
-
-    if(currentUser){
-
-        openAccount();
-
-    }else{
-
-        openLogin();
-
-    }
-
-});
-
-
-function openAccount(){
-
-    if(!currentUser)
-        return openLogin();
-
-
-    document
-    .getElementById("accountName")
-    .textContent =
-        currentUser.name +
-        " " +
-        currentUser.surname;
-
-
-    document
-    .getElementById("accountEmail")
-    .textContent =
-        currentUser.email;
-
-
-    document
-    .getElementById("accountCreated")
-    .textContent =
-        "Cuenta creada: " +
-        formatDate(
-            currentUser.createdAt
-        );
-
-
-    openModal(accountModal);
-
+/* =========================
+   REGISTER
+========================= */
+
+registerForm.addEventListener("submit",async e=>{
+e.preventDefault();
+
+const name=document.getElementById("registerName").value.trim();
+const surname=document.getElementById("registerSurname").value.trim();
+const email=document.getElementById("registerEmail").value.trim().toLowerCase();
+const password=document.getElementById("registerPassword").value;
+const password2=document.getElementById("registerPassword2").value;
+const message=document.getElementById("registerMessage");
+
+message.textContent="";
+
+if(!name||!surname){
+message.textContent="Completa tu nombre y apellido.";
+return;
 }
 
-
-/* =========================================================
-   LOGOUT
-   ========================================================= */
-
-document
-.getElementById("logoutBtn")
-.addEventListener("click",()=>{
-
-    currentUser=null;
-
-    setSession(null);
-
-    projectHistory=[];
-
-    renderHistory();
-
-    updateAuthUI();
-
-    closeModal(accountModal);
-
-});
-
-
-/* =========================================================
-   ADMIN
-   ========================================================= */
-
-adminBtn.addEventListener("click",()=>{
-
-    if(!currentUser || !currentUser.isAdmin)
-        return;
-
-    renderAdmin();
-
-    openModal(adminModal);
-
-});
-
-
-function renderAdmin(){
-
-    if(!currentUser || !currentUser.isAdmin)
-        return;
-
-
-    const users =
-        getUsers();
-
-    const logs =
-        getLogs();
-
-
-    let chatCount=0;
-
-
-    users.forEach(user=>{
-
-        try{
-
-            const savedHistory =
-                JSON.parse(
-                    localStorage.getItem(
-                        "sparky_history_" +
-                        user.id
-                    ) || "[]"
-                );
-
-            if(Array.isArray(savedHistory))
-                chatCount += savedHistory.length;
-
-        }catch{}
-
-    });
-
-
-    document
-    .getElementById("adminUserCount")
-    .textContent =
-        users.length;
-
-
-    document
-    .getElementById("adminLoginCount")
-    .textContent =
-        logs.length;
-
-
-    document
-    .getElementById("adminChatCount")
-    .textContent =
-        chatCount;
-
-
-    const body =
-        document
-        .getElementById("adminUsersBody");
-
-
-    body.innerHTML="";
-
-
-    if(!users.length){
-
-        body.innerHTML =
-            "<tr><td colspan='5'>No hay usuarios.</td></tr>";
-
-    }else{
-
-        users
-        .slice()
-        .sort(
-            (a,b)=>
-                new Date(a.createdAt) -
-                new Date(b.createdAt)
-        )
-        .forEach(user=>{
-
-            const row =
-                document.createElement("tr");
-
-
-            row.innerHTML=`
-
-                <td>
-                    ${escapeHTML(
-                        user.name +
-                        " " +
-                        user.surname
-                    )}
-                    ${
-                        user.isAdmin
-                        ? `
-                            <span
-                                style="
-                                    color:#54d68a;
-                                    margin-left:5px;
-                                    font-size:9px;
-                                ">
-                                ADMIN
-                            </span>
-                        `
-                        : ""
-                    }
-                </td>
-
-                <td>
-                    ${escapeHTML(user.email)}
-                </td>
-
-                <td>
-                    ${formatDate(user.createdAt)}
-                </td>
-
-                <td>
-                    ${
-                        user.lastLogin
-                        ? formatDate(user.lastLogin)
-                        : "Nunca"
-                    }
-                </td>
-
-                <td>
-                    ${user.loginCount||0}
-                </td>
-
-            `;
-
-
-            body.appendChild(row);
-
-        });
-
-    }
-
-
-    const logsBox =
-        document
-        .getElementById("adminLogs");
-
-
-    logsBox.innerHTML="";
-
-
-    if(!logs.length){
-
-        logsBox.innerHTML=`
-
-            <div class="account-box">
-
-                <div class="account-email">
-                    Todavía no hay actividad de inicio de sesión.
-                </div>
-
-            </div>
-
-        `;
-
-    }else{
-
-        logs
-        .slice(0,30)
-        .forEach(log=>{
-
-            const item =
-                document.createElement("div");
-
-
-            item.className="account-box";
-
-
-            item.innerHTML=`
-
-                <div class="account-name">
-                    ${escapeHTML(log.name)}
-                </div>
-
-                <div class="account-email">
-                    ${escapeHTML(log.email)}
-                </div>
-
-                <div class="account-email">
-                    ${formatDate(log.timestamp)}
-                </div>
-
-            `;
-
-
-            logsBox.appendChild(item);
-
-        });
-
-    }
-
+if(!email.includes("@")){
+message.textContent="Introduce un correo válido.";
+return;
 }
 
-
-/* =========================================================
-   ADMIN INITIALIZATION / MIGRATION
-   ========================================================= */
-
-/*
- * Si ya existía una cuenta antes de instalar esta versión
- * y todavía no hay ningún administrador, la cuenta más antigua
- * se convierte automáticamente en admin.
- *
- * Esto evita que tengas que borrar tu cuenta y registrarte otra vez.
- */
-
-function ensureAdminAccount(){
-
-    const users =
-        getUsers();
-
-
-    if(!users.length)
-        return;
-
-
-    let admin =
-        users.find(
-            user=>user.isAdmin===true
-        );
-
-
-    /*
-     * Si ya existe un admin, no se toca.
-     */
-
-    if(!admin){
-
-        users.sort(
-            (a,b)=>
-                new Date(a.createdAt) -
-                new Date(b.createdAt)
-        );
-
-
-        users[0].isAdmin=true;
-
-        admin=users[0];
-
-        setUsers(users);
-
-    }
-
-
-    /*
-     * Sincronizar la sesión actual con los datos
-     * reales del usuario guardado.
-     */
-
-    if(currentUser){
-
-        const freshUser =
-            users.find(
-                user=>user.id===currentUser.id
-            );
-
-
-        if(freshUser){
-
-            currentUser=freshUser;
-
-            setSession(freshUser);
-
-        }
-
-    }
-
+if(password.length<8){
+message.textContent="La contraseña debe tener al menos 8 caracteres.";
+return;
 }
 
-
-/*
- * Se mantiene como función para conservar
- * compatibilidad con la estructura anterior.
- */
-
-function seedAdmin(){
-
-    ensureAdminAccount();
-
+if(password!==password2){
+message.textContent="Las contraseñas no coinciden.";
+return;
 }
 
+const users=getUsers();
 
-/* =========================================================
-   USER UI
-   ========================================================= */
-
-function updateAuthUI(){
-
-    if(currentUser){
-
-        authBtn.textContent =
-            "◉ Mi cuenta";
-
-        userHeader.classList.remove("hidden");
-
-        userHeaderName.textContent =
-            currentUser.name;
-
-        if(currentUser.isAdmin){
-
-            adminBtn.classList.remove("hidden");
-
-        }else{
-
-            adminBtn.classList.add("hidden");
-
-        }
-
-    }else{
-
-        authBtn.textContent =
-            "◉ Iniciar sesión";
-
-        userHeader.classList.add("hidden");
-
-        adminBtn.classList.add("hidden");
-
-    }
-
-    renderHistory();
-
+if(users.some(user=>user.email===email)){
+message.textContent="Ese correo ya está registrado.";
+return;
 }
 
-
-/* =========================================================
-   LANGUAGE
-   ========================================================= */
-
-let currentLang =
-    localStorage.getItem("sparky_lang") ||
-    "es";
-
-
-const translations={
-
-    es:{
-        welcome:
-            "Tu idea puede convertirse en algo <span>increíble.</span>",
-
-        desc:
-            "SparkyKrea te ayuda a crear guiones, estrategias, conceptos y música para llevar tus ideas a otro nivel.",
-
-        placeholder:
-            "Cuéntame qué quieres crear...",
-
-        history:
-            "Historial de chats",
-
-        newProject:
-            "＋ Nuevo proyecto",
-
-        pdf:
-            "▣ Descargar Guión en PDF",
-
-        language:
-            "Idioma"
-
-    },
-
-    en:{
-        welcome:
-            "Your idea can become something <span>incredible.</span>",
-
-        desc:
-            "SparkyKrea helps you create scripts, strategies, concepts and music to take your ideas further.",
-
-        placeholder:
-            "Tell me what you want to create...",
-
-        history:
-            "Chat history",
-
-        newProject:
-            "＋ New project",
-
-        pdf:
-            "▣ Download Script as PDF",
-
-        language:
-            "Language"
-
-    },
-
-    pt:{
-        welcome:
-            "Sua ideia pode se tornar algo <span>incrível.</span>",
-
-        desc:
-            "A SparkyKrea ajuda você a criar roteiros, estratégias, conceitos e músicas.",
-
-        placeholder:
-            "Conte-me o que você quer criar...",
-
-        history:
-            "Histórico de chats",
-
-        newProject:
-            "＋ Novo projeto",
-
-        pdf:
-            "▣ Baixar roteiro em PDF",
-
-        language:
-            "Idioma"
-
-    },
-
-    fr:{
-        welcome:
-            "Votre idée peut devenir quelque chose de <span>génial.</span>",
-
-        desc:
-            "SparkyKrea vous aide à créer des scripts, stratégies, concepts et musiques.",
-
-        placeholder:
-            "Dites-moi ce que vous voulez créer...",
-
-        history:
-            "Historique des chats",
-
-        newProject:
-            "＋ Nouveau projet",
-
-        pdf:
-            "▣ Télécharger le script en PDF",
-
-        language:
-            "Langue"
-
-    },
-
-    de:{
-        welcome:
-            "Deine Idee kann etwas <span>Großartiges</span> werden.",
-
-        desc:
-            "SparkyKrea hilft dir bei Skripten, Strategien, Konzepten und Musik.",
-
-        placeholder:
-            "Erzähl mir, was du erstellen möchtest...",
-
-        history:
-            "Chatverlauf",
-
-        newProject:
-            "＋ Neues Projekt",
-
-        pdf:
-            "▣ Skript als PDF speichern",
-
-        language:
-            "Sprache"
-
-    },
-
-    it:{
-        welcome:
-            "La tua idea può diventare qualcosa di <span>incredibile.</span>",
-
-        desc:
-            "SparkyKrea ti aiuta con script, strategie, concept e musica.",
-
-        placeholder:
-            "Dimmi cosa vuoi creare...",
-
-        history:
-            "Cronologia chat",
-
-        newProject:
-            "＋ Nuovo progetto",
-
-        pdf:
-            "▣ Scarica script in PDF",
-
-        language:
-            "Lingua"
-
-    },
-
-    ru:{
-        welcome:
-            "Твоя идея может стать чем-то <span>невероятным.</span>",
-
-        desc:
-            "SparkyKrea помогает создавать сценарии, стратегии, концепции и музыку.",
-
-        placeholder:
-            "Расскажи, что ты хочешь создать...",
-
-        history:
-            "История чатов",
-
-        newProject:
-            "＋ Новый проект",
-
-        pdf:
-            "▣ Скачать сценарий PDF",
-
-        language:
-            "Язык"
-
-    },
-
-    zh:{
-        welcome:
-            "你的想法可以变成真正的<span>精彩作品。</span>",
-
-        desc:
-            "SparkyKrea 可以帮助你制作脚本、策略、概念和音乐。",
-
-        placeholder:
-            "告诉我你想创作什么...",
-
-        history:
-            "聊天记录",
-
-        newProject:
-            "＋ 新项目",
-
-        pdf:
-            "▣ 下载脚本 PDF",
-
-        language:
-            "语言"
-
-    },
-
-    ja:{
-        welcome:
-            "あなたのアイデアは<span>素晴らしい作品</span>になります。",
-
-        desc:
-            "SparkyKreaは脚本、戦略、コンセプト、音楽制作をサポートします。",
-
-        placeholder:
-            "何を作りたいですか？",
-
-        history:
-            "チャット履歴",
-
-        newProject:
-            "＋ 新しいプロジェクト",
-
-        pdf:
-            "▣ PDFとして保存",
-
-        language:
-            "言語"
-
-    },
-
-    ar:{
-        welcome:
-            "يمكن لفكرتك أن تصبح شيئًا <span>رائعًا.</span>",
-
-        desc:
-            "يساعدك SparkyKrea على إنشاء النصوص والاستراتيجيات والمفاهيم والموسيقى.",
-
-        placeholder:
-            "أخبرني ماذا تريد أن تصنع...",
-
-        history:
-            "سجل المحادثات",
-
-        newProject:
-            "＋ مشروع جديد",
-
-        pdf:
-            "▣ تنزيل النص بصيغة PDF",
-
-        language:
-            "اللغة"
-
-    }
-
+const passwordHash=await hashPassword(password);
+const firstUser=users.length===0;
+
+const user={
+id:"u_"+Date.now()+"_"+Math.random().toString(36).slice(2,8),
+name,
+surname,
+email,
+passwordHash,
+createdAt:new Date().toISOString(),
+lastLogin:null,
+loginCount:0,
+isAdmin:firstUser
 };
 
+users.push(user);
+setUsers(users);
 
-function updateLanguageUI(){
+currentUser=user;
+setSession(user);
+updateAuthUI();
+loadUserHistory();
+closeModal(authModal);
+registerForm.reset();
 
-    const t =
-        translations[currentLang] ||
-        translations.es;
+addBotMessage(
+user.isAdmin
+?"Cuenta creada correctamente. Esta es la primera cuenta de SparkyKrea, por lo que tienes acceso al Panel administrador. Tus chats podrán guardarse en este navegador y tendrás acceso a la opción PDF."
+:"Cuenta creada correctamente. Desde ahora tus chats podrán guardarse en este navegador y tendrás acceso a la opción PDF."
+);
+});
 
+/* =========================
+   LOGIN
+========================= */
 
-    document
-    .getElementById("welcomeTitle")
-    .innerHTML =
-        t.welcome;
+loginForm.addEventListener("submit",async e=>{
+e.preventDefault();
 
+const email=document.getElementById("loginEmail").value.trim().toLowerCase();
+const password=document.getElementById("loginPassword").value;
+const message=document.getElementById("loginMessage");
 
-    document
-    .getElementById("welcomeDesc")
-    .textContent =
-        t.desc;
+message.textContent="";
 
+const users=getUsers();
+const user=users.find(item=>item.email===email);
 
-    input.placeholder =
-        t.placeholder;
+if(!user){
+message.textContent="No existe una cuenta con ese correo.";
+return;
+}
 
+const passwordHash=await hashPassword(password);
 
-    document
-    .getElementById("historyTitleTxt")
-    .textContent =
-        t.history;
+if(user.passwordHash!==passwordHash){
+message.textContent="La contraseña no es correcta.";
+return;
+}
 
+user.lastLogin=new Date().toISOString();
+user.loginCount=(user.loginCount||0)+1;
 
-    document
-    .getElementById("newProjectBtn")
-    .textContent =
-        t.newProject;
+setUsers(users);
 
+currentUser=user;
+setSession(user);
 
-    document
-    .getElementById("exportPdfBtn")
-    .textContent =
-        t.pdf;
+const logs=getLogs();
 
+logs.unshift({
+id:Date.now(),
+userId:user.id,
+email:user.email,
+name:user.name+" "+user.surname,
+timestamp:new Date().toISOString(),
+type:"login"
+});
 
-    document
-    .getElementById("langMenuTitle")
-    .textContent =
-        t.language;
+setLogs(logs);
+updateAuthUI();
+loadUserHistory();
+closeModal(authModal);
+loginForm.reset();
+
+addBotMessage(
+"Bienvenido de nuevo, "+escapeHTML(user.name)+". Tus proyectos guardados vuelven a estar disponibles."
+);
+});
+
+/* =========================
+   ACCOUNT
+========================= */
+
+authBtn.addEventListener("click",()=>{
+if(currentUser)openAccount();
+else openLogin();
+});
+
+function openAccount(){
+if(!currentUser)return openLogin();
+
+document.getElementById("accountName").textContent=currentUser.name+" "+currentUser.surname;
+document.getElementById("accountEmail").textContent=currentUser.email;
+document.getElementById("accountCreated").textContent="Cuenta creada: "+formatDate(currentUser.createdAt);
+
+openModal(accountModal);
+}
+
+document.getElementById("logoutBtn").addEventListener("click",()=>{
+currentUser=null;
+setSession(null);
+projectHistory=[];
+renderHistory();
+updateAuthUI();
+closeModal(accountModal);
+});
+
+/* =========================
+   ADMIN
+========================= */
+
+adminBtn.addEventListener("click",()=>{
+if(!currentUser||!currentUser.isAdmin)return;
+renderAdmin();
+openModal(adminModal);
+});
+
+function renderAdmin(){
+if(!currentUser||!currentUser.isAdmin)return;
+
+const users=getUsers();
+const logs=getLogs();
+
+let chatCount=0;
+
+users.forEach(user=>{
+try{
+const savedHistory=JSON.parse(localStorage.getItem("sparky_history_"+user.id)||"[]");
+if(Array.isArray(savedHistory))chatCount+=savedHistory.length;
+}catch{}
+});
+
+document.getElementById("adminUserCount").textContent=users.length;
+document.getElementById("adminLoginCount").textContent=logs.length;
+document.getElementById("adminChatCount").textContent=chatCount;
+
+const body=document.getElementById("adminUsersBody");
+body.innerHTML="";
+
+if(!users.length){
+body.innerHTML="<tr><td colspan='5'>No hay usuarios.</td></tr>";
+}else{
+users.slice().sort((a,b)=>new Date(a.createdAt)-new Date(b.createdAt)).forEach(user=>{
+const row=document.createElement("tr");
+
+row.innerHTML=`
+<td>
+${escapeHTML(user.name+" "+user.surname)}
+${user.isAdmin?`<span style="color:#54d68a;margin-left:5px;font-size:8px">ADMIN</span>`:""}
+</td>
+<td>${escapeHTML(user.email)}</td>
+<td>${formatDate(user.createdAt)}</td>
+<td>${user.lastLogin?formatDate(user.lastLogin):"Nunca"}</td>
+<td>${user.loginCount||0}</td>
+`;
+
+body.appendChild(row);
+});
+}
+
+const logsBox=document.getElementById("adminLogs");
+logsBox.innerHTML="";
+
+if(!logs.length){
+logsBox.innerHTML=`
+<div class="account-box">
+<div class="account-email">Todavía no hay actividad de inicio de sesión.</div>
+</div>`;
+}else{
+logs.slice(0,30).forEach(log=>{
+const item=document.createElement("div");
+item.className="account-box";
+
+item.innerHTML=`
+<div class="account-name">${escapeHTML(log.name)}</div>
+<div class="account-email">${escapeHTML(log.email)}</div>
+<div class="account-email">${formatDate(log.timestamp)}</div>
+`;
+
+logsBox.appendChild(item);
+});
+}
+}
+
+/* =========================
+   ADMIN MIGRATION
+========================= */
+
+function ensureAdminAccount(){
+const users=getUsers();
+
+if(!users.length)return;
+
+let admin=users.find(user=>user.isAdmin===true);
+
+if(!admin){
+users.sort((a,b)=>new Date(a.createdAt)-new Date(b.createdAt));
+users[0].isAdmin=true;
+admin=users[0];
+setUsers(users);
+}
+
+if(currentUser){
+const freshUser=users.find(user=>user.id===currentUser.id);
+
+if(freshUser){
+currentUser=freshUser;
+setSession(freshUser);
+}
+}
+}
+
+function seedAdmin(){
+ensureAdminAccount();
+}
+
+/* =========================
+   AUTH UI
+========================= */
+
+function updateAuthUI(){
+if(currentUser){
+
+authBtn.textContent="◉ Mi cuenta";
+
+userHeader.classList.remove("hidden");
+userHeaderName.textContent=currentUser.name;
+
+if(currentUser.isAdmin)adminBtn.classList.remove("hidden");
+else adminBtn.classList.add("hidden");
+
+}else{
+
+authBtn.textContent="◉ Iniciar sesión";
+userHeader.classList.add("hidden");
+adminBtn.classList.add("hidden");
 
 }
 
+renderHistory();
+}
 
-langOptionsList
-.querySelectorAll(".lang-option")
-.forEach(option=>{
+/* =========================
+   LANGUAGES
+========================= */
 
-    option.addEventListener("click",()=>{
+let currentLang=localStorage.getItem("sparky_lang")||"es";
 
-        currentLang =
-            option.dataset.lang;
+const translations={
+es:{
+welcome:"Tu idea puede convertirse en algo <span>increíble.</span>",
+desc:"SparkyKrea te ayuda a crear guiones, estrategias, conceptos y música para llevar tus ideas a otro nivel.",
+placeholder:"Cuéntame qué quieres crear...",
+history:"Historial de chats",
+newProject:"＋ Nuevo proyecto",
+pdf:"▣ Descargar Guión en PDF",
+language:"Idioma"
+},
+en:{
+welcome:"Your idea can become something <span>incredible.</span>",
+desc:"SparkyKrea helps you create scripts, strategies, concepts and music to take your ideas further.",
+placeholder:"Tell me what you want to create...",
+history:"Chat history",
+newProject:"＋ New project",
+pdf:"▣ Download Script as PDF",
+language:"Language"
+},
+pt:{
+welcome:"Sua ideia pode se tornar algo <span>incrível.</span>",
+desc:"A SparkyKrea ajuda você a criar roteiros, estratégias, conceitos e músicas.",
+placeholder:"Conte-me o que você quer criar...",
+history:"Histórico de chats",
+newProject:"＋ Novo projeto",
+pdf:"▣ Baixar roteiro em PDF",
+language:"Idioma"
+},
+fr:{
+welcome:"Votre idée peut devenir quelque chose de <span>génial.</span>",
+desc:"SparkyKrea vous aide à créer des scripts, stratégies, concepts et musiques.",
+placeholder:"Dites-moi ce que vous voulez créer...",
+history:"Historique des chats",
+newProject:"＋ Nouveau projet",
+pdf:"▣ Télécharger le script en PDF",
+language:"Langue"
+},
+de:{
+welcome:"Deine Idee kann etwas <span>Großartiges</span> werden.",
+desc:"SparkyKrea hilft dir bei Skripten, Strategien, Konzepten und Musik.",
+placeholder:"Erzähl mir, was du erstellen möchtest...",
+history:"Chatverlauf",
+newProject:"＋ Neues Projekt",
+pdf:"▣ Skript als PDF speichern",
+language:"Sprache"
+},
+it:{
+welcome:"La tua idea può diventare qualcosa di <span>incredibile.</span>",
+desc:"SparkyKrea ti aiuta con script, strategie, concept e musica.",
+placeholder:"Dimmi cosa vuoi creare...",
+history:"Cronologia chat",
+newProject:"＋ Nuovo progetto",
+pdf:"▣ Scarica script in PDF",
+language:"Lingua"
+},
+ru:{
+welcome:"Твоя идея может стать чем-то <span>невероятным.</span>",
+desc:"SparkyKrea помогает создавать сценарии, стратегии, концепции и музыку.",
+placeholder:"Расскажи, что ты хочешь создать...",
+history:"История чатов",
+newProject:"＋ Новый проект",
+pdf:"▣ Скачать сценарий PDF",
+language:"Язык"
+},
+zh:{
+welcome:"你的想法可以变成真正的<span>精彩作品。</span>",
+desc:"SparkyKrea 可以帮助你制作脚本、策略、概念和音乐。",
+placeholder:"告诉我你想创作什么...",
+history:"聊天记录",
+newProject:"＋ 新项目",
+pdf:"▣ 下载脚本 PDF",
+language:"语言"
+},
+ja:{
+welcome:"あなたのアイデアは<span>素晴らしい作品</span>になります。",
+desc:"SparkyKreaは脚本、戦略、コンセプト、音楽制作をサポートします。",
+placeholder:"何を作りたいですか？",
+history:"チャット履歴",
+newProject:"＋ 新しいプロジェクト",
+pdf:"▣ PDFとして保存",
+language:"言語"
+},
+ar:{
+welcome:"يمكن لفكرتك أن تصبح شيئًا <span>رائعًا.</span>",
+desc:"يساعدك SparkyKrea على إنشاء النصوص والاستراتيجيات والمفاهيم والموسيقى.",
+placeholder:"أخبرني ماذا تريد أن تصنع...",
+history:"سجل المحادثات",
+newProject:"＋ مشروع جديد",
+pdf:"▣ تنزيل النص بصيغة PDF",
+language:"اللغة"
+}
+};
 
-        localStorage.setItem(
-            "sparky_lang",
-            currentLang
-        );
+function updateLanguageUI(){
+const t=translations[currentLang]||translations.es;
 
-        updateLanguageUI();
+document.getElementById("welcomeTitle").innerHTML=t.welcome;
+document.getElementById("welcomeDesc").textContent=t.desc;
+input.placeholder=t.placeholder;
+document.getElementById("historyTitleTxt").textContent=t.history;
+document.getElementById("newProjectBtn").textContent=t.newProject;
+document.getElementById("exportPdfBtn").textContent=t.pdf;
+document.getElementById("langMenuTitle").textContent=t.language;
+}
 
-        headerDropdown
-        .classList
-        .remove("show");
-
-    });
-
+langOptionsList.querySelectorAll(".lang-option").forEach(option=>{
+option.addEventListener("click",()=>{
+currentLang=option.dataset.lang;
+localStorage.setItem("sparky_lang",currentLang);
+updateLanguageUI();
+headerDropdown.classList.remove("show");
 });
-
+});
 
 headerDotsBtn.addEventListener("click",e=>{
-
-    e.stopPropagation();
-
-    headerDropdown
-    .classList
-    .toggle("show");
-
+e.stopPropagation();
+headerDropdown.classList.toggle("show");
 });
-
 
 document.addEventListener("click",e=>{
-
-    if(
-        !headerDropdown.contains(e.target) &&
-        e.target!==headerDotsBtn
-    ){
-
-        headerDropdown
-        .classList
-        .remove("show");
-
-    }
-
+if(!headerDropdown.contains(e.target)&&e.target!==headerDotsBtn){
+headerDropdown.classList.remove("show");
+}
 });
 
-
-/* =========================================================
+/* =========================
    MOTIVATION
-   ========================================================= */
+========================= */
 
 const motivations=[
-
-    "Una buena idea no necesita ser perfecta para empezar; necesita una oportunidad.",
-
-    "Lo que hoy es un borrador puede convertirse mañana en tu mejor proyecto.",
-
-    "La creatividad mejora cuando dejas de buscar la idea perfecta y empiezas a construir.",
-
-    "No subestimes una idea pequeña: muchas veces ahí empieza algo grande.",
-
-    "Tu siguiente proyecto puede estar escondido en esa idea que todavía no te convence.",
-
-    "Crear también es probar, equivocarse y volver a intentarlo con más claridad.",
-
-    "No necesitas tenerlo todo resuelto. Solo necesitas dar el siguiente paso.",
-
-    "Una idea con dirección puede avanzar muchísimo más que una idea perfecta sin acción."
-
+"Una buena idea no necesita ser perfecta para empezar; necesita una oportunidad.",
+"Lo que hoy es un borrador puede convertirse mañana en tu mejor proyecto.",
+"La creatividad mejora cuando dejas de buscar la idea perfecta y empiezas a construir.",
+"No subestimes una idea pequeña: muchas veces ahí empieza algo grande.",
+"Tu siguiente proyecto puede estar escondido en esa idea que todavía no te convence.",
+"Crear también es probar, equivocarse y volver a intentarlo con más claridad.",
+"No necesitas tenerlo todo resuelto. Solo necesitas dar el siguiente paso.",
+"Una idea con dirección puede avanzar muchísimo más que una idea perfecta sin acción."
 ];
-
 
 let motivationIndex=0;
 
-
 function motivation(){
+const text=motivations[motivationIndex%motivations.length];
+motivationIndex++;
 
-    const text =
-        motivations[
-            motivationIndex %
-            motivations.length
-        ];
-
-    motivationIndex++;
-
-    return `
-        <br><br>
-        <span class="accent">
-            ${text}
-        </span>
-    `;
-
+return `<br><br><span class="accent">${text}</span>`;
 }
 
-
-/* =========================================================
+/* =========================
    SPELLING
-   ========================================================= */
+========================= */
 
 const typoDictionary={
-
-    q:"que",
-    k:"que",
-    ke:"que",
-    xq:"porque",
-    pq:"porque",
-    porq:"porque",
-    tmb:"también",
-    tb:"también",
-    d:"de",
-    pa:"para",
-    pro:"pero",
-    bn:"bien",
-    qiero:"quiero",
-    kiero:"quiero",
-    videos:"vídeos",
-    videoo:"video",
-    musika:"música",
-    musiq:"música",
-    guion:"guión",
-    guionn:"guión",
-    estrateguia:"estrategia",
-    publi:"publicidad",
-    intagram:"instagram",
-    tikok:"tiktok",
-    tikttok:"tiktok",
-    youtbe:"youtube",
-    facebok:"facebook",
-    instgram:"instagram"
-
+q:"que",k:"que",ke:"que",xq:"porque",pq:"porque",porq:"porque",
+tmb:"también",tb:"también",d:"de",pa:"para",pro:"pero",bn:"bien",
+qiero:"quiero",kiero:"quiero",videos:"vídeos",videoo:"video",
+musika:"música",musiq:"música",guion:"guión",guionn:"guión",
+estrateguia:"estrategia",publi:"publicidad",intagram:"instagram",
+tikok:"tiktok",tikttok:"tiktok",youtbe:"youtube",
+facebok:"facebook",instgram:"instagram"
 };
-
 
 function normalizeText(text){
-
-    return text
-        .toLowerCase()
-        .normalize("NFD")
-        .replace(
-            /[\u0300-\u036f]/g,
-            ""
-        );
-
+return text.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"");
 }
-
 
 function correctSpelling(text){
-
-    return text
-        .split(/\s+/)
-        .map(word=>{
-
-            const clean =
-                word
-                .toLowerCase()
-                .replace(/[.,!?;:]+$/g,"");
-
-            return typoDictionary[clean]
-                || word;
-
-        })
-        .join(" ");
-
+return text.split(/\s+/).map(word=>{
+const clean=word.toLowerCase().replace(/[.,!?;:]+$/g,"");
+return typoDictionary[clean]||word;
+}).join(" ");
 }
 
-
-/* =========================================================
+/* =========================
    NOISE
-   ========================================================= */
-
-function conversationalNoise(text){
-
-    return [
-
-        "jaja",
-        "jajaja",
-        "xd",
-        "jeje",
-        "lol",
-        "bro",
-        "mano",
-        "dios"
-
-    ].some(
-        word=>
-            normalizeText(text)
-            .includes(word)
-    );
-
-}
-
+========================= */
 
 function removeNoise(text){
-
-    return text
-        .replace(/\bxd+\b/gi,"")
-        .replace(/\bjaj+a*\b/gi,"")
-        .replace(/\blol\b/gi,"")
-        .replace(/\bjeje+\b/gi,"")
-        .replace(/\s+/g," ")
-        .trim();
-
+return text
+.replace(/\bxd+\b/gi,"")
+.replace(/\bjaj+a*\b/gi,"")
+.replace(/\blol\b/gi,"")
+.replace(/\bjeje+\b/gi,"")
+.replace(/\s+/g," ")
+.trim();
 }
 
-
-/* =========================================================
+/* =========================
    GAME DATABASE
-   ========================================================= */
+========================= */
 
 const gameDatabase={
-
-    valorant:{
-        names:[
-            "valorant",
-            "reyna",
-            "jett",
-            "omen",
-            "sage",
-            "killjoy",
-            "raze",
-            "chamber",
-            "cypher",
-            "viper",
-            "gekko",
-            "phoenix"
-        ],
-        music:"Trap gaming / phonk / electrónica intensa"
-    },
-
-    minecraft:{
-        names:[
-            "minecraft"
-        ],
-        music:"Lo-fi aventurero / electrónica ligera"
-    },
-
-    fortnite:{
-        names:[
-            "fortnite"
-        ],
-        music:"Trap energético / hip-hop / phonk"
-    },
-
-    clashroyale:{
-        names:[
-            "clash royale",
-            "clash"
-        ],
-        music:"Beat rápido / meme / electrónica"
-    },
-
-    freefire:{
-        names:[
-            "free fire",
-            "freefire"
-        ],
-        music:"Phonk / trap / beat agresivo"
-    },
-
-    roblox:{
-        names:[
-            "roblox"
-        ],
-        music:"Electrónica divertida / meme / hyperpop"
-    }
-
+valorant:{
+names:["valorant","reyna","jett","omen","sage","killjoy","raze","chamber","cypher","viper","gekko","phoenix"],
+music:"Trap gaming / phonk / electrónica intensa"
+},
+minecraft:{
+names:["minecraft"],
+music:"Lo-fi aventurero / electrónica ligera"
+},
+fortnite:{
+names:["fortnite"],
+music:"Trap energético / hip-hop / phonk"
+},
+clashroyale:{
+names:["clash royale","clash"],
+music:"Beat rápido / meme / electrónica"
+},
+freefire:{
+names:["free fire","freefire"],
+music:"Phonk / trap / beat agresivo"
+},
+roblox:{
+names:["roblox"],
+music:"Electrónica divertida / meme / hyperpop"
+}
 };
-
 
 function detectGame(text){
+const n=normalizeText(text);
 
-    const n =
-        normalizeText(text);
-
-    for(
-        const game in gameDatabase
-    ){
-
-        if(
-            gameDatabase[game]
-            .names
-            .some(
-                name=>n.includes(
-                    normalizeText(name)
-                )
-            )
-        ){
-
-            return game;
-
-        }
-
-    }
-
-    return null;
-
+for(const game in gameDatabase){
+if(gameDatabase[game].names.some(name=>n.includes(normalizeText(name)))){
+return game;
+}
 }
 
+return null;
+}
 
 function detectCharacter(text){
-
-    const n =
-        normalizeText(text);
-
-    const chars=[
-        "reyna",
-        "jett",
-        "omen",
-        "sage",
-        "killjoy",
-        "raze",
-        "chamber",
-        "cypher",
-        "viper",
-        "gekko",
-        "phoenix"
-    ];
-
-    return chars.find(
-        char=>n.includes(char)
-    ) || null;
-
+const n=normalizeText(text);
+const chars=["reyna","jett","omen","sage","killjoy","raze","chamber","cypher","viper","gekko","phoenix"];
+return chars.find(char=>n.includes(char))||null;
 }
-
 
 function detectRole(text){
+const n=normalizeText(text);
 
-    const n =
-        normalizeText(text);
+if(/duelista|duelist|entry|frag/.test(n))return"Duelista";
+if(/iniciador|initiator/.test(n))return"Iniciador";
+if(/centinela|sentinel/.test(n))return"Centinela";
+if(/humos|controlador|controller|smoke/.test(n))return"Controlador";
 
-    if(
-        /duelista|duelist|entry|frag/.test(n)
-    )
-        return "Duelista";
-
-    if(
-        /iniciador|initiator/.test(n)
-    )
-        return "Iniciador";
-
-    if(
-        /centinela|sentinel/.test(n)
-    )
-        return "Centinela";
-
-    if(
-        /humos|controlador|controller|smoke/.test(n)
-    )
-        return "Controlador";
-
-    return null;
-
+return null;
 }
-
 
 function detectPlatform(text){
+const n=normalizeText(text);
 
-    const n =
-        normalizeText(text);
+if(n.includes("tiktok"))return"TikTok";
+if(n.includes("youtube")||n.includes("short"))return"YouTube Shorts";
+if(n.includes("instagram")||n.includes("reel"))return"Instagram Reels";
+if(n.includes("facebook"))return"Facebook";
 
-    if(n.includes("tiktok"))
-        return "TikTok";
-
-    if(
-        n.includes("youtube") ||
-        n.includes("short")
-    )
-        return "YouTube Shorts";
-
-    if(
-        n.includes("instagram") ||
-        n.includes("reel")
-    )
-        return "Instagram Reels";
-
-    if(n.includes("facebook"))
-        return "Facebook";
-
-    return "Redes sociales";
-
+return"Redes sociales";
 }
-
 
 function detectNiche(text){
+const n=normalizeText(text);
 
-    const n =
-        normalizeText(text);
+if(/gaming|videojuego|valorant|minecraft|fortnite|clash|roblox|free fire/.test(n))return"Gaming";
+if(/comida|cocina|receta|restaurant/.test(n))return"Gastronomía";
+if(/ropa|moda|outfit/.test(n))return"Moda";
+if(/gym|fitness|entrenamiento/.test(n))return"Fitness";
+if(/musica|cancion|artista/.test(n))return"Música";
+if(/negocio|empresa|marca|emprendimiento/.test(n))return"Negocios";
 
-    if(
-        /gaming|videojuego|valorant|minecraft|fortnite|clash|roblox|free fire/.test(n)
-    )
-        return "Gaming";
-
-    if(
-        /comida|cocina|receta|restaurant/.test(n)
-    )
-        return "Gastronomía";
-
-    if(
-        /ropa|moda|outfit/.test(n)
-    )
-        return "Moda";
-
-    if(
-        /gym|fitness|entrenamiento/.test(n)
-    )
-        return "Fitness";
-
-    if(
-        /musica|cancion|artista/.test(n)
-    )
-        return "Música";
-
-    if(
-        /negocio|empresa|marca|emprendimiento/.test(n)
-    )
-        return "Negocios";
-
-    return "Contenido digital";
-
+return"Contenido digital";
 }
 
-
-/* =========================================================
-   ADVERTISING DETECTION
-   ========================================================= */
+/* =========================
+   ADVERTISING
+========================= */
 
 function advertisingStrongSignals(text){
+const n=normalizeText(text);
 
-    const n =
-        normalizeText(text);
-
-    return [
-        "publicidad",
-        "anuncio",
-        "campana",
-        "vender",
-        "venta",
-        "marca",
-        "producto",
-        "servicio",
-        "cliente",
-        "marketing",
-        "promocionar",
-        "promocion",
-        "viral",
-        "contenido",
-        "tiktok",
-        "instagram",
-        "youtube",
-        "guion",
-        "video"
-    ].filter(
-        word=>n.includes(word)
-    ).length;
-
+return[
+"publicidad","anuncio","campana","vender","venta","marca",
+"producto","servicio","cliente","marketing","promocionar",
+"promocion","viral","contenido","tiktok","instagram",
+"youtube","guion","video"
+].filter(word=>n.includes(word)).length;
 }
-
 
 function advertisingContextSignals(text){
+const n=normalizeText(text);
 
-    const n =
-        normalizeText(text);
-
-    return [
-        "quiero hacer",
-        "quiero crear",
-        "necesito",
-        "como hago",
-        "dame ideas",
-        "ayudame",
-        "que puedo publicar",
-        "que publico",
-        "quiero subir"
-    ].filter(
-        phrase=>n.includes(phrase)
-    ).length;
-
+return[
+"quiero hacer","quiero crear","necesito","como hago",
+"dame ideas","ayudame","que puedo publicar","que publico",
+"quiero subir"
+].filter(phrase=>n.includes(phrase)).length;
 }
-
 
 function obviousNonAdvertisingTopics(text){
+const n=normalizeText(text);
 
-    const n =
-        normalizeText(text);
-
-    return [
-        "matematicas",
-        "fraccion",
-        "ecuacion",
-        "historia",
-        "geografia",
-        "biologia",
-        "tarea escolar",
-        "quimica"
-    ].some(
-        topic=>n.includes(topic)
-    );
-
+return[
+"matematicas","fraccion","ecuacion","historia","geografia",
+"biologia","tarea escolar","quimica"
+].some(topic=>n.includes(topic));
 }
-
 
 function detectAdvertisingIntent(text){
+if(obviousNonAdvertisingTopics(text))return false;
 
-    if(obviousNonAdvertisingTopics(text))
-        return false;
-
-    return (
-        advertisingStrongSignals(text)>=1 ||
-        advertisingContextSignals(text)>=1
-    );
-
+return advertisingStrongSignals(text)>=1||
+advertisingContextSignals(text)>=1;
 }
 
-
-/* =========================================================
-   CLEAN TOPIC
-   ========================================================= */
+/* =========================
+   TOPIC
+========================= */
 
 function cleanTopic(text){
-
-    return text
-        .replace(
-            /^(hola|hey|buenas|oye|bro|mano)[,\s]*/i,
-            ""
-        )
-        .replace(/\s+/g," ")
-        .trim()
-        .slice(0,180);
-
+return text
+.replace(/^(hola|hey|buenas|oye|bro|mano)[,\s]*/i,"")
+.replace(/\s+/g," ")
+.trim()
+.slice(0,180);
 }
 
-
-/* =========================================================
+/* =========================
    DURATIONS
-   ========================================================= */
+========================= */
 
 const timeOptions=[
-
-    {
-        label:"15 segundos",
-        seconds:15
-    },
-
-    {
-        label:"30 segundos",
-        seconds:30
-    },
-
-    {
-        label:"45 segundos",
-        seconds:45
-    },
-
-    {
-        label:"1 minuto",
-        seconds:60
-    },
-
-    {
-        label:"1:30",
-        seconds:90
-    },
-
-    {
-        label:"2 minutos",
-        seconds:120
-    },
-
-    {
-        label:"3 minutos",
-        seconds:180
-    }
-
+{label:"15 segundos",seconds:15},
+{label:"30 segundos",seconds:30},
+{label:"45 segundos",seconds:45},
+{label:"1 minuto",seconds:60},
+{label:"1:30",seconds:90},
+{label:"2 minutos",seconds:120},
+{label:"3 minutos",seconds:180}
 ];
 
-
 function durationToSeconds(duration){
+if(!duration)return 0;
 
-    if(!duration)
-        return 0;
+const n=normalizeText(duration);
 
-    const n =
-        normalizeText(duration);
+if(n.includes("15"))return 15;
+if(n.includes("30"))return 30;
+if(n.includes("45"))return 45;
+if(n.includes("1:30"))return 90;
+if(n.includes("2"))return 120;
+if(n.includes("3"))return 180;
+if(n.includes("1 minuto")||n==="1")return 60;
 
-    if(n.includes("15"))
-        return 15;
-
-    if(n.includes("30"))
-        return 30;
-
-    if(n.includes("45"))
-        return 45;
-
-    if(n.includes("1:30"))
-        return 90;
-
-    if(n.includes("2"))
-        return 120;
-
-    if(n.includes("3"))
-        return 180;
-
-    if(
-        n.includes("1 minuto") ||
-        n==="1"
-    )
-        return 60;
-
-    return 0;
-
+return 0;
 }
-
 
 function extractDuration(text){
+const n=normalizeText(text);
 
-    const n =
-        normalizeText(text);
+if(n.includes("15 segundos"))return 15;
+if(n.includes("30 segundos"))return 30;
+if(n.includes("45 segundos"))return 45;
+if(n.includes("1:30"))return 90;
+if(n.includes("2 minutos"))return 120;
+if(n.includes("3 minutos"))return 180;
+if(n.includes("1 minuto"))return 60;
 
-    if(
-        n.includes("15 segundos")
-    )
-        return 15;
-
-    if(
-        n.includes("30 segundos")
-    )
-        return 30;
-
-    if(
-        n.includes("45 segundos")
-    )
-        return 45;
-
-    if(
-        n.includes("1:30")
-    )
-        return 90;
-
-    if(
-        n.includes("2 minutos")
-    )
-        return 120;
-
-    if(
-        n.includes("3 minutos")
-    )
-        return 180;
-
-    if(
-        n.includes("1 minuto")
-    )
-        return 60;
-
-    return 0;
-
+return 0;
 }
 
-
-/* =========================================================
+/* =========================
    MUSIC
-   ========================================================= */
+========================= */
 
 const musicDatabase={
-
-    gaming:[
-        "Phonk oscuro",
-        "Trap energético",
-        "Drill instrumental",
-        "Electrónica intensa",
-        "Beat glitch"
-    ],
-
-    marketing:[
-        "Electrónica moderna",
-        "Future bass",
-        "Beat corporativo dinámico",
-        "Pop moderno",
-        "Lo-fi elegante"
-    ],
-
-    humor:[
-        "Meme beat",
-        "Hyperpop",
-        "Beat acelerado",
-        "Electrónica absurda",
-        "Percusión cómica"
-    ],
-
-    storytelling:[
-        "Piano cinematográfico",
-        "Ambient emocional",
-        "Lo-fi narrativo",
-        "Cinematic build",
-        "Electrónica atmosférica"
-    ],
-
-    moda:[
-        "House moderno",
-        "Afrobeat",
-        "Pop fashion",
-        "Deep house",
-        "Electrónica minimalista"
-    ],
-
-    general:[
-        "Lo-fi moderno",
-        "Pop instrumental",
-        "Electrónica suave",
-        "Hip-hop instrumental",
-        "Ambient"
-    ]
-
+gaming:["Phonk oscuro","Trap energético","Drill instrumental","Electrónica intensa","Beat glitch"],
+marketing:["Electrónica moderna","Future bass","Beat corporativo dinámico","Pop moderno","Lo-fi elegante"],
+humor:["Meme beat","Hyperpop","Beat acelerado","Electrónica absurda","Percusión cómica"],
+storytelling:["Piano cinematográfico","Ambient emocional","Lo-fi narrativo","Cinematic build","Electrónica atmosférica"],
+moda:["House moderno","Afrobeat","Pop fashion","Deep house","Electrónica minimalista"],
+general:["Lo-fi moderno","Pop instrumental","Electrónica suave","Hip-hop instrumental","Ambient"]
 };
 
-
-/* =========================================================
-   PROJECT ANALYSIS
-   ========================================================= */
+/* =========================
+   PROJECT
+========================= */
 
 let currentProject=null;
-
 let waitingForDuration=false;
-
 let lastGeneratedHTML="";
 
-
 function analyzeProject(text){
-
-    const game =
-        detectGame(text);
-
-    const character =
-        detectCharacter(text);
-
-    const role =
-        detectRole(text);
-
-    const platform =
-        detectPlatform(text);
-
-    const niche =
-        detectNiche(text);
-
-    const duration =
-        extractDuration(text);
-
-
-    return {
-
-        topic:
-            cleanTopic(text),
-
-        game,
-
-        character,
-
-        role,
-
-        platform,
-
-        niche,
-
-        duration:
-            duration || null
-
-    };
-
+return{
+topic:cleanTopic(text),
+game:detectGame(text),
+character:detectCharacter(text),
+role:detectRole(text),
+platform:detectPlatform(text),
+niche:detectNiche(text),
+duration:extractDuration(text)||null
+};
 }
-
 
 function buildAnalysisMessage(project){
 
-    const gameText =
-        project.game
-        ? capitalize(project.game)
-        : "No especificado";
+const gameText=project.game?capitalize(project.game):"No especificado";
 
+return`
+<strong>Perfecto. Ya tengo el punto de partida.</strong>
 
-    return `
+<ul>
+<li><strong>Proyecto:</strong> ${escapeHTML(project.topic)}</li>
+<li><strong>Plataforma:</strong> ${escapeHTML(project.platform)}</li>
+<li><strong>Nicho:</strong> ${escapeHTML(project.niche)}</li>
 
-        <strong>Perfecto. Ya tengo el punto de partida.</strong>
+${project.game?`
+<li><strong>Juego:</strong> ${escapeHTML(gameText)}</li>
+`:""}
 
-        <ul>
+${project.character?`
+<li><strong>Personaje:</strong> ${escapeHTML(capitalize(project.character))}</li>
+`:""}
 
-            <li>
-                <strong>Proyecto:</strong>
-                ${escapeHTML(project.topic)}
-            </li>
+${project.role?`
+<li><strong>Rol:</strong> ${escapeHTML(project.role)}</li>
+`:""}
 
-            <li>
-                <strong>Plataforma:</strong>
-                ${escapeHTML(project.platform)}
-            </li>
+</ul>
 
-            <li>
-                <strong>Nicho:</strong>
-                ${escapeHTML(project.niche)}
-            </li>
-
-            ${
-                project.game
-                ? `
-                <li>
-                    <strong>Juego:</strong>
-                    ${escapeHTML(gameText)}
-                </li>
-                `
-                : ""
-            }
-
-            ${
-                project.character
-                ? `
-                <li>
-                    <strong>Personaje:</strong>
-                    ${escapeHTML(
-                        capitalize(project.character)
-                    )}
-                </li>
-                `
-                : ""
-            }
-
-            ${
-                project.role
-                ? `
-                <li>
-                    <strong>Rol:</strong>
-                    ${escapeHTML(project.role)}
-                </li>
-                `
-                : ""
-            }
-
-        </ul>
-
-        Para hacerlo bien, primero definamos la duración del contenido.
-
-    `;
-
+Para hacerlo bien, primero definamos la duración del contenido.
+`;
 }
 
-
-/* =========================================================
+/* =========================
    TIMELINE
-   ========================================================= */
+========================= */
 
 function formatSeconds(seconds){
 
-    if(seconds<60)
-        return `${seconds} segundos`;
+if(seconds<60)return`${seconds} segundos`;
 
-    const minutes =
-        Math.floor(seconds/60);
+const minutes=Math.floor(seconds/60);
+const remaining=seconds%60;
 
-    const remaining =
-        seconds%60;
+if(!remaining)return`${minutes} minuto${minutes>1?"s":""}`;
 
-    if(!remaining)
-        return `${minutes} minuto${minutes>1?"s":""}`;
-
-    return `${minutes}:${String(remaining).padStart(2,"0")}`;
-
+return`${minutes}:${String(remaining).padStart(2,"0")}`;
 }
-
 
 function buildTimeline(seconds){
 
-    const parts=[];
+const parts=[];
 
-    const hook =
-        Math.max(
-            3,
-            Math.round(seconds*.15)
-        );
+const hook=Math.max(3,Math.round(seconds*.15));
+const development=Math.max(5,Math.round(seconds*.55));
+const payoff=Math.max(4,seconds-hook-development);
 
-    const development =
-        Math.max(
-            5,
-            Math.round(seconds*.55)
-        );
+parts.push(`<li><strong>0–${hook}s:</strong> Hook que detenga el scroll.</li>`);
+parts.push(`<li><strong>${hook}–${hook+development}s:</strong> Desarrollo rápido y visual.</li>`);
+parts.push(`<li><strong>${hook+development}–${seconds}s:</strong> Remate, CTA o giro final.</li>`);
 
-    const payoff =
-        Math.max(
-            4,
-            seconds-hook-development
-        );
-
-
-    parts.push(
-        `<li><strong>0–${hook}s:</strong> Hook que detenga el scroll.</li>`
-    );
-
-
-    parts.push(
-        `<li><strong>${hook}–${hook+development}s:</strong> Desarrollo rápido y visual.</li>`
-    );
-
-
-    parts.push(
-        `<li><strong>${hook+development}–${seconds}s:</strong> Remate, CTA o giro final.</li>`
-    );
-
-
-    return parts.join("");
-
+return parts.join("");
 }
 
-
-/* =========================================================
+/* =========================
    IDEAS
-   ========================================================= */
+========================= */
 
 function buildIdeas(project){
 
-    const ideas=[];
+const ideas=[];
 
-
-    if(project.niche==="Gaming"){
-
-        ideas.push(
-            "Empieza con el momento más intenso y explica el contexto después.",
-            "Haz que el espectador tenga una razón concreta para quedarse hasta el final.",
-            "Usa cortes rápidos y deja una pequeña sorpresa para el último tercio."
-        );
-
-    }else{
-
-        ideas.push(
-            "Abre con una frase que genere curiosidad inmediata.",
-            "Convierte el beneficio principal en una demostración visual.",
-            "Termina con una acción sencilla que el espectador pueda realizar."
-        );
-
-    }
-
-
-    return ideas;
-
+if(project.niche==="Gaming"){
+ideas.push(
+"Empieza con el momento más intenso y explica el contexto después.",
+"Haz que el espectador tenga una razón concreta para quedarse hasta el final.",
+"Usa cortes rápidos y deja una pequeña sorpresa para el último tercio."
+);
+}else{
+ideas.push(
+"Abre con una frase que genere curiosidad inmediata.",
+"Convierte el beneficio principal en una demostración visual.",
+"Termina con una acción sencilla que el espectador pueda realizar."
+);
 }
 
+return ideas;
+}
 
 function showDurationSelectorInsideChat(){
 
-    const wrapper =
-        document.createElement("div");
+const wrapper=document.createElement("div");
+wrapper.className="message bot";
 
+wrapper.innerHTML=`
+<div class="message-bubble">
 
-    wrapper.className="message bot";
+<div class="message-label">SPARKYKREA</div>
 
+<strong>¿Cuánto quieres que dure?</strong>
 
-    wrapper.innerHTML=`
+<div class="duration-panel">
 
-        <div class="message-bubble">
+${timeOptions.map(option=>`
+<button class="duration-option" data-seconds="${option.seconds}">
+${option.label}
+</button>
+`).join("")}
 
-            <div class="message-label">
-                SPARKYKREA
-            </div>
+</div>
 
-            <strong>
-                ¿Cuánto quieres que dure?
-            </strong>
+</div>
+`;
 
-            <div class="duration-panel">
+chatInner.appendChild(wrapper);
 
-                ${timeOptions.map(
-                    option=>`
+wrapper.querySelectorAll(".duration-option").forEach(button=>{
+button.addEventListener("click",()=>{
+selectDurationOption(Number(button.dataset.seconds));
+});
+});
 
-                    <button
-                        class="duration-option"
-                        data-seconds="${option.seconds}">
-
-                        ${option.label}
-
-                    </button>
-
-                `
-                ).join("")}
-
-            </div>
-
-        </div>
-
-    `;
-
-
-    chatInner.appendChild(wrapper);
-
-
-    wrapper
-    .querySelectorAll(".duration-option")
-    .forEach(button=>{
-
-        button.addEventListener(
-            "click",
-            ()=>{
-
-                selectDurationOption(
-                    Number(
-                        button.dataset.seconds
-                    )
-                );
-
-            }
-        );
-
-    });
-
-
-    scrollChat();
-
+scrollChat();
 }
 
-
-function toggleDurationPanel(){
-
-    showDurationSelectorInsideChat();
-
-}
-
-
-/* =========================================================
+/* =========================
    RESPONSES
-   ========================================================= */
+========================= */
 
 function buildIdeasResponse(project){
 
-    const ideas =
-        buildIdeas(project);
+const ideas=buildIdeas(project);
 
+return`
+<strong>Tengo varias rutas para este proyecto.</strong>
 
-    return `
+<ul>
+${ideas.map(idea=>`<li>${escapeHTML(idea)}</li>`).join("")}
+</ul>
 
-        <strong>Tengo varias rutas para este proyecto.</strong>
+<strong>Mi recomendación:</strong>
+empieza por la primera idea y haz que el primer segundo sea imposible de ignorar.
 
-        <ul>
-
-            ${ideas.map(
-                idea=>
-                    `<li>${escapeHTML(idea)}</li>`
-            ).join("")}
-
-        </ul>
-
-        <strong>Mi recomendación:</strong>
-        empieza por la primera idea y haz que el primer segundo
-        sea imposible de ignorar.
-
-        ${motivation()}
-
-    `;
-
+${motivation()}
+`;
 }
-
 
 function buildFinalStrategy(project){
 
-    const seconds =
-        project.duration ||
-        30;
+const seconds=project.duration||30;
 
+const musicType=project.niche==="Gaming"
+?musicDatabase.gaming
+:musicDatabase.general;
 
-    const musicType =
-        project.niche==="Gaming"
-        ? musicDatabase.gaming
-        : musicDatabase.general;
+const selectedMusic=musicType[Math.floor(Math.random()*musicType.length)];
 
+const timeline=buildTimeline(seconds);
+const ideas=buildIdeas(project);
 
-    const selectedMusic =
-        musicType[
-            Math.floor(
-                Math.random() *
-                musicType.length
-            )
-        ];
+const hookOptions=[
+"Si sigues haciendo esto, estás perdiendo oportunidades.",
+"Nadie te cuenta esta parte cuando empiezas.",
+"Mira esto antes de publicar tu próximo video.",
+"Hay una forma mucho más inteligente de hacerlo.",
+"Esto es lo primero que cambiaría de tu contenido."
+];
 
+const hook=hookOptions[Math.floor(Math.random()*hookOptions.length)];
 
-    const timeline =
-        buildTimeline(seconds);
+const html=`
 
+<strong>Proyecto listo: ${escapeHTML(project.topic)}</strong>
 
-    const ideas =
-        buildIdeas(project);
+<br><br>
 
+<strong class="accent">DURACIÓN: ${formatSeconds(seconds)}</strong>
 
-    const hookOptions=[
+<br><br>
 
-        "Si sigues haciendo esto, estás perdiendo oportunidades.",
+<strong>HOOK</strong>
 
-        "Nadie te cuenta esta parte cuando empiezas.",
+<p>"${escapeHTML(hook)}"</p>
 
-        "Mira esto antes de publicar tu próximo video.",
+<strong>ESTRUCTURA</strong>
 
-        "Hay una forma mucho más inteligente de hacerlo.",
+<ul>${timeline}</ul>
 
-        "Esto es lo primero que cambiaría de tu contenido."
+<strong>IDEAS DE DESARROLLO</strong>
 
-    ];
+<ul>
+${ideas.map(idea=>`<li>${escapeHTML(idea)}</li>`).join("")}
+</ul>
 
+<strong>MÚSICA</strong>
 
-    const hook =
-        hookOptions[
-            Math.floor(
-                Math.random() *
-                hookOptions.length
-            )
-        ];
+<p>${escapeHTML(selectedMusic)}</p>
 
+<strong>ESTRATEGIA</strong>
 
-    const html=`
+<ul>
+<li>Mantén el comienzo directo y elimina introducciones innecesarias.</li>
+<li>Añade cambios visuales cada pocos segundos.</li>
+<li>Construye una pequeña tensión antes del resultado.</li>
+<li>Cierra con una acción clara para el espectador.</li>
+</ul>
 
-        <strong>
-            Proyecto listo: ${escapeHTML(project.topic)}
-        </strong>
+<strong>CTA</strong>
 
-        <br><br>
+<p>"Si quieres ver la siguiente parte, quédate por aquí."</p>
 
-        <strong class="accent">
-            DURACIÓN: ${formatSeconds(seconds)}
-        </strong>
+${motivation()}
+`;
 
-        <br><br>
+lastGeneratedHTML=html;
 
-        <strong>HOOK</strong>
-
-        <p>
-            "${escapeHTML(hook)}"
-        </p>
-
-        <strong>ESTRUCTURA</strong>
-
-        <ul>
-            ${timeline}
-        </ul>
-
-        <strong>IDEAS DE DESARROLLO</strong>
-
-        <ul>
-
-            ${ideas.map(
-                idea=>
-                    `<li>${escapeHTML(idea)}</li>`
-            ).join("")}
-
-        </ul>
-
-        <strong>MÚSICA</strong>
-
-        <p>
-            ${escapeHTML(selectedMusic)}
-        </p>
-
-        <strong>ESTRATEGIA</strong>
-
-        <ul>
-
-            <li>
-                Mantén el comienzo directo y elimina introducciones innecesarias.
-            </li>
-
-            <li>
-                Añade cambios visuales cada pocos segundos.
-            </li>
-
-            <li>
-                Construye una pequeña tensión antes del resultado.
-            </li>
-
-            <li>
-                Cierra con una acción clara para el espectador.
-            </li>
-
-        </ul>
-
-        <strong>CTA</strong>
-
-        <p>
-            "Si quieres ver la siguiente parte,
-            quédate por aquí."
-        </p>
-
-        ${motivation()}
-
-    `;
-
-
-    lastGeneratedHTML=html;
-
-
-    return html;
-
+return html;
 }
 
-
-/* =========================================================
+/* =========================
    HELP
-   ========================================================= */
+========================= */
 
 function showHelp(){
 
-    return `
+return`
+<strong>Puedo ayudarte con varias cosas:</strong>
 
-        <strong>Puedo ayudarte con varias cosas:</strong>
+<ul>
+<li>Crear un guión.</li>
+<li>Diseñar una estrategia para TikTok, Reels o Shorts.</li>
+<li>Elegir música y ritmo.</li>
+<li>Crear ideas de contenido.</li>
+<li>Mejorar un anuncio.</li>
+<li>Organizar un proyecto.</li>
+</ul>
 
-        <ul>
+Por ejemplo:
 
-            <li>Crear un guión.</li>
+<br><br>
 
-            <li>Diseñar una estrategia para TikTok,
-                Reels o Shorts.</li>
+<span class="accent">
+"Quiero hacer un video de Valorant para TikTok de 30 segundos."
+</span>
 
-            <li>Elegir música y ritmo.</li>
-
-            <li>Crear ideas de contenido.</li>
-
-            <li>Mejorar un anuncio.</li>
-
-            <li>Organizar un proyecto.</li>
-
-        </ul>
-
-        Por ejemplo:
-
-        <br><br>
-
-        <span class="accent">
-            "Quiero hacer un video de Valorant para TikTok
-            de 30 segundos."
-        </span>
-
-        ${motivation()}
-
-    `;
-
+${motivation()}
+`;
 }
-
 
 function showGreeting(){
 
-    return `
+return`
+<strong>Bienvenido a SparkyKrea.</strong>
 
-        <strong>
-            Bienvenido a SparkyKrea.
-        </strong>
+<br><br>
 
-        <br><br>
+Cuéntame qué quieres crear y convertiré la idea en una propuesta mucho más clara.
 
-        Cuéntame qué quieres crear y convertiré la idea
-        en una propuesta mucho más clara.
-
-        ${motivation()}
-
-    `;
-
+${motivation()}
+`;
 }
-
 
 function startNoIdeaFlow(){
 
-    return `
+return`
+No pasa nada si todavía no tienes una idea.
 
-        No pasa nada si todavía no tienes una idea.
+<br><br>
 
-        <br><br>
+Podemos construirla desde cero.
 
-        Podemos construirla desde cero.
+<ul>
+<li>Qué contenido quieres hacer.</li>
+<li>Para quién.</li>
+<li>En qué plataforma.</li>
+<li>Qué quieres conseguir.</li>
+</ul>
 
-        <ul>
+Dime solamente el tema y empezamos.
 
-            <li>Qué contenido quieres hacer.</li>
-
-            <li>Para quién.</li>
-
-            <li>En qué plataforma.</li>
-
-            <li>Qué quieres conseguir.</li>
-
-        </ul>
-
-        Dime solamente el tema y empezamos.
-
-        ${motivation()}
-
-    `;
-
+${motivation()}
+`;
 }
-
 
 function modifyCurrentProject(text){
 
-    if(!currentProject){
+if(!currentProject)return generateResponse(text);
 
-        return generateResponse(text);
+currentProject.topic=cleanTopic(text);
 
-    }
-
-
-    currentProject.topic =
-        cleanTopic(text);
-
-
-    return buildIdeasResponse(
-        currentProject
-    );
-
+return buildIdeasResponse(currentProject);
 }
 
-
-/* =========================================================
-   GENERATE RESPONSE
-   ========================================================= */
+/* =========================
+   GENERATE
+========================= */
 
 function generateResponse(rawText){
 
-    const corrected =
-        correctSpelling(rawText);
+const corrected=correctSpelling(rawText);
+const text=removeNoise(corrected);
+const normalized=normalizeText(text);
 
-
-    const text =
-        removeNoise(corrected);
-
-
-    const normalized =
-        normalizeText(text);
-
-
-    if(
-        normalized==="hola" ||
-        normalized==="hey" ||
-        normalized==="buenas" ||
-        normalized.startsWith("hola ")
-    ){
-
-        addBotMessage(
-            showGreeting()
-        );
-
-        return;
-
-    }
-
-
-    if(
-        /no se|no tengo idea|ninguna idea|sin idea|no tengo nada/
-        .test(normalized)
-    ){
-
-        addBotMessage(
-            startNoIdeaFlow()
-        );
-
-        return;
-
-    }
-
-
-    if(
-        /ayuda|que puedes hacer|como funcionas|que haces/
-        .test(normalized)
-    ){
-
-        addBotMessage(
-            showHelp()
-        );
-
-        return;
-
-    }
-
-
-    const duration =
-        extractDuration(text);
-
-
-    if(waitingForDuration){
-
-        if(duration){
-
-            selectDurationOption(
-                duration
-            );
-
-            return;
-
-        }
-
-    }
-
-
-    if(
-        currentProject &&
-        /cambiar|modificar|hazlo diferente|otra idea|otra opcion/
-        .test(normalized)
-    ){
-
-        addBotMessage(
-            modifyCurrentProject(text)
-        );
-
-        return;
-
-    }
-
-
-    const project =
-        analyzeProject(text);
-
-
-    currentProject=project;
-
-
-    if(!project.duration){
-
-        waitingForDuration=true;
-
-        addBotMessage(
-            buildAnalysisMessage(project)
-        );
-
-        showDurationSelectorInsideChat();
-
-        return;
-
-    }
-
-
-    waitingForDuration=false;
-
-    currentProject.duration =
-        project.duration;
-
-
-    addBotMessage(
-        buildFinalStrategy(
-            currentProject
-        )
-    );
-
-
-    saveCurrentProject();
-
+if(
+normalized==="hola"||
+normalized==="hey"||
+normalized==="buenas"||
+normalized.startsWith("hola ")
+){
+addBotMessage(showGreeting());
+return;
 }
 
+if(/no se|no tengo idea|ninguna idea|sin idea|no tengo nada/.test(normalized)){
+addBotMessage(startNoIdeaFlow());
+return;
+}
 
-/* =========================================================
-   DURATION SELECTION
-   ========================================================= */
+if(/ayuda|que puedes hacer|como funcionas|que haces/.test(normalized)){
+addBotMessage(showHelp());
+return;
+}
+
+const duration=extractDuration(text);
+
+if(waitingForDuration){
+if(duration){
+selectDurationOption(duration);
+return;
+}
+}
+
+if(
+currentProject&&
+/cambiar|modificar|hazlo diferente|otra idea|otra opcion/.test(normalized)
+){
+addBotMessage(modifyCurrentProject(text));
+return;
+}
+
+const project=analyzeProject(text);
+
+currentProject=project;
+
+if(!project.duration){
+
+waitingForDuration=true;
+
+addBotMessage(buildAnalysisMessage(project));
+showDurationSelectorInsideChat();
+
+return;
+}
+
+waitingForDuration=false;
+currentProject.duration=project.duration;
+
+addBotMessage(buildFinalStrategy(currentProject));
+
+saveCurrentProject();
+}
+
+/* =========================
+   DURATION
+========================= */
 
 function selectDurationOption(seconds){
 
-    if(!currentProject){
-
-        currentProject={
-            topic:"Nuevo proyecto",
-            platform:"Redes sociales",
-            niche:"Contenido digital"
-        };
-
-    }
-
-
-    currentProject.duration =
-        seconds;
-
-
-    waitingForDuration=false;
-
-
-    addUserMessage(
-        `Duración: ${formatSeconds(seconds)}`
-    );
-
-
-    showTyping();
-
-
-    setTimeout(()=>{
-
-        removeTyping();
-
-
-        const result =
-            buildFinalStrategy(
-                currentProject
-            );
-
-
-        addBotMessage(result);
-
-        saveCurrentProject();
-
-    },450);
-
+if(!currentProject){
+currentProject={
+topic:"Nuevo proyecto",
+platform:"Redes sociales",
+niche:"Contenido digital"
+};
 }
 
+currentProject.duration=seconds;
+waitingForDuration=false;
 
-/* =========================================================
+addUserMessage(`Duración: ${formatSeconds(seconds)}`);
+showTyping();
+
+setTimeout(()=>{
+removeTyping();
+
+const result=buildFinalStrategy(currentProject);
+
+addBotMessage(result);
+saveCurrentProject();
+
+},450);
+}
+
+/* =========================
    MESSAGES
-   ========================================================= */
+========================= */
 
 function addUserMessage(text){
 
-    welcome.style.display="none";
+welcome.style.display="none";
 
+const wrapper=document.createElement("div");
+wrapper.className="message user";
 
-    const wrapper =
-        document.createElement("div");
+wrapper.innerHTML=`
+<div class="message-bubble">
+${escapeHTML(text)}
+</div>
+`;
 
-
-    wrapper.className =
-        "message user";
-
-
-    wrapper.innerHTML=`
-
-        <div class="message-bubble">
-
-            ${escapeHTML(text)}
-
-        </div>
-
-    `;
-
-
-    chatInner.appendChild(wrapper);
-
-
-    scrollChat();
-
+chatInner.appendChild(wrapper);
+scrollChat();
 }
-
 
 function addBotMessage(html){
 
-    welcome.style.display="none";
+welcome.style.display="none";
 
+const wrapper=document.createElement("div");
+wrapper.className="message bot";
 
-    const wrapper =
-        document.createElement("div");
+wrapper.innerHTML=`
+<div class="message-bubble">
 
+<div class="message-label">SPARKYKREA</div>
 
-    wrapper.className =
-        "message bot";
+${html}
 
+</div>
+`;
 
-    wrapper.innerHTML=`
+chatInner.appendChild(wrapper);
+lastGeneratedHTML=html;
 
-        <div class="message-bubble">
-
-            <div class="message-label">
-                SPARKYKREA
-            </div>
-
-            ${html}
-
-        </div>
-
-    `;
-
-
-    chatInner.appendChild(wrapper);
-
-
-    lastGeneratedHTML=html;
-
-
-    scrollChat();
-
+scrollChat();
 }
-
 
 function showTyping(){
 
-    removeTyping();
+removeTyping();
 
+const wrapper=document.createElement("div");
 
-    const wrapper =
-        document.createElement("div");
+wrapper.id="typingMessage";
+wrapper.className="message bot";
 
+wrapper.innerHTML=`
+<div class="message-bubble">
+<div class="typing">
+<span></span>
+<span></span>
+<span></span>
+</div>
+</div>
+`;
 
-    wrapper.id="typingMessage";
-
-    wrapper.className="message bot";
-
-
-    wrapper.innerHTML=`
-
-        <div class="message-bubble">
-
-            <div class="typing">
-
-                <span></span>
-                <span></span>
-                <span></span>
-
-            </div>
-
-        </div>
-
-    `;
-
-
-    chatInner.appendChild(wrapper);
-
-
-    scrollChat();
-
+chatInner.appendChild(wrapper);
+scrollChat();
 }
-
 
 function removeTyping(){
 
-    const typing =
-        document.getElementById(
-            "typingMessage"
-        );
+const typing=document.getElementById("typingMessage");
 
-
-    if(typing)
-        typing.remove();
-
+if(typing)typing.remove();
 }
-
 
 function scrollChat(){
 
-    setTimeout(()=>{
-
-        chat.scrollTo({
-
-            top:chat.scrollHeight,
-
-            behavior:"smooth"
-
-        });
-
-    },30);
-
+setTimeout(()=>{
+chat.scrollTo({
+top:chat.scrollHeight,
+behavior:"smooth"
+});
+},30);
 }
-
 
 function escapeHTML(value){
 
-    return String(value)
-        .replace(/&/g,"&amp;")
-        .replace(/</g,"&lt;")
-        .replace(/>/g,"&gt;")
-        .replace(/"/g,"&quot;")
-        .replace(/'/g,"&#039;");
-
+return String(value)
+.replace(/&/g,"&amp;")
+.replace(/</g,"&lt;")
+.replace(/>/g,"&gt;")
+.replace(/"/g,"&quot;")
+.replace(/'/g,"&#039;");
 }
-
 
 function capitalize(value){
 
-    if(!value)
-        return "";
+if(!value)return"";
 
-    return value.charAt(0).toUpperCase()
-        +value.slice(1);
-
+return value.charAt(0).toUpperCase()+value.slice(1);
 }
-
 
 function formatDate(date){
 
-    if(!date)
-        return "—";
+if(!date)return"—";
 
-    try{
-
-        return new Date(date)
-            .toLocaleString(
-                currentLang==="es"
-                ? "es-ES"
-                : currentLang
-            );
-
-    }catch{
-
-        return "—";
-
-    }
-
+try{
+return new Date(date).toLocaleString(
+currentLang==="es"?"es-ES":currentLang
+);
+}catch{
+return"—";
+}
 }
 
-
-/* =========================================================
+/* =========================
    HISTORY
-   ========================================================= */
+========================= */
 
 let projectHistory=[];
 
-
 function getHistoryKey(){
 
-    if(!currentUser)
-        return null;
+if(!currentUser)return null;
 
-    return (
-        "sparky_history_" +
-        currentUser.id
-    );
-
+return"sparky_history_"+currentUser.id;
 }
-
 
 function loadUserHistory(){
 
-    projectHistory=[];
+projectHistory=[];
 
-
-    if(!currentUser){
-
-        renderHistory();
-
-        return;
-
-    }
-
-
-    try{
-
-        const data =
-            JSON.parse(
-                localStorage.getItem(
-                    getHistoryKey()
-                ) || "[]"
-            );
-
-
-        if(Array.isArray(data))
-            projectHistory=data;
-
-    }catch{
-
-        projectHistory=[];
-
-    }
-
-
-    renderHistory();
-
+if(!currentUser){
+renderHistory();
+return;
 }
 
+try{
+
+const data=JSON.parse(
+localStorage.getItem(getHistoryKey())||"[]"
+);
+
+if(Array.isArray(data))projectHistory=data;
+
+}catch{
+projectHistory=[];
+}
+
+renderHistory();
+}
 
 function saveCurrentProject(){
 
-    if(!currentUser)
-        return;
+if(!currentUser)return;
 
+if(!currentProject||!currentProject.topic)return;
 
-    if(
-        !currentProject ||
-        !currentProject.topic
-    )
-        return;
+const record={
+id:Date.now(),
+topic:currentProject.topic,
+duration:currentProject.duration||"Sin duración",
+platform:currentProject.platform||"Redes sociales",
+niche:currentProject.niche||"general",
+html:lastGeneratedHTML,
+savedAt:new Date().toISOString()
+};
 
+projectHistory.unshift(record);
 
-    const record={
+projectHistory=projectHistory.slice(0,30);
 
-        id:Date.now(),
+localStorage.setItem(
+getHistoryKey(),
+JSON.stringify(projectHistory)
+);
 
-        topic:
-            currentProject.topic,
-
-        duration:
-            currentProject.duration ||
-            "Sin duración",
-
-        platform:
-            currentProject.platform ||
-            "Redes sociales",
-
-        niche:
-            currentProject.niche ||
-            "general",
-
-        html:
-            lastGeneratedHTML,
-
-        savedAt:
-            new Date().toISOString()
-
-    };
-
-
-    projectHistory.unshift(record);
-
-
-    projectHistory =
-        projectHistory.slice(0,30);
-
-
-    localStorage.setItem(
-
-        getHistoryKey(),
-
-        JSON.stringify(
-            projectHistory
-        )
-
-    );
-
-
-    renderHistory();
-
+renderHistory();
 }
-
 
 function renderHistory(){
 
-    history.innerHTML="";
+history.innerHTML="";
 
+if(!currentUser){
 
-    if(!currentUser){
+history.innerHTML=`
+<div class="history-empty">
+Inicia sesión para guardar tus chats.
+</div>
+`;
 
-        history.innerHTML=`
-
-            <div class="history-empty">
-
-                Inicia sesión para guardar tus chats.
-
-            </div>
-
-        `;
-
-        return;
-
-    }
-
-
-    if(!projectHistory.length){
-
-        history.innerHTML=`
-
-            <div class="history-empty">
-
-                Todavía no tienes proyectos guardados.
-
-            </div>
-
-        `;
-
-        return;
-
-    }
-
-
-    projectHistory.forEach(item=>{
-
-        const wrapper =
-            document.createElement("div");
-
-
-        wrapper.className =
-            "history-item";
-
-
-        wrapper.innerHTML=`
-
-            <button
-                class="history-delete"
-                title="Eliminar">
-                ×
-            </button>
-
-            <div class="history-topic">
-                ${escapeHTML(item.topic)}
-            </div>
-
-            <div class="history-date">
-                ${formatDate(item.savedAt)}
-            </div>
-
-        `;
-
-
-        wrapper
-        .querySelector(".history-delete")
-        .addEventListener(
-            "click",
-            e=>{
-
-                e.stopPropagation();
-
-                deleteHistoryItem(
-                    item.id
-                );
-
-            }
-        );
-
-
-        wrapper.addEventListener(
-            "click",
-            ()=>{
-
-                loadHistoryItem(
-                    item.id
-                );
-
-                closeSidebar();
-
-            }
-        );
-
-
-        history.appendChild(wrapper);
-
-    });
-
+return;
 }
 
+if(!projectHistory.length){
+
+history.innerHTML=`
+<div class="history-empty">
+Todavía no tienes proyectos guardados.
+</div>
+`;
+
+return;
+}
+
+projectHistory.forEach(item=>{
+
+const wrapper=document.createElement("div");
+
+wrapper.className="history-item";
+
+wrapper.innerHTML=`
+
+<button class="history-delete" title="Eliminar">×</button>
+
+<div class="history-topic">
+${escapeHTML(item.topic)}
+</div>
+
+<div class="history-date">
+${formatDate(item.savedAt)}
+</div>
+
+`;
+
+wrapper.querySelector(".history-delete").addEventListener("click",e=>{
+e.stopPropagation();
+deleteHistoryItem(item.id);
+});
+
+wrapper.addEventListener("click",()=>{
+loadHistoryItem(item.id);
+closeSidebar();
+});
+
+history.appendChild(wrapper);
+});
+}
 
 function deleteHistoryItem(id){
 
-    if(!currentUser)
-        return;
+if(!currentUser)return;
 
+projectHistory=projectHistory.filter(item=>item.id!==id);
 
-    projectHistory =
-        projectHistory.filter(
-            item=>item.id!==id
-        );
+localStorage.setItem(
+getHistoryKey(),
+JSON.stringify(projectHistory)
+);
 
-
-    localStorage.setItem(
-
-        getHistoryKey(),
-
-        JSON.stringify(
-            projectHistory
-        )
-
-    );
-
-
-    renderHistory();
-
+renderHistory();
 }
-
 
 function loadHistoryItem(id){
 
-    if(!currentUser)
-        return;
+if(!currentUser)return;
 
+const item=projectHistory.find(x=>x.id===id);
 
-    const item =
-        projectHistory.find(
-            x=>x.id===id
-        );
+if(!item)return;
 
+chatInner.innerHTML="";
+welcome.style.display="none";
 
-    if(!item)
-        return;
+currentProject={
+topic:item.topic,
+duration:
+typeof item.duration==="number"
+?item.duration
+:durationToSeconds(item.duration),
+platform:item.platform,
+niche:item.niche
+};
 
-
-    chatInner.innerHTML="";
-
-    welcome.style.display="none";
-
-
-    currentProject={
-
-        topic:item.topic,
-
-        duration:
-            typeof item.duration==="number"
-            ? item.duration
-            : durationToSeconds(
-                item.duration
-            ),
-
-        platform:item.platform,
-
-        niche:item.niche
-
-    };
-
-
-    addBotMessage(
-        item.html ||
-        buildFinalStrategy(
-            currentProject
-        )
-    );
-
+addBotMessage(
+item.html||buildFinalStrategy(currentProject)
+);
 }
 
-
-/* =========================================================
+/* =========================
    NEW PROJECT
-   ========================================================= */
+========================= */
 
-document
-.getElementById("newProjectBtn")
-.addEventListener("click",()=>{
+document.getElementById("newProjectBtn").addEventListener("click",()=>{
 
-    currentProject=null;
+currentProject=null;
+waitingForDuration=false;
+lastGeneratedHTML="";
 
-    waitingForDuration=false;
+chatInner.innerHTML="";
+chatInner.appendChild(welcome);
+welcome.style.display="flex";
 
-    lastGeneratedHTML="";
+input.value="";
+input.style.height="auto";
+send.classList.remove("active");
 
-
-    chatInner.innerHTML="";
-
-    chatInner.appendChild(welcome);
-
-    welcome.style.display="flex";
-
-
-    input.value="";
-
-    input.style.height="auto";
-
-
-    send.classList.remove("active");
-
-
-    closeSidebar();
-
+closeSidebar();
 });
 
-
-/* =========================================================
+/* =========================
    PDF
-   ========================================================= */
+========================= */
 
-document
-.getElementById("exportPdfBtn")
-.addEventListener("click",()=>{
+document.getElementById("exportPdfBtn").addEventListener("click",()=>{
 
-    if(!currentUser){
+if(!currentUser){
 
-        openLogin();
+openLogin();
 
-        document
-        .getElementById("loginMessage")
-        .textContent =
-            "Inicia sesión para guardar o descargar tus proyectos en PDF.";
+document.getElementById("loginMessage").textContent=
+"Inicia sesión para guardar o descargar tus proyectos en PDF.";
 
-        return;
+return;
+}
 
-    }
+if(!currentProject&&!lastGeneratedHTML){
 
+addBotMessage(
+"Primero crea un proyecto y luego podrás guardarlo como PDF."
+);
 
-    if(
-        !currentProject &&
-        !lastGeneratedHTML
-    ){
+return;
+}
 
-        addBotMessage(
-            "Primero crea un proyecto y luego podrás guardarlo como PDF."
-        );
-
-        return;
-
-    }
-
-
-    window.print();
-
+window.print();
 });
 
+/* =========================
+   MOBILE
+========================= */
 
-/* =========================================================
-   MOBILE SIDEBAR
-   ========================================================= */
+document.getElementById("mobileMenu").addEventListener("click",()=>{
 
-document
-.getElementById("mobileMenu")
-.addEventListener("click",()=>{
-
-    sidebar.classList.add("open");
-
-    overlay.classList.add("show");
+sidebar.classList.add("open");
+overlay.classList.add("show");
 
 });
-
 
 overlay.addEventListener("click",closeSidebar);
 
-
 function closeSidebar(){
 
-    sidebar.classList.remove("open");
-
-    overlay.classList.remove("show");
-
+sidebar.classList.remove("open");
+overlay.classList.remove("show");
 }
 
-
-/* =========================================================
-   SEND BUTTON
-   =========================================================
-
-   ESTA PARTE SE MANTIENE COMO ESTABA.
-   NO SE CAMBIA SU FUNCIONAMIENTO.
-   ========================================================= */
+/* =========================
+   SEND
+   NO SE CAMBIA EL BOTÓN
+========================= */
 
 function sendMessage(){
 
-    const text=input.value.trim();
+const text=input.value.trim();
 
-    if(!text)
-        return;
+if(!text)return;
 
-    input.value="";
-    input.style.height="auto";
+input.value="";
+input.style.height="auto";
 
-    send.classList.remove("active");
+send.classList.remove("active");
 
-    addUserMessage(text);
+addUserMessage(text);
+showTyping();
 
-    showTyping();
+setTimeout(()=>{
 
-    setTimeout(()=>{
+removeTyping();
+generateResponse(text);
 
-        removeTyping();
-
-        generateResponse(text);
-
-    },500);
-
+},500);
 }
 
 send.addEventListener("click",()=>{
 
-    if(send.classList.contains("active"))
-        sendMessage();
+if(send.classList.contains("active")){
+sendMessage();
+}
 
 });
 
 input.addEventListener("keydown",e=>{
 
-    if(
-        e.key==="Enter" &&
-        !e.shiftKey
-    ){
+if(e.key==="Enter"&&!e.shiftKey){
 
-        e.preventDefault();
+e.preventDefault();
 
-        if(input.value.trim())
-            sendMessage();
+if(input.value.trim()){
+sendMessage();
+}
 
-    }
+}
 
 });
 
 input.addEventListener("input",()=>{
 
-    input.style.height="auto";
+input.style.height="auto";
 
-    input.style.height=
-        Math.min(
-            input.scrollHeight,
-            140
-        )+"px";
+input.style.height=
+Math.min(input.scrollHeight,140)+"px";
 
-
-    if(input.value.trim())
-        send.classList.add("active");
-    else
-        send.classList.remove("active");
+if(input.value.trim()){
+send.classList.add("active");
+}else{
+send.classList.remove("active");
+}
 
 });
 
-
-/* =========================================================
+/* =========================
    INITIALIZATION
-   ========================================================= */
-
-/*
- * IMPORTANTE:
- * Primero comprobamos/creamos el administrador.
- * Esto también convierte la cuenta más antigua existente
- * en administrador si todavía no había ninguno.
- */
+========================= */
 
 seedAdmin();
-
 updateLanguageUI();
-
 updateAuthUI();
-
 loadUserHistory();
 
-
 setTimeout(()=>{
 
-    const splash =
-        document.getElementById("splash");
+const splash=document.getElementById("splash");
 
-    splash.style.opacity="0";
+if(splash){
 
-    setTimeout(()=>{
+splash.style.opacity="0";
 
-        splash.remove();
+setTimeout(()=>{
+splash.remove();
+},600);
 
-    },600);
+}
 
 },1100);
-
-
-/* =========================================================
-   WELCOME INITIAL MESSAGE
-   ========================================================= */
-
-setTimeout(()=>{
-
-    if(!chatInner.querySelector(".message")){
-
-        /*
-           La bienvenida visual permanece arriba.
-           No se inserta una conversación automática
-           que la haga desaparecer.
-        */
-
-    }
-
-},1200);
 
 </script>
 
