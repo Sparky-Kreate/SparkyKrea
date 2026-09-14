@@ -1004,6 +1004,7 @@ let motivationIndex = 0;
 let greetingShown = false;  
 let waitingForDuration = false;  
 let waitingForIdeasAfterDuration = false;  
+let waitingForSpecificSubject = false;
 let conversationStarted = false;  
 let lastGeneratedHTML = "";  
 let projectHistory = JSON.parse(localStorage.getItem("sparky_history") || "[]");  
@@ -1605,7 +1606,7 @@ function extractDuration(text){
   
   
 /* =========================================================  
-   DETECCIÓN DE INTENCIÓN  
+   DETECCIÓN DE INTENCIÓN Y FILTROS PREVIOS (Risas, Relleno, Indecisión)  
    ========================================================= */  
   
 const intentPatterns = {  
@@ -1629,6 +1630,29 @@ greeting:[
 "saludos"  
 ],  
   
+filler:[  
+"xd",  
+"lol",  
+"jaja",  
+"jajaja",  
+"jeje",  
+"jajajaja",  
+"xdxd",  
+"lmao",  
+"rofl"  
+],  
+
+indecision:[  
+"nose",  
+"idk",  
+"no se",  
+"no sé",  
+"duda",  
+"estoy dudando",  
+"no estoy seguro",  
+"tengo dudas"  
+],  
+
 noIdea:[  
 "no se que hacer",  
 "no sé qué hacer",  
@@ -1768,28 +1792,29 @@ function containsPattern(text,list){
   
   
 /* =========================================================  
-   DETECTAR TEMA / CATEGORÍA  
+   DETECTAR TEMA / CATEGORÍA (Con Base Amplia y Tolerancia a Errores)  
    ========================================================= */  
   
 function detectNiche(topic){  
   
-    const t =  
-        topic.toLowerCase();  
+    const t = topic.toLowerCase()  
+        .normalize("NFD").replace(/[\u0300-\u036f]/g, ""); // Remueve acentos para tolerancia  
   
+    // Tolerancia ampliada a errores ortográficos y variaciones de Videojuegos y Deportes
     if(  
-        /valorant|reyna|riot|fps|shooter|gaming|gamer|videojuego|juego|minecraft|fortnite|gta|gta 6|roblox|free fire|clash royale|playstation|xbox|steam/.test(t)  
+        /valorant|val[uo]rant|balrandt|balorant|valrant|riot|fps|shooter|gaming|gamer|videojuego|juego|minecraft|fortnite|gta|gta 6|roblox|free fire|clash royale|playstation|xbox|steam/.test(t)  
     ){  
         return "gaming";  
     }  
   
     if(  
-        /futbol|fútbol|futbolista|deporte|gym|fitness|entrenamiento|atleta|baloncesto|basket|running/.test(t)  
+        /futbol|f[uü]tbol|fvolisgas|ftbol|futbolista|deportes|deportista|gym|fitness|entrenamiento|atleta|baloncesto|basket|running/.test(t)  
     ){  
         return "deportes";  
     }  
   
     if(  
-        /pizza|hamburguesa|burger|comida|restaurante|cafeteria|café|comer|food|postre|dulce|helado/.test(t)  
+        /pizza|hamburguesa|burger|panaderia|panadería|pasteleria|pastelería|comida|restaurante|cafeteria|café|comer|food|postre|dulce|helado/.test(t)  
     ){  
         return "comida";  
     }  
@@ -1825,7 +1850,7 @@ function detectNiche(topic){
     }  
   
     if(  
-        /marketing|publicidad|marca|branding|negocio|empresa|emprendimiento|ventas/.test(t)  
+        /marketing|publicidad|marca|branding|negocio|empresa|emprendimiento|ventas|supermercado|tienda local/.test(t)  
     ){  
         return "negocio";  
     }  
@@ -2442,7 +2467,7 @@ function buildIdeasResponse(proj){
                     <br>  
                     ${idea.split(" — ")[1] || ""}  
                 </div>  
-  
+
             `).join("")}  
   
         </div>  
@@ -2588,7 +2613,7 @@ function buildFinalStrategy(proj){
                     </div>  
   
                 </div>  
-  
+
             `).join("")}  
   
         </div>  
@@ -2982,7 +3007,7 @@ function modifyCurrentProject(text){
   
   
 /* =========================================================  
-   PROCESAR MENSAJE  
+   PROCESAR MENSAJE CON FILTROS Y PREGUNTAS ESPECÍFICAS  
    ========================================================= */  
   
 function generateResponse(text){  
@@ -2995,6 +3020,23 @@ function generateResponse(text){
   
     const t =  
         i18n[currentLang];  
+
+
+    /* ---------------------------  
+       0. FILTROS PREVIOS (Risas y Relleno)  
+       --------------------------- */  
+    if(containsPattern(clean, intentPatterns.filler) && clean.length < 15){
+        addBotMessage("¡Jaja! 😊 Cuéntame, ¿qué tienes en mente o de qué negocio o juego armamos una idea hoy?");
+        return;
+    }
+
+    /* ---------------------------  
+       0.5. FILTROS PREVIOS (Indecisión)  
+       --------------------------- */  
+    if(containsPattern(clean, intentPatterns.indecision) && clean.length < 25){
+        addBotMessage("No te preocupes por dudar. ¿Quieres que te proponga ideas desde cero o ya tienes algún negocio, juego o deporte en mente?");
+        return;
+    }
   
   
     /* ---------------------------  
@@ -3236,9 +3278,7 @@ function generateResponse(text){
         addBotMessage(t.invalid);  
   
         return;  
-  
     }  
-  
   
     const analysis =  
         analyzeProject(clean);  
@@ -3266,10 +3306,35 @@ function generateResponse(text){
   
     };  
   
-  
     conversationStarted = true;  
   
   
+    /* ---------------------------  
+       10.5. PREGUNTAS ESPECÍFICAS DE SEGUIMIENTO (Gaming o Deportes)  
+       --------------------------- */  
+    if ((analysis.niche === 'gaming' || analysis.niche === 'deportes') && !waitingForSpecificSubject && !analysis.duration) {
+        waitingForSpecificSubject = true;
+        let specificPromptText = analysis.niche === 'gaming' 
+            ? `¡Excelente elección! Veo que es sobre gaming (${capitalize(analysis.topic)}). ¿De qué personaje, arma o mapa específico de este juego quieres hacer el anuncio?`
+            : `¡Genial! Veo que es sobre deportes (${capitalize(analysis.topic)}). ¿De qué futbolista o deportista en específico quieres centrar la publicidad?`;
+
+        addBotMessage(`  
+            <div class="bot-title">  
+                🎯 Enfoque Detectado  
+            </div>  
+            <div class="section">  
+                ${specificPromptText}  
+            </div>  
+        `);
+        return;
+    }
+
+    if (waitingForSpecificSubject) {
+        waitingForSpecificSubject = false;
+        currentProject.topic = `${currentProject.topic} (${clean})`;
+    }
+
+
     /* ---------------------------  
        11. DURACIÓN YA EXISTE  
        --------------------------- */  
@@ -3283,7 +3348,6 @@ function generateResponse(text){
         );  
   
         saveCurrentProject();  
-  
         return;  
   
     }  
@@ -3306,7 +3370,7 @@ function generateResponse(text){
         <div class="section">  
   
             <b>${t.projectLabel}</b>  
-            ${capitalize(analysis.topic)}  
+            ${capitalize(currentProject.topic)}  
   
             <br><br>  
   
@@ -3391,7 +3455,7 @@ function showTyping(){
                 <i></i>  
                 <i></i>  
             </div>  
-  
+
         </div>  
   
     `;  
@@ -3527,7 +3591,7 @@ function renderHistory(){
             ">  
                 Tus proyectos aparecerán aquí.  
             </div>  
-  
+
         `;  
   
         return;  
@@ -3559,7 +3623,7 @@ function renderHistory(){
             >  
                 ×  
             </button>  
-  
+
         `;  
   
   
@@ -3665,6 +3729,7 @@ document
     waitingForDuration = false;  
   
     waitingForIdeasAfterDuration = false;  
+    waitingForSpecificSubject = false;
   
     conversationStarted = false;  
   
