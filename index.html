@@ -1525,7 +1525,7 @@ function showDurationSelectorInsideChat(){
                     >  
                         ${option}  
                     </button>  
-  
+
                 `).join("")}  
   
             </div>  
@@ -1639,7 +1639,8 @@ filler:[
 "jajajaja",  
 "xdxd",  
 "lmao",  
-"rofl"  
+"rofl",
+"fshh"  
 ],  
 
 indecision:[  
@@ -1800,15 +1801,14 @@ function detectNiche(topic){
     const t = topic.toLowerCase()  
         .normalize("NFD").replace(/[\u0300-\u036f]/g, ""); // Remueve acentos para tolerancia  
   
-    // Tolerancia ampliada a errores ortográficos y variaciones de Videojuegos y Deportes
     if(  
-        /valorant|val[uo]rant|balrandt|balorant|valrant|riot|fps|shooter|gaming|gamer|videojuego|juego|minecraft|fortnite|gta|gta 6|roblox|free fire|clash royale|playstation|xbox|steam/.test(t)  
+        /valorant|val[uo]rant|balrandt|balorant|valrant|riot|fps|shooter|gaming|gamer|videojuego|juego|minecraft|fortnite|gta|gta 6|roblox|free fire|clash royale|playstation|xbox|steam|sk/.test(t)  
     ){  
         return "gaming";  
     }  
   
     if(  
-        /futbol|f[uü]tbol|fvolisgas|ftbol|futbolista|deportes|deportista|gym|fitness|entrenamiento|atleta|baloncesto|basket|running/.test(t)  
+        /futbol|f[uü]tbol|fvolisgas|ftbol|futbolista|deportes|deportista|gym|fitness|entrenamiento|atleta|baloncesto|basket|running|messi/.test(t)  
     ){  
         return "deportes";  
     }  
@@ -1873,15 +1873,15 @@ function detectNiche(topic){
 const musicDatabase = {  
   
 gaming:{  
-artist:"Rock electrónico / trap cinematográfico",  
-style:"Beat energético con subida progresiva y golpe fuerte en los momentos de acción.",  
-free:"Busca una pista royalty-free de gaming, phonk cinematográfico o electronic trap.",  
+artist:"Phonk / Rock electrónico / trap cinematográfico",  
+style:"Beat energético de Phonk con graves potentes (bass boost) y subida progresiva.",  
+free:"Busca una pista royalty-free de gaming, phonk agresivo o electronic trap.",  
 },  
   
 deportes:{  
-artist:"Hip-hop deportivo / electrónica energética",  
-style:"Percusión marcada, bajo potente y sensación de avance.",  
-free:"Busca una pista royalty-free de sports hype o energetic hip-hop.",  
+artist:"Hip-hop deportivo / Phonk energético",  
+style:"Percusión marcada, bajo potente y sensación de avance dinámico.",  
+free:"Busca una pista royalty-free de sports hype o energetic phonk.",  
 },  
   
 comida:{  
@@ -2294,7 +2294,7 @@ function buildTimeline(duration,topic,niche,platform){
             ["GANCHO","Captura atención con una apertura fuerte."],  
             ["CONTEXTO","Explica rápidamente qué está pasando y por qué debería importarle al público."],  
             ["PROBLEMA","Presenta la necesidad o deseo principal."],  
-            ["SOLUCIÓN","Introduce y demuestra cómo funciona el proyecto."],  
+            ["SOLUCIÓN","Introduce y demuestra how funciona el proyecto."],  
             ["BENEFICIOS","Desarrolla las ventajas más importantes."],  
             ["PRUEBA","Añade demostración, reacción, resultado o evidencia visual."],  
             ["DIFERENCIAL","Explica por qué esta propuesta merece ser elegida."],  
@@ -2510,58 +2510,40 @@ function buildIdeasResponse(proj){
   
   
 /* =========================================================  
-   ESTRATEGIA FINAL  
+   ESTRATEGIA FINAL (ACTUALIZADA CON GUIONES ESPECIALES PARA JUEGOS Y FÚTBOL)  
    ========================================================= */  
   
 function buildFinalStrategy(proj){  
   
-    const t =  
-        i18n[currentLang];  
+    const t = i18n[currentLang];  
+    const topic = proj.topic || "tu proyecto";  
+    const topicLower = topic.toLowerCase();  
+    const duration = proj.duration || "30 seg";  
+    const niche = proj.niche || detectNiche(topic);  
+    const platform = proj.platform || "Redes sociales";  
+    const music = musicDatabase[niche] || musicDatabase.general;  
   
-    const topic =  
-        proj.topic || "tu proyecto";  
-  
-    const duration =  
-        proj.duration || "30 seg";  
-  
-    const niche =  
-        proj.niche || detectNiche(topic);  
-  
-    const platform =  
-        proj.platform || "Redes sociales";  
-  
-    const music =  
-        musicDatabase[niche] ||  
-        musicDatabase.general;  
-  
-    const timeline =  
-        buildTimeline(  
-            duration,  
-            topic,  
-            niche,  
-            platform  
-        );  
-  
-    const seconds =  
-        durationToSeconds(duration);  
-  
-    let strategyText;  
-  
-    if(seconds <= 20){  
-  
-        strategyText =  
-        "La prioridad es velocidad: el espectador debe entender el concepto casi inmediatamente. Cada plano debe aportar información.";  
-  
-    }else if(seconds <= 60){  
-  
-        strategyText =  
-        "La estructura combina atención, contexto, demostración y cierre. La edición debe cambiar de estímulo regularmente sin sentirse caótica.";  
-  
-    }else{  
-  
-        strategyText =  
-        "Al tener más tiempo, el anuncio puede desarrollar una pequeña historia. La clave es dividir la información en bloques para evitar que el ritmo se vuelva plano.";  
-  
+    let scriptExample = "";  
+
+    // Casos personalizados para guiones (Messi/Fútbol o Juegos como "sk")
+    if (topicLower.includes("messi") || topicLower.includes("futbol") || topicLower.includes("fútbol")) {  
+        scriptExample = `  
+            <b>🎬 Gancho (0 - 3s):</b> Imagen épica con texto en pantalla: <i>"¿El secreto prohibido del mejor de la historia?"</i><br><br>  
+            <b>⚡ Desarrollo (3 - 25s):</b> Muestra clips rápidos combinados con datos de su mentalidad. Usa transiciones de zoom agresivas.<br><br>  
+            <b>🔥 Cierre (25 - 30s):</b> Pregunta de interacción: <i>"¿Para ti es el 1 o hay debate? Coméntalo"</i>.  
+        `;  
+    } else if (topicLower.includes("sk") || topicLower.includes("juego") || topicLower.includes("gameplay") || topicLower.includes("partida") || niche === "gaming") {  
+        scriptExample = `  
+            <b>🎬 Gancho (0 - 3s):</b> Clip ultra rápido de una jugada o momento épico de <b>${escapeHTML(topic)}</b> con texto: <i>"¡Nadie conocía este truco secreto!"</i><br><br>  
+            <b>⚡ Desarrollo (3 - 25s):</b> Muestra la jugada clave en pantalla, explica la táctica o cómo superar esa zona difícil de forma dinámica.<br><br>  
+            <b>🔥 Cierre (25 - 30s):</b> Reto a la comunidad: <i>"¿En qué nivel vas tú? Déjamelo en los comentarios"</i>.  
+        `;  
+    } else {  
+        scriptExample = `  
+            <b>🎬 Gancho (0 - 3s):</b> Empieza directo al grano con un problema o dato impactante sobre <b>${escapeHTML(topic)}</b>.<br><br>  
+            <b>⚡ Desarrollo (3 - 25s):</b> 3 pasos o revelaciones clave explicadas de forma dinámica y visual.<br><br>  
+            <b>🔥 Cierre (25 - 30s):</b> Llamado a la acción claro para que la gente comente o comparta.  
+        `;  
     }  
   
     return `  
@@ -2571,169 +2553,51 @@ function buildFinalStrategy(proj){
         </div>  
   
         <div class="section">  
-  
-            <b>${t.projectLabel}</b>  
-            ${capitalize(topic)}  
-  
-            <br>  
-  
-            <b>${t.durationLabel}</b>  
-            ${duration}  
-  
-            <br>  
-  
-            <b>${t.categoryLabel}</b>  
-            ${capitalize(niche)}  
-  
-            <br>  
-  
-            <b>📱 Plataforma:</b>  
-            ${platform}  
-  
+            <b>${t.projectLabel}</b> ${capitalize(topic)}<br>  
+            <b>${t.durationLabel}</b> ${duration}<br>  
+            <b>${t.categoryLabel}</b> ${capitalize(niche)}<br>  
+            <b>📱 Plataforma:</b> ${platform}  
         </div>  
-  
-  
-        <div class="section">  
-  
-            <b>${t.scriptHeader}</b>  
-  
-            ${timeline.map(segment=>`  
-  
-                <div class="script-line">  
-  
-                    <span class="time-code">  
-                        ${segment.time}  
-                    </span>  
-  
-                    —  
-                    <b>${segment.title}</b>  
-  
-                    <div class="tip">  
-                        ${segment.text}  
-                    </div>  
-  
-                </div>  
 
+        <div class="section">  
+            <b>📝 Guion Dinámico y Adaptado:</b><br>  
+            ${scriptExample}  
+        </div>  
+  
+        <div class="section">  
+            <b>${t.scriptHeader}</b>  
+            ${buildTimeline(duration, topic, niche, platform).map(segment=>`  
+                <div class="script-line">  
+                    <span class="time-code">${segment.time}</span> — <b>${segment.title}</b>  
+                    <div class="tip">${segment.text}</div>  
+                </div>  
             `).join("")}  
-  
         </div>  
   
-  
         <div class="section">  
-  
-            <b>${t.strategyHeader}</b>  
-  
-            <br><br>  
-  
-            ${strategyText}  
-  
-            <br><br>  
-  
-            <b>🎯 Público:</b>  
-            Personas interesadas en ${topic} o en el problema/necesidad que resuelve.  
-  
-            <br><br>  
-  
-            <b>🧲 Gancho:</b>  
-            No comenzar con una presentación larga. Mostrar primero el resultado, problema o elemento más interesante.  
-  
-            <br><br>  
-  
-            <b>👁️ Visual:</b>  
-            Mantener el elemento principal en pantalla mientras la información importante aparece mediante texto breve.  
-  
-            <br><br>  
-  
-            <b>✂️ Edición:</b>  
-            Cortes limpios, cambios visuales sincronizados con el ritmo y texto únicamente cuando ayude a comprender el mensaje.  
-  
-            <br><br>  
-  
-            <b>🗣️ Voz:</b>  
-            Tono natural y seguro. Evitar sonar como una lectura mecánica.  
-  
-            <br><br>  
-  
-            <b>📢 CTA:</b>  
-            Una sola acción principal al final. Evitar pedir demasiadas cosas simultáneamente.  
-  
+            <b>${t.musicHeader}</b><br><br>  
+            <b>${t.artistLabel}</b> ${music.artist}<br><br>  
+            <b>${t.trackLabel}</b> ${music.style}<br><br>  
+            <b>🎧 Estilo de audio recomendado:</b> Phonk con buenos graves (bass boost) y efectos especiales (whooshes/impactos).  
         </div>  
-  
-  
-        <div class="section">  
-  
-            <b>${t.platformHeader}</b>  
-  
-            <br><br>  
-  
-            <b>Formato:</b>  
-            Vertical 9:16 si se publicará principalmente en TikTok, Reels o Shorts.  
-  
-            <br><br>  
-  
-            <b>Primeros segundos:</b>  
-            El contenido importante empieza inmediatamente.  
-  
-            <br><br>  
-  
-            <b>Texto:</b>  
-            Frases cortas, grandes y fáciles de leer desde un teléfono.  
-  
-            <br><br>  
-  
-            <b>Retención:</b>  
-            Introducir cambios visuales y pequeños avances de información para mantener curiosidad.  
-  
-        </div>  
-  
-  
-        <div class="section">  
-  
-            <b>${t.musicHeader}</b>  
-  
-            <br><br>  
-  
-            <b>${t.artistLabel}</b>  
-            ${music.artist}  
-  
-            <br><br>  
-  
-            <b>${t.trackLabel}</b>  
-            ${music.style}  
-  
-            <br><br>  
-  
-            <b>🎧 Alternativa para contenido comercial:</b>  
-            ${music.free}  
-  
-        </div>  
-  
-  
-        <div class="section">  
-  
-            <b>🎬 Dirección de edición</b>  
-  
-            <br><br>  
-  
-            • Sin introducción larga.  
-            <br>  
-            • El primer plano debe generar curiosidad.  
-            <br>  
-            • Los textos deben reforzar, no repetir exactamente, la voz.  
-            <br>  
-            • Los cambios de plano deben tener intención.  
-            <br>  
-            • El cierre debe dejar claro qué hacer después.  
-            <br>  
-            • Mantener una identidad visual consistente con ${topic}.  
-  
+
+        <div class="section" style="text-align: center; margin-top: 12px;">  
+            <button onclick="generateAlternativeScript()" style="background: #10B981; color: white; border: none; padding: 8px 14px; border-radius: 8px; cursor: pointer; font-weight: bold;">  
+                🔄 Cambiar / Generar otro guion  
+            </button>  
         </div>  
   
         ${motivation()}  
-  
     `;  
-  
 }  
+
+function generateAlternativeScript() {
+    showTyping();
+    setTimeout(() => {
+        removeTyping();
+        addBotMessage(buildFinalStrategy(currentProject));
+    }, 650);
+}
   
   
 /* =========================================================  
@@ -2806,7 +2670,7 @@ function showThanks(){
   
   
 /* =========================================================  
-   SALUDO  
+   SALUDO DINÁMICO SEGÚN LA HORA DEL DÍA
    ========================================================= */  
   
 function showGreeting(){  
@@ -2816,11 +2680,21 @@ function showGreeting(){
   
     greetingShown = true;  
   
+    const hour = new Date().getHours();
+    let timeGreeting = "¡Hola! 👋";
+    if (hour >= 6 && hour < 12) {
+        timeGreeting = "¡Buenos días! ☀️";
+    } else if (hour >= 12 && hour < 19) {
+        timeGreeting = "¡Buenas tardes! 🌤️";
+    } else {
+        timeGreeting = "¡Buenas noches! 🌙";
+    }
+
     const t =  
         i18n[currentLang];  
   
     addBotMessage(  
-        `${t.greeting}${motivation()}`  
+        `${timeGreeting} Cuéntame qué quieres crear y voy a analizar tu idea para saber qué necesitas.${motivation()}`  
     );  
   
 }  
@@ -2963,7 +2837,7 @@ function modifyCurrentProject(text){
     }else if(/cambia la música|otra música|música diferente|musica diferente/.test(lower)){  
   
         change =  
-            "Cambié la dirección musical por una alternativa que contraste con la anterior.";  
+            "Cambié la dirección musical por una alternativa con bases Phonk y mayor pegada.";  
   
     }else if(/otra versión|otra version|otro guion|otro guión|otra idea/.test(lower)){  
   
