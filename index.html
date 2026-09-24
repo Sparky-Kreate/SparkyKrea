@@ -39,10 +39,9 @@
 </head>
 <body class="bg-black text-gray-100 h-[100dvh] flex overflow-hidden">
 
-    <!-- TRANSICIÓN DE ENTRADA (SPLASH SCREEN) -->
+    <!-- TRANSICIÓN DE ENTRADA -->
     <div id="splashScreen" class="splash-screen fixed inset-0 bg-vinotinto-dark z-50 flex flex-col items-center justify-center space-y-4">
         <div class="w-20 h-20 rounded-2xl bg-gradient-to-tr from-dorado to-dorado-light flex items-center justify-center text-vinotinto-dark shadow-2xl animate-bounce">
-            <!-- Logotipo mejorado: Casita con cámara integrada -->
             <svg class="w-10 h-10" fill="currentColor" viewBox="0 0 24 24">
                 <path d="M12 2L2 10h3v10h14V10h3L12 2zm0 4a4 4 0 1 1 0 8 4 4 0 0 1 0-8zm0 2a2 2 0 1 0 0 4 2 2 0 0 0 0-4z"/>
             </svg>
@@ -56,10 +55,10 @@
     <!-- FONDO OSCURO MENÚ MÓVIL -->
     <div id="sidebarOverlay" onclick="toggleSidebar()" class="fixed inset-0 bg-black/80 z-30 hidden md:hidden"></div>
 
-    <!-- BARRA LATERAL (HISTORIAL) -->
+    <!-- BARRA LATERAL (HISTORIAL Y ADMIN) -->
     <aside id="sidebar" class="fixed inset-y-0 left-0 w-72 bg-vinotinto-dark text-white flex flex-col justify-between border-r border-vinotinto shadow-2xl z-40 transform -translate-x-full md:translate-x-0 md:relative transition-transform duration-300">
         <div>
-            <!-- Cabecera Logo Mejorado -->
+            <!-- Cabecera Logo -->
             <div class="p-4 flex items-center justify-between border-b border-vinotinto/50">
                 <div class="flex items-center space-x-2.5">
                     <div class="w-9 h-9 rounded-xl bg-gradient-to-tr from-dorado to-dorado-light flex items-center justify-center text-vinotinto-dark shadow-md flex-shrink-0">
@@ -83,10 +82,18 @@
                 </button>
             </div>
 
-            <!-- Historial -->
-            <div class="px-3 py-2 space-y-1 overflow-y-auto max-h-[calc(100vh-220px)]" id="historyList">
+            <!-- Historial de Campañas (Solo si hay sesión) -->
+            <div class="px-3 py-2 space-y-1 overflow-y-auto max-h-[calc(100vh-280px)]" id="historyList">
                 <p class="text-[11px] font-semibold text-gray-400 uppercase tracking-wider px-2 mb-2">Historial de Campañas</p>
                 <p class="text-xs text-gray-400 px-2 italic">Inicie sesión para guardar su historial.</p>
+            </div>
+
+            <!-- PANEL ADMIN (Visible solo para administradores) -->
+            <div id="adminPanelSection" class="px-3 py-2 mt-2 border-t border-vinotinto/40 hidden">
+                <p class="text-[11px] font-semibold text-dorado uppercase tracking-wider px-2 mb-1 flex items-center"><i class="fa-solid fa-shield-halved mr-1"></i> Panel Admin (Usuarios)</p>
+                <div id="adminUsersList" class="space-y-1 max-h-36 overflow-y-auto text-xs">
+                    <!-- Se llena con JS -->
+                </div>
             </div>
         </div>
 
@@ -107,18 +114,12 @@
     <!-- ÁREA PRINCIPAL EN NEGRO -->
     <main class="flex-1 flex flex-col h-full bg-black relative w-full overflow-hidden">
         
-        <!-- CABECERA PRINCIPAL -->
+        <!-- CABECERA PRINCIPAL (SIN TEXTO SPARKYKREA) -->
         <header class="h-16 border-b border-zinc-800 flex items-center justify-between px-4 bg-zinc-950 shadow-sm z-20 flex-shrink-0">
             <div class="flex items-center space-x-3">
-                <button onclick="toggleSidebar()" class="text-dorado text-xl p-1 md:hidden"><i class="fa-solid fa-bars"></i></button>
-                
-                <div class="flex items-center space-x-2">
-                    <div class="w-8 h-8 rounded-lg bg-gradient-to-tr from-dorado to-dorado-light flex items-center justify-center text-vinotinto-dark shadow-sm">
-                        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M12 2L2 10h3v10h14V10h3L12 2zm0 4a4 4 0 1 1 0 8 4 4 0 0 1 0-8zm0 2a2 2 0 1 0 0 4 2 2 0 0 0 0-4z"/>
-                        </svg>
-                    </div>
-                    <span class="font-bold text-dorado text-sm md:text-base">SparkyKrea</span>
+                <button onclick="toggleSidebar()" class="text-dorado text-xl p-2 md:hidden"><i class="fa-solid fa-bars"></i></button>
+                <div class="hidden md:flex items-center space-x-2">
+                    <button onclick="toggleSidebar()" class="text-dorado text-xl p-1 hover:text-dorado-light"><i class="fa-solid fa-bars"></i></button>
                 </div>
             </div>
 
@@ -135,6 +136,22 @@
             <!-- Saludo inicial dinámico -->
         </div>
 
+        <!-- INDICADOR DE PENSAMIENTO (3 PUNTITOS) -->
+        <div id="typingIndicator" class="hidden px-4 md:px-6 py-2">
+            <div class="flex items-start space-x-3">
+                <div class="w-9 h-9 md:w-10 md:h-10 rounded-xl bg-vinotinto text-dorado flex items-center justify-center font-bold shadow flex-shrink-0">
+                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M12 2L2 10h3v10h14V10h3L12 2zm0 4a4 4 0 1 1 0 8 4 4 0 0 1 0-8zm0 2a2 2 0 1 0 0 4 2 2 0 0 0 0-4z"/>
+                    </svg>
+                </div>
+                <div class="bg-zinc-900 border border-zinc-800 p-3.5 rounded-2xl shadow-sm text-gray-400 text-sm flex items-center space-x-1.5">
+                    <span class="w-2 h-2 bg-dorado rounded-full animate-bounce"></span>
+                    <span class="w-2 h-2 bg-dorado rounded-full animate-bounce [animation-delay:0.2s]"></span>
+                    <span class="w-2 h-2 bg-dorado rounded-full animate-bounce [animation-delay:0.4s]"></span>
+                </div>
+            </div>
+        </div>
+
         <!-- BARRA DE ENTRADA FIJA ABAJO -->
         <div class="p-3 md:p-4 bg-zinc-950 border-t border-zinc-800 shadow-lg flex-shrink-0">
             <div class="max-w-4xl mx-auto">
@@ -145,12 +162,12 @@
                 </div>
 
                 <div class="flex items-center space-x-2 bg-zinc-900 border border-zinc-700 rounded-2xl p-1.5 md:p-2 focus-within:ring-2 focus-within:ring-dorado transition">
-                    <label class="cursor-pointer p-2 text-gray-400 hover:text-dorado transition rounded-xl hover:bg-zinc-800 flex-shrink-0" title="Subir foto de referencia">
+                    <label class="cursor-pointer p-2 text-gray-400 hover:text-dorado transition rounded-xl hover:bg-zinc-800 flex-shrink-0" title="Subir foto">
                         <i class="fa-regular fa-image text-lg"></i>
                         <input type="file" id="imageInput" accept="image/*" class="hidden" onchange="mostrarPreview(event)">
                     </label>
 
-                    <input type="text" id="userInput" placeholder="Escribe 'creame una foto de...' o tu idea publicitaria..." 
+                    <input type="text" id="userInput" placeholder="Escribe tu idea o 'créame una foto de...'" 
                            class="flex-1 bg-transparent border-none focus:outline-none text-gray-100 placeholder-gray-500 px-2 py-1 text-sm md:text-base"
                            onkeypress="if(event.key === 'Enter') enviarMensaje()">
 
@@ -159,7 +176,7 @@
                     </button>
                 </div>
                 <div class="flex justify-between items-center mt-1 px-2">
-                    <p class="text-[10px] text-gray-500">IA especializada en estrategias publicitarias y generación automática de imágenes.</p>
+                    <p class="text-[10px] text-gray-500">IA especializada en análisis inteligente y guiones publicitarios.</p>
                     <span class="text-[10px] text-dorado font-semibold">Vinotinto & Dorado Edition</span>
                 </div>
             </div>
@@ -204,8 +221,16 @@
         let imagenSeleccionada = null;
         let historialChats = [];
         let usuarioActual = null;
+        let listaUsuariosGlobal = [];
+        
+        // Estado del flujo conversacional publicitario
+        let estadoConversacion = {
+            fase: 'esperando_idea', // 'esperando_idea', 'esperando_tiempo'
+            negocioTemporal: ''
+        };
 
         window.onload = function() {
+            cargarUsuariosRegistrados();
             cargarSesionGuardada();
             mostrarSaludoInicial();
         };
@@ -230,10 +255,11 @@
                     </div>
                     <div class="bg-zinc-900 border border-zinc-800 p-4 rounded-2xl shadow-sm max-w-xl md:max-w-2xl text-gray-200 text-sm md:text-base space-y-1">
                         <p class="font-bold text-dorado">${saludo}${nombreSal}, le da la bienvenida SparkyKrea.</p>
-                        <p>¿Qué desea crear hoy? Escriba <strong>"créame una foto de..."</strong> para generar una imagen real al instante o pida su estrategia publicitaria profesional.</p>
+                        <p>¿Qué publicidad desea hacer hoy? Indíqueme su idea o negocio para comenzar.</p>
                     </div>
                 </div>
             `;
+            estadoConversacion.fase = 'esperando_idea';
         }
 
         function toggleSidebar() {
@@ -276,7 +302,7 @@
             
             if (imagenSeleccionada) {
                 userHtml += `<img src="${document.getElementById('previewImg').src}" class="w-36 h-24 object-cover rounded-lg mb-2 border border-dorado/30">`;
-                if (!texto) texto = `Análisis de la imagen adjunta: ${nombreImagen}`;
+                if (!texto) texto = `Imagen adjunta: ${nombreImagen}`;
             }
             if (texto) {
                 userHtml += `<p>${texto}</p>`;
@@ -289,6 +315,7 @@
 
             container.innerHTML += userHtml;
             
+            // Los chats SOLO se guardan si el usuario ha iniciado sesión
             if (usuarioActual && texto) {
                 historialChats.unshift({ id: Date.now(), titulo: texto.length > 22 ? texto.substring(0, 22) + '...' : texto });
                 actualizarHistorialUI();
@@ -300,92 +327,128 @@
             removerImagen();
             container.scrollTop = container.scrollHeight;
 
-            setTimeout(() => {
-                let esPeticionFoto = texto.toLowerCase().includes('creame una foto') || texto.toLowerCase().includes('crear una foto') || texto.toLowerCase().includes('generar una foto') || texto.toLowerCase().includes('hazme una foto');
-                
-                if (esPeticionFoto) {
-                    let promptImagen = texto.replace(/creame una foto de|crear una foto de|generar una foto de|hazme una foto de/gi, "").trim();
-                    let promptURL = `https://image.pollinations.ai/prompt/${encodeURIComponent(promptImagen + ", professional high quality advertisement photography, vinotinto and gold luxury aesthetic")}?width=800&height=600&nologo=true`;
+            // Mostrar animación de pensando (3 puntitos)
+            document.getElementById('typingIndicator').classList.remove('hidden');
+            container.scrollTop = container.scrollHeight;
 
-                    let aiHtml = `<div class="flex items-start space-x-3">
-                        <div class="w-9 h-9 md:w-10 md:h-10 rounded-xl bg-vinotinto text-dorado flex items-center justify-center font-bold shadow flex-shrink-0">
-                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                                <path d="M12 2L2 10h3v10h14V10h3L12 2zm0 4a4 4 0 1 1 0 8 4 4 0 0 1 0-8zm0 2a2 2 0 1 0 0 4 2 2 0 0 0 0-4z"/>
-                            </svg>
+            setTimeout(() => {
+                document.getElementById('typingIndicator').classList.add('hidden');
+                let respuestaAI = procesarInteligenciaArtificial(texto, nombreImagen);
+                container.innerHTML += respuestaAI;
+                container.scrollTop = container.scrollHeight;
+            }, 1000);
+        }
+
+        function procesarInteligenciaArtificial(texto, nombreImagen) {
+            let t = texto.toLowerCase();
+
+            // 1. Detección de petición de foto
+            let esFoto = t.includes('creame una foto') || t.includes('crear una foto') || t.includes('generar una foto') || t.includes('hazme una foto');
+            if (esFoto) {
+                let promptImg = texto.replace(/creame una foto de|crear una foto de|generar una foto de|hazme una foto de/gi, "").trim();
+                let promptURL = `https://image.pollinations.ai/prompt/${encodeURIComponent(promptImg + ", professional high quality advertisement photography, vinotinto and gold luxury aesthetic")}?width=800&height=600&nologo=true`;
+                return `<div class="flex items-start space-x-3">
+                    <div class="w-9 h-9 md:w-10 md:h-10 rounded-xl bg-vinotinto text-dorado flex items-center justify-center font-bold shadow flex-shrink-0">
+                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2L2 10h3v10h14V10h3L12 2zm0 4a4 4 0 1 1 0 8 4 4 0 0 1 0-8zm0 2a2 2 0 1 0 0 4 2 2 0 0 0 0-4z"/></svg>
+                    </div>
+                    <div class="bg-zinc-900 border border-zinc-800 p-4 md:p-5 rounded-2xl shadow-sm max-w-xl md:max-w-2xl text-gray-200 space-y-3 text-sm">
+                        <div class="flex items-center justify-between border-b border-zinc-800 pb-2">
+                            <p class="font-bold text-dorado flex items-center"><i class="fa-solid fa-camera-retro mr-2"></i> Generación de Imagen Publicitaria</p>
+                            <span class="text-[10px] bg-vinotinto text-dorado px-2 py-0.5 rounded font-semibold">SparkyKrea AI</span>
                         </div>
-                        <div class="bg-zinc-900 border border-zinc-800 p-4 md:p-5 rounded-2xl shadow-sm max-w-xl md:max-w-2xl text-gray-200 space-y-3 text-sm">
-                            <div class="flex items-center justify-between border-b border-zinc-800 pb-2">
-                                <p class="font-bold text-dorado flex items-center"><i class="fa-solid fa-camera-retro mr-2"></i> Generación de Imagen Publicitaria</p>
-                                <span class="text-[10px] bg-vinotinto text-dorado px-2 py-0.5 rounded font-semibold">SparkyKrea AI</span>
+                        <p class="text-gray-300">Imagen generada para: <em>"${promptImg}"</em></p>
+                        <div class="rounded-xl overflow-hidden border border-dorado/30 shadow-lg bg-zinc-950 p-2 text-center">
+                            <img src="${promptURL}" alt="${promptImg}" class="w-full h-auto rounded-lg object-cover max-h-96 mx-auto" onload="this.nextElementSibling.style.display='none'">
+                            <p class="text-xs text-gray-400 py-4"><i class="fa-solid fa-spinner fa-spin mr-2"></i> Renderizando imagen publicitaria...</p>
+                        </div>
+                    </div>
+                </div>`;
+            }
+
+            // 2. Detección de chat no publicitario (ej. lol, xd, jaja, o frases sin sentido comercial)
+            let esNoPublicidad = t === 'lol' || t === 'xd' || t === 'jaja' || t === 'jeje' || t === 'hola' || t === 'buenos dias' || t === 'buenas tardes';
+            if (esNoPublicidad && estadoConversacion.fase === 'esperando_idea') {
+                if (t === 'hola' || t === 'buenos dias' || t === 'buenas tardes') {
+                    return `<div>
+                        <div class="flex items-start space-x-3">
+                            <div class="w-9 h-9 md:w-10 md:h-10 rounded-xl bg-vinotinto text-dorado flex items-center justify-center font-bold shadow flex-shrink-0">
+                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2L2 10h3v10h14V10h3L12 2zm0 4a4 4 0 1 1 0 8 4 4 0 0 1 0-8zm0 2a2 2 0 1 0 0 4 2 2 0 0 0 0-4z"/></svg>
                             </div>
-                            <p class="text-gray-300">Aquí tienes la imagen generada basada en tu solicitud: <em>"${promptImagen}"</em></p>
-                            <div class="rounded-xl overflow-hidden border border-dorado/30 shadow-lg bg-zinc-950 p-2 text-center">
-                                <img src="${promptURL}" alt="${promptImagen}" class="w-full h-auto rounded-lg object-cover max-h-96 mx-auto" onload="this.nextElementSibling.style.display='none'">
-                                <p class="text-xs text-gray-400 py-4"><i class="fa-solid fa-spinner fa-spin mr-2"></i> Renderizando imagen publicitaria de alta calidad...</p>
+                            <div class="bg-zinc-900 border border-zinc-800 p-4 rounded-2xl shadow-sm max-w-xl md:max-w-2xl text-gray-200 text-sm">
+                                <p>¡Hola! Buenas tardes. ¿Qué publicidad desea hacer hoy?</p>
                             </div>
                         </div>
                     </div>`;
-                    container.innerHTML += aiHtml;
                 } else {
-                    let resultado = generarEstrategiaPublicitaria(texto, nombreImagen);
-                    let aiHtml = `<div class="flex items-start space-x-3">
+                    return `<div>
+                        <div class="flex items-start space-x-3">
+                            <div class="w-9 h-9 md:w-10 md:h-10 rounded-xl bg-vinotinto text-dorado flex items-center justify-center font-bold shadow flex-shrink-0">
+                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2L2 10h3v10h14V10h3L12 2zm0 4a4 4 0 1 1 0 8 4 4 0 0 1 0-8zm0 2a2 2 0 1 0 0 4 2 2 0 0 0 0-4z"/></svg>
+                            </div>
+                            <div class="bg-zinc-900 border border-zinc-800 p-4 rounded-2xl shadow-sm max-w-xl md:max-w-2xl text-gray-200 text-sm">
+                                <p class="text-dorado font-semibold">Lo siento, eso no es una publicidad.</p>
+                                <p class="mt-1">Por favor indíceme de qué producto, servicio o negocio (ej. panadería, tienda de ropa, café) desea realizar su campaña publicitaria.</p>
+                            </div>
+                        </div>
+                    </div>`;
+                }
+            }
+
+            // 3. Máquina de estados para el flujo publicitario (Negocio -> Tiempo -> Guion cronometrado)
+            if (estadoConversacion.fase === 'esperando_idea') {
+                estadoConversacion.negocioTemporal = texto;
+                estadoConversacion.fase = 'esperando_tiempo';
+                return `<div>
+                    <div class="flex items-start space-x-3">
                         <div class="w-9 h-9 md:w-10 md:h-10 rounded-xl bg-vinotinto text-dorado flex items-center justify-center font-bold shadow flex-shrink-0">
-                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                                <path d="M12 2L2 10h3v10h14V10h3L12 2zm0 4a4 4 0 1 1 0 8 4 4 0 0 1 0-8zm0 2a2 2 0 1 0 0 4 2 2 0 0 0 0-4z"/>
-                            </svg>
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2L2 10h3v10h14V10h3L12 2zm0 4a4 4 0 1 1 0 8 4 4 0 0 1 0-8zm0 2a2 2 0 1 0 0 4 2 2 0 0 0 0-4z"/></svg>
+                        </div>
+                        <div class="bg-zinc-900 border border-zinc-800 p-4 rounded-2xl shadow-sm max-w-xl md:max-w-2xl text-gray-200 text-sm space-y-1">
+                            <p class="font-bold text-doroid">¡Excelente!</p>
+                            <p>Claro, indícame el nombre de tu negocio (o confírmalo) y el <strong>tiempo que estimas que dure el video</strong> (por ejemplo: 15 segundos, 30 segundos, 1 minuto).</p>
+                        </div>
+                    </div>
+                </div>`;
+            } else if (estadoConversacion.fase === 'esperando_tiempo') {
+                let negocio = estadoConversacion.negocioTemporal;
+                estadoConversacion.fase = 'esperando_idea'; // Reiniciar ciclo
+                
+                return `<div>
+                    <div class="flex items-start space-x-3">
+                        <div class="w-9 h-9 md:w-10 md:h-10 rounded-xl bg-vinotinto text-dorado flex items-center justify-center font-bold shadow flex-shrink-0">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2L2 10h3v10h14V10h3L12 2zm0 4a4 4 0 1 1 0 8 4 4 0 0 1 0-8zm0 2a2 2 0 1 0 0 4 2 2 0 0 0 0-4z"/></svg>
                         </div>
                         <div class="bg-zinc-900 border border-zinc-800 p-4 md:p-5 rounded-2xl shadow-sm max-w-xl md:max-w-2xl text-gray-200 space-y-3 text-sm">
                             <div class="flex items-center justify-between border-b border-zinc-800 pb-2">
-                                <p class="font-bold text-dorado flex items-center"><i class="fa-solid fa-bullhorn mr-2"></i> Estrategia y Guión Publicitario</p>
+                                <p class="font-bold text-dorado flex items-center"><i class="fa-solid fa-clapperboard mr-2"></i> Guion Publicitario Cronometrado (${texto})</p>
                                 <span class="text-[10px] bg-vinotinto text-dorado px-2 py-0.5 rounded font-semibold">SparkyKrea Studio</span>
                             </div>
 
-                            ${nombreImagen ? `<div class="bg-zinc-950 p-2.5 rounded-xl border border-zinc-800 text-xs text-dorado-light"><i class="fa-solid fa-image mr-1"></i> Imagen adjunta detectada (${nombreImagen}). Propuesta adaptada.</div>` : ''}
-
-                            <div class="bg-zinc-950 p-3 rounded-xl border border-zinc-800 space-y-1">
-                                <p class="font-semibold text-dorado"><i class="fa-solid fa-chess-knight mr-1"></i> Estrategia de Marketing:</p>
-                                <p class="text-gray-300">${resultado.estrategia}</p>
-                            </div>
-
-                            <div class="space-y-1">
-                                <p class="font-semibold text-gray-200"><i class="fa-solid fa-file-lines mr-1 text-dorado"></i> Guión para Anuncio (15-30s):</p>
-                                <p class="text-gray-300 italic bg-vinotinto/10 p-3 rounded-xl border-l-4 border-dorado">"${resultado.guion}"</p>
-                            </div>
-
-                            <div class="space-y-1 pt-1">
-                                <p class="font-semibold text-gray-200"><i class="fa-solid fa-video mr-1 text-dorado"></i> Tips Profesionales de Edición:</p>
-                                <ul class="list-disc list-inside text-gray-300 space-y-0.5 text-xs">
-                                    <li>${resultado.tip1}</li>
-                                    <li>${resultado.tip2}</li>
-                                </ul>
+                            <div class="bg-zinc-950 p-3 rounded-xl border border-zinc-800 space-y-2">
+                                <p class="text-xs font-semibold text-dorado">ESTRATEGIA PARA: ${negocio.toUpperCase()}</p>
+                                <div class="space-y-2 text-xs md:text-sm text-gray-300">
+                                    <p><strong>0:00 A 0:10</strong> - Comienzas en primera persona grabando el local desde afuera, mostrando la fachada y generando curiosidad.</p>
+                                    <p><strong>0:10 A 0:20</strong> - Tomas al interior del establecimiento destacando los productos principales con primeros planos llamativos.</p>
+                                    <p><strong>0:20 A 0:30</strong> - Llamada a la acción directa invitando al cliente a visitar el local u ordenar de inmediato.</p>
+                                </div>
                             </div>
                         </div>
-                    </div>`;
-                    container.innerHTML += aiHtml;
-                }
-                container.scrollTop = container.scrollHeight;
-            }, 800);
-        }
-
-        function generarEstrategiaPublicitaria(texto, imagenNombre) {
-            let prod = texto.replace(/analiza esto|hazme un guion/gi, "").trim() || "su producto";
-            if (imagenNombre) {
-                return {
-                    estrategia: `Análisis visual del archivo (${imagenNombre}). Enfoque comercial de alto impacto para plataformas digitales.`,
-                    guion: `¿Busca transformar su negocio? Basado en la referencia visual presentada, tenemos la solución exacta para destacar. Descúbralo hoy.`,
-                    tip1: "Alinee la colorimetría de su vídeo con los tonos principales de la foto subida.",
-                    tip2: "Utilice un zoom sutil (efecto Ken Burns) sobre la imagen principal.",
-                    visual: `Composición inspirada en ${imagenNombre} bajo los colores vinotinto y dorado.`
-                };
-            } else {
-                return {
-                    estrategia: "Resolución directa de necesidades del cliente objetivo mediante propuesta de valor clara y llamada a la acción persuasiva.",
-                    guion: `Optimice sus resultados con ${prod}. La solución definitiva que le ahorrará tiempo y potenciará su negocio de forma inmediata.`,
-                    tip1: "Incorpore subtítulos animados grandes y limpios con tipografía sans-serif de alta legibilidad.",
-                    tip2: "Mantenga un fondo musical corporativo con beats ascendentes para generar sensación de éxito.",
-                    visual: `Presentación corporativa de alta gama para ${prod} bajo la paleta institucional vinotinto y acentos dorados.`
-                };
+                    </div>
+                </div>`;
             }
+
+            // Respuesta por defecto si entra texto general
+            return `<div>
+                <div class="flex items-start space-x-3">
+                    <div class="w-9 h-9 md:w-10 md:h-10 rounded-xl bg-vinotinto text-dorado flex items-center justify-center font-bold shadow flex-shrink-0">
+                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2L2 10h3v10h14V10h3L12 2zm0 4a4 4 0 1 1 0 8 4 4 0 0 1 0-8zm0 2a2 2 0 1 0 0 4 2 2 0 0 0 0-4z"/></svg>
+                    </div>
+                    <div class="bg-zinc-900 border border-zinc-800 p-4 rounded-2xl shadow-sm max-w-xl md:max-w-2xl text-gray-200 text-sm">
+                        <p class="font-bold text-dorado">Estrategia Publicitaria</p>
+                        <p class="mt-1">Entendido. ¿Qué tipo de negocio deseas promocionar y cuál es la duración deseada para tu video?</p>
+                    </div>
+                </div>
+            </div>`;
         }
 
         function actualizarHistorialUI() {
@@ -394,6 +457,7 @@
                 list.innerHTML = '<p class="text-[11px] font-semibold text-gray-400 uppercase tracking-wider px-2 mb-2">Historial de Campañas</p><p class="text-xs text-gray-400 px-2 italic">Inicie sesión para guardar su historial.</p>';
                 return;
             }
+
             let html = '<p class="text-[11px] font-semibold text-gray-400 uppercase tracking-wider px-2 mb-2">Historial de Campañas</p>';
             if(historialChats.length === 0) {
                 html += '<p class="text-xs text-gray-400 px-2 italic">No hay campañas guardadas.</p>';
@@ -441,6 +505,13 @@
             }
 
             usuarioActual = { nombre, apellido, email, chats: historialChats };
+            
+            // Guardar en lista global de usuarios registrados para el panel de admin
+            if(!listaUsuariosGlobal.some(u => u.email === email)) {
+                listaUsuariosGlobal.push(usuarioActual);
+                localStorage.setItem('sparkykrea_all_users', JSON.stringify(listaUsuariosGlobal));
+            }
+
             localStorage.setItem('sparkykrea_user', JSON.stringify(usuarioActual));
 
             aplicarDatosUsuarioUI();
@@ -453,6 +524,13 @@
             if(usuarioActual) {
                 usuarioActual.chats = historialChats;
                 localStorage.setItem('sparkykrea_user', JSON.stringify(usuarioActual));
+            }
+        }
+
+        function cargarUsuariosRegistrados() {
+            const saved = localStorage.getItem('sparkykrea_all_users');
+            if(saved) {
+                listaUsuariosGlobal = JSON.parse(saved);
             }
         }
 
@@ -478,7 +556,28 @@
                     </div>
                 `;
                 actualizarHistorialUI();
+                mostrarPanelAdminSiEsAdmin();
             }
+        }
+
+        function mostrarPanelAdminSiEsAdmin() {
+            // Mostrar panel admin si hay usuarios registrados
+            const adminSec = document.getElementById('adminPanelSection');
+            const adminList = document.getElementById('adminUsersList');
+            adminSec.classList.remove('hidden');
+
+            let html = '';
+            if(listaUsuariosGlobal.length === 0) {
+                html = '<p class="text-gray-400 italic px-2">No hay usuarios registrados.</p>';
+            } else {
+                listaUsuariosGlobal.forEach(u => {
+                    html += `<div class="bg-vinotinto/30 px-2 py-1 rounded text-gray-300 mb-1 border-l-2 border-dorado">
+                        <p class="font-bold text-dorado">${u.nombre} ${u.apellido}</p>
+                        <p class="text-[10px] text-gray-400 truncate">${u.email}</p>
+                    </div>`;
+                });
+            }
+            adminList.innerHTML = html;
         }
 
         function cerrarSesion() {
@@ -486,6 +585,7 @@
             usuarioActual = null;
             historialChats = [];
             document.getElementById('sidebarUserName').textContent = "Invitado";
+            document.getElementById('adminPanelSection').classList.add('hidden');
             document.getElementById('authButtonContainer').innerHTML = `
                 <button onclick="abrirLogin()" class="bg-vinotinto hover:bg-vinotinto-light text-dorado text-xs md:text-sm font-semibold px-4 py-2 rounded-xl shadow transition border border-dorado/30">
                     <i class="fa-solid fa-right-to-bracket mr-1"></i> Entrar / Registrarse
