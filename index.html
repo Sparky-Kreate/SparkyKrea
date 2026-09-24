@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SparkyKrea - IA de Marketing y Publicidad</title>
-    <!-- Tailwind CSS para diseño moderno -->
+    <!-- Tailwind CSS para diseño adaptable a PC y Móviles -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -30,146 +30,132 @@
 </head>
 <body class="bg-gray-50 text-gray-800 h-screen flex flex-col md:flex-row overflow-hidden">
 
-    <!-- BARRA LATERAL (Sidebar) -->
-    <aside class="w-full md:w-72 bg-vinotinto-dark text-white flex flex-col justify-between border-r border-vinotinto-light shadow-xl z-10">
+    <!-- BARRA LATERAL (Adaptable en móviles) -->
+    <aside id="sidebar" class="w-full md:w-72 bg-vinotinto-dark text-white flex flex-col justify-between border-r border-vinotinto-light shadow-xl z-20">
         <div>
             <!-- Logo y Nombre -->
-            <div class="p-5 flex items-center space-x-3 border-b border-vinotinto/50">
-                <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-dorado to-dorado-light flex items-center justify-center text-vinotinto-dark font-bold text-xl shadow-md">
-                    <i class="fa-solid fa-bolt"></i>
+            <div class="p-4 md:p-5 flex items-center justify-between border-b border-vinotinto/50">
+                <div class="flex items-center space-x-3">
+                    <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-dorado to-dorado-light flex items-center justify-center text-vinotinto-dark font-bold text-xl shadow-md">
+                        <i class="fa-solid fa-bolt"></i>
+                    </div>
+                    <div>
+                        <h1 class="font-bold text-lg tracking-wide text-dorado">SparkyKrea</h1>
+                        <p class="text-xs text-gray-300">Agencia & IA Publicitaria</p>
+                    </div>
                 </div>
-                <div>
-                    <h1 class="font-bold text-lg tracking-wide text-dorado">SparkyKrea</h1>
-                    <p class="text-xs text-gray-300">Agencia & IA Publicitaria</p>
-                </div>
+                <!-- Botón cerrar menú en móviles -->
+                <button onclick="toggleSidebar()" class="md:hidden text-dorado text-xl"><i class="fa-solid fa-xmark"></i></button>
             </div>
 
             <!-- Botón Nueva Consulta -->
             <div class="p-4">
-                <button onclick="nuevoChat()" class="w-full bg-dorado hover:bg-dorado-dark text-vinotinto-dark font-semibold py-2.5 px-4 rounded-xl shadow transition duration-200 flex items-center justify-center space-x-2">
+                <button onclick="nuevoChat(); toggleSidebar();" class="w-full bg-dorado hover:bg-dorado-dark text-vinotinto-dark font-semibold py-2.5 px-4 rounded-xl shadow transition duration-200 flex items-center justify-center space-x-2">
                     <i class="fa-solid fa-plus"></i>
                     <span>Nuevo Guión / Idea</span>
                 </button>
             </div>
 
             <!-- Historial de Chats -->
-            <div class="px-4 py-2 space-y-1 overflow-y-auto max-h-[calc(100vh-260px)]">
+            <div class="px-4 py-2 space-y-1 overflow-y-auto max-h-48 md:max-h-[calc(100vh-260px)]">
                 <p class="text-xs font-semibold text-gray-400 uppercase tracking-wider px-2 mb-2">Recientes</p>
-                <a href="#" class="block px-3 py-2 rounded-lg text-sm bg-vinotinto/60 text-dorado-light truncate border-l-4 border-dorado">Campaña Café Gourmet</a>
-                <a href="#" class="block px-3 py-2 rounded-lg text-sm text-gray-300 hover:bg-vinotinto/40 truncate">Guión Reel Ropa Deportiva</a>
-                <a href="#" class="block px-3 py-2 rounded-lg text-sm text-gray-300 hover:bg-vinotinto/40 truncate">Ideas Lanzamiento App</a>
+                <a href="#" class="block px-3 py-2 rounded-lg text-sm bg-vinotinto/60 text-dorado-light truncate border-l-4 border-dorado">Campaña Inicial Sparky</a>
+                <a href="#" class="block px-3 py-2 rounded-lg text-sm text-gray-300 hover:bg-vinotinto/40 truncate">Guión Publicitario Redes</a>
             </div>
         </div>
 
-        <!-- Perfil / Inicio de Sesión -->
+        <!-- Perfil / Sesión -->
         <div class="p-4 border-t border-vinotinto/50 bg-vinotinto-dark/50">
-            <div id="userSection" class="flex items-center justify-between">
+            <div class="flex items-center justify-between">
                 <div class="flex items-center space-x-3">
                     <div class="w-9 h-9 rounded-full bg-dorado text-vinotinto-dark font-bold flex items-center justify-center">
                         <i class="fa-solid fa-user"></i>
                     </div>
                     <div>
-                        <p class="text-sm font-medium text-white" id="userName">Invitado</p>
-                        <p class="text-xs text-dorado">Plan Gratuito</p>
+                        <p class="text-sm font-medium text-white" id="userName">Creador</p>
+                        <p class="text-xs text-dorado">Modo Gratuito ($0)</p>
                     </div>
                 </div>
-                <button onclick="abrirLogin()" class="text-xs bg-vinotinto-light hover:bg-dorado hover:text-vinotinto-dark text-white py-1.5 px-3 rounded-lg transition">
-                    Entrar
-                </button>
             </div>
         </div>
     </aside>
 
-    <!-- ÁREA PRINCIPAL DE CHAT -->
-    <main class="flex-1 flex flex-col h-full bg-white">
-        <!-- Cabecera del Chat -->
-        <header class="h-16 border-b border-gray-200 flex items-center justify-between px-6 bg-white shadow-sm z-0">
+    <!-- ÁREA PRINCIPAL -->
+    <main class="flex-1 flex flex-col h-full bg-white relative">
+        <!-- Cabecera -->
+        <header class="h-16 border-b border-gray-200 flex items-center justify-between px-4 md:px-6 bg-white shadow-sm z-10">
             <div class="flex items-center space-x-3">
+                <button onclick="toggleSidebar()" class="md:hidden text-vinotinto text-xl mr-1"><i class="fa-solid fa-bars"></i></button>
                 <span class="inline-block w-3 h-3 bg-green-500 rounded-full animate-pulse"></span>
-                <h2 class="font-semibold text-gray-700">SparkyKrea AI - Generador de Guiones & Creatividades</h2>
+                <h2 class="font-semibold text-gray-700 text-sm md:text-base truncate">SparkyKrea AI - Guiones e Imágenes</h2>
             </div>
-            <div class="flex items-center space-x-2">
-                <span class="text-xs bg-dorado-light text-vinotinto-dark px-3 py-1 rounded-full font-medium border border-dorado/40">
-                    <i class="fa-solid fa-wand-magic-sparkles mr-1"></i> Modo Publicidad Activo
-                </span>
-            </div>
+            <span class="text-xs bg-dorado-light text-vinotinto-dark px-2.5 py-1 rounded-full font-medium border border-dorado/40 hidden sm:inline-block">
+                <i class="fa-solid fa-wand-magic-sparkles mr-1"></i> 100% Gratis
+            </span>
         </header>
 
         <!-- Contenedor de Mensajes -->
-        <div id="chatContainer" class="flex-1 overflow-y-auto p-6 space-y-6 bg-gray-50/50">
-            <!-- Mensaje de bienvenida de la IA -->
-            <div class="flex items-start space-x-4">
-                <div class="w-10 h-10 rounded-xl bg-vinotinto text-dorado flex items-center justify-center font-bold shadow flex-shrink-0">
+        <div id="chatContainer" class="flex-1 overflow-y-auto p-4 md:p-6 space-y-6 bg-gray-50/50">
+            <!-- Mensaje de Bienvenida -->
+            <div class="flex items-start space-x-3 md:space-x-4">
+                <div class="w-9 h-9 md:w-10 md:h-10 rounded-xl bg-vinotinto text-dorado flex items-center justify-center font-bold shadow flex-shrink-0">
                     <i class="fa-solid fa-bolt"></i>
                 </div>
-                <div class="bg-white border border-gray-200 p-4 rounded-2xl shadow-sm max-w-2xl text-gray-700">
-                    <p class="font-semibold text-vinotinto mb-1">¡Hola! Soy Sparky, tu copiloto creativo.</p>
-                    <p>¿Qué tipo de publicidad o guión necesitas hoy? Cuéntame sobre tu marca, sube una foto de referencia o dime tu objetivo y te armaré las mejores ideas y conceptos visuales.</p>
+                <div class="bg-white border border-gray-200 p-4 rounded-2xl shadow-sm max-w-xl md:max-w-2xl text-gray-700 text-sm md:text-base">
+                    <p class="font-semibold text-vinotinto mb-1">¡Hola! Soy Sparky, tu IA de marketing.</p>
+                    <p>Dime qué producto, servicio o negocio quieres promocionar, sube una foto de referencia y te crearé el guión publicitario perfecto y la idea visual al instante.</p>
                 </div>
             </div>
         </div>
 
-        <!-- Barra de Entrada y Herramientas -->
-        <div class="p-4 bg-white border-t border-gray-200 shadow-lg">
+        <!-- Barra de Entrada -->
+        <div class="p-3 md:p-4 bg-white border-t border-gray-200 shadow-lg">
             <div class="max-w-4xl mx-auto">
-                <!-- Vista previa de imagen seleccionada -->
+                <!-- Vista previa de imagen -->
                 <div id="imagePreviewContainer" class="hidden mb-2 flex items-center space-x-2 bg-gray-100 p-2 rounded-xl w-fit">
-                    <img id="previewImg" src="" alt="Preview" class="w-12 h-12 object-cover rounded-lg">
+                    <img id="previewImg" src="" alt="Preview" class="w-10 h-10 object-cover rounded-lg">
                     <span id="fileName" class="text-xs text-gray-600 truncate max-w-xs"></span>
                     <button onclick="removerImagen()" class="text-red-500 hover:text-red-700 text-xs px-2"><i class="fa-solid fa-xmark"></i></button>
                 </div>
 
-                <div class="flex items-center space-x-2 bg-gray-50 border border-gray-300 rounded-2xl p-2 focus-within:ring-2 focus-within:ring-dorado focus-within:border-transparent transition">
+                <div class="flex items-center space-x-2 bg-gray-50 border border-gray-300 rounded-2xl p-2 focus-within:ring-2 focus-within:ring-dorado transition">
                     <!-- Botón para subir fotos -->
-                    <label class="cursor-pointer p-2.5 text-gray-500 hover:text-vinotinto transition rounded-xl hover:bg-gray-200">
+                    <label class="cursor-pointer p-2 text-gray-500 hover:text-vinotinto transition rounded-xl hover:bg-gray-200 flex-shrink-0">
                         <i class="fa-regular fa-image text-lg"></i>
                         <input type="file" id="imageInput" accept="image/*" class="hidden" onchange="mostrarPreview(event)">
                     </label>
 
                     <!-- Input de Texto -->
-                    <input type="text" id="userInput" placeholder="Ej: Escribe una idea para vender zapatos deportivos en Instagram..." 
-                           class="flex-1 bg-transparent border-none focus:outline-none text-gray-700 px-2 py-1"
+                    <input type="text" id="userInput" placeholder="Ej: Guión para vender café artesanal en Instagram..." 
+                           class="flex-1 bg-transparent border-none focus:outline-none text-gray-700 px-2 py-1 text-sm md:text-base"
                            onkeypress="if(event.key === 'Enter') enviarMensaje()">
 
                     <!-- Botón Enviar -->
-                    <button onclick="enviarMensaje()" class="bg-vinotinto hover:bg-vinotinto-light text-dorado p-2.5 rounded-xl shadow transition duration-200 flex items-center justify-center w-11 h-11">
+                    <button onclick="enviarMensaje()" class="bg-vinotinto hover:bg-vinotinto-light text-dorado p-2.5 rounded-xl shadow transition duration-200 flex items-center justify-center w-10 h-10 md:w-11 md:h-11 flex-shrink-0">
                         <i class="fa-solid fa-paper-plane"></i>
                     </button>
                 </div>
-                <div class="flex justify-between items-center mt-2 px-2">
-                    <p class="text-[11px] text-gray-400">SparkyKrea puede generar ideas, guiones publicitarios e imágenes conceptuales.</p>
-                    <span class="text-[11px] text-vinotinto font-medium">Vinotinto & Dorado Edition</span>
+                <div class="flex justify-between items-center mt-1.5 px-2">
+                    <p class="text-[10px] md:text-[11px] text-gray-400">Funciona en PC, tablets y cualquier celular.</p>
+                    <span class="text-[10px] md:text-[11px] text-vinotinto font-medium">SparkyKrea Engine</span>
                 </div>
             </div>
         </div>
     </main>
 
-    <!-- MODAL DE INICIO DE SESIÓN -->
-    <div id="loginModal" class="fixed inset-0 bg-black/50 backdrop-blur-sm hidden items-center justify-center z-50">
-        <div class="bg-white rounded-2xl p-8 max-w-md w-full shadow-2xl border-t-4 border-dorado">
-            <div class="flex justify-between items-center mb-6">
-                <h3 class="text-xl font-bold text-vinotinto">Iniciar Sesión en SparkyKrea</h3>
-                <button onclick="cerrarLogin()" class="text-gray-400 hover:text-gray-600"><i class="fa-solid fa-xmark text-lg"></i></button>
-            </div>
-            <div class="space-y-4">
-                <div>
-                    <label class="block text-xs font-semibold text-gray-600 uppercase mb-1">Correo Electrónico</label>
-                    <input type="email" id="loginEmail" placeholder="tucorreo@agencia.com" class="w-full border border-gray-300 rounded-xl px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-dorado">
-                </div>
-                <div>
-                    <label class="block text-xs font-semibold text-gray-600 uppercase mb-1">Contraseña</label>
-                    <input type="password" id="loginPassword" placeholder="••••••••" class="w-full border border-gray-300 rounded-xl px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-dorado">
-                </div>
-                <button onclick="ejecutarLogin()" class="w-full bg-vinotinto hover:bg-vinotinto-dark text-dorado font-semibold py-3 rounded-xl shadow transition duration-200">
-                    Entrar a la Plataforma
-                </button>
-            </div>
-        </div>
-    </div>
-
-    <!-- SCRIPT DE FUNCIONALIDAD -->
+    <!-- SCRIPT DEL MOTOR INTELIGENTE -->
     <script>
         let imagenSeleccionada = null;
+
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            sidebar.classList.toggle('-translate-x-full');
+        }
+
+        // Ajustar sidebar en móviles por defecto si se desea
+        if (window.innerWidth < 768) {
+            document.getElementById('sidebar').classList.add('-translate-x-full', 'absolute', 'h-full');
+        }
 
         function mostrarPreview(event) {
             const file = event.target.files[0];
@@ -199,83 +185,93 @@
             if (!texto && !imagenSeleccionada) return;
 
             // Renderizar mensaje del usuario
-            let userHtml = `<div class="flex items-start justify-end space-x-4">
-                <div class="bg-vinotinto text-white p-4 rounded-2xl shadow-sm max-w-2xl">`;
+            let userHtml = `<div class="flex items-start justify-end space-x-3 md:space-x-4">
+                <div class="bg-vinotinto text-white p-3.5 md:p-4 rounded-2xl shadow-sm max-w-xl md:max-w-2xl text-sm md:text-base">`;
             
             if (imagenSeleccionada) {
-                userHtml += `<img src="${document.getElementById('previewImg').src}" class="w-48 h-32 object-cover rounded-lg mb-2 border border-dorado/30">`;
+                userHtml += `<img src="${document.getElementById('previewImg').src}" class="w-40 h-28 object-cover rounded-lg mb-2 border border-dorado/30">`;
             }
             if (texto) {
                 userHtml += `<p>${texto}</p>`;
             }
             userHtml += `</div>
-                <div class="w-10 h-10 rounded-xl bg-dorado text-vinotinto-dark font-bold flex items-center justify-center shadow flex-shrink-0">
+                <div class="w-9 h-9 md:w-10 md:h-10 rounded-xl bg-dorado text-vinotinto-dark font-bold flex items-center justify-center shadow flex-shrink-0">
                     <i class="fa-solid fa-user"></i>
                 </div>
             </div>`;
 
             container.innerHTML += userHtml;
             input.value = '';
+            const imgRef = imagenSeleccionada ? document.getElementById('previewImg').src : null;
             removerImagen();
             container.scrollTop = container.scrollHeight;
 
-            // Simular respuesta de la IA de Marketing con Guión y Propuesta de Imagen
+            // Simular respuesta inteligente instantánea de SparkyKrea
             setTimeout(() => {
-                let aiHtml = `<div class="flex items-start space-x-4">
-                    <div class="w-10 h-10 rounded-xl bg-vinotinto text-dorado flex items-center justify-center font-bold shadow flex-shrink-0">
+                let respuestaGuion = generarGuionInteligente(texto);
+                
+                let aiHtml = `<div class="flex items-start space-x-3 md:space-x-4">
+                    <div class="w-9 h-9 md:w-10 md:h-10 rounded-xl bg-vinotinto text-dorado flex items-center justify-center font-bold shadow flex-shrink-0">
                         <i class="fa-solid fa-bolt"></i>
                     </div>
-                    <div class="bg-white border border-gray-200 p-5 rounded-2xl shadow-sm max-w-2xl text-gray-700 space-y-3">
-                        <p class="font-bold text-vinotinto flex items-center"><i class="fa-solid fa-bullhorn mr-2 text-dorado"></i> Propuesta Publicitaria & Guión</p>
-                        <p class="text-sm bg-gray-50 p-3 rounded-xl border border-gray-100"><strong>Concepto Creativo:</strong> Enfoque emocional centrado en el beneficio directo del cliente con llamados a la acción dinámicos.</p>
-                        <div class="text-sm space-y-1">
-                            <p class="font-semibold text-gray-800">Guión de 15 segundos:</p>
-                            <p class="text-gray-600 italic">"¿Cansado de no saber qué publicar? Con SparkyKrea tus ideas cobran vida en segundos. ¡Haz crecer tu marca hoy!"</p>
+                    <div class="bg-white border border-gray-200 p-4 md:p-5 rounded-2xl shadow-sm max-w-xl md:max-w-2xl text-gray-700 space-y-3 text-sm md:text-base">
+                        <p class="font-bold text-vinotinto flex items-center"><i class="fa-solid fa-bullhorn mr-2 text-dorado"></i> Propuesta Publicitaria SparkyKrea</p>
+                        <p class="text-xs md:text-sm bg-gray-50 p-3 rounded-xl border border-gray-100"><strong>Enfoque Creativo:</strong> ${respuestaGuion.concepto}</p>
+                        <div class="space-y-1">
+                            <p class="font-semibold text-gray-800">Guión Optimizado (15s / Reel):</p>
+                            <p class="text-gray-600 italic bg-vinotinto/5 p-3 rounded-xl border-l-4 border-dorado">"${respuestaGuion.guion}"</p>
                         </div>
                         <div class="border-t pt-3 flex items-center justify-between">
-                            <span class="text-xs text-dorado-dark font-semibold"><i class="fa-solid fa-image mr-1"></i> Sugerencia de Imagen Generada:</span>
-                            <span class="text-[10px] bg-vinotinto/10 text-vinotinto px-2 py-0.5 rounded">Estilo Minimalista / Lujoso</span>
+                            <span class="text-xs text-dorado-dark font-semibold"><i class="fa-solid fa-image mr-1"></i> Idea Visual Sugerida:</span>
+                            <span class="text-[10px] bg-vinotinto/10 text-vinotinto px-2 py-0.5 rounded">Estilo Profesional</span>
                         </div>
-                        <div class="w-full h-40 bg-gradient-to-tr from-vinotinto-dark to-vinotinto rounded-xl flex flex-col items-center justify-center text-white p-4 text-center shadow-inner">
-                            <i class="fa-solid fa-wand-magic-sparkles text-dorado text-3xl mb-2"></i>
-                            <p class="text-xs text-dorado-light font-medium">[Imagen conceptual generada para tu anuncio con paleta Vinotinto/Dorado]</p>
+                        <div class="w-full h-36 md:h-40 bg-gradient-to-tr from-vinotinto-dark to-vinotinto rounded-xl flex flex-col items-center justify-center text-white p-4 text-center shadow-inner">
+                            <i class="fa-solid fa-wand-magic-sparkles text-dorado text-2xl md:text-3xl mb-2"></i>
+                            <p class="text-xs text-dorado-light font-medium">Concepto visual generado: "${respuestaGuion.visual}"</p>
+                            ${imgRef ? '<p class="text-[10px] text-gray-300 mt-1">(Basado en la foto de referencia que subiste)</p>' : ''}
                         </div>
                     </div>
                 </div>`;
                 container.innerHTML += aiHtml;
                 container.scrollTop = container.scrollHeight;
-            }, 1000);
+            }, 800);
         }
 
-        function abrirLogin() {
-            document.getElementById('loginModal').classList.remove('hidden');
-            document.getElementById('loginModal').classList.add('flex');
-        }
-
-        function cerrarLogin() {
-            document.getElementById('loginModal').classList.remove('flex');
-            document.getElementById('loginModal').classList.add('hidden');
-        }
-
-        function ejecutarLogin() {
-            const email = document.getElementById('loginEmail').value;
-            if(email) {
-                document.getElementById('userName').textContent = email.split('@')[0];
-                cerrarLogin();
+        // Generador dinámico de marketing adaptado a lo que escriba el usuario
+        function generarGuionInteligente(texto) {
+            let t = texto.toLowerCase();
+            let producto = texto || "tu producto o servicio";
+            
+            if (t.includes('zapat')) {
+                return {
+                    concepto: "Destacar comodidad, estilo urbano y rendimiento físico.",
+                    guion: "(Primeros 3 segundos gancho visual) ¿Buscas destacar en cada paso? Con estos zapatos tu estilo no pasa desapercibido. ¡Camina con confianza, haz clic aquí!",
+                    visual: "Primer plano de calzado deportivo en movimiento con fondo urbano minimalista y luces de neón."
+                };
+            } else if (t.includes('comida') || t.includes('café') || t.includes('restaurant') || t.includes('hamburguesa')) {
+                return {
+                    concepto: "Despertar el antojo inmediato mediante estímulos visuales y cercanía.",
+                    guion: "(Primeros 3 segundos) El antojo perfecto existe y está más cerca de lo que crees. Disfruta un sabor único hoy mismo. ¡Pide el tuyo ahora!",
+                    visual: "Toma cenital de alta calidad del plato humeante con iluminación cálida y tonos dorados."
+                };
             } else {
-                alert('Por favor ingresa un correo válido.');
+                return {
+                    concepto: "Resolver un dolor específico del cliente mostrando tu marca como la solución ideal.",
+                    guion: `¿Cansado de buscar soluciones complicadas para ${producto}? Tenemos exactamente lo que necesitas para simplificar tu vida y potenciar tus resultados. ¡Contáctanos hoy!`,
+                    visual: `Escena publicitaria moderna enfocada en ${producto} con paleta de colores elegante vinotinto y acentos dorados.`
+                };
             }
         }
 
         function nuevoChat() {
             document.getElementById('chatContainer').innerHTML = `
-                <div class="flex items-start space-x-4">
-                    <div class="w-10 h-10 rounded-xl bg-vinotinto text-dorado flex items-center justify-center font-bold shadow flex-shrink-0">
+                <div class="flex items-start space-x-3 md:space-x-4">
+                    <div class="w-9 h-9 md:w-10 md:h-10 rounded-xl bg-vinotinto text-dorado flex items-center justify-center font-bold shadow flex-shrink-0">
                         <i class="fa-solid fa-bolt"></i>
                     </div>
-                    <div class="bg-white border border-gray-200 p-4 rounded-2xl shadow-sm max-w-2xl text-gray-700">
-                        <p class="font-semibold text-vinotinto mb-1">¡Nuevo espacio de trabajo listo!</p>
-                        <p>¿Qué campaña o producto vamos a potenciar ahora?</p>
+                    <div class="bg-white border border-gray-200 p-4 rounded-2xl shadow-sm max-w-xl md:max-w-2xl text-gray-700 text-sm md:text-base">
+                        <p class="font-semibold text-vinotinto mb-1">¡Nuevo espacio creativo listo!</p>
+                        <p>¿Qué campaña o marca vamos a desarrollar ahora?</p>
                     </div>
                 </div>
             `;
