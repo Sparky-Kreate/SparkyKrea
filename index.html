@@ -114,13 +114,10 @@
     <!-- ÁREA PRINCIPAL EN NEGRO -->
     <main class="flex-1 flex flex-col h-full bg-black relative w-full overflow-hidden">
         
-        <!-- CABECERA PRINCIPAL (SIN TEXTO SPARKYKREA) -->
+        <!-- CABECERA PRINCIPAL LIMPIA (SOLO RAYITAS Y LOGIN) -->
         <header class="h-16 border-b border-zinc-800 flex items-center justify-between px-4 bg-zinc-950 shadow-sm z-20 flex-shrink-0">
             <div class="flex items-center space-x-3">
-                <button onclick="toggleSidebar()" class="text-dorado text-xl p-2 md:hidden"><i class="fa-solid fa-bars"></i></button>
-                <div class="hidden md:flex items-center space-x-2">
-                    <button onclick="toggleSidebar()" class="text-dorado text-xl p-1 hover:text-dorado-light"><i class="fa-solid fa-bars"></i></button>
-                </div>
+                <button onclick="toggleSidebar()" class="text-dorado text-xl p-2 hover:text-dorado-light transition"><i class="fa-solid fa-bars"></i></button>
             </div>
 
             <!-- Botón de Registro / Usuario -->
@@ -223,7 +220,6 @@
         let usuarioActual = null;
         let listaUsuariosGlobal = [];
         
-        // Estado del flujo conversacional publicitario
         let estadoConversacion = {
             fase: 'esperando_idea', // 'esperando_idea', 'esperando_tiempo'
             negocioTemporal: ''
@@ -323,7 +319,6 @@
             }
 
             input.value = '';
-            const imgRef = imagenSeleccionada ? document.getElementById('previewImg').src : null;
             removerImagen();
             container.scrollTop = container.scrollHeight;
 
@@ -340,12 +335,14 @@
         }
 
         function procesarInteligenciaArtificial(texto, nombreImagen) {
-            let t = texto.toLowerCase();
+            let t = texto.toLowerCase().trim();
 
-            // 1. Detección de petición de foto
-            let esFoto = t.includes('creame una foto') || t.includes('crear una foto') || t.includes('generar una foto') || t.includes('hazme una foto');
+            // 1. Detección robusta de petición de foto ("quiero una foto", "hazme un...", "creame", etc.)
+            let esFoto = t.includes('foto') || t.includes('imagen') || t.includes('dibuja') || t.startsWith('hazme un') || t.startsWith('hazme una') || t.startsWith('quiero una');
             if (esFoto) {
-                let promptImg = texto.replace(/creame una foto de|crear una foto de|generar una foto de|hazme una foto de/gi, "").trim();
+                let promptImg = texto.replace(/creame una foto de|crear una foto de|generar una foto de|hazme una foto de|quiero una foto de|quiero un|hazme un|hazme una|foto de|imagen de/gi, "").trim();
+                if(!promptImg) promptImg = texto;
+                
                 let promptURL = `https://image.pollinations.ai/prompt/${encodeURIComponent(promptImg + ", professional high quality advertisement photography, vinotinto and gold luxury aesthetic")}?width=800&height=600&nologo=true`;
                 return `<div class="flex items-start space-x-3">
                     <div class="w-9 h-9 md:w-10 md:h-10 rounded-xl bg-vinotinto text-dorado flex items-center justify-center font-bold shadow flex-shrink-0">
@@ -365,36 +362,38 @@
                 </div>`;
             }
 
-            // 2. Detección de chat no publicitario (ej. lol, xd, jaja, o frases sin sentido comercial)
-            let esNoPublicidad = t === 'lol' || t === 'xd' || t === 'jaja' || t === 'jeje' || t === 'hola' || t === 'buenos dias' || t === 'buenas tardes';
-            if (esNoPublicidad && estadoConversacion.fase === 'esperando_idea') {
-                if (t === 'hola' || t === 'buenos dias' || t === 'buenas tardes') {
-                    return `<div>
-                        <div class="flex items-start space-x-3">
-                            <div class="w-9 h-9 md:w-10 md:h-10 rounded-xl bg-vinotinto text-dorado flex items-center justify-center font-bold shadow flex-shrink-0">
-                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2L2 10h3v10h14V10h3L12 2zm0 4a4 4 0 1 1 0 8 4 4 0 0 1 0-8zm0 2a2 2 0 1 0 0 4 2 2 0 0 0 0-4z"/></svg>
-                            </div>
-                            <div class="bg-zinc-900 border border-zinc-800 p-4 rounded-2xl shadow-sm max-w-xl md:max-w-2xl text-gray-200 text-sm">
-                                <p>¡Hola! Buenas tardes. ¿Qué publicidad desea hacer hoy?</p>
-                            </div>
+            // 2. Detección de chat no publicitario o saludos con errores ortográficos comunes
+            let esSaludo = t === 'hola' || t.startsWith('hola ') || t === 'buenos dias' || t === 'buenas tardes' || t === 'buenas noches';
+            let esBasura = t === 'lol' || t === 'xd' || t === 'jaja' || t === 'jeje' || t === 'asdf' || t === 'ok';
+
+            if (esSaludo && estadoConversacion.fase === 'esperando_idea') {
+                return `<div>
+                    <div class="flex items-start space-x-3">
+                        <div class="w-9 h-9 md:w-10 md:h-10 rounded-xl bg-vinotinto text-dorado flex items-center justify-center font-bold shadow flex-shrink-0">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2L2 10h3v10h14V10h3L12 2zm0 4a4 4 0 1 1 0 8 4 4 0 0 1 0-8zm0 2a2 2 0 1 0 0 4 2 2 0 0 0 0-4z"/></svg>
                         </div>
-                    </div>`;
-                } else {
-                    return `<div>
-                        <div class="flex items-start space-x-3">
-                            <div class="w-9 h-9 md:w-10 md:h-10 rounded-xl bg-vinotinto text-dorado flex items-center justify-center font-bold shadow flex-shrink-0">
-                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2L2 10h3v10h14V10h3L12 2zm0 4a4 4 0 1 1 0 8 4 4 0 0 1 0-8zm0 2a2 2 0 1 0 0 4 2 2 0 0 0 0-4z"/></svg>
-                            </div>
-                            <div class="bg-zinc-900 border border-zinc-800 p-4 rounded-2xl shadow-sm max-w-xl md:max-w-2xl text-gray-200 text-sm">
-                                <p class="text-dorado font-semibold">Lo siento, eso no es una publicidad.</p>
-                                <p class="mt-1">Por favor indíceme de qué producto, servicio o negocio (ej. panadería, tienda de ropa, café) desea realizar su campaña publicitaria.</p>
-                            </div>
+                        <div class="bg-zinc-900 border border-zinc-800 p-4 rounded-2xl shadow-sm max-w-xl md:max-w-2xl text-gray-200 text-sm">
+                            <p>¡Hola! Buenas tardes. ¿Qué publicidad desea hacer hoy?</p>
                         </div>
-                    </div>`;
-                }
+                    </div>
+                </div>`;
             }
 
-            // 3. Máquina de estados para el flujo publicitario (Negocio -> Tiempo -> Guion cronometrado)
+            if (esBasura && estadoConversacion.fase === 'esperando_idea') {
+                return `<div>
+                    <div class="flex items-start space-x-3">
+                        <div class="w-9 h-9 md:w-10 md:h-10 rounded-xl bg-vinotinto text-dorado flex items-center justify-center font-bold shadow flex-shrink-0">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2L2 10h3v10h14V10h3L12 2zm0 4a4 4 0 1 1 0 8 4 4 0 0 1 0-8zm0 2a2 2 0 1 0 0 4 2 2 0 0 0 0-4z"/></svg>
+                        </div>
+                        <div class="bg-zinc-900 border border-zinc-800 p-4 rounded-2xl shadow-sm max-w-xl md:max-w-2xl text-gray-200 text-sm">
+                            <p class="text-dorado font-semibold">Lo siento, eso no es una publicidad.</p>
+                            <p class="mt-1">Por favor indíceme de qué producto, servicio o negocio (ej. panadería, tienda de ropa, café) desea realizar su campaña publicitaria.</p>
+                        </div>
+                    </div>
+                </div>`;
+            }
+
+            // 3. Máquina de estados para flujo publicitario
             if (estadoConversacion.fase === 'esperando_idea') {
                 estadoConversacion.negocioTemporal = texto;
                 estadoConversacion.fase = 'esperando_tiempo';
@@ -404,14 +403,14 @@
                             <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2L2 10h3v10h14V10h3L12 2zm0 4a4 4 0 1 1 0 8 4 4 0 0 1 0-8zm0 2a2 2 0 1 0 0 4 2 2 0 0 0 0-4z"/></svg>
                         </div>
                         <div class="bg-zinc-900 border border-zinc-800 p-4 rounded-2xl shadow-sm max-w-xl md:max-w-2xl text-gray-200 text-sm space-y-1">
-                            <p class="font-bold text-doroid">¡Excelente!</p>
-                            <p>Claro, indícame el nombre de tu negocio (o confírmalo) y el <strong>tiempo que estimas que dure el video</strong> (por ejemplo: 15 segundos, 30 segundos, 1 minuto).</p>
+                            <p class="font-bold text-dorado">¡Excelente!</p>
+                            <p>Claro, indícame el nombre de tu negocio y el <strong>tiempo que estimas que dure el video</strong> (por ejemplo: 15 segundos, 30 segundos, 1 minuto).</p>
                         </div>
                     </div>
                 </div>`;
             } else if (estadoConversacion.fase === 'esperando_tiempo') {
                 let negocio = estadoConversacion.negocioTemporal;
-                estadoConversacion.fase = 'esperando_idea'; // Reiniciar ciclo
+                estadoConversacion.fase = 'esperando_idea';
                 
                 return `<div>
                     <div class="flex items-start space-x-3">
@@ -437,7 +436,6 @@
                 </div>`;
             }
 
-            // Respuesta por defecto si entra texto general
             return `<div>
                 <div class="flex items-start space-x-3">
                     <div class="w-9 h-9 md:w-10 md:h-10 rounded-xl bg-vinotinto text-dorado flex items-center justify-center font-bold shadow flex-shrink-0">
@@ -506,7 +504,6 @@
 
             usuarioActual = { nombre, apellido, email, chats: historialChats };
             
-            // Guardar en lista global de usuarios registrados para el panel de admin
             if(!listaUsuariosGlobal.some(u => u.email === email)) {
                 listaUsuariosGlobal.push(usuarioActual);
                 localStorage.setItem('sparkykrea_all_users', JSON.stringify(listaUsuariosGlobal));
@@ -561,7 +558,6 @@
         }
 
         function mostrarPanelAdminSiEsAdmin() {
-            // Mostrar panel admin si hay usuarios registrados
             const adminSec = document.getElementById('adminPanelSection');
             const adminList = document.getElementById('adminUsersList');
             adminSec.classList.remove('hidden');
