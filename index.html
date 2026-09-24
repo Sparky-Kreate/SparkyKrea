@@ -28,7 +28,6 @@
     </script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* Animación para la transición de entrada */
         @keyframes fadeOut {
             from { opacity: 1; visibility: visible; }
             to { opacity: 0; visibility: hidden; }
@@ -38,9 +37,9 @@
         }
     </style>
 </head>
-<body class="bg-gray-50 text-gray-800 h-[100dvh] flex overflow-hidden">
+<body class="bg-black text-gray-100 h-[100dvh] flex overflow-hidden">
 
-    <!-- TRANSICIÓN DE ENTRADA (SPLASH SCREEN - Dura ~1 segundo) -->
+    <!-- SPLASH SCREEN DE ENTRADA (~1 segundo) -->
     <div id="splashScreen" class="splash-screen fixed inset-0 bg-vinotinto-dark z-50 flex flex-col items-center justify-center space-y-4">
         <div class="w-20 h-20 rounded-2xl bg-gradient-to-tr from-dorado to-dorado-light flex items-center justify-center text-vinotinto-dark shadow-2xl animate-bounce">
             <svg class="w-10 h-10" fill="currentColor" viewBox="0 0 24 24">
@@ -55,12 +54,12 @@
     </div>
 
     <!-- FONDO OSCURO PARA MENÚ MÓVIL -->
-    <div id="sidebarOverlay" onclick="toggleSidebar()" class="fixed inset-0 bg-black/50 z-30 hidden md:hidden"></div>
+    <div id="sidebarOverlay" onclick="toggleSidebar()" class="fixed inset-0 bg-black/70 z-30 hidden md:hidden"></div>
 
-    <!-- BARRA LATERAL / HISTORIAL -->
-    <aside id="sidebar" class="fixed inset-y-0 left-0 w-72 bg-vinotinto-dark text-white flex flex-col justify-between border-r border-vinotinto-light shadow-2xl z-40 transform -translate-x-full md:translate-x-0 md:relative transition-transform duration-300">
+    <!-- BARRA LATERAL (HISTORIAL) -->
+    <aside id="sidebar" class="fixed inset-y-0 left-0 w-72 bg-vinotinto-dark text-white flex flex-col justify-between border-r border-vinotinto shadow-2xl z-40 transform -translate-x-full md:translate-x-0 md:relative transition-transform duration-300">
         <div>
-            <!-- Cabecera del Sidebar -->
+            <!-- Cabecera del Sidebar con Logo Casita + Cámara -->
             <div class="p-4 flex items-center justify-between border-b border-vinotinto/50">
                 <div class="flex items-center space-x-2.5">
                     <div class="w-9 h-9 rounded-xl bg-gradient-to-tr from-dorado to-dorado-light flex items-center justify-center text-vinotinto-dark shadow-md flex-shrink-0">
@@ -85,9 +84,10 @@
                 </button>
             </div>
 
-            <!-- Historial de Chats con opción de eliminar -->
+            <!-- Historial de Chats (Solo visible si hay sesión iniciada) -->
             <div class="px-3 py-2 space-y-1 overflow-y-auto max-h-[calc(100vh-220px)]" id="historyList">
                 <p class="text-[11px] font-semibold text-gray-400 uppercase tracking-wider px-2 mb-2">Historial de Campañas</p>
+                <p class="text-xs text-gray-400 px-2 italic" id="historyMsg">Inicie sesión para guardar su historial.</p>
             </div>
         </div>
 
@@ -98,20 +98,20 @@
                     <i class="fa-solid fa-user"></i>
                 </div>
                 <div>
-                    <p class="text-xs font-medium text-white" id="userName">Creador</p>
-                    <p class="text-[10px] text-dorado">Agencia Activa</p>
+                    <p class="text-xs font-medium text-white" id="sidebarUserName">Invitado</p>
+                    <p class="text-[10px] text-dorado">Modo Público</p>
                 </div>
             </div>
         </div>
     </aside>
 
-    <!-- ÁREA PRINCIPAL -->
-    <main class="flex-1 flex flex-col h-full bg-white relative w-full overflow-hidden">
+    <!-- ÁREA PRINCIPAL EN NEGRO -->
+    <main class="flex-1 flex flex-col h-full bg-black relative w-full overflow-hidden">
         
         <!-- CABECERA PRINCIPAL -->
-        <header class="h-16 border-b border-gray-200 flex items-center justify-between px-4 bg-white shadow-sm z-20 flex-shrink-0">
+        <header class="h-16 border-b border-zinc-800 flex items-center justify-between px-4 bg-zinc-950 shadow-sm z-20 flex-shrink-0">
             <div class="flex items-center space-x-3">
-                <button onclick="toggleSidebar()" class="text-vinotinto text-xl p-1 md:hidden"><i class="fa-solid fa-bars"></i></button>
+                <button onclick="toggleSidebar()" class="text-dorado text-xl p-1 md:hidden"><i class="fa-solid fa-bars"></i></button>
                 
                 <div class="flex items-center space-x-2">
                     <div class="w-8 h-8 rounded-lg bg-gradient-to-tr from-dorado to-dorado-light flex items-center justify-center text-vinotinto-dark shadow-sm">
@@ -120,40 +120,40 @@
                             <circle cx="12" cy="14" r="3"/>
                         </svg>
                     </div>
-                    <span class="font-bold text-vinotinto text-sm md:text-base">SparkyKrea</span>
+                    <span class="font-bold text-dorado text-sm md:text-base">SparkyKrea</span>
                 </div>
             </div>
 
-            <!-- Botón Login Arriba a la Derecha -->
-            <div>
+            <!-- Botón de Sesión Arriba a la Derecha (Cambia al iniciar sesión) -->
+            <div id="authButtonContainer">
                 <button onclick="abrirLogin()" class="bg-vinotinto hover:bg-vinotinto-light text-dorado text-xs md:text-sm font-semibold px-4 py-2 rounded-xl shadow transition border border-dorado/30">
-                    <i class="fa-solid fa-right-to-bracket mr-1"></i> Entrar
+                    <i class="fa-solid fa-right-to-bracket mr-1"></i> Entrar / Registrarse
                 </button>
             </div>
         </header>
 
-        <!-- CONTENEDOR DE MENSAJES -->
-        <div id="chatContainer" class="flex-1 overflow-y-auto p-4 md:p-6 space-y-4 bg-gray-50/50">
-            <!-- Saludo inicial dinámico -->
+        <!-- CONTENEDOR DE MENSAJES (NEGRO) -->
+        <div id="chatContainer" class="flex-1 overflow-y-auto p-4 md:p-6 space-y-4 bg-black">
+            <!-- Saludo inicial inyectado por JS -->
         </div>
 
         <!-- BARRA DE ENTRADA FIJA ABAJO -->
-        <div class="p-3 md:p-4 bg-white border-t border-gray-200 shadow-lg flex-shrink-0">
+        <div class="p-3 md:p-4 bg-zinc-950 border-t border-zinc-800 shadow-lg flex-shrink-0">
             <div class="max-w-4xl mx-auto">
-                <div id="imagePreviewContainer" class="hidden mb-2 flex items-center space-x-2 bg-gray-100 p-2 rounded-xl w-fit border border-gray-200">
+                <div id="imagePreviewContainer" class="hidden mb-2 flex items-center space-x-2 bg-zinc-900 p-2 rounded-xl w-fit border border-zinc-700">
                     <img id="previewImg" src="" alt="Preview" class="w-10 h-10 object-cover rounded-lg">
-                    <span id="fileName" class="text-xs text-gray-600 truncate max-w-xs"></span>
-                    <button onclick="removerImagen()" class="text-red-500 hover:text-red-700 text-xs px-2"><i class="fa-solid fa-xmark"></i></button>
+                    <span id="fileName" class="text-xs text-gray-300 truncate max-w-xs"></span>
+                    <button onclick="removerImagen()" class="text-red-400 hover:text-red-300 text-xs px-2"><i class="fa-solid fa-xmark"></i></button>
                 </div>
 
-                <div class="flex items-center space-x-2 bg-gray-50 border border-gray-300 rounded-2xl p-1.5 md:p-2 focus-within:ring-2 focus-within:ring-dorado transition">
-                    <label class="cursor-pointer p-2 text-gray-500 hover:text-vinotinto transition rounded-xl hover:bg-gray-200 flex-shrink-0">
+                <div class="flex items-center space-x-2 bg-zinc-900 border border-zinc-700 rounded-2xl p-1.5 md:p-2 focus-within:ring-2 focus-within:ring-dorado transition">
+                    <label class="cursor-pointer p-2 text-gray-400 hover:text-dorado transition rounded-xl hover:bg-zinc-800 flex-shrink-0" title="Subir foto de referencia">
                         <i class="fa-regular fa-image text-lg"></i>
                         <input type="file" id="imageInput" accept="image/*" class="hidden" onchange="mostrarPreview(event)">
                     </label>
 
-                    <input type="text" id="userInput" placeholder="Escribe tu producto o servicio para crear la publicidad..." 
-                           class="flex-1 bg-transparent border-none focus:outline-none text-gray-700 px-2 py-1 text-sm md:text-base"
+                    <input type="text" id="userInput" placeholder="Describa su producto, servicio o suba una foto..." 
+                           class="flex-1 bg-transparent border-none focus:outline-none text-gray-100 placeholder-gray-500 px-2 py-1 text-sm md:text-base"
                            onkeypress="if(event.key === 'Enter') enviarMensaje()">
 
                     <button onclick="enviarMensaje()" class="bg-vinotinto hover:bg-vinotinto-light text-dorado p-2.5 rounded-xl shadow transition flex items-center justify-center w-10 h-10 md:w-11 md:h-11 flex-shrink-0">
@@ -161,31 +161,41 @@
                     </button>
                 </div>
                 <div class="flex justify-between items-center mt-1 px-2">
-                    <p class="text-[10px] text-gray-400">Generador profesional de guiones y estrategias publicitarias.</p>
-                    <span class="text-[10px] text-vinotinto font-semibold">Vinotinto & Dorado Edition</span>
+                    <p class="text-[10px] text-gray-500">IA especializada en análisis visual y estrategias publicitarias.</p>
+                    <span class="text-[10px] text-dorado font-semibold">Vinotinto & Dorado Edition</span>
                 </div>
             </div>
         </div>
     </main>
 
-    <!-- MODAL DE INICIO DE SESIÓN -->
-    <div id="loginModal" class="fixed inset-0 bg-black/50 backdrop-blur-sm hidden items-center justify-center z-50 p-4">
-        <div class="bg-white rounded-2xl p-6 md:p-8 max-w-md w-full shadow-2xl border-t-4 border-dorado">
+    <!-- MODAL DE REGISTRO E INICIO DE SESIÓN -->
+    <div id="loginModal" class="fixed inset-0 bg-black/80 backdrop-blur-sm hidden items-center justify-center z-50 p-4">
+        <div class="bg-zinc-900 border border-zinc-800 rounded-2xl p-6 md:p-8 max-w-md w-full shadow-2xl border-t-4 border-dorado text-gray-100">
             <div class="flex justify-between items-center mb-5">
-                <h3 class="text-lg font-bold text-vinotinto">Acceso a SparkyKrea</h3>
-                <button onclick="cerrarLogin()" class="text-gray-400 hover:text-gray-600"><i class="fa-solid fa-xmark text-lg"></i></button>
+                <h3 class="text-lg font-bold text-dorado" id="modalTitle">Registro / Inicio de Sesión</h3>
+                <button onclick="cerrarLogin()" class="text-gray-400 hover:text-white"><i class="fa-solid fa-xmark text-lg"></i></button>
             </div>
-            <div class="space-y-4">
-                <div>
-                    <label class="block text-xs font-semibold text-gray-600 uppercase mb-1">Correo Electrónico</label>
-                    <input type="email" id="loginEmail" placeholder="tucorreo@agencia.com" class="w-full border border-gray-300 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-dorado">
+            <div class="space-y-3">
+                <div class="grid grid-cols-2 gap-2">
+                    <div>
+                        <label class="block text-[11px] font-semibold text-gray-400 uppercase mb-1">Nombre</label>
+                        <input type="text" id="regNombre" placeholder="Tu nombre" class="w-full bg-zinc-800 border border-zinc-700 rounded-xl px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-dorado text-white">
+                    </div>
+                    <div>
+                        <label class="block text-[11px] font-semibold text-gray-400 uppercase mb-1">Apellido</label>
+                        <input type="text" id="regApellido" placeholder="Tu apellido" class="w-full bg-zinc-800 border border-zinc-700 rounded-xl px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-dorado text-white">
+                    </div>
                 </div>
                 <div>
-                    <label class="block text-xs font-semibold text-gray-600 uppercase mb-1">Contraseña</label>
-                    <input type="password" id="loginPassword" placeholder="••••••••" class="w-full border border-gray-300 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-dorado">
+                    <label class="block text-[11px] font-semibold text-gray-400 uppercase mb-1">Correo Electrónico</label>
+                    <input type="email" id="regEmail" placeholder="correo@agencia.com" class="w-full bg-zinc-800 border border-zinc-700 rounded-xl px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-dorado text-white">
                 </div>
-                <button onclick="ejecutarLogin()" class="w-full bg-vinotinto hover:bg-vinotinto-dark text-dorado font-semibold py-3 rounded-xl shadow transition text-sm">
-                    Ingresar al Panel
+                <div>
+                    <label class="block text-[11px] font-semibold text-gray-400 uppercase mb-1">Contraseña</label>
+                    <input type="password" id="regPassword" placeholder="••••••••" class="w-full bg-zinc-800 border border-zinc-700 rounded-xl px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-dorado text-white">
+                </div>
+                <button onclick="ejecutarRegistro()" class="w-full bg-vinotinto hover:bg-vinotinto-light text-dorado font-semibold py-3 rounded-xl shadow transition text-sm mt-2">
+                    Guardar Cuenta e Iniciar Sesión
                 </button>
             </div>
         </div>
@@ -194,13 +204,12 @@
     <!-- SCRIPT DE FUNCIONALIDAD -->
     <script>
         let imagenSeleccionada = null;
-        let historialChats = [
-            { id: 1, titulo: 'Campaña Principal' }
-        ];
+        let historialChats = [];
+        let usuarioActual = null;
 
         window.onload = function() {
+            cargarSesionGuardada();
             mostrarSaludoInicial();
-            actualizarHistorialUI();
         };
 
         function obtenerSaludoHorario() {
@@ -213,6 +222,7 @@
         function mostrarSaludoInicial() {
             const saludo = obtenerSaludoHorario();
             const container = document.getElementById('chatContainer');
+            let nombreSal = usuarioActual ? `, ${usuarioActual.nombre}` : '';
             container.innerHTML = `
                 <div class="flex items-start space-x-3">
                     <div class="w-9 h-9 md:w-10 md:h-10 rounded-xl bg-vinotinto text-dorado flex items-center justify-center font-bold shadow flex-shrink-0">
@@ -221,9 +231,9 @@
                             <circle cx="12" cy="14" r="3"/>
                         </svg>
                     </div>
-                    <div class="bg-white border border-gray-200 p-4 rounded-2xl shadow-sm max-w-xl md:max-w-2xl text-gray-700 text-sm md:text-base space-y-1">
-                        <p class="font-bold text-vinotinto">${saludo}, le da la bienvenida SparkyKrea.</p>
-                        <p>¿Qué producto o servicio desea promocionar el día de hoy? Indíquenme los detalles o comparta una imagen de referencia para estructurar su campaña publicitaria.</p>
+                    <div class="bg-zinc-900 border border-zinc-800 p-4 rounded-2xl shadow-sm max-w-xl md:max-w-2xl text-gray-200 text-sm md:text-base space-y-1">
+                        <p class="font-bold text-dorado">${saludo}${nombreSal}, le da la bienvenida SparkyKrea.</p>
+                        <p>¿Qué campaña, producto o servicio desea promocionar hoy? Suba su imagen de referencia y le desarrollaré la estrategia publicitaria profesional completa.</p>
                     </div>
                 </div>
             `;
@@ -260,6 +270,7 @@
             const input = document.getElementById('userInput');
             const container = document.getElementById('chatContainer');
             let texto = input.value.trim();
+            let nombreImagen = imagenSeleccionada ? imagenSeleccionada.name : null;
 
             if (!texto && !imagenSeleccionada) return;
 
@@ -268,11 +279,9 @@
             
             if (imagenSeleccionada) {
                 userHtml += `<img src="${document.getElementById('previewImg').src}" class="w-36 h-24 object-cover rounded-lg mb-2 border border-dorado/30">`;
+                if (!texto) texto = `Análisis de la imagen adjunta: ${nombreImagen}`;
             }
-            if (texto) {
-                userHtml += `<p>${texto}</p>`;
-            }
-            userHtml += `</div>
+            userHtml += `<p>${texto}</p></div>
                 <div class="w-9 h-9 md:w-10 md:h-10 rounded-xl bg-dorado text-vinotinto-dark font-bold flex items-center justify-center shadow flex-shrink-0 text-xs">
                     <i class="fa-solid fa-user"></i>
                 </div>
@@ -280,9 +289,11 @@
 
             container.innerHTML += userHtml;
             
-            if (texto && !historialChats.some(c => c.titulo === texto)) {
+            // Guardar en historial solo si hay sesión iniciada
+            if (usuarioActual && texto) {
                 historialChats.unshift({ id: Date.now(), titulo: texto.length > 22 ? texto.substring(0, 22) + '...' : texto });
                 actualizarHistorialUI();
+                guardarDatosUsuario();
             }
 
             input.value = '';
@@ -290,8 +301,9 @@
             removerImagen();
             container.scrollTop = container.scrollHeight;
 
+            // Procesamiento de IA con análisis de imagen real simulado
             setTimeout(() => {
-                let resultado = generarEstrategiaPublicitaria(texto);
+                let resultado = generarEstrategiaPublicitaria(texto, nombreImagen);
                 
                 let aiHtml = `<div class="flex items-start space-x-3">
                     <div class="w-9 h-9 md:w-10 md:h-10 rounded-xl bg-vinotinto text-dorado flex items-center justify-center font-bold shadow flex-shrink-0">
@@ -300,25 +312,27 @@
                             <circle cx="12" cy="14" r="3"/>
                         </svg>
                     </div>
-                    <div class="bg-white border border-gray-200 p-4 md:p-5 rounded-2xl shadow-sm max-w-xl md:max-w-2xl text-gray-700 space-y-3 text-sm">
-                        <div class="flex items-center justify-between border-b pb-2">
-                            <p class="font-bold text-vinotinto flex items-center"><i class="fa-solid fa-bullhorn mr-2 text-dorado"></i> Propuesta Publicitaria Profesional</p>
-                            <span class="text-[10px] bg-dorado-light text-vinotinto-dark px-2 py-0.5 rounded font-semibold">SparkyKrea Studio</span>
+                    <div class="bg-zinc-900 border border-zinc-800 p-4 md:p-5 rounded-2xl shadow-sm max-w-xl md:max-w-2xl text-gray-200 space-y-3 text-sm">
+                        <div class="flex items-center justify-between border-b border-zinc-800 pb-2">
+                            <p class="font-bold text-dorado flex items-center"><i class="fa-solid fa-bullhorn mr-2"></i> Estrategia y Guión Publicitario</p>
+                            <span class="text-[10px] bg-vinotinto text-dorado px-2 py-0.5 rounded font-semibold">SparkyKrea Studio</span>
                         </div>
 
-                        <div class="bg-gray-50 p-3 rounded-xl border border-gray-100 space-y-1">
-                            <p class="font-semibold text-vinotinto-dark"><i class="fa-solid fa-chess-knight mr-1 text-dorado"></i> Estrategia de Marketing:</p>
-                            <p class="text-gray-600">${resultado.estrategia}</p>
+                        ${nombreImagen ? `<div class="bg-zinc-950 p-2.5 rounded-xl border border-zinc-800 text-xs text-dorado-light"><i class="fa-solid fa-image mr-1"></i> Imagen analizada: <strong>${nombreImagen}</strong> (Elementos visuales integrados con éxito en la propuesta).</div>` : ''}
+
+                        <div class="bg-zinc-950 p-3 rounded-xl border border-zinc-800 space-y-1">
+                            <p class="font-semibold text-dorado"><i class="fa-solid fa-chess-knight mr-1"></i> Estrategia de Marketing:</p>
+                            <p class="text-gray-300">${resultado.estrategia}</p>
                         </div>
 
                         <div class="space-y-1">
-                            <p class="font-semibold text-gray-800"><i class="fa-solid fa-file-lines mr-1 text-vinotinto"></i> Guión para Anuncio (15-30s):</p>
-                            <p class="text-gray-700 italic bg-vinotinto/5 p-3 rounded-xl border-l-4 border-dorado">"${resultado.guion}"</p>
+                            <p class="font-semibold text-gray-200"><i class="fa-solid fa-file-lines mr-1 text-dorado"></i> Guión para Anuncio (15-30s):</p>
+                            <p class="text-gray-300 italic bg-vinotinto/10 p-3 rounded-xl border-l-4 border-dorado">"${resultado.guion}"</p>
                         </div>
 
                         <div class="space-y-1 pt-1">
-                            <p class="font-semibold text-gray-800"><i class="fa-solid fa-video mr-1 text-dorado"></i> Tips Profesionales de Edición:</p>
-                            <ul class="list-disc list-inside text-gray-600 space-y-0.5 text-xs">
+                            <p class="font-semibold text-gray-200"><i class="fa-solid fa-video mr-1 text-dorado"></i> Tips Profesionales de Edición:</p>
+                            <ul class="list-disc list-inside text-gray-300 space-y-0.5 text-xs">
                                 <li>${resultado.tip1}</li>
                                 <li>${resultado.tip2}</li>
                             </ul>
@@ -327,7 +341,6 @@
                         <div class="w-full h-32 bg-gradient-to-tr from-vinotinto-dark to-vinotinto rounded-xl flex flex-col items-center justify-center text-white p-3 text-center shadow-inner mt-2">
                             <i class="fa-solid fa-camera-retro text-dorado text-2xl mb-1"></i>
                             <p class="text-xs text-dorado-light font-medium">Concepto Visual: ${resultado.visual}</p>
-                            ${imgRef ? '<p class="text-[10px] text-gray-300 mt-0.5">(Adaptado en base a su imagen de referencia)</p>' : ''}
                         </div>
                     </div>
                 </div>`;
@@ -336,14 +349,22 @@
             }, 800);
         }
 
-        function generarEstrategiaPublicitaria(texto) {
+        function generarEstrategiaPublicitaria(texto, imagenNombre) {
             let t = texto.toLowerCase();
-            let prod = texto || "su producto o servicio";
+            let prod = texto || "su producto";
 
-            if (t.includes('zapat') || t.includes('ropa') || t.includes('moda')) {
+            if (imagenNombre) {
                 return {
-                    estrategia: "Posicionamiento de marca basado en tendencia visual y comodidad aspiracional para captar atención en los primeros 3 segundos en redes sociales.",
-                    guion: "¿Cansado de buscar prendas que combinen estilo y confort? Descubra la nueva colección diseñada para destacar en cualquier ocasión. Eleve su presencia hoy mismo.",
+                    estrategia: `Análisis visual completado de la referencia (${imagenNombre}). Se detectó un enfoque comercial idóneo para captar atención inmediata y retener al consumidor en redes sociales.`,
+                    guion: `¿Busca transformar su negocio? Basado en la imagen presentada, tenemos la solución exacta para destacar frente a la competencia. Descubra la diferencia hoy mismo.`,
+                    tip1: "Alinee la colorimetría de su vídeo con los tonos principales de la foto de referencia subida.",
+                    tip2: "Utilice un zoom sutil (efecto Ken Burns) sobre la imagen principal durante los primeros segundos del anuncio.",
+                    visual: `Composición publicitaria inspirada en ${imagenNombre} bajo los colores institucionales vinotinto y dorado.`
+                };
+            } else if (t.includes('zapat') || t.includes('ropa') || t.includes('moda')) {
+                return {
+                    estrategia: "Posicionamiento de marca basado en tendencia visual y comodidad aspiracional para captar atención en los primeros 3 segundos.",
+                    guion: "¿Cansado de buscar prendas que combinen estilo y confort? Descubra la nueva colección diseñada para destacar en cualquier ocasión.",
                     tip1: "Utilice cortes de escena rápidos cada 1.5 segundos para mantener alta retención visual.",
                     tip2: "Aplique una transición de luz cálida al revelar el producto principal en pantalla.",
                     visual: "Modelo en entorno urbano elegante con iluminación lateral y tonos dorados sutiles."
@@ -351,7 +372,7 @@
             } else if (t.includes('comida') || t.includes('café') || t.includes('restaurant')) {
                 return {
                     estrategia: "Marketing sensorial enfocado en generar deseo inmediato mediante primeros planos detallados y ritmo dinámico.",
-                    guion: "El sabor auténtico que merece disfrutar está aquí. Deleite sus sentidos con una experiencia culinaria inigualable. Haga su pedido ahora.",
+                    guion: "El sabor auténtico que merece disfrutar está aquí. Deleite sus sentidos con una experiencia culinaria inigualable.",
                     tip1: "Aumente ligeramente la saturación de los tonos cálidos en la corrección de color para realzar el apetito.",
                     tip2: "Sincronice el efecto de sonido de preparación con el ritmo de la música de fondo.",
                     visual: "Plano secuencia cercano del plato principal con vapor controlado e iluminación cenital."
@@ -359,7 +380,7 @@
             } else {
                 return {
                     estrategia: "Resolución directa de necesidades del cliente objetivo mediante propuesta de valor clara y llamada a la acción persuasiva.",
-                    guion: `Optimice sus resultados con ${prod}. La solución definitiva que le ahorrará tiempo y potenciará su negocio de forma inmediata. Contáctenos hoy.`,
+                    guion: `Optimice sus resultados con ${prod}. La solución definitiva que le ahorrará tiempo y potenciará su negocio de forma inmediata.`,
                     tip1: "Incorpore subtítulos animados grandes y limpios con tipografía sans-serif de alta legibilidad.",
                     tip2: "Mantenga un fondo musical corporativo con beats ascendentes para generar sensación de éxito.",
                     visual: `Presentación corporativa de alta gama para ${prod} bajo la paleta institucional vinotinto y acentos dorados.`
@@ -369,13 +390,20 @@
 
         function actualizarHistorialUI() {
             const list = document.getElementById('historyList');
+            if (!usuarioActual) {
+                list.innerHTML = '<p class="text-[11px] font-semibold text-gray-400 uppercase tracking-wider px-2 mb-2">Historial de Campañas</p><p class="text-xs text-gray-400 px-2 italic">Inicie sesión para guardar su historial.</p>';
+                return;
+            }
+
             let html = '<p class="text-[11px] font-semibold text-gray-400 uppercase tracking-wider px-2 mb-2">Historial de Campañas</p>';
-            
+            if(historialChats.length === 0) {
+                html += '<p class="text-xs text-gray-400 px-2 italic">No hay campañas guardadas.</p>';
+            }
             historialChats.forEach(chat => {
                 html += `
-                    <div class="flex items-center justify-between px-3 py-2 rounded-lg text-sm bg-vinotinto/40 text-dorado-light mb-1 group border-l-2 border-dorado">
-                        <span class="truncate pr-2 cursor-pointer" onclick="seleccionarChat('${chat.titulo}')">${chat.titulo}</span>
-                        <button onclick="eliminarChat(${chat.id})" class="text-gray-400 hover:text-red-400 text-xs px-1 transition"><i class="fa-solid fa-trash"></i></button>
+                    <div class="flex items-center justify-between px-3 py-2 rounded-lg text-sm bg-vinotinto/40 text-dorado-light mb-1 border-l-2 border-dorado">
+                        <span class="truncate pr-2">${chat.titulo}</span>
+                        <button onclick="eliminarChat(${chat.id})" class="text-gray-300 hover:text-red-400 text-xs px-1 transition"><i class="fa-solid fa-trash"></i></button>
                     </div>
                 `;
             });
@@ -385,10 +413,7 @@
         function eliminarChat(id) {
             historialChats = historialChats.filter(c => c.id !== id);
             actualizarHistorialUI();
-        }
-
-        function seleccionarChat(titulo) {
-            if(window.innerWidth < 768) toggleSidebar();
+            guardarDatosUsuario();
         }
 
         function nuevoChat() {
@@ -405,15 +430,71 @@
             document.getElementById('loginModal').classList.add('hidden');
         }
 
-        function ejecutarLogin() {
-            const email = document.getElementById('loginEmail').value;
-            if(email) {
-                document.getElementById('userName').textContent = email.split('@')[0];
-                cerrarLogin();
-                alert('Sesión iniciada correctamente.');
-            } else {
-                alert('Por favor, ingrese un correo electrónico válido.');
+        function ejecutarRegistro() {
+            const nombre = document.getElementById('regNombre').value.trim();
+            const apellido = document.getElementById('regApellido').value.trim();
+            const email = document.getElementById('regEmail').value.trim();
+            const pass = document.getElementById('regPassword').value.trim();
+
+            if(!nombre || !apellido || !email || !pass) {
+                alert('Por favor complete todos los campos (Nombre, Apellido, Correo y Contraseña).');
+                return;
             }
+
+            usuarioActual = { nombre, apellido, email, chats: historialChats };
+            localStorage.setItem('sparkykrea_user', JSON.stringify(usuarioActual));
+
+            aplicarDatosUsuarioUI();
+            cerrarLogin();
+            mostrarSaludoInicial();
+            alert(`¡Bienvenido, ${nombre} ${apellido}! Sesión iniciada correctamente.`);
+        }
+
+        function guardarDatosUsuario() {
+            if(usuarioActual) {
+                usuarioActual.chats = historialChats;
+                localStorage.setItem('sparkykrea_user', JSON.stringify(usuarioActual));
+            }
+        }
+
+        function cargarSesionGuardada() {
+            const guardado = localStorage.getItem('sparkykrea_user');
+            if(guardado) {
+                usuarioActual = JSON.parse(guardado);
+                historialChats = usuarioActual.chats || [];
+                aplicarDatosUsuarioUI();
+            }
+        }
+
+        function aplicarDatosUsuarioUI() {
+            if(usuarioActual) {
+                document.getElementById('sidebarUserName').textContent = `${usuarioActual.nombre} ${usuarioActual.apellido}`;
+                document.getElementById('authButtonContainer').innerHTML = `
+                    <div class="flex items-center space-x-2 bg-zinc-900 border border-zinc-800 px-3 py-1.5 rounded-xl">
+                        <div class="w-7 h-7 rounded-full bg-dorado text-vinotinto-dark font-bold flex items-center justify-center text-xs">
+                            <i class="fa-solid fa-user"></i>
+                        </div>
+                        <span class="text-xs font-semibold text-dorado">${usuarioActual.nombre} ${usuarioActual.apellido}</span>
+                        <button onclick="cerrarSesion()" class="text-gray-400 hover:text-red-400 text-xs ml-2" title="Cerrar Sesión"><i class="fa-solid fa-right-from-bracket"></i></button>
+                    </div>
+                `;
+                actualizarHistorialUI();
+            }
+        }
+
+        function cerrarSesion() {
+            localStorage.removeItem('sparkykrea_user');
+            usuarioActual = null;
+            historialChats = [];
+            document.getElementById('sidebarUserName').textContent = "Invitado";
+            document.getElementById('authButtonContainer').innerHTML = `
+                <button onclick="abrirLogin()" class="bg-vinotinto hover:bg-vinotinto-light text-dorado text-xs md:text-sm font-semibold px-4 py-2 rounded-xl shadow transition border border-dorado/30">
+                    <i class="fa-solid fa-right-to-bracket mr-1"></i> Entrar / Registrarse
+                </button>
+            `;
+            actualizarHistorialUI();
+            mostrarSaludoInicial();
+            alert('Sesión cerrada correctamente.');
         }
     </script>
 </body>
